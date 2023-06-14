@@ -1,0 +1,18 @@
+.job-item {
+	position: relative;
+}
+.figure {
+	display: flex;
+	position: relative;
+	flex-wrap: wrap;
+	padding: 15px 10px;
+	overflow: hidden;
+	border-top-left-radius: 4px;
+	transition: 0.4s ease-in-out all;
+}
+.job-item .left-col {
+	margin-right: 1rem;
+}
+.job-item .right-col {
+	flex: 1;
+}

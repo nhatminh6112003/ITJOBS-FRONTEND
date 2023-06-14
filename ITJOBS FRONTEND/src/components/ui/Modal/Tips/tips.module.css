@@ -1,0 +1,81 @@
+.ReactModal__Body--open {
+	overflow: hidden;
+}
+.ReactModal__Overlay {
+	opacity: 0;
+	transition: opacity 2000ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+	opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+	opacity: 0;
+}
+.close-icon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 6px;
+	cursor: pointer;
+}
+.tips-modal .head-modal {
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	padding: 10px 20px;
+	padding-right: 30px;
+	background: #f3f3f3;
+}
+.tips-modal .head-modal .icon {
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 70px;
+	min-width: 70px;
+	height: 70px;
+	overflow: hidden;
+	border-radius: 5px;
+	background: #ffffff;
+	box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+}
+.tips-modal .head-modal .icon svg {
+	color: #2f4ba0;
+	font-size: 44px;
+}
+.fancybox-slide--html .fancybox-close-small {
+	color: currentColor;
+	padding: 10px;
+	right: 0;
+	top: 0;
+}
+.fancybox-close-small {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	color: #ccc;
+	cursor: pointer;
+	opacity: 0.8;
+	padding: 8px;
+	position: absolute;
+	right: -12px;
+	top: -44px;
+	z-index: 401;
+}
+.tips-modal .head-modal .title {
+	padding-left: 15px;
+}
+.widget-12 {
+	padding: 30px;
+}
