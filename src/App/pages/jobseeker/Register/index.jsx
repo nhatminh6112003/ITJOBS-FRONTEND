@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
-import RegisterForm from './Form/RegisterForm';
+import RegisterForm from './components/RegisterForm';
 import routesPath from '~/App/config/routesPath';
 import styles from './Register.module.css';
 const cx = classNames.bind(styles);
@@ -71,12 +71,18 @@ const Register = () => {
 							<div className={cx('main-form')}>
 								<ul className={cx('list-tabs')}>
 									<li>
-										<Link style={{ padding: '5px 0' }} to={routesPath.JobseekerPaths.login} title='Đăng Nhập '>
+										<Link
+											style={{ padding: '5px 0' }}
+											to={routesPath.JobseekerPaths.login}
+											title='Đăng Nhập '>
 											Đăng Nhập
 										</Link>
 									</li>
 									<li className={cx('active')}>
-										<Link style={{ padding: '5px 0' }} to={routesPath.JobseekerPaths.register} title='Đăng ký'>
+										<Link
+											style={{ padding: '5px 0' }}
+											to={routesPath.JobseekerPaths.register}
+											title='Đăng ký'>
 											Đăng ký
 										</Link>
 									</li>

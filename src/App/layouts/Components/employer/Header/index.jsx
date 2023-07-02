@@ -17,12 +17,12 @@ const Header = () => {
 							<span className={cx('mdi mdi-menu')} />
 						</div>
 						<div className={cx('logo')}>
-							<Link to={routesPath.JobseekerPaths.home} >
-							<img
+							<Link to={routesPath.JobseekerPaths.home}>
+								<img
 									src='./img/logo.png'
 									alt='CareerBuilder.vn - Nghĩ Nhân Tài, Nghĩ CareerBuilder'
 									title='CareerBuilder.vn - Nghĩ Nhân Tài, Nghĩ CareerBuilder'
-								/> 
+								/>
 							</Link>
 						</div>
 						<div className={cx('main-menu')}>

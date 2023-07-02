@@ -2,10 +2,9 @@ import { lazy } from 'react';
 
 import routesPath from '~/App/config/routesPath';
 
-
 const Login = lazy(() => import('~/App/pages/Employer/Login'));
 const Register = lazy(() => import('~/App/pages/Employer/Register'));
-const Dashboard = lazy(() => import('~/App/pages/Employer/Dashboard'));
+const EmployerDashboard = lazy(() => import('~/App/pages/Employer/EmployerDashboard'));
 
 const employerPublicRoutes = [
 	{ path: routesPath.EmployerPaths.register, component: Register },
@@ -15,7 +14,7 @@ const employerPublicRoutes = [
 const employerPrivateRoutes = [
 	{
 		path: routesPath.EmployerPaths.dashboard,
-		component: Dashboard
+		component: EmployerDashboard
 	}
 ];
 export { employerPublicRoutes, employerPrivateRoutes };

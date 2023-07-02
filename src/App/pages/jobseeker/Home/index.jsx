@@ -1,11 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
 import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import JobItem from '~/App/layouts/components/Jobseeker/JobItem';
 import Banner from '~/App/layouts/components/Jobseeker/Banner';
-
 import { useGetAllQuery } from '~/App/providers/apis/userApi';
 const Home = ({ cx }) => {
 	// const options = [
@@ -13,7 +11,7 @@ const Home = ({ cx }) => {
 	//   { value: 'strawberry', label: 'Strawberry' },
 	//   { value: 'vanilla', label: 'Vanilla' }
 	// ]
-	
+
 	return (
 		<>
 			<Banner />

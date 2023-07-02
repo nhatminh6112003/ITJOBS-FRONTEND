@@ -10,5 +10,4 @@ const Admin = () => {
 		<Navigate to={routesPath.JobseekerPaths.home} replace={true} />
 	);
 };
-export default Admin
-
+export default Admin;

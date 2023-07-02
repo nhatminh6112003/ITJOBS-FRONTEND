@@ -25,14 +25,14 @@ export const WidgetHeader = ({ title }) => {
 					</div>
 				</div>
 				<div className={cx('right-action')}>
-					<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-t-resume')">
+					<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-t-resume')">
 						<div className={cx('icon')}>
 							<em className={cx('mdi', 'mdi-lightbulb')} />
 						</div>
 						<p>Tips</p>
 					</div>
 					<div className={cx('link-edit')}>
-						<a href='javascript:void(0)' onclick='editResumeTitle();'>
+						<a href='javascript:void(0)' onClick='editResumeTitle();'>
 							<em className={cx('material-icons')}>
 								<EditIcon fontSize='normal' />
 							</em>

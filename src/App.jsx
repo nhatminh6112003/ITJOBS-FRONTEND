@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { BrowserRouter as Router, Routes } from 'react-router-dom';
 import { Suspense } from 'react';
 
-import Loading from '~/Core/components/ui/Loading';
+import Loading from '~/Core/components/common/Loading';
 import renderRoutes from './Core/utils/renderRoutes';
 import {
 	jobSeekerPublicRoutes,

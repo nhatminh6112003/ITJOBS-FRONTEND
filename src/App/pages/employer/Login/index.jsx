@@ -21,7 +21,8 @@ const Login = ({ cx }) => {
 									<a
 										href='https://careerbuilder.vn/vi/employers/faq'
 										target='_blank'
-										className={cx('support')}>
+										className={cx('support')}
+										rel='noreferrer'>
 										Hướng dẫn
 									</a>
 								</div>
@@ -42,8 +43,8 @@ const Login = ({ cx }) => {
 												name='username'
 												className={cx('form-control')}
 												placeholder=' Vui lòng nhập thông tin'
-												onkeyup="this.setAttribute('value', this.value);"
-												onfocus="javascript:if(this.value=='Email/Tên đăng nhập') this.value='';"
+												onKeyUp="this.setAttribute('value', this.value);"
+												onFocus="javascript:if(this.value=='Email/Tên đăng nhập') this.value='';"
 											/>
 										</div>
 									</div>
@@ -56,7 +57,7 @@ const Login = ({ cx }) => {
 												type='password'
 												className={cx('form-control')}
 												placeholder=' Vui lòng nhập thông tin'
-												onkeyup="this.setAttribute('value', this.value);"
+												onKeyUp="this.setAttribute('value', this.value);"
 												name='password'
 												defaultValue=''
 											/>
@@ -79,7 +80,7 @@ const Login = ({ cx }) => {
 											<a
 												className={cx('register')}
 												href='javascript:void()'
-												onclick="location.href='https://careerbuilder.vn/vi/employers/register'">
+												onClick="location.href='https://careerbuilder.vn/vi/employers/register'">
 												Quý khách chưa có tài khoản?
 											</a>
 											Đăng ký dễ dàng, hoàn toàn miễn phí

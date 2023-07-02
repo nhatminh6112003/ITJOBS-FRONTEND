@@ -27,7 +27,8 @@ const Register = ({ cx }) => {
 												href='https://careerbuilder.vn/vi/employers/faq'
 												target='_blank'
 												title='Hướng dẫn'
-												className={cx('support')}>
+												className={cx('support')}
+												rel='noreferrer'>
 												Hướng dẫn
 											</a>
 										</div>
@@ -65,7 +66,7 @@ const Register = ({ cx }) => {
 													className={cx('form-control')}
 													placeholder='Vui lòng nhập thông tin'
 												/>
-												<a className='check-email' href='' onclick='checkEmailExist();'>
+												<a className='check-email' href='' onClick='checkEmailExist();'>
 													Kiểm tra sự tồn tại của email
 												</a>{' '}
 												<span className='form-error error_re_email' id='error_re_email'></span>{' '}
@@ -121,7 +122,8 @@ const Register = ({ cx }) => {
 											<a
 												href='https://careerbuilder.vn/vi/employers/faq'
 												target='_blank'
-												className='support'>
+												className='support'
+												rel='noreferrer'>
 												Hướng dẫn
 											</a>
 										</div>
@@ -195,7 +197,7 @@ const Register = ({ cx }) => {
 													className={cx('form-control')}
 													name='country_id'
 													id='country_id'
-													onchange='loadLocations(this.value);'>
+													onChange='loadLocations(this.value);'>
 													<option value={1} selected=''>
 														Việt Nam
 													</option>
@@ -446,7 +448,7 @@ const Register = ({ cx }) => {
 													/>
 												</div>
 												<div className='reCapcha' style={{ fontSize: 24 }}>
-													<a onclick="refeshImgCaptcha('captchaim');" href=''>
+													<a onClick="refeshImgCaptcha('captchaim');" href=''>
 														{' '}
 														<em className='fa fa-repeat' />
 													</a>

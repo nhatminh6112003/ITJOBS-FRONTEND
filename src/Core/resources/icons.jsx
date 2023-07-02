@@ -14,6 +14,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddIcon from '@mui/icons-material/Add';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import CloseIcon from '@mui/icons-material/Close';
+import Notifications from '@mui/icons-material/Notifications';
 export {
 	CloseIcon,
 	AddIcon,
@@ -30,5 +31,6 @@ export {
 	CheckIcon,
 	SearchIcon,
 	FavoriteBorderIcon,
-	LightbulbIcon
+	LightbulbIcon,
+	Notifications
 };

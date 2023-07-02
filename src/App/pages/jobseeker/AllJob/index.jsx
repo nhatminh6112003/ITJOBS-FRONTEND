@@ -70,7 +70,7 @@ const AllJob = () => {
 										</select>
 									</div>
 									<div className={cx('form-group', 'form-submit')}>
-										<button className={cx('btn-gradient')} onclick="return validataSearchHomePage('vi');">
+										<button className={cx('btn-gradient')} onClick="return validataSearchHomePage('vi');">
 											<p>Tìm Ngay</p>
 											<SearchIcon />
 										</button>
@@ -90,7 +90,7 @@ const AllJob = () => {
 										<input
 											id='work-home-fli'
 											type='checkbox'
-											onclick="validFilterdataSearch('vi', 'homework', this);"
+											onClick="validFilterdataSearch('vi', 'homework', this);"
 										/>
 										<span className={cx('slider')} />
 									</label>
@@ -481,7 +481,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-thanh-thanh-cong-bien-hoa.35A7FCC0.html'
 													target='_blank'
-													title='Công ty CP Thành Thành Công - Biên Hòa'>
+													title='Công ty CP Thành Thành Công - Biên Hòa'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='https://images.careerbuilder.vn/employer_folders/lot4/201664/155x155/90931untitled-1.png'
@@ -498,7 +499,8 @@ const AllJob = () => {
 															data-id='35BB3D60'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-thanh-toan-lam-viec-tai-nha-may-mia-duong-cambodia.35BB3D60.html'
 															target='_blank'
-															title='Kế Toán Thanh toán (Làm việc tại nhà máy mía đường Cambodia)'>
+															title='Kế Toán Thanh toán (Làm việc tại nhà máy mía đường Cambodia)'
+															rel='noreferrer'>
 															Kế Toán Thanh toán (Làm việc tại nhà máy mía đường Cambodia)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -511,7 +513,8 @@ const AllJob = () => {
 														className={cx('company-name')}
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-thanh-thanh-cong-bien-hoa.35A7FCC0.html'
-														title='Công ty CP Thành Thành Công - Biên Hòa'>
+														title='Công ty CP Thành Thành Công - Biên Hòa'
+														rel='noreferrer'>
 														Công ty CP Thành Thành Công - Biên Hòa
 													</a>
 													<a
@@ -519,7 +522,8 @@ const AllJob = () => {
 														data-id='35BB3D60'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-thanh-toan-lam-viec-tai-nha-may-mia-duong-cambodia.35BB3D60.html'
 														target='_blank'
-														title='Kế Toán Thanh toán (Làm việc tại nhà máy mía đường Cambodia)'>
+														title='Kế Toán Thanh toán (Làm việc tại nhà máy mía đường Cambodia)'
+														rel='noreferrer'>
 														<div className={cx('salary')}>
 															<p>
 																<em className='fa fa-usd' />
@@ -557,7 +561,7 @@ const AllJob = () => {
 																className={cx('toollips', 'save-job', 'chk_save_35BB3D60')}
 																href=''
 																data-id='35BB3D60'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<FavoriteBorderIcon fontSize='small' />
 																<span className={cx('text')}>Lưu việc làm</span>
 															</a>
@@ -580,7 +584,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tai-chinh-tnhh-mb-shinsei-mcredit.35A78FCD.html'
 													target='_blank'
-													title='Công ty Tài chính TNHH MB SHINSEI (MCREDIT)'>
+													title='Công ty Tài chính TNHH MB SHINSEI (MCREDIT)'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='https://images.careerbuilder.vn/employer_folders/lot3/173773/155x155/160149logopng_rgb_digitaluse_onwhitebg.png'
@@ -597,7 +602,8 @@ const AllJob = () => {
 															data-id='35BB3D5F'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-cao-cap-kiem-toan-noi-bo.35BB3D5F.html'
 															target='_blank'
-															title='Chuyên viên cao cấp Kiểm toán nội bộ'>
+															title='Chuyên viên cao cấp Kiểm toán nội bộ'
+															rel='noreferrer'>
 															Chuyên viên cao cấp Kiểm toán nội bộ
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -610,7 +616,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tai-chinh-tnhh-mb-shinsei-mcredit.35A78FCD.html'
-														title='Công ty Tài chính TNHH MB SHINSEI (MCREDIT)'>
+														title='Công ty Tài chính TNHH MB SHINSEI (MCREDIT)'
+														rel='noreferrer'>
 														Công ty Tài chính TNHH MB SHINSEI (MCREDIT)
 													</a>
 													<a
@@ -618,7 +625,8 @@ const AllJob = () => {
 														data-id='35BB3D5F'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-cao-cap-kiem-toan-noi-bo.35BB3D5F.html'
 														target='_blank'
-														title='Chuyên viên cao cấp Kiểm toán nội bộ'>
+														title='Chuyên viên cao cấp Kiểm toán nội bộ'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -654,7 +662,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D5F '
 																href=''
 																data-id='35BB3D5F'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -678,7 +686,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-thanh-thanh-cong-bien-hoa.35A7FCC0.html'
 													target='_blank'
-													title='Công ty CP Thành Thành Công - Biên Hòa'>
+													title='Công ty CP Thành Thành Công - Biên Hòa'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='https://images.careerbuilder.vn/employer_folders/lot4/201664/155x155/90931untitled-1.png'
@@ -695,7 +704,8 @@ const AllJob = () => {
 															data-id='35BB3D5D'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/pho-truong-khu-vuc-mien-bac.35BB3D5D.html'
 															target='_blank'
-															title='Phó trưởng khu vực miền Bắc'>
+															title='Phó trưởng khu vực miền Bắc'
+															rel='noreferrer'>
 															Phó trưởng khu vực miền Bắc
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -708,7 +718,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-thanh-thanh-cong-bien-hoa.35A7FCC0.html'
-														title='Công ty CP Thành Thành Công - Biên Hòa'>
+														title='Công ty CP Thành Thành Công - Biên Hòa'
+														rel='noreferrer'>
 														Công ty CP Thành Thành Công - Biên Hòa
 													</a>
 													<a
@@ -716,7 +727,8 @@ const AllJob = () => {
 														data-id='35BB3D5D'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/pho-truong-khu-vuc-mien-bac.35BB3D5D.html'
 														target='_blank'
-														title='Phó trưởng khu vực miền Bắc'>
+														title='Phó trưởng khu vực miền Bắc'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -754,7 +766,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D5D '
 																href=''
 																data-id='35BB3D5D'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -778,7 +790,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-phuong-dong-ocb.35A5022A.html'
 													target='_blank'
-													title='Ngân Hàng TMCP Phương Đông - OCB'>
+													title='Ngân Hàng TMCP Phương Đông - OCB'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='https://images.careerbuilder.vn/employers/6442/155x155/112123logo-ocb.png'
@@ -795,7 +808,8 @@ const AllJob = () => {
 															data-id='35BB3D5C'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/cvcc-cv-thuc-day-chi-tieu-the-phu-trach-chuong-trinh-uu-dai-the-hoac-lien-ket-doi-tac.35BB3D5C.html'
 															target='_blank'
-															title='CVCC/ CV Thúc đẩy chi tiêu thẻ - Phụ trách chương trình ưu đãi thẻ hoặc liên kết đối tác'>
+															title='CVCC/ CV Thúc đẩy chi tiêu thẻ - Phụ trách chương trình ưu đãi thẻ hoặc liên kết đối tác'
+															rel='noreferrer'>
 															CVCC/ CV Thúc đẩy chi tiêu thẻ - Phụ trách chương trình ưu đãi thẻ hoặc
 															liên kết đối tác
 															<span className='new'>
@@ -809,7 +823,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-phuong-dong-ocb.35A5022A.html'
-														title='Ngân Hàng TMCP Phương Đông - OCB'>
+														title='Ngân Hàng TMCP Phương Đông - OCB'
+														rel='noreferrer'>
 														Ngân Hàng TMCP Phương Đông - OCB
 													</a>
 													<a
@@ -817,7 +832,8 @@ const AllJob = () => {
 														data-id='35BB3D5C'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/cvcc-cv-thuc-day-chi-tieu-the-phu-trach-chuong-trinh-uu-dai-the-hoac-lien-ket-doi-tac.35BB3D5C.html'
 														target='_blank'
-														title='CVCC/ CV Thúc đẩy chi tiêu thẻ - Phụ trách chương trình ưu đãi thẻ hoặc liên kết đối tác'>
+														title='CVCC/ CV Thúc đẩy chi tiêu thẻ - Phụ trách chương trình ưu đãi thẻ hoặc liên kết đối tác'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -839,7 +855,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D5C '
 																href=''
 																data-id='35BB3D5C'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -863,7 +879,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-thanh-thanh-cong-bien-hoa.35A7FCC0.html'
 													target='_blank'
-													title='Công ty CP Thành Thành Công - Biên Hòa'>
+													title='Công ty CP Thành Thành Công - Biên Hòa'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='https://images.careerbuilder.vn/employer_folders/lot4/201664/155x155/90931untitled-1.png'
@@ -880,7 +897,8 @@ const AllJob = () => {
 															data-id='35BB3D5B'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-kinh-doanh.35BB3D5B.html'
 															target='_blank'
-															title='Nhân viên Kinh doanh'>
+															title='Nhân viên Kinh doanh'
+															rel='noreferrer'>
 															Nhân viên Kinh doanh
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -893,7 +911,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-thanh-thanh-cong-bien-hoa.35A7FCC0.html'
-														title='Công ty CP Thành Thành Công - Biên Hòa'>
+														title='Công ty CP Thành Thành Công - Biên Hòa'
+														rel='noreferrer'>
 														Công ty CP Thành Thành Công - Biên Hòa
 													</a>
 													<a
@@ -901,7 +920,8 @@ const AllJob = () => {
 														data-id='35BB3D5B'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-kinh-doanh.35BB3D5B.html'
 														target='_blank'
-														title='Nhân viên Kinh doanh'>
+														title='Nhân viên Kinh doanh'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -939,7 +959,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D5B '
 																href=''
 																data-id='35BB3D5B'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -963,7 +983,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-sua-dau-nanh-viet-nam-vinasoy.35A6067E.html'
 													target='_blank'
-													title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '>
+													title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employers/73086/155x155/151253logovinasoycorp&slogan(vi)-01.png'
@@ -980,7 +1001,8 @@ const AllJob = () => {
 															data-id='35BB3D5A'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/ky-thuat-vien-van-hanh-thiet-bi-luong-khoi-diem-8-trieu-thang-nha-may-sua-dau-nanh-vinasoy-bac-ninh.35BB3D5A.html'
 															target='_blank'
-															title='Kỹ Thuật Viên Vận Hành Thiết Bị - Lương Khởi Điểm 8 Triệu / Tháng - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'>
+															title='Kỹ Thuật Viên Vận Hành Thiết Bị - Lương Khởi Điểm 8 Triệu / Tháng - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'
+															rel='noreferrer'>
 															Kỹ Thuật Viên Vận Hành Thiết Bị - Lương Khởi Điểm 8 Triệu / Tháng - Nhà Máy
 															Sữa Đậu Nành Vinasoy Bắc Ninh
 															<span className='new'>
@@ -994,7 +1016,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-sua-dau-nanh-viet-nam-vinasoy.35A6067E.html'
-														title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '>
+														title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '
+														rel='noreferrer'>
 														Công Ty Sữa Đậu Nành Việt Nam - Vinasoy{' '}
 													</a>
 													<a
@@ -1002,7 +1025,8 @@ const AllJob = () => {
 														data-id='35BB3D5A'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/ky-thuat-vien-van-hanh-thiet-bi-luong-khoi-diem-8-trieu-thang-nha-may-sua-dau-nanh-vinasoy-bac-ninh.35BB3D5A.html'
 														target='_blank'
-														title='Kỹ Thuật Viên Vận Hành Thiết Bị - Lương Khởi Điểm 8 Triệu / Tháng - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'>
+														title='Kỹ Thuật Viên Vận Hành Thiết Bị - Lương Khởi Điểm 8 Triệu / Tháng - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1038,7 +1062,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D5A '
 																href=''
 																data-id='35BB3D5A'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1062,7 +1086,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-phuong-dong-ocb.35A5022A.html'
 													target='_blank'
-													title='Ngân Hàng TMCP Phương Đông - OCB'>
+													title='Ngân Hàng TMCP Phương Đông - OCB'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employers/6442/155x155/112123logo-ocb.png'
@@ -1079,7 +1104,8 @@ const AllJob = () => {
 															data-id='35BB3D59'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/truong-bo-phan-kiem-soat-giao-dich-the.35BB3D59.html'
 															target='_blank'
-															title='Trưởng bộ phận Kiểm soát giao dịch thẻ'>
+															title='Trưởng bộ phận Kiểm soát giao dịch thẻ'
+															rel='noreferrer'>
 															Trưởng bộ phận Kiểm soát giao dịch thẻ
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -1092,7 +1118,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-phuong-dong-ocb.35A5022A.html'
-														title='Ngân Hàng TMCP Phương Đông - OCB'>
+														title='Ngân Hàng TMCP Phương Đông - OCB'
+														rel='noreferrer'>
 														Ngân Hàng TMCP Phương Đông - OCB
 													</a>
 													<a
@@ -1100,7 +1127,8 @@ const AllJob = () => {
 														data-id='35BB3D59'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/truong-bo-phan-kiem-soat-giao-dich-the.35BB3D59.html'
 														target='_blank'
-														title='Trưởng bộ phận Kiểm soát giao dịch thẻ'>
+														title='Trưởng bộ phận Kiểm soát giao dịch thẻ'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1122,7 +1150,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D59 '
 																href=''
 																data-id='35BB3D59'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1146,7 +1174,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-sua-dau-nanh-viet-nam-vinasoy.35A6067E.html'
 													target='_blank'
-													title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '>
+													title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employers/73086/155x155/151253logovinasoycorp&slogan(vi)-01.png'
@@ -1163,7 +1192,8 @@ const AllJob = () => {
 															data-id='35BB3D57'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-kiem-soat-chat-luong-qc-nha-may-sua-dau-nanh-vinasoy-bac-ninh.35BB3D57.html'
 															target='_blank'
-															title='Nhân Viên Kiểm Soát Chất Lượng (QC) - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'>
+															title='Nhân Viên Kiểm Soát Chất Lượng (QC) - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'
+															rel='noreferrer'>
 															Nhân Viên Kiểm Soát Chất Lượng (QC) - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -1176,7 +1206,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-sua-dau-nanh-viet-nam-vinasoy.35A6067E.html'
-														title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '>
+														title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '
+														rel='noreferrer'>
 														Công Ty Sữa Đậu Nành Việt Nam - Vinasoy{' '}
 													</a>
 													<a
@@ -1184,7 +1215,8 @@ const AllJob = () => {
 														data-id='35BB3D57'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-kiem-soat-chat-luong-qc-nha-may-sua-dau-nanh-vinasoy-bac-ninh.35BB3D57.html'
 														target='_blank'
-														title='Nhân Viên Kiểm Soát Chất Lượng (QC) - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'>
+														title='Nhân Viên Kiểm Soát Chất Lượng (QC) - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1220,7 +1252,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D57 '
 																href=''
 																data-id='35BB3D57'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1244,7 +1276,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-tham-my-quoc-te-linh-anh.35A8F78C.html'
 													target='_blank'
-													title='CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH'>
+													title='CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employer_folders/lot8/265868/155x155/172429logolinhanh.jpg'
@@ -1261,7 +1294,8 @@ const AllJob = () => {
 															data-id='35BB3D55'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-cham-soc-khach-hang.35BB3D55.html'
 															target='_blank'
-															title='Nhân viên chăm sóc khách hàng'>
+															title='Nhân viên chăm sóc khách hàng'
+															rel='noreferrer'>
 															Nhân viên chăm sóc khách hàng
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -1274,7 +1308,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-tham-my-quoc-te-linh-anh.35A8F78C.html'
-														title='CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH'>
+														title='CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH'
+														rel='noreferrer'>
 														CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH
 													</a>
 													<a
@@ -1282,7 +1317,8 @@ const AllJob = () => {
 														data-id='35BB3D55'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-cham-soc-khach-hang.35BB3D55.html'
 														target='_blank'
-														title='Nhân viên chăm sóc khách hàng'>
+														title='Nhân viên chăm sóc khách hàng'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1318,7 +1354,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D55 '
 																href=''
 																data-id='35BB3D55'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1342,7 +1378,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-sua-dau-nanh-viet-nam-vinasoy.35A6067E.html'
 													target='_blank'
-													title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '>
+													title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employers/73086/155x155/151253logovinasoycorp&slogan(vi)-01.png'
@@ -1359,7 +1396,8 @@ const AllJob = () => {
 															data-id='35BB3D54'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/ky-su-phu-trach-thiet-bi-dien-tu-dong-hoa-nha-may-sua-dau-nanh-vinasoy-bac-ninh.35BB3D54.html'
 															target='_blank'
-															title='Kỹ Sư Phụ Trách Thiết Bị Điện, Tự Động Hóa - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'>
+															title='Kỹ Sư Phụ Trách Thiết Bị Điện, Tự Động Hóa - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'
+															rel='noreferrer'>
 															Kỹ Sư Phụ Trách Thiết Bị Điện, Tự Động Hóa - Nhà Máy Sữa Đậu Nành Vinasoy
 															Bắc Ninh
 															<span className='new'>
@@ -1373,7 +1411,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-sua-dau-nanh-viet-nam-vinasoy.35A6067E.html'
-														title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '>
+														title='Công Ty Sữa Đậu Nành Việt Nam - Vinasoy '
+														rel='noreferrer'>
 														Công Ty Sữa Đậu Nành Việt Nam - Vinasoy{' '}
 													</a>
 													<a
@@ -1381,7 +1420,8 @@ const AllJob = () => {
 														data-id='35BB3D54'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/ky-su-phu-trach-thiet-bi-dien-tu-dong-hoa-nha-may-sua-dau-nanh-vinasoy-bac-ninh.35BB3D54.html'
 														target='_blank'
-														title='Kỹ Sư Phụ Trách Thiết Bị Điện, Tự Động Hóa - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'>
+														title='Kỹ Sư Phụ Trách Thiết Bị Điện, Tự Động Hóa - Nhà Máy Sữa Đậu Nành Vinasoy Bắc Ninh'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1426,7 +1466,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D54 '
 																href=''
 																data-id='35BB3D54'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1450,7 +1490,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-quan-ly-no-va-khai-thac-tai-san-ngan-hang-tmcp-quan-doi.35A59298.html'
 													target='_blank'
-													title='Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội'>
+													title='Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employers/43416/155x155/113211logo.png'
@@ -1467,7 +1508,8 @@ const AllJob = () => {
 															data-id='35BB3D53'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-tien-luong-va-dai-ngo.35BB3D53.html'
 															target='_blank'
-															title='Chuyên viên Tiền lương và Đãi ngộ'>
+															title='Chuyên viên Tiền lương và Đãi ngộ'
+															rel='noreferrer'>
 															Chuyên viên Tiền lương và Đãi ngộ
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -1480,7 +1522,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-quan-ly-no-va-khai-thac-tai-san-ngan-hang-tmcp-quan-doi.35A59298.html'
-														title='Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội'>
+														title='Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội'
+														rel='noreferrer'>
 														Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội
 													</a>
 													<a
@@ -1488,7 +1531,8 @@ const AllJob = () => {
 														data-id='35BB3D53'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-tien-luong-va-dai-ngo.35BB3D53.html'
 														target='_blank'
-														title='Chuyên viên Tiền lương và Đãi ngộ'>
+														title='Chuyên viên Tiền lương và Đãi ngộ'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1524,7 +1568,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D53 '
 																href=''
 																data-id='35BB3D53'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1548,7 +1592,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-tham-my-quoc-te-linh-anh.35A8F78C.html'
 													target='_blank'
-													title='CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH'>
+													title='CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employer_folders/lot8/265868/155x155/172429logolinhanh.jpg'
@@ -1565,7 +1610,8 @@ const AllJob = () => {
 															data-id='35BB3D52'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-tu-van-tuyen-sinh.35BB3D52.html'
 															target='_blank'
-															title='Nhân viên tư vấn tuyển sinh'>
+															title='Nhân viên tư vấn tuyển sinh'
+															rel='noreferrer'>
 															Nhân viên tư vấn tuyển sinh
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -1578,7 +1624,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-tham-my-quoc-te-linh-anh.35A8F78C.html'
-														title='CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH'>
+														title='CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH'
+														rel='noreferrer'>
 														CÔNG TY TNHH THẨM MỸ QUỐC TẾ LINH ANH
 													</a>
 													<a
@@ -1586,7 +1633,8 @@ const AllJob = () => {
 														data-id='35BB3D52'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-tu-van-tuyen-sinh.35BB3D52.html'
 														target='_blank'
-														title='Nhân viên tư vấn tuyển sinh'>
+														title='Nhân viên tư vấn tuyển sinh'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1622,7 +1670,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D52 '
 																href=''
 																data-id='35BB3D52'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1646,7 +1694,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/hanoi-family-medical-practice.35A6A65C.html'
 													target='_blank'
-													title='Hanoi Family Medical Practice'>
+													title='Hanoi Family Medical Practice'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://static.careerbuilder.vn/themes/kiemviecv32/images/graphics/logo-default.png'
@@ -1663,7 +1712,8 @@ const AllJob = () => {
 															data-id='35BB3D50'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/hr-admin-officer.35BB3D50.html'
 															target='_blank'
-															title='HR & Admin Officer'>
+															title='HR & Admin Officer'
+															rel='noreferrer'>
 															HR &amp; Admin Officer
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -1676,7 +1726,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/hanoi-family-medical-practice.35A6A65C.html'
-														title='Hanoi Family Medical Practice'>
+														title='Hanoi Family Medical Practice'
+														rel='noreferrer'>
 														Hanoi Family Medical Practice
 													</a>
 													<a
@@ -1684,7 +1735,8 @@ const AllJob = () => {
 														data-id='35BB3D50'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/hr-admin-officer.35BB3D50.html'
 														target='_blank'
-														title='HR & Admin Officer'>
+														title='HR & Admin Officer'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1729,7 +1781,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D50 '
 																href=''
 																data-id='35BB3D50'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1753,7 +1805,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/fukushima-galilei-vietnam-company-limited.35A79A22.html'
 													target='_blank'
-													title='FUKUSHIMA GALILEI VIETNAM COMPANY LIMITED'>
+													title='FUKUSHIMA GALILEI VIETNAM COMPANY LIMITED'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employer_folders/lot8/176418/155x155/1055521.jpg'
@@ -1770,7 +1823,8 @@ const AllJob = () => {
 															data-id='35BB3D4C'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/pho-giam-doc.35BB3D4C.html'
 															target='_blank'
-															title='Phó Giám Đốc'>
+															title='Phó Giám Đốc'
+															rel='noreferrer'>
 															Phó Giám Đốc
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -1783,7 +1837,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/fukushima-galilei-vietnam-company-limited.35A79A22.html'
-														title='FUKUSHIMA GALILEI VIETNAM COMPANY LIMITED'>
+														title='FUKUSHIMA GALILEI VIETNAM COMPANY LIMITED'
+														rel='noreferrer'>
 														FUKUSHIMA GALILEI VIETNAM COMPANY LIMITED
 													</a>
 													<a
@@ -1791,7 +1846,8 @@ const AllJob = () => {
 														data-id='35BB3D4C'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/pho-giam-doc.35BB3D4C.html'
 														target='_blank'
-														title='Phó Giám Đốc'>
+														title='Phó Giám Đốc'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1827,7 +1883,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D4C '
 																href=''
 																data-id='35BB3D4C'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1851,7 +1907,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/benh-vien-da-khoa-quoc-te-dolife.35A7FA0F.html'
 													target='_blank'
-													title='BỆNH VIỆN ĐA KHOA QUỐC TẾ DOLIFE'>
+													title='BỆNH VIỆN ĐA KHOA QUỐC TẾ DOLIFE'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employer_folders/lot5/200975/155x155/105059download-15.png'
@@ -1868,7 +1925,8 @@ const AllJob = () => {
 															data-id='35BB3D4F'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/truong-phong-van-hanh.35BB3D4F.html'
 															target='_blank'
-															title='Trưởng Phòng Vận Hành'>
+															title='Trưởng Phòng Vận Hành'
+															rel='noreferrer'>
 															Trưởng Phòng Vận Hành
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -1881,7 +1939,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/benh-vien-da-khoa-quoc-te-dolife.35A7FA0F.html'
-														title='BỆNH VIỆN ĐA KHOA QUỐC TẾ DOLIFE'>
+														title='BỆNH VIỆN ĐA KHOA QUỐC TẾ DOLIFE'
+														rel='noreferrer'>
 														BỆNH VIỆN ĐA KHOA QUỐC TẾ DOLIFE
 													</a>
 													<a
@@ -1889,7 +1948,8 @@ const AllJob = () => {
 														data-id='35BB3D4F'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/truong-phong-van-hanh.35BB3D4F.html'
 														target='_blank'
-														title='Trưởng Phòng Vận Hành'>
+														title='Trưởng Phòng Vận Hành'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -1934,7 +1994,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D4F '
 																href=''
 																data-id='35BB3D4F'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -1958,7 +2018,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/fpt-play.35A8CF49.html'
 													target='_blank'
-													title='FPT Play'>
+													title='FPT Play'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employer_folders/lot1/255561/155x155/114116100334240.png'
@@ -1975,7 +2036,8 @@ const AllJob = () => {
 															data-id='35BB3D4D'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/frontend-developer-reactjs-fpt-play.35BB3D4D.html'
 															target='_blank'
-															title='Frontend Developer (ReactJS - FPT Play)'>
+															title='Frontend Developer (ReactJS - FPT Play)'
+															rel='noreferrer'>
 															Frontend Developer (ReactJS - FPT Play)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -1988,7 +2050,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/fpt-play.35A8CF49.html'
-														title='FPT Play'>
+														title='FPT Play'
+														rel='noreferrer'>
 														FPT Play
 													</a>
 													<a
@@ -1996,7 +2059,8 @@ const AllJob = () => {
 														data-id='35BB3D4D'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/frontend-developer-reactjs-fpt-play.35BB3D4D.html'
 														target='_blank'
-														title='Frontend Developer (ReactJS - FPT Play)'>
+														title='Frontend Developer (ReactJS - FPT Play)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2041,7 +2105,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D4D '
 																href=''
 																data-id='35BB3D4D'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2065,7 +2129,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/coca-cola-vietnam.35A4FE5F.html'
 													target='_blank'
-													title='Coca-Cola Vietnam'>
+													title='Coca-Cola Vietnam'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employers/5471/155x155/153006logococa.png'
@@ -2082,7 +2147,8 @@ const AllJob = () => {
 															data-id='35BB3D4B'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/giam-sat-ban-hang-tp-vung-tau.35BB3D4B.html'
 															target='_blank'
-															title='Giám Sát Bán Hàng - TP. Vũng Tàu'>
+															title='Giám Sát Bán Hàng - TP. Vũng Tàu'
+															rel='noreferrer'>
 															Giám Sát Bán Hàng - TP. Vũng Tàu
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2095,7 +2161,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/coca-cola-vietnam.35A4FE5F.html'
-														title='Coca-Cola Vietnam'>
+														title='Coca-Cola Vietnam'
+														rel='noreferrer'>
 														Coca-Cola Vietnam
 													</a>
 													<a
@@ -2103,7 +2170,8 @@ const AllJob = () => {
 														data-id='35BB3D4B'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/giam-sat-ban-hang-tp-vung-tau.35BB3D4B.html'
 														target='_blank'
-														title='Giám Sát Bán Hàng - TP. Vũng Tàu'>
+														title='Giám Sát Bán Hàng - TP. Vũng Tàu'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2148,7 +2216,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D4B '
 																href=''
 																data-id='35BB3D4B'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2172,7 +2240,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-quan-ly-no-va-khai-thac-tai-san-ngan-hang-tmcp-quan-doi.35A59298.html'
 													target='_blank'
-													title='Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội'>
+													title='Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employers/43416/155x155/113211logo.png'
@@ -2189,7 +2258,8 @@ const AllJob = () => {
 															data-id='35BB3D4A'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-cao-cap-tai-chinh-ke-hoach.35BB3D4A.html'
 															target='_blank'
-															title='Chuyên viên cao cấp tài chính - kế hoạch'>
+															title='Chuyên viên cao cấp tài chính - kế hoạch'
+															rel='noreferrer'>
 															Chuyên viên cao cấp tài chính - kế hoạch
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2202,7 +2272,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-quan-ly-no-va-khai-thac-tai-san-ngan-hang-tmcp-quan-doi.35A59298.html'
-														title='Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội'>
+														title='Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội'
+														rel='noreferrer'>
 														Công Ty Quản Lý Nợ Và Khai Thác Tài Sản - Ngân Hàng TMCP Quân Đội
 													</a>
 													<a
@@ -2210,7 +2281,8 @@ const AllJob = () => {
 														data-id='35BB3D4A'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-cao-cap-tai-chinh-ke-hoach.35BB3D4A.html'
 														target='_blank'
-														title='Chuyên viên cao cấp tài chính - kế hoạch'>
+														title='Chuyên viên cao cấp tài chính - kế hoạch'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2246,7 +2318,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D4A '
 																href=''
 																data-id='35BB3D4A'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2270,7 +2342,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/goldbell-equipment-co-ltd.35A6FE63.html'
 													target='_blank'
-													title='Goldbell Equipment Co., Ltd.'>
+													title='Goldbell Equipment Co., Ltd.'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employer_folders/lot7/136547/155x155/102114logo.jpg'
@@ -2287,7 +2360,8 @@ const AllJob = () => {
 															data-id='35BB3D23'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-xuat-nhap-khau.35BB3D23.html'
 															target='_blank'
-															title='Nhân Viên Xuất Nhập Khẩu'>
+															title='Nhân Viên Xuất Nhập Khẩu'
+															rel='noreferrer'>
 															Nhân Viên Xuất Nhập Khẩu
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2300,7 +2374,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/goldbell-equipment-co-ltd.35A6FE63.html'
-														title='Goldbell Equipment Co., Ltd.'>
+														title='Goldbell Equipment Co., Ltd.'
+														rel='noreferrer'>
 														Goldbell Equipment Co., Ltd.
 													</a>
 													<a
@@ -2308,7 +2383,8 @@ const AllJob = () => {
 														data-id='35BB3D23'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-xuat-nhap-khau.35BB3D23.html'
 														target='_blank'
-														title='Nhân Viên Xuất Nhập Khẩu'>
+														title='Nhân Viên Xuất Nhập Khẩu'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2353,7 +2429,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D23 '
 																href=''
 																data-id='35BB3D23'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2377,7 +2453,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-thai-corp-international-viet-nam.35A7ECD7.html'
 													target='_blank'
-													title='CÔNG TY TNHH THAI CORP INTERNATIONAL (VIỆT NAM)'>
+													title='CÔNG TY TNHH THAI CORP INTERNATIONAL (VIỆT NAM)'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														data-src='https://images.careerbuilder.vn/employer_folders/lot1/197591/155x155/111210z3834860912615_1465f266f2125359075c6de8c1bfa764.jpg'
@@ -2394,7 +2471,8 @@ const AllJob = () => {
 															data-id='35BB3D47'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/facilities-supervisor-english-required.35BB3D47.html'
 															target='_blank'
-															title='Facilities Supervisor (English Required!!!)'>
+															title='Facilities Supervisor (English Required!!!)'
+															rel='noreferrer'>
 															Facilities Supervisor (English Required!!!)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2407,7 +2485,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-thai-corp-international-viet-nam.35A7ECD7.html'
-														title='CÔNG TY TNHH THAI CORP INTERNATIONAL (VIỆT NAM)'>
+														title='CÔNG TY TNHH THAI CORP INTERNATIONAL (VIỆT NAM)'
+														rel='noreferrer'>
 														CÔNG TY TNHH THAI CORP INTERNATIONAL (VIỆT NAM)
 													</a>
 													<a
@@ -2415,7 +2494,8 @@ const AllJob = () => {
 														data-id='35BB3D47'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/facilities-supervisor-english-required.35BB3D47.html'
 														target='_blank'
-														title='Facilities Supervisor (English Required!!!)'>
+														title='Facilities Supervisor (English Required!!!)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2451,7 +2531,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D47 '
 																href=''
 																data-id='35BB3D47'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2475,7 +2555,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/tyre-pacific-viet-nam-co-ltd.35A5C515.html'
 													target='_blank'
-													title='Tyre Pacific Viet Nam Co., Ltd.'>
+													title='Tyre Pacific Viet Nam Co., Ltd.'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -2492,7 +2573,8 @@ const AllJob = () => {
 															data-id='35BB3D17'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/sales-executive.35BB3D17.html'
 															target='_blank'
-															title='Sales Executive'>
+															title='Sales Executive'
+															rel='noreferrer'>
 															Sales Executive
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2505,7 +2587,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/tyre-pacific-viet-nam-co-ltd.35A5C515.html'
-														title='Tyre Pacific Viet Nam Co., Ltd.'>
+														title='Tyre Pacific Viet Nam Co., Ltd.'
+														rel='noreferrer'>
 														Tyre Pacific Viet Nam Co., Ltd.
 													</a>
 													<a
@@ -2513,7 +2596,8 @@ const AllJob = () => {
 														data-id='35BB3D17'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/sales-executive.35BB3D17.html'
 														target='_blank'
-														title='Sales Executive'>
+														title='Sales Executive'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2547,7 +2631,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D17 '
 																href=''
 																data-id='35BB3D17'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2568,7 +2652,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/tyre-pacific-viet-nam-co-ltd.35A5C515.html'
 													target='_blank'
-													title='Tyre Pacific Viet Nam Co., Ltd.'>
+													title='Tyre Pacific Viet Nam Co., Ltd.'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -2585,7 +2670,8 @@ const AllJob = () => {
 															data-id='35BB3D18'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/sales-manager-north.35BB3D18.html'
 															target='_blank'
-															title='Sales Manager (North)'>
+															title='Sales Manager (North)'
+															rel='noreferrer'>
 															Sales Manager (North)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2598,7 +2684,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/tyre-pacific-viet-nam-co-ltd.35A5C515.html'
-														title='Tyre Pacific Viet Nam Co., Ltd.'>
+														title='Tyre Pacific Viet Nam Co., Ltd.'
+														rel='noreferrer'>
 														Tyre Pacific Viet Nam Co., Ltd.
 													</a>
 													<a
@@ -2606,7 +2693,8 @@ const AllJob = () => {
 														data-id='35BB3D18'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/sales-manager-north.35BB3D18.html'
 														target='_blank'
-														title='Sales Manager (North)'>
+														title='Sales Manager (North)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2639,7 +2727,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D18 '
 																href=''
 																data-id='35BB3D18'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2660,7 +2748,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-sx-tm-duoc-pham-tam-binh.35A6C98B.html'
 													target='_blank'
-													title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'>
+													title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -2677,7 +2766,8 @@ const AllJob = () => {
 															data-id='35BB3D46'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/pho-phong-truyen-thong-marketing-phu-trach-noi-dung.35BB3D46.html'
 															target='_blank'
-															title='Phó phòng Truyền thông & Marketing phụ trách nội dung'>
+															title='Phó phòng Truyền thông & Marketing phụ trách nội dung'
+															rel='noreferrer'>
 															Phó phòng Truyền thông &amp; Marketing phụ trách nội dung
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2690,7 +2780,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-sx-tm-duoc-pham-tam-binh.35A6C98B.html'
-														title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'>
+														title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'
+														rel='noreferrer'>
 														Công ty TNHH SX &amp; TM Dược phẩm Tâm Bình
 													</a>
 													<a
@@ -2698,7 +2789,8 @@ const AllJob = () => {
 														data-id='35BB3D46'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/pho-phong-truyen-thong-marketing-phu-trach-noi-dung.35BB3D46.html'
 														target='_blank'
-														title='Phó phòng Truyền thông & Marketing phụ trách nội dung'>
+														title='Phó phòng Truyền thông & Marketing phụ trách nội dung'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2740,7 +2832,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D46 '
 																href=''
 																data-id='35BB3D46'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2761,7 +2853,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-sx-tm-duoc-pham-tam-binh.35A6C98B.html'
 													target='_blank'
-													title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'>
+													title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -2778,7 +2871,8 @@ const AllJob = () => {
 															data-id='35BB3D44'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/truong-phong-nghien-cuu-phat-trien-25-35-trieu.35BB3D44.html'
 															target='_blank'
-															title='Trưởng phòng Nghiên cứu phát triển (25-35 triệu)'>
+															title='Trưởng phòng Nghiên cứu phát triển (25-35 triệu)'
+															rel='noreferrer'>
 															Trưởng phòng Nghiên cứu phát triển (25-35 triệu)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2791,7 +2885,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-sx-tm-duoc-pham-tam-binh.35A6C98B.html'
-														title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'>
+														title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'
+														rel='noreferrer'>
 														Công ty TNHH SX &amp; TM Dược phẩm Tâm Bình
 													</a>
 													<a
@@ -2799,7 +2894,8 @@ const AllJob = () => {
 														data-id='35BB3D44'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/truong-phong-nghien-cuu-phat-trien-25-35-trieu.35BB3D44.html'
 														target='_blank'
-														title='Trưởng phòng Nghiên cứu phát triển (25-35 triệu)'>
+														title='Trưởng phòng Nghiên cứu phát triển (25-35 triệu)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2841,7 +2937,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D44 '
 																href=''
 																data-id='35BB3D44'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2862,7 +2958,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/careerbuilder-s-client.35A90091.html'
 													target='_blank'
-													title="CareerBuilder's Client">
+													title="CareerBuilder's Client"
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -2879,7 +2976,8 @@ const AllJob = () => {
 															data-id='35BB3D43'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/hrga-staff-cho-cty-nhat-tai-kcn-yen-phong-bac-ninh-tu-tuc-di-lai.35BB3D43.html'
 															target='_blank'
-															title='HRGA Staff cho cty Nhật tại KCN Yên Phong - Bắc Ninh (tự túc đi lại)'>
+															title='HRGA Staff cho cty Nhật tại KCN Yên Phong - Bắc Ninh (tự túc đi lại)'
+															rel='noreferrer'>
 															HRGA Staff cho cty Nhật tại KCN Yên Phong - Bắc Ninh (tự túc đi lại)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2892,7 +2990,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/careerbuilder-s-client.35A90091.html'
-														title="CareerBuilder's Client">
+														title="CareerBuilder's Client"
+														rel='noreferrer'>
 														CareerBuilder's Client
 													</a>
 													<a
@@ -2900,7 +2999,8 @@ const AllJob = () => {
 														data-id='35BB3D43'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/hrga-staff-cho-cty-nhat-tai-kcn-yen-phong-bac-ninh-tu-tuc-di-lai.35BB3D43.html'
 														target='_blank'
-														title='HRGA Staff cho cty Nhật tại KCN Yên Phong - Bắc Ninh (tự túc đi lại)'>
+														title='HRGA Staff cho cty Nhật tại KCN Yên Phong - Bắc Ninh (tự túc đi lại)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -2933,7 +3033,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D43 '
 																href=''
 																data-id='35BB3D43'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -2954,7 +3054,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-sx-tm-duoc-pham-tam-binh.35A6C98B.html'
 													target='_blank'
-													title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'>
+													title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -2971,7 +3072,8 @@ const AllJob = () => {
 															data-id='35BB3D42'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/truong-phong-dam-bao-chat-luong-25-30-trieu.35BB3D42.html'
 															target='_blank'
-															title='Trưởng phòng Đảm bảo chất lượng (25-30 triệu)'>
+															title='Trưởng phòng Đảm bảo chất lượng (25-30 triệu)'
+															rel='noreferrer'>
 															Trưởng phòng Đảm bảo chất lượng (25-30 triệu)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -2984,7 +3086,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-sx-tm-duoc-pham-tam-binh.35A6C98B.html'
-														title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'>
+														title='Công ty TNHH SX & TM Dược phẩm Tâm Bình'
+														rel='noreferrer'>
 														Công ty TNHH SX &amp; TM Dược phẩm Tâm Bình
 													</a>
 													<a
@@ -2992,7 +3095,8 @@ const AllJob = () => {
 														data-id='35BB3D42'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/truong-phong-dam-bao-chat-luong-25-30-trieu.35BB3D42.html'
 														target='_blank'
-														title='Trưởng phòng Đảm bảo chất lượng (25-30 triệu)'>
+														title='Trưởng phòng Đảm bảo chất lượng (25-30 triệu)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3034,7 +3138,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D42 '
 																href=''
 																data-id='35BB3D42'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3055,7 +3159,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-quan-doi.35A66D70.html'
 													target='_blank'
-													title='Ngân Hàng TMCP Quân Đội'>
+													title='Ngân Hàng TMCP Quân Đội'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3072,7 +3177,8 @@ const AllJob = () => {
 															data-id='35BB3D40'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-khach-hang-doanh-nghiep-sme-khu-vuc-da-nang.35BB3D40.html'
 															target='_blank'
-															title='Chuyên viên Khách hàng Doanh nghiệp (SME)  - Khu vực Đà Nẵng'>
+															title='Chuyên viên Khách hàng Doanh nghiệp (SME)  - Khu vực Đà Nẵng'
+															rel='noreferrer'>
 															Chuyên viên Khách hàng Doanh nghiệp (SME) - Khu vực Đà Nẵng
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3085,7 +3191,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-quan-doi.35A66D70.html'
-														title='Ngân Hàng TMCP Quân Đội'>
+														title='Ngân Hàng TMCP Quân Đội'
+														rel='noreferrer'>
 														Ngân Hàng TMCP Quân Đội
 													</a>
 													<a
@@ -3093,7 +3200,8 @@ const AllJob = () => {
 														data-id='35BB3D40'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-khach-hang-doanh-nghiep-sme-khu-vuc-da-nang.35BB3D40.html'
 														target='_blank'
-														title='Chuyên viên Khách hàng Doanh nghiệp (SME)  - Khu vực Đà Nẵng'>
+														title='Chuyên viên Khách hàng Doanh nghiệp (SME)  - Khu vực Đà Nẵng'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3135,7 +3243,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D40 '
 																href=''
 																data-id='35BB3D40'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3156,7 +3264,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-gofingo-vietnam.35A86542.html'
 													target='_blank'
-													title='Công ty TNHH Gofingo Vietnam '>
+													title='Công ty TNHH Gofingo Vietnam '
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3173,7 +3282,8 @@ const AllJob = () => {
 															data-id='35BB3D3D'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/general-accountant-fintech-industry.35BB3D3D.html'
 															target='_blank'
-															title='General Accountant (Fintech industry)'>
+															title='General Accountant (Fintech industry)'
+															rel='noreferrer'>
 															General Accountant (Fintech industry)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3186,7 +3296,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-gofingo-vietnam.35A86542.html'
-														title='Công ty TNHH Gofingo Vietnam '>
+														title='Công ty TNHH Gofingo Vietnam '
+														rel='noreferrer'>
 														Công ty TNHH Gofingo Vietnam{' '}
 													</a>
 													<a
@@ -3194,7 +3305,8 @@ const AllJob = () => {
 														data-id='35BB3D3D'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/general-accountant-fintech-industry.35BB3D3D.html'
 														target='_blank'
-														title='General Accountant (Fintech industry)'>
+														title='General Accountant (Fintech industry)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3227,7 +3339,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D3D '
 																href=''
 																data-id='35BB3D3D'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3248,7 +3360,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-reeracoen-viet-nam.35A7932C.html'
 													target='_blank'
-													title='Công Ty TNHH Reeracoen Việt Nam'>
+													title='Công Ty TNHH Reeracoen Việt Nam'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3265,7 +3378,8 @@ const AllJob = () => {
 															data-id='35BB3D3E'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/hcm-sales-cum-admin-staff-n2-up-to-32-000-000-vnd-20701.35BB3D3E.html'
 															target='_blank'
-															title='[ HCM ] - Sales cum Admin staff (N2) - Up to 32,000,000 VND (20701)'>
+															title='[ HCM ] - Sales cum Admin staff (N2) - Up to 32,000,000 VND (20701)'
+															rel='noreferrer'>
 															[ HCM ] - Sales cum Admin staff (N2) - Up to 32,000,000 VND (20701)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3278,7 +3392,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-reeracoen-viet-nam.35A7932C.html'
-														title='Công Ty TNHH Reeracoen Việt Nam'>
+														title='Công Ty TNHH Reeracoen Việt Nam'
+														rel='noreferrer'>
 														Công Ty TNHH Reeracoen Việt Nam
 													</a>
 													<a
@@ -3286,7 +3401,8 @@ const AllJob = () => {
 														data-id='35BB3D3E'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/hcm-sales-cum-admin-staff-n2-up-to-32-000-000-vnd-20701.35BB3D3E.html'
 														target='_blank'
-														title='[ HCM ] - Sales cum Admin staff (N2) - Up to 32,000,000 VND (20701)'>
+														title='[ HCM ] - Sales cum Admin staff (N2) - Up to 32,000,000 VND (20701)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3319,7 +3435,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D3E '
 																href=''
 																data-id='35BB3D3E'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3340,7 +3456,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/truyen-hinh-fpt.35A8CF49.html'
 													target='_blank'
-													title='Truyền Hình FPT'>
+													title='Truyền Hình FPT'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3357,7 +3474,8 @@ const AllJob = () => {
 															data-id='35BB3CFE'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/data-scientist.35BB3CFE.html'
 															target='_blank'
-															title='Data Scientist'>
+															title='Data Scientist'
+															rel='noreferrer'>
 															Data Scientist
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3370,7 +3488,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/truyen-hinh-fpt.35A8CF49.html'
-														title='Truyền Hình FPT'>
+														title='Truyền Hình FPT'
+														rel='noreferrer'>
 														Truyền Hình FPT
 													</a>
 													<a
@@ -3378,7 +3497,8 @@ const AllJob = () => {
 														data-id='35BB3CFE'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/data-scientist.35BB3CFE.html'
 														target='_blank'
-														title='Data Scientist'>
+														title='Data Scientist'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3420,7 +3540,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3CFE '
 																href=''
 																data-id='35BB3CFE'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3441,7 +3561,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/fpt-telecom-chi-nhanh-cong-ty-co-phan-vien-thong-fpt.35A8CF49.html'
 													target='_blank'
-													title='FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT'>
+													title='FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3458,7 +3579,8 @@ const AllJob = () => {
 															data-id='35BB3D3B'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/international-sales-representative-b2b-hn.35BB3D3B.html'
 															target='_blank'
-															title='International Sales Representative (B2B) - HN'>
+															title='International Sales Representative (B2B) - HN'
+															rel='noreferrer'>
 															International Sales Representative (B2B) - HN
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3471,7 +3593,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/fpt-telecom-chi-nhanh-cong-ty-co-phan-vien-thong-fpt.35A8CF49.html'
-														title='FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT'>
+														title='FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT'
+														rel='noreferrer'>
 														FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT
 													</a>
 													<a
@@ -3479,7 +3602,8 @@ const AllJob = () => {
 														data-id='35BB3D3B'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/international-sales-representative-b2b-hn.35BB3D3B.html'
 														target='_blank'
-														title='International Sales Representative (B2B) - HN'>
+														title='International Sales Representative (B2B) - HN'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3521,7 +3645,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D3B '
 																href=''
 																data-id='35BB3D3B'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3542,7 +3666,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-quan-doi.35A66D70.html'
 													target='_blank'
-													title='Ngân Hàng TMCP Quân Đội'>
+													title='Ngân Hàng TMCP Quân Đội'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3559,7 +3684,8 @@ const AllJob = () => {
 															data-id='35BB3D3A'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-khach-hang-doanh-nghiep-sme-kv-ha-noi.35BB3D3A.html'
 															target='_blank'
-															title='Chuyên viên Khách hàng Doanh nghiệp (SME) - KV Hà Nội'>
+															title='Chuyên viên Khách hàng Doanh nghiệp (SME) - KV Hà Nội'
+															rel='noreferrer'>
 															Chuyên viên Khách hàng Doanh nghiệp (SME) - KV Hà Nội
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3572,7 +3698,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-quan-doi.35A66D70.html'
-														title='Ngân Hàng TMCP Quân Đội'>
+														title='Ngân Hàng TMCP Quân Đội'
+														rel='noreferrer'>
 														Ngân Hàng TMCP Quân Đội
 													</a>
 													<a
@@ -3580,7 +3707,8 @@ const AllJob = () => {
 														data-id='35BB3D3A'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-khach-hang-doanh-nghiep-sme-kv-ha-noi.35BB3D3A.html'
 														target='_blank'
-														title='Chuyên viên Khách hàng Doanh nghiệp (SME) - KV Hà Nội'>
+														title='Chuyên viên Khách hàng Doanh nghiệp (SME) - KV Hà Nội'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3622,7 +3750,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D3A '
 																href=''
 																data-id='35BB3D3A'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3643,7 +3771,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-lectra-viet-nam.35A8EFD0.html'
 													target='_blank'
-													title='Công Ty TNHH Lectra Việt Nam'>
+													title='Công Ty TNHH Lectra Việt Nam'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3660,7 +3789,8 @@ const AllJob = () => {
 															data-id='35BB3D39'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/sales-coordinator.35BB3D39.html'
 															target='_blank'
-															title='Sales Coordinator'>
+															title='Sales Coordinator'
+															rel='noreferrer'>
 															Sales Coordinator
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3673,7 +3803,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-lectra-viet-nam.35A8EFD0.html'
-														title='Công Ty TNHH Lectra Việt Nam'>
+														title='Công Ty TNHH Lectra Việt Nam'
+														rel='noreferrer'>
 														Công Ty TNHH Lectra Việt Nam
 													</a>
 													<a
@@ -3681,7 +3812,8 @@ const AllJob = () => {
 														data-id='35BB3D39'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/sales-coordinator.35BB3D39.html'
 														target='_blank'
-														title='Sales Coordinator'>
+														title='Sales Coordinator'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3714,7 +3846,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D39 '
 																href=''
 																data-id='35BB3D39'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3735,7 +3867,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
 													target='_blank'
-													title='Công Ty Cổ Phần Đồng Tâm'>
+													title='Công Ty Cổ Phần Đồng Tâm'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3752,7 +3885,8 @@ const AllJob = () => {
 															data-id='35BB3D38'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-phat-trien-phan-mem.35BB3D38.html'
 															target='_blank'
-															title='Chuyên Viên Phát Triển Phần Mềm'>
+															title='Chuyên Viên Phát Triển Phần Mềm'
+															rel='noreferrer'>
 															Chuyên Viên Phát Triển Phần Mềm
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3765,7 +3899,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
-														title='Công Ty Cổ Phần Đồng Tâm'>
+														title='Công Ty Cổ Phần Đồng Tâm'
+														rel='noreferrer'>
 														Công Ty Cổ Phần Đồng Tâm
 													</a>
 													<a
@@ -3773,7 +3908,8 @@ const AllJob = () => {
 														data-id='35BB3D38'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-phat-trien-phan-mem.35BB3D38.html'
 														target='_blank'
-														title='Chuyên Viên Phát Triển Phần Mềm'>
+														title='Chuyên Viên Phát Triển Phần Mềm'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3815,7 +3951,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D38 '
 																href=''
 																data-id='35BB3D38'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3836,7 +3972,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tai-chinh-tnhh-mb-shinsei-mcredit.35A78FCD.html'
 													target='_blank'
-													title='Công ty Tài chính TNHH MB SHINSEI (MCREDIT)'>
+													title='Công ty Tài chính TNHH MB SHINSEI (MCREDIT)'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3853,7 +3990,8 @@ const AllJob = () => {
 															data-id='35BB3D37'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-cao-cap-kiem-toan-it.35BB3D37.html'
 															target='_blank'
-															title='Chuyên viên cao cấp kiểm toán IT'>
+															title='Chuyên viên cao cấp kiểm toán IT'
+															rel='noreferrer'>
 															Chuyên viên cao cấp kiểm toán IT
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3866,7 +4004,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tai-chinh-tnhh-mb-shinsei-mcredit.35A78FCD.html'
-														title='Công ty Tài chính TNHH MB SHINSEI (MCREDIT)'>
+														title='Công ty Tài chính TNHH MB SHINSEI (MCREDIT)'
+														rel='noreferrer'>
 														Công ty Tài chính TNHH MB SHINSEI (MCREDIT)
 													</a>
 													<a
@@ -3874,7 +4013,8 @@ const AllJob = () => {
 														data-id='35BB3D37'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-cao-cap-kiem-toan-it.35BB3D37.html'
 														target='_blank'
-														title='Chuyên viên cao cấp kiểm toán IT'>
+														title='Chuyên viên cao cấp kiểm toán IT'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -3916,7 +4056,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D37 '
 																href=''
 																data-id='35BB3D37'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -3937,7 +4077,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-va-thuong-mai-snake-viet.35A92033.html'
 													target='_blank'
-													title='Công ty TNHH sản xuất và thương mại Snake Việt'>
+													title='Công ty TNHH sản xuất và thương mại Snake Việt'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -3954,7 +4095,8 @@ const AllJob = () => {
 															data-id='35BB3D35'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-nhan-su.35BB3D35.html'
 															target='_blank'
-															title='Chuyên Viên Nhân Sự'>
+															title='Chuyên Viên Nhân Sự'
+															rel='noreferrer'>
 															Chuyên Viên Nhân Sự
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -3967,7 +4109,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-va-thuong-mai-snake-viet.35A92033.html'
-														title='Công ty TNHH sản xuất và thương mại Snake Việt'>
+														title='Công ty TNHH sản xuất và thương mại Snake Việt'
+														rel='noreferrer'>
 														Công ty TNHH sản xuất và thương mại Snake Việt
 													</a>
 													<a
@@ -3975,7 +4118,8 @@ const AllJob = () => {
 														data-id='35BB3D35'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-nhan-su.35BB3D35.html'
 														target='_blank'
-														title='Chuyên Viên Nhân Sự'>
+														title='Chuyên Viên Nhân Sự'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4008,7 +4152,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D35 '
 																href=''
 																data-id='35BB3D35'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4029,7 +4173,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-reeracoen-viet-nam.35A7932C.html'
 													target='_blank'
-													title='Công Ty TNHH Reeracoen Việt Nam'>
+													title='Công Ty TNHH Reeracoen Việt Nam'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4046,7 +4191,8 @@ const AllJob = () => {
 															data-id='35BB3D36'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/hcm-sales-staff-nha-kinh-nong-nghiep-up-to-16-000-000-vnd-22043.35BB3D36.html'
 															target='_blank'
-															title='[ HCM ] - Sales staff (Nhà kính nông nghiệp) - Up to 16,000,000 VND (22043)'>
+															title='[ HCM ] - Sales staff (Nhà kính nông nghiệp) - Up to 16,000,000 VND (22043)'
+															rel='noreferrer'>
 															[ HCM ] - Sales staff (Nhà kính nông nghiệp) - Up to 16,000,000 VND (22043)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4059,7 +4205,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-reeracoen-viet-nam.35A7932C.html'
-														title='Công Ty TNHH Reeracoen Việt Nam'>
+														title='Công Ty TNHH Reeracoen Việt Nam'
+														rel='noreferrer'>
 														Công Ty TNHH Reeracoen Việt Nam
 													</a>
 													<a
@@ -4067,7 +4214,8 @@ const AllJob = () => {
 														data-id='35BB3D36'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/hcm-sales-staff-nha-kinh-nong-nghiep-up-to-16-000-000-vnd-22043.35BB3D36.html'
 														target='_blank'
-														title='[ HCM ] - Sales staff (Nhà kính nông nghiệp) - Up to 16,000,000 VND (22043)'>
+														title='[ HCM ] - Sales staff (Nhà kính nông nghiệp) - Up to 16,000,000 VND (22043)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4100,7 +4248,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D36 '
 																href=''
 																data-id='35BB3D36'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4121,7 +4269,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-va-thuong-mai-snake-viet.35A92033.html'
 													target='_blank'
-													title='Công ty TNHH sản xuất và thương mại Snake Việt'>
+													title='Công ty TNHH sản xuất và thương mại Snake Việt'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4138,7 +4287,8 @@ const AllJob = () => {
 															data-id='35BB3D34'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-marketing.35BB3D34.html'
 															target='_blank'
-															title='Nhân Viên Marketing'>
+															title='Nhân Viên Marketing'
+															rel='noreferrer'>
 															Nhân Viên Marketing
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4151,7 +4301,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-va-thuong-mai-snake-viet.35A92033.html'
-														title='Công ty TNHH sản xuất và thương mại Snake Việt'>
+														title='Công ty TNHH sản xuất và thương mại Snake Việt'
+														rel='noreferrer'>
 														Công ty TNHH sản xuất và thương mại Snake Việt
 													</a>
 													<a
@@ -4159,7 +4310,8 @@ const AllJob = () => {
 														data-id='35BB3D34'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-marketing.35BB3D34.html'
 														target='_blank'
-														title='Nhân Viên Marketing'>
+														title='Nhân Viên Marketing'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4192,7 +4344,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D34 '
 																href=''
 																data-id='35BB3D34'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4213,7 +4365,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-va-thuong-mai-snake-viet.35A92033.html'
 													target='_blank'
-													title='Công ty TNHH sản xuất và thương mại Snake Việt'>
+													title='Công ty TNHH sản xuất và thương mại Snake Việt'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4230,7 +4383,8 @@ const AllJob = () => {
 															data-id='35BB3D30'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/truong-kenh-ban-le.35BB3D30.html'
 															target='_blank'
-															title='Trưởng Kênh Bán Lẻ'>
+															title='Trưởng Kênh Bán Lẻ'
+															rel='noreferrer'>
 															Trưởng Kênh Bán Lẻ
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4243,7 +4397,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-va-thuong-mai-snake-viet.35A92033.html'
-														title='Công ty TNHH sản xuất và thương mại Snake Việt'>
+														title='Công ty TNHH sản xuất và thương mại Snake Việt'
+														rel='noreferrer'>
 														Công ty TNHH sản xuất và thương mại Snake Việt
 													</a>
 													<a
@@ -4251,7 +4406,8 @@ const AllJob = () => {
 														data-id='35BB3D30'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/truong-kenh-ban-le.35BB3D30.html'
 														target='_blank'
-														title='Trưởng Kênh Bán Lẻ'>
+														title='Trưởng Kênh Bán Lẻ'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4284,7 +4440,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D30 '
 																href=''
 																data-id='35BB3D30'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4305,7 +4461,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/fpt-telecom-chi-nhanh-cong-ty-co-phan-vien-thong-fpt.35A8CF49.html'
 													target='_blank'
-													title='FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT'>
+													title='FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4322,7 +4479,8 @@ const AllJob = () => {
 															data-id='35BB3D31'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-kinh-doanh-tai-fpt-telecom-thanh-hoa.35BB3D31.html'
 															target='_blank'
-															title='Nhân Viên Kinh Doanh Tại FPT Telecom Thanh Hoá'>
+															title='Nhân Viên Kinh Doanh Tại FPT Telecom Thanh Hoá'
+															rel='noreferrer'>
 															Nhân Viên Kinh Doanh Tại FPT Telecom Thanh Hoá
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4335,7 +4493,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/fpt-telecom-chi-nhanh-cong-ty-co-phan-vien-thong-fpt.35A8CF49.html'
-														title='FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT'>
+														title='FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT'
+														rel='noreferrer'>
 														FPT Telecom - Chi nhánh Công ty Cổ Phần Viễn Thông FPT
 													</a>
 													<a
@@ -4343,7 +4502,8 @@ const AllJob = () => {
 														data-id='35BB3D31'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-kinh-doanh-tai-fpt-telecom-thanh-hoa.35BB3D31.html'
 														target='_blank'
-														title='Nhân Viên Kinh Doanh Tại FPT Telecom Thanh Hoá'>
+														title='Nhân Viên Kinh Doanh Tại FPT Telecom Thanh Hoá'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4385,7 +4545,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D31 '
 																href=''
 																data-id='35BB3D31'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4406,7 +4566,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
 													target='_blank'
-													title='Công Ty Cổ Phần Đồng Tâm'>
+													title='Công Ty Cổ Phần Đồng Tâm'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4423,7 +4584,8 @@ const AllJob = () => {
 															data-id='35BB3D33'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-phan-tich-nghiep-vu-cntt.35BB3D33.html'
 															target='_blank'
-															title='Chuyên Viên Phân Tích Nghiệp Vụ CNTT'>
+															title='Chuyên Viên Phân Tích Nghiệp Vụ CNTT'
+															rel='noreferrer'>
 															Chuyên Viên Phân Tích Nghiệp Vụ CNTT
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4436,7 +4598,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
-														title='Công Ty Cổ Phần Đồng Tâm'>
+														title='Công Ty Cổ Phần Đồng Tâm'
+														rel='noreferrer'>
 														Công Ty Cổ Phần Đồng Tâm
 													</a>
 													<a
@@ -4444,7 +4607,8 @@ const AllJob = () => {
 														data-id='35BB3D33'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-phan-tich-nghiep-vu-cntt.35BB3D33.html'
 														target='_blank'
-														title='Chuyên Viên Phân Tích Nghiệp Vụ CNTT'>
+														title='Chuyên Viên Phân Tích Nghiệp Vụ CNTT'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4486,7 +4650,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D33 '
 																href=''
 																data-id='35BB3D33'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4507,7 +4671,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
 													target='_blank'
-													title='Công Ty Cổ Phần Đồng Tâm'>
+													title='Công Ty Cổ Phần Đồng Tâm'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4524,7 +4689,8 @@ const AllJob = () => {
 															data-id='35BB3D32'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/truong-phong-quan-ly-thiet-bi-va-nguon-luc.35BB3D32.html'
 															target='_blank'
-															title='Trưởng Phòng Quản Lý Thiết Bị Và Nguồn Lực'>
+															title='Trưởng Phòng Quản Lý Thiết Bị Và Nguồn Lực'
+															rel='noreferrer'>
 															Trưởng Phòng Quản Lý Thiết Bị Và Nguồn Lực
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4537,7 +4703,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
-														title='Công Ty Cổ Phần Đồng Tâm'>
+														title='Công Ty Cổ Phần Đồng Tâm'
+														rel='noreferrer'>
 														Công Ty Cổ Phần Đồng Tâm
 													</a>
 													<a
@@ -4545,7 +4712,8 @@ const AllJob = () => {
 														data-id='35BB3D32'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/truong-phong-quan-ly-thiet-bi-va-nguon-luc.35BB3D32.html'
 														target='_blank'
-														title='Trưởng Phòng Quản Lý Thiết Bị Và Nguồn Lực'>
+														title='Trưởng Phòng Quản Lý Thiết Bị Và Nguồn Lực'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4587,7 +4755,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D32 '
 																href=''
 																data-id='35BB3D32'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4608,7 +4776,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-va-thuong-mai-snake-viet.35A92033.html'
 													target='_blank'
-													title='Công ty TNHH sản xuất và thương mại Snake Việt'>
+													title='Công ty TNHH sản xuất và thương mại Snake Việt'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4625,7 +4794,8 @@ const AllJob = () => {
 															data-id='35BB3D2F'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-cham-soc-khach-hang.35BB3D2F.html'
 															target='_blank'
-															title='Nhân Viên Chăm Sóc Khách Hàng'>
+															title='Nhân Viên Chăm Sóc Khách Hàng'
+															rel='noreferrer'>
 															Nhân Viên Chăm Sóc Khách Hàng
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4638,7 +4808,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-va-thuong-mai-snake-viet.35A92033.html'
-														title='Công ty TNHH sản xuất và thương mại Snake Việt'>
+														title='Công ty TNHH sản xuất và thương mại Snake Việt'
+														rel='noreferrer'>
 														Công ty TNHH sản xuất và thương mại Snake Việt
 													</a>
 													<a
@@ -4646,7 +4817,8 @@ const AllJob = () => {
 														data-id='35BB3D2F'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-cham-soc-khach-hang.35BB3D2F.html'
 														target='_blank'
-														title='Nhân Viên Chăm Sóc Khách Hàng'>
+														title='Nhân Viên Chăm Sóc Khách Hàng'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4679,7 +4851,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D2F '
 																href=''
 																data-id='35BB3D2F'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4700,7 +4872,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
 													target='_blank'
-													title='Công Ty Cổ Phần Đồng Tâm'>
+													title='Công Ty Cổ Phần Đồng Tâm'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4717,7 +4890,8 @@ const AllJob = () => {
 															data-id='35BB3D2E'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/giam-sat-ke-hoach-bai.35BB3D2E.html'
 															target='_blank'
-															title='Giám Sát Kế Hoạch Bãi'>
+															title='Giám Sát Kế Hoạch Bãi'
+															rel='noreferrer'>
 															Giám Sát Kế Hoạch Bãi
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4730,7 +4904,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
-														title='Công Ty Cổ Phần Đồng Tâm'>
+														title='Công Ty Cổ Phần Đồng Tâm'
+														rel='noreferrer'>
 														Công Ty Cổ Phần Đồng Tâm
 													</a>
 													<a
@@ -4738,7 +4913,8 @@ const AllJob = () => {
 														data-id='35BB3D2E'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/giam-sat-ke-hoach-bai.35BB3D2E.html'
 														target='_blank'
-														title='Giám Sát Kế Hoạch Bãi'>
+														title='Giám Sát Kế Hoạch Bãi'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4780,7 +4956,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D2E '
 																href=''
 																data-id='35BB3D2E'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4801,7 +4977,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-mtv-thep-vas-an-hung-tuong.35A5A619.html'
 													target='_blank'
-													title='Công Ty TNHH MTV Thép VAS An Hưng Tường'>
+													title='Công Ty TNHH MTV Thép VAS An Hưng Tường'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4818,7 +4995,8 @@ const AllJob = () => {
 															data-id='35BB3D2C'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-thu-mua.35BB3D2C.html'
 															target='_blank'
-															title='NHÂN VIÊN THU MUA'>
+															title='NHÂN VIÊN THU MUA'
+															rel='noreferrer'>
 															NHÂN VIÊN THU MUA
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4831,7 +5009,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-mtv-thep-vas-an-hung-tuong.35A5A619.html'
-														title='Công Ty TNHH MTV Thép VAS An Hưng Tường'>
+														title='Công Ty TNHH MTV Thép VAS An Hưng Tường'
+														rel='noreferrer'>
 														Công Ty TNHH MTV Thép VAS An Hưng Tường
 													</a>
 													<a
@@ -4839,7 +5018,8 @@ const AllJob = () => {
 														data-id='35BB3D2C'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-thu-mua.35BB3D2C.html'
 														target='_blank'
-														title='NHÂN VIÊN THU MUA'>
+														title='NHÂN VIÊN THU MUA'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4872,7 +5052,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D2C '
 																href=''
 																data-id='35BB3D2C'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4893,7 +5073,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-thiet-ke-kien-truc-noi-that-xay-dung-aaa.35A8DC59.html'
 													target='_blank'
-													title='Công ty CP Thiết kế Kiến trúc - Nội thất - Xây dựng AAA '>
+													title='Công ty CP Thiết kế Kiến trúc - Nội thất - Xây dựng AAA '
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -4910,7 +5091,8 @@ const AllJob = () => {
 															data-id='35BB3D2D'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-nhan-su-tong-hop-manh-ve-tuyen-dung.35BB3D2D.html'
 															target='_blank'
-															title='Chuyên viên Nhân sự Tổng hợp (Mạnh về Tuyển dụng)'>
+															title='Chuyên viên Nhân sự Tổng hợp (Mạnh về Tuyển dụng)'
+															rel='noreferrer'>
 															Chuyên viên Nhân sự Tổng hợp (Mạnh về Tuyển dụng)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -4923,7 +5105,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-thiet-ke-kien-truc-noi-that-xay-dung-aaa.35A8DC59.html'
-														title='Công ty CP Thiết kế Kiến trúc - Nội thất - Xây dựng AAA '>
+														title='Công ty CP Thiết kế Kiến trúc - Nội thất - Xây dựng AAA '
+														rel='noreferrer'>
 														Công ty CP Thiết kế Kiến trúc - Nội thất - Xây dựng AAA{' '}
 													</a>
 													<a
@@ -4931,7 +5114,8 @@ const AllJob = () => {
 														data-id='35BB3D2D'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/chuyen-vien-nhan-su-tong-hop-manh-ve-tuyen-dung.35BB3D2D.html'
 														target='_blank'
-														title='Chuyên viên Nhân sự Tổng hợp (Mạnh về Tuyển dụng)'>
+														title='Chuyên viên Nhân sự Tổng hợp (Mạnh về Tuyển dụng)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -4964,7 +5148,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D2D '
 																href=''
 																data-id='35BB3D2D'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -4985,7 +5169,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
 													target='_blank'
-													title='Công Ty Cổ Phần Đồng Tâm'>
+													title='Công Ty Cổ Phần Đồng Tâm'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -5002,7 +5187,8 @@ const AllJob = () => {
 															data-id='35BB3D25'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/giam-sat-chung-tu-khai-thac.35BB3D25.html'
 															target='_blank'
-															title='Giám Sát Chứng Từ Khai Thác'>
+															title='Giám Sát Chứng Từ Khai Thác'
+															rel='noreferrer'>
 															Giám Sát Chứng Từ Khai Thác
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -5015,7 +5201,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
-														title='Công Ty Cổ Phần Đồng Tâm'>
+														title='Công Ty Cổ Phần Đồng Tâm'
+														rel='noreferrer'>
 														Công Ty Cổ Phần Đồng Tâm
 													</a>
 													<a
@@ -5023,7 +5210,8 @@ const AllJob = () => {
 														data-id='35BB3D25'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/giam-sat-chung-tu-khai-thac.35BB3D25.html'
 														target='_blank'
-														title='Giám Sát Chứng Từ Khai Thác'>
+														title='Giám Sát Chứng Từ Khai Thác'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -5065,7 +5253,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D25 '
 																href=''
 																data-id='35BB3D25'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -5086,7 +5274,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
 													target='_blank'
-													title='Công Ty Cổ Phần Đồng Tâm'>
+													title='Công Ty Cổ Phần Đồng Tâm'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -5103,7 +5292,8 @@ const AllJob = () => {
 															data-id='35BB3D2A'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/giam-sat-ke-hoach-tau-sa-lan.35BB3D2A.html'
 															target='_blank'
-															title='Giám Sát Kế Hoạch Tàu/ Sà Lan'>
+															title='Giám Sát Kế Hoạch Tàu/ Sà Lan'
+															rel='noreferrer'>
 															Giám Sát Kế Hoạch Tàu/ Sà Lan
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -5116,7 +5306,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-dong-tam.35A4F126.html'
-														title='Công Ty Cổ Phần Đồng Tâm'>
+														title='Công Ty Cổ Phần Đồng Tâm'
+														rel='noreferrer'>
 														Công Ty Cổ Phần Đồng Tâm
 													</a>
 													<a
@@ -5124,7 +5315,8 @@ const AllJob = () => {
 														data-id='35BB3D2A'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/giam-sat-ke-hoach-tau-sa-lan.35BB3D2A.html'
 														target='_blank'
-														title='Giám Sát Kế Hoạch Tàu/ Sà Lan'>
+														title='Giám Sát Kế Hoạch Tàu/ Sà Lan'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -5166,7 +5358,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D2A '
 																href=''
 																data-id='35BB3D2A'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -5187,7 +5379,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-dau-tu-va-quan-ly-bao-lam-holdings.35A92380.html'
 													target='_blank'
-													title='CÔNG TY TNHH ĐẦU TƯ VÀ QUẢN LÝ BẢO LÂM HOLDINGS'>
+													title='CÔNG TY TNHH ĐẦU TƯ VÀ QUẢN LÝ BẢO LÂM HOLDINGS'
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -5204,7 +5397,8 @@ const AllJob = () => {
 															data-id='35BB3D26'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/sales-admin.35BB3D26.html'
 															target='_blank'
-															title='Sales Admin'>
+															title='Sales Admin'
+															rel='noreferrer'>
 															Sales Admin
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -5217,7 +5411,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-dau-tu-va-quan-ly-bao-lam-holdings.35A92380.html'
-														title='CÔNG TY TNHH ĐẦU TƯ VÀ QUẢN LÝ BẢO LÂM HOLDINGS'>
+														title='CÔNG TY TNHH ĐẦU TƯ VÀ QUẢN LÝ BẢO LÂM HOLDINGS'
+														rel='noreferrer'>
 														CÔNG TY TNHH ĐẦU TƯ VÀ QUẢN LÝ BẢO LÂM HOLDINGS
 													</a>
 													<a
@@ -5225,7 +5420,8 @@ const AllJob = () => {
 														data-id='35BB3D26'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/sales-admin.35BB3D26.html'
 														target='_blank'
-														title='Sales Admin'>
+														title='Sales Admin'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -5258,7 +5454,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D26 '
 																href=''
 																data-id='35BB3D26'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -5279,7 +5475,8 @@ const AllJob = () => {
 												<a
 													href='https://careerbuilder.vn/vi/nha-tuyen-dung/coca-cola.35A4FE5F.html'
 													target='_blank'
-													title='Coca-Cola '>
+													title='Coca-Cola '
+													rel='noreferrer'>
 													<img
 														className='lazy-img'
 														src='../kiemviecv32/images/graphics/blank.gif'
@@ -5296,7 +5493,8 @@ const AllJob = () => {
 															data-id='35BB3D29'
 															href='https://careerbuilder.vn/vi/tim-viec-lam/electrical-technician-ky-thuat-vien-dien-lam-viec-theo-ca.35BB3D29.html'
 															target='_blank'
-															title='Electrical Technician - Kỹ Thuật Viên Điện (Làm việc theo ca)'>
+															title='Electrical Technician - Kỹ Thuật Viên Điện (Làm việc theo ca)'
+															rel='noreferrer'>
 															Electrical Technician - Kỹ Thuật Viên Điện (Làm việc theo ca)
 															<span className='new'>
 																<font color='ff0000'>(Mới)</font>
@@ -5309,7 +5507,8 @@ const AllJob = () => {
 														className='company-name'
 														target='_blank'
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/coca-cola.35A4FE5F.html'
-														title='Coca-Cola '>
+														title='Coca-Cola '
+														rel='noreferrer'>
 														Coca-Cola{' '}
 													</a>
 													<a
@@ -5317,7 +5516,8 @@ const AllJob = () => {
 														data-id='35BB3D29'
 														href='https://careerbuilder.vn/vi/tim-viec-lam/electrical-technician-ky-thuat-vien-dien-lam-viec-theo-ca.35BB3D29.html'
 														target='_blank'
-														title='Electrical Technician - Kỹ Thuật Viên Điện (Làm việc theo ca)'>
+														title='Electrical Technician - Kỹ Thuật Viên Điện (Làm việc theo ca)'
+														rel='noreferrer'>
 														<div className='salary'>
 															<p>
 																<em className='fa fa-usd' />
@@ -5359,7 +5559,7 @@ const AllJob = () => {
 																className='toollips save-job chk_save_35BB3D29 '
 																href=''
 																data-id='35BB3D29'
-																onclick='popuplogin()'>
+																onClick='popuplogin()'>
 																<i className='mdi mdi-heart-outline' />
 																<span className='text'>Lưu việc làm</span>
 															</a>
@@ -5497,7 +5697,7 @@ const AllJob = () => {
 				</div>
 				<div className='button'>
 					{' '}
-					<a href='' onclick='return adVanceJobalert();'>
+					<a href='' onClick='return adVanceJobalert();'>
 						Đăng ký ngay
 					</a>
 				</div>
@@ -5550,7 +5750,7 @@ const AllJob = () => {
 								<a
 									className='fb'
 									href=''
-									onclick="popupapi('facebook','aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL2pvYnNlZWtlcnMvbG9naW5mYWNlYm9vaw==');">
+									onClick="popupapi('facebook','aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL2pvYnNlZWtlcnMvbG9naW5mYWNlYm9vaw==');">
 									<em className='fa fa-facebook' />
 									Facebook
 								</a>
@@ -5559,7 +5759,7 @@ const AllJob = () => {
 								<a
 									className='gg'
 									href=''
-									onclick="popupapi('google','aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL2pvYnNlZWtlcnMvbG9naW5nb29nbGU=');">
+									onClick="popupapi('google','aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL2pvYnNlZWtlcnMvbG9naW5nb29nbGU=');">
 									<em className='fa fa-google' />
 									Google
 								</a>

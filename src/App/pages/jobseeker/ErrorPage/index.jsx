@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './ErrorPage.module.css';
 const cx = classNames.bind(styles);
-const ErrorPage = () => {
+const NotFound = () => {
 	const navigate = useNavigate();
 	const redirectHome = () => {
 		navigate('/');
@@ -485,4 +485,4 @@ const ErrorPage = () => {
 	);
 };
 
-export default ErrorPage;
+export default NotFound;

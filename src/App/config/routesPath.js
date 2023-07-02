@@ -22,7 +22,7 @@ const EmployerPaths = {
 };
 
 const BasePaths = {
-	errorPage: '*'
+	NOT_FOUND: '*'
 };
 const routesPath = {
 	JobseekerPaths,

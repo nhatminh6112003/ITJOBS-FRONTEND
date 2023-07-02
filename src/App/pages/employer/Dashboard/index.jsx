@@ -1,10 +1,7 @@
-export { default } from './Dashboard';
-import React from 'react'
+import React from 'react';
 
-const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
+const EmployerDashboard = () => {
+	return <div>Dashboard</div>;
+};
 
-export default Dashboard
+export default EmployerDashboard;

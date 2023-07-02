@@ -4,10 +4,9 @@ import styles from './changetemplate.module.css';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import Tips from '~/Core/components/ui/Modal/Tips';
+import Tips from '~/Core/components/common/Modal/Tips';
 import useModal from '~/App/hooks/useModal';
-// import ChosseTemplate from "~/components/ui/Modal/ChosseTemplate";
-const ChosseTemplate = lazy(() => import('~/Core/components/ui/Modal/ChosseTemplate'));
+const ChosseTemplate = lazy(() => import('~/Core/components/common/Modal/ChosseTemplate'));
 
 const cx = classNames.bind(styles);
 const ChangeTemplate = () => {
@@ -65,7 +64,7 @@ const ChangeTemplate = () => {
 									<a
 										className={cx('btn-gradient')}
 										href='javascript:void(0);'
-										onclick='downloadCvProfile(17722295);'>
+										onClick='downloadCvProfile(17722295);'>
 										{' '}
 										<span>Tải hồ sơ</span>
 										<em className={cx('material-icons')}>get_app</em>

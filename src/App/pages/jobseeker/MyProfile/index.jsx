@@ -161,7 +161,7 @@ const MyProfile = () => {
 																	id='cv_jobalert_17722295'
 																	defaultValue={17722295}
 																	defaultChecked='checked'
-																	onclick='updateCvJobalert(this);'
+																	onClick='updateCvJobalert(this);'
 																/>
 																<span className={cx('slider')} />{' '}
 															</label>
@@ -242,7 +242,7 @@ const MyProfile = () => {
 									</div>
 									<ul className={cx('list-action')}>
 										<li className={cx('delete', 'no-bf')}>
-											<a href='' onclick='deleteResumeObject();'>
+											<a href='' onClick='deleteResumeObject();'>
 												{' '}
 												<em className={cx('material-icons')}>highlight_off</em>
 												<span>Xóa</span>
@@ -266,14 +266,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-objective')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-objective')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-edit')}>
-													<a href='' onclick='editResumeObjective();'>
+													<a href='' onClick='editResumeObjective();'>
 														{' '}
 														<em className={cx('material-icons')}>
 															<EditIcon fontSize='normal' />
@@ -290,7 +290,7 @@ const MyProfile = () => {
 										</div>
 										<ul className={cx('list-action')}>
 											<li className={cx('delete', 'no-bf')}>
-												<a href='' onclick='deleteResumeObject();'>
+												<a href='' onClick='deleteResumeObject();'>
 													{' '}
 													<em className={cx('material-icons')}>highlight_off</em>
 													<span>Xóa</span>
@@ -315,14 +315,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-desired-job')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-desired-job')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-edit')}>
-													<a title='Chỉnh sửa' href='javascript:void(0)' onclick='editDesiredJob();'>
+													<a title='Chỉnh sửa' href='javascript:void(0)' onClick='editDesiredJob();'>
 														{' '}
 														<em className={cx('material-icons')}>
 															<EditIcon fontSize='normal' />
@@ -388,14 +388,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-experience')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-experience')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-add')}>
-													<a href='' onclick='show_frmExperience(0);' title='Thêm mới'>
+													<a href='' onClick='show_frmExperience(0);' title='Thêm mới'>
 														<em className={cx('material-icons')}>
 															<AddIcon sx={{ fontSize: '20px' }} />
 														</em>
@@ -414,7 +414,7 @@ const MyProfile = () => {
 														<td id='txt-experience'>Chưa có kinh nghiệm</td>
 														<td>
 															<div className={cx('link-edit')}>
-																<a href='' onclick='editFrmExperience();'>
+																<a href='' onClick='editFrmExperience();'>
 																	{' '}
 																	<em className={cx('material-icons')}>create</em>
 																</a>
@@ -426,7 +426,7 @@ const MyProfile = () => {
 														<td id='cbprofile_levelpresent'>Mới tốt nghiệp</td>
 														<td>
 															<div className={cx('link-edit')}>
-																<a href='' onclick='editFrmExperience();'>
+																<a href='' onClick='editFrmExperience();'>
 																	{' '}
 																	<em className={cx('material-icons')}>create</em>
 																</a>
@@ -455,14 +455,14 @@ const MyProfile = () => {
 															</div>
 															<ul className={cx('list-action')}>
 																<li className={cx('edit-link')}>
-																	<a href='' title='Chỉnh sửa' onclick='show_frmExperience(2451920);'>
+																	<a href='' title='Chỉnh sửa' onClick='show_frmExperience(2451920);'>
 																		<em className={cx('material-icons')}>
 																			<EditIcon fontSize='normal' />
 																		</em>
 																	</a>
 																</li>
 																<li className={cx('delete')}>
-																	<a href='' title='Xóa' onclick='deleteExperience(2451920);'>
+																	<a href='' title='Xóa' onClick='deleteExperience(2451920);'>
 																		{' '}
 																		<em className={cx('material-icons')}>highlight_off</em>
 																	</a>
@@ -493,14 +493,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-education')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-education')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-add')}>
-													<a href='javascript:void(0)' onclick='show_frmEducation(0);' title='Thêm mới'>
+													<a href='javascript:void(0)' onClick='show_frmEducation(0);' title='Thêm mới'>
 														{' '}
 														<em className={cx('material-icons')}>
 															<AddIcon sx={{ fontSize: '20px' }} />
@@ -546,7 +546,7 @@ const MyProfile = () => {
 																</div>
 																<div className={cx('link-save')}>
 																	{' '}
-																	<a href='' onclick='saveEduLevel();'>
+																	<a href='' onClick='saveEduLevel();'>
 																		<em className={cx('material-icons')}>save</em>
 																		Lưu Lại
 																	</a>
@@ -576,13 +576,13 @@ const MyProfile = () => {
 															</div>
 															<ul className={cx('list-action')}>
 																<li className={cx('edit-link')}>
-																	<a href='' onclick='show_frmEducation(1815961);' title='Chỉnh sửa'>
+																	<a href='' onClick='show_frmEducation(1815961);' title='Chỉnh sửa'>
 																		{' '}
 																		<em className={cx('material-icons')}>create</em>
 																	</a>
 																</li>
 																<li className={cx('delete')}>
-																	<a href='' onclick='deleteEducation(1815961);' title='Xóa'>
+																	<a href='' onClick='deleteEducation(1815961);' title='Xóa'>
 																		{' '}
 																		<em className={cx('material-icons')}>highlight_off</em>
 																	</a>
@@ -611,13 +611,13 @@ const MyProfile = () => {
 															</div>
 															<ul className={cx('list-action')}>
 																<li className={cx('edit-link')}>
-																	<a href='' onclick='show_frmEducation(1815960);' title='Chỉnh sửa'>
+																	<a href='' onClick='show_frmEducation(1815960);' title='Chỉnh sửa'>
 																		{' '}
 																		<em className={cx('material-icons')}>create</em>
 																	</a>
 																</li>
 																<li className={cx('delete')}>
-																	<a href='' onclick='deleteEducation(1815960);' title='Xóa'>
+																	<a href='' onClick='deleteEducation(1815960);' title='Xóa'>
 																		{' '}
 																		<em className={cx('material-icons')}>highlight_off</em>
 																	</a>
@@ -649,14 +649,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-certificate')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-certificate')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-add')}>
-													<a href='javascript:void(0)' onclick='editResumeCertificate(0);'>
+													<a href='javascript:void(0)' onClick='editResumeCertificate(0);'>
 														{' '}
 														<em className={cx('material-icons')}>
 															<AddIcon sx={{ fontSize: '20px' }} />
@@ -686,13 +686,13 @@ const MyProfile = () => {
 																<li className={cx('edit-link')}>
 																	<a
 																		href='javascript:void(0)'
-																		onclick='editResumeCertificate(106485);'>
+																		onClick='editResumeCertificate(106485);'>
 																		{' '}
 																		<em className={cx('material-icons')}>create</em>
 																	</a>
 																</li>
 																<li className={cx('delete')}>
-																	<a href='javascript:void(0)' onclick='deleteCertificate(106485);'>
+																	<a href='javascript:void(0)' onClick='deleteCertificate(106485);'>
 																		{' '}
 																		<em className={cx('material-icons')}>highlight_off</em>
 																	</a>
@@ -721,14 +721,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-language')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-language')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-add-lang')}>
-													<a href='javascript:void(0)' onclick='editResumeLanguage(0);'>
+													<a href='javascript:void(0)' onClick='editResumeLanguage(0);'>
 														{' '}
 														<em className={cx('material-icons')}>
 															<AddIcon sx={{ fontSize: '20px' }} />
@@ -775,7 +775,7 @@ const MyProfile = () => {
 														<td>
 															<ul className={cx('list-action')}>
 																<li className={cx('edit-link')}>
-																	<a href='javascript:void(0)' onclick='editResumeLanguage(329508);'>
+																	<a href='javascript:void(0)' onClick='editResumeLanguage(329508);'>
 																		{' '}
 																		<em className={cx('material-icons')}>create</em>
 																		<span>Chỉnh sửa</span>
@@ -784,7 +784,7 @@ const MyProfile = () => {
 																<li className={cx('delete')}>
 																	<a
 																		href='javascript:void(0)'
-																		onclick='deleteResumeLanguageProfile(329508);'>
+																		onClick='deleteResumeLanguageProfile(329508);'>
 																		{' '}
 																		<em className={cx('material-icons')}>highlight_off</em>
 																		<span>Xoá</span>
@@ -814,14 +814,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-skill')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-skill')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-add')}>
-													<a href='' onclick='show_frmSkill(0);'>
+													<a href='' onClick='show_frmSkill(0);'>
 														{' '}
 														<em className={cx('material-icons')}>
 															<AddIcon sx={{ fontSize: '20px' }} />
@@ -870,14 +870,14 @@ const MyProfile = () => {
 														<td>
 															<ul className={cx('list-action')}>
 																<li className={cx('edit-link')}>
-																	<a href='' onclick='show_frmSkill(3144927);' title='Chỉnh sửa'>
+																	<a href='' onClick='show_frmSkill(3144927);' title='Chỉnh sửa'>
 																		{' '}
 																		<em className={cx('material-icons')}>create</em>
 																		<span>Chỉnh sửa</span>
 																	</a>
 																</li>
 																<li className={cx('delete')}>
-																	<a href='' title='Xóa' onclick='deleteResumeSkill(3144927)'>
+																	<a href='' title='Xóa' onClick='deleteResumeSkill(3144927)'>
 																		{' '}
 																		<em className={cx('material-icons')}>highlight_off</em>
 																		<span>Xóa</span>
@@ -907,14 +907,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-award')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-award')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-edit')}>
-													<a href='' onclick='editResumeAdditioninfo();'>
+													<a href='' onClick='editResumeAdditioninfo();'>
 														{' '}
 														<em className={cx('material-icons')}>create</em>
 														<span>Chỉnh sửa</span>
@@ -926,7 +926,7 @@ const MyProfile = () => {
 									<div className={cx('widget-body')} id='no-content' style={{ display: 'none' }}>
 										<div className={cx('no-content')}>
 											<p>Vui lòng thêm Thành tích nổi bật của bạn</p>
-											<a href='' onclick='editResumeAdditioninfo();'>
+											<a href='' onClick='editResumeAdditioninfo();'>
 												<em className={cx('mdi', 'mdi-plus-circle')} />
 												<span>Thêm mới</span>
 											</a>{' '}
@@ -939,7 +939,7 @@ const MyProfile = () => {
 										</div>
 										<ul className={cx('list-action')}>
 											<li className={cx('delete')}>
-												<a href='' onclick='deleteResumeAdditionInfo();'>
+												<a href='' onClick='deleteResumeAdditionInfo();'>
 													{' '}
 													<em className={cx('material-icons')}>highlight_off</em>
 													<span>Xóa</span>
@@ -964,14 +964,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-other-activity')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-other-activity')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-add')}>
-													<a href='javascript:void(0)' onclick='editResumeActivity(0);'>
+													<a href='javascript:void(0)' onClick='editResumeActivity(0);'>
 														{' '}
 														<em className={cx('material-icons')}>
 															<AddIcon sx={{ fontSize: '20px' }} />
@@ -985,7 +985,7 @@ const MyProfile = () => {
 									<div className={cx('widget-body')}>
 										<div className={cx('no-content')}>
 											<p>Mô tả hoạt động</p>
-											<a href='javascript:void(0)' onclick='editResumeActivity(0);'>
+											<a href='javascript:void(0)' onClick='editResumeActivity(0);'>
 												<em className={cx('mdi', 'mdi-plus-circle')} />
 												<span>Thêm mới</span>
 											</a>
@@ -1008,14 +1008,14 @@ const MyProfile = () => {
 												</div>
 											</div>
 											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onclick="openTipSlide('tip-references')">
+												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-references')">
 													<div className={cx('icon')}>
 														<em className={cx('mdi', 'mdi-lightbulb')} />
 													</div>
 													<p>Tips</p>
 												</div>
 												<div className={cx('link-add')}>
-													<a href='' onclick='show_frmRefer(0);'>
+													<a href='' onClick='show_frmRefer(0);'>
 														{' '}
 														<em className={cx('material-icons')}>
 															<AddIcon sx={{ fontSize: '20px' }} />
@@ -1034,13 +1034,13 @@ const MyProfile = () => {
 													<h4>nguyen nhat minh</h4>
 													<ul className={cx('list-action')}>
 														<li className={cx('edit-link')}>
-															<a href='' onclick='show_frmRefer(825646);'>
+															<a href='' onClick='show_frmRefer(825646);'>
 																{' '}
 																<em className={cx('material-icons')}>create</em>
 															</a>
 														</li>
 														<li className={cx('delete')}>
-															<a href='' onclick='deleteRefer(825646);'>
+															<a href='' onClick='deleteRefer(825646);'>
 																{' '}
 																<em className={cx('material-icons')}>highlight_off</em>
 															</a>
@@ -1106,7 +1106,7 @@ const MyProfile = () => {
 												</a>
 											</li>
 											<li id='btn_download' style={{ display: 'block' }}>
-												<a href='' onclick='downloadCvProfile(17722295)'>
+												<a href='' onClick='downloadCvProfile(17722295)'>
 													<em className={cx('material-icons')}>
 														<GetAppIcon fontSize='normal' />
 													</em>
@@ -1114,7 +1114,7 @@ const MyProfile = () => {
 												</a>
 											</li>
 											<li>
-												<a className={cx('hidden-info')} href='' onclick='showHideInfor();'>
+												<a className={cx('hidden-info')} href='' onClick='showHideInfor();'>
 													<em className={cx('material-icons')}>
 														<VisibilityOffIcon fontSize='normal' />
 													</em>
@@ -1300,7 +1300,7 @@ const MyProfile = () => {
 									</div>
 								</div>
 								<div className={cx('button-modal')}>
-									<a className={cx('btn-gradient')} href='javascript:;' onclick='saveConfResume();'>
+									<a className={cx('btn-gradient')} href='javascript:;' onClick='saveConfResume();'>
 										Lưu Lại
 									</a>
 								</div>
@@ -1383,7 +1383,7 @@ const MyProfile = () => {
 										<button
 											className={cx('btn-gradient')}
 											type='button'
-											onclick='return saveFrmExperience();'>
+											onClick='return saveFrmExperience();'>
 											Lưu Lại
 										</button>
 									</div>

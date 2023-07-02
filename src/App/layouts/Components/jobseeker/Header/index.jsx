@@ -3,10 +3,11 @@ import styles from './Header.module.css';
 import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
 import routesPath from '~/App/config/routesPath';
-import { AccountCircleIcon, ExpandMoreIcon, CheckIcon } from '~/Core/resources';
+import { AccountCircleIcon, ExpandMoreIcon, CheckIcon, Notifications } from '~/Core/resources';
 import { logout } from '~/App/providers/slices/authSlice';
+import { Fragment } from 'react';
+
 const cx = classNames.bind(styles);
 
 const Header = () => {
@@ -32,7 +33,7 @@ const Header = () => {
 							</div>
 							<div className={cx('main-menu')}>
 								<ul className={cx('menu')}>
-									<li class={cx('dropdown')}>
+									<li className={cx('dropdown')}>
 										<Link to={routesPath.JobseekerPaths.allJob} title='Tìm việc làm'>
 											Tìm việc làm
 										</Link>
@@ -120,10 +121,8 @@ const Header = () => {
 						</div>
 						<div className={cx('right-wrap')}>
 							<div className={cx('main-noti', 'dropdown')}>
-								<>
-									<a href='https://careerbuilder.vn/thong-bao-viec-lam' title='Thông Báo Việc Làm'>
-										<span className={cx('mdi', 'mdi-bell')} />
-									</a>
+								<Fragment>
+									<Notifications style={{ cursor: 'pointer' }} />
 									<div className={cx('dropdown-menu')}>
 										<div className={cx('noti')}>
 											<p />
@@ -143,7 +142,7 @@ const Header = () => {
 											</a>
 										</div>
 									</div>
-								</>
+								</Fragment>
 							</div>
 							{/* <div className={cx("main-login","dropdown")}>
           <div className={cx("title-login")}>

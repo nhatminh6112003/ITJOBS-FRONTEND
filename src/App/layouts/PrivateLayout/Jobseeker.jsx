@@ -2,7 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import routesPath from '~/App/config/routesPath';
 import UserRoleEnum from '~/App/constants/roleEnum';
- const Jobseeker = () => {
+const Jobseeker = () => {
 	const user = useSelector((state) => state.auth?.user);
 	return user?.user_type_id == UserRoleEnum.JOBSEEKER ? (
 		<Outlet />
@@ -11,4 +11,4 @@ import UserRoleEnum from '~/App/constants/roleEnum';
 	);
 };
 
-export default Jobseeker
+export default Jobseeker;

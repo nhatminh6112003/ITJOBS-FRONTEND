@@ -21,12 +21,17 @@ const Footer = () => {
 											<a
 												target='_blank'
 												href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-vi.html'
-												title='Việc làm mới nhất'>
+												title='Việc làm mới nhất'
+												rel='noreferrer'>
 												Việc làm mới nhất
 											</a>
 										</li>
 										<li>
-											<a target='_blank' href='https://careerbuilder.vn/cv-hay/' title='CV Hay'>
+											<a
+												target='_blank'
+												href='https://careerbuilder.vn/cv-hay/'
+												title='CV Hay'
+												rel='noreferrer'>
 												CV Hay
 											</a>
 										</li>
@@ -34,27 +39,44 @@ const Footer = () => {
 											<a
 												target='_blank'
 												href='https://vietnamsalary.careerbuilder.vn/'
-												title='VietnamSalary'>
+												title='VietnamSalary'
+												rel='noreferrer'>
 												VietnamSalary
 											</a>
 										</li>
 										<li>
-											<a target='_blank' href='https://careerbuilder.vn/careermap' title='CareerMap'>
+											<a
+												target='_blank'
+												href='https://careerbuilder.vn/careermap'
+												title='CareerMap'
+												rel='noreferrer'>
 												CareerMap
 											</a>
 										</li>
 										<li>
-											<a target='_blank' href='https://careerbuilder.vn/vi/talentcommunity' title='Cẩm Nang'>
+											<a
+												target='_blank'
+												href='https://careerbuilder.vn/vi/talentcommunity'
+												title='Cẩm Nang'
+												rel='noreferrer'>
 												Cẩm Nang
 											</a>
 										</li>
 										<li>
-											<a target='_blank' href='https://vieclamit.careerbuilder.vn/advices' title='IT Blogs'>
+											<a
+												target='_blank'
+												href='https://vieclamit.careerbuilder.vn/advices'
+												title='IT Blogs'
+												rel='noreferrer'>
 												IT Blogs
 											</a>
 										</li>
 										<li>
-											<a target='_blank' href='https://careerbuilder.vn/vi/mobile' title='Ứng Dụng Di Động'>
+											<a
+												target='_blank'
+												href='https://careerbuilder.vn/vi/mobile'
+												title='Ứng Dụng Di Động'
+												rel='noreferrer'>
 												Ứng Dụng Di Động
 											</a>
 										</li>
@@ -62,12 +84,13 @@ const Footer = () => {
 											<a
 												target='_blank'
 												href='https://careerbuilder.vn/vi/jobseekers/sitemap'
-												title='Sơ Đồ Trang Web'>
+												title='Sơ Đồ Trang Web'
+												rel='noreferrer'>
 												Sơ Đồ Trang Web
 											</a>
 										</li>
 										<li>
-											<a target='_blank' href='https://careerstart.vn/' title='CareerStart'>
+											<a target='_blank' href='https://careerstart.vn/' title='CareerStart' rel='noreferrer'>
 												CareerStart
 											</a>
 										</li>
@@ -82,7 +105,8 @@ const Footer = () => {
 											<a
 												target='_blank'
 												href='https://careerbuilder.vn/vi/employers/postjobs'
-												title='Đăng Tuyển Dụng'>
+												title='Đăng Tuyển Dụng'
+												rel='noreferrer'>
 												Đăng Tuyển Dụng
 											</a>
 										</li>
@@ -90,12 +114,13 @@ const Footer = () => {
 											<a
 												target='_blank'
 												href='https://careerbuilder.vn/vi/resume-search.html'
-												title='Tìm Hồ Sơ'>
+												title='Tìm Hồ Sơ'
+												rel='noreferrer'>
 												Tìm Hồ Sơ
 											</a>
 										</li>
 										<li>
-											<a target='_blank' href='https://careerbuilder.vn/vi/talentnetwork'>
+											<a target='_blank' href='https://careerbuilder.vn/vi/talentnetwork' rel='noreferrer'>
 												Giải Pháp Talent Solution
 											</a>
 										</li>
@@ -103,7 +128,8 @@ const Footer = () => {
 											<a
 												target='_blank'
 												href='https://careerbuilder.vn/vi/employers/products-and-services'
-												title='Sản Phẩm Dịch Vụ'>
+												title='Sản Phẩm Dịch Vụ'
+												rel='noreferrer'>
 												Sản Phẩm Dịch Vụ
 											</a>
 										</li>
@@ -118,13 +144,14 @@ const Footer = () => {
 											<a
 												target='_blank'
 												href='https://careerbuilder.vn/vi/jobseekers/about'
-												title='Về CareerBuilder.vn'>
+												title='Về CareerBuilder.vn'
+												rel='noreferrer'>
 												Về CareerBuilder.vn
 											</a>
 										</li>
 										<li>
 											<a
-												rel='nofollow'
+												rel='nofollow noreferrer'
 												target='_blank'
 												href='https://careerbuilder.vn/vi/jobseekers/regulations'
 												title='Chính Sách BV Thông Tin'>
@@ -133,7 +160,7 @@ const Footer = () => {
 										</li>
 										<li>
 											<a
-												rel='nofollow'
+												rel='nofollow noreferrer'
 												target='_blank'
 												href='https://advertising.careerbuilder.vn/html/customer/cbvn/GDPR.PDF'
 												title='Chính sách GDPR'>
@@ -142,7 +169,7 @@ const Footer = () => {
 										</li>
 										<li>
 											<a
-												rel='nofollow'
+												rel='nofollow noreferrer'
 												target='_blank'
 												href='https://images.careerbuilder.vn/regulations.pdf'
 												title='Quy chế sàn giao dịch'>
@@ -151,7 +178,7 @@ const Footer = () => {
 										</li>
 										<li>
 											<a
-												rel='nofollow'
+												rel='nofollow noreferrer'
 												target='_blank'
 												href='https://careerbuilder.vn/vi/jobseekers/use'
 												title='Thỏa thuận sử dụng'>
@@ -160,7 +187,7 @@ const Footer = () => {
 										</li>
 										<li>
 											<a
-												rel='nofollow'
+												rel='nofollow noreferrer'
 												target='_blank'
 												href='https://careerbuilder.vn/vi/jobseekers/security'
 												title='Quy định bảo mật'>
@@ -169,7 +196,7 @@ const Footer = () => {
 										</li>
 										<li>
 											<a
-												rel='nofollow'
+												rel='nofollow noreferrer'
 												target='_blank'
 												href='https://careerbuilder.vn/vi/jobseekers/process'
 												title='QT Giải Quyết Tranh Chấp'>
@@ -178,7 +205,7 @@ const Footer = () => {
 										</li>
 										<li>
 											<a
-												rel='nofollow'
+												rel='nofollow noreferrer'
 												target='_blank'
 												href='https://careerbuilder.vn/vi/jobseekers/faq'
 												title='Trợ giúp'>

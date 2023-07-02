@@ -1,0 +1,30 @@
+.form-group input {
+	height: 40px;
+	border: none;
+	border-bottom: 1px solid #2f4ba0;
+	color: #172642;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 5px 0;
+}
+.form-group label {
+	color: #5d677a;
+	font-size: 16px;
+	font-weight: 500;
+}
+.form-group {
+	margin-bottom: 20px;
+}
+.form-group > * {
+	width: 100%;
+}
+.form-group span {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	padding-top: 7px;
+	color: red;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: 500;
+}

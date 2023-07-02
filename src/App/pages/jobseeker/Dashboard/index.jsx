@@ -35,7 +35,7 @@ const Dashboard = () => {
 														<div className={cx('image', 'img-result', 'hide')}>
 															<input
 																style={{ display: 'none' }}
-																onchange='return ajaxFileUpload();'
+																onChange='return ajaxFileUpload();'
 																type='file'
 																className={cx('file')}
 																id='fileAvatar'
@@ -51,12 +51,12 @@ const Dashboard = () => {
 															<div className={cx('dropdown-menu')}>
 																<ul>
 																	<li className={cx('upload-pro')}>
-																		<a href='' onclick='choose_file();'>
+																		<a href='' onClick='choose_file();'>
 																			<span>Tải hình ảnh</span>
 																		</a>
 																	</li>
 																	<li className={cx('view-pro')}>
-																		<a href='' onclick='removeAvarta();'>
+																		<a href='' onClick='removeAvarta();'>
 																			{' '}
 																			<span>Xóa hình ảnh</span>
 																		</a>
@@ -221,7 +221,7 @@ const Dashboard = () => {
 														</a>
 													</div>
 													<div className={cx('item')}>
-														<a href='' onclick='downloadCvProfile(17722295)'>
+														<a href='' onClick='downloadCvProfile(17722295)'>
 															<span className={cx('mdi', 'mdi-download')} />
 															Tải hồ sơ
 														</a>
@@ -452,7 +452,7 @@ const Dashboard = () => {
 																			<li className={cx('delete')}>
 																				<a
 																					href=''
-																					onclick="deleteResume('18020074','123', '','2'); return false;">
+																					onClick="deleteResume('18020074','123', '','2'); return false;">
 																					Xóa
 																				</a>
 																			</li>
@@ -534,7 +534,7 @@ const Dashboard = () => {
 																<li>
 																	<a
 																		href=''
-																		onclick='downloadCvAttach(18020074);'
+																		onClick='downloadCvAttach(18020074);'
 																		title='Tải hồ sơ'
 																		className={cx('down')}>
 																		<em className={cx('mdi', 'mdi-download')} />
@@ -584,7 +584,7 @@ const Dashboard = () => {
 																			<li className={cx('delete')}>
 																				<a
 																					href=''
-																					onclick="deleteResume('18006664','Frontend Developer 123', '','3'); return false;">
+																					onClick="deleteResume('18006664','Frontend Developer 123', '','3'); return false;">
 																					Xóa
 																				</a>
 																			</li>
@@ -669,7 +669,7 @@ const Dashboard = () => {
 																<li>
 																	<a
 																		href=''
-																		onclick='downloadCvProfile(18006664);'
+																		onClick='downloadCvProfile(18006664);'
 																		title='Tải hồ sơ'
 																		className={cx('down')}>
 																		<em className={cx('mdi', 'mdi-download')} />
@@ -717,7 +717,7 @@ const Dashboard = () => {
 													</div>
 												</div>
 												<div className={cx('form-group', 'form-submit')}>
-													<a className={cx('btn-gradient')} href='' onclick='addBlackListDashboard();'>
+													<a className={cx('btn-gradient')} href='' onClick='addBlackListDashboard();'>
 														Thêm
 													</a>
 												</div>
@@ -739,7 +739,7 @@ const Dashboard = () => {
 													</div>
 												</div>
 												<div className={cx('form-group', 'form-submit')}>
-													<a className={cx('btn-gradient')} href='' onclick='addBlackListDomain();'>
+													<a className={cx('btn-gradient')} href='' onClick='addBlackListDomain();'>
 														Thêm
 													</a>
 												</div>
@@ -794,7 +794,8 @@ const Dashboard = () => {
 																	<a
 																		href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-giay-fuluh.35A7BB93.html'
 																		target='_blank'
-																		title='Công Ty TNHH Giầy Fuluh '>
+																		title='Công Ty TNHH Giầy Fuluh '
+																		rel='noreferrer'>
 																		<img
 																			className={cx('lazy-bg')}
 																			data-src='https://images.careerbuilder.vn/employer_folders/lot9/184979/79x79/101626logo.png'
@@ -810,7 +811,8 @@ const Dashboard = () => {
 																			data-id='35BB3FA0'
 																			href='https://careerbuilder.vn/vi/tim-viec-lam/asst-manager-formulation-ce.35BB3FA0.html'
 																			title='Asst. manager Formulation CE'
-																			target='_blank'>
+																			target='_blank'
+																			rel='noreferrer'>
 																			Asst. manager Formulation CE
 																		</a>
 																	</div>
@@ -819,7 +821,8 @@ const Dashboard = () => {
 																			className={cx('company-name')}
 																			target='_blank'
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-giay-fuluh.35A7BB93.html'
-																			title='Công Ty TNHH Giầy Fuluh '>
+																			title='Công Ty TNHH Giầy Fuluh '
+																			rel='noreferrer'>
 																			Công Ty TNHH Giầy Fuluh{' '}
 																		</a>
 																		<p className={cx('salary')}>
@@ -866,7 +869,8 @@ const Dashboard = () => {
 																			data-id='35BB3FA2'
 																			href='https://careerbuilder.vn/vi/tim-viec-lam/giam-doc-truyen-thong-va-marketing.35BB3FA2.html'
 																			title='Giám đốc Truyền thông và Marketing'
-																			target='_blank'>
+																			target='_blank'
+																			rel='noreferrer'>
 																			Giám đốc Truyền thông và Marketing
 																		</a>
 																	</div>
@@ -916,7 +920,8 @@ const Dashboard = () => {
 																			data-id='35BB3F9F'
 																			href='https://careerbuilder.vn/vi/tim-viec-lam/giam-doc-nha-may-nhua.35BB3F9F.html'
 																			title='Giám đốc Nhà máy Nhựa'
-																			target='_blank'>
+																			target='_blank'
+																			rel='noreferrer'>
 																			Giám đốc Nhà máy Nhựa
 																		</a>
 																	</div>
@@ -966,7 +971,8 @@ const Dashboard = () => {
 																			data-id='35BB3F9E'
 																			href='https://careerbuilder.vn/vi/tim-viec-lam/giam-doc-nha-may-son.35BB3F9E.html'
 																			title='Giám đốc Nhà máy Sơn'
-																			target='_blank'>
+																			target='_blank'
+																			rel='noreferrer'>
 																			Giám đốc Nhà máy Sơn
 																		</a>
 																	</div>
@@ -1003,7 +1009,8 @@ const Dashboard = () => {
 																	<a
 																		href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-lap-rap-tuan-nghia.35A8030D.html'
 																		target='_blank'
-																		title='Công ty TNHH Sản xuất, lắp ráp Tuấn Nghĩa'>
+																		title='Công ty TNHH Sản xuất, lắp ráp Tuấn Nghĩa'
+																		rel='noreferrer'>
 																		<img
 																			className={cx('lazy-bg')}
 																			data-src='https://images.careerbuilder.vn/employer_folders/lot7/203277/79x79/151251untitled.png'
@@ -1019,7 +1026,8 @@ const Dashboard = () => {
 																			data-id='35BB3F9D'
 																			href='https://careerbuilder.vn/vi/tim-viec-lam/truong-nhom-kinh-doanh-tai-ha-noi-quang-ninh-thanh-hoa-vinh-phuc-bac-giang-phu-tho-hung-yen-hai-phong-nam-dinh.35BB3F9D.html'
 																			title='Trưởng nhóm Kinh Doanh tại Hà Nội, Quảng Ninh, Thanh Hoá, Vĩnh Phúc, Bắc Giang, Phú Thọ, Hưng Yên, Hải Phòng, Nam Định'
-																			target='_blank'>
+																			target='_blank'
+																			rel='noreferrer'>
 																			Trưởng nhóm Kinh Doanh tại Hà Nội, Quảng Ninh, Thanh Hoá, Vĩnh
 																			Phúc, Bắc Giang, Phú Thọ, Hưng Yên, Hải Phòng, Nam Định
 																		</a>
@@ -1029,7 +1037,8 @@ const Dashboard = () => {
 																			className={cx('company-name')}
 																			target='_blank'
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-san-xuat-lap-rap-tuan-nghia.35A8030D.html'
-																			title='Công ty TNHH Sản xuất, lắp ráp Tuấn Nghĩa'>
+																			title='Công ty TNHH Sản xuất, lắp ráp Tuấn Nghĩa'
+																			rel='noreferrer'>
 																			Công ty TNHH Sản xuất, lắp ráp Tuấn Nghĩa
 																		</a>
 																		<p className={cx('salary')}>
@@ -1180,7 +1189,8 @@ const Dashboard = () => {
 																	<a
 																		href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-giay-fuluh.35A7BB93.html'
 																		target='_blank'
-																		title='Công Ty TNHH Giầy Fuluh '>
+																		title='Công Ty TNHH Giầy Fuluh '
+																		rel='noreferrer'>
 																		<img
 																			src='https://images.careerbuilder.vn/employer_folders/lot9/184979/67x67/101626logo.png'
 																			alt='Công Ty TNHH Giầy Fuluh '
@@ -1194,7 +1204,8 @@ const Dashboard = () => {
 																			data-id='35BB3FA0'
 																			href='https://careerbuilder.vn/vi/tim-viec-lam/asst-manager-formulation-ce.35BB3FA0.html'
 																			target='_blank'
-																			title='Asst. manager Formulation CE'>
+																			title='Asst. manager Formulation CE'
+																			rel='noreferrer'>
 																			Asst. manager Formulation CE
 																		</a>
 																	</div>

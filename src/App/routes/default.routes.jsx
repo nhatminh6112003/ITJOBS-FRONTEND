@@ -2,8 +2,8 @@ import { lazy } from 'react';
 
 import routesPath from '~/App/config/routesPath';
 
-const ErrorPage = lazy(() => import('~/Core/components/layouts/ErrorPage'));
+const NotFound = lazy(() => import('~/App/pages/Default/NotFound'));
 
-const defaultRoutes = [{ path: routesPath.BasePaths.errorPage, component: ErrorPage, layout: null }];
+const defaultRoutes = [{ path: routesPath.BasePaths.NOT_FOUND, component: NotFound, layout: null }];
 
 export { defaultRoutes };

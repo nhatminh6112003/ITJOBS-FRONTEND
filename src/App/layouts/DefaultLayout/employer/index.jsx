@@ -1,7 +1,7 @@
 import { cloneElement, lazy, Suspense } from 'react';
 import Header from '../../components/Employer/Header';
 import EmployerStyles, { cx } from './EmployerStyles';
-import Loading from '~/Core/components/ui/Loading';
+import Loading from '~/Core/components/common/Loading';
 const Footer = lazy(() => import('../../components/Employer/Footer'));
 export const EmployerLayout = ({ children }) => {
 	return (

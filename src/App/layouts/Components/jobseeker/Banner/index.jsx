@@ -11,7 +11,7 @@ const Banner = () => {
 							<div className={cx('swiper-slide')}>
 								<a
 									href='https://careerbuilder.vn/vi/jobseekers/ajax/counterbannerclick?url=aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL25oYS10dXllbi1kdW5nL25nYW4taGFuZy10bWNwLXF1YW4tZG9pLjM1QTY2RDcwLmh0bWw=&id=291'
-									rel='nofollow;noreferrer'
+									rel='nofollow; noreferrer'
 									target='_blank'>
 									<div className={cx('image')}>
 										<img
@@ -33,7 +33,7 @@ const Banner = () => {
 							<div className={cx('swiper-slide')}>
 								<a
 									href='https://careerbuilder.vn/vi/jobseekers/ajax/counterbannerclick?url=aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL25oYS10dXllbi1kdW5nL25nYW4taGFuZy10bWNwLXF1YW4tZG9pLjM1QTY2RDcwLmh0bWw=&id=291'
-									rel='nofollow;noreferrer'
+									rel='nofollow; noreferrer'
 									target='_blank'>
 									<div className={cx('image')}>
 										<img
@@ -82,7 +82,7 @@ const Banner = () => {
 												}}
 												type='search'
 												className='prompt keyword'
-												autofocus=''
+												autoFocus=''
 												name='keyword'
 												id='keyword'
 												placeholder='Chức danh, Kỹ năng, Tên công ty'
