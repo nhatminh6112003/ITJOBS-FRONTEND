@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './chosseTemplate.module.css';
+import styles from './chooseTemplate.module.css';
 import classNames from 'classnames/bind';
 import Modal from '..';
 import { CloseIcon } from '~/Core/resources';
 const sx = classNames.bind(styles);
-const ChosseTemplate = ({ isShowing, hide, classNames: cx }) => {
+const ChooseTemplate = ({ isShowing, hide, classNames: cx }) => {
 	return isShowing ? (
 		<>
 			<Modal isOpen={isShowing} onRequestClose={hide}>
@@ -418,4 +418,4 @@ const ChosseTemplate = ({ isShowing, hide, classNames: cx }) => {
 		</>
 	) : null;
 };
-export default ChosseTemplate;
+export default ChooseTemplate;

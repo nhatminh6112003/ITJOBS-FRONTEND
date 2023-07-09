@@ -24,19 +24,19 @@ module.exports = {
 		'react/display-name': 'off',
 		'no-unused-vars': 'off',
 		'no-useless-escape': 'off',
-		'no-undef': 'off',
+		'no-undef': 'off'
 		// ... any rules you want
-		'prettier/prettier': [
-			'warn',
-			{
-				printWidth: 120,
-				useTabs: true,
-				bracketSameLine: true,
-				jsxSingleQuote: true,
-				singleQuote: true,
-				tabWidth: 3,
-				trailingComma: 'none'
-			}
-		]
+		// 'prettier/prettier': [
+		// 	'warn',
+		// 	{
+		// 		printWidth: 120,
+		// 		useTabs: true,
+		// 		bracketSameLine: true,
+		// 		jsxSingleQuote: true,
+		// 		singleQuote: true,
+		// 		tabWidth: 3,
+		// 		trailingComma: 'none'
+		// 	}
+		// ]
 	}
 };
