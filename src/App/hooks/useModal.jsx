@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const useModal = (modals) => {
 	const [isShowing, setIsShowing] = useState(modals);
@@ -8,9 +8,6 @@ const useModal = (modals) => {
 			[modalName]: !isShowing[modalName]
 		});
 	}
-	useEffect(() => {
-		console.log(isShowing);
-	}, [isShowing]);
 
 	return {
 		isShowing,
