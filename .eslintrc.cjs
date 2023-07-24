@@ -24,7 +24,8 @@ module.exports = {
 		'react/display-name': 'off',
 		'no-unused-vars': 'off',
 		'no-useless-escape': 'off',
-		'no-undef': 'off'
+		'no-undef': 'off',
+		'no-unsafe-optional-chaining':'off'
 		// ... any rules you want
 		// 'prettier/prettier': [
 		// 	'warn',

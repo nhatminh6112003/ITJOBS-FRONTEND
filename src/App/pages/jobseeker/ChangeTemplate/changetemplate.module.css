@@ -1928,7 +1928,7 @@ body.TS_service {
 }
 
 #colorItems .color-item {
-	width: 110px;
+	/* width: 110px; */
 	border: 2px solid #d7d7d7;
 	padding: 2px;
 	overflow: auto;
@@ -19588,13 +19588,11 @@ header.header-dashboard .mobile-menu .menu .menu-logged ul li.dropdown-mobile .d
 }
 
 .change-cv-template-modal .list-template .cv-item .figure .image img {
-	-o-object-fit: cover;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
 }
 
 .change-cv-template-modal .list-template .cv-item .figure .image:before {
