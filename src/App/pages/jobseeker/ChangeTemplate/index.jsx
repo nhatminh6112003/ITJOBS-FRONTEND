@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
 import styles from './changetemplate.module.css';
 import classNames from 'classnames/bind';
@@ -6,38 +6,60 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Tips from '~/Core/components/common/Modal/Tips';
 import useModal from '~/App/hooks/useModal';
-const ChooseTemplate = lazy(() => import('~/Core/components/common/Modal/ChooseTemplate'));
-
+import { useGetOneQuery, useUpdateUiMutation } from '~/App/providers/apis/resumeTemplateApi';
+import { useSelector } from 'react-redux';
+import { fontsEnum, colorsEnum,fontSize } from '~/App/constants/resumeTemplateEnum';
+import ChooseTemplate from './components/ChooseTemplate';
+import { toast } from 'react-toastify';
 const cx = classNames.bind(styles);
 const ChangeTemplate = () => {
+	let [currentFont, changeFont] = useState('');
+	let [currentFontSize, changeFontSize] = useState('fontCVsize14');
+	let [language, changeLanguage] = useState('');
+	let [cvColor, setCvColor] = useState('');
+	const resume = useSelector((state) => state.auth?.user?.resume);
+
+	const { data: myResume, refetch } = useGetOneQuery(resume?.id);
+	const [updateUi, updateUiState] = useUpdateUiMutation();
+
 	const { isShowing, toggle } = useModal({
 		tips: false,
 		chooseTemplate: false
 	});
-	let [currentFont, changeFont] = useState('Roboto');
-	let [currentFontSize, changeFontSize] = useState('fontCVsize14');
-	let [language, changeLanguage] = useState('en');
 
 	const toggleLanguage = (e) => {
 		changeLanguage(e.target.value);
 	};
-	// let [currentFont,changeFont]=useState("");
-	const fonts = {
-		Roboto: 'fontCVRoboto',
-		Helvetica: 'fontCVHelvetica',
-		OpenSans: 'fontCVOpenSans',
-		Arial: 'fontCVArial',
-		TimesNewRoman: 'fontCVTimesNewRoman'
-	};
-	const fontSize = {
-		fontCVsize12: 'fontCVsize12',
-		fontCVsize14: 'fontCVsize14',
-		fontCVsize16: 'fontCVsize16'
-	};
+
+
 	const handleSetFontSize = (e) => {
 		changeFontSize(e.currentTarget.dataset.fontsize);
 	};
 
+	const handleSelectedColor = (id) => {
+		setCvColor(id);
+	};
+	const handleUpdateUi = async () => {
+		const data = {
+			cv_color: cvColor ? cvColor : myResume?.cv_color,
+			cv_font: currentFont,
+			cv_language: language,
+			cv_size: currentFontSize ? currentFontSize : myResume?.cv_size
+		};
+		updateUi({
+			id: resume?.id,
+			payload: data
+		}).unwrap().then(r=>{
+			toast.success(r?.message)
+		})
+		
+	};
+
+	useEffect(() => {
+		changeLanguage(myResume?.cv_language);
+		changeFont(myResume?.cv_font);
+		changeFontSize(myResume?.cv_size)
+	}, [myResume]);
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
 			<SideBar className={cx} />
@@ -54,9 +76,8 @@ const ChangeTemplate = () => {
 							</div>
 							<div className={cx('right')}>
 								<div className={cx('save')}>
-									<a href='javascript:void(0);' id='btn_savetemplate'>
-										<span>Lưu Lại</span>
-										<em className={cx('material-icons')}>save</em>
+									<a id='btn_savetemplate' onClick={handleUpdateUi}>
+										<span style={{cursor:'pointer'}}>Lưu Lại</span>
 									</a>
 								</div>
 								<div className={cx('download-profile')}>
@@ -71,7 +92,6 @@ const ChangeTemplate = () => {
 							</div>
 						</div>
 						<form method='post' name='frmTemplatePattern' id='frmTemplatePattern'>
-
 							<div className={cx('row')}>
 								<div className={cx('col-tools')}>
 									<div className={cx('tools-schemes')}>
@@ -107,7 +127,7 @@ const ChangeTemplate = () => {
 															</div>
 															<div className={cx('template')}>
 																<div className={cx('name')}>
-																	<p id='cv_template_name' />
+																	<p id='cv_template_name'>{myResume?.default_template_name}</p>
 																</div>
 																<div className={cx('change')}>
 																	<Link
@@ -129,9 +149,11 @@ const ChangeTemplate = () => {
 																		onChange={toggleLanguage}
 																		name='cv_language'
 																		id='cv_language'>
-																		<option value='vi'>Tiếng Việt</option>
-																		<option value='en' selected='selected'>
+																		<option value='en' selected={language == 'en' ? true : ''}>
 																			Tiếng Anh
+																		</option>
+																		<option value='vi' selected={language == 'vi' ? true : ''}>
+																			Tiếng Việt
 																		</option>
 																	</select>
 																</div>
@@ -150,13 +172,14 @@ const ChangeTemplate = () => {
 																		className={cx('form-control')}
 																		name='cv_font'
 																		id='cv_font'>
-																		<option value='Roboto' selected='selected'>
-																			Roboto
-																		</option>
-																		<option value='Helvetica'>Helvetica</option>
-																		<option value='OpenSans'>OpenSans</option>
-																		<option value='Arial'>Arial</option>
-																		<option value='TimesNewRoman'>TimesNewRoman</option>
+																		{Object.entries(fontsEnum).map(([key, value]) => (
+																			<option
+																				selected={currentFont == key ? true : ''}
+																				key={key}
+																				value={key}>
+																				{key}
+																			</option>
+																		))}
 																	</select>
 																</div>
 															</div>
@@ -263,38 +286,51 @@ const ChangeTemplate = () => {
 													<ul className={cx('list-tools')}>
 														<li className={cx('item-tools')}>
 															<div className={cx('title-tools')}>
-																<h3>Cover CV</h3>
-															</div>
-															<div className={cx('cover-cv')}>
-																<div className={cx('name')}>
-																	<p>CV thêm trang bìa thu hút sự chú ý hơn</p>
-																</div>
-																<div className={cx('form-group', 'form-check-box')}>
-																	<label htmlFor='cv_cover'>
-																		<input
-																			type='checkbox'
-																			name='cv_cover'
-																			id='cv_cover'
-																			defaultChecked='checked'
-																		/>
-																		<span className={cx('slider')} />{' '}
-																	</label>
-																</div>
-															</div>
-															<div
-																className={cx('image-cover-cv', 'showImgCover')}
-																style={{ display: 'block' }}>
-																<img
-																	src='https://static.careerbuilder.vn/themes/cv_tool/images/template/image-18.png'
-																	alt=''
-																/>
-															</div>
-														</li>
-														<li className={cx('item-tools')}>
-															<div className={cx('title-tools')}>
 																<h3>Màu sắc</h3>
 															</div>
-															<div className={cx('row', 'color-schemes-wrapper')} id='colorItems'></div>
+															<div className={cx('row', 'color-schemes-wrapper')} id={cx('colorItems')}>
+																{myResume?.color_pick?.map((item, index) => {
+																	const isSelected = cvColor === item.id;
+
+																	return (
+																		<div
+																			className={cx(
+																				'col-xs-12',
+																				'col-sm-3',
+																				'col-md-6',
+																				'color-selector-mb'
+																			)}>
+																			<div
+																				className={cx(
+																					'color-selector',
+																					myResume?.cv_color === item.id && !cvColor && 'selected',
+																					isSelected && 'selected'
+																				)}
+																				data-color-id={item.id}>
+																				<div className={cx('color-item', 'mb2')}>
+																					{item?.color.map((color, colorIndex) => (
+																						<div
+																							key={colorIndex}
+																							onClick={() => handleSelectedColor(item.id)}
+																							style={{
+																								backgroundColor: color.background,
+																								marginRight: colorIndex === 1 ? 2 : '',
+																								marginLeft:
+																									colorIndex === 3
+																										? 2
+																										: colorIndex === 1
+																										? 2
+																										: ''
+																							}}
+																							className={cx('color-block')}
+																						/>
+																					))}
+																				</div>
+																			</div>
+																		</div>
+																	);
+																})}
+															</div>
 														</li>
 													</ul>
 												</div>
@@ -304,313 +340,32 @@ const ChangeTemplate = () => {
 								</div>
 								<div className={cx('col-template')}>
 									<div className={cx('main-template')}>
-									
 										{language == 'en' ? (
 											<div
 												id='ZoneShowCVTemplateEn'
 												className={cx(
 													'cv-template-wrapper',
-													currentFont ? fonts[currentFont] : '',
+													currentFont ? fontsEnum[currentFont] : '',
 													currentFontSize ? fontSize[currentFontSize] : fontSize['fontCVsize14'],
-													'cv-template-18',
-													'clrOrangeBlack18'
-												)}>
-												<div className={cx('dflex')}>
-													<div className={cx('col-5', 'col-left')}>
-														<div className={cx('col-12', 'top')}>
-															<div className={cx('iavatar')}>
-																<img
-																	src='https://static.careerbuilder.vn/themes/cv_tool/images/avatar.jpg'
-																	alt=''
-																/>
-															</div>
-															<div className={cx('col-12', 'name')}>
-																<h2>Nguyen Van A</h2>
-																<h4>Expected Tittle</h4>
-															</div>
-														</div>
-														<div className={cx('col-12', 'block-cv', 'main-contact')}>
-															<h3>Contact</h3>
-															<ul>
-																<li className={cx('phone')}>
-																	<i className={cx('fa', 'fa-phone')} />
-																	<p>Phone number</p>
-																</li>
-																<li className={cx('mail')}>
-																	<i className={cx('fa', 'fa-envelope')} />
-																	<p>Example@gmail.com</p>
-																</li>
-																<li className={cx('address2')}>
-																	<i className={cx('fa', 'fa-home')} />
-																	<p>Address</p>
-																</li>
-															</ul>
-														</div>
-														<div className={cx('col-12', 'block-cv', 'info-personal')}>
-															<h3>Contact</h3>
-															<ul>
-																<li>
-																	<label>Gender:</label> Gender
-																</li>
-																<li>
-																	<label>Birthday:</label> MM/DD/YYYY
-																</li>
-																<li>
-																	<label>Marital status:</label> Single
-																</li>
-																<li>
-																	<label>Nationality:</label> Vietnamese
-																</li>
-																<li>
-																	<label>Location:</label> Vietnam
-																</li>
-															</ul>
-														</div>
-														<div className={cx('col-12', 'block-cv', 'skill-list')}>
-															<h3>Skill</h3>
-															<div className={cx('dflex', 'text-edt')}>
-																<p>Problem Solving</p>
-																<p>
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																</p>
-															</div>
-															<div className={cx('dflex', 'text-edt')}>
-																<p>Communication</p>
-																<p>
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																</p>
-															</div>
-															<div className={cx('dflex', 'text-edt')}>
-																<p>Project manager</p>
-																<p>
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																</p>
-															</div>
-														</div>
-													</div>
-													<div className={cx('col-7', 'col-right')}>
-														<div className={cx('block-cv')}>
-															<p>
-																Your personal statement is perhaps the single most important part of you
-																CV. Its aim is to highlight your professional attributes and goals,
-																summarize why someone should consider your application. (80-100 words)
-															</p>
-														</div>
-														<div className={cx('block-cv', 'work-exp')}>
-															<h3>WORK EXPERIENCE</h3>
-															<div className={cx('text-edt')}>
-																<div className={cx('date')}>From MM/YY to MM/YY</div>
-																<div className={cx('title')}>Job Title - Company Name</div>
-																<div className={cx('content_fck')}>
-																	06.2017 – 06.2018:
-																	<b> Job Title - Company Name</b>
-																	<br />
-																	Key achievements:
-																	<br />
-																	- Provide a list of the key achievements you have made in your job.
-																	<br />
-																	- Try to show evidence such as percentage increases or financial
-																	figures.
-																	<br />
-																	Key skills gained:
-																	<br />
-																	- Show that you have the relevant knowledge required to succeed.
-																	<br />
-																	06.2017 – 06.2018:
-																	<b> Job Title - Company Name</b>
-																	<br />
-																	Key achievements:
-																	<br />
-																	- Provide a list of the key achievements you have made in your job.
-																	<br />
-																	- Try to show evidence such as percentage increases or financial
-																	figures.
-																	<br />
-																	Key skills gained:
-																	<br />
-																	- Show that you have the relevant knowledge required to succeed.
-																	<br />
-																</div>
-															</div>
-															<div className={cx('text-edt')}>
-																<div className={cx('date')}>From MM/YY to MM/YY</div>
-																<div className={cx('title')}>Job Title - Company Name</div>
-																<div className={cx('content_fck')}>
-																	Key achievements:
-																	<br />
-																	- Provide a list of the key achievements you have made in your job.
-																	<br />
-																	- Try to show evidence such as percentage increases or financial
-																	figures.
-																	<br />
-																	Key skills gained:
-																	<br />
-																	- Show that you have the relevant knowledge required to succeed.
-																	<br />
-																</div>
-															</div>
-														</div>
-													</div>
+													myResume?.default_template,
+													colorsEnum[cvColor] ? colorsEnum[cvColor] : colorsEnum[myResume?.cv_color]
+												)}
+												dangerouslySetInnerHTML={{ __html: myResume?.cvTemplate?.html_template_en }}
+												>
+	
+
 												</div>
-											</div>
 										) : (
 											<div
 												id='ZoneShowCVTemplateVi'
 												className={cx(
 													'cv-template-wrapper',
-													currentFont ? fonts[currentFont] : '',
+													currentFont ? fontsEnum[currentFont] : '',
 													currentFontSize ? fontSize[currentFontSize] : fontSize['fontCVsize14'],
-													'cv-template-18',
-													'clrOrangeBlack18'
-												)}>
-												<div className={cx('dflex')}>
-													<div className={cx('col-5', 'col-left')}>
-														<div className={cx('col-12', 'top')}>
-															<div className={cx('iavatar')}>
-																<img
-																	src='https://static.careerbuilder.vn/themes/cv_tool/images/avatar.jpg'
-																	alt=''
-																/>
-															</div>
-															<div className={cx('col-12', 'name')}>
-																<h2>Nguyen Van A</h2>
-																<h4>Vị trí mong muốn ứng tuyển</h4>
-															</div>
-														</div>
-														<div className={cx('col-12', 'block-cv', 'main-contact')}>
-															<h3>Liên hệ</h3>
-															<ul>
-																<li className={cx('phone')}>
-																	<i className={cx('fa', 'fa-phone')} />
-																	<p>Số điện thoại</p>
-																</li>
-																<li className={cx('mail')}>
-																	<i className={cx('fa', 'fa-envelope')} />
-																	<p>Example@gmail.com</p>
-																</li>
-																<li className={cx('address2')}>
-																	<i className={cx('fa', 'fa-home')} />
-																	<p>Địa chỉ</p>
-																</li>
-															</ul>
-														</div>
-														<div className={cx('col-12', 'block-cv', 'info-personal')}>
-															<h3>Liên hệ</h3>
-															<ul>
-																<li>
-																	<label>Giới tính:</label> Giới tính
-																</li>
-																<li>
-																	<label>Sinh nhật:</label> MM/DD/YYYY
-																</li>
-																<li>
-																	<label>Tình trạng hôn nhân:</label> Độc thân
-																</li>
-																<li>
-																	<label>Quốc tịch:</label> Việt Nam
-																</li>
-																<li>
-																	<label>Quốc gia:</label> Việt Nam
-																</li>
-															</ul>
-														</div>
-														<div className={cx('col-12', 'block-cv', 'skill-list')}>
-															<h3>Kỹ năng</h3>
-															<div className={cx('dflex', 'text-edt')}>
-																<p>Giải quyết vấn đề</p>
-																<p>
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																</p>
-															</div>
-															<div className={cx('dflex', 'text-edt')}>
-																<p>Kỹ năng giao tiếp</p>
-																<p>
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																</p>
-															</div>
-															<div className={cx('dflex', 'text-edt')}>
-																<p>Kỹ năng quản lý dự án</p>
-																<p>
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																	<span className={cx('itemlvl')} />
-																</p>
-															</div>
-														</div>
-													</div>
-													<div className={cx('col-7', 'col-right')}>
-														<div className={cx('block-cv')}>
-															<p>
-																Mục tiêu nghề nghiệp là một phần quan trọng nhất trong CV. Hãy đề cập
-																những điểm nổi bật của sự nghiệp và mục tiêu cho công việc đang ứng
-																tuyển. Tóm tắt lý do tại sao Nhà tuyển dụng phải chọn bạn (nên từ 80 –
-																100 từ)
-															</p>
-														</div>
-														<div className={cx('block-cv', 'work-exp')}>
-															<h3>Kinh Nghiệm Làm Việc</h3>
-															<div className={cx('text-edt')}>
-																<div className={cx('date')}>Từ MM/YY đến MM/YY</div>
-																<div className={cx('title')}>Tên công việc - Tên công ty</div>
-																<div className={cx('content_fck')}>
-																	06.2017 – 06.2018:
-																	<b>Chức danh – Tên công ty</b>
-																	<br />
-																	Thành tựu chính:
-																	<br />
-																	- Những thành tựu chính bạn đã gặt hái trong công việc này
-																	<br />- Nên thể hiện bằng con số, tỷ lệ phần trăm tăng trưởng hoặc số
-																	liệu tài chính
-																	<p>Các kỹ năng bạn đã đạt được:</p>
-																	- Kỹ năng/ kiến thức tích lũy được trong quá trình làm việc
-																	<br />
-																	06.2017 – 06.2018:
-																	<b>Chức danh – Tên công ty</b>
-																	<br />
-																	Thành tựu chính:
-																	<br />
-																	- Những thành tựu chính bạn đã gặt hái trong công việc này
-																	<br />- Nên thể hiện bằng con số, tỷ lệ phần trăm tăng trưởng hoặc số
-																	liệu tài chính
-																	<p>Các kỹ năng bạn đã đạt được:</p>
-																	- Kỹ năng/ kiến thức tích lũy được trong quá trình làm việc
-																	<br />
-																</div>
-															</div>
-															<div className={cx('text-edt')}>
-																<div className={cx('date')}>Từ MM/YY đến MM/YY</div>
-																<div className={cx('title')}>Tên công việc - Tên công ty</div>
-																<div className={cx('content_fck')}>
-																	Thành tựu chính:
-																	<br />
-																	- Những thành tựu chính bạn đã gặt hái trong công việc này
-																	<br />- Nên thể hiện bằng con số, tỷ lệ phần trăm tăng trưởng hoặc số
-																	liệu tài chính
-																	<p>Các kỹ năng bạn đã đạt được:</p>
-																	- Kỹ năng/ kiến thức tích lũy được trong quá trình làm việc
-																	<br />
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+													myResume?.default_template,
+													colorsEnum[cvColor] ? colorsEnum[cvColor] : colorsEnum[myResume?.cv_color]
+												)}
+												dangerouslySetInnerHTML={{ __html: myResume?.cvTemplate?.html_template_vi }}></div>
 										)}
 
 										{/* tiếng anh */}
@@ -633,13 +388,13 @@ const ChangeTemplate = () => {
                           màu đơn sắc và tông tươi tắn, nhẹ nhàng; Phông nền của
                           ảnh không rườm rà hay có nhiều chi tiết phụ.'
 					/>
-					<Suspense fallback={<div>...loading</div>}>
-						<ChooseTemplate
-							isShowing={isShowing.chooseTemplate}
-							hide={() => toggle('chooseTemplate')}
-							classNames={cx}
-						/>
-					</Suspense>
+					<ChooseTemplate
+						isShowing={isShowing.chooseTemplate}
+						hide={() => toggle('chooseTemplate')}
+						classNames={cx}
+						toggle={toggle}
+						refetch={refetch}
+					/>
 				</div>
 			</div>
 		</div>

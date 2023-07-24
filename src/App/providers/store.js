@@ -5,6 +5,8 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 import rootReducer from './rootReducer';
 import authApi from './apis/authApi';
 import userApi from './apis/userApi';
+import resumeTemplateApi from './apis/resumeTemplateApi';
+import cvTemplateApi from './apis/cvTemplateApi';
 import RTKQueryLogger from './middlewares/RTKQueryLogger';
 
 const persistConfig = {
@@ -25,6 +27,9 @@ const store = configureStore({
 		}).concat([
 			authApi.middleware,
 			userApi.middleware,
+			resumeTemplateApi.middleware,
+			cvTemplateApi.middleware,
+
 			// logger middleware
 			RTKQueryLogger
 		])

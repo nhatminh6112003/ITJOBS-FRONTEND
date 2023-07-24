@@ -15,6 +15,9 @@ import {
 	defaultRoutes
 } from './App/routes';
 import ErrorBoundary from './Core/components/error/ErrorBoundary';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
 	const RoutesApp = [
 		{
@@ -39,6 +42,7 @@ function App() {
 	return (
 		<div className='App'>
 			<ErrorBoundary>
+			<ToastContainer />
 				<Suspense fallback={<Loading />}>
 					<Router>
 						<Routes>

@@ -3,6 +3,7 @@ import routesPath from '~/App/config/routesPath';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '~/App/providers/slices/authSlice';
+
 const SideBar = ({ className: cx }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
