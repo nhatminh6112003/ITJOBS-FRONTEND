@@ -16,9 +16,8 @@ const baseQuery = fetchBaseQuery({
 });
 const baseQueryWithAuth = async (args, api, extraOptions) => {
 	let result = await baseQuery(args, api, extraOptions);
-	const { code, message } = result?.data;
-	if (code && code == 401) {
-		if (message && message == 'jwt expired') {
+	if ( result?.data?.code &&  result?.data?.code == 401) {
+		if ( result?.data?.message &&  result?.data?.message == 'jwt expired') {
 			const user = api.getState().auth.user;
 			const refreshToken = user?.refreshToken;
 			const { data: refreshResult } = await baseQuery(

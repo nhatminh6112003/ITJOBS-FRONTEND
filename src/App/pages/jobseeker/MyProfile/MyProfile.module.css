@@ -17732,9 +17732,18 @@ header.header-dashboard .mobile-menu .menu .menu-logged ul li.dropdown-mobile .d
 	margin-top: 15px;
 	margin-bottom: 10px;
 	display: flex !important;
+	border-radius: 28px;
 }
 
-.status-area .switch-status a {
+.status-area .switch-status button {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	gap:4px;
+	border-radius: 28px;
+	border:none;
+	background: #f8faf9;
+	color: #5d677a;
 	-ms-flex: 0 0 33.3333%;
 	flex: 0 0 33.3333%;
 	max-width: 33.3333%;
@@ -17743,23 +17752,23 @@ header.header-dashboard .mobile-menu .menu .menu-logged ul li.dropdown-mobile .d
 	font-size: 16px;
 }
 
-.status-area .switch-status a.active {
+.status-area .switch-status button.active {
 	color: #fff;
 }
 
-.status-area .switch-status a.lock.active {
+.status-area .switch-status button.lock.active {
 	background: #aaa;
 }
 
-.status-area .switch-status a.public.active {
+.status-area .switch-status button.public.active {
 	background: #2f4ba0;
 }
 
-.status-area .switch-status a.flash.active {
+.status-area .switch-status button.flash.active {
 	background: #00b2a3;
 }
 
-.status-area .switch-status a em {
+.status-area .switch-status button em {
 	margin-right: 7px;
 }
 
@@ -17773,7 +17782,7 @@ header.header-dashboard .mobile-menu .menu .menu-logged ul li.dropdown-mobile .d
 }
 
 @media (max-width: 1023px) {
-	.status-area .switch-status a {
+	.status-area .switch-status button {
 		font-size: 14px;
 		padding: 7px 0;
 	}

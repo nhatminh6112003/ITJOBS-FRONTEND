@@ -16,7 +16,6 @@ const authSlice = createSlice({
 	initialState: initialState,
 	extraReducers: (build) => {
 		build.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-			console.log('etst');
 			if (payload.isSuccess) {
 				return {
 					isSignedIn: true,

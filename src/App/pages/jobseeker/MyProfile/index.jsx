@@ -125,18 +125,18 @@ const MyProfile = () => {
 															id='cv_searchable_17722295'
 															data-id={17722295}
 															data-complete={1}>
-															<a href='' data-type={2} className={cx('lock', 'active')}>
+															<button  data-type={2} className={cx('lock', 'active')}>
 																<LockIcon fontSize='small' />
 																Khóa
-															</a>
-															<a href='' data-type={1} className={cx('public', '')}>
+															</button>
+															<button  data-type={1} className={cx('public', '')}>
 																<em className={cx('mdi', 'mdi-web')} />
 																Công khai
-															</a>
-															<a href='' data-type={3} className={cx('flash', '')}>
+															</button>
+															<button  data-type={3} className={cx('flash', '')}>
 																<em className={cx('mdi', 'mdi-flash')} />
 																Khẩn cấp
-															</a>
+															</button>
 														</div>
 														<p className={cx('text-notes', 'text-notes-2', 'd-block')}>
 															Bạn đang <span>vô hiệu hóa</span> hồ sơ. Nhà tuyển dụng sẽ không thấy được

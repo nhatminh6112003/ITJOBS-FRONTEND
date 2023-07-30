@@ -6,12 +6,22 @@ import styles from './Login.module.css';
 import LoginForm from './components/LoginForm';
 import { useLoginMutation } from '~/App/providers/apis/authApi';
 import routesPath from '~/App/config/routesPath';
+import { toast } from 'react-toastify';
 const cx = classNames.bind(styles);
 const Login = () => {
 	const user = useSelector((state) => state.auth?.user);
 	const [loginMutation, { isLoading }] = useLoginMutation();
 	const handleLoginFormSubmit = async (data) => {
-		await loginMutation(data);
+		loginMutation(data)
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success('Đăng nhập thành công');
+				}
+			})
+			.catch((err) => {
+				toast.error(err?.data?.message);
+			});
 	};
 
 	return (
