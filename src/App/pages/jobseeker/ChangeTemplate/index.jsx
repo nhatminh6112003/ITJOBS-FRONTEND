@@ -8,7 +8,7 @@ import Tips from '~/Core/components/common/Modal/Tips';
 import useModal from '~/App/hooks/useModal';
 import { useGetOneQuery, useUpdateUiMutation } from '~/App/providers/apis/resumeTemplateApi';
 import { useSelector } from 'react-redux';
-import { fontsEnum, colorsEnum,fontSize } from '~/App/constants/resumeTemplateEnum';
+import { fontsEnum, colorsEnum, fontSize } from '~/App/constants/resumeTemplateEnum';
 import ChooseTemplate from './components/ChooseTemplate';
 import { toast } from 'react-toastify';
 const cx = classNames.bind(styles);
@@ -31,7 +31,6 @@ const ChangeTemplate = () => {
 		changeLanguage(e.target.value);
 	};
 
-
 	const handleSetFontSize = (e) => {
 		changeFontSize(e.currentTarget.dataset.fontsize);
 	};
@@ -49,16 +48,17 @@ const ChangeTemplate = () => {
 		updateUi({
 			id: resume?.id,
 			payload: data
-		}).unwrap().then(r=>{
-			toast.success(r?.message)
 		})
-		
+			.unwrap()
+			.then((r) => {
+				toast.success(r?.message);
+			});
 	};
 
 	useEffect(() => {
 		changeLanguage(myResume?.cv_language);
 		changeFont(myResume?.cv_font);
-		changeFontSize(myResume?.cv_size)
+		changeFontSize(myResume?.cv_size);
 	}, [myResume]);
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -77,7 +77,7 @@ const ChangeTemplate = () => {
 							<div className={cx('right')}>
 								<div className={cx('save')}>
 									<a id='btn_savetemplate' onClick={handleUpdateUi}>
-										<span style={{cursor:'pointer'}}>Lưu Lại</span>
+										<span style={{ cursor: 'pointer' }}>Lưu Lại</span>
 									</a>
 								</div>
 								<div className={cx('download-profile')}>
@@ -350,11 +350,7 @@ const ChangeTemplate = () => {
 													myResume?.default_template,
 													colorsEnum[cvColor] ? colorsEnum[cvColor] : colorsEnum[myResume?.cv_color]
 												)}
-												dangerouslySetInnerHTML={{ __html: myResume?.cvTemplate?.html_template_en }}
-												>
-	
-
-												</div>
+												dangerouslySetInnerHTML={{ __html: myResume?.cvTemplate?.html_template_en }}></div>
 										) : (
 											<div
 												id='ZoneShowCVTemplateVi'
@@ -376,18 +372,14 @@ const ChangeTemplate = () => {
 							</div>
 						</form>
 					</div>
-					<Tips
-						isShowing={isShowing.tips}
-						hide={() => toggle('tips')}
-						title='>Gợi ý'
-						content='Ảnh chân dung trong CV tuy không quyết định tất cả
-                          nhưng lại có khả năng gây ấn tượng với Nhà tuyển dụng
-                          từ cái nhìn đầu tiên. Nếu CV của bạn có thêm ảnh chân
-                          dung, bạn cần nhớ những nguyên tắc cơ bản sau: Mỉm
-                          cười vừa đủ tạo thiện cảm; Trang phục trong ảnh nên có
-                          màu đơn sắc và tông tươi tắn, nhẹ nhàng; Phông nền của
-                          ảnh không rườm rà hay có nhiều chi tiết phụ.'
-					/>
+					<Tips isShowing={isShowing.tips} hide={() => toggle('tips')} title='>Gợi ý'>
+						<p>
+							Ảnh chân dung trong CV tuy không quyết định tất cả nhưng lại có khả năng gây ấn tượng với Nhà tuyển
+							dụng từ cái nhìn đầu tiên. Nếu CV của bạn có thêm ảnh chân dung, bạn cần nhớ những nguyên tắc cơ
+							bản sau: Mỉm cười vừa đủ tạo thiện cảm; Trang phục trong ảnh nên có màu đơn sắc và tông tươi tắn,
+							nhẹ nhàng; Phông nền của ảnh không rườm rà hay có nhiều chi tiết phụ.
+						</p>
+					</Tips>
 					<ChooseTemplate
 						isShowing={isShowing.chooseTemplate}
 						hide={() => toggle('chooseTemplate')}

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './MyProfile.module.css';
-import Widget, { WidgetHeader } from './components/widget';
+import Widget from './components/Widget';
 import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
 import {
 	LockIcon,
@@ -14,9 +14,15 @@ import {
 	AddIcon
 } from '~/Core/resources';
 
+import useModal from '~/App/hooks/useModal';
+import ResumeTitle from './components/ResumeTitle';
+
 export const cx = classNames.bind(styles);
 
 const MyProfile = () => {
+	const { isShowing, toggle } = useModal({
+		resume_title: false,
+	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
 			<SideBar className={cx} />
@@ -151,39 +157,19 @@ const MyProfile = () => {
 															được ưu tiên tìm thấy bởi các nhà tuyển dụng.
 														</p>
 													</div>
-													<div className={cx('check-box')}>
-														<div className={cx('form-group', 'form-check-box', 'job-alerts')}>
-															<label htmlFor='cv_jobalert_17722295'>
-																Nhận thông báo việc làm
-																<input
-																	type='checkbox'
-																	name='cv_jobalert_17722295'
-																	id='cv_jobalert_17722295'
-																	defaultValue={17722295}
-																	defaultChecked='checked'
-																	onClick='updateCvJobalert(this);'
-																/>
-																<span className={cx('slider')} />{' '}
-															</label>
-														</div>
-													</div>
+												
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<Widget title='Tiêu đề hồ sơ' className={cx('widget', 'widget-24')} id='t-resume-section'>
-									<>
-										<div className={cx('content')}>
-											<p>Frontend Developer</p>
-										</div>
-										<input type='hidden' id='title_hidden_value' defaultValue='Frontend Developer' />
-									</>
-								</Widget>
+								<ResumeTitle className={cx} isShowing={isShowing} toggle={toggle} />
 								<Widget
 									title='Thông tin cá nhân'
 									className={cx('widget', 'widget-13')}
-									id='personalinfo-section'>
+									id='personalinfo-section'
+									status="error"
+									>
 									<div className={cx('table')}>
 										<table>
 											<tbody>
@@ -251,54 +237,7 @@ const MyProfile = () => {
 									</ul>
 								</Widget>
 
-								<div className={cx('widget', 'widget-14')} id='widget-14'>
-									<div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image')}>
-													<img src='./img/dash-board/i3.png' alt='' />
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Mục tiêu nghề nghiệp</h3>
-													<div className={cx('status')}>
-														<p>Không bắt buộc</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-objective')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-edit')}>
-													<a href='' onClick='editResumeObjective();'>
-														{' '}
-														<em className={cx('material-icons')}>
-															<EditIcon fontSize='normal' />
-														</em>
-														<span>Chỉnh sửa</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('content')}>
-											<p>mimnhvodcih</p>
-										</div>
-										<ul className={cx('list-action')}>
-											<li className={cx('delete', 'no-bf')}>
-												<a href='' onClick='deleteResumeObject();'>
-													{' '}
-													<em className={cx('material-icons')}>highlight_off</em>
-													<span>Xóa</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
+					
 
 								<div className={cx('widget', 'widget-18')} id='widget-18'>
 									<div className={cx('widget-head')}>
@@ -1141,7 +1080,7 @@ const MyProfile = () => {
 										</li>
 										<li>
 											<a href='' data-href='#t-resume-section'>
-												Tiêu đề hồ sơ
+													
 											</a>
 										</li>
 										<li>

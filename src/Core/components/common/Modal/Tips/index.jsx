@@ -4,7 +4,7 @@ import styles from './tips.module.css';
 import classNames from 'classnames/bind';
 import { LightbulbIcon, CloseIcon } from '~/Core/resources';
 const cx = classNames.bind(styles);
-const Tips = ({ isShowing, hide, title, content }) => {
+const Tips = ({ isShowing,children, hide, title, content }) => {
 	return isShowing ? (
 		<div className={cx('ReactModal__Body--open')}>
 			<Modal
@@ -46,7 +46,7 @@ const Tips = ({ isShowing, hide, title, content }) => {
 											<h3>Hồ sơ CareerBuilder</h3>
 										</div>
 										<div className={cx('content')}>
-											<p>{content}</p>
+											{children}
 										</div>
 									</div>
 									<div className={cx('main-button')}>
