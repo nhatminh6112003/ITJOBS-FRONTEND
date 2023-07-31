@@ -7,6 +7,7 @@ import authApi from './apis/authApi';
 import userApi from './apis/userApi';
 import resumeTemplateApi from './apis/resumeTemplateApi';
 import cvTemplateApi from './apis/cvTemplateApi';
+import resumeTitleApi from './apis/resumeTitleApi';
 import RTKQueryLogger from './middlewares/RTKQueryLogger';
 
 const persistConfig = {
@@ -29,7 +30,7 @@ const store = configureStore({
 			userApi.middleware,
 			resumeTemplateApi.middleware,
 			cvTemplateApi.middleware,
-
+			resumeTitleApi.middleware,
 			// logger middleware
 			RTKQueryLogger
 		])

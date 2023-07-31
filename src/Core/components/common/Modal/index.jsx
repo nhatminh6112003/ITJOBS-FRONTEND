@@ -24,7 +24,9 @@ const Modal = ({ children, isOpen, onRequestClose, ...props }) => {
 					top: '50%',
 					transform: 'translate(-50%,-50%)'
 				}
-			}}>
+			}}
+			
+			>
 			{children}
 		</ReactModal>
 	);
