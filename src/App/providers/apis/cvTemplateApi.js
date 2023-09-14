@@ -6,7 +6,7 @@ const cvTemplateApi = createApi({
 	baseQuery: baseQueryWithAuth,
 	endpoints: (build) => ({
 		getAllTemplate: build.query({
-			query: (id) => {
+			query: () => {
 				return { url: `/cv_template`, method: 'GET' };
 			},
 			transformResponse: (response) => response.data

@@ -44,8 +44,7 @@ function App() {
 			<ErrorBoundary>
 			<ToastContainer 
 				autoClose={1000}
-				transition={Slide}
-				position='top-center'
+				position='top-right'
 			/>
 				<Suspense fallback={<Loading />}>
 					<Router>

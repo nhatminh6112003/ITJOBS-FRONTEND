@@ -1,7 +1,7 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { logout, updateAccessToken } from './slices/authSlice';
 const baseQuery = fetchBaseQuery({
-	baseUrl: import.meta.env.VITE_BASE_URL,
+	baseUrl: import.meta.env.VITE_API_URL,
 	prepareHeaders: async (headers, { getState }) => {
 		const user = getState().auth.user;
 		const accessToken = user?.accessToken;
