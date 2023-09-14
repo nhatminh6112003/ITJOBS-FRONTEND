@@ -17,6 +17,7 @@ const Login = () => {
 			.then((r) => {
 				if (r.status == 200) {
 					toast.success('Đăng nhập thành công');
+					return;
 				}
 			})
 			.catch((err) => {

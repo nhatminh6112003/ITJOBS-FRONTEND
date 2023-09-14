@@ -10,11 +10,14 @@ const resumeTemplateApi = createApi({
 				return { url: `/resume_template/${id}`, method: 'GET' };
 			},
 			transformResponse: (response) => {
-				const { id } = response.data;
+				const {
+					id,
+					cvTemplate: { color_pick }
+				} = response.data;
 				const covertData = {
 					...response.data,
 					id: Number(id),
-					color_pick: JSON.parse(response.data.cvTemplate.color_pick)
+					color_pick: JSON.parse(color_pick)
 				};
 				return covertData;
 			}

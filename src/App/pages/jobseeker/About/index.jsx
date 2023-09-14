@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import saveAs from 'file-saver';
-import axiosClient from '~/api/axiosClient';
+
 const About = () => {
 	// const NODE_APP_BASE_URL=import.meta.env.VITE_NODE_APP_BASE_URL
 
