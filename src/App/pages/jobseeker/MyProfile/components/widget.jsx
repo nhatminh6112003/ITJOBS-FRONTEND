@@ -2,7 +2,13 @@ import { EditIcon } from '~/Core/resources';
 import React from 'react';
 import { cx } from '..';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
-const Widget = ({ children,avatar, title, status, onOpenResume, onOpenTipSlide, ...props }) => {
+import { AddIcon } from '~/Core/resources';
+
+const Widget = ({ action = 'ADD', children, avatar, title, status, onOpenResume, onOpenTipSlide, ...props }) => {
+	const modalAction = {
+		ADD: 'THÊM MỚI',
+		EDIT: 'CHỈNH SỬA'
+	};
 	const statusWidget = {
 		error: 'error',
 		success: 'success',
@@ -38,9 +44,9 @@ const Widget = ({ children,avatar, title, status, onOpenResume, onOpenTipSlide, 
 						<div className={cx('link-edit')}>
 							<a href='javascript:void(0)' onClick={onOpenResume}>
 								<em className={cx('material-icons')}>
-									<EditIcon fontSize='normal' />
+									{action == 'ADD' ? <AddIcon sx={{ fontSize: '20px' }} /> : <EditIcon fontSize='normal' />}
 								</em>
-								<span>Chỉnh sửa</span>
+								<span>{modalAction[action]}</span>
 							</a>
 						</div>
 					</div>

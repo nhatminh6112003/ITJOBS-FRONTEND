@@ -24,6 +24,7 @@ const Tips = ({ isShowing,children, hide, title, content }) => {
 						position: 'absolute',
 						left: '50%',
 						top: '50%',
+						minHeight:500,
 						transform: 'translate(-50%,-50%)'
 					}
 				}}>
