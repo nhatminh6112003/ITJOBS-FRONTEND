@@ -2,7 +2,7 @@ import React from 'react';
 import { cx } from '..';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-const No_Content = ({ title, onShowTip, action = 'ADD' }) => {
+const NoContent = ({ title, onShowTip, action = 'ADD', onClick }) => {
 	const tipsAction = {
 		ADD: 'THÊM MỚI',
 		EDIT: 'CHỈNH SỬA'
@@ -10,7 +10,7 @@ const No_Content = ({ title, onShowTip, action = 'ADD' }) => {
 	return (
 		<div className={cx('no-content')} onClick={onShowTip}>
 			<p>{title}</p>
-			<a href='javascript:void(0)'>
+			<a href='javascript:void(0)' onClick={onClick}>
 				<AddCircleIcon />
 				<span>{tipsAction[action]}</span>
 			</a>
@@ -18,4 +18,4 @@ const No_Content = ({ title, onShowTip, action = 'ADD' }) => {
 	);
 };
 
-export default No_Content;
+export default NoContent;

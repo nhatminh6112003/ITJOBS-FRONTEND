@@ -16,12 +16,16 @@ import {
 
 import useModal from '~/App/hooks/useModal';
 import ResumeTitle from './components/ResumeTitle';
+import ResumeRefer from './components/ResumeRefer';
 
 export const cx = classNames.bind(styles);
 
 const MyProfile = () => {
 	const { isShowing, toggle } = useModal({
 		resume_title: false,
+		resume_refer:false,
+		update_resume_refer:false,
+
 	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -931,88 +935,10 @@ const MyProfile = () => {
 										</div>
 									</div>
 								</div>
-								<div className={cx('widget', 'widget-20')} id='widget-20'>
-									{' '}
-									<div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image')}>
-													<img src='./img/dash-board/i8.png' alt='' />
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Người tham khảo</h3>
-													<div className={cx('status', 'default')}>
-														<p>Không bắt buộc</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-references')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-add')}>
-													<a href='' onClick='show_frmRefer(0);'>
-														{' '}
-														<em className={cx('material-icons')}>
-															<AddIcon sx={{ fontSize: '20px' }} />
-														</em>
-														<span>Thêm mới</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('list-references')}>
-											{' '}
-											<div className={cx('item')} id='referList_825646'>
-												<div className={cx('title')}>
-													<h4>nguyen nhat minh</h4>
-													<ul className={cx('list-action')}>
-														<li className={cx('edit-link')}>
-															<a href='' onClick='show_frmRefer(825646);'>
-																{' '}
-																<em className={cx('material-icons')}>create</em>
-															</a>
-														</li>
-														<li className={cx('delete')}>
-															<a href='' onClick='deleteRefer(825646);'>
-																{' '}
-																<em className={cx('material-icons')}>highlight_off</em>
-															</a>
-														</li>
-													</ul>
-												</div>
-												<div className={cx('content')}>
-													<ul>
-														<li>
-															{' '}
-															<em className={cx('material-icons')}>person</em>
-															Chức vụ leader
-														</li>
-														<li>
-															{' '}
-															<em className={cx('material-icons')}>domain</em>
-															Công ty fpt
-														</li>
-														<li>
-															{' '}
-															<em className={cx('material-icons')}>phone</em>Số điện thoại: 0839704567
-														</li>
-														<li>
-															{' '}
-															<em className={cx('material-icons')}>email</em>
-															Email: aolang169@gmail.com
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
+								
+								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
+
+								
 							</div>
 							<div className={cx('col-lg-4', 'col-xl-3', 'main-menu')}>
 								<div className={cx('menu-shortchut')}>

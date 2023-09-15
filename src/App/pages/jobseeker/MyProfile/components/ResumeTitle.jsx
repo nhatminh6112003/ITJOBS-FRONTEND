@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Tips from '~/Core/components/common/Modal/Tips';
 import useModal from '~/App/hooks/useModal';
-import No_Content from './No_Content';
+import NoContent from './NoContent';
 const ResumeTitle = ({ className: cx, isShowing, toggle }) => {
 	const resume = useSelector((state) => state.auth?.user?.resume);
 
@@ -50,13 +50,12 @@ const ResumeTitle = ({ className: cx, isShowing, toggle }) => {
 				id='t-resume-section'
 				onOpenResume={() => toggle('resume_title')}
 				onOpenTipSlide={() => toggleTips('t_title_resume')}
-				avatar="https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i14.png"
-				>
+				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i14.png'>
 				<div className={cx('content')}>
 					{resumeTitle?.title ? (
 						<p>{resumeTitle?.title}</p>
 					) : (
-						<No_Content action='EDIT' onShowTip={() => toggle('resume_title')} title='Tiêu đề hồ sơ' />
+						<NoContent action='EDIT' onShowTip={() => toggle('resume_title')} title='Tiêu đề hồ sơ' />
 					)}
 				</div>
 			</Widget>

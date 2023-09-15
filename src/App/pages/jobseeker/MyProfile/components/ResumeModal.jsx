@@ -12,18 +12,22 @@ const ResumeModal = ({ children, isOpen,hide, onRequestClose,title,className:cx,
 					backgroundColor: '#343434'
 				},
 				content: {
+					padding:0,
 					overflow: 'hidden',
-					padding: 0,
+					overflowY:'scroll',
+					margin: 30,
 					backgroundColor: '#ffff',
 					position: 'absolute',
 					left: '50%',
 					top: '50%',
 					maxHeight:"100%",
+					minHeight:500,
+					
 					transform: 'translate(-50%,-50%)'
 				}
 			}}>
-				<div className={wrapModal} >
-					<h2 className={cx('modal-title')}>
+				<div  >
+					<h2 className={cx('modal-title')} style={{textAlign:'center',padding:4}}>
 						{title}
 					</h2>
 					<div className={cx('modal-body')}>

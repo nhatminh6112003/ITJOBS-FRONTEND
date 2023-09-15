@@ -5,6 +5,7 @@ import userApi from './apis/userApi';
 import cvTemplateApi from './apis/cvTemplateApi';
 import resumeTemplateApi from './apis/resumeTemplateApi';
 import resumeTitleApi from './apis/resumeTitleApi';
+import resumeReferApi from './apis/resumeReferApi';
 const rootReducer = combineReducers({
 	[authSlice.name]: authSlice.reducer,
 	[authApi.reducerPath]: authApi.reducer,
@@ -12,6 +13,8 @@ const rootReducer = combineReducers({
 	[cvTemplateApi.reducerPath]: cvTemplateApi.reducer,
 	[resumeTemplateApi.reducerPath]: resumeTemplateApi.reducer,
 	[resumeTitleApi.reducerPath]: resumeTitleApi.reducer,
+	[resumeReferApi.reducerPath]: resumeReferApi.reducer,
+
 
 
 });
