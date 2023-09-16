@@ -208,7 +208,7 @@ export const fontsEnum = {
 	TimesNewRoman: 'fontCVTimesNewRoman'
 };
 export const fontSize = {
-		fontCVsize12: 'fontCVsize12',
-		fontCVsize14: 'fontCVsize14',
-		fontCVsize16: 'fontCVsize16'
-	};
+	fontCVsize12: 'fontCVsize12',
+	fontCVsize14: 'fontCVsize14',
+	fontCVsize16: 'fontCVsize16'
+};
