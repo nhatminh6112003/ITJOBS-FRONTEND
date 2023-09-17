@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-
 import routesPath from '~/App/config/routesPath';
 const Login = lazy(() => import('~/App/pages/Admin/Login'));
 

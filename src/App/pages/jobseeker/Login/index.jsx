@@ -7,6 +7,7 @@ import LoginForm from './components/LoginForm';
 import { useLoginMutation } from '~/App/providers/apis/authApi';
 import routesPath from '~/App/config/routesPath';
 import { toast } from 'react-toastify';
+import { Fragment } from 'react';
 const cx = classNames.bind(styles);
 const Login = () => {
 	const user = useSelector((state) => state.auth?.user);
@@ -25,9 +26,11 @@ const Login = () => {
 			});
 	};
 
+	if(user){
+		return <Navigate to={routesPath.JobseekerPaths.dashboard} />
+	}
+	
 	return (
-		<>
-			{user && <Navigate to={routesPath.JobseekerPaths.dashboard} />}
 			<section className={cx('signin-form', 'cb-section')}>
 				<div className={cx('container')}>
 					<div className={cx('cb-title', 'cb-title-center')}>
@@ -127,17 +130,6 @@ const Login = () => {
 					</div>
 				</div>
 			</section>
-			{/* <form onSubmit={handleSubmit}>
-        <div>Email</div>
-        <input type="text" name="email" />
-        <div>Password</div>
-
-        <input type="text" name="password" />
-        <div>
-          <button type="submit">Gửi</button>
-        </div>
-      </form> */}
-		</>
 	);
 };
 export default Login;

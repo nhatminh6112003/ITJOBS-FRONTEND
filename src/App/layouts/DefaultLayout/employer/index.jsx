@@ -2,15 +2,19 @@ import { cloneElement, lazy, Suspense } from 'react';
 import Header from '../../components/Employer/Header';
 import EmployerStyles, { cx } from './EmployerStyles';
 import Loading from '~/Core/components/common/Loading';
+import NavBar from '../../components/Employer/NavBar';
 const Footer = lazy(() => import('../../components/Employer/Footer'));
 export const EmployerLayout = ({ children }) => {
 	return (
-		<Suspense fallback={<Loading />}>
-			<EmployerStyles>
+		<EmployerStyles>
 				<Header />
-				<main>{cloneElement(children, { cx })}</main>
+				<Suspense fallback={<Loading />}>
+				<main>
+					<NavBar className={cx} />
+					{cloneElement(children, { cx })}
+				</main>
 				<Footer />
-			</EmployerStyles>
 		</Suspense>
+			</EmployerStyles>
 	);
 };

@@ -7,7 +7,7 @@ import routesPath from '~/App/config/routesPath';
 import { AccountCircleIcon, ExpandMoreIcon, CheckIcon, Notifications } from '~/Core/resources';
 import { logout } from '~/App/providers/slices/authSlice';
 import { Fragment } from 'react';
-
+import UserRoleEnum,{ UserType } from '~/App/constants/roleEnum';
 const cx = classNames.bind(styles);
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.auth?.user);
 	const handleLogout = () => {
-		dispatch(logout());
+		dispatch(logout({ Role: UserType[UserRoleEnum.JOBSEEKER] }));
 	};
 	return (
 		<>

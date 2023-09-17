@@ -18,7 +18,18 @@ const JobseekerPaths = {
 const EmployerPaths = {
 	login: '/employers/login',
 	register: '/employers/register',
-	dashboard: '/employers/dashboard'
+	dashboard: '/employers/dashboard',
+	posting: '/employers/hrcentral/posting',
+	manageResume: '/employers/hrcentral/manageresume',
+	searchHistory: '/employers/hrcentral/search-history',
+	ordersAvailable: '/employers/hrcentral/orders-available',
+	emailManagement: '/employers/hrcentral/emailcontentmanagement',
+	accounts: '/employers/hrcentral/accounts',
+	waitPosting: '/employers/hrcentral/waitposting',
+	unPosting: '/employers/hrcentral/unposting',
+	expirePosting: '/employers/hrcentral/expireposting',
+	postjobs: '/employers/postjobs',
+	
 };
 
 const BasePaths = {

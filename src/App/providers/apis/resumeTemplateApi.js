@@ -1,9 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import baseQueryWithAuth from '../fetchBaseQuery';
+import baseQueryWithUser from '../fetchBaseQuery';
 
 const resumeTemplateApi = createApi({
 	reducerPath: 'resumeTemplateApi',
-	baseQuery: baseQueryWithAuth,
+	baseQuery: baseQueryWithUser,
 	endpoints: (build) => ({
 		getOne: build.query({
 			query: (id) => {

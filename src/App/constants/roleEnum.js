@@ -4,4 +4,10 @@ const UserRoleEnum = {
 	ADMIN: 3
 };
 
+export const UserType = {
+	[UserRoleEnum.JOBSEEKER]: 'user',
+	[UserRoleEnum.EMPLOYER]: 'employer',
+	[UserRoleEnum.ADMIN]: 'admin'
+};
+
 export default UserRoleEnum;

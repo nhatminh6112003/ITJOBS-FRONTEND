@@ -1,9 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import baseQueryWithAuth from '../fetchBaseQuery';
+import baseQueryWithUser from '../fetchBaseQuery';
 
 const userApi = createApi({
 	reducerPath: 'userApi',
-	baseQuery: baseQueryWithAuth,
+	baseQuery: baseQueryWithUser,
 	endpoints: (build) => ({
 		getAll: build.query({
 			query: () => {

@@ -1,14 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import authApi from '../apis/authApi';
-
+import { UserType } from '~/App/constants/roleEnum';
 const initialState = {
-	isSignedIn: false,
-	user: false
+	user: false,
+	employer: false,
+	admin: false
 };
 const authSlice = createSlice({
 	name: 'auth',
 	reducers: {
-		logout: (state, { payload }) => initialState,
+		logout: (state, { payload }) => {
+			const { Role } = payload;
+			state[Role] = false;
+		},
 		updateAccessToken(state, action) {
 			state.user.accessToken = action.payload;
 		}
@@ -17,9 +21,12 @@ const authSlice = createSlice({
 	extraReducers: (build) => {
 		build.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
 			if (payload.isSuccess) {
+				const { data } = payload;
+
+				const roleKey = UserType[data.user_type_id];
 				return {
-					isSignedIn: true,
-					user: payload.data
+					...state,
+					[roleKey]: roleKey ? data : false
 				};
 			}
 		});
