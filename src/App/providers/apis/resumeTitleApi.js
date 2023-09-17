@@ -1,12 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import baseQueryWithAuth from '../fetchBaseQuery';
+import baseQueryWithUser from '../fetchBaseQuery';
 
 const resumeTitleApi = createApi({
 	reducerPath: 'resumeTitleApi',
-	baseQuery: baseQueryWithAuth,
+	baseQuery: baseQueryWithUser,
 	tagTypes: ['resume_title'],
 	endpoints: (build) => ({
-		getOneResumeTitle	: build.query({
+		getOneResumeTitle: build.query({
 			query: (id) => {
 				return { url: `/resume_title/${id}`, method: 'GET' };
 			},
@@ -14,14 +14,14 @@ const resumeTitleApi = createApi({
 			transformResponse: (response) => response.data
 		}),
 		updateResumeTitle: build.mutation({
-			query: ({id,payload}) => {
-				return { url: `/resume_title/${id}`, method: 'PATCH',body:payload };
+			query: ({ id, payload }) => {
+				return { url: `/resume_title/${id}`, method: 'PATCH', body: payload };
 			},
-			invalidatesTags:['resume_title']
-		}),
+			invalidatesTags: ['resume_title']
+		})
 	})
 });
 
-export const { useUpdateResumeTitleMutation ,useGetOneResumeTitleQuery} = resumeTitleApi;
+export const { useUpdateResumeTitleMutation, useGetOneResumeTitleQuery } = resumeTitleApi;
 
 export default resumeTitleApi;

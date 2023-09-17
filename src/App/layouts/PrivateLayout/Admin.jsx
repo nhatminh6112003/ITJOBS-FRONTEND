@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import routesPath from '~/App/config/routesPath';
 import UserRoleEnum from '~/App/constants/roleEnum';
 const Admin = () => {
-	const user = useSelector((state) => state.auth?.user);
-	return user?.user_type_id == UserRoleEnum.ADMIN ? (
+	const admin = useSelector((state) => state.auth?.admin);
+	return admin?.user_type_id == UserRoleEnum.ADMIN ? (
 		<Outlet />
 	) : (
 		<Navigate to={routesPath.JobseekerPaths.home} replace={true} />

@@ -6,8 +6,19 @@ import classNames from 'classnames/bind';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckIcon from '@mui/icons-material/Check';
+import { useSelector, useDispatch } from 'react-redux';
+import UserRoleEnum, { UserType } from '~/App/constants/roleEnum';
+import { logout } from '~/App/providers/slices/authSlice';
+import { Fragment } from 'react';
+
 const cx = classNames.bind(styles);
 const Header = () => {
+	const employer = useSelector((state) => state.auth?.employer);
+	const dispatch = useDispatch();
+
+	const handleLogout = () => {
+		dispatch(logout({ Role: UserType[UserRoleEnum.EMPLOYER] }));
+	};
 	return (
 		<header className={cx('for-customers')}>
 			<div className={cx('container-fluid')}>
@@ -85,7 +96,7 @@ const Header = () => {
 									</div>
 								</li>
 								<li className={cx('dropdown')}>
-									<a href='https://careerbuilder.vn/vi/employers/dashboard'>HR Central</a>
+									<Link to={routesPath.JobseekerPaths.dashboard}>HR Central</Link>
 									<div className={cx('dropdown-menu')}>
 										<ul>
 											<li>
@@ -111,69 +122,90 @@ const Header = () => {
 					</div>
 					<div className={cx('right-wrap')}>
 						<div className={cx('main-login', 'dropdown')}>
-							<div className={cx('title-login')}>
-								<Link to={routesPath.EmployerPaths.login}>
-									<AccountCircleIcon sx={{ fontSize: 20, paddingRight: '5px' }} />
-									Đăng nhập
-								</Link>
-							</div>
-							{/* <div className={cx("dropdown-menu")}>
-            <div className={cx("login-wrapper")}>
-              <form
-                method="post"
-                action="https://careerbuilder.vn/vi/employers/login"
-                id={cx("frm_login_header")}
-              >
-                <div className={cx("row")}>
-                  <div className={cx("form-group col-12")}>
-                    <input
-                      type="text"
-                      placeholder="Email/Tên đăng nhập"
-                      autoComplete="off"
-                      id={cx("username_box")}
-                      name="username"
-                    />
-                  </div>
-                  <div className={cx("form-group col-8")}>
-                    <input
-                      type="password"
-                      placeholder="Mật khẩu"
-                      id={cx("password_box")}
-                      name="password"
-                      autoComplete="off"
-                    />
-                  </div>
-                  <div className={cx("form-group col-4")}>
-                    <input
-                      type="hidden"
-                      name="csrf_token_login"
-                      defaultValue="2e42d3e89f13fec49a9a6c0aa7b9db54feb1cdddcce6dc5680b3476dfcba5dd7"
-                    />
-                    <button type="submit">Đăng nhập</button>
-                  </div>
-                </div>
-                <a
-                  className={cx("forget-password")}
-                  href="https://careerbuilder.vn/vi/employers/forgetpassword.html"
-                >
-                  Quên mật khẩu
-                </a>
-                <a
-                  className={cx("forget-password register")}
-                  href="https://careerbuilder.vn/vi/employers/register"
-                >
-                  Đăng ký
-                </a>
-              </form>
-            </div>
-          </div> */}
+							{employer ? (
+								<Fragment>
+									<Link to='https://careerbuilder.vn/vi/employers/hrcentral/accounts' title='minh nguyễn 123'>
+										<AccountCircleIcon sx={{ fontSize: 20, paddingRight: '5px' }} />
+										Hi,{' '}
+										<span className={cx('name')}>
+											{employer?.firstname} {employer?.lastname}
+										</span>
+									</Link>
+
+									<div className={cx('dropdown-menu')}>
+										<ul>
+											<li>
+												<a href='https://careerbuilder.vn/vi/employers/dashboard' title='Dashboard'>
+													Dashboard
+												</a>
+											</li>
+											<li>
+												<a
+													href='https://careerbuilder.vn/vi/employers/hrcentral/posting'
+													title='Quản Lý Đăng Tuyển'>
+													Quản Lý Đăng Tuyển
+												</a>
+											</li>
+											<li>
+												<a
+											href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume'
+													className={cx('active')}
+													title='Quản Lý Ứng Viên'>
+													Quản Lý Ứng Viên
+												</a>
+											</li>
+											<li>
+												<a
+													href='https://careerbuilder.vn/vi/employers/hrcentral/search-history'
+													title='Lịch Sử Tìm Kiếm'>
+													Lịch Sử Tìm Kiếm
+												</a>
+											</li>
+											<li>
+												<a
+													href='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_available'
+													title='Đơn Hàng '>
+													Đơn Hàng
+												</a>
+											</li>
+											<li>
+												<a
+													href='https://careerbuilder.vn/vi/employers/hrcentral/emailcontentmanagement'
+													title='Cấu Hình Email'>
+													Cấu Hình Email
+												</a>
+											</li>
+											<li>
+												<a href='https://careerbuilder.vn/vi/employers/careerbuilder-rewards'>
+													CareerBuilder Rewards
+												</a>
+											</li>
+											<li>
+												<a href='https://careerbuilder.vn/vi/employers/hrcentral/accounts'> Tài khoản</a>
+											</li>
+											<li>
+												<Link title='Thoát' onClick={handleLogout}> Thoát</Link>
+											</li>
+										</ul>
+									</div>
+								</Fragment>
+							) : (
+								<Fragment>
+									<div className={cx('title-login')}>
+										<Link to={routesPath.EmployerPaths.login}>
+											<AccountCircleIcon sx={{ fontSize: 20, paddingRight: '5px' }} />
+											Đăng nhập
+										</Link>
+									</div>
+									<div className={cx('main-register')}>
+										<Link to={routesPath.EmployerPaths.register}>Đăng ký</Link>
+									</div>
+								</Fragment>
+							)}
 						</div>
-						<div className={cx('main-register')}>
-							<Link to={routesPath.EmployerPaths.register}>Đăng ký</Link>
-						</div>
+
 						<div className={cx('main-noti')} style={{ display: 'none' }}>
 							<a href=''>
-								{' '}
 								<span className='mdi mdi-cart' />
 							</a>
 						</div>
@@ -211,207 +243,7 @@ const Header = () => {
 					</div>
 				</div>
 			</div>
-			{/* <div className="mobile-menu">
-    <div className="mobile-wrap">
-      <div className="header-logo">
-        <a
-          href="https://careerbuilder.vn/vi/employers"
-          title="homepage-employers"
-        >
-          <img
-            src="https://images.careerbuilder.vn/logo/logo_1644552010.png"
-            alt="CareerBuilder.vn - Nghĩ Nhân Tài, Nghĩ CareerBuilder"
-            title="CareerBuilder.vn - Nghĩ Nhân Tài, Nghĩ CareerBuilder"
-          />
-        </a>
-      </div>
-      <div className="header-bottom">
-        <div className="header-bottom-top">
-          <div className="profile">
-            <div className="avatar">
-              <a href="#">
-                <img src="./img/avata-new.png" alt="" />
-              </a>
-            </div>
-            <div className="username">
-              <a href="">Xin chào!</a>
-              <div className="authentication-links">
-                <ul>
-                  <li>
-                    <a href="https://careerbuilder.vn/vi/employers/login">
-                      {" "}
-                      <i className="mdi mdi-login-variant" />
-                      Đăng nhập
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://careerbuilder.vn/vi/employers/register">
-                      {" "}
-                      <i className="mdi mdi-account-plus-outline" />
-                      Đăng ký
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="back-menu-normal">
-              <em className="mdi mdi-arrow-left" />
-            </div>
-          </div>
-          <div className="menu">
-            <ul className="menu-normal">
-              <li className="active">
-                <a
-                  href="https://careerbuilder.vn/vi/employers"
-                  title="homepage-employers"
-                >
-                  <i className="mdi mdi-home-outline" />
-                  Trang Chủ
-                </a>
-              </li>
-              <li className="dropdown-mobile">
-                <a href="https://careerbuilder.vn/vi/employers/products-and-services">
-                  {" "}
-                  <i className="mdi mdi-apps" />
-                  Sản Phẩm và Dịch Vụ
-                </a>
-                <div className="dropdown-menu">
-                  <ul>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3">
-                        Đăng Tuyển Dụng
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/products-and-services/tim-ho-so-ung-vien/8">
-                        Tìm Hồ Sơ Ứng Viên
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/products-and-services/talent-solution/">
-                        Talent Solution
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/products-and-services/quang-cao-tuyen-dung/9">
-                        Quảng Cáo Tuyển Dụng
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/products-and-services/talent-driver/14">
-                        Talent Driver
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/products-and-services/targeted-email-marketing/">
-                        Targeted Email Marketing
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/products-and-services/talent-referral/">
-                        Talent Referral
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung-va-tim-ho-so-quoc-te/10">
-                        Đăng Tuyển Dụng và Tìm Hồ Sơ Quốc tế
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/products-and-services">
-                        Xem tất cả sản phẩm / dịch vụ
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li className="dropdown-mobile">
-                <a href="https://careerbuilder.vn/vi/employers/dashboard">
-                  {" "}
-                  <i className="mdi mdi-briefcase-account" />
-                  HR Central
-                </a>
-                <div className="dropdown-menu">
-                  <ul>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/dashboard">
-                        Dashboard
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/employers/postjobs">
-                        Đăng Tuyển Dụng
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://careerbuilder.vn/vi/tim-ung-vien.html">
-                        Tìm Hồ Sơ
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a href="https://careerbuilder.vn/vi/hiringsite">
-                  {" "}
-                  <i className="mdi mdi-lightbulb-on-outline" />
-                  Cẩm Nang Tuyển Dụng
-                </a>
-              </li>
-              <li>
-                <a href="https://careerbuilder.vn/vi/employers/services/contact">
-                  {" "}
-                  <i className="mdi mdi-contacts" />
-                  Liên hệ
-                </a>
-              </li>
-              <li>
-                <a href="https://careerbuilder.vn/en/employers/login">
-                  {" "}
-                  <i className="mdi mdi-web" />
-                  <span>English</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="header-bottom-bottom">
-          <div className="header-alert">
-            <h4>
-              <a href="https://careerbuilder.vn/">
-                {" "}
-                <strong> Dành Cho Ứng Viên</strong>
-              </a>
-              <br />
-              <a href="https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-vi.html">
-                <span> Tìm Việc Làm</span>
-              </a>
-            </h4>
-          </div>
-          <div className="employer-site">
-            <ul>
-              <li>
-                {" "}
-                <a>
-                  {" "}
-                  <i className="mdi mdi-phone" />
-                  <span>HCM: (84.28) 3822 6060</span>
-                </a>
-              </li>
-              <li>
-                {" "}
-                <a>
-                  {" "}
-                  <i className="mdi mdi-phone" />
-                  <span>HN: (84.24) 6268 1919</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> */}
+
 		</header>
 	);
 };

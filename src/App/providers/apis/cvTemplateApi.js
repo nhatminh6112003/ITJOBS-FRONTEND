@@ -1,9 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import baseQueryWithAuth from '../fetchBaseQuery';
+import baseQueryWithUser from '../fetchBaseQuery';
 
 const cvTemplateApi = createApi({
 	reducerPath: 'cvTemplateApi',
-	baseQuery: baseQueryWithAuth,
+	baseQuery: baseQueryWithUser,
 	endpoints: (build) => ({
 		getAllTemplate: build.query({
 			query: () => {
