@@ -15,6 +15,12 @@ import AddIcon from '@mui/icons-material/Add';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import CloseIcon from '@mui/icons-material/Close';
 import Notifications from '@mui/icons-material/Notifications';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+
+import Settings from '@mui/icons-material/Settings';
+import HomeIcon from '@mui/icons-material/Home';
+import CategoryIcon from '@mui/icons-material/Category';
 export {
 	CloseIcon,
 	AddIcon,
@@ -32,5 +38,10 @@ export {
 	SearchIcon,
 	FavoriteBorderIcon,
 	LightbulbIcon,
-	Notifications
+	Notifications,
+	IconButton,
+	DeleteIcon,
+	Settings,
+	HomeIcon,
+	CategoryIcon
 };

@@ -13,16 +13,15 @@ const ResumeModal = ({ children, isOpen,hide, onRequestClose,title,className:cx,
 				},
 				content: {
 					padding:0,
-					overflow: 'hidden',
+					overflow:'hidden',
 					overflowY:'scroll',
+					minWidth:'fit-content',
+					minHeight:500,
 					margin: 30,
 					backgroundColor: '#ffff',
 					position: 'absolute',
 					left: '50%',
 					top: '50%',
-					maxHeight:"100%",
-					minHeight:500,
-					
 					transform: 'translate(-50%,-50%)'
 				}
 			}}>

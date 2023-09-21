@@ -5,7 +5,7 @@ const Modal = ({ children, isOpen, onRequestClose, ...props }) => {
 	return (
 		<ReactModal
 			{...props}
-			closeTimeoutMS={2000}
+			closeTimeoutMS={100}
 			isOpen={isOpen}
 			onRequestClose={onRequestClose}
 			style={{
@@ -15,13 +15,16 @@ const Modal = ({ children, isOpen, onRequestClose, ...props }) => {
 				},
 				content: {
 					overflow: 'hidden',
-					minWidth: '1000px',
-					padding: 0,
+					minWidth:'fit-content',
+					minHeight:'fit-content',
+					width:'auto',
+					height:'auto',
+					padding: 24,
 					backgroundColor: '#ffff',
 					position: 'absolute',
-					height: '90%',
 					left: '50%',
 					top: '50%',
+					maxHeight:'100%',
 					transform: 'translate(-50%,-50%)'
 				}
 			}}

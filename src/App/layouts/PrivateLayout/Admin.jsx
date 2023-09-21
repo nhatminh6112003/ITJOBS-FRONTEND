@@ -7,7 +7,7 @@ const Admin = () => {
 	return admin?.user_type_id == UserRoleEnum.ADMIN ? (
 		<Outlet />
 	) : (
-		<Navigate to={routesPath.JobseekerPaths.home} replace={true} />
+		<Navigate to={routesPath.AdminPaths.login} replace={true} />
 	);
 };
 export default Admin;

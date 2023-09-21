@@ -5,7 +5,7 @@ const Header = () => {
 		<header>
 			<ul>
 				<li>
-					<Link to={routesPath.AdminPaths.home}>Home</Link>
+					<Link to={routesPath.AdminPaths.dashboard}>Home</Link>
 				</li>
 				<li>
 					<Link to={routesPath.AdminPaths.about}>About</Link>

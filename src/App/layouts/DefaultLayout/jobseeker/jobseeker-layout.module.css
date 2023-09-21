@@ -1885,7 +1885,7 @@ button:focus {
 	border: 0;
 	border-color: #00b2a3 !important;
 	outline: 0;
-}
+} 
 body,
 html {
 	font-family: Barlow, sans-serif;
@@ -2007,12 +2007,7 @@ main {
 iframe {
 	max-width: 100%;
 }
-button,
-input,
-select,
-textarea {
-	border: 1px solid #333;
-}
+
 button {
 	border: 0;
 }
