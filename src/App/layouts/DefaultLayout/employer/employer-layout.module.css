@@ -4288,14 +4288,14 @@ header .backdrop.active {
 	border-bottom: 7px solid #ccc;
 	border-left: 8px solid transparent;
 }
-button:focus,
+/* button:focus,
 input:focus,
 select:focus,
 textarea:focus {
 	border: 1px solid #f1f1f1;
 	border-color: #4fb45e !important;
 	outline: 0;
-}
+} */
 body,
 html {
 	color: #5d677a;
@@ -5402,12 +5402,7 @@ textarea {
 	overflow: auto;
 	resize: vertical;
 }
-button,
-input,
-select,
-textarea {
-	border: 1px solid #333;
-}
+
 .button-next em,
 .button-prev em,
 footer.for-customers .top-footer .footer-links ul li a {

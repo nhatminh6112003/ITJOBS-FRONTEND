@@ -41,7 +41,6 @@ const renderPrivateRoutes = (routes, role) => {
 };
 
 const renderRoutes = (routes, role) => {
-	console.log("🚀 ~ file: renderRoutes.jsx:45 ~ renderRoutes ~ routes:", routes)
 	return (
 		<Fragment>
 			{role && (

@@ -1,22 +1,26 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import authApi from './apis/authApi';
 import authSlice from './slices/authSlice';
+import themeSlice from './slices/ThemeSlice';
 import userApi from './apis/userApi';
 import cvTemplateApi from './apis/cvTemplateApi';
 import resumeTemplateApi from './apis/resumeTemplateApi';
 import resumeTitleApi from './apis/resumeTitleApi';
 import resumeReferApi from './apis/resumeReferApi';
+import jobPositionCategoryApi from './apis/jobPositionCategoryApi';
+import jobWelfareApi from './apis/jobWelfareApi';
+
 const rootReducer = combineReducers({
 	[authSlice.name]: authSlice.reducer,
+	[themeSlice.name]: themeSlice.reducer,
 	[authApi.reducerPath]: authApi.reducer,
 	[userApi.reducerPath]: userApi.reducer,
 	[cvTemplateApi.reducerPath]: cvTemplateApi.reducer,
 	[resumeTemplateApi.reducerPath]: resumeTemplateApi.reducer,
 	[resumeTitleApi.reducerPath]: resumeTitleApi.reducer,
 	[resumeReferApi.reducerPath]: resumeReferApi.reducer,
-
-
-
+	[jobPositionCategoryApi.reducerPath]: jobPositionCategoryApi.reducer,
+	[jobWelfareApi.reducerPath]: jobWelfareApi.reducer
 });
 
 export default rootReducer;

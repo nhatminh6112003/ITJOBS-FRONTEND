@@ -1,6 +1,9 @@
 const AdminPaths = {
-	home: 'admin/dashboard',
-	login: 'admin/login'
+	dashboard: '/admin/dashboard',
+	login: '/admin/login',
+	products: '/admin/products',
+	jobPositionCategory: '/admin/job-position-category',
+	jobWelfare: '/admin/job-welfare',
 };
 const JobseekerPaths = {
 	home: '/',
