@@ -18,6 +18,12 @@ const SideBar = (props) => {
 			route: '/admin/job-position-category',
 			icon: <CategoryIcon />
 		},
+
+		{
+			title: 'Phúc lợi công việc',
+			route: '/admin/job-welfare',
+			icon: <CategoryIcon />
+		},
 		
 		{
 			title: 'Cài đặt',

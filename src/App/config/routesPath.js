@@ -3,8 +3,7 @@ const AdminPaths = {
 	login: '/admin/login',
 	products: '/admin/products',
 	jobPositionCategory: '/admin/job-position-category',
-
-
+	jobWelfare: '/admin/job-welfare',
 };
 const JobseekerPaths = {
 	home: '/',

@@ -13,6 +13,7 @@ import cvTemplateApi from './apis/cvTemplateApi';
 import resumeTitleApi from './apis/resumeTitleApi';
 import resumeReferApi from './apis/resumeReferApi';
 import jobPositionCategoryApi from './apis/jobPositionCategoryApi';
+import jobWelfareApi from './apis/jobWelfareApi';
 
 
 
@@ -39,6 +40,7 @@ const store = configureStore({
 			resumeTitleApi.middleware,
 			resumeReferApi.middleware,
 			jobPositionCategoryApi.middleware,
+			jobWelfareApi.middleware,
 			// logger middleware
 			RTKQueryLogger
 		])
