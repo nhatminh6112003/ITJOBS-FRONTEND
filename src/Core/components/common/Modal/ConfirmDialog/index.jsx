@@ -28,7 +28,7 @@ export default function ConfirmDialog({ open, onOpen, onConfirm, onCancel }) {
           <Button onClick={onCancel} variant="outlined" color="error">
             Hủy
           </Button>
-          <Button  onClick={onConfirm} variant="contained" color="success">
+          <Button  onClick={onConfirm} variant="contained" color="primary">
             Đồng ý
           </Button>
         </DialogActions>

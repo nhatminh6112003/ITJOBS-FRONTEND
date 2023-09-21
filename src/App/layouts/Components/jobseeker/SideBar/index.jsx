@@ -3,13 +3,14 @@ import routesPath from '~/App/config/routesPath';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '~/App/providers/slices/authSlice';
-
+import { UserType } from '~/App/constants/roleEnum';
+import UserRoleEnum from '~/App/constants/roleEnum';
 const SideBar = ({ className: cx }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const handleLogout = () => {
-		dispatch(logout());
+		dispatch(logout({ Role: UserType[UserRoleEnum.JOBSEEKER] }));
 	};
 	return (
 		<div className={cx('default-sidebar', 'sticky')}>

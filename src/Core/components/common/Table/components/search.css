@@ -1,0 +1,32 @@
+.search {
+	position: relative;
+	height: 50px;
+	background-color: var(--main-bg);
+	display: flex;
+	align-items: center;
+	box-shadow: var(--box-shadow);
+	border-radius: var(--border-radius);
+	overflow: hidden;
+   margin: 1rem 0;
+   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+
+.search > input {
+   height: 100%;
+   width: 100%;
+   padding: 10px 60px 10px 20px;
+   font-size: 1rem;
+   border: transparent;
+   border-radius: var(--border-radius);
+   color: var(--txt-color);
+   background-color: var(--main-bg);
+}
+
+.search > svg {
+   font-size: 1.5rem;
+   position: absolute;
+   right: 20px;
+   cursor: pointer;
+}
