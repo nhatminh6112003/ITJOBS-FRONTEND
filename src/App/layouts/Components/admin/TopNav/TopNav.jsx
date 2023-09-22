@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 import ThemeMenu from '../ThemeMenu';
 
-
 import { logout } from '~/App/providers/slices/authSlice';
 import { UserType } from '~/App/constants/roleEnum';
 import UserRoleEnum from '~/App/constants/roleEnum';
@@ -41,7 +40,6 @@ const notifications = [
 // import user_image from '../../assets/images/tuat.png'
 
 // import user_menu from '../../assets/JsonData/user_menus.json'
-
 
 const curr_user = {
 	display_name: 'Tuat Tran'
@@ -88,7 +86,7 @@ const TopNav = () => {
 					<AccountMenu />
 				</div>
 				<div className='topnav__right-item'>
-				<ThemeMenu />
+					<ThemeMenu />
 					{/* <Dropdown
 						icon={<NotificationsIcon />}
 						badge='12'
@@ -97,8 +95,7 @@ const TopNav = () => {
 						renderFooter={() => <Link to='/'>View All</Link>}
 					/> */}
 				</div>
-				<div className='topnav__right-item'>
-				</div>
+				<div className='topnav__right-item'></div>
 			</div>
 		</div>
 	);

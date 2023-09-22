@@ -203,7 +203,6 @@ const Accounts = ({ cx }) => {
 													</tbody>
 												</table>
 											</div>
-								
 										</div>
 									</div>
 								</div>

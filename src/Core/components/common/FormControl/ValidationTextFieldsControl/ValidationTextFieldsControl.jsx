@@ -5,7 +5,7 @@ import { useForm, Controller, useController } from 'react-hook-form';
 import './ValidationTextFieldsControl.css';
 import { useRef, forwardRef } from 'react';
 
-export default function ValidationTextFieldsControl({ rules,label, control,...props }) {
+export default function ValidationTextFieldsControl({ rules, label, control, ...props }) {
 	const {
 		field,
 		fieldState: { error },
@@ -38,7 +38,7 @@ export default function ValidationTextFieldsControl({ rules,label, control,...pr
 					onBlur={field.onBlur}
 					value={field.value || ''}
 					control={control}
-					{...errors[name]?.message && error}
+					{...(errors[name]?.message && error)}
 					label={label}
 					variant='standard'
 					helperText={errors[name]?.message}

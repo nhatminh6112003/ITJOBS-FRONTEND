@@ -3,31 +3,31 @@ import { TextareaAutosize } from '@mui/material';
 
 import { styled } from '@mui/system';
 
-export default function Textarea({...props}) {
-  const blue = {
-    100: '#DAECFF',
-    200: '#b6daff',
-    400: '#3399FF',
-    500: '#007FFF',
-    600: '#0072E5',
-    900: '#003A75',
-  };
+export default function Textarea({ ...props }) {
+	const blue = {
+		100: '#DAECFF',
+		200: '#b6daff',
+		400: '#3399FF',
+		500: '#007FFF',
+		600: '#0072E5',
+		900: '#003A75'
+	};
 
-  const grey = {
-    50: '#f6f8fa',
-    100: '#eaeef2',
-    200: '#d0d7de',
-    300: '#afb8c1',
-    400: '#8c959f',
-    500: '#6e7781',
-    600: '#57606a',
-    700: '#424a53',
-    800: '#32383f',
-    900: '#24292f',
-  };
+	const grey = {
+		50: '#f6f8fa',
+		100: '#eaeef2',
+		200: '#d0d7de',
+		300: '#afb8c1',
+		400: '#8c959f',
+		500: '#6e7781',
+		600: '#57606a',
+		700: '#424a53',
+		800: '#32383f',
+		900: '#24292f'
+	};
 
-  const StyledTextarea = styled(TextareaAutosize)(
-    ({ theme }) => `
+	const StyledTextarea = styled(TextareaAutosize)(
+		({ theme }) => `
     width: 320px;
     font-family: IBM Plex Sans, sans-serif;
     font-size: 0.875rem;
@@ -53,8 +53,8 @@ export default function Textarea({...props}) {
     &:focus-visible {
       outline: 0;
     }
-  `,
-  );
+  `
+	);
 
-  return <StyledTextarea {...props} />;
+	return <StyledTextarea {...props} />;
 }

@@ -1,8 +1,6 @@
 import { forwardRef, useRef } from 'react';
 import { useController } from 'react-hook-form';
 
-
-
 const SelectFieldControl = (
 	{ initialValue = 'Chọn', control, name, label, options, disabled, rules, ...props },
 	ref
@@ -24,11 +22,7 @@ const SelectFieldControl = (
 
 	return (
 		<div>
-			{label && (
-				<div>
-					{label}
-				</div>
-			)}
+			{label && <div>{label}</div>}
 			<select
 				{...props}
 				onChange={(event) => {
@@ -53,7 +47,7 @@ const SelectFieldControl = (
 						</option>
 					))}
 			</select>
-         {errors ? <span className={`error_${name}`}>{errors[name]?.message}</span> : ''}
+			{errors ? <span className={`error_${name}`}>{errors[name]?.message}</span> : ''}
 		</div>
 	);
 };

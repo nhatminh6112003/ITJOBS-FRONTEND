@@ -10,7 +10,7 @@ import Loading from '~/Core/components/common/Loading';
 import { toast } from 'react-toastify';
 
 const sx = classNames.bind(styles);
-const ChooseTemplate = ({ isShowing, refetch,toggle, hide, classNames: cx }) => {
+const ChooseTemplate = ({ isShowing, refetch, toggle, hide, classNames: cx }) => {
 	const resume = useSelector((state) => state.auth?.user?.resume);
 	const { data, isFetching } = useGetAllTemplateQuery();
 
@@ -22,12 +22,12 @@ const ChooseTemplate = ({ isShowing, refetch,toggle, hide, classNames: cx }) => 
 				cv_template_id
 			}
 		});
-		const {isSuccess}=handleChangeTemplate.data;
+		const { isSuccess } = handleChangeTemplate.data;
 
-		if (isSuccess){
+		if (isSuccess) {
 			toast.success('Thay đổi template thành công!');
 		}
-		refetch()
+		refetch();
 		toggle('chooseTemplate');
 	};
 
@@ -52,8 +52,7 @@ const ChooseTemplate = ({ isShowing, refetch,toggle, hide, classNames: cx }) => 
 										</div>
 										<div className={cx('el-horizontal')}>
 											<button
-												className={cx('btn-gradient', 'select-template-new')}			
-												
+												className={cx('btn-gradient', 'select-template-new')}
 												style={{ border: 'none' }}
 												onClick={() => handleChangeCv(item.id)}>
 												Chọn template

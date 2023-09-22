@@ -27,7 +27,7 @@ export const AdminLayout = ({ children }) => {
 
 	const location = useLocation();
 	return (
-		<div className={cx('layout',`${themeReducer.mode}`,`${themeReducer.color}`)}>
+		<div className={cx('layout', `${themeReducer.mode}`, `${themeReducer.color}`)}>
 			<SideBar location={location} />
 			<div className={cx('layout__content')}>
 				<TopNav />

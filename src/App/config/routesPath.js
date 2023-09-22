@@ -4,6 +4,7 @@ const AdminPaths = {
 	products: '/admin/products',
 	jobPositionCategory: '/admin/job-position-category',
 	jobWelfare: '/admin/job-welfare',
+	managementCandidate: '/admin/management-candidate'
 };
 const JobseekerPaths = {
 	home: '/',
@@ -31,8 +32,7 @@ const EmployerPaths = {
 	waitPosting: '/employers/hrcentral/waitposting',
 	unPosting: '/employers/hrcentral/unposting',
 	expirePosting: '/employers/hrcentral/expireposting',
-	postjobs: '/employers/postjobs',
-	
+	postjobs: '/employers/postjobs'
 };
 
 const BasePaths = {

@@ -7,14 +7,14 @@ const Footer = lazy(() => import('../../components/Employer/Footer'));
 export const EmployerLayout = ({ children }) => {
 	return (
 		<EmployerStyles>
-				<Header />
-				<Suspense fallback={<Loading />}>
+			<Header />
+			<Suspense fallback={<Loading />}>
 				<main>
 					<NavBar className={cx} />
 					{cloneElement(children, { cx })}
 				</main>
 				<Footer />
-		</Suspense>
-			</EmployerStyles>
+			</Suspense>
+		</EmployerStyles>
 	);
 };

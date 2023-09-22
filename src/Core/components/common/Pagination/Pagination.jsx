@@ -24,7 +24,7 @@ const Pagination = ({ gotoPreviousPage, gotoNextPage, total, pageSize, currentPa
 				{pages.map((page) => (
 					<li
 						key={page}
-						className={cx('pg-item', { active: total === 1 || page === currentPage  })}
+						className={cx('pg-item', { active: total === 1 || page === currentPage })}
 						data-page={page}
 						onClick={() => {
 							pushQuery({ page });

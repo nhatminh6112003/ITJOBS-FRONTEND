@@ -25,7 +25,6 @@
 	.container {
 		max-width: 960px;
 	}
-	
 }
 .col,
 .col-auto {
@@ -304,8 +303,6 @@
 		flex: 0 0 100%;
 		max-width: 100%;
 	}
-	
-	
 }
 
 ul {
@@ -321,7 +318,6 @@ ul {
 		max-width: 100%;
 		padding: 0 15px;
 	}
-
 }
 @media (max-width: 720px) {
 	.container {

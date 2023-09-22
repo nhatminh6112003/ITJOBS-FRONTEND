@@ -16,7 +16,7 @@ import {
 } from './App/routes';
 import ErrorBoundary from './Core/components/error/ErrorBoundary';
 
-import { ToastContainer,Slide } from 'react-toastify';
+import { ToastContainer, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function App() {
 	const RoutesApp = [
@@ -42,10 +42,7 @@ function App() {
 	return (
 		<div className='App'>
 			<ErrorBoundary>
-			<ToastContainer 
-				autoClose={1000}
-				position='top-right'
-			/>
+				<ToastContainer autoClose={1000} position='top-right' />
 				<Suspense fallback={<Loading />}>
 					<Router>
 						<Routes>

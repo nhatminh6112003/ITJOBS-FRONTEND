@@ -1,1 +1,1 @@
-export { default } from "./JobWelfare"
+export { default } from './JobWelfare';

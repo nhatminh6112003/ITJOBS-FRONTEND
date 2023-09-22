@@ -35,7 +35,7 @@ const renderPrivateRoutes = (routes, role) => {
 	const PrivateComponent = privateLayouts[role];
 	return routes.map((route) => (
 		<Route key={uuidv4()} element={<PrivateComponent />}>
-			{renderPublicRoutes([route],role)}
+			{renderPublicRoutes([route], role)}
 		</Route>
 	));
 };

@@ -15,12 +15,10 @@ import resumeReferApi from './apis/resumeReferApi';
 import jobPositionCategoryApi from './apis/jobPositionCategoryApi';
 import jobWelfareApi from './apis/jobWelfareApi';
 
-
-
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist: ['auth','theme']
+	whitelist: ['auth', 'theme']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer); // Provide a way to combine redux's root reducer

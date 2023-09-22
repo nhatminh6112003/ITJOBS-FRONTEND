@@ -1,14 +1,14 @@
 .theme-menu {
-    position: fixed;
-    right: -300px;
-    top: 0;
-    width: 300px;
-    height: 100vh;
-    padding: 20px;
-    z-index: 99;
-    background-color: var(--main-bg);
-    box-shadow: var(--box-shadow);
-    transition: right 0.5s var(--transition-cubic);
+	position: fixed;
+	right: -300px;
+	top: 0;
+	width: 300px;
+	height: 100vh;
+	padding: 20px;
+	z-index: 99;
+	background-color: var(--main-bg);
+	box-shadow: var(--box-shadow);
+	transition: right 0.5s var(--transition-cubic);
 }
 .dropdown__toggle {
 	border: 0;
@@ -18,87 +18,87 @@
 	position: relative;
 }
 .theme-menu.active {
-    right: 0;
+	right: 0;
 }
 
 .theme-menu__close {
-    position: absolute;
-    top: 17px;
-    right: 20px;
-    background-color: transparent;
-    font-size: 1.5rem;
-    border: transparent;
+	position: absolute;
+	top: 17px;
+	right: 20px;
+	background-color: transparent;
+	font-size: 1.5rem;
+	border: transparent;
 }
 
 .theme-menu__select {
-    margin-top: 40px;
+	margin-top: 40px;
 }
 
 .mode-list {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .mode-list > li {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 }
 
 .mode-list > li ~ li {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 .mode-list__color {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    font-size: 1.5rem;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 10px;
+	font-size: 1.5rem;
 }
 
 .mode-list__color > i {
-    transform: scale(0);
-    transition: transform 0.5s var(--transition-cubic);
+	transform: scale(0);
+	transition: transform 0.5s var(--transition-cubic);
 }
 
 .mode-list__color.active > i {
-    transform: scale(1);
+	transform: scale(1);
 }
 
 .light-background {
-    background-color: var(--main-bg-light);
-    color: #000;
+	background-color: var(--main-bg-light);
+	color: #000;
 }
 
 .dark-background {
-    background-color: var(--main-bg-dark);
-    color: #fff;
+	background-color: var(--main-bg-dark);
+	color: #fff;
 }
 
 .blue-color {
-    background-color: var(--main-color-blue);
-    color: #fff;
+	background-color: var(--main-color-blue);
+	color: #fff;
 }
 
 .red-color {
-    background-color: var(--main-color-red);
-    color: #fff;
+	background-color: var(--main-color-red);
+	color: #fff;
 }
 
 .cyan-color {
-    background-color: var(--main-color-cyan);
-    color: #fff;
+	background-color: var(--main-color-cyan);
+	color: #fff;
 }
 
 .green-color {
-    background-color: var(--main-color-green);
-    color: #fff;
+	background-color: var(--main-color-green);
+	color: #fff;
 }
 
 .orange-color {
-    background-color: var(--main-color-orange);
-    color: #fff;
+	background-color: var(--main-color-orange);
+	color: #fff;
 }

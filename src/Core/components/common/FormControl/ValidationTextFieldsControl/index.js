@@ -1,1 +1,1 @@
-export {default}  from "./ValidationTextFieldsControl";
+export { default } from './ValidationTextFieldsControl';

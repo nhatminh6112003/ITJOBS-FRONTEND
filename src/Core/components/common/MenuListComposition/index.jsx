@@ -86,7 +86,7 @@ const MenuListComposition = ({ menuItems, customToggle }) => {
 										aria-labelledby='composition-button'
 										onKeyDown={handleListKeyDown}>
 										{menuItems?.map((item) => {
-											<MenuItem  onClick={handleClose}>
+											<MenuItem onClick={handleClose}>
 												<ListItemIcon>{item.icon}</ListItemIcon>
 												<ListItemText>{item.content}</ListItemText>
 											</MenuItem>;

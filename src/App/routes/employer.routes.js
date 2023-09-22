@@ -64,6 +64,6 @@ const employerPrivateRoutes = [
 	{
 		path: routesPath.EmployerPaths.postjobs,
 		component: PostJobs
-	},
+	}
 ];
 export { employerPublicRoutes, employerPrivateRoutes };
