@@ -124,7 +124,6 @@ const EmailManagement = ({ cx }) => {
 											</div>
 										</div>
 									</div>
-					
 								</div>
 							</div>
 						</div>

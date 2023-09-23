@@ -6,5 +6,3 @@ export const resumeReferSchema = yup.object({
 	ref_title: yup.string().required(),
 	ref_company: yup.string().required()
 });
-
-

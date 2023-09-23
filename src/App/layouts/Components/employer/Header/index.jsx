@@ -148,7 +148,7 @@ const Header = () => {
 											</li>
 											<li>
 												<a
-											href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume'
+													href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume'
 													className={cx('active')}
 													title='Quản Lý Ứng Viên'>
 													Quản Lý Ứng Viên
@@ -184,7 +184,10 @@ const Header = () => {
 												<a href='https://careerbuilder.vn/vi/employers/hrcentral/accounts'> Tài khoản</a>
 											</li>
 											<li>
-												<Link title='Thoát' onClick={handleLogout}> Thoát</Link>
+												<Link title='Thoát' onClick={handleLogout}>
+													{' '}
+													Thoát
+												</Link>
 											</li>
 										</ul>
 									</div>
@@ -243,7 +246,6 @@ const Header = () => {
 					</div>
 				</div>
 			</div>
-
 		</header>
 	);
 };

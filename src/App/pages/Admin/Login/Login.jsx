@@ -13,14 +13,17 @@ import { Navigate } from 'react-router-dom';
 const Login = () => {
 	const admin = useSelector((state) => state.auth?.admin);
 
-	const { register, handleSubmit, formState: { errors } } = useForm({
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }
+	} = useForm({
 		defaultValues: {
 			...loginSchema.getDefault(),
 			user_type_id: UserRoleEnum.ADMIN
 		},
 		resolver: yupResolver(loginSchema)
 	});
-	
 
 	const [loginMutation] = useLoginMutation();
 	const handleLoginFormSubmit = async (data) => {
@@ -37,9 +40,8 @@ const Login = () => {
 			});
 	};
 
-	
-	if(admin){
-		return <Navigate to={routesPath.AdminPaths.dashboard} />
+	if (admin) {
+		return <Navigate to={routesPath.AdminPaths.dashboard} />;
 	}
 	return (
 		<div className={cx('container')}>
@@ -56,8 +58,8 @@ const Login = () => {
 							<i className={cx('fas', 'fa-lock')} />
 							<input {...register('password')} type='password' placeholder='Password' />
 						</div>
-							{errors?.password && <span className={cx('error-message')}>{errors?.password.message}</span>}
-					
+						{errors?.password && <span className={cx('error-message')}>{errors?.password.message}</span>}
+
 						<button type='submit' className={cx('btn', 'solid')}>
 							Sign In
 						</button>

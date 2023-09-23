@@ -17,7 +17,7 @@ const useCustomRouter = () => {
 			page === '' ? delete query.page : (query.page = page);
 		}
 		const newQuery = new URLSearchParams(query).toString();
-		console.log("🚀 ~ file: useCustomRouter.js:20 ~ pushQuery ~ newQuery:", newQuery)
+		console.log('🚀 ~ file: useCustomRouter.js:20 ~ pushQuery ~ newQuery:', newQuery);
 		setSearchParams(newQuery);
 	};
 	return { pushQuery, query };

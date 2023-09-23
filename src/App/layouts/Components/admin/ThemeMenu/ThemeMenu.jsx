@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import PaletteIcon from '@mui/icons-material/Palette';
 import { useSelector } from 'react-redux';
-import { setColor,setMode } from '~/App/providers/slices/ThemeSlice';
+import { setColor, setMode } from '~/App/providers/slices/ThemeSlice';
 import './thememenu.css';
 
 import { useDispatch } from 'react-redux';
@@ -9,20 +9,19 @@ import CloseIcon from '@mui/icons-material/Close';
 // import ThemeAction from '../../redux/actions/ThemeAction'
 import CheckIcon from '@mui/icons-material/Check';
 
-
 const mode_settings = [
-    {
-        id: 'light',
-        name: 'Light',
-        background: 'light-background',
-        class: 'theme-mode-light'
-    },
-    {
-        id: 'dark',
-        name: 'Dark',
-        background: 'dark-background',
-        class: 'theme-mode-dark'
-    }
+	{
+		id: 'light',
+		name: 'Light',
+		background: 'light-background',
+		class: 'theme-mode-light'
+	},
+	{
+		id: 'dark',
+		name: 'Dark',
+		background: 'dark-background',
+		class: 'theme-mode-dark'
+	}
 ];
 
 const color_settings = [
@@ -76,8 +75,6 @@ const ThemeMenu = () => {
 	const mode = useSelector((state) => state.theme.mode);
 	const color = useSelector((state) => state.theme.color);
 
-
-
 	const menu_ref = useRef(null);
 	const menu_toggle_ref = useRef(null);
 
@@ -95,26 +92,24 @@ const ThemeMenu = () => {
 
 	const handleSetMode = (mode) => {
 		setcurrMode(mode.id);
-		dispatch(setMode(mode.class))
+		dispatch(setMode(mode.class));
 	};
 
 	const hanldeSetColor = (color) => {
 		setcurrColor(color.id);
-		dispatch(setColor(color.class))
+		dispatch(setColor(color.class));
 	};
 
 	useEffect(() => {
 		const themeClass = mode_settings.find((e) => e.class === mode);
-	
+
 		const colorClass = color_settings.find((e) => e.class === color);
 
 		if (themeClass) setcurrMode(themeClass?.id);
 
 		if (colorClass) setcurrColor(colorClass?.id);
+	}, [color, mode]);
 
-	}, [color,mode]);
-
-    
 	return (
 		<div>
 			<button ref={menu_toggle_ref} className='dropdown__toggle' onClick={() => setActiveMenu()}>
@@ -131,7 +126,7 @@ const ThemeMenu = () => {
 						{mode_settings.map((item, index) => (
 							<li key={index} onClick={() => handleSetMode(item)}>
 								<div className={`mode-list__color ${item.background} ${item.id === currMode ? 'active' : ''}`}>
-                                    {item.id === currMode && <CheckIcon /> }
+									{item.id === currMode && <CheckIcon />}
 								</div>
 								<span>{item.name}</span>
 							</li>
@@ -144,7 +139,7 @@ const ThemeMenu = () => {
 						{color_settings.map((item, index) => (
 							<li key={index} onClick={() => hanldeSetColor(item)}>
 								<div className={`mode-list__color ${item.background} ${item.id === currColor ? 'active' : ''}`}>
-                                {item.id === currColor && <CheckIcon /> }
+									{item.id === currColor && <CheckIcon />}
 								</div>
 								<span>{item.name}</span>
 							</li>

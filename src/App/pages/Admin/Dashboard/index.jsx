@@ -172,7 +172,7 @@ const renderOrderBody = (item, index) => (
 );
 
 const Dashboard = ({ cx }) => {
-	 const themeReducer = useSelector(state => state.theme.mode)
+	const themeReducer = useSelector((state) => state.theme.mode);
 
 	return (
 		<div className={cx('container')}>

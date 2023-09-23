@@ -1,1 +1,1 @@
-export {default} from "./AccountMenu.jsx"
+export { default } from './AccountMenu.jsx';

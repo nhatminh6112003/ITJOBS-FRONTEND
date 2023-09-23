@@ -23,9 +23,8 @@ export const cx = classNames.bind(styles);
 const MyProfile = () => {
 	const { isShowing, toggle } = useModal({
 		resume_title: false,
-		resume_refer:false,
-		update_resume_refer:false,
-
+		resume_refer: false,
+		update_resume_refer: false
 	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -135,15 +134,15 @@ const MyProfile = () => {
 															id='cv_searchable_17722295'
 															data-id={17722295}
 															data-complete={1}>
-															<button  data-type={2} className={cx('lock', 'active')}>
+															<button data-type={2} className={cx('lock', 'active')}>
 																<LockIcon fontSize='small' />
 																Khóa
 															</button>
-															<button  data-type={1} className={cx('public', '')}>
+															<button data-type={1} className={cx('public', '')}>
 																<em className={cx('mdi', 'mdi-web')} />
 																Công khai
 															</button>
-															<button  data-type={3} className={cx('flash', '')}>
+															<button data-type={3} className={cx('flash', '')}>
 																<em className={cx('mdi', 'mdi-flash')} />
 																Khẩn cấp
 															</button>
@@ -161,7 +160,6 @@ const MyProfile = () => {
 															được ưu tiên tìm thấy bởi các nhà tuyển dụng.
 														</p>
 													</div>
-												
 												</div>
 											</div>
 										</div>
@@ -172,8 +170,7 @@ const MyProfile = () => {
 									title='Thông tin cá nhân'
 									className={cx('widget', 'widget-13')}
 									id='personalinfo-section'
-									status="error"
-									>
+									status='error'>
 									<div className={cx('table')}>
 										<table>
 											<tbody>
@@ -240,8 +237,6 @@ const MyProfile = () => {
 										</li>
 									</ul>
 								</Widget>
-
-					
 
 								<div className={cx('widget', 'widget-18')} id='widget-18'>
 									<div className={cx('widget-head')}>
@@ -935,10 +930,8 @@ const MyProfile = () => {
 										</div>
 									</div>
 								</div>
-								
-								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
 
-								
+								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
 							</div>
 							<div className={cx('col-lg-4', 'col-xl-3', 'main-menu')}>
 								<div className={cx('menu-shortchut')}>
@@ -1005,9 +998,7 @@ const MyProfile = () => {
 											</a>
 										</li>
 										<li>
-											<a href='' data-href='#t-resume-section'>
-													
-											</a>
+											<a href='' data-href='#t-resume-section'></a>
 										</li>
 										<li>
 											<a href='' data-href='#personalinfo-section'>

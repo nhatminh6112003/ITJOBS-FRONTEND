@@ -14,15 +14,13 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 	} = useForm();
 
 	const onSubmit = (data) => {
-		createJobPositionCategory(data)
-		.then(r=>{
+		createJobPositionCategory(data).then((r) => {
 			if (r.status == 200) {
-					toast.success('Sửa thành công');
-					return;
-				}
-		})
+				toast.success('Sửa thành công');
+				return;
+			}
+		});
 		onRequestClose();
-
 	};
 
 	return (

@@ -1,1 +1,1 @@
-export { default } from "./JobPositionCategory"
+export { default } from './JobPositionCategory';

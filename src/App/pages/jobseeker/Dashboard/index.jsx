@@ -173,7 +173,6 @@ const Dashboard = () => {
 															className={cx('swiper-slide', 'swiper-slide-active')}
 															style={{ width: '300.5px', marginRight: 15 }}>
 															<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/my-profile#other-activity-section'>
-																
 																<div className={cx('item-cvcht')}>
 																	<div className={cx('col-sm-3', 'icon')}>
 																		<img src='img/dash-board/i13.png' alt='' />
@@ -312,7 +311,7 @@ const Dashboard = () => {
 											</div>
 											<p>
 												<a href='https://careerbuilder.vn/vi/jobseekers/myresume/viewbyemp'>
-													 NTD xem qua hồ sơ CB
+													NTD xem qua hồ sơ CB
 												</a>
 											</p>
 										</div>

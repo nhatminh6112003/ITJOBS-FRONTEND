@@ -12,10 +12,10 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 const sx = classNames.bind(styles);
 
 const ExpirePosting = ({ cx }) => {
-  const location = useLocation();
+	const location = useLocation();
 	const currentPath = location.pathname;
 	return (
-<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
+		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
 				<div className={sx('box-manage-job-posting')}>
 					<div className={sx('heading-manage')}>

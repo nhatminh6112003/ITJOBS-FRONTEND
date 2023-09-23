@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './sidebar.css';
 import SidebarItem from './SidebarItem';
-import { HomeIcon,CategoryIcon,Settings } from '~/Core/resources';
+import { HomeIcon, CategoryIcon, Settings } from '~/Core/resources';
 const SideBar = (props) => {
 	const SidebarItems = [
 		{
@@ -12,7 +12,7 @@ const SideBar = (props) => {
 			route: '/admin/dashboard',
 			icon: <HomeIcon />
 		},
-		
+
 		{
 			title: 'Danh mục vị trí công việc',
 			route: '/admin/job-position-category',
@@ -24,7 +24,13 @@ const SideBar = (props) => {
 			route: '/admin/job-welfare',
 			icon: <CategoryIcon />
 		},
-		
+
+		{
+			title: 'Quản lý ứng viên',
+			route: '/admin/management-candidate',
+			icon: <CategoryIcon />
+		},
+
 		{
 			title: 'Cài đặt',
 			route: '/settings',

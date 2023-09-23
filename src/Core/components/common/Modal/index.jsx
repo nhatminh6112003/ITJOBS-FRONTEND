@@ -15,21 +15,19 @@ const Modal = ({ children, isOpen, onRequestClose, ...props }) => {
 				},
 				content: {
 					overflow: 'hidden',
-					minWidth:'fit-content',
-					minHeight:'fit-content',
-					width:'auto',
-					height:'auto',
+					minWidth: 'fit-content',
+					minHeight: 'fit-content',
+					width: 'auto',
+					height: 'auto',
 					padding: 24,
 					backgroundColor: '#ffff',
 					position: 'absolute',
 					left: '50%',
 					top: '50%',
-					maxHeight:'100%',
+					maxHeight: '100%',
 					transform: 'translate(-50%,-50%)'
 				}
-			}}
-			
-			>
+			}}>
 			{children}
 		</ReactModal>
 	);

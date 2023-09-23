@@ -3,7 +3,7 @@ import styles from './ordersAvailable.module.css';
 import classNames from 'classnames/bind';
 
 const sx = classNames.bind(styles);
-const OrdersAvailable = ({cx}) => {
+const OrdersAvailable = ({ cx }) => {
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>

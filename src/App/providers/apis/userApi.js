@@ -6,13 +6,20 @@ const userApi = createApi({
 	baseQuery: baseQueryWithUser,
 	endpoints: (build) => ({
 		getAll: build.query({
-			query: () => {
-				return { url: '/users', method: 'GET' };
+			query: (arg) => {
+				return { url: '/users', method: 'GET', params: arg.params };
 			}
+		}),
+		getOneUser: build.query({
+			query: (id) => {
+				return { url: `/users/${id}`, method: 'GET' };
+			},
+			providesTags: ['users'],
+			transformResponse: (response) => response.data
 		})
 	})
 });
 
-export const { useGetAllQuery } = userApi;
+export const { useGetAllQuery, useGetOneUserQuery } = userApi;
 
 export default userApi;
