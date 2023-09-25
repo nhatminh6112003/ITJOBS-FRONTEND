@@ -4,7 +4,8 @@ const AdminPaths = {
 	products: '/admin/products',
 	jobPositionCategory: '/admin/job-position-category',
 	jobWelfare: '/admin/job-welfare',
-	managementCandidate: '/admin/management-candidate'
+	jobSeeker: '/admin/jobSeeker',
+	profession: '/admin/profession'
 };
 const JobseekerPaths = {
 	home: '/',

@@ -3,26 +3,33 @@ import Modal from '~/Core/components/common/Modal';
 import ValidationTextFieldsControl from '~/Core/components/common/FormControl/ValidationTextFieldsControl';
 import { useForm, Controller } from 'react-hook-form';
 import Button from '@mui/material/Button';
-import { useCreateJobWelfareMutation } from '~/App/providers/apis/jobWelfareApi';
+import { useUpdateProfessionMutation } from '~/App/providers/apis/professionApi';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { jobWelfareSchema } from '~/App/schemas/jobWelfareSchema';
-const CreateModal = ({ isOpen, onRequestClose }) => {
-	const [createJobPositionCategory] = useCreateJobWelfareMutation();
+import { professionSchema } from '~/App/schemas/professionSchema';
+
+const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
+	const [updateProfession] = useUpdateProfessionMutation();
 	const {
 		handleSubmit,
 		control,
 		formState: { errors }
 	} = useForm({
-		resolver: yupResolver(jobWelfareSchema)
+		resolver: yupResolver(professionSchema),
+		values: dataUpdate && {
+			name: dataUpdate.name
+		}
 	});
 
 	const onSubmit = (data) => {
-		createJobPositionCategory(data)
+		updateProfession({
+			id: dataUpdate.id,
+			payload: data
+		})
 			.unwrap()
 			.then((r) => {
 				if (r.status == 200) {
-					toast.success('Thêm thành công');
+					toast.success('Sửa thành công');
 					return;
 				}
 			});
@@ -32,10 +39,10 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 	return (
 		<Modal isOpen={isOpen} onRequestClose={onRequestClose}>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<ValidationTextFieldsControl name='welfare_type' label='Phúc Lợi' control={control} />
+				<ValidationTextFieldsControl name='name' label='Tên danh mục' control={control} />
 				<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
 					<Button type='submit' variant='contained'>
-						Thêm mới
+						Sửa
 					</Button>
 				</div>
 			</form>
@@ -43,4 +50,4 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 	);
 };
 
-export default CreateModal;
+export default UpdateModal;

@@ -5,8 +5,8 @@ const Dashboard = lazy(() => import('~/App/pages/Admin/Dashboard'));
 const Products = lazy(() => import('~/App/pages/Admin/Products'));
 const JobPositionCategory = lazy(() => import('~/App/pages/Admin/JobPositionCategory'));
 const JobWelfare = lazy(() => import('~/App/pages/Admin/JobWelfare'));
-const ManagementCandidate = lazy(() => import('~/App/pages/Admin/ManagementCandidate'));
-
+const JobSeeker = lazy(() => import('~/App/pages/Admin/JobSeeker'));
+const Profession = lazy(() => import('~/App/pages/Admin/Profession'));
 const adminPublicRoutes = [{ path: routesPath.AdminPaths.login, component: Login, layout: null }];
 
 const adminPrivateRoutes = [
@@ -14,6 +14,7 @@ const adminPrivateRoutes = [
 	{ path: routesPath.AdminPaths.products, component: Products },
 	{ path: routesPath.AdminPaths.jobPositionCategory, component: JobPositionCategory },
 	{ path: routesPath.AdminPaths.jobWelfare, component: JobWelfare },
-	{ path: routesPath.AdminPaths.managementCandidate, component: ManagementCandidate }
+	{ path: routesPath.AdminPaths.jobSeeker, component: JobSeeker },
+	{ path: routesPath.AdminPaths.profession, component: Profession }
 ];
 export { adminPublicRoutes, adminPrivateRoutes };

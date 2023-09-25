@@ -8,7 +8,7 @@ import UserRoleEnum from '~/App/constants/roleEnum';
 import useServerPagination from '~/App/hooks/useServerPagination';
 import { useGetAllQuery } from '~/App/providers/apis/userApi';
 
-const ManagementCandidate = () => {
+const JobSeeker = () => {
 	const { paginationState, handlePaginate } = useServerPagination();
 	const [searchParams] = useSearchParams();
 	const keyword = searchParams.get('keyword') || paginationState.queryPageFilter;
@@ -64,4 +64,4 @@ const ManagementCandidate = () => {
 	);
 };
 
-export default ManagementCandidate;
+export default JobSeeker;
