@@ -5,21 +5,27 @@ import { useForm, Controller } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import { useCreateJobPositionCategoryMutation } from '~/App/providers/apis/jobPositionCategoryApi';
 import { toast } from 'react-toastify';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { jobPositionCategorySchema } from '~/App/schemas/jobPositionCategorySchema';
 const CreateModal = ({ isOpen, onRequestClose }) => {
 	const [createJobPositionCategory] = useCreateJobPositionCategoryMutation();
 	const {
 		handleSubmit,
 		control,
 		formState: { errors }
-	} = useForm();
+	} = useForm({
+		resolver: yupResolver(jobPositionCategorySchema)
+	});
 
 	const onSubmit = (data) => {
-		createJobPositionCategory(data).then((r) => {
-			if (r.status == 200) {
-				toast.success('Sửa thành công');
-				return;
-			}
-		});
+		createJobPositionCategory(data)
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success('Thêm thành công');
+					return;
+				}
+			});
 		onRequestClose();
 	};
 

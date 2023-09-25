@@ -5,6 +5,8 @@ import { useForm, Controller } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import { useUpdateJobPositionCategoryMutation } from '~/App/providers/apis/jobPositionCategoryApi';
 import { toast } from 'react-toastify';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { jobPositionCategorySchema } from '~/App/schemas/jobPositionCategorySchema';
 
 const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	const [updateJobPositionCategory] = useUpdateJobPositionCategoryMutation();
@@ -15,19 +17,22 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	} = useForm({
 		values: dataUpdate && {
 			name: dataUpdate.name
-		}
+		},
+		resolver: yupResolver(jobPositionCategorySchema)
 	});
 
 	const onSubmit = (data) => {
 		updateJobPositionCategory({
 			id: dataUpdate.id,
 			payload: data
-		}).then((r) => {
-			if (r.status == 200) {
-				toast.success('Sửa thành công');
-				return;
-			}
-		});
+		})
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success('Sửa thành công');
+					return;
+				}
+			});
 		onRequestClose();
 	};
 

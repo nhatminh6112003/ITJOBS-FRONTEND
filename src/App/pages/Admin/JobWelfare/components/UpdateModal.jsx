@@ -5,6 +5,8 @@ import { useForm, Controller } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import { useUpdateJobWelfareMutation } from '~/App/providers/apis/jobWelfareApi';
 import { toast } from 'react-toastify';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { jobWelfareSchema } from '~/App/schemas/jobWelfareSchema';
 
 const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	const [updateJobWelfare] = useUpdateJobWelfareMutation();
@@ -15,19 +17,22 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	} = useForm({
 		values: dataUpdate && {
 			welfare_type: dataUpdate.welfare_type
-		}
+		},
+		resolver: yupResolver(jobWelfareSchema)
 	});
 
 	const onSubmit = (data) => {
 		updateJobWelfare({
 			id: dataUpdate.id,
 			payload: data
-		}).then((r) => {
-			if (r.status == 200) {
-				toast.success('Sửa thành công');
-				return;
-			}
-		});
+		})
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success('Sửa thành công');
+					return;
+				}
+			});
 		onRequestClose();
 	};
 
