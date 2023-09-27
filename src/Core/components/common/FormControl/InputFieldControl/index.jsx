@@ -5,7 +5,7 @@ const cx = classNames.bind(styles);
 import { v4 as uuidv4 } from 'uuid';
 
 import { useRef, forwardRef } from 'react';
-const InputFieldControl = ({ control, disabled, rules, type = 'text', name, label, ...props }, ref) => {
+const InputFieldControl = ({ defaultValue,control, disabled, rules, type = 'text', name, label, ...props }, ref) => {
 	const {
 		field,
 		fieldState: { error },
@@ -29,6 +29,7 @@ const InputFieldControl = ({ control, disabled, rules, type = 'text', name, labe
 				id={uuidv4()}
 				onChange={field.onChange}
 				onBlur={field.onBlur}
+				defaultValue={defaultValue}
 				value={field.value || ''}
 				disabled={disabled}
 				ref={(e) => {
