@@ -5,7 +5,7 @@ import { useForm, Controller, useController } from 'react-hook-form';
 import './ValidationTextFieldsControl.css';
 import { useRef, forwardRef } from 'react';
 
-export default function ValidationTextFieldsControl({ rules, label, control, ...props }) {
+export default function ValidationTextFieldsControl({ name,rules, label, control, ...props }) {
 	const {
 		field,
 		fieldState: { error },
@@ -17,6 +17,7 @@ export default function ValidationTextFieldsControl({ rules, label, control, ...
 		defaultValue: props.value,
 		...props
 	});
+	console.log("TCL: ValidationTextFieldsControl -> errors", errors)
 
 	return (
 		<Box
@@ -26,7 +27,7 @@ export default function ValidationTextFieldsControl({ rules, label, control, ...
 					border: 'none',
 					outlineColor: 'transparent'
 				},
-				'& .MuiTextField-root': { m: 1, width: '100%', height: '' }
+				'& .MuiTextField-root': { my: 1, width: '100%', height: '' }
 			}}
 			disableUnderline
 			noValidate
@@ -38,12 +39,13 @@ export default function ValidationTextFieldsControl({ rules, label, control, ...
 					onBlur={field.onBlur}
 					value={field.value || ''}
 					control={control}
-					{...(errors[name]?.message && error)}
+					{...(errors[field.name]?.message && error)}
 					label={label}
 					variant='standard'
-					helperText={errors[name]?.message}
 				/>
 			</div>
+			{errors ? <span style={{color:'red'}}>{errors[name]?.message}</span> : ''}
+
 		</Box>
 	);
 }

@@ -12,7 +12,7 @@ import Table from '~/Core/components/common/Table/Table';
 import UpdateModal from './components/UpdateModal';
 import CreateModal from './components/CreateModal';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
-
+import { useGetAllJobPositionCategoryQuery } from '~/App/providers/apis/jobPositionCategoryApi';
 const Profession = () => {
 	const [dataUpdate, setDataUpdate] = useState(null);
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
@@ -37,6 +37,7 @@ const Profession = () => {
 			refetchOnMountOrArgChange: true
 		}
 	);
+	console.log("TCL: data", data)
 
 	const [deleteMutation] = useDeleteProfessionMutation();
 	const tableData = useMemo(() => data?.data ?? [], [data]);
@@ -51,6 +52,13 @@ const Profession = () => {
 				Cell: ({ row }) => data?.pagination.itemsPerPage * (data?.pagination.pageIndex - 1) + Number(row.index) + 1
 			},
 			{ Header: 'Tên nghề nghiệp', accessor: 'name' },
+			{
+				Header: 'Danh mục',
+				accessor: 'job_position_category',
+				Cell: ({ row: { values } }) => {
+					return values.job_position_category.name;
+				}
+			},
 			{
 				Header: 'Thao tác',
 				accessor: 'id',

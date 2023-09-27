@@ -7,8 +7,10 @@ import { useUpdateProfessionMutation } from '~/App/providers/apis/professionApi'
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { professionSchema } from '~/App/schemas/professionSchema';
-
+import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
+import { useGetAllJobPositionCategoryQuery } from '~/App/providers/apis/jobPositionCategoryApi';
 const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
+	const { data: listProfessionCategory } = useGetAllJobPositionCategoryQuery();
 	const [updateProfession] = useUpdateProfessionMutation();
 	const {
 		handleSubmit,
@@ -17,7 +19,8 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	} = useForm({
 		resolver: yupResolver(professionSchema),
 		values: dataUpdate && {
-			name: dataUpdate.name
+			name: dataUpdate.name,
+			jobPositionCategoryId: dataUpdate.jobPositionCategoryId
 		}
 	});
 
@@ -39,7 +42,17 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	return (
 		<Modal isOpen={isOpen} onRequestClose={onRequestClose}>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<ValidationTextFieldsControl name='name' label='Tên danh mục' control={control} />
+				<ValidationTextFieldsControl name='name' label='Tên nghề nghiệp' control={control} />
+				<SelectVariantsFieldControl
+					options={listProfessionCategory?.data?.map((item) => ({
+						label: item.name,
+						value: item.id
+					}))}
+					control={control}
+					label='Chọn danh mục nghề nghiệp'
+					name='jobPositionCategoryId'
+				/>
+
 				<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
 					<Button type='submit' variant='contained'>
 						Sửa

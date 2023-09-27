@@ -1,9 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import fetchBaseQueryAdmin from '../fetchBaseQueryAdmin';
-
+import baseQueryWithAdmin from '../fetchBaseQueryAdmin';
 const professionApi = createApi({
 	reducerPath: 'profession',
-	baseQuery: fetchBaseQueryAdmin,
+	baseQuery: baseQueryWithAdmin,
 	endpoints: (build) => ({
 		getAllProfession: build.query({
 			query: (arg) => {
