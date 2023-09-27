@@ -5,11 +5,12 @@ import store, { persistor } from './App/providers/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import Modal from 'react-modal';
+
 Modal.setAppElement('#root');
 ReactDOM.render(
 	<Provider store={store}>
 		<PersistGate loading={null} persistor={persistor}>
-			<App />
+				<App />
 		</PersistGate>
 	</Provider>,
 	document.getElementById('root')

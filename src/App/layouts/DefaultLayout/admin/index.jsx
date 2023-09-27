@@ -12,19 +12,6 @@ const cx = classNames.bind(styles);
 
 export const AdminLayout = ({ children }) => {
 	const themeReducer = useSelector((state) => state.theme);
-
-	const dispatch = useDispatch();
-
-	// useEffect(() => {
-	// 	const themeClass = localStorage.getItem('themeMode', 'theme-mode-light');
-
-	// 	const colorClass = localStorage.getItem('colorMode', 'theme-mode-light');
-
-	// 	dispatch(setMode(themeClass));
-
-	// 	dispatch(setColor(colorClass));
-	// }, [themeReducer, dispatch]);
-
 	const location = useLocation();
 	return (
 		<div className={cx('layout', `${themeReducer.mode}`, `${themeReducer.color}`)}>

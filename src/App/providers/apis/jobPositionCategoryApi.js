@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import fetchBaseQueryAdmin from '../fetchBaseQueryAdmin';
+import baseQueryWithAdmin from '../fetchBaseQueryAdmin';
 
 const jobPositionCategoryApi = createApi({
 	reducerPath: 'jobPositionCategory',
-	baseQuery: fetchBaseQueryAdmin,
+	baseQuery: baseQueryWithAdmin,
 	endpoints: (build) => ({
 		getAllJobPositionCategory: build.query({
 			query: (arg) => {
-				return { url: `/job_position_category`, method: 'GET', params: arg.params };
+				return { url: `/job_position_category`, method: 'GET', params: arg?.params };
 			},
 			providesTags: ['job_position_category'],
 			transformResponse: (response) => response

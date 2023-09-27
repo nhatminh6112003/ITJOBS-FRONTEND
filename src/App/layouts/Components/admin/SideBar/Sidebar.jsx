@@ -5,46 +5,53 @@ import { Link } from 'react-router-dom';
 import './sidebar.css';
 import SidebarItem from './SidebarItem';
 import { HomeIcon, CategoryIcon, Settings } from '~/Core/resources';
+import routesPath from '~/App/config/routesPath';
+
 const SideBar = (props) => {
-	const SidebarItems = [
+	const SideBarMenu = [
 		{
 			title: 'Dashboard',
-			route: '/admin/dashboard',
+			route: routesPath.AdminPaths.dashboard,
 			icon: <HomeIcon />
 		},
 
 		{
-			title: 'Danh mục vị trí công việc',
-			route: '/admin/job-position-category',
+			title: 'Quản lý Danh mục nghề nghiệp',
+			route: routesPath.AdminPaths.jobPositionCategory,
 			icon: <CategoryIcon />
 		},
 
 		{
 			title: 'Phúc lợi công việc',
-			route: '/admin/job-welfare',
+			route: routesPath.AdminPaths.jobWelfare,
 			icon: <CategoryIcon />
 		},
-
 		{
 			title: 'Quản lý ứng viên',
-			route: '/admin/management-candidate',
+			route: routesPath.AdminPaths.jobSeeker,
 			icon: <CategoryIcon />
 		},
-
+		{
+			title: 'Quản lý nghề nghiệp',
+			route: routesPath.AdminPaths.profession,
+			icon: <CategoryIcon />
+		},
 		{
 			title: 'Cài đặt',
 			route: '/settings',
 			icon: <Settings />
 		}
 	];
-	const activeItem = SidebarItems.findIndex((item) => item.route === props?.location?.pathname);
+	console.log("TCL: SideBar -> SideBarMenu", SideBarMenu)
+
+	const activeItem = SideBarMenu.findIndex((item) => item.route === props?.location?.pathname);
 
 	return (
 		<div className='sidebar'>
 			<div className='sidebar__logo'>
 				<img src={'/vite.svg'} alt='company logo' />
 			</div>
-			{SidebarItems.map((item, index) => (
+			{SideBarMenu.map((item, index) => (
 				<Link to={item.route} key={index}>
 					<SidebarItem title={item.title} icon={item.icon} active={index === activeItem} />
 				</Link>
