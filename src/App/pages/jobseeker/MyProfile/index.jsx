@@ -17,6 +17,7 @@ import {
 import useModal from '~/App/hooks/useModal';
 import ResumeTitle from './components/ResumeTitle';
 import ResumeRefer from './components/ResumeRefer';
+import ResumeEducation from './components/ResumeEducation';
 
 export const cx = classNames.bind(styles);
 
@@ -24,7 +25,9 @@ const MyProfile = () => {
 	const { isShowing, toggle } = useModal({
 		resume_title: false,
 		resume_refer: false,
-		update_resume_refer: false
+		resume_education: false,
+		update_resume_refer: false,
+		update_resume_education: false
 	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -416,8 +419,9 @@ const MyProfile = () => {
 										</div>
 									</div>
 								</div>
+
 								<div className={cx('widget', 'widget-16')} id='widget-16'>
-									<div className={cx('widget-head')}>
+									{/* <div className={cx('widget-head')}>
 										<div className={cx('cb-title-h3')}>
 											<div className={cx('figure')}>
 												<div className={cx('image')}>
@@ -569,7 +573,8 @@ const MyProfile = () => {
 												</li>
 											</ul>
 										</div>
-									</div>
+									</div> */}
+									<ResumeEducation className={cx} isShowing={isShowing} toggle={toggle} />
 								</div>
 								<div className={cx('widget', 'widget-16')} id='certificate-section'>
 									{' '}
