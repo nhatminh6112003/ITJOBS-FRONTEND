@@ -207,21 +207,20 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl control={control} name='ref_name' id='ref_name' label='Họ tên' />
 					</div>
 				</div>
-			</div>
-			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl control={control} name='ref_title' label='Chức vụ *' id='ref_title' />
 					</div>
 				</div>
 			</div>
+		
 			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl
 							control={control}
@@ -232,9 +231,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 						/>
 					</div>
 				</div>
-			</div>
-			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl
 							control={control}

@@ -942,7 +942,7 @@ const MyProfile = () => {
 								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
 							</div>
 							<div className={cx('col-lg-4', 'col-xl-3', 'main-menu')}>
-								<div className={cx('menu-shortchut')}>
+								<div className={cx('menu-shortchut','active')}>
 									<div className={cx('list-button')}>
 										<ul>
 											<li>

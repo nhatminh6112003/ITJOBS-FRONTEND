@@ -1,5 +1,6 @@
-import { forwardRef, useRef } from 'react';
+import { forwardRef, useRef, Fragment } from 'react';
 import { useController } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
 
 const SelectFieldControl = (
 	{ initialValue = 'Chọn', control, name, label, options, disabled, rules, ...props },
@@ -21,8 +22,18 @@ const SelectFieldControl = (
 	});
 
 	return (
-		<div>
-			{label && <div>{label}</div>}
+		<Fragment>
+			{label && (
+				<label
+					style={{
+						color: '#5d677a',
+						fontWeight: 500,
+						fontSize: 16
+					}}
+					for={name}>
+					{label}
+				</label>
+			)}
 			<select
 				{...props}
 				onChange={(event) => {
@@ -35,7 +46,7 @@ const SelectFieldControl = (
 					field.ref(e);
 					inputRef.current = e;
 				}}
-				id={id}
+				id={uuidv4()}
 				name={name}
 				disabled={disabled}
 				value={field.value}>
@@ -47,8 +58,22 @@ const SelectFieldControl = (
 						</option>
 					))}
 			</select>
-			{errors ? <span className={`error_${name}`}>{errors[name]?.message}</span> : ''}
-		</div>
+			{errors ? (
+				<span
+					className={`error_${name}`}
+					style={{
+						paddingTop: 7,
+						color: 'red',
+						fontSize: 12,
+						fontStyle: 'italic',
+						fontWeight: 500
+					}}>
+					{errors[name]?.message}
+				</span>
+			) : (
+				''
+			)}
+		</Fragment>
 	);
 };
 

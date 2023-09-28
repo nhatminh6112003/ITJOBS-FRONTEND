@@ -9,6 +9,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import LockIcon from '@mui/icons-material/Lock';
 import LanguageIcon from '@mui/icons-material/Language';
 import BoltIcon from '@mui/icons-material/Bolt';
+import { Link } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
 
 const cx = classNames.bind(styles);
 
@@ -686,7 +688,7 @@ const Dashboard = () => {
 												<p>Bạn có thể tạo tối đa 4 hồ sơ đính kèm</p>
 											</div>
 											<div className={cx('col-md-5', 'button-upload')} id='created-resume'>
-												<a href=''>Tạo Hồ Sơ Ngay!</a>
+												<Link to={routesPath.JobseekerPaths.myAttach}>Tạo Hồ Sơ Ngay!</Link>
 											</div>
 										</div>
 									</div>
