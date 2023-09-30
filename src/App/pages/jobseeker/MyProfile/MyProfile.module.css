@@ -13092,6 +13092,7 @@ header.header-dashboard .mobile-menu .menu .menu-logged ul li.dropdown-mobile .d
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0;
+	top: 102.95px;
 }
 
 @media (max-width: 1023px) {
@@ -15334,9 +15335,8 @@ header.header-dashboard .mobile-menu .menu .menu-logged ul li.dropdown-mobile .d
 	height: 44px;
 	padding: 5px 20px;
 	border-radius: 5px;
-	background-image: -webkit-gradient(linear, right top, left top, from(#169b74), color-stop(#86cb49), to(#169b74));
-	background-image: -o-linear-gradient(right, #169b74, #86cb49, #169b74);
-	background-image: linear-gradient(270deg, #169b74, #86cb49, #169b74);
+	background-image: -webkit-gradient(linear, right top, left top, from(#00b2a3), color-stop(#00b2a3), to(#00b2a3));
+	background-image: linear-gradient(270deg, #42ecce, #00b2a3, #42ecce);
 	color: #fff;
 	font-size: 16px;
 	font-weight: 700;

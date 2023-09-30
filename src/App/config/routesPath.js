@@ -18,7 +18,8 @@ const JobseekerPaths = {
 	register: '/account/register',
 	dashboard: '/jobseekers/dashboard',
 	myProfile: '/jobseekers/my-profile',
-	changeTemplate: '/jobseekers/changetemplate'
+	changeTemplate: '/jobseekers/changetemplate',
+	myAttach:'/jobseekers/myresume/myattach'
 };
 const EmployerPaths = {
 	login: '/employers/login',

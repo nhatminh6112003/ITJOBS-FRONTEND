@@ -22,6 +22,7 @@ import { resumeCertificateSchema } from '~/App/schemas/resumeCertificateSchema';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import formatDate from '~/Core/utils/formatDate';
 import moment from 'moment';
+
 const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 	const resume = useSelector((state) => state.auth?.user?.resume);
@@ -261,8 +262,13 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch,data }) => {
 			</div>
 			<div className={cx('row')}>
 				<div className={cx('col-lg-12')}>
-					<div>
+					<div style={{display:'flex',alignItems:'center',gap:6}}>
 						<InputFieldControl
+							style={{
+								position: 'relative',
+								top: 2,
+								marginRight: 5
+							}}
 							control={control}
 							name='cer_limit'
 							id='cer_limit'

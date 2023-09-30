@@ -42,7 +42,7 @@ const ChooseTemplate = ({ isShowing, refetch, toggle, hide, classNames: cx }) =>
 					<div className={cx('list-template')}>
 						<div className={cx('row')}>
 							{data?.map((item) => (
-								<div className={cx('col-xs-12', 'col-sm-6', 'col-md-4', 'cv-item')}>
+								<div className={cx('col-xs-12', 'col-sm-6', 'cv-item')}>
 									<div className={cx('figure')}>
 										<div className={cx('image')}>
 											<img src={item.image_cv} />

@@ -21,9 +21,10 @@ import { resumeEducationSchema } from '~/App/schemas/resumeEducationSchema';
 
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
-import { degreeArray, degree } from '~/App/constants/degreeArray';
+import { DegreeArray, degree } from '~/App/constants/degreeArray';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import formatDate from '~/Core/utils/formatDate';
+import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import moment from 'moment';
 const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
@@ -111,7 +112,6 @@ const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 			redu_date: moment(result?.data?.redu_date).format('YYYY-MM-DD'),
 			resume_id: result?.data?.resume_id
 		});
-		console.log('test', result.data);
 	}, [updateReset, result]);
 
 	return (
@@ -206,6 +206,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 	const futureDate = date.getDate() + 3;
 	date.setDate(futureDate);
 	const defaultValue = date.toLocaleDateString('en-CA');
+	console.log("TCL: Form -> defaultValue", defaultValue)
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
@@ -218,9 +219,9 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 			<div className={cx('form-group', 'row')}>
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
-						<SelectVariantsFieldControl
+						<SelectFieldControl
 							control={control}
-							options={degreeArray}
+							options={DegreeArray}
 							name='redu_degree'
 							id='redu_degree'
 							label='Bằng cấp'
@@ -232,7 +233,6 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl
-							defaultValue={defaultValue}
 							control={control}
 							name='redu_date'
 							id='redu_date'

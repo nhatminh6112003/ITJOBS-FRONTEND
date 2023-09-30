@@ -1,4 +1,4 @@
-export const degreeArray = [
+export const DegreeArray = [
 	{
 		value: '0',
 		label: 'Chưa tốt nghiệp'
