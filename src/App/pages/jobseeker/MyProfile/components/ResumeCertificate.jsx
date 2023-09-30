@@ -10,52 +10,52 @@ import Tips from '~/Core/components/common/Modal/Tips';
 import useModal from '~/App/hooks/useModal';
 import NoContent from './NoContent';
 import {
-	useGetAllEducationQuery,
-	useUpdateResumeEducationMutation,
-	useCreateResumeEducationMutation,
-	useDeleteResumeEducationMutation,
-	useLazyGetOneResumeEducationQuery
-} from '~/App/providers/apis/resumeEducation';
+	useGetAllCertificateQuery,
+	useUpdateResumeCertificateMutation,
+	useCreateResumeCertificateMutation,
+	useDeleteResumeCertificateMutation,
+	useLazyGetOneResumeCertificateQuery
+} from '~/App/providers/apis/resumeCertificate';
 
-import { resumeEducationSchema } from '~/App/schemas/resumeEducationSchema';
+import { resumeCertificateSchema } from '~/App/schemas/resumeCertificateSchema';
 
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
-import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
-import { degreeArray, degree } from '~/App/constants/degreeArray';
-import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import formatDate from '~/Core/utils/formatDate';
 import moment from 'moment';
-const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
+const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 	const resume = useSelector((state) => state.auth?.user?.resume);
 	const [updateId, setUpdateId] = useState(null);
 
 	//toggle tips
 	const { isShowing: showTips, toggle: toggleTips } = useModal({
-		t_resume_education: false
+		t_resume_certificate: false
 	});
 
 	//Gọi api rtk query
-	const { data: resumeEducation, refetch } = useGetAllEducationQuery(resume?.id);
-	const [trigger, result] = useLazyGetOneResumeEducationQuery();
-	const [createReferMutation] = useCreateResumeEducationMutation();
-	const [deleteReferMutation] = useDeleteResumeEducationMutation();
-	const [updateReferMutation] = useUpdateResumeEducationMutation();
+	const { data: resumeCertificate, refetch } = useGetAllCertificateQuery(resume?.id);
+	const [trigger, result] = useLazyGetOneResumeCertificateQuery();
+	const [createCertificateMutation] = useCreateResumeCertificateMutation();
+	const [deleteCertificateMutation] = useDeleteResumeCertificateMutation();
+	const [updateCertificateMutation] = useUpdateResumeCertificateMutation();
 
-	const { control, handleSubmit, reset } = useForm({
-		resolver: yupResolver(resumeEducationSchema)
+	const { control, handleSubmit, reset, watch } = useForm({
+		resolver: yupResolver(resumeCertificateSchema)
 	});
+
 	const {
 		control: updateControl,
 		handleSubmit: handleUpdateSubmit,
-		reset: updateReset
+		reset: updateReset,
+		watch: updateWatch,
+		setValue
 	} = useForm({
-		resolver: yupResolver(resumeEducationSchema)
+		resolver: yupResolver(resumeCertificateSchema)
 	});
 
 	const onCreateSubmit = async (data) => {
-		toggle('resume_education');
-		createReferMutation({
+		toggle('resume_certificate');
+		createCertificateMutation({
 			...data,
 			resume_id: resume?.id
 		})
@@ -73,7 +73,7 @@ const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 	};
 
 	const onUpdateSubmit = async (data) => {
-		updateReferMutation({
+		updateCertificateMutation({
 			id: updateId,
 			payload: data
 		})
@@ -81,7 +81,7 @@ const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 			.then((r) => {
 				if (r.status == 200) {
 					toast.success(r?.message);
-					toggle('update_resume_education');
+					toggle('update_resume_certificate');
 				}
 			});
 	};
@@ -89,11 +89,11 @@ const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 	const onOpenModalUpdate = (id) => {
 		setUpdateId(id);
 		trigger(id);
-		toggle('update_resume_education');
+		toggle('update_resume_certificate');
 	};
 
 	const handleConfirmDelete = async (id) => {
-		deleteReferMutation(id)
+		deleteCertificateMutation(id)
 			.unwrap()
 			.then((r) => {
 				if (r.status == 200) {
@@ -105,33 +105,34 @@ const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 
 	useEffect(() => {
 		updateReset({
-			redu_name: result?.data?.redu_name,
-			redu_degree: result?.data?.redu_degree,
+			cer_title: result?.data?.cer_title,
+			cer_by: result?.data?.cer_by,
 			redu_desc: result?.data?.redu_desc,
-			redu_date: moment(result?.data?.redu_date).format('YYYY-MM-DD'),
+			cer_form: moment(result?.data?.cer_form).format('YYYY-MM-DD'),
+			cer_to: moment(result?.data?.cer_form).format('YYYY-MM-DD'),
+			cer_limit: result?.data?.cer_limit,
 			resume_id: result?.data?.resume_id
 		});
-		console.log('test', result.data);
 	}, [updateReset, result]);
 
 	return (
 		<Fragment>
 			<Widget
 				action='ADD'
-				title='Học vấn'
+				title='Chứng chỉ khác'
 				className={cx('widget', 'widget-20')}
 				id='t-resume-section'
 				status='default'
-				onOpenResume={() => toggle('resume_education')}
-				onOpenTipSlide={() => toggleTips('t_resume_education')}
+				onOpenResume={() => toggle('resume_certificate')}
+				onOpenTipSlide={() => toggleTips('t_resume_certificate')}
 				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i14.png'>
 				<div className={cx('content')}>
 					<div className={cx('list-references')}>
-						{resumeEducation?.length > 0 ? (
-							resumeEducation?.map((item) => (
+						{resumeCertificate?.length > 0 ? (
+							resumeCertificate?.map((item) => (
 								<div className={cx('item')}>
 									<div className={cx('title')}>
-										<h4 className={cx('sub-title')}>{item?.redu_name}</h4>
+										<h4 className={cx('sub-title')}>{item?.cer_title}</h4>
 										<ul className={cx('list-action')}>
 											<li className={cx('edit-link')}>
 												<a href='javascript:void(0);' onClick={() => onOpenModalUpdate(item.id)}>
@@ -149,47 +150,55 @@ const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 									</div>
 									<div className={cx('content')}>
 										<ul>
-											<li className={cx('title')}>{degree[item?.redu_degree]}</li>
-											<li className={cx('date')}>Tốt nghiệp {formatDate(item.redu_date)}</li>
-											<li>{item.redu_desc}</li>
+											<li>{item?.cer_by}</li>
+											<li>
+												{formatDate(item.cer_form)}-
+												{item.cer_limit ? 'Không giới hạn' : formatDate(item.cer_to)}
+											</li>
 										</ul>
 									</div>
 								</div>
 							))
 						) : (
-							<NoContent onClick={() => toggle('resume_education')} title='Vui lòng thêm thông tin học vấn' />
+							<NoContent onClick={() => toggle('resume_certificate')} title='Vui lòng thêm chứng chỉ khác' />
 						)}
 					</div>
 				</div>
 			</Widget>
 
 			<ResumeModal
-				isOpen={isShowing.resume_education}
-				hide={() => toggle('resume_education')}
+				isOpen={isShowing.resume_certificate}
+				hide={() => toggle('resume_certificate')}
 				className={cx}
-				title='Thông Tin Học Vấn'>
-				<Form control={control} onSubmit={onCreateSubmit} handleSubmit={handleSubmit} cx={cx} />
+				title='Thông Tin Chứng Chỉ'>
+				<Form control={control} onSubmit={onCreateSubmit} handleSubmit={handleSubmit} cx={cx} watch={watch} />
 			</ResumeModal>
 
 			<ResumeModal
-				isOpen={isShowing.update_resume_education}
-				hide={() => toggle('update_resume_education')}
+				isOpen={isShowing.update_resume_certificate}
+				hide={() => toggle('update_resume_certificate')}
 				className={cx}
-				title='Thông Tin Học Vấn'>
-				<Form control={updateControl} onSubmit={onUpdateSubmit} handleSubmit={handleUpdateSubmit} cx={cx} />
+				title='Thông Tin Chứng Chỉ'>
+				<Form
+					control={updateControl}
+					onSubmit={onUpdateSubmit}
+					handleSubmit={handleUpdateSubmit}
+					cx={cx}
+					watch={watch}
+					data={result?.data}
+				/>
 			</ResumeModal>
 			<Tips
-				isShowing={showTips.t_resume_education}
-				hide={() => toggleTips('t_resume_education')}
+				isShowing={showTips.t_resume_certificate}
+				hide={() => toggleTips('t_resume_certificate')}
 				title='Để CV không chỉ Hay mà còn Đẹp trong mắt Nhà tuyển dụng'>
 				<div className='swiper-wrapper'>
-					Học vấn:
+					Chứng chỉ khác:
 					<br />
-					- Hãy nêu ra những bậc học đạt được như cao đẳng, đại học, thạc sĩ,...
+					Bạn có thể chọn hiển thị hoặc không hiển thị mục này trên CV
 					<br />
-					- Bạn cũng có thể kể thêm những khóa học ngắn hạn, khóa đào tạo chuyên nghiệp (có phí) mà bạn đã từng
-					được học.
-					<br />- Lưu ý chọn lọc những khóa học liên quan đến công việc mà bạn ứng tuyển thôi nhé
+					- Hãy điền đầy đủ các thông tin như ngày hoàn thành, tổ chức cấp.
+					<br />- Bạn cũng có thể kể tên các hội thảo, hội nghị có uy tín mà bạn đã từng được tham dự
 				</div>
 			</Tips>
 			<ConfirmDialog
@@ -201,30 +210,38 @@ const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 	);
 };
 
-const Form = ({ onSubmit, handleSubmit, control, cx }) => {
-	const date = new Date();
-	const futureDate = date.getDate() + 3;
-	date.setDate(futureDate);
-	const defaultValue = date.toLocaleDateString('en-CA');
+const Form = ({ onSubmit, handleSubmit, control, cx, watch,data }) => {
+	const cerLimit = watch('cer_limit');
+	const [isDisabled, setIsDisabled] = useState(false);
+	useEffect(() => {
+		const cer_limit=data?.cer_limit
+		if (cerLimit || cer_limit === 1) {
+			setIsDisabled(true);
+		} else {
+			setIsDisabled(false);
+		}
+	}, [isDisabled, cerLimit,data]);
+
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
-						<InputFieldControl control={control} name='redu_name' id='redu_name' label='Trường / khóa học' />
+						<InputFieldControl control={control} name='cer_title' id='cer_title' label='Tên chứng chỉ' />
 					</div>
 				</div>
 			</div>
 			<div className={cx('form-group', 'row')}>
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
-						<SelectVariantsFieldControl
-							control={control}
-							options={degreeArray}
-							name='redu_degree'
-							id='redu_degree'
-							label='Bằng cấp'
-						/>
+						<InputFieldControl control={control} name='cer_by' id='cer_by' label='Cấp bởi' />
+					</div>
+				</div>
+			</div>
+			<div className={cx('form-group', 'row')}>
+				<div className={cx('col-lg-12')}>
+					<div className={cx('input-group')}>
+						<InputFieldControl control={control} name='cer_form' id='cer_form' label='Từ' type='date' />
 					</div>
 				</div>
 			</div>
@@ -232,20 +249,28 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl
-							defaultValue={defaultValue}
 							control={control}
-							name='redu_date'
-							id='redu_date'
-							label='Tốt nghiệp'
+							name='cer_to'
+							id='cer_to'
+							label='Ngày hết hạn'
 							type='date'
+							disabled={isDisabled}
 						/>
 					</div>
 				</div>
 			</div>
-			<div className={cx('form-group', 'row')}>
+			<div className={cx('row')}>
 				<div className={cx('col-lg-12')}>
-					<div className={cx('input-group')}>
-						<TextAreaFieldControl control={control} name='redu_desc' label='Mô tả' id='redu_desc' />
+					<div>
+						<InputFieldControl
+							control={control}
+							name='cer_limit'
+							id='cer_limit'
+							label='Không giới hạn'
+							type='checkbox'
+							defaultChecked={cerLimit}
+							checked={isDisabled}
+						/>
 					</div>
 				</div>
 			</div>
@@ -260,4 +285,4 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 	);
 };
 
-export default ResumeEducation;
+export default ResumeCertificate;
