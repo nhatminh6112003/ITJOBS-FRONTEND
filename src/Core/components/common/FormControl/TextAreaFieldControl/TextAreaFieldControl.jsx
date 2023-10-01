@@ -114,7 +114,7 @@ const TextAreaFieldControl = ({ label, name, control, rules, disabled, ...props 
 				name={name}
 				{...props}
 				id={uuidv4()}
-				minRows={3}
+				minRows={1}
 				onChange={field.onChange}
 				onBlur={field.onBlur}
 				value={field.value || ''}

@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 import { v4 as uuidv4 } from 'uuid';
 
-import { useRef, forwardRef } from 'react';
+import { useRef, forwardRef, Fragment } from 'react';
 const InputFieldControl = ({ defaultValue,control, disabled, rules, type = 'text', name, label, ...props }, ref) => {
 	const {
 		field,
@@ -21,7 +21,7 @@ const InputFieldControl = ({ defaultValue,control, disabled, rules, type = 'text
 	const localRef = useRef(null);
 	const inputRef = ref || localRef;
 	return (
-		<div className={cx('form-group', 'form-text')}>
+		<Fragment>
 			{label && <label htmlFor={field.name}>{label}</label>}
 			<input
 				type={type}
@@ -38,8 +38,9 @@ const InputFieldControl = ({ defaultValue,control, disabled, rules, type = 'text
 				}}
 				{...props}
 			/>
-			{errors ? <span className={`error_${name}`}>{errors[name]?.message}</span> : ''}
-		</div>
+			{errors ? <span className={`error_${name}`}
+			>{errors[name]?.message}</span> : ''}
+		</Fragment>
 	);
 };
 export default forwardRef(InputFieldControl);

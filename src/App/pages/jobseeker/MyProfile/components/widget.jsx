@@ -43,7 +43,7 @@ const Widget = ({ action = 'ADD', children, avatar, title, status, onOpenResume,
 						</div>
 						<div className={cx('link-edit')}>
 							<a href='javascript:void(0)' onClick={onOpenResume}>
-								<em className={cx('material-icons')}>
+								<em style={{display:'flex'}}	className={cx('material-icons')}>
 									{action == 'ADD' ? <AddIcon sx={{ fontSize: '20px' }} /> : <EditIcon fontSize='normal' />}
 								</em>
 								<span>{modalAction[action]}</span>

@@ -14,9 +14,8 @@ const ResumeModal = ({ children, isOpen, hide, onRequestClose, title, className:
 				content: {
 					padding: 0,
 					overflow: 'hidden',
-					overflowY: 'scroll',
 					minWidth: 'fit-content',
-					minHeight: 500,
+					minHeight: 'fit-content',
 					margin: 30,
 					backgroundColor: '#ffff',
 					position: 'absolute',

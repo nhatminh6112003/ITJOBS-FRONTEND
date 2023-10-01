@@ -18,6 +18,7 @@ import useModal from '~/App/hooks/useModal';
 import ResumeTitle from './components/ResumeTitle';
 import ResumeRefer from './components/ResumeRefer';
 import ResumeEducation from './components/ResumeEducation';
+import ResumeCertificate from './components/ResumeCertificate';
 
 export const cx = classNames.bind(styles);
 
@@ -25,8 +26,10 @@ const MyProfile = () => {
 	const { isShowing, toggle } = useModal({
 		resume_title: false,
 		resume_refer: false,
+		resume_certificate: false,
 		resume_education: false,
 		update_resume_refer: false,
+		update_resume_certificate: false,
 		update_resume_education: false
 	});
 	return (
@@ -577,8 +580,7 @@ const MyProfile = () => {
 									<ResumeEducation className={cx} isShowing={isShowing} toggle={toggle} />
 								</div>
 								<div className={cx('widget', 'widget-16')} id='certificate-section'>
-									{' '}
-									<div className={cx('widget-head')}>
+									{/* <div className={cx('widget-head')}>
 										<div className={cx('cb-title-h3')}>
 											<div className={cx('figure')}>
 												<div className={cx('image')}>
@@ -609,8 +611,8 @@ const MyProfile = () => {
 												</div>
 											</div>
 										</div>
-									</div>
-									<div className={cx('widget-body')}>
+									</div> */}
+									{/* <div className={cx('widget-body')}>
 										<div className={cx('sticker')}>
 											<ul className={cx('list-sticker')}>
 												<li className={cx('item')} id='certificate_106485'>
@@ -646,7 +648,8 @@ const MyProfile = () => {
 												</li>
 											</ul>
 										</div>
-									</div>
+									</div> */}
+									<ResumeCertificate className={cx} isShowing={isShowing} toggle={toggle} />
 								</div>
 								<div className={cx('widget', 'widget-22', 'widget-17')} id='language-section'>
 									{' '}
@@ -939,7 +942,7 @@ const MyProfile = () => {
 								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
 							</div>
 							<div className={cx('col-lg-4', 'col-xl-3', 'main-menu')}>
-								<div className={cx('menu-shortchut')}>
+								<div className={cx('menu-shortchut','active')}>
 									<div className={cx('list-button')}>
 										<ul>
 											<li>
