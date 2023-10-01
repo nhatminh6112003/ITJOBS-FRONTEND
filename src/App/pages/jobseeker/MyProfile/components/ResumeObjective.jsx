@@ -11,7 +11,7 @@ import NoContent from './NoContent';
 import {
 	useCreateResumeObjectiveMutation,
 	useDeleteResumeObjectiveMutation,
-	useGetAllObjectiveQuery,
+	useGetAllResumeObjectiveQuery,
 	useUpdateResumeObjectiveMutation,
 	useLazyGetOneResumeObjectiveQuery,
 	useGetOneResumeObjectiveQuery
@@ -31,7 +31,7 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	});
 
 	//Gọi api rtk query
-	const { data: resume_objective, refetch } = useGetOneResumeObjectiveQuery(resume?.id);
+	const { data: resume_objective, refetch } = useGetAllResumeObjectiveQuery(resume?.id);
 	const [trigger, result] = useLazyGetOneResumeObjectiveQuery();
 	const [createObjectiveMutation] = useCreateResumeObjectiveMutation();
 	const [deleteObjectiveMutation] = useDeleteResumeObjectiveMutation();
@@ -68,8 +68,10 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	};
 
 	const onUpdateSubmit = async (data) => {
+		console.log('TCL: onUpdateSubmit -> updateId', updateId);
+
 		updateObjectiveMutation({
-			id: data.id,
+			id: updateId,
 			payload: {
 				...data,
 				resume_id: resume?.id
@@ -110,13 +112,15 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	return (
 		<Fragment>
 			<Widget
-				action={`${resume_objective?.length > 0 ? 'EDIT' : 'ADD'}`}
+				action={resume_objective?.length > 0 ? 'EDIT' : 'ADD'}
 				title='Mục tiêu nghề nghiệp'
 				className={cx('widget', 'widget-20')}
 				id='t-resume-section'
 				status='default'
 				onOpenResume={
-					resume_objective?.length > 0 ? () => toggle('update_resume_objective') : () => toggle('resume_objective')
+					resume_objective?.length > 0
+						? () => onOpenModalUpdate(resume_objective?.[0]?.id)
+						: () => toggle('resume_objective')
 				}
 				onOpenTipSlide={() => toggleTips('t_resume_objective')}
 				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i3.png'>

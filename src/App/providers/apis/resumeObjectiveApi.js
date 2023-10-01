@@ -6,7 +6,7 @@ const resumeObjectiveApi = createApi({
 	baseQuery: baseQueryWithUser,
 	tagTypes: ['resume_objective'],
 	endpoints: (build) => ({
-		getAllObjective: build.query({
+		getAllResumeObjective: build.query({
 			query: (id) => {
 				return { url: `/resume_objective/getAll/${id}`, method: 'GET' };
 			},
@@ -45,7 +45,7 @@ export const {
 	useDeleteResumeObjectiveMutation,
 	useCreateResumeObjectiveMutation,
 	useGetOneResumeObjectiveQuery,
-	useGetAllObjectiveQuery,
+	useGetAllResumeObjectiveQuery,
 	useUpdateResumeObjectiveMutation,
 	useLazyGetOneResumeObjectiveQuery
 } = resumeObjectiveApi;
