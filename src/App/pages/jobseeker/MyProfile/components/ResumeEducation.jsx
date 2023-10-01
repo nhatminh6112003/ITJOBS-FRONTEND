@@ -14,7 +14,7 @@ import {
 	useUpdateResumeEducationMutation,
 	useCreateResumeEducationMutation,
 	useDeleteResumeEducationMutation,
-	useLazyGetOneResumeEducationQuery
+	useLazyGetOneResumeEducationQuery,
 } from '~/App/providers/apis/resumeEducation';
 
 import { resumeEducationSchema } from '~/App/schemas/resumeEducationSchema';
@@ -124,7 +124,7 @@ const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 				status='default'
 				onOpenResume={() => toggle('resume_education')}
 				onOpenTipSlide={() => toggleTips('t_resume_education')}
-				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i14.png'>
+				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i7.png'>
 				<div className={cx('content')}>
 					<div className={cx('list-references')}>
 						{resumeEducation?.length > 0 ? (
@@ -206,7 +206,6 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 	const futureDate = date.getDate() + 3;
 	date.setDate(futureDate);
 	const defaultValue = date.toLocaleDateString('en-CA');
-	console.log("TCL: Form -> defaultValue", defaultValue)
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
@@ -232,13 +231,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 			<div className={cx('form-group', 'row')}>
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
-						<InputFieldControl
-							control={control}
-							name='redu_date'
-							id='redu_date'
-							label='Tốt nghiệp'
-							type='date'
-						/>
+						<InputFieldControl control={control} name='redu_date' id='redu_date' label='Tốt nghiệp' type='date' />
 					</div>
 				</div>
 			</div>

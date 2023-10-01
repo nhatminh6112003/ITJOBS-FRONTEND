@@ -19,6 +19,7 @@ import ResumeTitle from './components/ResumeTitle';
 import ResumeRefer from './components/ResumeRefer';
 import ResumeEducation from './components/ResumeEducation';
 import ResumeCertificate from './components/ResumeCertificate';
+import ResumeObjective from './components/ResumeObjective';
 
 export const cx = classNames.bind(styles);
 
@@ -28,9 +29,11 @@ const MyProfile = () => {
 		resume_refer: false,
 		resume_certificate: false,
 		resume_education: false,
+		resume_objective: false,
 		update_resume_refer: false,
 		update_resume_certificate: false,
-		update_resume_education: false
+		update_resume_education: false,
+		update_resume_objective: false
 	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -228,21 +231,8 @@ const MyProfile = () => {
 										</table>
 									</div>
 								</Widget>
-
-								<Widget id='widget-14' title='Mục tiêu nghề nghiệp' className={cx('widget', 'widget-14')}>
-									<div className={cx('content')}>
-										<p>mimnhvodcih</p>{' '}
-									</div>
-									<ul className={cx('list-action')}>
-										<li className={cx('delete', 'no-bf')}>
-											<a href='' onClick='deleteResumeObject();'>
-												{' '}
-												<em className={cx('material-icons')}>highlight_off</em>
-												<span>Xóa</span>
-											</a>
-										</li>
-									</ul>
-								</Widget>
+								
+								<ResumeObjective className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<div className={cx('widget', 'widget-18')} id='widget-18'>
 									<div className={cx('widget-head')}>
@@ -424,231 +414,9 @@ const MyProfile = () => {
 								</div>
 
 								<div className={cx('widget', 'widget-16')} id='widget-16'>
-									{/* <div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image')}>
-													<img src='./img/dash-board/i7.png' alt='' />
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Học vấn *</h3>
-													<div className={cx('status', 'success')}>
-														<p>Hoàn thành</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-education')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-add')}>
-													<a href='javascript:void(0)' onClick='show_frmEducation(0);' title='Thêm mới'>
-														{' '}
-														<em className={cx('material-icons')}>
-															<AddIcon sx={{ fontSize: '20px' }} />
-														</em>
-														<span>Thêm mới</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('experience')}>
-											<table>
-												<tbody>
-													<tr>
-														<td>Bằng cấp cao nhất</td>
-														<td>
-															<div className={cx('box-edit-degree')} id='cbprofile_degree_name'>
-																Cao đẳng{' '}
-																<div className={cx('link-edit', 'link-highest-degree')}>
-																	<a href=''>
-																		{' '}
-																		<em className={cx('material-icons')}>create</em>
-																	</a>
-																</div>
-															</div>
-															<div className={cx('highest-degree')}>
-																<div className={cx('select-group')}>
-																	<form id='resume-degree-form'>
-																		<select name='degree' id='degree'>
-																			<option value=''>Chọn</option>
-																			<option value={0}>Chưa tốt nghiệp</option>
-																			<option value={1}>Trung học</option>
-																			<option value={2}>Trung cấp</option>
-																			<option value={3} selected='selected'>
-																				Cao đẳng
-																			</option>
-																			<option value={4}>Đại học</option>
-																			<option value={5}>Sau đại học</option>
-																			<option value={6}>Khác</option>
-																		</select>
-																	</form>
-																</div>
-																<div className={cx('link-save')}>
-																	{' '}
-																	<a href='' onClick='saveEduLevel();'>
-																		<em className={cx('material-icons')}>save</em>
-																		Lưu Lại
-																	</a>
-																</div>
-															</div>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-										<div className={cx('sticker')}>
-											<ul className={cx('list-sticker')}>
-												<li className={cx('item')} id='eduList_1815961'>
-													<div className={cx('head-sticker')}>
-														<div className={cx('title')}>
-															<h4>Trung học</h4>
-															<div className={cx('sub-title')}>
-																<p>fpt</p>
-															</div>
-															<div className={cx('date')}>
-																<p>Tốt nghiệp 2-2006</p>
-															</div>
-														</div>
-														<div className={cx('right-head')}>
-															<div className={cx('view-less')}>
-																<em className={cx('material-icons')}>expand_more</em>
-															</div>
-															<ul className={cx('list-action')}>
-																<li className={cx('edit-link')}>
-																	<a href='' onClick='show_frmEducation(1815961);' title='Chỉnh sửa'>
-																		{' '}
-																		<em className={cx('material-icons')}>create</em>
-																	</a>
-																</li>
-																<li className={cx('delete')}>
-																	<a href='' onClick='deleteEducation(1815961);' title='Xóa'>
-																		{' '}
-																		<em className={cx('material-icons')}>highlight_off</em>
-																	</a>
-																</li>
-															</ul>
-														</div>
-													</div>
-													<div className={cx('body-sticker')} style={{ display: 'none' }}>
-														<div className={cx('content')}>132</div>
-													</div>
-												</li>
-												<li className={cx('item')} id='eduList_1815960'>
-													<div className={cx('head-sticker')}>
-														<div className={cx('title')}>
-															<h4>Trung cấp</h4>
-															<div className={cx('sub-title')}>
-																<p>fpt</p>
-															</div>
-															<div className={cx('date')}>
-																<p>Tốt nghiệp 3-2005</p>
-															</div>
-														</div>
-														<div className={cx('right-head')}>
-															<div className={cx('view-less')}>
-																<em className={cx('material-icons')}>expand_more</em>
-															</div>
-															<ul className={cx('list-action')}>
-																<li className={cx('edit-link')}>
-																	<a href='' onClick='show_frmEducation(1815960);' title='Chỉnh sửa'>
-																		{' '}
-																		<em className={cx('material-icons')}>create</em>
-																	</a>
-																</li>
-																<li className={cx('delete')}>
-																	<a href='' onClick='deleteEducation(1815960);' title='Xóa'>
-																		{' '}
-																		<em className={cx('material-icons')}>highlight_off</em>
-																	</a>
-																</li>
-															</ul>
-														</div>
-													</div>
-													<div className={cx('body-sticker')} style={{ display: 'none' }}>
-														<div className={cx('content')}>123</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div> */}
 									<ResumeEducation className={cx} isShowing={isShowing} toggle={toggle} />
 								</div>
 								<div className={cx('widget', 'widget-16')} id='certificate-section'>
-									{/* <div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image')}>
-													<img src='./img/dash-board/i10.png' alt='' />
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Chứng chỉ khác</h3>
-													<div className={cx('status')}>
-														<p>Không bắt buộc</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-certificate')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-add')}>
-													<a href='javascript:void(0)' onClick='editResumeCertificate(0);'>
-														{' '}
-														<em className={cx('material-icons')}>
-															<AddIcon sx={{ fontSize: '20px' }} />
-														</em>
-														<span>Thêm mới</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div> */}
-									{/* <div className={cx('widget-body')}>
-										<div className={cx('sticker')}>
-											<ul className={cx('list-sticker')}>
-												<li className={cx('item')} id='certificate_106485'>
-													<div className={cx('head-sticker')}>
-														<div className={cx('title')}>
-															<h4>kỹ sư phần mềm</h4>
-															<div className={cx('sub-title')}>
-																<p>fpt</p>
-															</div>
-															<div className={cx('date')}>
-																<p>25/12/2022 - 25/12/2022</p>
-															</div>
-														</div>
-														<div className={cx('right-head')}>
-															<ul className={cx('list-action')}>
-																<li className={cx('edit-link')}>
-																	<a
-																		href='javascript:void(0)'
-																		onClick='editResumeCertificate(106485);'>
-																		{' '}
-																		<em className={cx('material-icons')}>create</em>
-																	</a>
-																</li>
-																<li className={cx('delete')}>
-																	<a href='javascript:void(0)' onClick='deleteCertificate(106485);'>
-																		{' '}
-																		<em className={cx('material-icons')}>highlight_off</em>
-																	</a>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div> */}
 									<ResumeCertificate className={cx} isShowing={isShowing} toggle={toggle} />
 								</div>
 								<div className={cx('widget', 'widget-22', 'widget-17')} id='language-section'>
@@ -942,7 +710,7 @@ const MyProfile = () => {
 								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
 							</div>
 							<div className={cx('col-lg-4', 'col-xl-3', 'main-menu')}>
-								<div className={cx('menu-shortchut','active')}>
+								<div className={cx('menu-shortchut', 'active')}>
 									<div className={cx('list-button')}>
 										<ul>
 											<li>
