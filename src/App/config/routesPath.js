@@ -5,6 +5,7 @@ const AdminPaths = {
 	jobPositionCategory: '/admin/job-position-category',
 	jobWelfare: '/admin/job-welfare',
 	jobSeeker: '/admin/jobSeeker',
+	employer: '/admin/employer',
 	profession: '/admin/profession'
 };
 const JobseekerPaths = {

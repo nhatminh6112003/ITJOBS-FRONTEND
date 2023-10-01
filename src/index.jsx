@@ -5,8 +5,6 @@ import store, { persistor } from './App/providers/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import Modal from 'react-modal';
-
-import "react-datepicker/dist/react-datepicker.css";
 Modal.setAppElement('#root');
 ReactDOM.render(
 	<Provider store={store}>

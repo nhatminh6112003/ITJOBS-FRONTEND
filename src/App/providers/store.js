@@ -15,6 +15,7 @@ import resumeReferApi from './apis/resumeReferApi';
 import jobPositionCategoryApi from './apis/jobPositionCategoryApi';
 import jobWelfareApi from './apis/jobWelfareApi';
 import professionApi from './apis/professionApi';
+import resumeEducationApi from './apis/resumeEducation';
 
 const persistConfig = {
 	key: 'root',
@@ -41,6 +42,7 @@ const store = configureStore({
 			jobPositionCategoryApi.middleware,
 			jobWelfareApi.middleware,
 			professionApi.middleware,
+			resumeEducationApi.middleware,
 			// logger middleware
 			RTKQueryLogger
 		])
