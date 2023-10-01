@@ -14,7 +14,7 @@ import {
 	useUpdateResumeCertificateMutation,
 	useCreateResumeCertificateMutation,
 	useDeleteResumeCertificateMutation,
-	useLazyGetOneResumeCertificateQuery
+	useLazyGetOneResumeCertificateQuery,
 } from '~/App/providers/apis/resumeCertificate';
 
 import { resumeCertificateSchema } from '~/App/schemas/resumeCertificateSchema';
@@ -126,7 +126,7 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 				status='default'
 				onOpenResume={() => toggle('resume_certificate')}
 				onOpenTipSlide={() => toggleTips('t_resume_certificate')}
-				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i14.png'>
+				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i10.png'>
 				<div className={cx('content')}>
 					<div className={cx('list-references')}>
 						{resumeCertificate?.length > 0 ? (

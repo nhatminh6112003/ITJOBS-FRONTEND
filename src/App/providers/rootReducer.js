@@ -12,6 +12,7 @@ import jobWelfareApi from './apis/jobWelfareApi';
 import professionApi from './apis/professionApi';
 import resumeEducationApi from './apis/resumeEducation';
 import resumeCertificateApi from './apis/resumeCertificate';
+import resumeObjectiveApi from './apis/resumeObjectiveApi';
 const rootReducer = combineReducers({
 	[authSlice.name]: authSlice.reducer,
 	[themeSlice.name]: themeSlice.reducer,
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
 	[jobWelfareApi.reducerPath]: jobWelfareApi.reducer,
 	[professionApi.reducerPath]: professionApi.reducer,
 	[resumeEducationApi.reducerPath]: resumeEducationApi.reducer,
-	[resumeCertificateApi.reducerPath]: resumeCertificateApi.reducer
+	[resumeCertificateApi.reducerPath]: resumeCertificateApi.reducer,
+	[resumeObjectiveApi.reducerPath]: resumeObjectiveApi.reducer
 });
 
 export default rootReducer;

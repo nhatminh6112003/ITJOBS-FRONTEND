@@ -116,7 +116,7 @@ const ResumeRefer = ({ className: cx, isShowing, toggle }) => {
 				status='default'
 				onOpenResume={() => toggle('resume_refer')}
 				onOpenTipSlide={() => toggleTips('t_resume_refer')}
-				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i14.png'>
+				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i8.png'>
 				<div className={cx('content')}>
 					<div className={cx('list-references')}>
 						{resumeRefer?.length > 0 ? (
