@@ -214,32 +214,29 @@ const ResumeActivity = ({ className: cx, isShowing, toggle }) => {
 };
 
 const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing }) => {
-	// const activityCurrent = watch('activity_current');
+
 	const [isDisabled, setIsDisabled] = useState(false);
 
-	useEffect(() => {
-		console.log(data);
-		
-	}, [data]);
+	const handleCheckboxChange = (event) => {
+	  setIsDisabled(event.target.checked);
+	};
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl control={control} name='organization' id='organization' label='Tổ chức' />
 					</div>
 				</div>
-			</div>
-
-			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl control={control} name='role' id='role' label='Vai trò' />
 					</div>
 				</div>
 			</div>
+
 			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl
 							control={control}
@@ -250,9 +247,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing }) =
 						/>
 					</div>
 				</div>
-			</div>
-			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl
 							control={control}
@@ -265,15 +260,19 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing }) =
 					</div>
 				</div>
 			</div>
+
 			<div className={cx('row')}>
 				<div className={cx('col-lg-12')}>
 					<div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+					
 						<CheckBoxFieldControl
 							name={'activity_current'}
 							control={control}
 							label={'Hiện tại'}
-							checked={data?.activity_current === 1 ? true : false}
-						/>
+							// checked={data?.activity_current === 1 ? true : false}
+							defaultChecked={data?.activity_current === 1 ? true : false}
+							onChange={handleCheckboxChange}
+						/> 
 					</div>
 				</div>
 			</div>

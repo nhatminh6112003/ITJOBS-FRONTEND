@@ -22,7 +22,7 @@ import { resumeCertificateSchema } from '~/App/schemas/resumeCertificateSchema';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import formatDate from '~/Core/utils/formatDate';
 import moment from 'moment';
-
+import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
 const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 	const resume = useSelector((state) => state.auth?.user?.resume);
@@ -212,16 +212,11 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 };
 
 const Form = ({ onSubmit, handleSubmit, control, cx, watch, data }) => {
-	const cerLimit = watch('cer_limit');
 	const [isDisabled, setIsDisabled] = useState(false);
-	useEffect(() => {
-		const cer_limit = data?.cer_limit;
-		if (cerLimit || cer_limit === 1) {
-			setIsDisabled(true);
-		} else {
-			setIsDisabled(false);
-		}
-	}, [isDisabled, cerLimit, data]);
+
+	const handleCheckboxChange = (event) => {
+	  setIsDisabled(event.target.checked);
+	};
 
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
@@ -263,20 +258,14 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data }) => {
 			<div className={cx('row')}>
 				<div className={cx('col-lg-12')}>
 					<div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-						<InputFieldControl
-							style={{
-								position: 'relative',
-								top: 2,
-								marginRight: 5
-							}}
+					<CheckBoxFieldControl
+							name={'cer_limit'}
 							control={control}
-							name='cer_limit'
-							id='cer_limit'
 							label='Không giới hạn'
-							type='checkbox'
-							defaultChecked={cerLimit}
-							checked={isDisabled}
-						/>
+							defaultChecked={data?.cer_limit === 1 ? true : false}
+							onChange={handleCheckboxChange}
+						/> 
+					
 					</div>
 				</div>
 			</div>
