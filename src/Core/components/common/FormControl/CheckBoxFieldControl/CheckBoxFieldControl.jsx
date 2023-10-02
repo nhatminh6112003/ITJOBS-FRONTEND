@@ -19,6 +19,7 @@ const CheckBoxFieldControl = ({ defaultValue, disabled, rules, checked, name, co
 		<div style={{ marginTop: 4 }}>
 			<input
 				{...props}
+				checked={checked}
 				defaultValue={defaultValue}
 				type='checkbox'
 				style={{

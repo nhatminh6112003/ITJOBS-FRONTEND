@@ -20,6 +20,7 @@ import ResumeRefer from './components/ResumeRefer';
 import ResumeEducation from './components/ResumeEducation';
 import ResumeCertificate from './components/ResumeCertificate';
 import ResumeObjective from './components/ResumeObjective';
+import ResumeActivity from './components/ResumeActivity';
 
 export const cx = classNames.bind(styles);
 
@@ -30,10 +31,12 @@ const MyProfile = () => {
 		resume_certificate: false,
 		resume_education: false,
 		resume_objective: false,
+		resume_activity: false,
 		update_resume_refer: false,
 		update_resume_certificate: false,
 		update_resume_education: false,
-		update_resume_objective: false
+		update_resume_objective: false,
+		update_resume_activity: false
 	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -231,7 +234,7 @@ const MyProfile = () => {
 										</table>
 									</div>
 								</Widget>
-								
+
 								<ResumeObjective className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<div className={cx('widget', 'widget-18')} id='widget-18'>
@@ -413,12 +416,10 @@ const MyProfile = () => {
 									</div>
 								</div>
 
-								<div className={cx('widget', 'widget-16')} id='widget-16'>
-									<ResumeEducation className={cx} isShowing={isShowing} toggle={toggle} />
-								</div>
-								<div className={cx('widget', 'widget-16')} id='certificate-section'>
-									<ResumeCertificate className={cx} isShowing={isShowing} toggle={toggle} />
-								</div>
+								<ResumeEducation className={cx} isShowing={isShowing} toggle={toggle} />
+
+								<ResumeCertificate className={cx} isShowing={isShowing} toggle={toggle} />
+								
 								<div className={cx('widget', 'widget-22', 'widget-17')} id='language-section'>
 									{' '}
 									<div className={cx('widget-head')}>
@@ -662,50 +663,7 @@ const MyProfile = () => {
 										</ul>
 									</div>
 								</div>
-								<div className={cx('widget', 'widget-23', 'widget-15')} id='other-activity-section'>
-									{' '}
-									<div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image')}>
-													<img src='./img/dash-board/i13.png' alt='' />
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Hoạt động khác</h3>
-													<div className={cx('status')}>
-														<p>Không bắt buộc</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-other-activity')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-add')}>
-													<a href='javascript:void(0)' onClick='editResumeActivity(0);'>
-														{' '}
-														<em className={cx('material-icons')}>
-															<AddIcon sx={{ fontSize: '20px' }} />
-														</em>
-														<span>Thêm mới</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('no-content')}>
-											<p>Mô tả hoạt động</p>
-											<a href='javascript:void(0)' onClick='editResumeActivity(0);'>
-												<em className={cx('mdi', 'mdi-plus-circle')} />
-												<span>Thêm mới</span>
-											</a>
-										</div>
-									</div>
-								</div>
+								<ResumeActivity className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
 							</div>
