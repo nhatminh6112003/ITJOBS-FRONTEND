@@ -10,53 +10,52 @@ import Tips from '~/Core/components/common/Modal/Tips';
 import useModal from '~/App/hooks/useModal';
 import NoContent from './NoContent';
 import {
-	useGetAllCertificateQuery,
-	useUpdateResumeCertificateMutation,
-	useCreateResumeCertificateMutation,
-	useDeleteResumeCertificateMutation,
-	useLazyGetOneResumeCertificateQuery
-} from '~/App/providers/apis/resumeCertificate';
+	useCreateResumeActivityMutation,
+	useDeleteResumeActivityMutation,
+	useGetAllActivityQuery,
+	useLazyGetOneResumeActivityQuery,
+	useUpdateResumeActivityMutation
+} from '~/App/providers/apis/resumeAcitivity';
 
-import { resumeCertificateSchema } from '~/App/schemas/resumeCertificateSchema';
+import { resumeActivitySchema } from '~/App/schemas/resumeActivitySchema';
 
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
+import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import formatDate from '~/Core/utils/formatDate';
+
 import moment from 'moment';
 import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
-const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
+const ResumeActivity = ({ className: cx, isShowing, toggle }) => {
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 	const resume = useSelector((state) => state.auth?.user?.resume);
 	const [updateId, setUpdateId] = useState(null);
 
 	//toggle tips
 	const { isShowing: showTips, toggle: toggleTips } = useModal({
-		t_resume_certificate: false
+		t_resume_activity: false
 	});
 
 	//Gọi api rtk query
-	const { data: resumeCertificate, refetch } = useGetAllCertificateQuery(resume?.id);
-	const [trigger, result] = useLazyGetOneResumeCertificateQuery();
-	const [createCertificateMutation] = useCreateResumeCertificateMutation();
-	const [deleteCertificateMutation] = useDeleteResumeCertificateMutation();
-	const [updateCertificateMutation] = useUpdateResumeCertificateMutation();
+	const { data: resumeAcitivity, refetch } = useGetAllActivityQuery(resume?.id);
+	const [trigger, result] = useLazyGetOneResumeActivityQuery();
+	const [createReferMutation] = useCreateResumeActivityMutation();
+	const [deleteReferMutation] = useDeleteResumeActivityMutation();
+	const [updateReferMutation] = useUpdateResumeActivityMutation();
 
 	const { control, handleSubmit, reset, watch } = useForm({
-		resolver: yupResolver(resumeCertificateSchema)
+		resolver: yupResolver(resumeActivitySchema)
 	});
-
 	const {
 		control: updateControl,
 		handleSubmit: handleUpdateSubmit,
-		reset: updateReset,
-		watch: updateWatch,
-		setValue
+		reset: updateReset
 	} = useForm({
-		resolver: yupResolver(resumeCertificateSchema)
+		resolver: yupResolver(resumeActivitySchema)
 	});
 
 	const onCreateSubmit = async (data) => {
-		toggle('resume_certificate');
-		createCertificateMutation({
+		toggle('resume_activity');
+		createReferMutation({
 			...data,
 			resume_id: resume?.id
 		})
@@ -74,7 +73,7 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 	};
 
 	const onUpdateSubmit = async (data) => {
-		updateCertificateMutation({
+		updateReferMutation({
 			id: updateId,
 			payload: data
 		})
@@ -82,7 +81,7 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 			.then((r) => {
 				if (r.status == 200) {
 					toast.success(r?.message);
-					toggle('update_resume_certificate');
+					toggle('update_resume_activity');
 				}
 			});
 	};
@@ -90,11 +89,11 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 	const onOpenModalUpdate = (id) => {
 		setUpdateId(id);
 		trigger(id);
-		toggle('update_resume_certificate');
+		toggle('update_resume_activity');
 	};
 
 	const handleConfirmDelete = async (id) => {
-		deleteCertificateMutation(id)
+		deleteReferMutation(id)
 			.unwrap()
 			.then((r) => {
 				if (r.status == 200) {
@@ -106,12 +105,12 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 
 	useEffect(() => {
 		updateReset({
-			cer_title: result?.data?.cer_title,
-			cer_by: result?.data?.cer_by,
-			redu_desc: result?.data?.redu_desc,
-			cer_form: moment(result?.data?.cer_form).format('YYYY-MM-DD'),
-			cer_to: moment(result?.data?.cer_form).format('YYYY-MM-DD'),
-			cer_limit: result?.data?.cer_limit,
+			organization: result?.data?.organization,
+			role: result?.data?.role,
+			start_date: moment(result?.data?.start_date).format('YYYY-MM-DD'),
+			end_date: moment(result?.data?.end_date).format('YYYY-MM-DD'),
+			activity_des: result?.data?.activity_des,
+			activity_current: result?.data?.activity_current,
 			resume_id: result?.data?.resume_id
 		});
 	}, [updateReset, result]);
@@ -120,20 +119,20 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 		<Fragment>
 			<Widget
 				action='ADD'
-				title='Chứng chỉ khác'
+				title='Hoạt động khác'
 				className={cx('widget', 'widget-20')}
 				id='t-resume-section'
 				status='default'
-				onOpenResume={() => toggle('resume_certificate')}
-				onOpenTipSlide={() => toggleTips('t_resume_certificate')}
-				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i10.png'>
+				onOpenResume={() => toggle('resume_activity')}
+				onOpenTipSlide={() => toggleTips('t_resume_activity')}
+				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i13.png'>
 				<div className={cx('content')}>
 					<div className={cx('list-references')}>
-						{resumeCertificate?.length > 0 ? (
-							resumeCertificate?.map((item) => (
+						{resumeAcitivity?.length > 0 ? (
+							resumeAcitivity?.map((item) => (
 								<div className={cx('item')}>
 									<div className={cx('title')}>
-										<h4 className={cx('sub-title')}>{item?.cer_title}</h4>
+										<h4 className={cx('sub-title')}>{item?.organization}</h4>
 										<ul className={cx('list-action')}>
 											<li className={cx('edit-link')}>
 												<a href='javascript:void(0);' onClick={() => onOpenModalUpdate(item.id)}>
@@ -151,35 +150,36 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 									</div>
 									<div className={cx('content')}>
 										<ul>
-											<li>{item?.cer_by}</li>
+											<li>{item?.role}</li>
 											<li>
 												{formatDate(item.cer_form)}-
-												{item.cer_limit ? 'Không giới hạn' : formatDate(item.cer_to)}
+												{item.activity_current ? 'Hiện tại' : formatDate(item.end_date)}
 											</li>
+											<li>{item?.activity_des}</li>
 										</ul>
 									</div>
 								</div>
 							))
 						) : (
-							<NoContent onClick={() => toggle('resume_certificate')} title='Vui lòng thêm chứng chỉ khác' />
+							<NoContent onClick={() => toggle('resume_activity')} title='Vui lòng thêm hoạt động khác' />
 						)}
 					</div>
 				</div>
 			</Widget>
 
 			<ResumeModal
-				isOpen={isShowing.resume_certificate}
-				hide={() => toggle('resume_certificate')}
+				isOpen={isShowing.resume_activity}
+				hide={() => toggle('resume_activity')}
 				className={cx}
-				title='Thông Tin Chứng Chỉ'>
+				title='Hoạt động khác'>
 				<Form control={control} onSubmit={onCreateSubmit} handleSubmit={handleSubmit} cx={cx} watch={watch} />
 			</ResumeModal>
 
 			<ResumeModal
-				isOpen={isShowing.update_resume_certificate}
-				hide={() => toggle('update_resume_certificate')}
+				isOpen={isShowing.update_resume_activity}
+				hide={() => toggle('update_resume_activity')}
 				className={cx}
-				title='Thông Tin Chứng Chỉ'>
+				title='Hoạt động khác'>
 				<Form
 					control={updateControl}
 					onSubmit={onUpdateSubmit}
@@ -190,15 +190,17 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 				/>
 			</ResumeModal>
 			<Tips
-				isShowing={showTips.t_resume_certificate}
-				hide={() => toggleTips('t_resume_certificate')}
+				isShowing={showTips.t_resume_activity}
+				hide={() => toggleTips('t_resume_activity')}
 				title='Để CV không chỉ Hay mà còn Đẹp trong mắt Nhà tuyển dụng'>
 				<div className='swiper-wrapper'>
 					Chứng chỉ khác:
 					<br />
 					Bạn có thể chọn hiển thị hoặc không hiển thị mục này trên CV
 					<br />
-					- Hãy điền đầy đủ các thông tin như ngày hoàn thành, tổ chức cấp.
+					- Chỉ nên đề cập đến những chứng chỉ liên quan đến công việc bạn đang ứng tuyển hoặc những chứng chỉ có
+					kĩ năng nổi bật.
+					<br />- Hãy điền đầy đủ các thông tin như ngày hoàn thành, tổ chức cấp.
 					<br />- Bạn cũng có thể kể tên các hội thảo, hội nghị có uy tín mà bạn đã từng được tham dự
 				</div>
 			</Tips>
@@ -211,61 +213,78 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 	);
 };
 
-const Form = ({ onSubmit, handleSubmit, control, cx, watch, data }) => {
+const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing }) => {
+
 	const [isDisabled, setIsDisabled] = useState(false);
 
 	const handleCheckboxChange = (event) => {
 	  setIsDisabled(event.target.checked);
 	};
-
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
-						<InputFieldControl control={control} name='cer_title' id='cer_title' label='Tên chứng chỉ' />
+						<InputFieldControl control={control} name='organization' id='organization' label='Tổ chức' />
+					</div>
+				</div>
+				<div className={cx('col-lg-6')}>
+					<div className={cx('input-group')}>
+						<InputFieldControl control={control} name='role' id='role' label='Vai trò' />
 					</div>
 				</div>
 			</div>
+
 			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
-					<div className={cx('input-group')}>
-						<InputFieldControl control={control} name='cer_by' id='cer_by' label='Cấp bởi' />
-					</div>
-				</div>
-			</div>
-			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
-					<div className={cx('input-group')}>
-						<InputFieldControl control={control} name='cer_form' id='cer_form' label='Từ' type='date' />
-					</div>
-				</div>
-			</div>
-			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl
 							control={control}
-							name='cer_to'
-							id='cer_to'
-							label='Ngày hết hạn'
+							name='start_date'
+							id='start_date'
+							label='Thời gian hoạt động'
+							type='date'
+						/>
+					</div>
+				</div>
+				<div className={cx('col-lg-6')}>
+					<div className={cx('input-group')}>
+						<InputFieldControl
+							control={control}
+							name='end_date'
+							id='end_date'
+							label='Đến'
 							type='date'
 							disabled={isDisabled}
 						/>
 					</div>
 				</div>
 			</div>
+
 			<div className={cx('row')}>
 				<div className={cx('col-lg-12')}>
 					<div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-					<CheckBoxFieldControl
-							name={'cer_limit'}
+					
+						<CheckBoxFieldControl
+							name={'activity_current'}
 							control={control}
-							label='Không giới hạn'
-							defaultChecked={data?.cer_limit === 1 ? true : false}
+							label={'Hiện tại'}
+							// checked={data?.activity_current === 1 ? true : false}
+							defaultChecked={data?.activity_current === 1 ? true : false}
 							onChange={handleCheckboxChange}
 						/> 
-					
+					</div>
+				</div>
+			</div>
+			<div className={cx('form-group', 'row')}>
+				<div className={cx('col-lg-12')}>
+					<div className={cx('input-group')}>
+						<TextAreaFieldControl
+							control={control}
+							name='activity_des'
+							label='Mô tả hoạt động'
+							id='activity_des'
+						/>
 					</div>
 				</div>
 			</div>
@@ -280,4 +299,4 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data }) => {
 	);
 };
 
-export default ResumeCertificate;
+export default ResumeActivity;

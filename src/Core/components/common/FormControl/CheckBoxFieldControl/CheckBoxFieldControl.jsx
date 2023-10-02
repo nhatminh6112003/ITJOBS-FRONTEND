@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Fragment, forwardRef, useId, useRef } from 'react';
 import { useController } from 'react-hook-form';
-const CheckBoxFieldControl = ({ defaultValue, disabled, rules, checked, name, control, label, ...props }) => {
+const CheckBoxFieldControl = ({ defaultChecked,defaultValue, disabled, rules, checked, name, control, label, ...props }) => {
 	const {
 		field,
 		fieldState: { error },
@@ -19,6 +19,8 @@ const CheckBoxFieldControl = ({ defaultValue, disabled, rules, checked, name, co
 		<div style={{ marginTop: 4 }}>
 			<input
 				{...props}
+				defaultChecked={defaultChecked}
+				checked={checked}
 				defaultValue={defaultValue}
 				type='checkbox'
 				style={{

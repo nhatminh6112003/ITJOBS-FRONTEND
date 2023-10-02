@@ -49,5 +49,5 @@ export const {
 	useLazyGetOneResumeCertificateQuery,
 	useUpdateResumeCertificateMutation
 } = resumeCertificateApi;
-   
+
 export default resumeCertificateApi;
