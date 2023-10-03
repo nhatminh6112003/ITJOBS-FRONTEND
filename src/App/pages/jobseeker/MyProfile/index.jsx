@@ -21,6 +21,7 @@ import ResumeEducation from './components/ResumeEducation';
 import ResumeCertificate from './components/ResumeCertificate';
 import ResumeObjective from './components/ResumeObjective';
 import ResumeActivity from './components/ResumeActivity';
+import ResumeExperience from './components/ResumeExperience';
 
 export const cx = classNames.bind(styles);
 
@@ -32,11 +33,13 @@ const MyProfile = () => {
 		resume_education: false,
 		resume_objective: false,
 		resume_activity: false,
+		resume_experience: false,
 		update_resume_refer: false,
 		update_resume_certificate: false,
 		update_resume_education: false,
 		update_resume_objective: false,
-		update_resume_activity: false
+		update_resume_activity: false,
+		update_resume_experience: false
 	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -310,116 +313,12 @@ const MyProfile = () => {
 										</table>
 									</div>
 								</div>
-								<div className={cx('widget', 'widget-15')} id='widget-15'>
-									<div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image')}>
-													<img src='./img/dash-board/i4.png' alt='' />
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Kinh nghiệm làm việc *</h3>
-													<div className={cx('status', 'success')}>
-														<p>Hoàn thành</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-experience')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-add')}>
-													<a href='' onClick='show_frmExperience(0);' title='Thêm mới'>
-														<em className={cx('material-icons')}>
-															<AddIcon sx={{ fontSize: '20px' }} />
-														</em>
-														<span>Thêm mới</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('experience')}>
-											<table>
-												<tbody>
-													<tr>
-														<td>Số năm kinh nghiệm</td>
-														<td id='txt-experience'>Chưa có kinh nghiệm</td>
-														<td>
-															<div className={cx('link-edit')}>
-																<a href='' onClick='editFrmExperience();'>
-																	{' '}
-																	<em className={cx('material-icons')}>create</em>
-																</a>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td>Cấp bậc hiện tại</td>
-														<td id='cbprofile_levelpresent'>Mới tốt nghiệp</td>
-														<td>
-															<div className={cx('link-edit')}>
-																<a href='' onClick='editFrmExperience();'>
-																	{' '}
-																	<em className={cx('material-icons')}>create</em>
-																</a>
-															</div>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-										<div className={cx('sticker')}>
-											<ul className={cx('list-sticker')}>
-												<li className={cx('item')} id='expList_2451920'>
-													<div className={cx('head-sticker')}>
-														<div className={cx('title')}>
-															<h4>nhân viên</h4>
-															<div className={cx('sub-title')}>
-																<p>fpt</p>
-															</div>
-															<div className={cx('date')}>
-																<p>1/2005 - Hiện tại</p>
-															</div>
-														</div>
-														<div className={cx('right-head')}>
-															<div className={cx('view-less')}>
-																<em className={cx('material-icons')}>expand_more</em>
-															</div>
-															<ul className={cx('list-action')}>
-																<li className={cx('edit-link')}>
-																	<a href='' title='Chỉnh sửa' onClick='show_frmExperience(2451920);'>
-																		<em className={cx('material-icons')}>
-																			<EditIcon fontSize='normal' />
-																		</em>
-																	</a>
-																</li>
-																<li className={cx('delete')}>
-																	<a href='' title='Xóa' onClick='deleteExperience(2451920);'>
-																		{' '}
-																		<em className={cx('material-icons')}>highlight_off</em>
-																	</a>
-																</li>
-															</ul>
-														</div>
-													</div>
-													<div className={cx('body-sticker')}>
-														<div className={cx('content')}> 123 </div>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
+								<ResumeExperience className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeEducation className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeCertificate className={cx} isShowing={isShowing} toggle={toggle} />
-								
+
 								<div className={cx('widget', 'widget-22', 'widget-17')} id='language-section'>
 									{' '}
 									<div className={cx('widget-head')}>
