@@ -14,6 +14,8 @@ import resumeEducationApi from './apis/resumeEducation';
 import resumeCertificateApi from './apis/resumeCertificate';
 import resumeObjectiveApi from './apis/resumeObjectiveApi';
 import resumeActivityApi from './apis/resumeAcitivity';
+import resumeExperienceApi from './apis/resumeExperienceApi';
+import workTypeApi from './apis/workTypeApi';
 const rootReducer = combineReducers({
 	[authSlice.name]: authSlice.reducer,
 	[themeSlice.name]: themeSlice.reducer,
@@ -29,7 +31,9 @@ const rootReducer = combineReducers({
 	[resumeEducationApi.reducerPath]: resumeEducationApi.reducer,
 	[resumeCertificateApi.reducerPath]: resumeCertificateApi.reducer,
 	[resumeObjectiveApi.reducerPath]: resumeObjectiveApi.reducer,
-	[resumeActivityApi.reducerPath]: resumeActivityApi.reducer
+	[resumeActivityApi.reducerPath]: resumeActivityApi.reducer,
+	[resumeExperienceApi.reducerPath]: resumeExperienceApi.reducer,
+	[workTypeApi.reducerPath]: workTypeApi.reducer
 });
 
 export default rootReducer;
