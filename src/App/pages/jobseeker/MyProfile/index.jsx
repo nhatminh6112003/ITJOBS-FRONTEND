@@ -20,6 +20,7 @@ import ResumeRefer from './components/ResumeRefer';
 import ResumeEducation from './components/ResumeEducation';
 import ResumeCertificate from './components/ResumeCertificate';
 import ResumeObjective from './components/ResumeObjective';
+import ResumeAddioninfo from './components/ResumeAddioninfo';
 import ResumeActivity from './components/ResumeActivity';
 import ResumeExperience from './components/ResumeExperience';
 
@@ -32,12 +33,14 @@ const MyProfile = () => {
 		resume_certificate: false,
 		resume_education: false,
 		resume_objective: false,
+		ResumeAddioninfo: false,
 		resume_activity: false,
 		resume_experience: false,
 		update_resume_refer: false,
 		update_resume_certificate: false,
 		update_resume_education: false,
 		update_resume_objective: false,
+		update_resume_addioninfo: false,
 		update_resume_activity: false,
 		update_resume_experience: false
 	});
@@ -319,6 +322,8 @@ const MyProfile = () => {
 
 								<ResumeCertificate className={cx} isShowing={isShowing} toggle={toggle} />
 
+								<ResumeAddioninfo className={cx} isShowing={isShowing} toggle={toggle} />
+
 								<div className={cx('widget', 'widget-22', 'widget-17')} id='language-section'>
 									{' '}
 									<div className={cx('widget-head')}>
@@ -505,7 +510,7 @@ const MyProfile = () => {
 										</div>
 									</div>
 								</div>
-								<div className={cx('widget', 'widget-19')} id='widget-19'>
+								{/* <div className={cx('widget', 'widget-19')} id='widget-19'>
 									{' '}
 									<div className={cx('widget-head')}>
 										<div className={cx('cb-title-h3')}>
@@ -561,7 +566,7 @@ const MyProfile = () => {
 											</li>
 										</ul>
 									</div>
-								</div>
+								</div> */}
 								<ResumeActivity className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
