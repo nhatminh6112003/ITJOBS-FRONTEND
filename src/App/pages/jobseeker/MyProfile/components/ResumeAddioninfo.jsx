@@ -68,12 +68,12 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	};
 
 	const onUpdateSubmit = async (data) => {
-		console.log('TCL: onUpdateSubmit -> updateId', updateId);
 
 		updateAddioninfoMutation({
+			id: resume?.id,
 			payload: {
 				...data,
-				resume_id: resume?.id
+				resume_id: resume?.id,
 			}
 		})
 			.unwrap()
@@ -92,7 +92,6 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	};
 
 	const handleConfirmDelete = async (id) => {
-		console.log(id);
 		deleteAddioninfoMutation(id)
 			.unwrap()
 			.then((r) => {

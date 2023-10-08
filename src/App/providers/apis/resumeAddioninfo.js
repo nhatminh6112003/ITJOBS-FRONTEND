@@ -24,7 +24,7 @@ const resumeAddioninfoApi = createApi({
 			query: (payload) => {
 				return { url: `/resume_addioninfo`, method: 'POST', body: payload };
 			},
-			invalidatesTags: ['resume_addionnifo']
+			invalidatesTags: ['resume_addioninfo']
 		}),
 		updateResumeAddioninfo: build.mutation({
 			query: ({ id, payload }) => {
