@@ -20,6 +20,7 @@ import resumeCertificateApi from './apis/resumeCertificate';
 import resumeObjectiveApi from './apis/resumeObjectiveApi';
 import resumeActivityApi from './apis/resumeAcitivity';
 import resumeExperienceApi from './apis/resumeExperienceApi';
+import resumeAddioninfoApi from './apis/resumeAddioninfo';
 import workTypeApi from './apis/workTypeApi';
 
 const persistConfig = {
@@ -27,7 +28,7 @@ const persistConfig = {
 	storage,
 	whitelist: ['auth', 'theme']
 };
-
+ 
 const persistedReducer = persistReducer(persistConfig, rootReducer); // Provide a way to combine redux's root reducer
 
 const store = configureStore({
@@ -52,6 +53,7 @@ const store = configureStore({
 			resumeObjectiveApi.middleware,
 			resumeActivityApi.middleware,
 			resumeExperienceApi.middleware,
+			resumeAddioninfoApi.middleware,
 			workTypeApi.middleware,
 			// logger middleware
 			RTKQueryLogger
