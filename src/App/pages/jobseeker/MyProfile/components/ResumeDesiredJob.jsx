@@ -3,6 +3,7 @@ import Widget from './Widget';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ResumeModal from './ResumeModal';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -21,21 +22,20 @@ import { useGetAllWorkTypeQuery } from '~/App/providers/apis/workTypeApi';
 import { resumeDesiredJoSchema } from '~/App/schemas/resumeDesiredJoSchema';
 const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	const resume = useSelector((state) => state.auth?.user?.resume);
-	const [updateId, setUpdateId] = useState(null);
+	// const [updateId, setUpdateId] = useState(null);
 	//toggle tips
 	const { isShowing: showTips, toggle: toggleTips } = useModal({
 		t_resume_desired_job: false
 	});
-
+const {data:test}=useGetAllProvincesQuery()
+	console.log("TCL: test", test)
 	//Gọi api rtk query
 	const [trigger, result] = useLazyGetOneResumeDesiredJobQuery();
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	// const { data: listProvinces } = useGetAllProvincesQuery();
-	// const { data: getone } = useGetOneResumeDesiredJobQuery(resume?.id);
+	const { data: resume_desired_job } = useGetOneResumeDesiredJobQuery(resume?.id);
 	const [updateReferMutation] = useUpdateResumeDesiredJobMutation();
-	useEffect(() => {
-		// console.log('getone', getone);
-	}, []);
+	
 	const { control, handleSubmit, reset } = useForm({
 		resolver: yupResolver(resumeDesiredJoSchema)
 	});
@@ -49,7 +49,7 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 
 	const onUpdateSubmit = async (data) => {
 		updateReferMutation({
-			id: updateId,
+			id: resume_desired_job?.resume_id,
 			payload: data
 		})
 			.unwrap()
@@ -61,8 +61,8 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 			});
 	};
 	const onOpenModalUpdate = (id) => {
-		setUpdateId(id);
-		trigger(id);
+		// setUpdateId(id);
+		// trigger(id);
 		toggle('update_resume_desired_job');
 	};
 
@@ -89,7 +89,7 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 				className={cx('widget', 'widget-20')}
 				id='t-resume-section'
 				status={result ? 'success' : 'error'}
-				onOpenResume={onOpenModalUpdate(`${resume?.id}`)}
+				onOpenResume={()=>toggle('update_resume_desired_job')}
 				onOpenTipSlide={() => toggleTips('t_resume_desired_job')}
 				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i5.png'>
 				<div className={cx('content')}>
@@ -157,16 +157,52 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listWorkType }) => {
 				</div>
 				<div className={cx('col-lg-4')}>
 					<div className={cx('input-group')}>
-						<InputFieldControl control={control} name='' id='' label='Từ' type='text' />
+						<InputFieldControl control={control} name='' id='' placeholder='Từ' type='text' />
 					</div>
 				</div>
 				<div className={cx('col-lg-4')}>
 					<div className={cx('input-group')}>
-						<InputFieldControl control={control} name='' id='' label='Đến' type='text' />
+						<InputFieldControl control={control} name='' id='' placeholder='Đến' type='text' />
 					</div>
 				</div>
 			</div>
 			<div className={cx('form-group', 'row')}>
+				<div className={cx('col-lg-12')}>
+					<div className={cx('input-group')}>
+				
+						<SelectFieldControl
+							control={control}
+							options={LevelArray}
+							name='redu_degree'
+							id='redu_degree'
+							label='Nơi làm việc mong muốn'
+						/> 
+					</div>
+				</div>
+			</div>
+			<div className={cx('form-group', 'row')}>
+				<div className={cx('col-lg-12')}>
+					<div className={cx('input-group')}>
+					<SelectMultipleFieldControl
+														label='Phúc lợi mong muốn'
+														options={LevelArray}
+														placeholder='Phúc lợi mong muốn'
+														maxItems={5}
+														control={control}
+														rules={{ required: 'Please select at least one option' }}
+														name='redu_degree'
+													/>
+						{/* <SelectFieldControl
+							control={control}
+							options={LevelArray}
+							name='redu_degree'
+							id='redu_degree'
+							label='Phúc lợi mong muốn'
+						/> */}
+					</div>
+				</div>
+			</div>
+			<div className={cx('row')} style={{marginBottom:20}}>
 				<div className={cx('col-lg-4')}>
 					<label for=''>Hình thức làm việc</label>
 				</div>
@@ -180,7 +216,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listWorkType }) => {
 					</div>
 				</div>
 			</div>
-			<div className={cx('form-group', 'row')}>
+			<div className={cx('row','d-flex','align-items-center')} style={{marginBottom:20}}>
 				<div className={cx('col-lg-4')}>
 					<label for=''>Phương thức công việc</label>
 				</div>
@@ -188,32 +224,8 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listWorkType }) => {
 					<CheckBoxFieldControl name='' id='' control={control} label='Work form home' />
 				</div>
 			</div>
-			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
-					<div className={cx('input-group')}>
-						<SelectFieldControl
-							control={control}
-							options={LevelArray}
-							name='redu_degree'
-							id='redu_degree'
-							label='Nơi làm việc mong muốn'
-						/>
-					</div>
-				</div>
-			</div>
-			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
-					<div className={cx('input-group')}>
-						<SelectFieldControl
-							control={control}
-							options={LevelArray}
-							name='redu_degree'
-							id='redu_degree'
-							label='Phúc lợi mong muốn'
-						/>
-					</div>
-				</div>
-			</div>
+		
+	
 			<div className={cx('form-group', 'form-button')}>
 				<div className={cx('button-save', 'button-center')}>
 					<button className={cx('btn-gradient')} type='submit'>

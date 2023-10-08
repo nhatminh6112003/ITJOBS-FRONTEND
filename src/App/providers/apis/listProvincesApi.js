@@ -1,12 +1,12 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi,fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import baseQueryWithAdmin from '../fetchBaseQueryAdmin';
 const listProvincesApi = createApi({
 	reducerPath: 'Provinces',
-	baseQuery: baseQueryWithAdmin,
+	baseQuery:fetchBaseQuery({ baseUrl: 'https://provinces.open-api.vn/api' }),
 	endpoints: (build) => ({
 		getAllProvinces: build.query({
-			query: (arg) => {
-				return { url: `https://provinces.open-api.vn/api/p/`, method: 'GET', params: arg.params };
+			query: () => {
+				return { url: `p`, method: 'GET'};
 			},
 			providesTags: ['Provinces'],
 			transformResponse: (response) => response
