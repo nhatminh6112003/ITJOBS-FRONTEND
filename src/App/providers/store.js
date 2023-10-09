@@ -16,13 +16,13 @@ import jobPositionCategoryApi from './apis/jobPositionCategoryApi';
 import jobWelfareApi from './apis/jobWelfareApi';
 import professionApi from './apis/professionApi';
 import resumeEducationApi from './apis/resumeEducation';
+import resumeSkillApi from './apis/resumeSkill';
 import resumeCertificateApi from './apis/resumeCertificate';
 import resumeObjectiveApi from './apis/resumeObjectiveApi';
 import resumeActivityApi from './apis/resumeAcitivity';
 import resumeExperienceApi from './apis/resumeExperienceApi';
 import resumeAddioninfoApi from './apis/resumeAddioninfo';
 import workTypeApi from './apis/workTypeApi';
-import resumeSkillApi from './apis/resumeSkill';
 
 const persistConfig = {
 	key: 'root',
@@ -50,13 +50,13 @@ const store = configureStore({
 			jobWelfareApi.middleware,
 			professionApi.middleware,
 			resumeEducationApi.middleware,
+			resumeSkillApi.middleware,
 			resumeCertificateApi.middleware,
 			resumeObjectiveApi.middleware,
 			resumeActivityApi.middleware,
 			resumeExperienceApi.middleware,
 			resumeAddioninfoApi.middleware,
 			workTypeApi.middleware,
-			resumeSkillApi.middleware,
 			// logger middleware
 			RTKQueryLogger
 		])

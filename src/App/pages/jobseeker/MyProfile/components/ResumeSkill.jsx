@@ -22,10 +22,10 @@ import { resumeSkillSchema } from '~/App/schemas/resumeSkillSchema';
 
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
-import { levelArray, level } from '~/App/constants/levelArray';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import formatDate from '~/Core/utils/formatDate';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl/SelectFieldControl';
+import SkillEnum from '~/App/constants/skillEnum';
 const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 	const resume = useSelector((state) => state.auth?.user?.resume);
@@ -58,6 +58,7 @@ const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 		toggle('resume_skill');
 		createReferMutation({
 			...data,
+			skil_level:data.skill_level.toString(),
 			resume_id: resume?.id
 		})
 			.unwrap()
@@ -252,12 +253,11 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
 						<SelectFieldControl
-							// options={levelArray}
+							options={SkillEnum}
 							control={control}
 							name='skill_level'
 							id='skill_level'
 							label='Mức độ'
-							type='date'
 						/>
 					</div>
 				</div>
