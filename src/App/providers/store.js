@@ -22,6 +22,7 @@ import resumeActivityApi from './apis/resumeAcitivity';
 import resumeExperienceApi from './apis/resumeExperienceApi';
 import resumeAddioninfoApi from './apis/resumeAddioninfo';
 import workTypeApi from './apis/workTypeApi';
+import resumeSkillApi from './apis/resumeSkill';
 
 const persistConfig = {
 	key: 'root',
@@ -55,6 +56,7 @@ const store = configureStore({
 			resumeExperienceApi.middleware,
 			resumeAddioninfoApi.middleware,
 			workTypeApi.middleware,
+			resumeSkillApi.middleware,
 			// logger middleware
 			RTKQueryLogger
 		])

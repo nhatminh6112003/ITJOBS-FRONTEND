@@ -23,6 +23,7 @@ import ResumeObjective from './components/ResumeObjective';
 import ResumeAddioninfo from './components/ResumeAddioninfo';
 import ResumeActivity from './components/ResumeActivity';
 import ResumeExperience from './components/ResumeExperience';
+import ResumeSkill from './components/ResumeSkill';
 
 export const cx = classNames.bind(styles);
 
@@ -36,6 +37,7 @@ const MyProfile = () => {
 		ResumeAddioninfo: false,
 		resume_activity: false,
 		resume_experience: false,
+		resume_skill: false,
 		update_resume_refer: false,
 		update_resume_certificate: false,
 		update_resume_education: false,
@@ -418,7 +420,7 @@ const MyProfile = () => {
 									</div>
 								</div>
 								<div className={cx('widget', 'widget-17')} id='widget-17'>
-									{' '}
+									{/* {' '}
 									<div className={cx('widget-head')}>
 										<div className={cx('cb-title-h3')}>
 											<div className={cx('figure')}>
@@ -508,7 +510,8 @@ const MyProfile = () => {
 												</tbody>
 											</table>
 										</div>
-									</div>
+									</div> */}
+									<ResumeSkill className={cx} isShowing={isShowing} toggle={toggle} />
 								</div>
 								{/* <div className={cx('widget', 'widget-19')} id='widget-19'>
 									{' '}
