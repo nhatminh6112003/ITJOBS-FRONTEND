@@ -81,7 +81,7 @@ const SelectMultipleFieldControl = ({ label, options, placeholder, maxItems, con
 
 	return (
 		<Fragment>
-			<label htmlFor='' style={{ fontSize: 16, marginBottom: 7 }}>
+			<label htmlFor='' style={{ fontSize: 16, marginBottom: 7,fontWeight:500 }}>
 				{label}
 			</label>
 			<div className={cx('multiselect-dropdown')} ref={dropdownRef}>

@@ -21,6 +21,8 @@ import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxF
 import { useGetAllWorkTypeQuery } from '~/App/providers/apis/workTypeApi';
 import { resumeDesiredJoSchema } from '~/App/schemas/resumeDesiredJoSchema';
 import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
+import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
+import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
 const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	const resume = useSelector((state) => state.auth?.user?.resume);
 	// const [updateId, setUpdateId] = useState(null);
@@ -32,23 +34,51 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	const [trigger, result] = useLazyGetOneResumeDesiredJobQuery();
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProvinces } = useGetAllProvincesQuery();
+	// console.log("TCL: listProvinces", listProvinces)
+
 	const { data: resume_desired_job } = useGetOneResumeDesiredJobQuery(resume?.id);
 	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
+	const { data: listProfession } = useGetAllProfessionQuery({});
+
 	const [updateReferMutation] = useUpdateResumeDesiredJobMutation();
 
 	const {
 		control: updateControl,
 		handleSubmit: handleUpdateSubmit,
-		reset: updateReset
+		reset: updateReset,
+		watch,
+		setValue
 	} = useForm({
 		resolver: yupResolver(resumeDesiredJoSchema)
 	});
+	const selectedProvince = watch('provinces', null);
+	const { data: listDistricts } = useGetAllDistrictsQuery(
+		{
+			params: {
+				depth: 2
+			},
+			code: selectedProvince
+		},
+		{
+			skip: !selectedProvince
+		}
+	);
 
 	const onUpdateSubmit = async (data) => {
-		console.log(data);
+		const work_type_id = [];
+		for (let i = 1; i <= 4; i++) {
+			const key = `work_type_id_${i}`;
+			if (data[key]) {
+				work_type_id.push(data[key]);
+				delete data[key];
+			}
+		}
 		updateReferMutation({
 			id: resume_desired_job?.resume_id,
-			payload: data
+			payload: {
+				...data,
+				work_type_id
+			}
 		})
 			.unwrap()
 			.then((r) => {
@@ -57,11 +87,6 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 					toggle('update_resume_desired_job');
 				}
 			});
-	};
-	const onOpenModalUpdate = (id) => {
-		// setUpdateId(id);
-		// trigger(id);
-		toggle('update_resume_desired_job');
 	};
 
 	useEffect(() => {
@@ -73,8 +98,8 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 			work_home: resume_desired_job?.work_home,
 			work_type_id: resume_desired_job?.work_type_id,
 			profession_id: resume_desired_job?.profession_id,
-			welfare_id: resume_desired_job?.welfare_id,
-			resume_id: resume_desired_job?.resume_id
+			welfare_id: resume_desired_job?.welfare_id
+			// resume_id: resume_desired_job?.resume_id
 		});
 	}, [updateReset, resume_desired_job, listJobWelfare]);
 
@@ -116,7 +141,10 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 					cx={cx}
 					listWorkType={listWorkType}
 					listProvinces={listProvinces}
+					listProfession={listProfession?.data}
 					listJobWelfare={listJobWelfare?.data}
+					listDistricts={listDistricts?.districts}
+					setValue={setValue}
 				/>
 			</ResumeModal>
 			<Tips
@@ -134,7 +162,18 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	);
 };
 
-const Form = ({ onSubmit, handleSubmit, control, cx, listWorkType, listProvinces, listJobWelfare }) => {
+const Form = ({
+	onSubmit,
+	handleSubmit,
+	control,
+	cx,
+	listWorkType,
+	listProvinces,
+	listJobWelfare,
+	listProfession,
+	listDistricts,
+	setValue
+}) => {
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
@@ -156,23 +195,17 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listWorkType, listProvinces
 				</div>
 				<div className={cx('col-lg-4')}>
 					<div className={cx('input-group')}>
-						<InputFieldControl
-							control={control}
-							name='salary_from'
-							id='salary_from'
-							placeholder='Từ'
-							type='text'
-						/>
+						<InputFieldControl control={control} name='salary_from' id='salary_from' placeholder='Từ' />
 					</div>
 				</div>
 				<div className={cx('col-lg-4')}>
 					<div className={cx('input-group')}>
-						<InputFieldControl control={control} name='salary_to' id='salary_to' placeholder='Đến' type='text' />
+						<InputFieldControl control={control} name='salary_to' id='salary_to' placeholder='Đến' />
 					</div>
 				</div>
 			</div>
 			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<SelectFieldControl
 							control={control}
@@ -188,9 +221,26 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listWorkType, listProvinces
 						/>
 					</div>
 				</div>
+				<div className={cx('col-lg-6')}>
+					<div className={cx('input-group')}>
+						<SelectFieldControl
+							control={control}
+							options={listDistricts?.map((value) => {
+								return {
+									value: value.code,
+									label: value.name
+								};
+							})}
+							placeholder='Chọn'
+							name='districts'
+							id='districts'
+							label='Quận'
+						/>
+					</div>
+				</div>
 			</div>
 			<div className={cx('form-group', 'row')}>
-				<div className={cx('col-lg-12')}>
+				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<SelectMultipleFieldControl
 							label='Phúc lợi mong muốn'
@@ -200,15 +250,32 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listWorkType, listProvinces
 									label: value.welfare_type
 								};
 							})}
-							placeholder='Phúc lợi mong muốn'
+							placeholder='Chọn'
 							maxItems={5}
 							control={control}
-							rules={{ required: 'Please select at least one option' }}
-							name='welfare_id[]'
+							name='welfare_id'
+						/>
+					</div>
+				</div>
+				<div className={cx('col-lg-6')}>
+					<div className={cx('input-group')}>
+						<SelectMultipleFieldControl
+							label='Ngành nghề'
+							options={listProfession?.map((value) => {
+								return {
+									value: value.id,
+									label: value.name
+								};
+							})}
+							placeholder='Chọn'
+							maxItems={5}
+							control={control}
+							name='profession_id'
 						/>
 					</div>
 				</div>
 			</div>
+
 			<div className={cx('row')} style={{ marginBottom: 20 }}>
 				<div className={cx('col-lg-4')}>
 					<label for=''>Hình thức làm việc</label>
@@ -218,11 +285,14 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listWorkType, listProvinces
 						{listWorkType?.map((listWork) => (
 							<div className={cx('col-md-6')} key={listWork.id}>
 								<CheckBoxFieldControl
-									name='work_type_id[]'
+									name={`work_type_id_${listWork.id}`}
 									id='work_type_id'
 									control={control}
 									label={listWork.name}
-									value={'1'}
+									value={listWork.id}
+									onChange={(e) => {
+										if (e.target.checked) setValue(`work_type_id_${listWork.id}`, Number(e.target.value));
+									}}
 								/>
 							</div>
 						))}
@@ -234,7 +304,13 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listWorkType, listProvinces
 					<label for=''>Phương thức công việc</label>
 				</div>
 				<div className={cx('col-lg-8')}>
-					<CheckBoxFieldControl name='work_home' id='work_home' control={control} label='Work form home' />
+					<CheckBoxFieldControl
+						name='work_home'
+						id='work_home'
+						control={control}
+						label='Work form home'
+						value={false}
+					/>
 				</div>
 			</div>
 

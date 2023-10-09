@@ -3,7 +3,7 @@
 	height: 40px;
 	padding: 5px 5px;
 	border: none;
-	border-bottom: 1px solid #2f4ba0;
+	border-bottom: 1px solid #93bcdc;
 	color: #172642;
 	font-size: 16px;
 	font-weight: 700;
@@ -32,7 +32,9 @@
 	color: #c66;
 }
 .multiselect-dropdown span.placeholder {
-	color: #ced4da;
+	color: #5d677a;
+	font-weight: 400;
+	
 }
 .multiselect-dropdown-list-wrapper {
 	box-shadow: gray 0 3px 8px;

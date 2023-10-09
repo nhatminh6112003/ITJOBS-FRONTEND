@@ -10,6 +10,7 @@ const CheckBoxFieldControl = ({
 	name,
 	control,
 	label,
+	value,
 	...props
 }) => {
 	const {
@@ -29,7 +30,7 @@ const CheckBoxFieldControl = ({
 		<div style={{ marginTop: 4 }}>
 			<input
 				{...props}
-				value={field.value | ''}
+				value={value | ''}
 				defaultChecked={defaultChecked}
 				checked={checked}
 				defaultValue={defaultValue}
@@ -39,6 +40,7 @@ const CheckBoxFieldControl = ({
 					top: 2,
 					marginRight: 5
 				}}
+		
 				onChange={(event) => {
 					field.onChange(event);
 					if (props.onChange) {
