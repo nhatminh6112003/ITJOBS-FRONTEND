@@ -23,6 +23,7 @@ import ResumeObjective from './components/ResumeObjective';
 import ResumeAddioninfo from './components/ResumeAddioninfo';
 import ResumeActivity from './components/ResumeActivity';
 import ResumeExperience from './components/ResumeExperience';
+import ResumeSkill from './components/ResumeSkill';
 
 export const cx = classNames.bind(styles);
 
@@ -33,9 +34,9 @@ const MyProfile = () => {
 		resume_certificate: false,
 		resume_education: false,
 		resume_objective: false,
-		ResumeAddioninfo: false,
 		resume_activity: false,
 		resume_experience: false,
+		resume_skill: false,
 		update_resume_refer: false,
 		update_resume_certificate: false,
 		update_resume_education: false,
@@ -418,7 +419,7 @@ const MyProfile = () => {
 									</div>
 								</div>
 								<div className={cx('widget', 'widget-17')} id='widget-17'>
-									{' '}
+									{/* {' '}
 									<div className={cx('widget-head')}>
 										<div className={cx('cb-title-h3')}>
 											<div className={cx('figure')}>
@@ -508,65 +509,10 @@ const MyProfile = () => {
 												</tbody>
 											</table>
 										</div>
-									</div>
+									</div> */}
+									<ResumeSkill className={cx} isShowing={isShowing} toggle={toggle} />
 								</div>
-								{/* <div className={cx('widget', 'widget-19')} id='widget-19'>
-									{' '}
-									<div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image')}>
-													<img src='./img/dash-board/i6.png' alt='' />
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Thành tích nổi bật</h3>
-													<div className={cx('status', 'default')}>
-														<p>Không bắt buộc</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-award')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-edit')}>
-													<a href='' onClick='editResumeAdditioninfo();'>
-														{' '}
-														<em className={cx('material-icons')}>create</em>
-														<span>Chỉnh sửa</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={cx('widget-body')} id='no-content' style={{ display: 'none' }}>
-										<div className={cx('no-content')}>
-											<p>Vui lòng thêm Thành tích nổi bật của bạn</p>
-											<a href='' onClick='editResumeAdditioninfo();'>
-												<em className={cx('mdi', 'mdi-plus-circle')} />
-												<span>Thêm mới</span>
-											</a>{' '}
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('content')} id='content'>
-											{' '}
-											<p>hackathon 2022</p>
-										</div>
-										<ul className={cx('list-action')}>
-											<li className={cx('delete')}>
-												<a href='' onClick='deleteResumeAdditionInfo();'>
-													{' '}
-													<em className={cx('material-icons')}>highlight_off</em>
-													<span>Xóa</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div> */}
+							
 								<ResumeActivity className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
