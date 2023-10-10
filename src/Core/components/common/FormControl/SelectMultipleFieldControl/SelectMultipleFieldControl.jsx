@@ -7,7 +7,17 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-const SelectMultipleFieldControl = ({ label, options, placeholder, maxItems, control, rules, name, ...props }) => {
+const SelectMultipleFieldControl = ({
+	label,
+	options,
+	placeholder,
+	maxItems,
+	control,
+	rules,
+	name,
+	selectedValues,
+	...props
+}) => {
 	const [searchValue, setSearchValue] = useState('');
 	const [selectedOptions, setSelectedOptions] = useState([]);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -26,6 +36,15 @@ const SelectMultipleFieldControl = ({ label, options, placeholder, maxItems, con
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
 	}, []);
+
+	// Use useEffect to populate selectedOptions when the component mounts
+	useEffect(() => {
+		// Filter the options to get the selectedOptions based on selectedValues
+		if (selectedValues) {
+			const newSelectedOptions = options.filter((option) => selectedValues.includes(option.value));
+			setSelectedOptions(newSelectedOptions);
+		}
+	}, [selectedValues, options]);
 
 	const toggleDropdown = () => {
 		setIsDropdownOpen(!isDropdownOpen);
@@ -81,7 +100,7 @@ const SelectMultipleFieldControl = ({ label, options, placeholder, maxItems, con
 
 	return (
 		<Fragment>
-			<label htmlFor='' style={{ fontSize: 16, marginBottom: 7,fontWeight:500 }}>
+			<label htmlFor='' style={{ fontSize: 16, marginBottom: 7, fontWeight: 500 }}>
 				{label}
 			</label>
 			<div className={cx('multiselect-dropdown')} ref={dropdownRef}>
@@ -130,12 +149,6 @@ const SelectMultipleFieldControl = ({ label, options, placeholder, maxItems, con
 									className={cx('select-item')}
 									key={index}
 									onClick={() => handleOptionClick(option)}
-									// onChange={(event) => {
-									//    field.onChange(event);
-									//    if (props.onChange) {
-									//       props.onChange(event);
-									//    }
-									// }}
 									name={name}>
 									<input type='checkbox' checked={selectedOptions.includes(option)} readOnly />
 									<label>{option.label}</label>

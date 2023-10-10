@@ -23,6 +23,7 @@ import { resumeDesiredJoSchema } from '~/App/schemas/resumeDesiredJoSchema';
 import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
 import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
+import formatVND from '~/Core/utils/formatVND';
 const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	const resume = useSelector((state) => state.auth?.user?.resume);
 	// const [updateId, setUpdateId] = useState(null);
@@ -34,7 +35,6 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	const [trigger, result] = useLazyGetOneResumeDesiredJobQuery();
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProvinces } = useGetAllProvincesQuery();
-	// console.log("TCL: listProvinces", listProvinces)
 
 	const { data: resume_desired_job } = useGetOneResumeDesiredJobQuery(resume?.id);
 	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
@@ -65,14 +65,17 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	);
 
 	const onUpdateSubmit = async (data) => {
+
 		const work_type_id = [];
+
 		for (let i = 1; i <= 4; i++) {
 			const key = `work_type_id_${i}`;
 			if (data[key]) {
 				work_type_id.push(data[key]);
-				delete data[key];
 			}
+			delete data[key];
 		}
+
 		updateReferMutation({
 			id: resume_desired_job?.resume_id,
 			payload: {
@@ -98,9 +101,13 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 			districts: resume_desired_job?.districts,
 			work_home: resume_desired_job?.work_home,
 			profession_id: resume_desired_job?.profession_id,
-			welfare_id: resume_desired_job?.welfare_id
+			welfare_id: resume_desired_job?.welfare_id,
+			work_type_id: resume_desired_job?.work_type_id
 		});
-	}, [updateReset, resume_desired_job]);
+		resume_desired_job?.work_type_id.forEach(item=>{
+			setValue(`work_type_id_${item}`,item)
+		})
+	}, [updateReset,resume_desired_job]);
 
 	return (
 		<Fragment>
@@ -142,7 +149,12 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 												style={{
 													paddingBottom: '12px'
 												}}>
-												{resume_desired_job?.salary_to} -{resume_desired_job?.salary_from}VND
+												{resume_desired_job?.salary_to && resume_desired_job?.salary_from && (
+													<>
+														{formatVND(resume_desired_job?.salary_to)} -{' '}
+														{formatVND(resume_desired_job?.salary_from)} VND
+													</>
+												)}
 											</td>
 										</tr>
 										<tr>
@@ -155,11 +167,18 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 														style={{
 															paddingBottom: '12px'
 														}}>
-														{listWorkType?.map((value) => {
-															return resume_desired_job?.work_type_id?.map((item) => {
-																return value.id === item ? value.name : null;
-															});
-														})}
+														{listWorkType &&
+															listWorkType
+																.filter((value) => resume_desired_job?.work_type_id?.includes(value.id))
+																.map((value, index, array) => {
+																	const isLastItem = index === array.length - 1;
+																	return (
+																		<span key={value.id}>
+																			{value.name}
+																			{!isLastItem && ', '}
+																		</span>
+																	);
+																})}
 													</td>
 												</>
 											)}
@@ -168,17 +187,29 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 											{resume_desired_job?.welfare_id && (
 												<>
 													<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
-														Phúc lợi mong muốn{' '}
+														Phúc lợi mong muốn
 													</td>
 													<td
 														style={{
 															paddingBottom: '12px'
 														}}>
-														{listJobWelfare?.data?.map((value) => {
+															{listJobWelfare?.data &&
+															listJobWelfare?.data?.
+																filter((value) => resume_desired_job?.welfare_id?.includes(value.id))
+																.map((value, index, array) => {
+																	const isLastItem = index === array.length - 1;
+																	return (
+																		<span key={value.id}>
+																			{value.welfare_type}
+																			{!isLastItem && ', '}
+																		</span>
+																	);
+																})}
+														{/* {listJobWelfare?.data?.map((value) => {
 															return resume_desired_job?.welfare_id?.map((item) => {
 																return value.id === item ? value.welfare_type : null;
 															});
-														})}
+														})} */}
 													</td>
 												</>
 											)}
@@ -235,12 +266,14 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 					onSubmit={onUpdateSubmit}
 					handleSubmit={handleUpdateSubmit}
 					cx={cx}
+					resume_desired_job={resume_desired_job}
 					listWorkType={listWorkType}
 					listProvinces={listProvinces}
 					listProfession={listProfession?.data}
 					listJobWelfare={listJobWelfare?.data}
 					listDistricts={listDistricts?.districts}
 					work_home={resume_desired_job?.work_home}
+					work_type_id={resume_desired_job?.work_type_id}
 					setValue={setValue}
 				/>
 			</ResumeModal>
@@ -270,7 +303,9 @@ const Form = ({
 	listProfession,
 	listDistricts,
 	setValue,
-	work_home
+	work_type_id,
+	work_home,
+	resume_desired_job
 }) => {
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
@@ -348,8 +383,9 @@ const Form = ({
 									label: value.welfare_type
 								};
 							})}
+							selectedValues={resume_desired_job?.welfare_id}
 							placeholder='Chọn'
-							maxItems={5}
+							maxItems={3}
 							control={control}
 							name='welfare_id'
 						/>
@@ -365,8 +401,9 @@ const Form = ({
 									label: value.name
 								};
 							})}
+							selectedValues={resume_desired_job?.profession_id}
 							placeholder='Chọn'
-							maxItems={5}
+							maxItems={3}
 							control={control}
 							name='profession_id'
 						/>
@@ -388,6 +425,7 @@ const Form = ({
 									control={control}
 									label={listWork.name}
 									value={listWork.id}
+									defaultChecked={work_type_id?.includes(listWork.id)}
 									onChange={(e) => {
 										if (e.target.checked) setValue(`work_type_id_${listWork.id}`, Number(e.target.value));
 									}}

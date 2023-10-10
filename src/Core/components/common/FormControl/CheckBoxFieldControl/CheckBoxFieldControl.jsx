@@ -40,7 +40,6 @@ const CheckBoxFieldControl = ({
 					top: 2,
 					marginRight: 5
 				}}
-		
 				onChange={(event) => {
 					field.onChange(event);
 					if (props.onChange) {
