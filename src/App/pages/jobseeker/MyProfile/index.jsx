@@ -24,6 +24,7 @@ import ResumeAddioninfo from './components/ResumeAddioninfo';
 import ResumeActivity from './components/ResumeActivity';
 import ResumeExperience from './components/ResumeExperience';
 import ResumeSkill from './components/ResumeSkill';
+import ResumeDesiredJob from './components/ResumeDesiredJob';
 
 export const cx = classNames.bind(styles);
 
@@ -37,13 +38,15 @@ const MyProfile = () => {
 		resume_activity: false,
 		resume_experience: false,
 		resume_skill: false,
+		resume_desired_job: false,
 		update_resume_refer: false,
 		update_resume_certificate: false,
 		update_resume_education: false,
 		update_resume_objective: false,
 		update_resume_addioninfo: false,
 		update_resume_activity: false,
-		update_resume_experience: false
+		update_resume_experience: false,
+		update_resume_desired_job: false
 	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -244,79 +247,8 @@ const MyProfile = () => {
 
 								<ResumeObjective className={cx} isShowing={isShowing} toggle={toggle} />
 
-								<div className={cx('widget', 'widget-18')} id='widget-18'>
-									<div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image')}>
-													<img src='./img/dash-board/i5.png' alt='' />
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Thông tin nghề nghiệp *</h3>
-													<div className={cx('status', 'success')}>
-														<p>Hoàn thành</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-desired-job')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-edit')}>
-													<a title='Chỉnh sửa' href='javascript:void(0)' onClick='editDesiredJob();'>
-														{' '}
-														<em className={cx('material-icons')}>
-															<EditIcon fontSize='normal' />
-														</em>
-														<span>Chỉnh sửa</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<table>
-											<tbody>
-												<tr>
-													<td>Cấp bậc mong muốn</td>
-													<td>Sinh viên/ Thực tập sinh</td>
-												</tr>
-												<tr>
-													<td>Mức lương</td>
-													<td>500,000 - 1,000,000 VND</td>
-												</tr>
-												<tr>
-													<td>Hình thức làm việc</td>
-													<td>Nhân viên chính thức</td>
-												</tr>
-												<tr>
-													<td>Phương thức công việc</td>
-													<td>Work from home</td>
-												</tr>
-												<tr>
-													<td>Ngành nghề</td>
-													<td>
-														<ul>
-															<li>Bán lẻ / Bán sỉ</li>
-														</ul>
-													</td>
-												</tr>
-												<tr>
-													<td>Nơi làm việc</td>
-													<td>
-														<ul>
-															<li>Dak Lak - Huyện Buôn Đôn</li>
-															<li />
-														</ul>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
+								<ResumeDesiredJob className={cx} isShowing={isShowing} toggle={toggle} />
+
 								<ResumeExperience className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeEducation className={cx} isShowing={isShowing} toggle={toggle} />

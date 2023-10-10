@@ -18,6 +18,10 @@ import resumeExperienceApi from './apis/resumeExperienceApi';
 import resumeAddioninfoApi from './apis/resumeAddioninfo';
 import resumeSkillApi from './apis/resumeSkill';
 import workTypeApi from './apis/workTypeApi';
+import resumeDesiredJobApi from './apis/resumeDesiredJobApi';
+import listProvincesApi from './apis/listProvincesApi';
+import districtsApi from './apis/districtsApi';
+
 const rootReducer = combineReducers({
 	[authSlice.name]: authSlice.reducer,
 	[themeSlice.name]: themeSlice.reducer,
@@ -37,7 +41,11 @@ const rootReducer = combineReducers({
 	[resumeExperienceApi.reducerPath]: resumeExperienceApi.reducer,
 	[resumeAddioninfoApi.reducerPath]: resumeAddioninfoApi.reducer,
 	[workTypeApi.reducerPath]: workTypeApi.reducer,
-	[resumeSkillApi.reducerPath]: resumeSkillApi.reducer
+	[resumeSkillApi.reducerPath]: resumeSkillApi.reducer,
+	[resumeDesiredJobApi.reducerPath]: resumeDesiredJobApi.reducer,
+	[workTypeApi.reducerPath]: workTypeApi.reducer,
+	[listProvincesApi.reducerPath]: listProvincesApi.reducer,
+	[districtsApi.reducerPath]: districtsApi.reducer,
 });
 
 export default rootReducer;
