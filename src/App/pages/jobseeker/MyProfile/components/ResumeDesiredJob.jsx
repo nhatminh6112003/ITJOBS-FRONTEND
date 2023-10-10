@@ -95,13 +95,12 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 			salary_to: resume_desired_job?.salary_to,
 			position_id: resume_desired_job?.position_id,
 			provinces: resume_desired_job?.provinces,
+			districts: resume_desired_job?.districts,
 			work_home: resume_desired_job?.work_home,
-			work_type_id: resume_desired_job?.work_type_id,
 			profession_id: resume_desired_job?.profession_id,
 			welfare_id: resume_desired_job?.welfare_id
-			// resume_id: resume_desired_job?.resume_id
 		});
-	}, [updateReset, resume_desired_job, listJobWelfare]);
+	}, [updateReset, resume_desired_job]);
 
 	return (
 		<Fragment>
@@ -118,11 +117,108 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 					<div className={cx('list-references')}>
 						<div className={cx('item')}>
 							<div className={cx('content')}>
-								<ul>
-									<li className={cx('title')}>{resume_desired_job?.position_id}</li>
-									<li className={cx('title')}>{resume_desired_job?.salary_to}</li>
-									<li>{resume_desired_job?.salary_from}</li>
-								</ul>
+								<table>
+									<tbody>
+										<tr>
+											<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+												Cấp bậc mong muốn
+											</td>
+											<td
+												style={{
+													paddingBottom: '12px'
+												}}>
+												{LevelArray.map((value) => {
+													const id = resume_desired_job?.position_id;
+													const positionLabel = value.value === id ? value.label : null;
+													return positionLabel;
+												})}
+											</td>
+										</tr>
+										<tr>
+											<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+												Mức lương
+											</td>
+											<td
+												style={{
+													paddingBottom: '12px'
+												}}>
+												{resume_desired_job?.salary_to} -{resume_desired_job?.salary_from}VND
+											</td>
+										</tr>
+										<tr>
+											{resume_desired_job?.work_type_id && (
+												<>
+													<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+														Hình thức làm việc
+													</td>
+													<td
+														style={{
+															paddingBottom: '12px'
+														}}>
+														{listWorkType?.map((value) => {
+															return resume_desired_job?.work_type_id?.map((item) => {
+																return value.id === item ? value.name : null;
+															});
+														})}
+													</td>
+												</>
+											)}
+										</tr>
+										<tr>
+											{resume_desired_job?.welfare_id && (
+												<>
+													<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+														Phúc lợi mong muốn{' '}
+													</td>
+													<td
+														style={{
+															paddingBottom: '12px'
+														}}>
+														{listJobWelfare?.data?.map((value) => {
+															return resume_desired_job?.welfare_id?.map((item) => {
+																return value.id === item ? value.welfare_type : null;
+															});
+														})}
+													</td>
+												</>
+											)}
+										</tr>
+										<tr>
+											{resume_desired_job?.profession_id && (
+												<>
+													<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+														Ngành nghề
+													</td>
+													<td
+														style={{
+															paddingBottom: '12px'
+														}}>
+														{listProfession?.data?.map((value) => {
+															return resume_desired_job?.profession_id?.map((item) => {
+																return value.id === item ? value.name : null;
+															});
+														})}
+													</td>
+												</>
+											)}
+										</tr>
+										<tr>
+											<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+												Nơi làm việc
+											</td>
+											<td
+												style={{
+													paddingBottom: '12px'
+												}}>
+												{listProvinces?.map((province) => {
+													const desiredProvinceId = resume_desired_job?.provinces;
+													const positionLabel = province.code === desiredProvinceId ? province.name : null;
+													return positionLabel;
+												})}
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -144,6 +240,7 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 					listProfession={listProfession?.data}
 					listJobWelfare={listJobWelfare?.data}
 					listDistricts={listDistricts?.districts}
+					work_home={resume_desired_job?.work_home}
 					setValue={setValue}
 				/>
 			</ResumeModal>
@@ -172,7 +269,8 @@ const Form = ({
 	listJobWelfare,
 	listProfession,
 	listDistricts,
-	setValue
+	setValue,
+	work_home
 }) => {
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
@@ -310,6 +408,7 @@ const Form = ({
 						control={control}
 						label='Work form home'
 						value={false}
+						defaultChecked={work_home === 1 ? true : false}
 					/>
 				</div>
 			</div>
