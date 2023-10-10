@@ -1,8 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQueryWithAdmin from '../fetchBaseQueryAdmin';
+import baseQueryWithUser from '../fetchBaseQuery';
 const jobWelfareApi = createApi({
 	reducerPath: 'jobWelfare',
-	baseQuery: baseQueryWithAdmin,
+	baseQuery: baseQueryWithUser,
 	endpoints: (build) => ({
 		getAllJobWelfare: build.query({
 			query: (arg) => {

@@ -24,6 +24,8 @@ import ResumeAddioninfo from './components/ResumeAddioninfo';
 import ResumeActivity from './components/ResumeActivity';
 import ResumeExperience from './components/ResumeExperience';
 import ResumeSkill from './components/ResumeSkill';
+import ResumeDesiredJob from './components/ResumeDesiredJob';
+import ResumeLanguage from './components/Resumelanguage';
 
 export const cx = classNames.bind(styles);
 
@@ -37,13 +39,17 @@ const MyProfile = () => {
 		resume_activity: false,
 		resume_experience: false,
 		resume_skill: false,
+		resume_desired_job: false,
+		resume_language: false,
 		update_resume_refer: false,
 		update_resume_certificate: false,
 		update_resume_education: false,
 		update_resume_objective: false,
 		update_resume_addioninfo: false,
 		update_resume_activity: false,
-		update_resume_experience: false
+		update_resume_experience: false,
+		update_resume_desired_job: false,
+		update_resume_language:false
 	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -244,79 +250,8 @@ const MyProfile = () => {
 
 								<ResumeObjective className={cx} isShowing={isShowing} toggle={toggle} />
 
-								<div className={cx('widget', 'widget-18')} id='widget-18'>
-									<div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image')}>
-													<img src='./img/dash-board/i5.png' alt='' />
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Thông tin nghề nghiệp *</h3>
-													<div className={cx('status', 'success')}>
-														<p>Hoàn thành</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-desired-job')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-edit')}>
-													<a title='Chỉnh sửa' href='javascript:void(0)' onClick='editDesiredJob();'>
-														{' '}
-														<em className={cx('material-icons')}>
-															<EditIcon fontSize='normal' />
-														</em>
-														<span>Chỉnh sửa</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<table>
-											<tbody>
-												<tr>
-													<td>Cấp bậc mong muốn</td>
-													<td>Sinh viên/ Thực tập sinh</td>
-												</tr>
-												<tr>
-													<td>Mức lương</td>
-													<td>500,000 - 1,000,000 VND</td>
-												</tr>
-												<tr>
-													<td>Hình thức làm việc</td>
-													<td>Nhân viên chính thức</td>
-												</tr>
-												<tr>
-													<td>Phương thức công việc</td>
-													<td>Work from home</td>
-												</tr>
-												<tr>
-													<td>Ngành nghề</td>
-													<td>
-														<ul>
-															<li>Bán lẻ / Bán sỉ</li>
-														</ul>
-													</td>
-												</tr>
-												<tr>
-													<td>Nơi làm việc</td>
-													<td>
-														<ul>
-															<li>Dak Lak - Huyện Buôn Đôn</li>
-															<li />
-														</ul>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
+								<ResumeDesiredJob className={cx} isShowing={isShowing} toggle={toggle} />
+
 								<ResumeExperience className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeEducation className={cx} isShowing={isShowing} toggle={toggle} />
@@ -325,99 +260,8 @@ const MyProfile = () => {
 
 								<ResumeAddioninfo className={cx} isShowing={isShowing} toggle={toggle} />
 
-								<div className={cx('widget', 'widget-22', 'widget-17')} id='language-section'>
-									{' '}
-									<div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<div className={cx('figure')}>
-												<div className={cx('image', 'icon-translate')}>
-													<span className={cx('material-icons')}>translate</span>
-												</div>
-												<div className={cx('figcaption')}>
-													<h3>Ngôn ngữ </h3>
-													<div className={cx('status')}>
-														<p>Không bắt buộc</p>
-													</div>
-												</div>
-											</div>
-											<div className={cx('right-action')}>
-												<div className={cx('tips', 'p1')} onClick="openTipSlide('tip-language')">
-													<div className={cx('icon')}>
-														<em className={cx('mdi', 'mdi-lightbulb')} />
-													</div>
-													<p>Tips</p>
-												</div>
-												<div className={cx('link-add-lang')}>
-													<a href='javascript:void(0)' onClick='editResumeLanguage(0);'>
-														{' '}
-														<em className={cx('material-icons')}>
-															<AddIcon sx={{ fontSize: '20px' }} />
-														</em>
-														<span>Thêm mới</span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('list-progress')}>
-											<table>
-												<thead>
-													<tr>
-														<th>Trình độ ngoại ngữ</th>
-														<th>Trình độ</th>
-														<th>Chứng chỉ ngoại ngữ</th>
-														<th> </th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<div className={cx('title')}>
-																<h4>Anh</h4>
-															</div>
-														</td>
-														<td>
-															<div className={cx('progress')}>
-																<progress className={cx('progress-main')} max={5} value={2} />
-																<div className={cx('lavel')}>Sơ cấp</div>
-																<div className={cx('progress-row')}>
-																	<div className={cx('line', 'success')} />
-																	<div className={cx('line', '')} />
-																	<div className={cx('line', '')} />
-																	<div className={cx('line', '')} />
-																</div>
-															</div>
-														</td>
-														<td>
-															<span>ielts</span>
-														</td>
-														<td>
-															<ul className={cx('list-action')}>
-																<li className={cx('edit-link')}>
-																	<a href='javascript:void(0)' onClick='editResumeLanguage(329508);'>
-																		{' '}
-																		<em className={cx('material-icons')}>create</em>
-																		<span>Chỉnh sửa</span>
-																	</a>
-																</li>
-																<li className={cx('delete')}>
-																	<a
-																		href='javascript:void(0)'
-																		onClick='deleteResumeLanguageProfile(329508);'>
-																		{' '}
-																		<em className={cx('material-icons')}>highlight_off</em>
-																		<span>Xoá</span>
-																	</a>
-																</li>
-															</ul>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
+								<ResumeLanguage className={cx} isShowing={isShowing} toggle={toggle} />
+							
 								<div className={cx('widget', 'widget-17')} id='widget-17'>
 									{/* {' '}
 									<div className={cx('widget-head')}>
