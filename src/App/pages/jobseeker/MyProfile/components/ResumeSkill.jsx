@@ -21,9 +21,7 @@ import {
 import { resumeSkillSchema } from '~/App/schemas/resumeSkillSchema';
 
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
-import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
-import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
-import formatDate from '~/Core/utils/formatDate';
+
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl/SelectFieldControl';
 import SkillEnum from '~/App/constants/skillEnum';
 const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
@@ -58,7 +56,6 @@ const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 		toggle('resume_skill');
 		createReferMutation({
 			...data,
-			skil_level:data.skill_level.toString(),
 			resume_id: resume?.id
 		})
 			.unwrap()
@@ -112,7 +109,6 @@ const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 			skill_level: result?.data?.skill_level,
 			resume_id: result?.data?.resume_id
 		});
-		console.log('test', result.data);
 	}, [updateReset, result]);
 
 	return (
@@ -120,7 +116,6 @@ const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 			<Widget
 				action='ADD'
 				title='Kỹ năng chuyên môn'
-				className={cx('widget', 'widget-20')}
 				id='t-resume-section'
 				status='default'
 				onOpenResume={() => toggle('resume_skill')}
@@ -141,41 +136,37 @@ const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 											</tr>
 										</thead>
 										<tbody>
-											<tr id='skillList_3144927'>
+											<tr >
 												<td>
 													<div className={cx('title')}>
-														<h4>c#</h4>
+														<h4>{item.skill_name}</h4>
 													</div>
 													<div className={cx('content')}>
-														<p>tốt</p>
+														<p>{item.skill_content}</p>
 													</div>
 												</td>
 												<td>
 													<div className={cx('progress')}>
 														<progress className={cx('progress-main')} max={5} value={3} />
-														<div className={cx('lavel')}>
-															Mức độ <span>3/5</span>
+														<div className={cx('level')}>
+															Mức độ <span>{item.skill_level}/5</span>
 														</div>
-														<div className={cx('progress-row')}>
-															<div className={cx('line', 'success')} />
-															<div className={cx('line', 'success')} />
-															<div className={cx('line', 'success')} />
-															<div className={cx('line', '')} />
-															<div className={cx('line', '')} />
-														</div>
+													
+														<SkillLevelProgressBar cx={cx} skillLevel={item.skill_level}/>
 													</div>
 												</td>
 												<td>
 													<ul className={cx('list-action')}>
 														<li className={cx('edit-link')}>
-															<a href='' onClick='show_frmSkill(3144927);' title='Chỉnh sửa'>
+															<a  href='javascript:void(0);' onClick={() => onOpenModalUpdate(item.id)}>
 																{' '}
 																<em className={cx('material-icons')}>create</em>
 																<span>Chỉnh sửa</span>
 															</a>
 														</li>
 														<li className={cx('delete')}>
-															<a href='' title='Xóa' onClick='deleteResumeSkill(3144927)'>
+															<a href='javascript:void(0);'
+													onClick={() => setModalConfirmState({ open: true, payload: item.id })}>
 																{' '}
 																<em className={cx('material-icons')}>highlight_off</em>
 																<span>Xóa</span>
@@ -227,6 +218,22 @@ const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 		</Fragment>
 	);
 };
+
+
+const SkillLevelProgressBar=({ cx,skillLevel }) =>{
+	const classes = [];
+	for (let i = 1; i <= 5; i++) {
+	  classes.push(skillLevel >= i ? 'success' : '');
+	}
+ 
+	return (
+	  <div className={cx('progress-row')}>
+		 {classes.map((classValue, index) => (
+			<div key={index} className={cx('line', classValue)} />
+		 ))}
+	  </div>
+	);
+ }
 
 const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 	const date = new Date();
