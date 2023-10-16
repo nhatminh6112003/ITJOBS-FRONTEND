@@ -27,12 +27,13 @@ import workTypeApi from './apis/workTypeApi';
 import resumeDesiredJobApi from './apis/resumeDesiredJobApi';
 import listProvincesApi from './apis/listProvincesApi';
 import districtsApi from './apis/districtsApi';
+import myAttachApi from './apis/myAttachApi';
 const persistConfig = {
 	key: 'root',
 	storage,
 	whitelist: ['auth', 'theme']
 };
- 
+
 const persistedReducer = persistReducer(persistConfig, rootReducer); // Provide a way to combine redux's root reducer
 
 const store = configureStore({
@@ -64,6 +65,7 @@ const store = configureStore({
 			workTypeApi.middleware,
 			listProvincesApi.middleware,
 			districtsApi.middleware,
+			myAttachApi.middleware,
 			// logger middleware
 			RTKQueryLogger
 		])

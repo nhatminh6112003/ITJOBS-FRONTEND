@@ -11,10 +11,36 @@ import LanguageIcon from '@mui/icons-material/Language';
 import BoltIcon from '@mui/icons-material/Bolt';
 import { Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
+import { useGetAllMyAttachQuery, useDeleteMyAttachMutation } from '~/App/providers/apis/myAttachApi';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
+import formatDate from '~/Core/utils/formatDate';
 
 const cx = classNames.bind(styles);
 
 const Dashboard = () => {
+	const user_account_id = useSelector((state) => state.auth?.user?.id);
+	let count = 0;
+	const { data: getAllMyAttach, refetch } = useGetAllMyAttachQuery(user_account_id);
+	const [deleteMyAttach] = useDeleteMyAttachMutation();
+	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
+	useEffect(() => {
+		console.log(getAllMyAttach);
+	}, [getAllMyAttach]);
+
+	const handleDeleteMyAttach = (id) => {
+		console.log(id);
+		deleteMyAttach(id)
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success(r?.message);
+				}
+			});
+		setModalConfirmState({ open: false, payload: null });
+	};
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
 			<SideBar className={cx} />
@@ -416,45 +442,189 @@ const Dashboard = () => {
 										</p>
 									</div>
 									<div className={cx('widget-body')}>
-										<div className={cx('attached-item')}>
-											<div className={cx('row')}>
-												<div className={cx('col-12')}>
-													<div className={cx('head-title')}>
+										{getAllMyAttach?.map((item, index) => {
+											if (count < 4 && item.isDeleted === 0) {
+												count++;
+												return (
+													<div className={cx('attached-item')}>
+														<div className={cx('row')}>
+															<div className={cx('col-12')}>
+																<div className={cx('head-title')}>
+																	<div className={cx('row')}>
+																		<div className={cx('col-lg-5')}>
+																			<div className={cx('title')}>
+																				<h4 id='titleresume_18020074'>{item.resume_title.title}</h4>
+																				<div className={cx('status', 'success')}>
+																					<p>Hoàn Tất</p>
+																				</div>
+																			</div>
+																		</div>
+																		<div className={cx('col-lg-7')}>
+																			<div className={cx('top-action')}>
+																				<div className={cx('switch-box', 'jobalert-cv-widget')}>
+																					<label htmlFor={`cv_jobalert_${item.id}`}>
+																						Thông báo việc làm
+																						<input
+																							type='checkbox'
+																							id={`cv_jobalert_${item.id}`}
+																							className={cx('group_jobalert')}
+																							data-id={item.id}
+																						/>
+																						<span className={cx('slider')} />
+																					</label>
+																				</div>
+																				<div className={cx('action')}>
+																					<ul>
+																						<li className={cx('edit')}>
+																							<Link
+																								to={`/jobseekers/myresume/myattach/${item.id}`}
+																								style={{
+																									cursor: 'pointer',
+																									fontWeight: '500'
+																								}}>
+																								{' '}
+																								Chỉnh sửa
+																							</Link>
+																						</li>
+																						<li className={cx('delete')}>
+																							<a
+																								onClick={() =>
+																									setModalConfirmState({
+																										open: true,
+																										payload: item.id
+																									})
+																								}
+																								style={{
+																									cursor: 'pointer',
+																									fontWeight: '500'
+																								}}>
+																								Xóa
+																							</a>
+																							<ConfirmDialog
+																								open={modalConfirmState.open}
+																								onConfirm={() =>
+																									handleDeleteMyAttach(
+																										modalConfirmState.payload
+																									)
+																								}
+																								onCancel={() =>
+																									setModalConfirmState({
+																										open: false,
+																										payload: null
+																									})
+																								}
+																							/>
+																						</li>
+																					</ul>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
 														<div className={cx('row')}>
 															<div className={cx('col-lg-5')}>
-																<div className={cx('title')}>
-																	<h4 id='titleresume_18020074'>123</h4>
-																	<div className={cx('status', 'success')}>
-																		<p>Hoàn Tất</p>
+																<div className={cx('figure')}>
+																	<div className={cx('image')}>
+																		<img
+																			src='https://static.careerbuilder.vn/themes/kiemviecv32/images/icons/ic-resume.png'
+																			alt={123}
+																		/>
+																	</div>
+																	<div className={cx('figcaption')}>
+																		<div className={cx('time')}>
+																			<p>Ngày cập nhật:</p>
+																			<time id='date_18020074'>{formatDate(item.createdAt)}</time>
+																			<a
+																				className={cx('refresh', 'ac_refesh')}
+																				title='Cập nhật hồ sơ'
+																				href='javascript:;'
+																				rel={18020074}></a>
+																		</div>
+																		<div className={cx('view-number')}>
+																			<p>Lượt xem:</p>
+																			<span>0</span>
+																		</div>
 																	</div>
 																</div>
 															</div>
 															<div className={cx('col-lg-7')}>
-																<div className={cx('top-action')}>
-																	<div className={cx('switch-box', 'jobalert-cv-widget')}>
-																		<label htmlFor='cv_jobalert_18020074'>
-																			Thông báo việc làm
-																			<input
-																				type='checkbox'
-																				id='cv_jobalert_18020074'
-																				className={cx('group_jobalert')}
-																				data-id={18020074}
-																			/>
-																			<span className={cx('slider')} />
-																		</label>
+																<div className={cx('attached-status-area')}>
+																	<p>Cho phép tìm</p>
+																	<div
+																		className={cx('switch-status', 'group_searchable')}
+																		id='cv_searchable_18020074'
+																		data-id={18020074}
+																		data-complete={1}>
+																		<a
+																			href=''
+																			data-type={2}
+																			className={
+																				item.resume_active === '2'
+																					? cx('lock', 'active')
+																					: cx('lock')
+																			}>
+																			Khóa
+																		</a>
+																		<a
+																			href=''
+																			data-type={1}
+																			className={
+																				item.resume_active === '1'
+																					? cx('public', 'active')
+																					: cx('public')
+																			}>
+																			Công khai
+																		</a>
+																		<a
+																			href=''
+																			data-type={3}
+																			className={
+																				item.resume_active === '3'
+																					? cx('flash', 'active')
+																					: cx('flash')
+																			}>
+																			Khẩn cấp
+																		</a>
 																	</div>
-																	<div className={cx('action')}>
+																	{item.resume_active === '1' && (
+																		<p className={cx('text-notes', 'text-notes-2', 'd-block')}>
+																			Bạn đang <span>vô hiệu hóa</span> hồ sơ. Nhà tuyển dụng sẽ
+																			không thấy được hồ sơ này của bạn.
+																		</p>
+																	)}
+																	{item.resume_active === '2' && (
+																		<p className={cx('text-notes', 'text-notes-1', 'd-none')}>
+																			Hồ sơ của bạn đang ở trạng thái <span>Công Khai</span>. Nhà
+																			tuyển dụng có thể tìm thấy Hồ sơ này của bạn.
+																		</p>
+																	)}
+																	{item.resume_active === '3' && (
+																		<p className={cx('text-notes', 'text-notes-3', 'd-none')}>
+																			Hồ sơ của bạn đang ở trạng thái <span>Khẩn cấp</span>. Hồ sơ
+																			của bạn sẽ được ưu tiên tìm thấy bởi các nhà tuyển dụng.
+																		</p>
+																	)}
+																	<div className={cx('right-action')}>
 																		<ul>
-																			<li className={cx('edit')}>
-																				<a href='https://careerbuilder.vn/vi/jobseekers/myresume/myattach?id=18020074'>
-																					; Chỉnh sửa
+																			<li>
+																				<a
+																					href='https://careerbuilder.vn/vi/quan-ly-nghe-nghiep/ho-so-cua-toi/ho-so-dinh-kem/123-18020074'
+																					title='Xem'
+																					className={cx('view')}>
+																					<em className={cx('mdi', 'mdi-eye')} />
+																					Xem
 																				</a>
 																			</li>
-																			<li className={cx('delete')}>
+																			<li>
 																				<a
 																					href=''
-																					onClick="deleteResume('18020074','123', '','2'); return false;">
-																					Xóa
+																					onClick='downloadCvAttach(18020074);'
+																					title='Tải hồ sơ'
+																					className={cx('down')}>
+																					<em className={cx('mdi', 'mdi-download')} />
+																					Tải hồ sơ
 																				</a>
 																			</li>
 																		</ul>
@@ -463,232 +633,20 @@ const Dashboard = () => {
 															</div>
 														</div>
 													</div>
-												</div>
-											</div>
-											<div className={cx('row')}>
-												<div className={cx('col-lg-5')}>
-													<div className={cx('figure')}>
-														<div className={cx('image')}>
-															<img
-																src='https://static.careerbuilder.vn/themes/kiemviecv32/images/icons/ic-resume.png'
-																alt={123}
-															/>
-														</div>
-														<div className={cx('figcaption')}>
-															<div className={cx('time')}>
-																<p>Ngày cập nhật:</p>
-																<time id='date_18020074'>27/12/2022</time>
-																<a
-																	className={cx('refresh', 'ac_refesh')}
-																	title='Cập nhật hồ sơ'
-																	href='javascript:;'
-																	rel={18020074}></a>
-															</div>
-															<div className={cx('view-number')}>
-																<p>Lượt xem:</p>
-																<span>0</span>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className={cx('col-lg-7')}>
-													<div className={cx('attached-status-area')}>
-														<p>Cho phép tìm</p>
-														<div
-															className={cx('switch-status', 'group_searchable')}
-															id='cv_searchable_18020074'
-															data-id={18020074}
-															data-complete={1}>
-															<a href='' data-type={2} className={cx('lock', 'active')}>
-																Khóa
-															</a>
-															<a href='' data-type={1} className={cx('public', '')}>
-																Công khai
-															</a>
-															<a href='' data-type={3} className={cx('flash', '')}>
-																Khẩn cấp
-															</a>
-														</div>
-														<p className={cx('text-notes', 'text-notes-2', 'd-block')}>
-															Bạn đang <span>vô hiệu hóa</span> hồ sơ. Nhà tuyển dụng sẽ không thấy được
-															hồ sơ này của bạn.
-														</p>
-														<p className={cx('text-notes', 'text-notes-1', 'd-none')}>
-															Hồ sơ của bạn đang ở trạng thái <span>Công Khai</span>. Nhà tuyển dụng có
-															thể tìm thấy Hồ sơ này của bạn.
-														</p>
-														<p className={cx('text-notes', 'text-notes-3', 'd-none')}>
-															Hồ sơ của bạn đang ở trạng thái <span>Khẩn cấp</span>. Hồ sơ của bạn sẽ
-															được ưu tiên tìm thấy bởi các nhà tuyển dụng.
-														</p>
-														<div className={cx('right-action')}>
-															<ul>
-																<li>
-																	<a
-																		href='https://careerbuilder.vn/vi/quan-ly-nghe-nghiep/ho-so-cua-toi/ho-so-dinh-kem/123-18020074'
-																		title='Xem'
-																		className={cx('view')}>
-																		<em className={cx('mdi', 'mdi-eye')} />
-																		Xem
-																	</a>
-																</li>
-																<li>
-																	<a
-																		href=''
-																		onClick='downloadCvAttach(18020074);'
-																		title='Tải hồ sơ'
-																		className={cx('down')}>
-																		<em className={cx('mdi', 'mdi-download')} />
-																		Tải hồ sơ
-																	</a>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div className={cx('attached-item')}>
-											<div className={cx('row')}>
-												<div className={cx('col-12')}>
-													<div className={cx('head-title')}>
-														<div className={cx('row')}>
-															<div className={cx('col-lg-5')}>
-																<div className={cx('title')}>
-																	<h4 id='titleresume_18006664'>Frontend Developer 123</h4>
-																	<div className={cx('status', 'success')}>
-																		<p>Hoàn Tất</p>
-																	</div>
-																</div>
-															</div>
-															<div className={cx('col-lg-7')}>
-																<div className={cx('top-action')}>
-																	<div className={cx('switch-box', 'jobalert-cv-widget')}>
-																		<label htmlFor='cv_jobalert_18006664'>
-																			Thông báo việc làm
-																			<input
-																				type='checkbox'
-																				id='cv_jobalert_18006664'
-																				className={cx('group_jobalert')}
-																				data-id={18006664}
-																			/>
-																			<span className={cx('slider')} />
-																		</label>
-																	</div>
-																	<div className={cx('action')}>
-																		<ul>
-																			<li className={cx('edit')}>
-																				<a href='https://careerbuilder.vn/cv-hay/tao-cv/resume/18006664'>
-																					; Chỉnh sửa
-																				</a>
-																			</li>
-																			<li className={cx('delete')}>
-																				<a
-																					href=''
-																					onClick="deleteResume('18006664','Frontend Developer 123', '','3'); return false;">
-																					Xóa
-																				</a>
-																			</li>
-																		</ul>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className={cx('row')}>
-												<div className={cx('col-lg-5')}>
-													<div className={cx('figure')}>
-														<div className={cx('image')}>
-															<img
-																src='https://static.careerbuilder.vn/themes/cv_tool/images/template/cvtemplate05_1605606637.jpg'
-																alt='Frontend Developer 123'
-															/>
-														</div>
-														<div className={cx('figcaption')}>
-															<div className={cx('time')}>
-																<p>Ngày cập nhật:</p>
-																<time id='date_18006664'>25/12/2022</time>
-																<a
-																	className={cx('refresh', 'ac_refesh')}
-																	title='Cập nhật hồ sơ'
-																	href='javascript:;'
-																	rel={18006664}></a>
-															</div>
-															<div className={cx('view-number')}>
-																<p>Lượt xem:</p>
-																<span>0</span>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className={cx('col-lg-7')}>
-													<div className={cx('attached-status-area')}>
-														<p>Cho phép tìm</p>
-														<div
-															className={cx('switch-status', 'group_searchable')}
-															id='cv_searchable_18006664'
-															data-id={18006664}
-															data-complete={1}>
-															<a href='' data-type={2} className={cx('lock', 'active')}>
-																<em className={cx('mdi', 'mdi-lock')} />
-																Khóa
-															</a>
-															<a href='' data-type={1} className={cx('public', '')}>
-																<em className={cx('mdi', 'mdi-web')} />
-																Công khai
-															</a>
-															<a href='' data-type={3} className={cx('flash', '')}>
-																<em className={cx('mdi', 'mdi-flash')} />
-																Khẩn cấp
-															</a>
-														</div>
-														<p className={cx('text-notes', 'text-notes-2', 'd-block')}>
-															Bạn đang <span>vô hiệu hóa</span> hồ sơ. Nhà tuyển dụng sẽ không thấy được
-															hồ sơ này của bạn.
-														</p>
-														<p className={cx('text-notes', 'text-notes-1', 'd-none')}>
-															Hồ sơ của bạn đang ở trạng thái <span>Công Khai</span>. Nhà tuyển dụng có
-															thể tìm thấy Hồ sơ này của bạn.
-														</p>
-														<p className={cx('text-notes', 'text-notes-3', 'd-none')}>
-															Hồ sơ của bạn đang ở trạng thái <span>Khẩn cấp</span>. Hồ sơ của bạn sẽ
-															được ưu tiên tìm thấy bởi các nhà tuyển dụng.
-														</p>
-														<div className={cx('right-action')}>
-															<ul>
-																<li>
-																	<a
-																		href='https://careerbuilder.vn/cv-hay/tao-cv/resume/preview/18006664'
-																		title='Xem'
-																		className={cx('view')}>
-																		<em className={cx('mdi', 'mdi-eye')} />
-																		Xem
-																	</a>
-																</li>
-																<li>
-																	<a
-																		href=''
-																		onClick='downloadCvProfile(18006664);'
-																		title='Tải hồ sơ'
-																		className={cx('down')}>
-																		<em className={cx('mdi', 'mdi-download')} />
-																		Tải hồ sơ
-																	</a>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+												);
+											}
+										})}
+
 										<div className={cx('row')}>
 											<div className={cx('col-md-7', 'create-info')}>
 												<p>Bạn có thể tạo tối đa 4 hồ sơ đính kèm</p>
 											</div>
 											<div className={cx('col-md-5', 'button-upload')} id='created-resume'>
-												<Link to={routesPath.JobseekerPaths.myAttach}>Tạo Hồ Sơ Ngay!</Link>
+												{count === 4 ? (
+													''
+												) : (
+													<Link to={routesPath.JobseekerPaths.myAttach}>Tạo Hồ Sơ Ngay!</Link>
+												)}
 											</div>
 										</div>
 									</div>
