@@ -4,7 +4,7 @@ import { cx } from '..';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { AddIcon } from '~/Core/resources';
 
-const Widget = ({ action = 'ADD', children, avatar, title, status, onOpenResume, onOpenTipSlide, ...props }) => {
+const Widget = ({ action = 'ADD', children, avatar,icon, title, status, onOpenResume, onOpenTipSlide, ...props }) => {
 	const modalAction = {
 		ADD: 'THÊM MỚI',
 		EDIT: 'CHỈNH SỬA'
@@ -25,7 +25,8 @@ const Widget = ({ action = 'ADD', children, avatar, title, status, onOpenResume,
 				<div className={cx('cb-title-h3')}>
 					<div className={cx('figure')}>
 						<div className={cx('image')}>
-							<img src={avatar} alt='' />
+						{avatar &&  <img src={avatar} alt='' />  }
+						{icon && icon}
 						</div>
 						<div className={cx('figcaption')}>
 							<h3>{title} *</h3>

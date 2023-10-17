@@ -22,6 +22,7 @@ import resumeObjectiveApi from './apis/resumeObjectiveApi';
 import resumeActivityApi from './apis/resumeAcitivity';
 import resumeExperienceApi from './apis/resumeExperienceApi';
 import resumeAddioninfoApi from './apis/resumeAddioninfo';
+import resumeLanguageApi from './apis/resumeLanguageApi';
 import workTypeApi from './apis/workTypeApi';
 import resumeDesiredJobApi from './apis/resumeDesiredJobApi';
 import listProvincesApi from './apis/listProvincesApi';
@@ -59,6 +60,7 @@ const store = configureStore({
 			resumeExperienceApi.middleware,
 			resumeAddioninfoApi.middleware,
 			resumeDesiredJobApi.middleware,
+			resumeLanguageApi.middleware,
 			workTypeApi.middleware,
 			listProvincesApi.middleware,
 			districtsApi.middleware,
