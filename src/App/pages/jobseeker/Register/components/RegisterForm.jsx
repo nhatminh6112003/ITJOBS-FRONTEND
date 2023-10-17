@@ -32,6 +32,7 @@ const RegisterForm = ({ className: cx }) => {
 	};
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
+			<div className={cx("form-group","form-text")}>
 			<InputFieldControl control={control} name='firstname' placeholder='* Tên' />
 			<InputFieldControl control={control} name='lastname' placeholder='* Họ và tên lót' type='text' />
 			<InputFieldControl control={control} name='email' placeholder='* Email' />
@@ -42,6 +43,7 @@ const RegisterForm = ({ className: cx }) => {
 				name='confirm_password'
 				placeholder='* Xác nhận mật khẩu'
 			/>
+			</div>
 			<div className='form-group form-submit'>
 				<button className={cx('btn-gradient')}>Đăng ký</button>
 			</div>

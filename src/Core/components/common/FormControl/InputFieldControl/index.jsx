@@ -21,7 +21,7 @@ const InputFieldControl = ({ defaultValue, control, disabled, rules, type = 'tex
 	const localRef = useRef(null);
 	const inputRef = ref || localRef;
 	return (
-		<Fragment>
+		<div style={{ marginBottom: 20 }}>
 			{label && <label htmlFor={field.name}>{label}</label>}
 			<input
 				type={type}
@@ -53,7 +53,7 @@ const InputFieldControl = ({ defaultValue, control, disabled, rules, type = 'tex
 			) : (
 				''
 			)}
-		</Fragment>
+		</div>
 	);
 };
 export default forwardRef(InputFieldControl);

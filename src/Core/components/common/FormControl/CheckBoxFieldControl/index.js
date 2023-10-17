@@ -1,1 +1,1 @@
-export {default} from "./CheckBoxFieldControl.jsx"
+export {default} from "./CheckBoxFieldControl.jsx";
