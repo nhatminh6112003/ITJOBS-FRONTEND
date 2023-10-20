@@ -40,8 +40,8 @@ const SelectMultipleFieldControl = ({
 	// Use useEffect to populate selectedOptions when the component mounts
 	useEffect(() => {
 		// Filter the options to get the selectedOptions based on selectedValues
-		if (selectedValues) {
-			const newSelectedOptions = options.filter((option) => selectedValues.includes(option.value));
+		if (selectedValues && options) {
+			const newSelectedOptions = options?.filter((option) => selectedValues.includes(option.value));
 			setSelectedOptions(newSelectedOptions);
 		}
 	}, [selectedValues, options]);
@@ -76,10 +76,14 @@ const SelectMultipleFieldControl = ({
 	};
 
 	// Filter options based on the searchValue
-	const filteredOptions = useMemo(
-		() => options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase())),
-		[searchValue]
-	);
+	const filteredOptions = useMemo(() => {
+		if (!options) {
+		
+		  return []; 
+		} else {
+		  return options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+		}
+	 }, [searchValue, options]);
 
 	const {
 		field,
@@ -95,6 +99,7 @@ const SelectMultipleFieldControl = ({
 
 	useEffect(() => {
 		const handleData = selectedOptions.map((item) => item.value);
+		console.log("TCL: handleData", handleData)
 		field.onChange(handleData);
 	}, [selectedOptions]);
 
@@ -144,7 +149,7 @@ const SelectMultipleFieldControl = ({
 									<label>All</label>
 								</div>
 							)} */}
-							{filteredOptions.map((option, index) => (
+							{filteredOptions?.map((option, index) => (
 								<div
 									className={cx('select-item')}
 									key={index}

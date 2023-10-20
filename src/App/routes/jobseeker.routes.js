@@ -13,6 +13,8 @@ const Dashboard = lazy(() => import('../pages/Jobseeker/Dashboard'));
 const MyProfile = lazy(() => import('../pages/Jobseeker/MyProfile'));
 const ChangeTemplate = lazy(() => import('../pages/Jobseeker/ChangeTemplate'));
 const MyAttach = lazy(() => import('../pages/Jobseeker/MyAttach'));
+const UpdateMyAttach = lazy(() => import('../pages/Jobseeker/UpdateMyAttach'));
+const MyCvDetail = lazy(() => import('../pages/Jobseeker/MyCvDetail'));
 
 const jobSeekerPublicRoutes = [
 	{ path: routesPath.JobseekerPaths.home, component: Home },
@@ -30,5 +32,8 @@ const jobSeekerPrivateRoutes = [
 	{ path: routesPath.JobseekerPaths.myProfile, component: MyProfile },
 	{ path: routesPath.JobseekerPaths.changeTemplate, component: ChangeTemplate },
 	{ path: routesPath.JobseekerPaths.myAttach, component: MyAttach },
+	{ path: routesPath.JobseekerPaths.myUpdateAttach, component: UpdateMyAttach },
+	{ path: routesPath.JobseekerPaths.myCvDetail, component: MyCvDetail },
 ];
+
 export { jobSeekerPublicRoutes, jobSeekerPrivateRoutes };

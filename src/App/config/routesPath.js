@@ -20,7 +20,9 @@ const JobseekerPaths = {
 	dashboard: '/jobseekers/dashboard',
 	myProfile: '/jobseekers/my-profile',
 	changeTemplate: '/jobseekers/changetemplate',
-	myAttach:'/jobseekers/myresume/myattach'
+	myAttach: '/jobseekers/myresume/myattach',
+	myUpdateAttach: '/jobseekers/myresume/myattach/:id',
+	myCvDetail:"/ho-so-cua-toi/ho-so-dinh-kem/:id"
 };
 const EmployerPaths = {
 	login: '/employers/login',
