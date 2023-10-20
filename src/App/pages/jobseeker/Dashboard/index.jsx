@@ -26,9 +26,7 @@ const Dashboard = () => {
 	const { data: getAllMyAttach, refetch } = useGetAllMyAttachQuery(user_account_id);
 	const [deleteMyAttach] = useDeleteMyAttachMutation();
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
-	useEffect(() => {
-		console.log(getAllMyAttach);
-	}, [getAllMyAttach]);
+	
 
 	const handleDeleteMyAttach = (id) => {
 		console.log(id);
@@ -482,7 +480,6 @@ const Dashboard = () => {
 																									cursor: 'pointer',
 																									fontWeight: '500'
 																								}}>
-																								{' '}
 																								Chỉnh sửa
 																							</Link>
 																						</li>
@@ -609,18 +606,16 @@ const Dashboard = () => {
 																	<div className={cx('right-action')}>
 																		<ul>
 																			<li>
-																				<a
-																					href='https://careerbuilder.vn/vi/quan-ly-nghe-nghiep/ho-so-cua-toi/ho-so-dinh-kem/123-18020074'
+																				<Link	
+																					to={`/ho-so-cua-toi/ho-so-dinh-kem/${item.id}`}
 																					title='Xem'
 																					className={cx('view')}>
 																					<em className={cx('mdi', 'mdi-eye')} />
 																					Xem
-																				</a>
+																				</Link>
 																			</li>
 																			<li>
 																				<a
-																					href=''
-																					onClick='downloadCvAttach(18020074);'
 																					title='Tải hồ sơ'
 																					className={cx('down')}>
 																					<em className={cx('mdi', 'mdi-download')} />

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { myAttachSchema } from '~/App/schemas/myAttachSchema';
 import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUploadFieldControl/FileUploadFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
@@ -12,8 +13,10 @@ import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import { useGetAllWorkTypeQuery } from '~/App/providers/apis/workTypeApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
-import { DegreeArray } from '~/App/constants/degreeArray';
-
+import { LevelArray } from '~/App/constants/levelEnum';
+import { LockIcon } from '~/Core/resources';
+import LanguageIcon from '@mui/icons-material/Language';
+import BoltIcon from '@mui/icons-material/Bolt';
 const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue }) => {
 	const { control, handleSubmit, watch, setValue } = useForm({
 		resolver: yupResolver(myAttachSchema)
@@ -58,24 +61,30 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 						<div className={sx('form-group')}>
 							<div className={sx('list-choose')}>
 								<div className={sx('choose-mycomputer')}>
-									<label htmlFor='attach_file'>
+									{/* <label htmlFor='file'>
 										<FolderOutlinedIcon style={{ padding: 3 }} />
 										Tải hồ sơ từ máy tính
-									</label>
-									<InputFieldControl
+									</label> */}
+									<FileUploadFieldControl
+										htmlFor='file'
+										control={control}
+										name='file'
+										label='Tải hồ sơ từ máy tính'
+									/>
+									{/* <InputFieldControl
 										control={control}
 										name='file'
 										id='file'
 										type='file'
-										style={{ overflow: 'hidden' }}
-									/>
+										style={{display:'none'}}
+									/> */}
 								</div>
 							</div>
 							<span className={sx('error_attach_file')} />
 						</div>
 					</div>
 					<div className={sx('form-group', 'form-text')}>
-						<InputFieldControl control={control} name='title' id='title' label='' />
+						<InputFieldControl control={control} name='title' id='title' placeholder='Tiều đề hồ sơ' />
 						<span className={sx('error_resume_title')} />
 						<div className={sx('form-note')}>
 							<p>Nhập vị trí hoặc chức danh. Ví dụ: Kế toán trưởng, Web designer</p>
@@ -141,7 +150,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 									label='* Cấp bậc hiện tại'
 									control={control}
 									name='position_id'
-									options={DegreeArray}
+									options={LevelArray}
 								/>
 							</div>
 						</div>
@@ -150,12 +159,10 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								{/* ngành nghề mon muốn */}
 								<SelectMultipleFieldControl
 									label='Ngành nghề mong muốn'
-									options={
-										listProfession?.data?.map((value) => ({
-											value: value.id,
-											label: value.name
-										})) || []
-									}
+									options={listProfession?.data?.map((value) => ({
+										value: value.id,
+										label: value.name
+									}))}
 									placeholder='Chọn'
 									maxItems={3}
 									control={control}
@@ -264,14 +271,12 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 									<div>
 										<SelectMultipleFieldControl
 											label='Phúc lợi mong muốn'
-											options={
-												listJobWelfare?.data?.map((value) => {
-													return {
-														value: value.id,
-														label: value.welfare_type
-													};
-												}) || []
-											}
+											options={listJobWelfare?.data?.map((value) => {
+												return {
+													value: value.id,
+													label: value.welfare_type
+												};
+											})}
 											placeholder='Chọn'
 											maxItems={3}
 											control={control}
@@ -338,10 +343,15 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 										: sx('lock', 'switch-status-element-1')
 								)}
 								style={{
-									cursor: 'pointer'
+									cursor: 'pointer',
+									display:'flex',
+									alignItems:'center',
+									gap:3,
+									justifyContent:'center'
 								}}
 								onClick={() => handleClick(1)}>
-								<em className={cx('mdi', 'mdi-lock', '')} />
+								{/* <em className={cx('mdi', 'mdi-lock', '')} /> */}
+								<LockIcon fontSize='20'/>
 								Khóa
 							</a>
 							<a
@@ -352,10 +362,14 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 										: sx('public', 'switch-status-element-2')
 								}
 								style={{
-									cursor: 'pointer'
+									cursor: 'pointer',
+									display:'flex',
+									alignItems:'center',
+									gap:3,
+									justifyContent:'center'
 								}}
 								onClick={() => handleClick(2)}>
-								<em className={cx('mdi', 'mdi-web', '')} />
+								<LanguageIcon fontSize='20'/>
 								Công khai
 							</a>
 							<a
@@ -368,10 +382,14 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 										: sx('flash', 'switch-status-element-3')
 								)}
 								style={{
-									cursor: 'pointer'
+									cursor: 'pointer',
+									display:'flex',
+									alignItems:'center',
+									gap:3,
+									justifyContent:'center'
 								}}
 								onClick={() => handleClick(3)}>
-								<em className={cx('mdi', 'mdi-flash', '')} />
+								<BoltIcon fontSize='20'/>
 								Khẩn cấp
 							</a>
 						</div>
@@ -389,13 +407,13 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 							</p>
 						</div>
 					</div>
-					<div className={cx('row', 'search-resume', '')}>
+					{/* <div className={cx('row', 'search-resume', '')}>
 						<div className={cx('col-md-6', '')}>
 							<div className={sx('form-group', '')}>
 								<span className={sx('hide-infor', '')}>Ẩn một số thông tin</span>
 							</div>
 						</div>
-					</div>
+					</div> */}
 					<div className={cx('row', '')}>
 						<div className={cx('col-md-12')}>
 							<div className={sx('form-group', 'form-submit', 'form-back', '')}>

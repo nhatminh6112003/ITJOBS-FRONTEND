@@ -15,7 +15,7 @@ const MyAttach = ({ cx }) => {
 		setSelectedValue(value);
 	};
 	const navigate = useNavigate();
-	const onCreateAttach = (data) => {
+	const onCreateAttach = ({ profession_id, welfare_id, ...data }) => {	
 		const work_type_id = [];
 		for (let i = 1; i <= 4; i++) {
 			const key = `work_type_id_${i}`;
@@ -24,19 +24,24 @@ const MyAttach = ({ cx }) => {
 			}
 			delete data[key];
 		}
-		// const fileName = data.file.substring(data.file.lastIndexOf('\\') + 1);
-		const body = {
-			...data,
-			work_type_id,
-			resume_active: Number(selectedValue),
-			user_account_id
-		};
-		createMyAttach(body)
+		const formData = new FormData();
+
+		Object.entries(data).forEach(([key, value]) => {
+			formData.append(key, value);
+		});
+
+		formData.append('profession_id', JSON.stringify(profession_id));
+		formData.append('welfare_id', JSON.stringify(welfare_id));
+		formData.append('work_type_id', JSON.stringify(work_type_id));
+		formData.append('resume_active', Number(selectedValue));
+		formData.append('user_account_id', user_account_id);
+
+		createMyAttach(formData)
 			.unwrap()
 			.then((r) => {
-				console.log(r);
 				if (r.status == 200) {
 					toast.success(r?.message);
+					navigate('/jobseekers/dashboard');
 					return;
 				}
 			});

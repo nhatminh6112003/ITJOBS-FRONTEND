@@ -8,12 +8,15 @@ import { AccountCircleIcon, ExpandMoreIcon, CheckIcon, Notifications } from '~/C
 import { logout } from '~/App/providers/slices/authSlice';
 import { Fragment } from 'react';
 import UserRoleEnum, { UserType } from '~/App/constants/roleEnum';
+import { useGetOneUserQuery } from '~/App/providers/apis/userApi';
 const cx = classNames.bind(styles);
 
 const Header = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.auth?.user);
+	const { data } = useGetOneUserQuery(user?.id);
+
 	const handleLogout = () => {
 		dispatch(logout({ Role: UserType[UserRoleEnum.JOBSEEKER] }));
 	};
@@ -175,7 +178,7 @@ const Header = () => {
 										<AccountCircleIcon sx={{ fontSize: 20, paddingRight: '5px' }} />
 										Chào
 										<span className={cx('nameUser')}>
-											{user?.firstname} {user?.lastname}
+											 {data?.firstname}
 										</span>
 									</Link>
 									<div className={cx('dropdown-menu')}>

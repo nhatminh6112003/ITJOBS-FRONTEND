@@ -3,27 +3,53 @@ import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxF
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
+import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUploadFieldControl/FileUploadFieldControl';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
-
+import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
+import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
+import { useGetAllWorkTypeQuery } from '~/App/providers/apis/workTypeApi';
+import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
+import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
+import { LockIcon } from '~/Core/resources';
+import LanguageIcon from '@mui/icons-material/Language';
+import BoltIcon from '@mui/icons-material/Bolt';
+import { useNavigate } from 'react-router-dom';
 const UpdateMyAttachForm = ({
 	sx,
 	cx,
 	onUpdateAttach,
-	DegreeArray,
+	degreeArray,
 	reset,
 	setValue,
 	handleSubmit,
 	control,
-	listProfession,
-	listDistricts,
-	listProvinces,
-	listWorkType,
-	listJobWelfare,
 	setSelectedValue,
 	selectedValue,
 	resume_desired_job,
-	resume_title
+	resume_title,
+	my_attach,
+	watch
 }) => {
+
+	const selectFile = watch('file');
+	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
+	const { data: listProfession } = useGetAllProfessionQuery({});
+	const { data: listWorkType } = useGetAllWorkTypeQuery();
+	const { data: listProvinces } = useGetAllProvincesQuery();
+	const [work_type_id, setWorkTypeId] = useState([]);
+	const selectedProvince = watch('provinces', null);
+	const { data: listDistricts } = useGetAllDistrictsQuery(
+		{
+			params: {
+				depth: 2
+			},
+			code: selectedProvince
+		},
+		{
+			skip: !selectedProvince
+		}
+	);
+
 	useEffect(() => {
 		reset({
 			salary_from: resume_desired_job?.salary_from,
@@ -32,15 +58,18 @@ const UpdateMyAttachForm = ({
 			provinces: resume_desired_job?.provinces,
 			districts: resume_desired_job?.districts,
 			work_home: resume_desired_job?.work_home,
-			profession_id: resume_desired_job?.profession_id,
-			welfare_id: resume_desired_job?.welfare_id,
-			work_type_id: resume_desired_job?.work_type_id,
+			// profession_id: resume_desired_job?.profession_id,
+			// welfare_id: resume_desired_job?.welfare_id,
+			// work_type_id: resume_desired_job?.work_type_id,
 			title: resume_title?.title
 		});
-		resume_desired_job?.work_type_id?.forEach((item) => {
-			setValue(`work_type_id_${item}`, item);
+		const work_type_id = my_attach?.resume_work_type.map((item) => item.work_type_id);
+		setWorkTypeId(work_type_id);
+		my_attach?.resume_work_type?.forEach((item) => {
+			setValue(`work_type_id_${item.work_type_id}`, item.work_type_id);
 		});
-	}, [reset, resume_desired_job, resume_title, setValue]);
+		setValue('file', selectFile | my_attach?.attachments?.file);
+	}, [reset, my_attach, setValue, setWorkTypeId]);
 	const handleClick = (value) => {
 		setSelectedValue(value);
 	};
@@ -51,13 +80,10 @@ const UpdateMyAttachForm = ({
 					<div className={sx('cb-title-h3')}>
 						<h3>Hồ sơ</h3>
 					</div>
-					<div className={sx('form-show-file', '')} id='uploadFile_file'>
+					<div className={sx('form-show-file', 'active')} id='uploadFile_file'>
 						<label>* Tên Hồ Sơ:</label>
-						<em className={sx('material-icons')}>picture_as_pdf</em>
-						<p className={sx('show-file')} />
-						<a href='javascript:void(0)' className={sx('removefile')}>
-							<em className={sx('material-icons')}>highlight_off </em>Xóa
-						</a>
+
+						<p className={sx('show-file')}>{selectFile?.name || my_attach?.attachments?.file}</p>
 					</div>
 					<div className={sx('form-choose')}>
 						<div className={sx('form-group')}>
@@ -68,18 +94,19 @@ const UpdateMyAttachForm = ({
 						<div className={sx('form-group')}>
 							<div className={sx('list-choose')}>
 								<div className={sx('choose-mycomputer')}>
-									<label htmlFor='attach_file'>
-										<FolderOutlinedIcon style={{ padding: 3 }} />
-										Tải hồ sơ từ máy tính
-									</label>
-									<InputFieldControl control={control} name='file' id='file' type='file' />
+									<FileUploadFieldControl
+										htmlFor='file'
+										control={control}
+										name='file'
+										label='Tải hồ sơ từ máy tính'
+									/>
 								</div>
 							</div>
 							<span className={sx('error_attach_file')} />
 						</div>
 					</div>
 					<div className={sx('form-group', 'form-text')}>
-						<InputFieldControl control={control} name='title' id='title' label='Tiêu đề hồ sơ' />
+						<InputFieldControl control={control} name='title' id='title' placeholder='Tiêu đề hồ sơ' />
 						<span className={sx('error_resume_title')} />
 						<div className={sx('form-note')}>
 							<p>Nhập vị trí hoặc chức danh. Ví dụ: Kế toán trưởng, Web designer</p>
@@ -145,7 +172,7 @@ const UpdateMyAttachForm = ({
 									label='* Cấp bậc hiện tại'
 									control={control}
 									name='position_id'
-									options={DegreeArray}
+									options={degreeArray}
 								/>
 							</div>
 						</div>
@@ -154,17 +181,15 @@ const UpdateMyAttachForm = ({
 								{/* ngành nghề mon muốn */}
 								<SelectMultipleFieldControl
 									label='Ngành nghề mong muốn'
-									options={
-										listProfession?.data?.map((value) => ({
-											value: value.id,
-											label: value.name
-										})) || []
-									}
+									options={listProfession?.data?.map((value) => ({
+										value: value.id,
+										label: value.name
+									}))}
 									placeholder='Chọn'
 									maxItems={3}
 									control={control}
 									name='profession_id'
-									selectedValues={resume_desired_job?.profession_id}
+									selectedValues={my_attach?.profession_desired_job?.map((item) => item.profession_id)}
 								/>
 							</div>
 						</div>
@@ -226,19 +251,17 @@ const UpdateMyAttachForm = ({
 									<div>
 										<SelectMultipleFieldControl
 											label='Phúc lợi mong muốn'
-											options={
-												listJobWelfare?.data?.map((value) => {
-													return {
-														value: value.id,
-														label: value.welfare_type
-													};
-												}) || []
-											}
+											options={listJobWelfare?.data?.map((value) => {
+												return {
+													value: value.id,
+													label: value.welfare_type
+												};
+											})}
 											placeholder='Chọn'
 											maxItems={3}
 											control={control}
 											name='welfare_id'
-											selectedValues={resume_desired_job?.welfare_id}
+											selectedValues={my_attach?.welfare_id}
 										/>
 									</div>
 								</div>
@@ -249,7 +272,7 @@ const UpdateMyAttachForm = ({
 							<div className={cx('row')} style={{ marginTop: 6 }}>
 								{listWorkType?.map((listWork, index) => {
 									return (
-										<div className={cx('col-md-6', '')}>
+										<div className={cx('col-md-6', '')} key={index}>
 											<div className={cx('d-flex')}>
 												<CheckBoxFieldControl
 													name={`work_type_id_${listWork.id}`}
@@ -257,7 +280,9 @@ const UpdateMyAttachForm = ({
 													control={control}
 													label={listWork.name}
 													value={listWork.id}
-													defaultChecked={resume_desired_job?.work_type_id?.includes(listWork.id)}
+													defaultChecked={my_attach?.resume_work_type
+														.map((item) => item.work_type_id)
+														?.includes(listWork.id)}
 													onChange={(e) => {
 														if (e.target.checked)
 															setValue(`work_type_id_${listWork.id}`, Number(e.target.value));
@@ -303,10 +328,15 @@ const UpdateMyAttachForm = ({
 										: sx('lock', 'switch-status-element-1')
 								)}
 								style={{
-									cursor: 'pointer'
+									cursor: 'pointer',
+									display:'flex',
+									alignItems:'center',
+									gap:3,
+									justifyContent:'center'
 								}}
 								onClick={() => handleClick(1)}>
-								<em className={cx('mdi', 'mdi-lock', '')} />
+								{/* <em className={cx('mdi', 'mdi-lock', '')} /> */}
+								<LockIcon fontSize='20'/>
 								Khóa
 							</a>
 							<a
@@ -317,10 +347,14 @@ const UpdateMyAttachForm = ({
 										: sx('public', 'switch-status-element-2')
 								}
 								style={{
-									cursor: 'pointer'
+									cursor: 'pointer',
+									display:'flex',
+									alignItems:'center',
+									gap:3,
+									justifyContent:'center'
 								}}
 								onClick={() => handleClick(2)}>
-								<em className={cx('mdi', 'mdi-web', '')} />
+								<LanguageIcon fontSize='20'/>
 								Công khai
 							</a>
 							<a
@@ -333,10 +367,14 @@ const UpdateMyAttachForm = ({
 										: sx('flash', 'switch-status-element-3')
 								)}
 								style={{
-									cursor: 'pointer'
+									cursor: 'pointer',
+									display:'flex',
+									alignItems:'center',
+									gap:3,
+									justifyContent:'center'
 								}}
 								onClick={() => handleClick(3)}>
-								<em className={cx('mdi', 'mdi-flash', '')} />
+								<BoltIcon fontSize='20'/>
 								Khẩn cấp
 							</a>
 						</div>
@@ -354,13 +392,13 @@ const UpdateMyAttachForm = ({
 							</p>
 						</div>
 					</div>
-					<div className={cx('row', 'search-resume', '')}>
+					{/* <div className={cx('row', 'search-resume', '')}>
 						<div className={cx('col-md-6', '')}>
 							<div className={sx('form-group', '')}>
 								<span className={sx('hide-infor', '')}>Ẩn một số thông tin</span>
 							</div>
 						</div>
-					</div>
+					</div> */}
 					<div className={cx('row', '')}>
 						<div className={cx('col-md-12')}>
 							<div className={sx('form-group', 'form-submit', 'form-back', '')}>

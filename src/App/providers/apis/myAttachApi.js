@@ -1,9 +1,10 @@
 import baseQueryWithUser from '../fetchBaseQuery';
+import axiosBaseQuery from '../axiosBaseQuery';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 const myAttachApi = createApi({
 	reducerPath: 'myAttachApi',
-	baseQuery: baseQueryWithUser,
+	baseQuery: axiosBaseQuery(),
 	tagTypes: ['my_attach'],
 	endpoints: (build) => ({
 		getAllMyAttach: build.query({
@@ -21,9 +22,13 @@ const myAttachApi = createApi({
 			transformResponse: (response) => response.data
 		}),
 		createMyAttach: build.mutation({
-			query: (payload) => {
-				return { url: `/my_attach`, method: 'POST', body: payload };
-			},
+			query: (payload) => (
+				{
+					url: `/my_attach`,
+					method: 'POST',
+					body: payload,
+				}
+			),
 			invalidatesTags: ['my_attach']
 		}),
 		updateMyAttach: build.mutation({

@@ -1,7 +1,16 @@
 import * as yup from 'yup';
+import getFileExtension from '~/Core/utils/getFileExtension';
+import { AllowedFileExtension } from '../constants/allowedFileType';
+
 export const myAttachSchema = yup
 	.object({
-		file: yup.string().default('').required('Vui lòng chọn file attach'),
+		// file: yup
+		// 	.mixed()
+		// 	.default('')
+		// 	.test({
+		// 		message: 'Vui lòng chọn file PDF',
+		// 		test: (value) => AllowedFileExtension.PDF === getFileExtension(value)
+		// 	}),
 		position_id: yup.string().default('').required('Vui lòng chọn cấp bậc'),
 		// work_type_id: yup.array().default('').required('Vui lòng chọn hình thức làm việc'),
 		work_home: yup.boolean().default(false).nullable(),
