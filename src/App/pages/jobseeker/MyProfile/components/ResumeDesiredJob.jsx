@@ -105,7 +105,7 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 			welfare_id: resume_desired_job?.welfare_id,
 			work_type_id: resume_desired_job?.work_type_id
 		});
-		resume_desired_job?.work_type_id.forEach(item=>{
+		resume_desired_job?.work_type_id?.forEach(item=>{
 			setValue(`work_type_id_${item}`,item)
 		})
 	}, [updateReset,resume_desired_job]);
