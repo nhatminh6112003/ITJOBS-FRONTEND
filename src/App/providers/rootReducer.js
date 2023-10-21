@@ -23,7 +23,7 @@ import listProvincesApi from './apis/listProvincesApi';
 import districtsApi from './apis/districtsApi';
 import resumeLanguageApi from './apis/resumeLanguageApi';
 import myAttachApi from './apis/myAttachApi';
-
+import companyApi from './apis/companyApi';
 const rootReducer = combineReducers({
 	[authSlice.name]: authSlice.reducer,
 	[themeSlice.name]: themeSlice.reducer,
@@ -49,7 +49,8 @@ const rootReducer = combineReducers({
 	[listProvincesApi.reducerPath]: listProvincesApi.reducer,
 	[districtsApi.reducerPath]: districtsApi.reducer,
 	[resumeLanguageApi.reducerPath]: resumeLanguageApi.reducer,
-	[myAttachApi.reducerPath]: myAttachApi.reducer
+	[myAttachApi.reducerPath]: myAttachApi.reducer,
+	[companyApi.reducerPath]: companyApi.reducer,
 });
 
 export default rootReducer;

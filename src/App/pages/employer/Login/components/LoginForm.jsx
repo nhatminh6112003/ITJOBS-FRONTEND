@@ -3,6 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import UserRoleEnum from '~/App/constants/roleEnum';
 import { loginSchema } from '~/App/schemas/authSchema';
+import routesPath from '~/App/config/routesPath';
+import { Link } from 'react-router-dom';
 const LoginForm = ({ className: cx, onSubmit }) => {
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
@@ -49,12 +51,12 @@ const LoginForm = ({ className: cx, onSubmit }) => {
 					</button>
 				</div>
 				<p>
-					<a
+					<Link
 						className={cx('register')}
-						href='javascript:void()'
-						onClick="location.href='https://careerbuilder.vn/vi/employers/register'">
+						to={routesPath.EmployerPaths.register}
+						>
 						Quý khách chưa có tài khoản?
-					</a>
+					</Link>
 					Đăng ký dễ dàng, hoàn toàn miễn phí
 				</p>
 			</div>
