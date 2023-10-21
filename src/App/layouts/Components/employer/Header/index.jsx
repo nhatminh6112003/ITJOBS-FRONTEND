@@ -239,7 +239,7 @@ const Header = () => {
 						</div>
 						<div className={cx('main-candidates')}>
 							<Link to={routesPath.JobseekerPaths.home}>
-								<em className='fa fa-external-link' />
+								<em className={cx('fa', 'fa-external-link')} />
 								<h4>Dành cho Ứng Viên</h4>
 							</Link>
 						</div>
