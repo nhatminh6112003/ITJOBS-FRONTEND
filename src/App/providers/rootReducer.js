@@ -24,6 +24,8 @@ import districtsApi from './apis/districtsApi';
 import resumeLanguageApi from './apis/resumeLanguageApi';
 import myAttachApi from './apis/myAttachApi';
 import companyApi from './apis/companyApi';
+import resumeProfileApi from './apis/resumeProfileApi';
+
 const rootReducer = combineReducers({
 	[authSlice.name]: authSlice.reducer,
 	[themeSlice.name]: themeSlice.reducer,
@@ -51,6 +53,7 @@ const rootReducer = combineReducers({
 	[resumeLanguageApi.reducerPath]: resumeLanguageApi.reducer,
 	[myAttachApi.reducerPath]: myAttachApi.reducer,
 	[companyApi.reducerPath]: companyApi.reducer,
+	[resumeProfileApi.reducerPath]: resumeProfileApi.reducer
 });
 
 export default rootReducer;

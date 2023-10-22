@@ -26,6 +26,7 @@ import ResumeExperience from './components/ResumeExperience';
 import ResumeSkill from './components/ResumeSkill';
 import ResumeDesiredJob from './components/ResumeDesiredJob';
 import ResumeLanguage from './components/Resumelanguage';
+import ResumeProfile from './components/ResumeProfile';
 
 export const cx = classNames.bind(styles);
 
@@ -190,63 +191,10 @@ const MyProfile = () => {
 										</div>
 									</div>
 								</div>
+								
 								<ResumeTitle className={cx} isShowing={isShowing} toggle={toggle} />
-								<Widget
-									title='Thông tin cá nhân'
-									className={cx('widget', 'widget-13')}
-									id='personalinfo-section'
-									status='error'>
-									<div className={cx('table')}>
-										<table>
-											<tbody>
-												<tr>
-													<td>Họ và Tên Lót</td>
-													<td>Lop</td>
-												</tr>
-												<tr>
-													<td>Tên</td>
-													<td>Minh</td>
-												</tr>
-												<tr>
-													<td>Ngày sinh</td>
-													<td>31/12/2007</td>
-												</tr>
-												<tr>
-													<td>Điện thoại</td>
-													<td>0964185472</td>
-												</tr>
-												<tr>
-													<td>Email</td>
-													<td>lop7cttnq@gmail.com</td>
-												</tr>
-												<tr>
-													<td>Quốc tịch</td>
-													<td>Người Việt Nam</td>
-												</tr>
-												<tr>
-													<td>Tình trạng hôn nhân</td>
-													<td>Độc thân</td>
-												</tr>
-												<tr>
-													<td>Quốc gia</td>
-													<td>Việt Nam</td>
-												</tr>
-												<tr>
-													<td>Tỉnh/ Thành phố</td>
-													<td>Hà Nội</td>
-												</tr>
-												<tr>
-													<td>Quận/ Huyện</td>
-													<td>Huyện Ba Vì</td>
-												</tr>
-												<tr>
-													<td>Địa chỉ</td>
-													<td>123, Huyện Ba Vì, Hà Nội, Việt Nam</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</Widget>
+
+								<ResumeProfile className={cx} isShowing={isShowing} toggle={toggle}/>
 
 								<ResumeObjective className={cx} isShowing={isShowing} toggle={toggle} />
 
