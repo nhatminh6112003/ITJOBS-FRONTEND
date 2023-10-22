@@ -17,7 +17,6 @@ export default function ValidationTextFieldsControl({ name,rules, label, control
 		defaultValue: props.value,
 		...props
 	});
-	console.log("TCL: ValidationTextFieldsControl -> errors", errors)
 
 	return (
 		<Box
