@@ -1,39 +1,29 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import Widget from './Widget';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ResumeModal from './ResumeModal';
-import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
-import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
+import { Fragment, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import Tips from '~/Core/components/common/Modal/Tips';
 import useModal from '~/App/hooks/useModal';
-import { useUpdateResumeProfileMutation, useGetOneResumeProfileQuery } from '~/App/providers/apis/resumeProfileApi';
+import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
+import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
-import { LevelArray } from '~/App/constants/levelEnum';
-import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
-import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
+import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
+import { useGetOneResumeProfileQuery, useUpdateResumeProfileMutation } from '~/App/providers/apis/resumeProfileApi';
 import { useGetAllWorkTypeQuery } from '~/App/providers/apis/workTypeApi';
 import { resumeProfileSchema } from '~/App/schemas/resumeProfileSchema';
-import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
-import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
-import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
-import formatVND from '~/Core/utils/formatVND';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import Tips from '~/Core/components/common/Modal/Tips';
+import ResumeModal from './ResumeModal';
+import Widget from './Widget';
 const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 	const id = useSelector((state) => state.auth?.user?.id);
-	// const [updateId, setUpdateId] = useState(null);
-	//toggle tips
 	const { isShowing: showTips, toggle: toggleTips } = useModal({
 		t_resume_profile: false
 	});
-	//Gọi api rtk query
-	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProvinces } = useGetAllProvincesQuery();
 
 	const { data: resume_profile } = useGetOneResumeProfileQuery(id);
-	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
-	const { data: listProfession } = useGetAllProfessionQuery({});
 
 	const [updateProfileMutation] = useUpdateResumeProfileMutation();
 
@@ -60,12 +50,12 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 	);
 
 	const onUpdateSubmit = async (data) => {
-    console.log(data)
+		console.log(data);
 		updateProfileMutation({
 			id: resume_profile?.resume_id,
 			payload: {
 				...data,
-        user_id: id
+				user_id: id
 			}
 		})
 			.unwrap()
@@ -105,54 +95,40 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 				<div className={cx('table')}>
 					<table>
 						<tbody>
-							{resume_profile?.firstname && (
-								<tr>
-									<td className={cx('title')}>Họ và Tên Lót</td>
-									<td>{resume_profile?.firstname}</td>
-								</tr>
-							)}
-							{resume_profile?.lastname && (
-								<tr>
-									<td className={cx('title')}>Tên</td>
-									<td>{resume_profile?.lastname}</td>
-								</tr>
-							)}
-							{resume_profile?.birthday && (
-								<tr>
-									<td className={cx('title')}>Ngày sinh</td>
-									<td>{resume_profile?.birthday}</td>
-								</tr>
-							)}
-							{resume_profile?.phone_number && (
-								<tr>
-									<td className={cx('title')}>Điện thoại</td>
-									<td>{resume_profile?.phone_number}</td>
-								</tr>
-							)}
-							{resume_profile?.marial_status !== null && (
-								<tr>
-									<td className={cx('title')}>Tình trạng hôn nhân</td>
-									<td>{resume_profile?.marial_status === 0 ? "Độc thân" : "Đã kết hôn"}</td>
-								</tr>
-							)}
-							{resume_profile?.provinces && (
-								<tr>
-									<td className={cx('title')}>Tỉnh/ Thành phố</td>
-									<td>{resume_profile?.provinces}</td>
-								</tr>
-							)}
-							{resume_profile?.districts && (
-								<tr>
-									<td className={cx('title')}>Quận/ Huyện</td>
-									<td>{resume_profile?.districts}</td>
-								</tr>
-							)}
-							{resume_profile?.address && (
-								<tr>
-									<td className={cx('title')}>Địa chỉ</td>
-									<td>{resume_profile?.address}</td>
-								</tr>
-							)}
+							<tr>
+								<td className={cx('title')}>Họ và Tên Lót</td>
+								{resume_profile?.firstname && <td>{resume_profile?.firstname}</td>}
+							</tr>
+							<tr>
+								<td className={cx('title')}>Tên</td>
+								{resume_profile?.lastname && <td>{resume_profile?.lastname}</td>}
+							</tr>
+							<tr>
+								<td className={cx('title')}>Ngày sinh</td>
+								{resume_profile?.birthday && <td>{resume_profile?.birthday}</td>}
+							</tr>
+							<tr>
+								<td className={cx('title')}>Điện thoại</td>
+								{resume_profile?.phone_number && <td>{resume_profile?.phone_number}</td>}
+							</tr>
+							<tr>
+								<td className={cx('title')}>Tình trạng hôn nhân</td>
+								{resume_profile?.marial_status !== null && (
+									<td>{resume_profile?.marial_status === 0 ? 'Độc thân' : 'Đã kết hôn'}</td>
+								)}
+							</tr>
+							<tr>
+								<td className={cx('title')}>Tỉnh/ Thành phố</td>
+								{resume_profile?.provinces && <td>{resume_profile?.provinces}</td>}
+							</tr>
+							<tr>
+								<td className={cx('title')}>Quận/ Huyện</td>
+								{resume_profile?.districts && <td>{resume_profile?.districts}</td>}
+							</tr>
+							<tr>
+								<td className={cx('title')}>Địa chỉ</td>
+								{resume_profile?.address && <td>{resume_profile?.address}</td>}
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -162,17 +138,14 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 				isOpen={isShowing.update_resume_profile}
 				hide={() => toggle('update_resume_profile')}
 				className={cx}
-				title='Thông tin nghề nghiệp'>
+				title='Thông tin cá nhân'>
 				<Form
 					control={updateControl}
 					onSubmit={onUpdateSubmit}
 					handleSubmit={handleUpdateSubmit}
 					cx={cx}
 					resume_profile={resume_profile}
-					listWorkType={listWorkType}
 					listProvinces={listProvinces}
-					listProfession={listProfession?.data}
-					listJobWelfare={listJobWelfare?.data}
 					listDistricts={listDistricts?.districts}
 					setValue={setValue}
 				/>
@@ -192,7 +165,7 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 	);
 };
 
-const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistricts }) => {
+const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistricts,resume_profile }) => {
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
@@ -213,9 +186,9 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistrict
 						<SelectFieldControl
 							control={control}
 							options={[
-								{ value: "Male", label: 'Nam' },
-								{ value: "Female", label: 'Nữ' },
-                { value: "Other", label: "Khác"}
+								{ value: 'Male', label: 'Nam' },
+								{ value: 'Female', label: 'Nữ' },
+								{ value: 'Other', label: 'Khác' }
 							]}
 							name='gender'
 							id='gender'
@@ -223,6 +196,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistrict
 						/>
 					</div>
 				</div>
+
 				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>
 						<InputFieldControl control={control} type='date' name='birthday' id='birthday' label='Ngày sinh' />
@@ -289,6 +263,15 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistrict
 							id='marial_status'
 							label='Tình trạng hôn nhân'
 						/>
+					</div>
+				</div>
+				<div className={cx('col-lg-6')}>
+					<div className={cx('input-group')}>
+						<div style={{ marginBottom: 20 }}>
+							<label htmlFor='email'>Email</label>
+							<input type='text' name='email	' id='email	' defaultValue={resume_profile?.email} disabled />
+
+						</div>
 					</div>
 				</div>
 			</div>
