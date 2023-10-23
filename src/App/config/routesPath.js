@@ -22,7 +22,8 @@ const JobseekerPaths = {
 	changeTemplate: '/jobseekers/changetemplate',
 	myAttach: '/jobseekers/myresume/myattach',
 	myUpdateAttach: '/jobseekers/myresume/myattach/:id',
-	myCvDetail: '/ho-so-cua-toi/ho-so-dinh-kem/:id'
+	myCvDetail: '/ho-so-cua-toi/ho-so-dinh-kem/:id',
+	findJob:'tim-viec-lam/:id'
 };
 const EmployerPaths = {
 	login: '/employers/login',
