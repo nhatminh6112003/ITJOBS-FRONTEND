@@ -22,7 +22,7 @@ const JobseekerPaths = {
 	changeTemplate: '/jobseekers/changetemplate',
 	myAttach: '/jobseekers/myresume/myattach',
 	myUpdateAttach: '/jobseekers/myresume/myattach/:id',
-	myCvDetail:"/ho-so-cua-toi/ho-so-dinh-kem/:id"
+	myCvDetail: '/ho-so-cua-toi/ho-so-dinh-kem/:id'
 };
 const EmployerPaths = {
 	login: '/employers/login',
@@ -37,7 +37,9 @@ const EmployerPaths = {
 	waitPosting: '/employers/hrcentral/waitposting',
 	unPosting: '/employers/hrcentral/unposting',
 	expirePosting: '/employers/hrcentral/expireposting',
-	postjobs: '/employers/postjobs'
+	postjobs: '/employers/postjobs',
+	updatePostJobs: '/employers/postjobs/:id',
+	viewJob: '/employers/hrcentral/viewjob/:id'
 };
 
 const BasePaths = {

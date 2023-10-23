@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../Posting/posting.module.css';
 import classNames from 'classnames/bind';
 import CreateIcon from '@mui/icons-material/Create';
@@ -11,11 +11,26 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useDeleteJobPostMutation, useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import formatDate from '~/Core/utils/formatDate';
+import { toast } from 'react-toastify';
 const sx = classNames.bind(styles);
 
 const WaitPosting = ({ cx }) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
+	const { data: allJobPost } = useGetAllJobPostQuery();
+	const [deleteJobPost] = useDeleteJobPostMutation();
+	useEffect(() => {}, [allJobPost?.data]);
+	const handleDeleteJobPost = (id) => {
+		deleteJobPost(id)
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success(r?.message);
+				}
+			});
+	};
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -24,10 +39,10 @@ const WaitPosting = ({ cx }) => {
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}>Việc Làm Chờ Đăng </h1>
 							<div className={sx('button')}>
-								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/postjobs'>
+								<Link className={sx('btn-gradient')} to='/employers/postjobs'>
 									<CreateIcon style={{ paddingRight: 5 }} />
 									Tạo Mẫu Tuyển Dụng
-								</a>
+								</Link>
 							</div>
 						</div>
 						<div className={sx('right-heading')}>
@@ -164,7 +179,7 @@ const WaitPosting = ({ cx }) => {
 												<tr>
 													<th width='1%' />
 													<th width='49%'>Chức danh</th>
-													<th width='10%' onclick="setTypeSort('waitposting', 'asc', 0)">
+													<th width='10%' onClick="setTypeSort('waitposting', 'asc', 0)">
 														Cập nhật
 														<SortIcon style={{ paddingLeft: 5 }} />
 													</th>
@@ -177,87 +192,99 @@ const WaitPosting = ({ cx }) => {
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>
-														<div className={sx('checkbox')}>
-															<input type='checkbox' name='listresumes[]' defaultValue='35BADBC3' />
-														</div>
-													</td>
-													<td>
-														<div className={sx('title')}>
-															<a href='https://careerbuilder.vn/vi/employers/hrcentral/viewjob/35BADBC3/user_id/lop7cttnq.1667207375/sort/desc/type/3/position/1'>
-																Fresher Developer (Nhân bản)
-															</a>
-														</div>
-														<div className={sx('jobs-view-detail')}>
-															<p>
-																<strong>Ngành nghề:</strong> Bán hàng / Kinh doanh, CNTT - Phần mềm
-															</p>
-															<p>
-																<strong>Địa điểm:</strong> Hà Nội
-															</p>
-														</div>
-													</td>
-													<td>
-														<time>11-12-2022</time>
-													</td>
-													<td>
-														<p>Hoàn tất</p>
-													</td>
-													<td>
-														<a
-															href='javascript:void(0);'
-															onclick="checkOrder('35BADBC3');return false;"
-															title='Thực hiện đăng tuyển'>
-															<img
-																alt='Thực hiện đăng tuyển'
-																src='https://static.careerbuilder.vn/images/icons/posted_13x16.png'
-															/>
-														</a>
-													</td>
-													<td>
-														<ul className={sx('list-manipulation')}>
-															<li>
-																<a
-																	href='javascript:void(0);'
-																	onclick="checkOrder('35BADBC3');return false;"
-																	title='Đăng tuyển'>
-																	<PublishIcon />
-																</a>
-															</li>
-															<li>
-																<a
-																	href='https://careerbuilder.vn/vi/employers/hrcentral/viewjob/35BADBC3/user_id/lop7cttnq.1667207375/sort/desc/type/3/position/1'
-																	title='Chi tiết'>
-																	<VisibilityIcon />
-																</a>
-															</li>
-															<li>
-																<a
-																	href='https://careerbuilder.vn/vi/employers/hrcentral/posting/copyjob/lop7cttnq.1667207375/35BADBC3/1/1'
-																	title='Nhân bản'>
-																	{/* <em className={sx('material-icons')}>content_copy </em> */}
-																	<ContentCopyIcon />
-																</a>
-															</li>
-															<li>
-																<a
-																	href='https://careerbuilder.vn/vi/employers/postjobs/35BADBC3'
-																	title='Sửa'>
-																	<EditIcon />
-																</a>
-															</li>
-															<li className={sx('end')}>
-																<a
-																	href='javascript:void(0);'
-																	onclick="deleteItem_job('35BADBC3');return false;"
-																	title='Xóa'>
-																	<CancelIcon />
-																</a>
-															</li>
-														</ul>
-													</td>
-												</tr>
+												{allJobPost?.data?.map((job_post) => {
+													if (job_post.status === 0 && job_post.isDeleted === false) {
+														return (
+															<tr key={job_post.id}>
+																<td>
+																	<div className={sx('checkbox')}>
+																		<input
+																			type='checkbox'
+																			name='listresumes[]'
+																			defaultValue='35BADBC3'
+																		/>
+																	</div>
+																</td>
+																<td>
+																	<div className={sx('title')}>
+																		<Link to={`/employers/hrcentral/viewjob/${job_post.id}`}>
+																			{job_post.job_title}
+																		</Link>
+																	</div>
+																	<div className={sx('jobs-view-detail')}>
+																		<p>
+																			<strong>Ngành nghề:</strong> Bán hàng / Kinh doanh, CNTT - Phần
+																			mềm
+																		</p>
+																		<p>
+																			<strong>Địa điểm:</strong> Hà Nội
+																		</p>
+																	</div>
+																</td>
+																<td>
+																	<time>{formatDate(job_post.createdAt)}</time>
+																</td>
+																<td>
+																	<p>Hoàn tất</p>
+																</td>
+																<td>
+																	<a
+																		href='javascript:void(0);'
+																		onclick="checkOrder('35BADBC3');return false;"
+																		title='Thực hiện đăng tuyển'>
+																		<img
+																			alt='Thực hiện đăng tuyển'
+																			src='https://static.careerbuilder.vn/images/icons/posted_13x16.png'
+																		/>
+																	</a>
+																</td>
+																<td>
+																	<ul className={sx('list-manipulation')}>
+																		<li>
+																			<a
+																				href='javascript:void(0);'
+																				onClick="checkOrder('35BADBC3');return false;"
+																				title='Đăng tuyển'>
+																				<PublishIcon />
+																			</a>
+																		</li>
+																		<li>
+																			<Link
+																				to={`/employers/hrcentral/viewjob/${job_post.id}`}
+																				title='Chi tiết'>
+																				<VisibilityIcon />
+																			</Link>
+																		</li>
+																		<li>
+																			<a
+																				href='https://careerbuilder.vn/vi/employers/hrcentral/posting/copyjob/lop7cttnq.1667207375/35BADBC3/1/1'
+																				title='Nhân bản'>
+																				{/* <em className={sx('material-icons')}>content_copy </em> */}
+																				<ContentCopyIcon />
+																			</a>
+																		</li>
+																		<li>
+																			<Link
+																				to={`/employers/postjobs/${job_post.id}`}
+																				title='Sửa'
+																				style={{ cursor: 'pointer' }}>
+																				<EditIcon />
+																			</Link>
+																		</li>
+																		<li className={sx('end')}>
+																			<a
+																				title='Xóa'
+																				onClick={() => handleDeleteJobPost(job_post.id)}
+																				style={{ cursor: 'pointer' }}>
+																				<CancelIcon />
+																			</a>
+																		</li>
+																	</ul>
+																</td>
+															</tr>
+														);
+													}
+												})}
 											</tbody>
 										</table>
 									</div>
@@ -281,7 +308,7 @@ const WaitPosting = ({ cx }) => {
 									<a
 										className={sx('btn-gradient')}
 										href='https://careerbuilder.vn/vi/employers/services/contact'
-										onclick='closeAllmodal();'>
+										onClick='closeAllmodal();'>
 										Đồng ý
 									</a>
 								</div>

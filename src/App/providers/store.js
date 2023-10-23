@@ -30,6 +30,7 @@ import districtsApi from './apis/districtsApi';
 import myAttachApi from './apis/myAttachApi';
 import companyApi from './apis/companyApi';
 import resumeProfileApi from './apis/resumeProfileApi';
+import jobPostApi from './apis/jobPostApi';
 const persistConfig = {
 	key: 'root',
 	storage,
@@ -70,6 +71,7 @@ const store = configureStore({
 			myAttachApi.middleware,
 			companyApi.middleware,
 			resumeProfileApi.middleware,
+			jobPostApi.middleware,
 			// logger middleware
 			RTKQueryLogger
 		])

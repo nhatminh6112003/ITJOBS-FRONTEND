@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styles from './postjobs.module.css';
+import React, { useEffect, useState } from 'react';
+import styles from '../postjobs.module.css';
 import classNames from 'classnames/bind';
 import Tooltip from '@mui/material/Tooltip';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
@@ -20,11 +20,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { jobPostSchema } from '~/App/schemas/jobPostSchema';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useCreateJobPostMutation } from '~/App/providers/apis/jobPostApi';
-import { useNavigate } from 'react-router-dom';
+import {
+	useCreateJobPostMutation,
+	useGetOneJobPostQuery,
+	useUpdateJobPostMutation
+} from '~/App/providers/apis/jobPostApi';
+import { useNavigate, useParams } from 'react-router-dom';
 const sx = classNames.bind(styles);
-const PostJobs = ({ cx }) => {
-	const { control, handleSubmit, setValue, watch } = useForm({
+const UpdatePostJobs = ({ cx }) => {
+	const { control, handleSubmit, setValue, watch, reset } = useForm({
 		resolver: yupResolver(jobPostSchema)
 	});
 	const user_account_id = useSelector((state) => state?.auth.employer?.id);
@@ -45,9 +49,34 @@ const PostJobs = ({ cx }) => {
 			skip: !selectedProvince
 		}
 	);
-	const [createJobPost] = useCreateJobPostMutation();
+	const [updateJobPost] = useUpdateJobPostMutation();
 	const navigate = useNavigate();
+	const { id } = useParams();
+	const { data: jobPost } = useGetOneJobPostQuery(id);
+
 	const [displayExperience, setDisplayExperience] = useState(false);
+
+	useEffect(() => {
+		console.log(jobPost);
+		reset({
+			districts: jobPost?.districts,
+			address: jobPost?.address,
+			form_age: jobPost?.form_age,
+			form_to: jobPost?.form_to,
+			job_degree_value: jobPost?.job_degree_value,
+			job_desc: jobPost?.job_desc,
+			job_experience_value: jobPost?.job_experience_value,
+			job_position_value: jobPost?.job_position_value,
+			job_request: jobPost?.job_request,
+			job_title: jobPost?.job_title,
+			max_salary: jobPost?.max_salary,
+			min_salary: jobPost?.min_salary,
+			provinces: jobPost?.provinces,
+			work_home: jobPost?.work_home,
+			job_formExperience: jobPost?.job_formExperience,
+			job_ToExperience: jobPost?.job_ToExperience
+		});
+	}, [jobPost, reset]);
 	const handleExperienceChange = (selectedValue) => {
 		if (Number(selectedValue) === 1) {
 			setDisplayExperience(true);
@@ -55,7 +84,7 @@ const PostJobs = ({ cx }) => {
 			setDisplayExperience(false);
 		}
 	};
-	const onCreatePostJobs = (data) => {
+	const onUpdatePostJobs = (data) => {
 		const job_work_type_id = [];
 		for (let i = 1; i <= 4; i++) {
 			const key = `job_work_type_id_${i}`;
@@ -80,7 +109,10 @@ const PostJobs = ({ cx }) => {
 			...data
 		};
 		console.log(form);
-		createJobPost(form)
+		updateJobPost({
+			id: id,
+			payload: form
+		})
 			.unwrap()
 			.then((r) => {
 				if (r.status == 200) {
@@ -105,7 +137,7 @@ const PostJobs = ({ cx }) => {
 								</a>
 							</div>
 						</div>
-						<form onSubmit={handleSubmit(onCreatePostJobs)}>
+						<form onSubmit={handleSubmit(onUpdatePostJobs)}>
 							<div className={sx('main-tabslet')}>
 								<ul className={sx('tabslet-tab')}>
 									<li className={sx('active')}>
@@ -180,6 +212,9 @@ const PostJobs = ({ cx }) => {
 															maxItems={3}
 															control={control}
 															name='job_profession_id'
+															// selectedValues={jobPost?.job_profession_detail?.map(
+															// 	(item) => item.profession_id
+															// )}
 														/>
 													</div>
 												</div>
@@ -243,7 +278,8 @@ const PostJobs = ({ cx }) => {
 																	label='Hiển thị trên tin tuyển dụng để thu hút ứng viên hơn'
 																	control={control}
 																	name='is_address_work_hidden'
-																	defaultValue={false}
+																	value={false}
+																	defaultChecked={jobPost?.is_address_work_hidden === 1 ? true : false}
 																/>
 															</div>
 														</div>
@@ -338,6 +374,9 @@ const PostJobs = ({ cx }) => {
 																					Number(e.target.value)
 																				);
 																		}}
+																		// defaultChecked={jobPost?.job_work_type_detail
+																		// 	.map((item) => item.work_type_id)
+																		// 	?.includes(listWork.id)}
 																	/>
 																);
 															})}
@@ -365,6 +404,9 @@ const PostJobs = ({ cx }) => {
 																					Number(e.target.value)
 																				);
 																		}}
+																		// defaultChecked={jobPost?.job_welfare_detail
+																		// 	.map((item) => item.job_welfare_id)
+																		// 	?.includes(JobWelfare.id)}
 																	/>
 																</div>
 															</div>
@@ -534,7 +576,8 @@ const PostJobs = ({ cx }) => {
 																id='work_home'
 																control={control}
 																label='Work form home'
-																defaultValue={false}
+																value={jobPost?.work_home === 1 ? true : false}
+																defaultChecked={jobPost?.work_home === 1 ? true : false}
 															/>
 														</div>
 														<div className={sx('form-group', 'mt-0', 'form-note-workfromhome')}>
@@ -936,4 +979,4 @@ const PostJobs = ({ cx }) => {
 	);
 };
 
-export default PostJobs;
+export default UpdatePostJobs;
