@@ -9,11 +9,24 @@ import TabMenu from '../Posting/components/TabMenu';
 import { useLocation } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import { useDeleteJobPostMutation, useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import { toast } from 'react-toastify';
 const sx = classNames.bind(styles);
 
 const UnPosting = ({ cx }) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
+	const { data: allJobPost } = useGetAllJobPostQuery();
+	const [deleteJobPost] = useDeleteJobPostMutation();
+	const handleDeleteJobPost = (id) => {
+		deleteJobPost(id)
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success(r?.message);
+				}
+			});
+	};
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -22,10 +35,10 @@ const UnPosting = ({ cx }) => {
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}>Quản Lý Tuyển Dụng</h1>
 							<div className={sx('button')}>
-								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/postjobs'>
+								<Link className={sx('btn-gradient')} to='/employers/postjobs'>
 									<CreateIcon style={{ paddingRight: 5 }} />
 									Tạo Mẫu Tuyển Dụng
-								</a>
+								</Link>
 							</div>
 						</div>
 						<div className={sx('right-heading')}>

@@ -14,7 +14,7 @@ const WaitPosting = lazy(() => import('~/App/pages/Employer/HrCentral/WaitPostin
 const UnPosting = lazy(() => import('~/App/pages/Employer/HrCentral/UnPosting'));
 const ExpirePosting = lazy(() => import('~/App/pages/Employer/HrCentral/ExpirePosting'));
 const PostJobs = lazy(() => import('~/App/pages/Employer/HrCentral/PostJobs'));
-
+const UpdatePostJobs = lazy(() => import('~/App/pages/Employer/HrCentral/PostJobs/components/UpdatePostJobs'));
 const employerPublicRoutes = [
 	{ path: routesPath.EmployerPaths.register, component: Register },
 	{ path: routesPath.EmployerPaths.login, component: Login }
@@ -64,6 +64,10 @@ const employerPrivateRoutes = [
 	{
 		path: routesPath.EmployerPaths.postjobs,
 		component: PostJobs
+	},
+	{
+		path: routesPath.EmployerPaths.updatePostJobs,
+		component: UpdatePostJobs
 	}
 ];
 export { employerPublicRoutes, employerPrivateRoutes };

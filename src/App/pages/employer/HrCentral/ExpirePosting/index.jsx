@@ -22,10 +22,10 @@ const ExpirePosting = ({ cx }) => {
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}>Quản Lý Tuyển Dụng</h1>
 							<div className={sx('button')}>
-								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/postjobs'>
+								<Link className={sx('btn-gradient')} to='/employers/postjobs'>
 									<CreateIcon style={{ paddingRight: 5 }} />
 									Tạo Mẫu Tuyển Dụng
-								</a>
+								</Link>
 							</div>
 						</div>
 						<div className={sx('right-heading')}>
