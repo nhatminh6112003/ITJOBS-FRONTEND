@@ -27,6 +27,7 @@ const jobSeekerPublicRoutes = [
 	{ path: routesPath.JobseekerPaths.login, component: Login },
 	{ path: routesPath.JobseekerPaths.register, component: Register },
 	{ path: routesPath.JobseekerPaths.detailCompany, component: DetailCompany },
+	{ path: routesPath.JobseekerPaths.findJob, component: FindJob },
 ];
 
 const jobSeekerPrivateRoutes = [
@@ -37,8 +38,6 @@ const jobSeekerPrivateRoutes = [
 	{ path: routesPath.JobseekerPaths.myAttach, component: MyAttach },
 	{ path: routesPath.JobseekerPaths.myUpdateAttach, component: UpdateMyAttach },
 	{ path: routesPath.JobseekerPaths.myCvDetail, component: MyCvDetail },
-	{ path: routesPath.JobseekerPaths.findJob, component: FindJob },
-
 ];
 
 export { jobSeekerPublicRoutes, jobSeekerPrivateRoutes };

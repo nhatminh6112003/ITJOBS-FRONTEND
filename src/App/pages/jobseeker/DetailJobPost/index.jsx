@@ -1,10 +1,50 @@
-import React from 'react';
-import styles from "./DetailJobPost.module.css"
+import React, { useEffect, useState } from 'react';
+import styles from './DetailJobPost.module.css';
 import classNames from 'classnames/bind';
-
+import { useGetOneJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import { Link, useParams } from 'react-router-dom';
+import formatDate from '~/Core/utils/formatDate';
+import { experienceEnum } from '~/App/constants/experienceEnum';
+import { LevelArray } from '~/App/constants/levelEnum';
+import { DegreeArray } from '~/App/constants/degreeArray';
+import GenderEnum from '~/App/constants/genderEnum';
+import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
+import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
 const sx = classNames.bind(styles);
 
 const DetailJobPost = ({ cx }) => {
+	const { id } = useParams();
+	const { data: detailJobPost } = useGetOneJobPostQuery(id);
+	const { data: listProvinces } = useGetAllProvincesQuery();
+	const [provinces, setProvinces] = useState('');
+	const [districts, setDistricts] = useState('');
+	const jobExperienceLabel = experienceEnum[detailJobPost?.job_experience_value]?.label;
+	const jobFormExperience = detailJobPost?.job_formExperience;
+	const jobToExperience = detailJobPost?.job_ToExperience;
+	const { data: listDistricts } = useGetAllDistrictsQuery(
+		{
+			params: {
+				depth: 2
+			},
+			code: detailJobPost?.provinces
+		},
+		{
+			skip: !detailJobPost?.provinces
+		}
+	);
+	useEffect(() => {
+		console.log(detailJobPost);
+		listProvinces?.map((item) => {
+			if (item.code == detailJobPost?.provinces) {
+				setProvinces(item.name);
+			}
+		});
+		listDistricts?.districts?.map((item) => {
+			if (item.code == detailJobPost?.districts) {
+				setDistricts(item.name);
+			}
+		});
+	}, [detailJobPost, listProvinces, listDistricts]);
 	return (
 		<>
 			<section className={sx('find-jobs-form')}>
@@ -258,17 +298,17 @@ const DetailJobPost = ({ cx }) => {
 							<section className={sx('apply-now-banner', '', '')}>
 								<div className={sx('image')}>
 									<img
-										src='https://images.careerbuilder.vn/content/news/1.jpg'
-										alt='CÔNG TY LUẬT TNHH DENTONS LUẬT VIỆT'
+										src={detailJobPost?.company?.banner}
+										alt={detailJobPost?.company?.company_name}
 									/>
 								</div>
 								<div className={sx('apply-now-content')}>
 									<div className={sx('job-desc')}>
-										<h1 className={sx('title')}>Kế Toán Nội Bộ</h1>
+										<h1 className={sx('title')}>{detailJobPost?.job_title}</h1>
 										<a
 											className={sx('employer', 'job-company-name')}
 											href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-luat-tnhh-dentons-luat-viet.35A93D3A.html'>
-											CÔNG TY LUẬT TNHH DENTONS LUẬT VIỆT
+											{detailJobPost?.company?.company_name}
 										</a>
 									</div>
 									<div className={sx('apply-type')}>
@@ -336,19 +376,19 @@ const DetailJobPost = ({ cx }) => {
 													<div className={sx('dropdown-menu')}>
 														<div className={sx('social-list')}>
 															<a
-																rel='nofollow'
+																rel='nofollow noreferrer'
 																target='_blank'
 																href='https://www.facebook.com/sharer/sharer.php?u=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&t=Kế Toán Nội Bộ'>
 																<i className={sx('fa', 'fa-facebook')} />
 															</a>
 															<a
-																rel='nofollow'
+																rel='nofollow noreferrer'
 																target='_blank'
 																href='https://api.addthis.com/oexchange/0.8/forward/linkedin/offer?url=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&pubid=ra-559220ee7f9c15d6&title=Kế Toán Nội Bộ&ct=1&pco=tbxnj-1.0'>
 																<i className={sx('fa', 'fa-linkedin')} />
 															</a>
 															<a
-																rel='nofollow'
+																rel='nofollow noreferrer'
 																target='_blank'
 																href='https://api.addthis.com/oexchange/0.8/forward/gmail/offer?url=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&pubid=ra-559220ee7f9c15d6&title=Kế Toán Nội Bộ&ct=1&pco=tbxnj-1.0'>
 																<i className={sx('fa', 'fa-google')} />
@@ -387,14 +427,22 @@ const DetailJobPost = ({ cx }) => {
 																<em className={sx('mdi', 'mdi-map-marker')} />
 																Địa điểm
 															</strong>
-															<p>
-																<a href='https://careerbuilder.vn/viec-lam/ho-chi-minh-l8-vi.html'>
-																	Hồ Chí Minh
-																</a>
-															</p>
-															<a tabIndex={0} role='button' onclick='show_map_detail_job();'>
+															{detailJobPost?.is_address_work_hidden === 1 && (
+																<>
+																	<p style={{ marginBottom: 2, marginTop: 2 }}>{provinces}</p>
+																	<p>Địa điểm chi tiết đã được bảo mật</p>
+																</>
+															)}
+															{detailJobPost?.is_address_work_hidden === 0 && (
+																<p>
+																	<a href='https://careerbuilder.vn/viec-lam/ho-chi-minh-l8-vi.html'>
+																		{provinces} / {districts} / {detailJobPost?.address}
+																	</a>
+																</p>
+															)}
+															{/* <a tabIndex={0} role='button' onclick='show_map_detail_job();'>
 																<img src='img/icon-map.svg' alt=' Hồ Chí Minh' />
-															</a>
+															</a> */}
 														</div>
 													</div>
 												</div>
@@ -406,7 +454,7 @@ const DetailJobPost = ({ cx }) => {
 																<strong>
 																	<em className={sx('mdi', 'mdi-update')}> </em>Ngày cập nhật
 																</strong>
-																<p>23/10/2023</p>
+																<p>{formatDate(detailJobPost?.updatedAt)}</p>
 															</li>
 															<li>
 																{' '}
@@ -416,14 +464,16 @@ const DetailJobPost = ({ cx }) => {
 																	Ngành nghề
 																</strong>
 																<p>
-																	{' '}
-																	<a href='https://careerbuilder.vn/viec-lam/luat-phap-ly-c24-vi.html'>
-																		Luật / Pháp lý
-																	</a>{' '}
-																	,{' '}
-																	<a href='https://careerbuilder.vn/viec-lam/ke-toan-kiem-toan-c2-vi.html'>
-																		Kế toán / Kiểm toán
-																	</a>
+																	{detailJobPost?.jobProfessionDetail?.map((jobProfessionDetail) => {
+																		return (
+																			<>
+																				{' '}
+																				<Link to='/viec-lam/ke-toan-kiem-toan-c2-vi.html'>
+																					{jobProfessionDetail?.profession?.name},
+																				</Link>
+																			</>
+																		);
+																	})}
 																</p>
 															</li>
 															<li>
@@ -431,7 +481,13 @@ const DetailJobPost = ({ cx }) => {
 																<strong>
 																	<em className={sx('mdi', 'mdi-briefcase-edit')}> </em>Hình thức
 																</strong>
-																<p>Nhân viên chính thức</p>
+																{detailJobPost?.jobWorkTypeDetail?.map((jobWorkTypeDetail) => {
+																	return (
+																		<p style={{ marginBottom: '2px' }}>
+																			{jobWorkTypeDetail?.work_type?.name}
+																		</p>
+																	);
+																})}
 															</li>
 														</ul>
 													</div>
@@ -444,21 +500,29 @@ const DetailJobPost = ({ cx }) => {
 																	<i className={sx('fa', 'fa-usd')} />
 																	Lương
 																</strong>
-																<p>8 Tr - 10 Tr VND</p>
+																<p>
+																	{parseInt(detailJobPost?.min_salary).toString().charAt(0)} Tr -{' '}
+																	{parseInt(detailJobPost?.max_salary).toString().charAt(0)} Tr VND
+																</p>
 															</li>
 															<li>
 																<strong>
 																	<i className={sx('fa', 'fa-briefcase')} />
 																	Kinh nghiệm
 																</strong>
-																<p>Trên 1 Năm</p>
+																{jobExperienceLabel !== 'Có kinh nghiệm' && <p>{jobExperienceLabel}</p>}
+																{jobExperienceLabel === 'Có kinh nghiệm' && (
+																	<p>
+																		{jobFormExperience} - {jobToExperience} Năm
+																	</p>
+																)}
 															</li>
 															<li>
 																<strong>
 																	<i className={sx('mdi', 'mdi-account')} />
 																	Cấp bậc
 																</strong>
-																<p>Nhân viên</p>
+																<p> {LevelArray[detailJobPost?.job_position_value]?.label}</p>
 															</li>
 															<li>
 																<strong>
@@ -475,29 +539,19 @@ const DetailJobPost = ({ cx }) => {
 										<div className={sx('detail-row')}>
 											<h2 className={sx('detail-title')}>Phúc lợi </h2>
 											<ul className={sx('welfare-list')}>
-												<li>
-													<span className={sx('fa', 'fa-medkit')} /> Chế độ bảo hiểm
-												</li>
-												<li>
-													<span className={sx('fa', 'fa-plane')} /> Du Lịch
-												</li>
-												<li>
-													<span className={sx('fa', 'fa-usd')} /> Chế độ thưởng
-												</li>
-												<li>
-													<span className={sx('fa', 'fa-user-md')} /> Chăm sóc sức khỏe
-												</li>
-												<li>
-													<span className={sx('fa', 'fa-graduation-cap')} /> Đào tạo
-												</li>
-												<li>
-													<span className={sx('fa', 'fa-line-chart')} /> Tăng lương
-												</li>
+												{detailJobPost?.jobWelfare?.map((jobWelfare) => {
+													return (
+														<li>
+															<span className={sx('fa', 'fa-medkit')} />{' '}
+															{jobWelfare?.job_welfare?.welfare_type}
+														</li>
+													);
+												})}
 											</ul>
 										</div>
 										<div className={sx('detail-row', 'reset-bullet')}>
 											<h2 className={sx('detail-title')}>Mô tả Công việc</h2>
-											<p>
+											{/* <p>
 												<strong>Tóm tắt nhiệm vụ:</strong>
 											</p>
 											<ul>
@@ -566,11 +620,12 @@ const DetailJobPost = ({ cx }) => {
 													Hỗ trợ các công việc liên quan và các báo cáo khác khi có yêu cầu từ trưởng bộ
 													phận hoặc Giám đốc.
 												</li>
-											</ul>
+											</ul> */}
+											<div>{detailJobPost?.job_desc}</div>
 										</div>
 										<div className={sx('detail-row')} reset-bullet=''>
 											<h2 className={sx('detail-title')}>Yêu Cầu Công Việc</h2>
-											<ul>
+											{/* <ul>
 												<li>
 													<strong>Nữ</strong>, tốt nghiệp Cao Đẳng chuyên ngành Kế toán trở lên;
 												</li>
@@ -603,7 +658,8 @@ const DetailJobPost = ({ cx }) => {
 											</ul>
 											<p>
 												<strong>Địa điểm: Hồ Chí Minh</strong>
-											</p>
+											</p> */}
+											<div>{detailJobPost?.job_request}</div>
 										</div>
 										<div className={sx('detail-row')}>
 											<h3 className={sx('detail-title')}>Thông tin khác</h3>
@@ -612,10 +668,19 @@ const DetailJobPost = ({ cx }) => {
    ----*/}
 											<div className={sx('content_fck', '')}>
 												<ul>
-													<li> Bằng cấp: Cao đẳng</li>
-													<li> Giới tính: Nữ </li>
-													<li> Độ tuổi: 23 - 28</li>
-													<li>Lương: 8 Tr - 10 Tr VND</li>
+													<li> Bằng cấp: {DegreeArray[detailJobPost?.job_degree_value]?.label}</li>
+													<li> Giới tính: {GenderEnum[detailJobPost?.gender]} </li>
+													<li>
+														{' '}
+														Độ tuổi: {detailJobPost?.form_age} - {detailJobPost?.to_age}
+													</li>
+													<li>
+														Lương:
+														<span>
+															{parseInt(detailJobPost?.min_salary).toString().charAt(0)} Tr -{' '}
+															{parseInt(detailJobPost?.max_salary).toString().charAt(0)} Tr VND
+														</span>
+													</li>
 												</ul>
 											</div>
 										</div>
@@ -627,7 +692,7 @@ const DetailJobPost = ({ cx }) => {
 														<img src='images/icon-cv.png' />
 														<span></span>
 													</a>
-													<a href='https://careerbuilder.vn/cv-hay' target='_blank'>
+													<a href='https://careerbuilder.vn/cv-hay' target='_blank' rel='noreferrer'>
 														Thiết kế CV Ứng Tuyển
 													</a>
 												</div>
@@ -637,19 +702,22 @@ const DetailJobPost = ({ cx }) => {
 											<span>Chia sẻ việc làm này:</span>
 											<a
 												target='_blank'
-												href='https://www.facebook.com/sharer/sharer.php?u=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&t=Kế Toán Nội Bộ'>
+												href='https://www.facebook.com/sharer/sharer.php?u=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&t=Kế Toán Nội Bộ'
+												rel='noreferrer'>
 												{' '}
 												<i className={sx('fa', 'fa-facebook')} />{' '}
 											</a>
 											<a
 												target='_blank'
-												href='https://api.addthis.com/oexchange/0.8/forward/linkedin/offer?url=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&pubid=ra-559220ee7f9c15d6&title=Kế Toán Nội Bộ&ct=1&pco=tbxnj-1.0'>
+												href='https://api.addthis.com/oexchange/0.8/forward/linkedin/offer?url=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&pubid=ra-559220ee7f9c15d6&title=Kế Toán Nội Bộ&ct=1&pco=tbxnj-1.0'
+												rel='noreferrer'>
 												{' '}
 												<i className={sx('fa', 'fa-linkedin')} />
 											</a>
 											<a
 												target='_blank'
-												href='https://api.addthis.com/oexchange/0.8/forward/gmail/offer?url=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&pubid=ra-559220ee7f9c15d6&title=Kế Toán Nội Bộ&ct=1&pco=tbxnj-1.0'>
+												href='https://api.addthis.com/oexchange/0.8/forward/gmail/offer?url=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&pubid=ra-559220ee7f9c15d6&title=Kế Toán Nội Bộ&ct=1&pco=tbxnj-1.0'
+												rel='noreferrer'>
 												{' '}
 												<i className={sx('fa', 'fa-google')} />
 											</a>
@@ -661,22 +729,6 @@ const DetailJobPost = ({ cx }) => {
 												data-color='white'
 												data-customize='false'
 											/>
-										</div>
-										<div className={sx('job-tags', '')}>
-											<h2>Job tags / skills</h2>
-											<ul>
-												<li>
-													<a href='https://careerbuilder.vn/vi/tag/ke-toan.html' title='Kế Toán'>
-														Kế Toán
-													</a>
-												</li>
-												<li>
-													<a href='https://careerbuilder.vn/vi/tag/thong-ke.html' title=' thống kê'>
-														{' '}
-														thống kê
-													</a>
-												</li>
-											</ul>
 										</div>
 										<div className={sx('job-detail-bottom')}>
 											<div className={sx('job-detail-bottom-wrapper')}>
@@ -861,7 +913,8 @@ const DetailJobPost = ({ cx }) => {
 																<div className={sx('image')}>
 																	<a
 																		href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-luat-tnhh-dentons-luat-viet.35A93D3A.html'
-																		target='_blank'>
+																		target='_blank'
+																		rel='noreferrer'>
 																		<img
 																			className={sx('lazy-hidden')}
 																			data-src='https://images.careerbuilder.vn/employer_folders/lot6/283706/110x55/142718dentonslogo-002.jpg'
@@ -976,7 +1029,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-trach-nhiem-huu-han-san-xuat-thuong-mai-dich-vu-bgc.35A98DDC.html'
 																			target='_blank'
-																			title='Công Ty Trách Nhiệm Hữu Hạn Sản Xuất Thương Mại Dịch Vụ BGC'>
+																			title='Công Ty Trách Nhiệm Hữu Hạn Sản Xuất Thương Mại Dịch Vụ BGC'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://static.careerbuilder.vn/themes/kiemviecv32/images/graphics/logo-default.png'
@@ -991,7 +1045,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='KẾ TOÁN NỘI BỘ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BDF58C.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BDF58C.html?s=rec'
+																				rel='noreferrer'>
 																				KẾ TOÁN NỘI BỘ
 																			</a>
 																		</div>
@@ -1015,7 +1070,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/bao-mat.35A66147.html'
 																			target='_blank'
-																			title='Bảo mật'>
+																			title='Bảo mật'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://images.careerbuilder.vn/employer_folders/lot7/96327/67x67/160753nhakhoa_logo.jpg'
@@ -1030,7 +1086,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='KẾ TOÁN NỘI BỘ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BDC2DE.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BDC2DE.html?s=rec'
+																				rel='noreferrer'>
 																				KẾ TOÁN NỘI BỘ
 																			</a>
 																		</div>
@@ -1052,7 +1109,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/mac-media.35A81912.html'
 																			target='_blank'
-																			title='MAC Media'>
+																			title='MAC Media'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://images.careerbuilder.vn/employer_folders/lot4/208914/67x67/172317capture.jpg'
@@ -1067,7 +1125,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='Kế Toán Nội Bộ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE098A.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE098A.html?s=rec'
+																				rel='noreferrer'>
 																				Kế Toán Nội Bộ
 																			</a>
 																		</div>
@@ -1089,7 +1148,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/readingq.35A95A55.html'
 																			target='_blank'
-																			title='ReadingQ'>
+																			title='ReadingQ'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://images.careerbuilder.vn/employer_folders/lot7/291157/67x67/20365949312072_232490014322965_5879210762458628096_n.png'
@@ -1104,7 +1164,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='Kế Toán Nội Bộ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BDCEAB.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BDCEAB.html?s=rec'
+																				rel='noreferrer'>
 																				Kế Toán Nội Bộ
 																			</a>
 																		</div>
@@ -1126,7 +1187,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-mtv-tin-nha.35A95C6B.html'
 																			target='_blank'
-																			title='Công ty TNHH MTV Tín Nha'>
+																			title='Công ty TNHH MTV Tín Nha'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://images.careerbuilder.vn/employer_folders/lot1/291691/67x67/143456277527354_107239305278551_3701203795594275674_n.jpg'
@@ -1141,7 +1203,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='Kế toán Nội bộ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE14E9.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE14E9.html?s=rec'
+																				rel='noreferrer'>
 																				Kế toán Nội bộ
 																			</a>
 																		</div>
@@ -1163,7 +1226,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-du-lich-intertour-viet-nam.35A84F82.html'
 																			target='_blank'
-																			title='Công ty Cổ phần du lịch Intertour Việt Nam'>
+																			title='Công ty Cổ phần du lịch Intertour Việt Nam'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://static.careerbuilder.vn/themes/kiemviecv32/images/graphics/logo-default.png'
@@ -1178,7 +1242,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='Nhân viên kế toán nội bộ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-ke-toan-noi-bo.35BDE7DC.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-ke-toan-noi-bo.35BDE7DC.html?s=rec'
+																				rel='noreferrer'>
 																				Nhân viên kế toán nội bộ
 																			</a>
 																		</div>
@@ -1202,7 +1267,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-tap-doan-unis.35A7CDF2.html'
 																			target='_blank'
-																			title='CÔNG TY CỔ PHẦN TẬP ĐOÀN UNIS'>
+																			title='CÔNG TY CỔ PHẦN TẬP ĐOÀN UNIS'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://images.careerbuilder.vn/employer_folders/lot2/189682/67x67/130030logo.jpg'
@@ -1217,7 +1283,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='Kế Toán Quản Lý Nội Bộ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-quan-ly-noi-bo.35BDE8A8.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-quan-ly-noi-bo.35BDE8A8.html?s=rec'
+																				rel='noreferrer'>
 																				Kế Toán Quản Lý Nội Bộ
 																			</a>
 																		</div>
@@ -1241,7 +1308,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-dau-tu-thuong-mai-dich-vu-moc-lan-vien.35A97442.html'
 																			target='_blank'
-																			title='CÔNG TY TNHH ĐẦU TƯ THƯƠNG MẠI DỊCH VỤ MỘC LAN VIÊN'>
+																			title='CÔNG TY TNHH ĐẦU TƯ THƯƠNG MẠI DỊCH VỤ MỘC LAN VIÊN'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://images.careerbuilder.vn/employer_folders/lot4/297794/67x67/110544logomlv2.jpg'
@@ -1256,7 +1324,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='Nhân viên kế toán nội bộ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-ke-toan-noi-bo.35BDF2E4.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-ke-toan-noi-bo.35BDF2E4.html?s=rec'
+																				rel='noreferrer'>
 																				Nhân viên kế toán nội bộ
 																			</a>
 																		</div>
@@ -1280,7 +1349,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-dau-tu-tam-anh.35A95D97.html'
 																			target='_blank'
-																			title='Công Ty TNHH Đầu Tư Tam Anh'>
+																			title='Công Ty TNHH Đầu Tư Tam Anh'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://images.careerbuilder.vn/employer_folders/lot1/291991/67x67/133253asset1-2x.png'
@@ -1295,7 +1365,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='[HCM] Kế Toán Tổng Hợp Nội Bộ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/hcm-ke-toan-tong-hop-noi-bo.35BDC425.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/hcm-ke-toan-tong-hop-noi-bo.35BDC425.html?s=rec'
+																				rel='noreferrer'>
 																				[HCM] Kế Toán Tổng Hợp Nội Bộ
 																			</a>
 																		</div>
@@ -1319,7 +1390,8 @@ const DetailJobPost = ({ cx }) => {
 																		<a
 																			href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-co-khi-tan-minh.35A83784.html'
 																			target='_blank'
-																			title='CÔNG TY CP CƠ KHÍ TÂN MINH'>
+																			title='CÔNG TY CP CƠ KHÍ TÂN MINH'
+																			rel='noreferrer'>
 																			<img
 																				className={sx('lazy-hidden')}
 																				data-src='https://images.careerbuilder.vn/employer_folders/lot8/216708/67x67/151622img_2263.png'
@@ -1334,7 +1406,8 @@ const DetailJobPost = ({ cx }) => {
 																			<a
 																				target='_blank'
 																				title='Nhân viên Kế toán nội bộ'
-																				href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-ke-toan-noi-bo.35BE1312.html?s=rec'>
+																				href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-ke-toan-noi-bo.35BE1312.html?s=rec'
+																				rel='noreferrer'>
 																				Nhân viên Kế toán nội bộ
 																			</a>
 																		</div>
@@ -1381,7 +1454,8 @@ const DetailJobPost = ({ cx }) => {
 													<a
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-trach-nhiem-huu-han-san-xuat-thuong-mai-dich-vu-bgc.35A98DDC.html'
 														target='_blank'
-														title='Công Ty Trách Nhiệm Hữu Hạn Sản Xuất Thương Mại Dịch Vụ BGC'>
+														title='Công Ty Trách Nhiệm Hữu Hạn Sản Xuất Thương Mại Dịch Vụ BGC'
+														rel='noreferrer'>
 														{' '}
 														<img
 															className={sx('lazy-bg')}
@@ -1399,7 +1473,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BDF58C.html'
 															target='_blank'
-															title='KẾ TOÁN NỘI BỘ'>
+															title='KẾ TOÁN NỘI BỘ'
+															rel='noreferrer'>
 															{' '}
 															KẾ TOÁN NỘI BỘ{' '}
 														</a>{' '}
@@ -1409,7 +1484,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('company-name')}
 															href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-trach-nhiem-huu-han-san-xuat-thuong-mai-dich-vu-bgc.35A98DDC.html'
 															target='_blank'
-															title='Công Ty Trách Nhiệm Hữu Hạn Sản Xuất Thương Mại Dịch Vụ BGC'>
+															title='Công Ty Trách Nhiệm Hữu Hạn Sản Xuất Thương Mại Dịch Vụ BGC'
+															rel='noreferrer'>
 															Công Ty Trách Nhiệm Hữu Hạn Sản Xuất Thương Mại Dịch Vụ BGC
 														</a>
 														<p className={sx('salary')}>
@@ -1449,7 +1525,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BDC2DE.html'
 															target='_blank'
-															title='KẾ TOÁN NỘI BỘ'>
+															title='KẾ TOÁN NỘI BỘ'
+															rel='noreferrer'>
 															{' '}
 															KẾ TOÁN NỘI BỘ{' '}
 														</a>{' '}
@@ -1480,7 +1557,8 @@ const DetailJobPost = ({ cx }) => {
 													<a
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/mac-media.35A81912.html'
 														target='_blank'
-														title='MAC Media'>
+														title='MAC Media'
+														rel='noreferrer'>
 														{' '}
 														<img
 															className={sx('lazy-bg')}
@@ -1498,7 +1576,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE098A.html'
 															target='_blank'
-															title='Kế Toán Nội Bộ'>
+															title='Kế Toán Nội Bộ'
+															rel='noreferrer'>
 															{' '}
 															Kế Toán Nội Bộ{' '}
 														</a>{' '}
@@ -1508,7 +1587,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('company-name')}
 															href='https://careerbuilder.vn/vi/nha-tuyen-dung/mac-media.35A81912.html'
 															target='_blank'
-															title='MAC Media'>
+															title='MAC Media'
+															rel='noreferrer'>
 															MAC Media
 														</a>
 														<p className={sx('salary')}>
@@ -1533,7 +1613,8 @@ const DetailJobPost = ({ cx }) => {
 													<a
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/readingq.35A95A55.html'
 														target='_blank'
-														title='ReadingQ'>
+														title='ReadingQ'
+														rel='noreferrer'>
 														{' '}
 														<img
 															className={sx('lazy-bg')}
@@ -1551,7 +1632,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BDCEAB.html'
 															target='_blank'
-															title='Kế Toán Nội Bộ'>
+															title='Kế Toán Nội Bộ'
+															rel='noreferrer'>
 															{' '}
 															Kế Toán Nội Bộ{' '}
 														</a>{' '}
@@ -1561,7 +1643,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('company-name')}
 															href='https://careerbuilder.vn/vi/nha-tuyen-dung/readingq.35A95A55.html'
 															target='_blank'
-															title='ReadingQ'>
+															title='ReadingQ'
+															rel='noreferrer'>
 															ReadingQ
 														</a>
 														<p className={sx('salary')}>
@@ -1586,7 +1669,8 @@ const DetailJobPost = ({ cx }) => {
 													<a
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-mtv-tin-nha.35A95C6B.html'
 														target='_blank'
-														title='Công ty TNHH MTV Tín Nha'>
+														title='Công ty TNHH MTV Tín Nha'
+														rel='noreferrer'>
 														{' '}
 														<img
 															className={sx('lazy-bg')}
@@ -1604,7 +1688,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE14E9.html'
 															target='_blank'
-															title='Kế toán Nội bộ'>
+															title='Kế toán Nội bộ'
+															rel='noreferrer'>
 															{' '}
 															Kế toán Nội bộ{' '}
 														</a>{' '}
@@ -1614,7 +1699,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('company-name')}
 															href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-mtv-tin-nha.35A95C6B.html'
 															target='_blank'
-															title='Công ty TNHH MTV Tín Nha'>
+															title='Công ty TNHH MTV Tín Nha'
+															rel='noreferrer'>
 															Công ty TNHH MTV Tín Nha
 														</a>
 														<p className={sx('salary')}>
@@ -1639,7 +1725,8 @@ const DetailJobPost = ({ cx }) => {
 													<a
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-du-lich-intertour-viet-nam.35A84F82.html'
 														target='_blank'
-														title='Công ty Cổ phần du lịch Intertour Việt Nam'>
+														title='Công ty Cổ phần du lịch Intertour Việt Nam'
+														rel='noreferrer'>
 														{' '}
 														<img
 															className={sx('lazy-bg')}
@@ -1657,7 +1744,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-ke-toan-noi-bo.35BDE7DC.html'
 															target='_blank'
-															title='Nhân viên kế toán nội bộ'>
+															title='Nhân viên kế toán nội bộ'
+															rel='noreferrer'>
 															{' '}
 															Nhân viên kế toán nội bộ{' '}
 														</a>{' '}
@@ -1667,7 +1755,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('company-name')}
 															href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-du-lich-intertour-viet-nam.35A84F82.html'
 															target='_blank'
-															title='Công ty Cổ phần du lịch Intertour Việt Nam'>
+															title='Công ty Cổ phần du lịch Intertour Việt Nam'
+															rel='noreferrer'>
 															Công ty Cổ phần du lịch Intertour Việt Nam
 														</a>
 														<p className={sx('salary')}>
@@ -1692,7 +1781,8 @@ const DetailJobPost = ({ cx }) => {
 													<a
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-tap-doan-unis.35A7CDF2.html'
 														target='_blank'
-														title='CÔNG TY CỔ PHẦN TẬP ĐOÀN UNIS'>
+														title='CÔNG TY CỔ PHẦN TẬP ĐOÀN UNIS'
+														rel='noreferrer'>
 														{' '}
 														<img
 															className={sx('lazy-bg')}
@@ -1710,7 +1800,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-quan-ly-noi-bo.35BDE8A8.html'
 															target='_blank'
-															title='Kế Toán Quản Lý Nội Bộ'>
+															title='Kế Toán Quản Lý Nội Bộ'
+															rel='noreferrer'>
 															{' '}
 															Kế Toán Quản Lý Nội Bộ{' '}
 														</a>{' '}
@@ -1720,7 +1811,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('company-name')}
 															href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-co-phan-tap-doan-unis.35A7CDF2.html'
 															target='_blank'
-															title='CÔNG TY CỔ PHẦN TẬP ĐOÀN UNIS'>
+															title='CÔNG TY CỔ PHẦN TẬP ĐOÀN UNIS'
+															rel='noreferrer'>
 															CÔNG TY CỔ PHẦN TẬP ĐOÀN UNIS
 														</a>
 														<p className={sx('salary')}>
@@ -1745,7 +1837,8 @@ const DetailJobPost = ({ cx }) => {
 													<a
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-dau-tu-thuong-mai-dich-vu-moc-lan-vien.35A97442.html'
 														target='_blank'
-														title='CÔNG TY TNHH ĐẦU TƯ THƯƠNG MẠI DỊCH VỤ MỘC LAN VIÊN'>
+														title='CÔNG TY TNHH ĐẦU TƯ THƯƠNG MẠI DỊCH VỤ MỘC LAN VIÊN'
+														rel='noreferrer'>
 														{' '}
 														<img
 															className={sx('lazy-bg')}
@@ -1763,7 +1856,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-ke-toan-noi-bo.35BDF2E4.html'
 															target='_blank'
-															title='Nhân viên kế toán nội bộ'>
+															title='Nhân viên kế toán nội bộ'
+															rel='noreferrer'>
 															{' '}
 															Nhân viên kế toán nội bộ{' '}
 														</a>{' '}
@@ -1773,7 +1867,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('company-name')}
 															href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-dau-tu-thuong-mai-dich-vu-moc-lan-vien.35A97442.html'
 															target='_blank'
-															title='CÔNG TY TNHH ĐẦU TƯ THƯƠNG MẠI DỊCH VỤ MỘC LAN VIÊN'>
+															title='CÔNG TY TNHH ĐẦU TƯ THƯƠNG MẠI DỊCH VỤ MỘC LAN VIÊN'
+															rel='noreferrer'>
 															CÔNG TY TNHH ĐẦU TƯ THƯƠNG MẠI DỊCH VỤ MỘC LAN VIÊN
 														</a>
 														<p className={sx('salary')}>
@@ -1798,7 +1893,8 @@ const DetailJobPost = ({ cx }) => {
 													<a
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-dau-tu-tam-anh.35A95D97.html'
 														target='_blank'
-														title='Công Ty TNHH Đầu Tư Tam Anh'>
+														title='Công Ty TNHH Đầu Tư Tam Anh'
+														rel='noreferrer'>
 														{' '}
 														<img
 															className={sx('lazy-bg')}
@@ -1816,7 +1912,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/hcm-ke-toan-tong-hop-noi-bo.35BDC425.html'
 															target='_blank'
-															title='[HCM] Kế Toán Tổng Hợp Nội Bộ'>
+															title='[HCM] Kế Toán Tổng Hợp Nội Bộ'
+															rel='noreferrer'>
 															{' '}
 															[HCM] Kế Toán Tổng Hợp Nội Bộ{' '}
 														</a>{' '}
@@ -1826,7 +1923,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('company-name')}
 															href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-tnhh-dau-tu-tam-anh.35A95D97.html'
 															target='_blank'
-															title='Công Ty TNHH Đầu Tư Tam Anh'>
+															title='Công Ty TNHH Đầu Tư Tam Anh'
+															rel='noreferrer'>
 															Công Ty TNHH Đầu Tư Tam Anh
 														</a>
 														<p className={sx('salary')}>
@@ -1851,7 +1949,8 @@ const DetailJobPost = ({ cx }) => {
 													<a
 														href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-co-khi-tan-minh.35A83784.html'
 														target='_blank'
-														title='CÔNG TY CP CƠ KHÍ TÂN MINH'>
+														title='CÔNG TY CP CƠ KHÍ TÂN MINH'
+														rel='noreferrer'>
 														{' '}
 														<img
 															className={sx('lazy-bg')}
@@ -1869,7 +1968,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('job_link')}
 															href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-ke-toan-noi-bo.35BE1312.html'
 															target='_blank'
-															title='Nhân viên Kế toán nội bộ'>
+															title='Nhân viên Kế toán nội bộ'
+															rel='noreferrer'>
 															{' '}
 															Nhân viên Kế toán nội bộ{' '}
 														</a>{' '}
@@ -1879,7 +1979,8 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('company-name')}
 															href='https://careerbuilder.vn/vi/nha-tuyen-dung/cong-ty-cp-co-khi-tan-minh.35A83784.html'
 															target='_blank'
-															title='CÔNG TY CP CƠ KHÍ TÂN MINH'>
+															title='CÔNG TY CP CƠ KHÍ TÂN MINH'
+															rel='noreferrer'>
 															CÔNG TY CP CƠ KHÍ TÂN MINH
 														</a>
 														<p className={sx('salary')}>

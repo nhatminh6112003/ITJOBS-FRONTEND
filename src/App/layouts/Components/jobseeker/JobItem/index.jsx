@@ -5,10 +5,15 @@ import RoomIcon from '@mui/icons-material/Room';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/black-and-white.css';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const JobItem = () => {
+const JobItem = ({ job_post }) => {
+	useEffect(() => {
+		console.log(job_post);
+	}, [job_post]);
 	return (
 		<div className={cx('job-item')}>
 			<div className={cx('figure')}>
@@ -27,13 +32,9 @@ const JobItem = () => {
 				</div>
 				<div className={cx('figcaption')}>
 					<div className={cx('title')}>
-						<a
-							target='_blank'
-							href='https://careerbuilder.vn/vi/tim-viec-lam/cọng-tác-vien-phòng-quản-trị-hiẹu-suát-khói-qt-ptnnl.35BB3173.html'
-							title='Cộng tác viên - Phòng Quản trị hiệu suất - Khối QT&PTNNL'
-							rel='noreferrer'>
-							Cộng tác viên - Phòng Quản trị hiệu suất - Khối QT&amp;PTNNL
-						</a>
+						<Link target='_blank' to={`/tim-viec-lam/${job_post.id}`} title={job_post.job_title} rel='noreferrer'>
+							{job_post.job_title}
+						</Link>
 					</div>
 					<div className={cx('caption')}>
 						<a

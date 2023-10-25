@@ -5,12 +5,14 @@ import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import JobItem from '~/App/layouts/components/Jobseeker/JobItem';
 import Banner from '~/App/layouts/components/Jobseeker/Banner';
 import { useGetAllQuery } from '~/App/providers/apis/userApi';
+import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
 const Home = ({ cx }) => {
 	// const options = [
 	//   { value: 'chocolate', label: 'Chocolate' },
 	//   { value: 'strawberry', label: 'Strawberry' },
 	//   { value: 'vanilla', label: 'Vanilla' }
 	// ]
+	const { data: allJobPost } = useGetAllJobPostQuery({});
 
 	return (
 		<>
@@ -74,32 +76,20 @@ const Home = ({ cx }) => {
 										<div className={cx('swiper-wrapper')}>
 											<div className={cx('swiper-slide')}>
 												<div className={cx('row')}>
-													<div className={cx('col-lg-6 ')}>
-														{/* <ItemLoading items={8}/> */}
-														<Suspense fallback={<div>...loading</div>}>
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-														</Suspense>
-													</div>
-													<div className={cx('col-lg-6 ')}>
-														{/* <ItemLoading items={8}/> */}
-														<Suspense fallback={<div>...loading</div>}>
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-															<JobItem />
-														</Suspense>
-													</div>
+													{allJobPost?.data?.map((job_post) => {
+														if (job_post.isDeleted === false && job_post.status === 1) {
+															return (
+																<>
+																	<div className={cx('col-lg-6')}>
+																		{/* <ItemLoading items={8}/> */}
+																		<Suspense fallback={<div>...loading</div>}>
+																			<JobItem job_post={job_post} />
+																		</Suspense>
+																	</div>
+																</>
+															);
+														}
+													})}
 												</div>
 											</div>
 										</div>
