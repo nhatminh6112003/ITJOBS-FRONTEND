@@ -5,7 +5,7 @@ const cx = classNames.bind(styles);
 import { v4 as uuidv4 } from 'uuid';
 
 import { useRef, forwardRef, Fragment } from 'react';
-const InputFieldControl = ({ defaultValue, control, disabled, rules, type = 'text', name, label, ...props }, ref) => {
+const InputFieldControl = ({ defaultValue, control, disabled, rules, type = 'text', name, label,id, ...props }, ref) => {
 	const {
 		field,
 		fieldState: { error },
@@ -21,7 +21,7 @@ const InputFieldControl = ({ defaultValue, control, disabled, rules, type = 'tex
 	const localRef = useRef(null);
 	const inputRef = ref || localRef;
 	return (
-		<div style={{ marginBottom: 20 }}>
+		<Fragment>
 			{label && <label htmlFor={field.name}>{label}</label>}
 			<input
 				type={type}
@@ -53,7 +53,7 @@ const InputFieldControl = ({ defaultValue, control, disabled, rules, type = 'tex
 			) : (
 				''
 			)}
-		</div>
+		</Fragment>
 	);
 };
 export default forwardRef(InputFieldControl);

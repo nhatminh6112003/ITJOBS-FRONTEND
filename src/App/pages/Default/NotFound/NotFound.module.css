@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather+Sans');
-main {
+.not-found-page {
 	height: 80vh;
 
 	background: #fff;
@@ -9,11 +9,11 @@ main {
 	align-items: center;
 	font-family: 'Merriweather Sans', sans-serif;
 }
-main #errorText {
+.not-found-page #errorText {
 	font-size: 22px;
 	margin: 14px 0;
 }
-main #errorLink {
+.not-found-page #errorLink {
 	font-size: 20px;
 	padding: 12px;
 	border: 1px solid;
@@ -22,12 +22,12 @@ main #errorLink {
 	text-decoration: none;
 	transition: all 0.5s ease-in-out;
 }
-main #errorLink:hover,
-main #errorLink:active {
+.not-found-page #errorLink:hover,
+.not-found-page #errorLink:active {
 	color: #fff;
 	background: #000;
 }
-main #g6219 {
+.not-found-page #g6219 {
 	transform-origin: 85px 4px;
 	-webkit-animation: an1 12s 0.5s infinite ease-out;
 	animation: an1 12s 0.5s infinite ease-out;

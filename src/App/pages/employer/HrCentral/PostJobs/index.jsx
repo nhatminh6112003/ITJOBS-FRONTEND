@@ -79,7 +79,6 @@ const PostJobs = ({ cx }) => {
 			company_id,
 			...data
 		};
-		console.log(form);
 		createJobPost(form)
 			.unwrap()
 			.then((r) => {
@@ -239,12 +238,12 @@ const PostJobs = ({ cx }) => {
 														</div>
 														<div className={cx('col-lg-6', 'd-flex', 'align-center')}>
 															<div className={sx('form-group', 'form-checkbox', 'mt-5')}>
-																<CheckBoxFieldControl
+																{/* <CheckBoxFieldControl
 																	label='Hiển thị trên tin tuyển dụng để thu hút ứng viên hơn'
 																	control={control}
 																	name='is_address_work_hidden'
 																	defaultValue={false}
-																/>
+																/> */}
 															</div>
 														</div>
 													</div>
@@ -351,7 +350,7 @@ const PostJobs = ({ cx }) => {
 													{listJobWelfare?.data?.map((JobWelfare, index) => {
 														return (
 															<div className={cx('col-sm-6', 'col-lg-3')}>
-																<div className={sx('form-group', 'form-checkbox')}>
+																<div>
 																	<CheckBoxFieldControl
 																		name={`job_welfare_id_${JobWelfare.id}`}
 																		id='job_welfare_id'
@@ -380,24 +379,71 @@ const PostJobs = ({ cx }) => {
 															<p className={sx('title-label')}>Giới tính</p>
 														</div>
 														<div className={sx('d-flex', 'gender-wrap')}>
-															<div className={sx('form-group', 'form-radio')}>
-																<input type='radio' id='gender' name='gender' defaultValue={0} />
-																<label htmlFor='gender'>Nam/Nữ</label>
-															</div>
-															<div className={sx('form-group', 'form-radio')}>
-																<input
+															<div
+																className={sx('form-group', 'form-radio', 'align-items-center')}
+																style={{ gap: 4 }}>
+																<InputFieldControl
 																	type='radio'
-																	id='gender'
 																	name='gender'
-																	defaultValue={1}
-																	defaultChecked='checked'
 																	control={control}
+																	label='Khác'
+																	value={0}
+																	id='gender0'
+																	style={{ position: 'relative', top: 3 }}
+																	onChange={(e) => {
+																		if (e.target.checked){
+																			setValue(
+																				`gender`,
+																				Number(e.target.value)
+																			);
+																		}
+																			
+																			
+																	}}
 																/>
-																<label htmlFor='gender'>Nam</label>
 															</div>
-															<div className={sx('form-group', 'form-radio')}>
-																<input type='radio' id='gender' name='gender' defaultValue={2} />
-																<label htmlFor='gender'>Nữ</label>
+															<div
+																className={sx('form-group', 'form-radio', 'align-items-center')}
+																style={{ gap: 4 }}>
+																<InputFieldControl
+																	type='radio'
+																	name='gender'
+																	control={control}
+																	label='Nam'
+																	value={1}
+																	id='gender1'
+																	style={{ position: 'relative', top: 3 }}	onChange={(e) => {
+																		if (e.target.checked){
+																			setValue(
+																				`gender`,
+																				Number(e.target.value)
+																			);
+																		}
+																			
+																			
+																	}}
+																/>
+															</div>
+															<div
+																className={sx('form-group', 'form-radio', 'align-items-center')}
+																style={{ gap: 4 }}>
+																<InputFieldControl
+																	type='radio'
+																	name='gender'
+																	control={control}
+																	label='Nữ'
+																	value={2}
+																	id='gender2'
+																	style={{ position: 'relative', top: 3 }}	onChange={(e) => {
+																		if (e.target.checked){
+																			setValue(
+																				`gender`,
+																				Number(e.target.value)
+																			);
+																		}
+																			
+																	}}
+																/>
 															</div>
 														</div>
 													</div>
@@ -453,9 +499,6 @@ const PostJobs = ({ cx }) => {
 														className={cx('col-lg-6')}
 														id='job_experience'
 														style={{ display: displayExperience ? 'block' : 'none' }}>
-														<div className={sx('form-group')}>
-															<p className={sx('title-label')}>năm</p>
-														</div>
 														<div className={sx('d-flex', 'form-age', 'align-center')}>
 															<div className={sx('form-group', 'form-text')}>
 																<InputFieldControl

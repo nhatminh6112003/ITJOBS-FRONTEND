@@ -26,6 +26,7 @@ import {
 	useUpdateJobPostMutation
 } from '~/App/providers/apis/jobPostApi';
 import { useNavigate, useParams } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
 const sx = classNames.bind(styles);
 const UpdatePostJobs = ({ cx }) => {
 	const { control, handleSubmit, setValue, watch, reset } = useForm({
@@ -57,12 +58,14 @@ const UpdatePostJobs = ({ cx }) => {
 	const [displayExperience, setDisplayExperience] = useState(false);
 
 	useEffect(() => {
-		console.log(jobPost);
+			console.log(jobPost?.jobProfessionDetail?.map(
+				(item) => item.profession_id
+			))
 		reset({
 			districts: jobPost?.districts,
 			address: jobPost?.address,
 			form_age: jobPost?.form_age,
-			form_to: jobPost?.form_to,
+			to_age: jobPost?.to_age,
 			job_degree_value: jobPost?.job_degree_value,
 			job_desc: jobPost?.job_desc,
 			job_experience_value: jobPost?.job_experience_value,
@@ -108,7 +111,6 @@ const UpdatePostJobs = ({ cx }) => {
 			company_id,
 			...data
 		};
-		console.log(form);
 		updateJobPost({
 			id: id,
 			payload: form
@@ -117,11 +119,16 @@ const UpdatePostJobs = ({ cx }) => {
 			.then((r) => {
 				if (r.status == 200) {
 					toast.success(r?.message);
-					navigate('/employers/hrcentral/waitposting');
+					navigate(routesPath.EmployerPaths.waitPosting);
 					return;
 				}
 			});
 	};
+	useEffect(()=>{
+		if (jobPost?.job_experience_value == 1) {
+			setDisplayExperience(true);
+		}
+	},[jobPost?.job_formExperience,jobPost?.jobToExperience])
 	return (
 		<>
 			<section className={sx('manage-job-posting-post-jobs', 'cb-section', 'bg-manage')}>
@@ -141,17 +148,14 @@ const UpdatePostJobs = ({ cx }) => {
 							<div className={sx('main-tabslet')}>
 								<ul className={sx('tabslet-tab')}>
 									<li className={sx('active')}>
-										{' '}
 										<a href='javascript:void(0);'>Thông Tin Tuyển Dụng</a>
 									</li>
 									<li>
-										{' '}
 										<a href='javascript:void(0)' onclick='is_Filter_Form();'>
 											Thông Tin Liên Hệ
 										</a>
 									</li>
 									<li>
-										{' '}
 										<a href='javascript:void(0)' onclick='is_Filter_Form();'>
 											Thiết Lập Độ Phù Hợp Ứng Viên
 										</a>
@@ -212,9 +216,9 @@ const UpdatePostJobs = ({ cx }) => {
 															maxItems={3}
 															control={control}
 															name='job_profession_id'
-															// selectedValues={jobPost?.job_profession_detail?.map(
-															// 	(item) => item.profession_id
-															// )}
+															selectedValues={jobPost?.jobProfessionDetail?.map(
+																(item) => Number(item.profession_id)
+															)}
 														/>
 													</div>
 												</div>
@@ -374,9 +378,7 @@ const UpdatePostJobs = ({ cx }) => {
 																					Number(e.target.value)
 																				);
 																		}}
-																		// defaultChecked={jobPost?.job_work_type_detail
-																		// 	.map((item) => item.work_type_id)
-																		// 	?.includes(listWork.id)}
+																		defaultChecked={jobPost?.jobWorkTypeDetail?.map(item=>item.work_type_id)?.includes(listWork.id)}
 																	/>
 																);
 															})}
@@ -387,26 +389,25 @@ const UpdatePostJobs = ({ cx }) => {
 											<h2 className={sx('title-application')}>Phúc lợi</h2>
 											<div className={sx('checkbox-wrap')}>
 												<div className={cx('row')}>
-													{listJobWelfare?.data?.map((JobWelfare, index) => {
+													{listJobWelfare?.data?.map((jobWelfare, index) => {
 														return (
 															<div className={cx('col-sm-6', 'col-lg-3')}>
-																<div className={sx('form-group', 'form-checkbox')}>
+																<div>
 																	<CheckBoxFieldControl
-																		name={`job_welfare_id_${JobWelfare.id}`}
+																		name={`job_welfare_id_${jobWelfare.id}`}
 																		id='job_welfare_id'
 																		control={control}
-																		label={JobWelfare.welfare_type}
-																		value={JobWelfare.id}
+																		label={jobWelfare.welfare_type}
+																		value={jobWelfare.id}
 																		onChange={(e) => {
 																			if (e.target.checked)
 																				setValue(
-																					`job_welfare_id_${JobWelfare.id}`,
+																					`job_welfare_id_${jobWelfare.id}`,
 																					Number(e.target.value)
 																				);
 																		}}
-																		// defaultChecked={jobPost?.job_welfare_detail
-																		// 	.map((item) => item.job_welfare_id)
-																		// 	?.includes(JobWelfare.id)}
+																										defaultChecked={jobPost?.jobWelfare?.map(item=>item.job_welfare_id)?.includes(jobWelfare.id)}
+
 																	/>
 																</div>
 															</div>
@@ -422,24 +423,61 @@ const UpdatePostJobs = ({ cx }) => {
 															<p className={sx('title-label')}>Giới tính</p>
 														</div>
 														<div className={sx('d-flex', 'gender-wrap')}>
-															<div className={sx('form-group', 'form-radio')}>
-																<input type='radio' id='gender' name='gender' defaultValue={0} />
-																<label htmlFor='gender'>Nam/Nữ</label>
-															</div>
-															<div className={sx('form-group', 'form-radio')}>
-																<input
+															<div
+																className={sx('form-group', 'form-radio', 'align-items-center')}
+																style={{ gap: 4 }}>
+																<InputFieldControl
 																	type='radio'
-																	id='gender'
 																	name='gender'
-																	defaultValue={1}
-																	defaultChecked='checked'
 																	control={control}
+																	label='Khác'
+																	value={0}
+																	checked={jobPost?.gender == 0 ? true : false}
+																	id='gender0'
+																	style={{ position: 'relative', top: 3 }}
+																	onChange={(e) => {
+																		if (e.target.checked) {
+																			setValue(`gender`, Number(e.target.value));
+																		}
+																	}}
 																/>
-																<label htmlFor='gender'>Nam</label>
 															</div>
-															<div className={sx('form-group', 'form-radio')}>
-																<input type='radio' id='gender' name='gender' defaultValue={2} />
-																<label htmlFor='gender'>Nữ</label>
+															<div
+																className={sx('form-group', 'form-radio', 'align-items-center')}
+																style={{ gap: 4 }}>
+																<InputFieldControl
+																	type='radio'
+																	name='gender'
+																	control={control}
+																	label='Nam'
+																	value={1}
+																	checked={jobPost?.gender == 1 ? true : false}
+																	id='gender1'
+																	style={{ position: 'relative', top: 3 }}
+																	onChange={(e) => {
+																		if (e.target.checked) {
+																			setValue(`gender`, Number(e.target.value));
+																		}
+																	}}
+																/>
+															</div>
+															<div
+																className={sx('form-group', 'form-radio', 'align-items-center')}
+																style={{ gap: 4 }}>
+																<InputFieldControl
+																	type='radio'
+																	name='gender'
+																	control={control}
+																	label='Nữ'
+																	checked={jobPost?.gender == 2 ? true : false}
+																	id='gender2'
+																	style={{ position: 'relative', top: 3 }}
+																	onChange={(e) => {
+																		if (e.target.checked) {
+																			setValue(`gender`, Number(e.target.value));
+																		}
+																	}}
+																/>
 															</div>
 														</div>
 													</div>
@@ -495,9 +533,6 @@ const UpdatePostJobs = ({ cx }) => {
 														className={cx('col-lg-6')}
 														id='job_experience'
 														style={{ display: displayExperience ? 'block' : 'none' }}>
-														<div className={sx('form-group')}>
-															<p className={sx('title-label')}>năm</p>
-														</div>
 														<div className={sx('d-flex', 'form-age', 'align-center')}>
 															<div className={sx('form-group', 'form-text')}>
 																<InputFieldControl
@@ -562,7 +597,7 @@ const UpdatePostJobs = ({ cx }) => {
 											</div>
 
 											<h2 className={sx('title-application')}>
-												Thông tin khác{' '}
+												Thông tin khác
 												<span>
 													<span className={sx('txt_required', 'mar_left10')}>(Không bắt buộc)</span>
 												</span>
@@ -876,7 +911,6 @@ const UpdatePostJobs = ({ cx }) => {
 																	/>
 																	<span className={sx('error')} />
 																	<span className={sx('noted')}>
-																		{' '}
 																		Ít nhất 30 ký tự, Nhiều nhất 3000 ký tự
 																	</span>
 																</div>
@@ -922,7 +956,7 @@ const UpdatePostJobs = ({ cx }) => {
 															</div>
 															<div className={sx('full-content')}>
 																Dear <strong>[firstname] [lastname]</strong>,<br />
-																We have received your resume submission for the{' '}
+																We have received your resume submission for the
 																<strong>[job-title]</strong> position. We appreciate your interest and
 																look forward to reviewing your resume.
 																<br />

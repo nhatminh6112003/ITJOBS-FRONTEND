@@ -9,7 +9,7 @@ const NotFound = () => {
 	};
 
 	return (
-		<main>
+		<section className={cx('not-found-page')}>
 			<svg viewBox='0 0 541.17206 328.45184' height='328.45184' width='541.17206' id='svg2' version='1.1'>
 				<metadata id='metadata8'></metadata>
 				<defs id='defs6'>
@@ -481,7 +481,7 @@ const NotFound = () => {
 			<button id={cx('errorLink')} onClick={redirectHome}>
 				Go Back
 			</button>
-		</main>
+		</section>
 	);
 };
 

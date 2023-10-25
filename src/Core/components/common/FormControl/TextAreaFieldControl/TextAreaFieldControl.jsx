@@ -35,18 +35,20 @@ const TextAreaFieldControl = ({ label, name, control, rules, disabled, ...props 
 		<div>
 			<label htmlFor=''>{label}</label>
 			<TextareaAutosize
+				
 				style={{
 					margin: '8px 0',
 					width: '100%',
 					padding: '12px',
-					border: `1px solid ${grey[700]}`,
-					borderRadius: '12px',
-					boxShadow: `0px 2px 2px ${grey[50]}`
+					border: `1px solid #e5e5e5`,
+					color:'#999999',
+					borderRadius:5,
+					boxShadow: `rgb(201 202 203) 0px 2px 2px`
 				}}
 				name={name}
 				{...props}
 				id={uuidv4()}
-				minRows={1}
+				minRows={4}
 				onChange={field.onChange}
 				onBlur={field.onBlur}
 				value={field.value || ''}

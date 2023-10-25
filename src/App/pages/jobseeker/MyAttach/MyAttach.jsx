@@ -6,6 +6,7 @@ import { useCreateMyAttachMutation } from '~/App/providers/apis/myAttachApi';
 import { toast } from 'react-toastify';
 import CreateMyAttachForm from './components/CreateMyAttachForm';
 import { useNavigate } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
 const sx = classNames.bind(styles);
 const MyAttach = ({ cx }) => {
 	const [selectedValue, setSelectedValue] = useState(1);
@@ -41,7 +42,7 @@ const MyAttach = ({ cx }) => {
 			.then((r) => {
 				if (r.status == 200) {
 					toast.success(r?.message);
-					navigate('/jobseekers/dashboard');
+					navigate(routesPath.JobseekerPaths.dashboard);
 					return;
 				}
 			});

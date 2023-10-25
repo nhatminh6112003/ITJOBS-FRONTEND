@@ -17,6 +17,7 @@ import Tips from '~/Core/components/common/Modal/Tips';
 import ResumeModal from './ResumeModal';
 import Widget from './Widget';
 const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
+	const user= useSelector((state) => state.auth?.user);
 	const id = useSelector((state) => state.auth?.user?.id);
 	const { isShowing: showTips, toggle: toggleTips } = useModal({
 		t_resume_profile: false
@@ -148,6 +149,7 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 					listProvinces={listProvinces}
 					listDistricts={listDistricts?.districts}
 					setValue={setValue}
+					user={user}
 				/>
 			</ResumeModal>
 			<Tips
@@ -165,7 +167,7 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 	);
 };
 
-const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistricts,resume_profile }) => {
+const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistricts,resume_profile,user }) => {
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
@@ -269,7 +271,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistrict
 					<div className={cx('input-group')}>
 						<div style={{ marginBottom: 20 }}>
 							<label htmlFor='email'>Email</label>
-							<input type='text' name='email	' id='email	' defaultValue={resume_profile?.email} disabled />
+							<input type='text' name='email	' id='email	' defaultValue={user?.email} disabled />
 
 						</div>
 					</div>

@@ -54,7 +54,6 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 					name='jobPositionCategoryId'
 				/>
 
-				<TextAreaFieldControl  control={control} name='desc' placeholder='Mô tả'/>
 			{/* <InputFieldControl type='date' name='date' control={control}/> */}
 				<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
 					<Button type='submit' variant='contained'>

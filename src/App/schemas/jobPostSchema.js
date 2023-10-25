@@ -11,7 +11,7 @@ export const jobPostSchema = yup.object({
 	form_age: yup.string(),
 	to_age: yup.string(),
 	job_title: yup.string().default('').required('Vui lòng nhập Chức danh tuyển dụng'),
-	gender: yup.string().default('1'),
+	gender: yup.string()	,
 	is_address_work_hidden: yup.boolean(),
 	min_salary: yup
 		.string()
