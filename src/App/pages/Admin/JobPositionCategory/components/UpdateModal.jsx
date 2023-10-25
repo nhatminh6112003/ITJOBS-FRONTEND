@@ -22,6 +22,7 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	});
 
 	const onSubmit = (data) => {
+
 		updateJobPositionCategory({
 			id: dataUpdate.id,
 			payload: data
