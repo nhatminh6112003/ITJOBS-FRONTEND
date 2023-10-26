@@ -54,7 +54,6 @@ const SideBar = (props) => {
 			icon: <Settings />
 		}
 	];
-	console.log("TCL: SideBar -> SideBarMenu", SideBarMenu)
 
 	const activeItem = SideBarMenu.findIndex((item) => item.route === props?.location?.pathname);
 

@@ -1,17 +1,27 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '~/App/providers/slices/authSlice';
 import { UserType } from '~/App/constants/roleEnum';
 import UserRoleEnum from '~/App/constants/roleEnum';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 const SideBar = ({ className: cx }) => {
+	const location = useLocation();
+	const [isOpen, setIsOpen] = useState(false);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const handleLogout = () => {
 		dispatch(logout({ Role: UserType[UserRoleEnum.JOBSEEKER] }));
 	};
+	useEffect(() => {
+		if (location.pathname == routesPath.JobseekerPaths.jobApplied) {
+			setIsOpen(true);
+		}
+	}, [location]);
+
 	return (
 		<div className={cx('default-sidebar', 'sticky')}>
 			<nav className={cx('side-navbar')}>
@@ -48,15 +58,26 @@ const SideBar = ({ className: cx }) => {
 							</NavLink>
 						</li>
 						<li>
-							<a className={cx('collapse')} href=''>
+							<a
+								className={
+									location.pathname === routesPath.JobseekerPaths.jobApplied
+										? cx('active', 'collapse')
+										: cx('collapse')
+								}
+								href='javascript:;'
+								onClick={() => setIsOpen(!isOpen)}>
 								<span>Việc làm của tôi</span>
 							</a>
-							<ul className={cx('list-unstyled', 'collapse')}>
+							<ul className={cx('list-unstyled', 'collapse')} style={{ display: isOpen ? 'block' : 'none' }}>
 								<li>
 									<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobsaved'>Việc làm đã lưu</a>
 								</li>
 								<li>
-									<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobapplied'>Việc làm đã nộp</a>
+									<NavLink
+										className={({ isActive }) => (isActive ? cx('active') : undefined)}
+										to={routesPath.JobseekerPaths.jobApplied}>
+										Việc làm đã nộp
+									</NavLink>
 								</li>
 							</ul>
 						</li>
@@ -65,7 +86,7 @@ const SideBar = ({ className: cx }) => {
 								<span>Thông Báo Việc Làm</span>
 							</a>
 						</li>
-						<li>
+						{/* <li>
 							<a className={cx('collapse')} href='javascript:;'>
 								<span>Nhà tuyển dụng của tôi</span>
 							</a>
@@ -89,7 +110,7 @@ const SideBar = ({ className: cx }) => {
 									</a>
 								</li>
 							</ul>
-						</li>
+						</li> */}
 						<li>
 							<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/notify' title='Xem tất cả thông báo'>
 								<span>Xem tất cả thông báo</span>

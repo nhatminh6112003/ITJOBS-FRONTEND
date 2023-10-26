@@ -15,6 +15,9 @@ const authSlice = createSlice({
 		},
 		updateAccessToken(state, action) {
 			state.user.accessToken = action.payload;
+		},
+		updateAdminAccessToken(state, action) {
+			state.admin.accessToken = action.payload;
 		}
 	},
 	initialState: initialState,
@@ -33,5 +36,5 @@ const authSlice = createSlice({
 	}
 });
 
-export const { logout, updateAccessToken } = authSlice.actions;
+export const { logout, updateAccessToken,updateAdminAccessToken } = authSlice.actions;
 export default authSlice;

@@ -36,6 +36,7 @@ const MyAttach = ({ cx }) => {
 		formData.append('work_type_id', JSON.stringify(work_type_id));
 		formData.append('resume_active', Number(selectedValue));
 		formData.append('user_account_id', user_account_id);
+		formData.append('resume_type_id', 2);
 
 		createMyAttach(formData)
 			.unwrap()

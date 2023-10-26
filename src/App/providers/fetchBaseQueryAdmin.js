@@ -1,5 +1,5 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { logout, updateAccessToken } from './slices/authSlice';
+import { logout, updateAdminAccessToken } from './slices/authSlice';
 import UserRoleEnum, { UserType } from '../constants/roleEnum';
 const baseQuery = fetchBaseQuery({
 	baseUrl: import.meta.env.VITE_API_URL,
@@ -31,7 +31,7 @@ const baseQueryWithAdmin= async (args, api, extraOptions) => {
 				extraOptions
 			);
 			if (refreshResult?.isSuccess) {
-				await api.dispatch(updateAccessToken(refreshResult?.data?.accessToken));
+				await api.dispatch(updateAdminAccessToken(refreshResult?.data?.accessToken));
 				result = await baseQuery(args, api, extraOptions);
 			} else {
 				api.dispatch(logout({ Role: UserType[UserRoleEnum.ADMIN] }));

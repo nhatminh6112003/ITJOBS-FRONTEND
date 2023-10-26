@@ -16,7 +16,6 @@ const MyCvDetail = ({ cx }) => {
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProfession } = useGetAllProfessionQuery({});
-	
 
 	const { data: listDistricts } = useGetAllDistrictsQuery(
 		{
@@ -45,14 +44,16 @@ const MyCvDetail = ({ cx }) => {
 							</div>
 							<div className={cx('form-group', 'row')}>
 								<div className={cx('col-12')}>
-									<iframe
-										id='frm_view_pdf'
-										frameBorder={0}
-										scrolling='no'
-										src={`${import.meta.env.VITE_IMAGE_URL}/${data?.attachments?.file}`}
-										height={934}
-										width='100%'
-									/>
+									{data?.attachments?.file && (
+										<iframe
+											id='frm_view_pdf'
+											frameBorder={0}
+											scrolling='no'
+											src={`${import.meta.env.VITE_IMAGE_URL}/${data.attachments.file}`}
+											height={934}
+											width='100%'
+										/>
+									)}
 								</div>
 							</div>
 						</div>
@@ -180,8 +181,8 @@ const MyCvDetail = ({ cx }) => {
 									{listProfession?.data?.map((profession, index) => {
 										const matchingProfession = data?.profession_desired_job.filter(
 											(item) => item.profession_id == profession.id
-											);
-										console.log("TCL: matchingProfession", matchingProfession)
+										);
+										console.log('TCL: matchingProfession', matchingProfession);
 
 										const professionNames = matchingProfession?.map((item) => profession.name).join(',');
 

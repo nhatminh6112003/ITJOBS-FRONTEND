@@ -10,6 +10,8 @@ import { DegreeArray } from '~/App/constants/degreeArray';
 import GenderEnum from '~/App/constants/genderEnum';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
+import routesPath from '~/App/config/routesPath';
+
 const sx = classNames.bind(styles);
 
 const DetailJobPost = ({ cx }) => {
@@ -322,11 +324,9 @@ const DetailJobPost = ({ cx }) => {
 											Mức độ phù hợp...
 										</a>
 										<div className={sx('apply-now-btn', '')}>
-											{' '}
-											<a tabIndex={0} role='button' className={sx('btn-gradient', 'btnApplyClick')}>
-												{' '}
-												Nộp Đơn Ứng Tuyển{' '}
-											</a>
+											<Link to={`/jobseekers/jobs/apply/${detailJobPost?.id}`} role='button' className={sx('btn-gradient', 'btnApplyClick')}>
+												Nộp Đơn Ứng Tuyển
+											</Link>
 										</div>
 									</div>
 								</div>
@@ -865,28 +865,15 @@ const DetailJobPost = ({ cx }) => {
 													<div className={sx('apply-now-right')}>
 														<div className={sx('apply-now-btn', '', '')}>
 															{' '}
-															<a
-																tabIndex={0}
-																role='button'
-																className={sx('btn-gradient', 'btnApplyClick')}>
-																{' '}
-																Nộp Đơn Ứng Tuyển{' '}
-															</a>{' '}
+															<Link to={`/jobseekers/jobs/apply/${detailJobPost?.id}`} role='button' className={sx('btn-gradient', 'btnApplyClick')}>
+												Nộp Đơn Ứng Tuyển
+											</Link>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-										<input type='hidden' id='salary_taskbar' name='salary_taskbar' defaultValue={8000000} />
-										<input type='hidden' id='industry_taskbar' name='industry_taskbar' defaultValue='24,2' />
-										<input type='hidden' id='location_taskbar' name='location_taskbar' defaultValue={8} />
-										<input
-											type='hidden'
-											id='keyword_taskbar'
-											name='keyword_taskbar'
-											defaultValue='Kế Toán Nội Bộ'
-										/>
-										<input type='hidden' id='title_alert' defaultValue='Kế Toán Nội Bộ' />
+										
 										<div className={sx('job-detail-bottom-banner', '')} id=''>
 											<div className={sx('adsBannerOA')} data-id={852} />
 										</div>
@@ -985,12 +972,9 @@ const DetailJobPost = ({ cx }) => {
 															</div>
 														</div>
 														<div className={sx('box-apply', '')}>
-															<a
-																tabIndex={0}
-																role='button'
-																className={sx('btn-gradient', 'btnApplyClick')}>
-																Nộp Đơn Ứng Tuyển
-															</a>
+														<Link to={`/jobseekers/jobs/apply/${detailJobPost?.id}`} role='button' className={sx('btn-gradient', 'btnApplyClick')}>
+												Nộp Đơn Ứng Tuyển
+											</Link>
 														</div>
 														<div className={sx('box-contact')}>
 															<ul>

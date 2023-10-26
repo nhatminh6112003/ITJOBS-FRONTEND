@@ -5,15 +5,11 @@ import RoomIcon from '@mui/icons-material/Room';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/black-and-white.css';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const JobItem = ({ job_post }) => {
-	useEffect(() => {
-		console.log(job_post);
-	}, [job_post]);
 	return (
 		<div className={cx('job-item')}>
 			<div className={cx('figure')}>
@@ -21,19 +17,19 @@ const JobItem = ({ job_post }) => {
 					<a
 						target='_blank'
 						href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-sai-gon-ha-noi-shb.35A6E089.html'
-						title='Ngân Hàng TMCP Sài Gòn - Hà Nội ( SHB )'
+						title={job_post?.company?.company_name}
 						rel='noreferrer'>
 						<LazyLoadImage
 							src='	https://images.careerbuilder.vn/employer_folders/lot7/87417/67x67/13452210999_2011_11_23.gif'
 							effect='black-and-white'
-							alt='Ngân Hàng TMCP Sài Gòn - Hà Nội ( SHB )'
+							alt={job_post?.company?.company_name}
 						/>
 					</a>
 				</div>
 				<div className={cx('figcaption')}>
 					<div className={cx('title')}>
-						<Link target='_blank' to={`/tim-viec-lam/${job_post.id}`} title={job_post.job_title} rel='noreferrer'>
-							{job_post.job_title}
+						<Link  to={`/tim-viec-lam/${job_post?.id}`} title={job_post?.job_title} >
+							{job_post?.job_title}
 						</Link>
 					</div>
 					<div className={cx('caption')}>
@@ -43,7 +39,7 @@ const JobItem = ({ job_post }) => {
 							title='Ngân Hàng TMCP Sài Gòn - Hà Nội ( SHB )'
 							target='_blank'
 							rel='noreferrer'>
-							Ngân Hàng TMCP Sài Gòn - Hà Nội ( SHB )
+							{job_post?.company?.company_name}
 						</a>
 						<p className={cx('salary')}>
 							<em className={cx('fa', 'fa-usd')} />
