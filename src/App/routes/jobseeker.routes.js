@@ -3,7 +3,6 @@ import { lazy } from 'react';
 import routesPath from '~/App/config/routesPath';
 const Home = lazy(() => import('../pages/Jobseeker/Home'));
 const About = lazy(() => import('../pages/Jobseeker/About'));
-const Detail = lazy(() => import('../pages/Jobseeker/DetailJobPost'));
 const Cart = lazy(() => import('../pages/Jobseeker/Cart'));
 const Product = lazy(() => import('../pages/Jobseeker/Product'));
 const Login = lazy(() => import('../pages/Jobseeker/Login'));
@@ -17,11 +16,12 @@ const UpdateMyAttach = lazy(() => import('../pages/Jobseeker/UpdateMyAttach'));
 const MyCvDetail = lazy(() => import('../pages/Jobseeker/MyCvDetail'));
 const FindJob = lazy(() => import('../pages/Jobseeker/DetailJobPost'));
 const DetailCompany = lazy(() => import('../pages/Jobseeker/DetailCompany'));
+const ApplyJob = lazy(() => import('../pages/Jobseeker/ApplyJob'));
+const JobApplied = lazy(() => import('../pages/Jobseeker/JobApplied'));
 
 const jobSeekerPublicRoutes = [
 	{ path: routesPath.JobseekerPaths.home, component: Home },
 	{ path: routesPath.JobseekerPaths.about, component: About },
-	{ path: routesPath.JobseekerPaths.detail, component: Detail },
 	{ path: routesPath.JobseekerPaths.product, component: Product },
 	{ path: routesPath.JobseekerPaths.allJob, component: AllJob },
 	{ path: routesPath.JobseekerPaths.login, component: Login },
@@ -38,6 +38,8 @@ const jobSeekerPrivateRoutes = [
 	{ path: routesPath.JobseekerPaths.myAttach, component: MyAttach },
 	{ path: routesPath.JobseekerPaths.myUpdateAttach, component: UpdateMyAttach },
 	{ path: routesPath.JobseekerPaths.myCvDetail, component: MyCvDetail },
+	{ path: routesPath.JobseekerPaths.applyJobs, component: ApplyJob },
+	{ path: routesPath.JobseekerPaths.jobApplied, component: JobApplied },
 ];
 
 export { jobSeekerPublicRoutes, jobSeekerPrivateRoutes };

@@ -26,7 +26,8 @@ import myAttachApi from './apis/myAttachApi';
 import companyApi from './apis/companyApi';
 import resumeProfileApi from './apis/resumeProfileApi';
 import jobPostApi from './apis/jobPostApi';
-
+import resumeApi from './apis/resumeApi';
+import jobPostActivityApi from './apis/jobPostActivityApi';
 const rootReducer = combineReducers({
 	[authSlice.name]: authSlice.reducer,
 	[themeSlice.name]: themeSlice.reducer,
@@ -55,7 +56,9 @@ const rootReducer = combineReducers({
 	[myAttachApi.reducerPath]: myAttachApi.reducer,
 	[companyApi.reducerPath]: companyApi.reducer,
 	[resumeProfileApi.reducerPath]: resumeProfileApi.reducer,
-	[jobPostApi.reducerPath]: jobPostApi.reducer
+	[jobPostApi.reducerPath]: jobPostApi.reducer,
+	[resumeApi.reducerPath]: resumeApi.reducer,
+	[jobPostActivityApi.reducerPath]: jobPostActivityApi.reducer,
 });
 
 export default rootReducer;
