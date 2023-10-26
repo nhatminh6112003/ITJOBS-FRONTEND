@@ -5,22 +5,33 @@ import RoomIcon from '@mui/icons-material/Room';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/black-and-white.css';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 
 const cx = classNames.bind(styles);
 
 const JobItem = ({ job_post }) => {
+	const [provinces, setProvinces] = useState('');
+	const { data: listProvinces } = useGetAllProvincesQuery();
+	useEffect(() => {
+		listProvinces?.map((item) => {
+			if (item.code == job_post?.provinces) {
+				setProvinces(item.name);
+			}
+		});
+	}, [job_post, listProvinces]);
 	return (
 		<div className={cx('job-item')}>
 			<div className={cx('figure')}>
 				<div className={cx('image')}>
 					<a
 						target='_blank'
-						href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-sai-gon-ha-noi-shb.35A6E089.html'
+						href={`/nha-tuyen-dung/${job_post?.company_id}`}
 						title={job_post?.company?.company_name}
 						rel='noreferrer'>
 						<LazyLoadImage
-							src='	https://images.careerbuilder.vn/employer_folders/lot7/87417/67x67/13452210999_2011_11_23.gif'
+							src={`${job_post?.company?.logo}`}
 							effect='black-and-white'
 							alt={job_post?.company?.company_name}
 						/>
@@ -28,26 +39,27 @@ const JobItem = ({ job_post }) => {
 				</div>
 				<div className={cx('figcaption')}>
 					<div className={cx('title')}>
-						<Link  to={`/tim-viec-lam/${job_post?.id}`} title={job_post?.job_title} >
+						<Link to={`/tim-viec-lam/${job_post?.id}`} title={job_post?.job_title}>
 							{job_post?.job_title}
 						</Link>
 					</div>
 					<div className={cx('caption')}>
-						<a
+						<Link
 							className={cx('company-name')}
-							href='https://careerbuilder.vn/vi/nha-tuyen-dung/ngan-hang-tmcp-sai-gon-ha-noi-shb.35A6E089.html'
-							title='Ngân Hàng TMCP Sài Gòn - Hà Nội ( SHB )'
+							to={`/nha-tuyen-dung/${job_post?.company_id}`}
+							title={job_post?.company?.company_name}
 							target='_blank'
 							rel='noreferrer'>
 							{job_post?.company?.company_name}
-						</a>
+						</Link>
 						<p className={cx('salary')}>
 							<em className={cx('fa', 'fa-usd')} />
-							Lương: Cạnh Tranh
+							Lương: {parseInt(job_post?.min_salary).toString().charAt(0)} Tr -{' '}
+							{parseInt(job_post?.max_salary).toString().charAt(0)} Tr VND
 						</p>
 						<div className={cx('location')}>
 							<RoomIcon sx={{ fontSize: '14px' }} />
-							<p> Hà Nội</p>
+							<p> {provinces}</p>
 						</div>
 					</div>
 				</div>

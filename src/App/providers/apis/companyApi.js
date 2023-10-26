@@ -10,6 +10,12 @@ const companyApi = createApi({
 			},
 			providesTags: ['company']
 		}),
+		getOneCompany: build.query({
+			query: (id) => {
+				return { url: `/company/${id}`, method: 'GET' };
+			},
+			providesTags: ['company']
+		}),
 		createCompany: build.mutation({
 			query: (payload) => {
 				return { url: '/company', method: 'POST', body: payload };
@@ -17,20 +23,26 @@ const companyApi = createApi({
 			invalidatesTags: ['company']
 		}),
 		updateCompany: build.mutation({
-			query: ({id,payload}) => {
+			query: ({ id, payload }) => {
 				return { url: `/company/${id}`, method: 'PATCH', body: payload };
 			},
 			invalidatesTags: ['company']
 		}),
 		deleteCompany: build.mutation({
 			query: (id) => {
-				return { url: `/company/${id}`, method: 'DELETE'};
+				return { url: `/company/${id}`, method: 'DELETE' };
 			},
 			invalidatesTags: ['company']
 		})
 	})
 });
 
-export const { useGetAllCompanyQuery, useCreateCompanyMutation , useUpdateCompanyMutation , useDeleteCompanyMutation } = companyApi;
+export const {
+	useGetAllCompanyQuery,
+	useCreateCompanyMutation,
+	useUpdateCompanyMutation,
+	useDeleteCompanyMutation,
+	useGetOneCompanyQuery
+} = companyApi;
 
 export default companyApi;

@@ -36,18 +36,16 @@ const Header = () => {
 							</div>
 							<div className={cx('main-menu')}>
 								<ul className={cx('menu')}>
-									<li className={cx('dropdown')}>
-										<Link to={routesPath.JobseekerPaths.allJob} title='Tìm việc làm'>
+									<li className={cx('dropdown')} style={{ cursor: 'pointer' }}>
+										<a tabindex='0' role='button'>
 											Tìm việc làm
-										</Link>
+										</a>
 										<div className={cx('dropdown-menu')}>
 											<ul>
 												<li>
-													<a
-														href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-vi.html'
-														title='Việc làm mới nhất'>
+													<Link to={routesPath.JobseekerPaths.allJob} title='Việc làm mới nhất'>
 														Việc làm mới nhất
-													</a>
+													</Link>
 												</li>
 												<li>
 													<a
@@ -177,9 +175,7 @@ const Header = () => {
 									<Link to={routesPath.JobseekerPaths.dashboard} rel='nofollow'>
 										<AccountCircleIcon sx={{ fontSize: 20, paddingRight: '5px' }} />
 										Chào
-										<span className={cx('nameUser')}>
-											 {data?.firstname}
-										</span>
+										<span className={cx('nameUser')}>{data?.firstname}</span>
 									</Link>
 									<div className={cx('dropdown-menu')}>
 										<ul>
