@@ -6,6 +6,8 @@ import JobItem from '~/App/layouts/components/Jobseeker/JobItem';
 import Banner from '~/App/layouts/components/Jobseeker/Banner';
 import { useGetAllQuery } from '~/App/providers/apis/userApi';
 import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import { Link } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
 const Home = ({ cx }) => {
 	// const options = [
 	//   { value: 'chocolate', label: 'Chocolate' },
@@ -34,6 +36,10 @@ const Home = ({ cx }) => {
 								<div className={cx('item')}>
 									<div className={cx('image', 'adsTopBanner')} id={846}>
 										{/**/}
+										<img
+											src='https://ads.careerbuilder.vn/www/images/8038e22595ece70fbfe0a75e7020f355.jpg'
+											alt=''
+										/>
 									</div>
 								</div>
 							</div>
@@ -41,6 +47,10 @@ const Home = ({ cx }) => {
 								<div className={cx('item')}>
 									<div className={cx('image', 'adsTopBanner')} id={847}>
 										{/**/}
+										<img
+											src='https://ads.careerbuilder.vn/www/images/80aafecd7e8bc8eaa6ebccb05cb02177.jpg'
+											alt=''
+										/>
 									</div>
 								</div>
 							</div>
@@ -106,10 +116,10 @@ const Home = ({ cx }) => {
 												</div>
 											</div>
 											<div className={cx('view-more')}>
-												<a href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-vi.html'>
+												<Link to={routesPath.JobseekerPaths.allJob}>
 													Xem việc làm mới cập nhật
 													<span className={cx('mdi', 'mdi-arrow-right')} />
-												</a>
+												</Link>
 											</div>
 										</div>
 									</div>

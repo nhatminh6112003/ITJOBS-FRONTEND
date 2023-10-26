@@ -14,7 +14,7 @@ const JobseekerPaths = {
 	about: '/about',
 	cart: '/cart',
 	product: '/product',
-	allJob: '/tat-ca-viec-lam',
+	allJob: '/viec-lam/tat-ca-viec-lam',
 	login: '/account/login',
 	register: '/account/register',
 	dashboard: '/jobseekers/dashboard',
