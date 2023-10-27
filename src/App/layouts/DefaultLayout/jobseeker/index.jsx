@@ -12,7 +12,7 @@ export const JobSeekerLayout = ({ children }) => {
 				<Header />
 				<Suspense fallback={<Loading />}>
 					<main>{cloneElement(children, { cx })}</main>
-					<Footer />
+					<Footer cx={cx}/>
 				</Suspense>
 			</JobSeekerStyles>
 		</>

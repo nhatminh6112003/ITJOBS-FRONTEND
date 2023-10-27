@@ -31,7 +31,7 @@ const Header = () => {
 							</div>
 							<div className={cx('logo')}>
 								<Link to={routesPath.JobseekerPaths.home}>
-									<img style={{ height: 80 }} src='' alt='Tuyển dụng & Tìm kiếm việc làm nhanh' />
+									<img style={{ height: 50 }} src='/logo.png' alt='Tuyển dụng & Tìm kiếm việc làm nhanh 1' />
 								</Link>
 							</div>
 							<div className={cx('main-menu')}>
