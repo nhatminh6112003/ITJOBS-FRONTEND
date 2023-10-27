@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './manageResume.module.css';
 import classNames from 'classnames/bind';
+import { useSelector } from 'react-redux';
+import { useGetAllJobPostActivityApiQuery } from '~/App/providers/apis/jobPostActivityApi';
 
 const sx = classNames.bind(styles);
 

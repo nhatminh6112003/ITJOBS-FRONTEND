@@ -2,6 +2,7 @@ import styles from './AllJob.module.css';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 
@@ -9,15 +10,18 @@ import { SearchIcon, FavoriteBorderIcon } from '~/Core/resources';
 import formatDate from '~/Core/utils/formatDate';
 const cx = classNames.bind(styles);
 const AllJob = () => {
-	const { data: allJobPost } = useGetAllJobPostQuery({});
+	const { data: allJobPost, isLoading } = useGetAllJobPostQuery({
+		params: {
+			status: jobPostStatusEnum.Publish,
+			isDeleted: false
+		}
+	});
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const [provinces, setProvinces] = useState('');
 	const [isChecked, setIsChecked] = useState(false);
 
-	const activeJobPosts = allJobPost?.data.filter((job_post) => job_post.isDeleted === false && job_post.status === 1);
-	const activeJobPostsWorkHome = allJobPost?.data.filter(
-		(job_post) => job_post.isDeleted === false && job_post.status === 1 && job_post.work_home === true
-	);
+	const activeJobPosts = allJobPost?.data;
+	const activeJobPostsWorkHome = allJobPost?.data.filter((job_post) => job_post.work_home === true);
 	const handleCheckboxChange = () => {
 		setIsChecked(!isChecked);
 	};
@@ -506,11 +510,7 @@ const AllJob = () => {
 								<div className={cx('jobs-side-list')} id='jobs-side-list-content'>
 									{isChecked
 										? allJobPost?.data.map((job_post) => {
-												if (
-													job_post.isDeleted === false &&
-													job_post.status === 1 &&
-													job_post.work_home === true
-												) {
+												if (job_post.work_home === true) {
 													return (
 														<>
 															<div className={cx('job-item')} id='job-item-35BB3D60'>
@@ -626,50 +626,26 @@ const AllJob = () => {
 												}
 										  })
 										: allJobPost?.data.map((job_post) => {
-												if (job_post.isDeleted === false && job_post.status === 1) {
-													return (
-														<>
-															<div className={cx('job-item')} id='job-item-35BB3D60'>
-																<div className={cx('figure')}>
-																	<div className={cx('image')}>
-																		<Link
-																			to={`/nha-tuyen-dung/${job_post?.company_id}`}
-																			target='_blank'
-																			title={job_post?.company?.company_name}
-																			rel='noreferrer'>
-																			<img
-																				className={cx('lazy-img')}
-																				src={job_post?.company?.logo}
-																				alt={job_post?.company?.company_name}
-																			/>
-																		</Link>
-																	</div>
-																	<div className={cx('figcaption')}>
-																		<div className={cx('title')}>
-																			<h2>
-																				<a
-																					className={cx('job_link')}
-																					data-id='35BB3D60'
-																					href={`/tim-viec-lam/${job_post?.id}`}
-																					target='_blank'
-																					title={job_post?.job_title}
-																					rel='noreferrer'>
-																					{job_post?.job_title}
-																					<span className={cx('new')}>
-																						<font color='ff0000'>(Mới)</font>
-																					</span>{' '}
-																				</a>
-																			</h2>
-																		</div>
-																		<div className={cx('caption')}>
-																			<a
-																				className={cx('company-name')}
-																				target='_blank'
-																				href={`/nha-tuyen-dung/${job_post?.company_id}`}
-																				title={job_post?.company?.company_name}
-																				rel='noreferrer'>
-																				{job_post?.company?.company_name}
-																			</a>
+												return (
+													<>
+														<div className={cx('job-item')} id='job-item-35BB3D60'>
+															<div className={cx('figure')}>
+																<div className={cx('image')}>
+																	<Link
+																		to={`/nha-tuyen-dung/${job_post?.company_id}`}
+																		target='_blank'
+																		title={job_post?.company?.company_name}
+																		rel='noreferrer'>
+																		<img
+																			className={cx('lazy-img')}
+																			src={job_post?.company?.logo}
+																			alt={job_post?.company?.company_name}
+																		/>
+																	</Link>
+																</div>
+																<div className={cx('figcaption')}>
+																	<div className={cx('title')}>
+																		<h2>
 																			<a
 																				className={cx('job_link')}
 																				data-id='35BB3D60'
@@ -677,23 +653,43 @@ const AllJob = () => {
 																				target='_blank'
 																				title={job_post?.job_title}
 																				rel='noreferrer'>
-																				<div className={cx('salary')}>
-																					<p>
-																						<em className='fa fa-usd' />
-																						Lương:{' '}
-																						{parseInt(job_post?.min_salary)
-																							.toString()
-																							.charAt(0)}{' '}
-																						Tr -{' '}
-																						{parseInt(job_post?.max_salary).toString().charAt(0)}{' '}
-																						Tr VND
-																					</p>
-																				</div>
-																				<div className={cx('location')}>
-																					<em className='mdi mdi-map-marker' />
-																					<ul>{provinces && <li>{provinces}</li>}</ul>
-																				</div>
-																				{/* <ul className={cx('welfare')}>
+																				{job_post?.job_title}
+																				<span className={cx('new')}>
+																					<font color='ff0000'>(Mới)</font>
+																				</span>{' '}
+																			</a>
+																		</h2>
+																	</div>
+																	<div className={cx('caption')}>
+																		<a
+																			className={cx('company-name')}
+																			target='_blank'
+																			href={`/nha-tuyen-dung/${job_post?.company_id}`}
+																			title={job_post?.company?.company_name}
+																			rel='noreferrer'>
+																			{job_post?.company?.company_name}
+																		</a>
+																		<a
+																			className={cx('job_link')}
+																			data-id='35BB3D60'
+																			href={`/tim-viec-lam/${job_post?.id}`}
+																			target='_blank'
+																			title={job_post?.job_title}
+																			rel='noreferrer'>
+																			<div className={cx('salary')}>
+																				<p>
+																					<em className='fa fa-usd' />
+																					Lương:{' '}
+																					{parseInt(job_post?.min_salary).toString().charAt(0)} Tr
+																					- {parseInt(job_post?.max_salary).toString().charAt(0)}{' '}
+																					Tr VND
+																				</p>
+																			</div>
+																			<div className={cx('location')}>
+																				<em className='mdi mdi-map-marker' />
+																				<ul>{provinces && <li>{provinces}</li>}</ul>
+																			</div>
+																			{/* <ul className={cx('welfare')}>
 																			<li>
 																				<span className='fa fa-medkit' />
 																				Chế độ bảo hiểm
@@ -707,39 +703,38 @@ const AllJob = () => {
 																				Chế độ thưởng
 																			</li>
 																		</ul> */}
-																			</a>
-																		</div>
-																		<div className={cx('bottom-right-icon')}>
-																			<ul>
-																				<li>
-																					<a
-																						className={cx(
-																							'toollips',
-																							'save-job',
-																							'chk_save_35BB3D60'
-																						)}
-																						href=''
-																						data-id='35BB3D60'
-																						onClick='popuplogin()'>
-																						<FavoriteBorderIcon fontSize='small' />
-																						<span className={cx('text')}>Lưu việc làm</span>
-																					</a>
-																				</li>
-																			</ul>
-																			<div className={cx('time')}>
-																				<em className='mdi mdi-calendar' />
-																				<time>{formatDate(job_post?.updatedAt)}</time>
-																				{/* <div className={cx("toolip")}>
+																		</a>
+																	</div>
+																	<div className={cx('bottom-right-icon')}>
+																		<ul>
+																			<li>
+																				<a
+																					className={cx(
+																						'toollips',
+																						'save-job',
+																						'chk_save_35BB3D60'
+																					)}
+																					href=''
+																					data-id='35BB3D60'
+																					onClick='popuplogin()'>
+																					<FavoriteBorderIcon fontSize='small' />
+																					<span className={cx('text')}>Lưu việc làm</span>
+																				</a>
+																			</li>
+																		</ul>
+																		<div className={cx('time')}>
+																			<em className='mdi mdi-calendar' />
+																			<time>{formatDate(job_post?.updatedAt)}</time>
+																			{/* <div className={cx("toolip")}>
 								  <p>Ngày cập nhật</p>
 								</div> */}
-																			</div>
 																		</div>
 																	</div>
 																</div>
 															</div>
-														</>
-													);
-												}
+														</div>
+													</>
+												);
 										  })}
 								</div>
 								<div className={cx('pagination')}>
