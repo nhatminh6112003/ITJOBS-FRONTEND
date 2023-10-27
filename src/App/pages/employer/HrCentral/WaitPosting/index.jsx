@@ -11,17 +11,32 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useDeleteJobPostMutation, useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import {
+	useDeleteJobPostMutation,
+	useGetAllJobPostQuery,
+	useUpdateJobPostMutation
+} from '~/App/providers/apis/jobPostApi';
 import formatDate from '~/Core/utils/formatDate';
 import { toast } from 'react-toastify';
+import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 const sx = classNames.bind(styles);
 
 const WaitPosting = ({ cx }) => {
+	const employer = useSelector((state) => state.auth?.employer);
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data: allJobPost } = useGetAllJobPostQuery();
+	const { data: allJobPost } = useGetAllJobPostQuery({
+		params: {
+			posted_by_id: employer?.id,
+			status: jobPostStatusEnum.Pending,
+			isDeleted: false
+		}
+	});
 	const [deleteJobPost] = useDeleteJobPostMutation();
-	useEffect(() => {}, [allJobPost?.data]);
+	const [updateJobPost] = useUpdateJobPostMutation();
+
 	const handleDeleteJobPost = (id) => {
 		deleteJobPost(id)
 			.unwrap()
@@ -30,6 +45,13 @@ const WaitPosting = ({ cx }) => {
 					toast.success(r?.message);
 				}
 			});
+	};
+	const updateStatusJobPost = async (id) => {
+		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date() } }).then((r) => {
+			if (r.status == 200) {
+				toast.success('Đăng tuyển thành công');
+			}
+		});
 	};
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
@@ -192,8 +214,8 @@ const WaitPosting = ({ cx }) => {
 												</tr>
 											</thead>
 											<tbody>
-												{allJobPost?.data?.map((job_post) => {
-													if (job_post.status === 0 && job_post.isDeleted === false) {
+												{allJobPost?.data && allJobPost?.data?.length > 0 ? (
+													allJobPost?.data?.map((job_post) => {
 														return (
 															<tr key={job_post.id}>
 																<td>
@@ -222,7 +244,7 @@ const WaitPosting = ({ cx }) => {
 																	</div>
 																</td>
 																<td>
-																	<time>{formatDate(job_post.createdAt)}</time>
+																	<time>{formatDate(job_post.updatedAt)}</time>
 																</td>
 																<td>
 																	<p>Hoàn tất</p>
@@ -230,7 +252,7 @@ const WaitPosting = ({ cx }) => {
 																<td>
 																	<a
 																		href='javascript:void(0);'
-																		onclick="checkOrder('35BADBC3');return false;"
+																		onClick={() => updateStatusJobPost(job_post.id)}
 																		title='Thực hiện đăng tuyển'>
 																		<img
 																			alt='Thực hiện đăng tuyển'
@@ -243,7 +265,7 @@ const WaitPosting = ({ cx }) => {
 																		<li>
 																			<a
 																				href='javascript:void(0);'
-																				onClick="checkOrder('35BADBC3');return false;"
+																				onClick={() => updateStatusJobPost(job_post.id)}
 																				title='Đăng tuyển'>
 																				<PublishIcon />
 																			</a>
@@ -259,7 +281,6 @@ const WaitPosting = ({ cx }) => {
 																			<a
 																				href='https://careerbuilder.vn/vi/employers/hrcentral/posting/copyjob/lop7cttnq.1667207375/35BADBC3/1/1'
 																				title='Nhân bản'>
-																				{/* <em className={sx('material-icons')}>content_copy </em> */}
 																				<ContentCopyIcon />
 																			</a>
 																		</li>
@@ -283,8 +304,16 @@ const WaitPosting = ({ cx }) => {
 																</td>
 															</tr>
 														);
-													}
-												})}
+													})
+												) : (
+													<tr>
+														<td colspan='8'>
+															<p align='center'>
+																<strong> Không có vị trí nào trong thư mục này.</strong>
+															</p>
+														</td>
+													</tr>
+												)}
 											</tbody>
 										</table>
 									</div>

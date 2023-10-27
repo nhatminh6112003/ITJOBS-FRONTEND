@@ -11,12 +11,21 @@ import SearchIcon from '@mui/icons-material/Search';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { useDeleteJobPostMutation, useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
 import { toast } from 'react-toastify';
+import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
+import { useSelector } from 'react-redux';
 const sx = classNames.bind(styles);
 
 const UnPosting = ({ cx }) => {
+	const employer = useSelector((state) => state.auth?.employer);
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data: allJobPost } = useGetAllJobPostQuery();
+	const { data: allJobPost } = useGetAllJobPostQuery({
+		params: {
+			posted_by_id: employer?.id,
+			status: jobPostStatusEnum.Pause,
+			isDeleted: false
+		}
+	});
 	const [deleteJobPost] = useDeleteJobPostMutation();
 	const handleDeleteJobPost = (id) => {
 		deleteJobPost(id)

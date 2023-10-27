@@ -11,23 +11,25 @@ import SearchIcon from '@mui/icons-material/Search';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { useDeleteJobPostMutation, useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
 import { toast } from 'react-toastify';
+import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
+import { useSelector } from 'react-redux';
 import formatDate from '~/Core/utils/formatDate';
 const sx = classNames.bind(styles);
 
 const Posting = ({ cx }) => {
+	const employer = useSelector((state) => state.auth?.employer);
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data: allJobPost } = useGetAllJobPostQuery();
+	const { data: allJobPost } = useGetAllJobPostQuery({
+		params: {
+			posted_by_id: employer?.id,
+			status: jobPostStatusEnum.Publish,
+			isDeleted: false
+		}
+	});
+
 	const [deleteJobPost] = useDeleteJobPostMutation();
-	const handleDeleteJobPost = (id) => {
-		deleteJobPost(id)
-			.unwrap()
-			.then((r) => {
-				if (r.status == 200) {
-					toast.success(r?.message);
-				}
-			});
-	};
+
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -79,7 +81,7 @@ const Posting = ({ cx }) => {
 										defaultValue=''
 									/>
 									<div className={sx('icon')}>
-										<em className={sx('material-icons')}>event</em>
+										<em className={cx('material-icons')}>event</em>
 									</div>
 									<div id='start-date' className={sx('dtpicker-overlay', 'dtpicker-mobile')}>
 										<div className={sx('dtpicker-bg')}>
@@ -103,7 +105,7 @@ const Posting = ({ cx }) => {
 										defaultValue=''
 									/>
 									<div className={sx('icon')}>
-										<em className={sx('material-icons')}>event</em>
+										<em className={cx('material-icons')}>event</em>
 									</div>
 									<div id='end-date' className={sx('dtpicker-overlay', 'dtpicker-mobile')}>
 										<div className={sx('dtpicker-bg')}>
@@ -124,7 +126,7 @@ const Posting = ({ cx }) => {
 							</div>
 						</form>
 					</div>
-					<div className={sx('filter-emp-user-create')}>
+					{/* <div className={sx('filter-emp-user-create')}>
 						<label>Việc làm đăng bởi</label>
 						<select name='user_id' onchange="SetUserId(this.value, 'posting');">
 							&gt;
@@ -134,7 +136,7 @@ const Posting = ({ cx }) => {
 							</option>
 							<option value='nhatminhnguyen6112003.1672041283'>nguyễn minh</option>
 						</select>
-					</div>
+					</div> */}
 					<div className={sx('main-tabslet')}>
 						<ul className={sx('tabslet-tab')}>
 							{TabMenu.map((item) => (
@@ -157,13 +159,8 @@ const Posting = ({ cx }) => {
 											<li className={sx('view-posting-summary')}>
 												<a href='javascript:void(0)'>Xem tóm tắt </a>
 											</li>
+										
 											<li>
-												<a href='javascript:void(0);' id='copy_multi_job'>
-													Nhân bản
-												</a>
-											</li>
-											<li>
-												{' '}
 												<a href='javascript:void(0);' id='unposting_multi_job'>
 													Tạm Dừng Đăng
 												</a>
@@ -213,18 +210,94 @@ const Posting = ({ cx }) => {
 													<th width='10%' onclick="setTypeSort('posting', 'asc', 1)">
 														Lượt Nộp <SortIcon style={{ paddingLeft: 5 }} />
 													</th>
-													<th width='10%'>CV Gợi Ý</th>
 													<th width='15%'>Thao tác</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td colSpan={9} className={sx('cb-text-center')}>
-														<p>
-															<strong> Không có vị trí nào trong thư mục này.</strong>
-														</p>
-													</td>
-												</tr>
+												{allJobPost?.data && allJobPost?.data.length > 0 ? (
+													allJobPost?.data?.map((item) => (
+														<tr>
+															<td>
+																<div className='checkbox'></div>
+															</td>
+															<td>
+																<div className='title'>
+																	<a
+																		title='Xem chi tiết việc làm'
+																		className='name'
+																		href='https://careerbuilder.vn/vi/employers/hrcentral/viewjob/35BE12BA/user_id/lop7cttnq.1667207375/sort/desc/type/3/position/1'>
+																		{item.job_title}
+																	</a>
+																</div>
+																{/* <div className='jobs-view-detail'>
+																<p>
+																	<strong>Ngành nghề:</strong> Bán hàng / Kinh doanh, CNTT - Phần mềm
+																</p>
+																<p>
+																	<strong>Địa điểm:</strong> Hà Nội
+																</p>
+															</div> */}
+															</td>
+															<td>
+																<time>{formatDate(item.posted_date)}</time>
+															</td>
+															<td>
+																<time>{formatDate(item.expiry_date)}</time>
+															</td>
+															<td>
+																<p className='view-number'>0</p>
+															</td>
+															<td>
+																<div className='hit-filed'>
+																	<p>
+																		<a
+																			href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/1/35C37874/*/2/0/*/*/8/2/6/2/0/desc/lop7cttnq.1667207375/1'
+																			className='f_size12'
+																			title='Hồ sơ chưa xem '>
+																			0
+																		</a>
+																		/
+																		<a
+																			href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/1/35C37874/*/2/0/*/*/7/2/6/2/0/desc/lop7cttnq.1667207375/1'
+																			className='f_size12'
+																			title='Tổng số hồ sơ ứng tuyển'>
+																			0
+																		</a>
+																	</p>
+																</div>
+															</td>
+														
+															<td>
+																<ul
+																	className={cx('list-manipulation', 'd-flex')}
+																	style={{ alignItems: 'center', justifyContent: 'center' }}>
+																	<li>
+																		<Link
+																			to={`/employers/postjobs/${item.id}`}
+																			title='Sửa'>
+																			<em className={cx('material-icons')}>created</em>
+																		</Link>
+																	</li>
+																	<li>
+																		<a
+																			href='https://careerbuilder.vn/vi/employers/hrcentral/viewjob/35BE12BA/user_id/lop7cttnq.1667207375/sort/desc/type/3/position/1'
+																			title='Chi tiết'>
+																			<em className={cx('material-icons')}>visibility </em>
+																		</a>
+																	</li>
+																</ul>
+															</td>
+														</tr>
+													))
+												) : (
+													<tr>
+														<td colSpan={9} className={sx('cb-text-center')}>
+															<p>
+																<strong> Không có vị trí nào trong thư mục này.</strong>
+															</p>
+														</td>
+													</tr>
+												)}
 											</tbody>
 										</table>
 									</div>
