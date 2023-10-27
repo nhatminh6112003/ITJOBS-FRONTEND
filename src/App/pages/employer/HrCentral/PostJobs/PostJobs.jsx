@@ -408,7 +408,7 @@ const PostJobs = ({ cx }) => {
 																	type='radio'
 																	name='gender'
 																	control={control}
-																	label='Khác'
+																	label='Nam/Nữ'
 																	value={0}
 																	id='gender0'
 																	style={{ position: 'relative', top: 3 }}

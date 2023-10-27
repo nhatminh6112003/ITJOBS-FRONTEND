@@ -277,13 +277,7 @@ const WaitPosting = ({ cx }) => {
 																				<VisibilityIcon />
 																			</Link>
 																		</li>
-																		<li>
-																			<a
-																				href='https://careerbuilder.vn/vi/employers/hrcentral/posting/copyjob/lop7cttnq.1667207375/35BADBC3/1/1'
-																				title='Nhân bản'>
-																				<ContentCopyIcon />
-																			</a>
-																		</li>
+														
 																		<li>
 																			<Link
 																				to={`/employers/postjobs/${job_post.id}`}
