@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './manageResume.module.css';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
 import { useGetAllJobPostActivityApiQuery } from '~/App/providers/apis/jobPostActivityApi';
+import formatDate from '~/Core/utils/formatDate';
+import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 
 const sx = classNames.bind(styles);
 
 const ManageResume = ({ cx }) => {
+	const employer = useSelector((state) => state.auth?.employer);
+	const { data: allJobPostActivity, isLoading } = useGetAllJobPostActivityApiQuery({
+		params: {
+			posted_by_id: employer?.id
+		}
+	});
+	const { data: listProvinces } = useGetAllProvincesQuery();
+	const [provinces, setProvinces] = useState('');
+	useEffect(() => {
+		console.log(allJobPostActivity?.data);
+		allJobPostActivity?.data?.map((PostActivity) => {
+			return listProvinces?.map((item) => {
+				if (item.code == PostActivity?.resume?.resume_profile?.provinces) {
+					setProvinces(item.name);
+				}
+			});
+		});
+	}, [allJobPostActivity, listProvinces]);
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -338,67 +358,73 @@ const ManageResume = ({ cx }) => {
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>
-														<div className='checkbox'></div>
-													</td>
-													<td>
-														<div className='title'>
-															<a>Huỳnh Hồng Khánh Linh</a>
-														</div>
-														<div className='detail'>
-															<p>
-																<strong>Chức danh:</strong> Senior Card and Digital Partnership
-																Development Supervisor
+												{allJobPostActivity?.data && allJobPostActivity?.data.length > 0 ? (
+													allJobPostActivity?.data.map((jobPostActivity) => {
+														return (
+															<>
+																<tr>
+																	<td>
+																		<div className={cx('checkbox')}></div>
+																	</td>
+																	<td>
+																		<div className={sx('title')}>
+																			<a>
+																				{jobPostActivity?.user_account?.lastname +
+																					'' +
+																					jobPostActivity?.user_account?.firstname}
+																			</a>
+																		</div>
+																		<div className={sx('detail')}>
+																			<p>
+																				<strong>Chức danh:</strong>{' '}
+																				{jobPostActivity?.resume?.resume_title?.title}
+																			</p>
+																			{/* <p>
+																				<strong>Địa điểm:</strong>
+																				{provinces}{' '}
+																			</p> */}
+																		</div>
+																	</td>
+																	<td>
+																		<time>{formatDate(jobPostActivity.apply_date)}</time>
+																	</td>
+																	<td>
+																		<time>{formatDate(jobPostActivity.updatedAt)}</time>
+																	</td>
+																	<td>
+																		<p>Chưa quyết định</p>
+																	</td>
+																	<td>
+																		<p>Chưa xếp loại</p>
+																	</td>
+																	<td>
+																		<p>9 năm</p>
+																	</td>
+																	<td>
+																		<p>
+																			{parseInt(jobPostActivity?.job_post?.min_salary)
+																				.toString()
+																				.charAt(0)}{' '}
+																			Tr -{' '}
+																			{parseInt(jobPostActivity?.job_post?.max_salary)
+																				.toString()
+																				.charAt(0)}{' '}
+																			Tr VND
+																		</p>
+																	</td>
+																</tr>
+															</>
+														);
+													})
+												) : (
+													<tr>
+														<td colSpan={9}>
+															<p align='center'>
+																<strong> Hiện tại không có hồ sơ nào trong thư mục này!</strong>
 															</p>
-															<p>
-																<strong>Địa điểm:</strong>
-																Hồ Chí Minh{' '}
-															</p>
-															<p>
-																<strong>Thư mục</strong>
-																<a
-																	href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/4/35BFE874/*/0/*/*/7/2/6/2/1/desc/lop7cttnq.1667207375/1'
-																	title='Xem thư mục lưu trữ'>
-																	ứng viên
-																</a>{' '}
-															</p>
-															<p>
-																<strong>Việc làm gần nhất:</strong> KS Chất Lượng Và Quản Lý Khiếu Nại
-															</p>
-															<p>
-																<strong>Công ty gần nhất:</strong> Công Ty CP DV Di Động Trực Tuyến
-																Mservice - Ví Momo
-															</p>
-														</div>
-													</td>
-													<td>
-														<time>12-12-2022</time>
-													</td>
-													<td>
-														<time>13-12-2022</time>
-													</td>
-													<td>
-														<p>Chưa quyết định</p>
-													</td>
-													<td>
-														<p>Chưa xếp loại</p>
-													</td>
-													<td>
-														<p>9 năm</p>
-													</td>
-													<td>
-														<p>30 Tr - 35 Tr VND</p>
-													</td>
-												</tr>
-
-												{/* <tr>
-													<td colSpan={9}>
-														<p align='center'>
-															<strong> Hiện tại không có hồ sơ nào trong thư mục này!</strong>
-														</p>
-													</td>
-												</tr> */}
+														</td>
+													</tr>
+												)}
 											</tbody>
 										</table>
 									</div>
