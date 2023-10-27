@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './applyJob.module.css';
 import { useSelector } from 'react-redux';
@@ -9,12 +9,14 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import { useForm } from 'react-hook-form';
 import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
 import routesPath from '~/App/config/routesPath';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useCreateJobPostActivityApiMutation } from '~/App/providers/apis/jobPostActivityApi';
 import { useParams } from 'react-router-dom';
 import { useGetOneJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
+import formatDate from '~/Core/utils/formatDate';
 
 const sx = classNames.bind(styles);
 
@@ -25,13 +27,15 @@ const ApplyJob = ({ cx }) => {
 	const [resumeId, setResumeId] = useState(null);
 	const user = useSelector((state) => state.auth?.user);
 	const { data } = useGetOneUserQuery(user?.id);
-	const { data:jobPost } = useGetOneJobPostQuery(id);
+	const { data: jobPost } = useGetOneJobPostQuery(id);
 
 	const { data: resume } = useGetAllResumeQuery({
 		params: { user_account_id: user?.id, isDeleted: false, resume_type_id: 1 }
 	});
 	const { data: myAttach } = useGetAllMyAttachQuery(user?.id);
 	const [createMutation] = useCreateJobPostActivityApiMutation();
+	const [provinces, setProvinces] = useState('');
+	const { data: listProvinces } = useGetAllProvincesQuery();
 
 	const { control, handleSubmit, setValue, register } = useForm({});
 
@@ -52,12 +56,20 @@ const ApplyJob = ({ cx }) => {
 			job_id: id,
 			resume_type: data.resume_type
 		}).then((result) => {
-			if(result.status==200){
+			if (result.status == 200) {
 				toast.success('Bạn đã nộp cv thành công');
 			}
-			navigate(routesPath.JobseekerPaths.jobApplied)
+			navigate(routesPath.JobseekerPaths.jobApplied);
 		});
 	};
+	useEffect(() => {
+		console.log(jobPost);
+		return listProvinces?.map((item) => {
+			if (item.code == jobPost?.provinces) {
+				setProvinces(item.name);
+			}
+		});
+	}, [jobPost, listProvinces]);
 	return (
 		<section className={cx('member', 'cb-section')}>
 			<div className={cx('container')}>
@@ -70,11 +82,9 @@ const ApplyJob = ({ cx }) => {
 							<div className={sx('main-form')}>
 								<div className={sx('title-h3')}>
 									<h3>Nộp hồ sơ ứng tuyển:</h3>
-									<a
-										className={sx('name', 'detail')}
-										href='https://careerbuilder.vn/vi/tim-viec-lam/nhan-vien-sourcing.35BE1C53.html'>
-										Nhân viên Sourcing
-									</a>
+									<Link className={sx('name', 'detail')} to={`/tim-viec-lam/${jobPost?.id}`}>
+										{jobPost?.job_title}
+									</Link>
 								</div>
 								<div className={sx('please-fill')}>
 									<p>Điền thông tin liên hệ của bạn và chọn hồ sơ để ứng tuyển:</p>
@@ -631,23 +641,23 @@ const ApplyJob = ({ cx }) => {
 									<tbody>
 										<tr>
 											<td>Vị trí / Chức danh:</td>
-											<td>Nhân viên Sourcing</td>
+											<td>{jobPost?.job_title}</td>
 										</tr>
 										<tr>
 											<td>Công ty ứng tuyển:</td>
-											<td>Công ty Liên Doanh May Oasis</td>
+											<td>{jobPost?.company?.company_name}</td>
 										</tr>
 										<tr>
 											<td>Nơi làm việc</td>
-											<td> Hồ Chí Minh</td>
+											<td>{provinces}</td>
 										</tr>
 										<tr>
 											<td>Người liên hệ</td>
-											<td>Công ty May OASIS</td>
+											<td>{jobPost?.company?.contact_name}</td>
 										</tr>
 										<tr>
 											<td>Hết hạn nộp</td>
-											<td>30/11/2023</td>
+											<td>{formatDate(jobPost?.expiry_date)}</td>
 										</tr>
 									</tbody>
 								</table>
