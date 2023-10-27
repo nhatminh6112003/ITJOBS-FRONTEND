@@ -278,12 +278,14 @@ const Posting = ({ cx }) => {
 																			<em className={cx('material-icons')}>created</em>
 																		</Link>
 																	</li>
+																	
 																	<li>
-																		<a
-																			href='https://careerbuilder.vn/vi/employers/hrcentral/viewjob/35BE12BA/user_id/lop7cttnq.1667207375/sort/desc/type/3/position/1'
+																
+																		<Link
+																			to={`/employers/hrcentral/viewjob/${item.id}`}
 																			title='Chi tiết'>
 																			<em className={cx('material-icons')}>visibility </em>
-																		</a>
+																		</Link>
 																	</li>
 																</ul>
 															</td>

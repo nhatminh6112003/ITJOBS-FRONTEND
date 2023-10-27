@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './accounts.module.css';
 import classNames from 'classnames/bind';
-
+import routesPath from '~/App/config/routesPath';
+import { Link } from 'react-router-dom';
 const sx = classNames.bind(styles);
 
 const Accounts = ({ cx }) => {
@@ -28,11 +29,11 @@ const Accounts = ({ cx }) => {
 								</a>
 							</li>
 							<li>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/edit_employer'
+								<Link
+									to={routesPath.EmployerPaths.editEmployer}
 									alt='Thông tin công ty'>
 									<span>Thông tin công ty</span>
-								</a>
+								</Link>
 							</li>
 							<li>
 								<a
