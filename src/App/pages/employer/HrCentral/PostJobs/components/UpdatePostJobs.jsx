@@ -21,15 +21,15 @@ import { jobPostSchema } from '~/App/schemas/jobPostSchema';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import {
-	useCreateJobPostMutation,
 	useGetOneJobPostQuery,
 	useUpdateJobPostMutation
 } from '~/App/providers/apis/jobPostApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
+import moment from 'moment';
 const sx = classNames.bind(styles);
 const UpdatePostJobs = ({ cx }) => {
-	const { control, handleSubmit, setValue, watch, reset } = useForm({
+	const { control, handleSubmit, setValue, watch, reset, formState: { errors }  } = useForm({
 		resolver: yupResolver(jobPostSchema)
 	});
 	const user_account_id = useSelector((state) => state?.auth.employer?.id);
@@ -58,10 +58,8 @@ const UpdatePostJobs = ({ cx }) => {
 	const [displayExperience, setDisplayExperience] = useState(false);
 
 	useEffect(() => {
-			console.log(jobPost?.jobProfessionDetail?.map(
-				(item) => item.profession_id
-			))
 		reset({
+			expiry_date:moment(jobPost?.expiry_date).format('YYYY-MM-DD'),
 			districts: jobPost?.districts,
 			address: jobPost?.address,
 			form_age: jobPost?.form_age,
@@ -128,7 +126,7 @@ const UpdatePostJobs = ({ cx }) => {
 		if (jobPost?.job_experience_value == 1) {
 			setDisplayExperience(true);
 		}
-	},[jobPost?.job_formExperience,jobPost?.jobToExperience])
+	},[jobPost?.job_experience_value])
 	return (
 		<>
 			<section className={sx('manage-job-posting-post-jobs', 'cb-section', 'bg-manage')}>
@@ -383,6 +381,27 @@ const UpdatePostJobs = ({ cx }) => {
 																);
 															})}
 														</div>
+													</div>
+												</div>
+											</div>
+											<div className={cx('row')}>
+												<div className={cx('col-lg-3')}>
+													<div style={{ display: 'flex', flexDirection: 'column' }}>
+														<InputFieldControl
+															control={control}
+															name='expiry_date'
+															label='Hạn nhận hồ sơ'
+															type='date'
+															style={{
+																border: '1px solid #e5e5e5',
+																padding: '0 15px',
+																borderRadius: 5,
+																height: 40,
+																marginTop: 10
+															}}
+														/>
+														<div className={cx('icon')}></div>
+														<span className={cx('form-error', 'error_job_lastdate')} />
 													</div>
 												</div>
 											</div>
@@ -1008,6 +1027,16 @@ const UpdatePostJobs = ({ cx }) => {
 						</form>
 					</div>
 				</div>
+				{Object.keys(errors).length > 0 && (
+        <div>
+          <p>Có lỗi xảy ra:</p>
+          <ul>
+            {Object.keys(errors).map((errorKey) => (
+              <li key={errorKey}>{errors[errorKey].message}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 			</section>
 		</>
 	);

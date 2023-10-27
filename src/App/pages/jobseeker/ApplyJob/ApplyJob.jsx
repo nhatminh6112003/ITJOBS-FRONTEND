@@ -14,6 +14,8 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useCreateJobPostActivityApiMutation } from '~/App/providers/apis/jobPostActivityApi';
 import { useParams } from 'react-router-dom';
+import { useGetOneJobPostQuery } from '~/App/providers/apis/jobPostApi';
+
 const sx = classNames.bind(styles);
 
 const ApplyJob = ({ cx }) => {
@@ -23,6 +25,8 @@ const ApplyJob = ({ cx }) => {
 	const [resumeId, setResumeId] = useState(null);
 	const user = useSelector((state) => state.auth?.user);
 	const { data } = useGetOneUserQuery(user?.id);
+	const { data:jobPost } = useGetOneJobPostQuery(id);
+
 	const { data: resume } = useGetAllResumeQuery({
 		params: { user_account_id: user?.id, isDeleted: false, resume_type_id: 1 }
 	});
@@ -37,7 +41,6 @@ const ApplyJob = ({ cx }) => {
 		setValue('resume_type', item.resume_type_id);
 	};
 	const handleApplyJob = (data) => {
-		console.log('TCL: handleApplyJob -> data', data);
 		if (!resumeId) {
 			toast.error('Vui lòng chọn hồ sơ để ứng tuyển');
 			return;

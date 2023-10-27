@@ -344,6 +344,28 @@ const PostJobs = ({ cx }) => {
 													</div>
 												</div>
 											</div>
+											<div className={cx('row')}>
+												<div className={cx('col-lg-3')}>
+													<div style={{ display: 'flex', flexDirection: 'column' }}>
+														<InputFieldControl
+															control={control}
+															name='expiry_date'
+															label='Hạn nhận hồ sơ'
+															type='date'
+															style={{
+																border: '1px solid #e5e5e5',
+																padding: '0 15px',
+																borderRadius: 5,
+																height: 40,
+																marginTop: 10
+															}}
+														/>
+														<div className={cx('icon')}></div>
+														<span className={cx('form-error', 'error_job_lastdate')} />
+													</div>
+												</div>
+											</div>
+
 											<h2 className={sx('title-application')}>Phúc lợi</h2>
 											<div className={sx('checkbox-wrap')}>
 												<div className={cx('row')}>
@@ -391,14 +413,9 @@ const PostJobs = ({ cx }) => {
 																	id='gender0'
 																	style={{ position: 'relative', top: 3 }}
 																	onChange={(e) => {
-																		if (e.target.checked){
-																			setValue(
-																				`gender`,
-																				Number(e.target.value)
-																			);
+																		if (e.target.checked) {
+																			setValue(`gender`, Number(e.target.value));
 																		}
-																			
-																			
 																	}}
 																/>
 															</div>
@@ -412,15 +429,11 @@ const PostJobs = ({ cx }) => {
 																	label='Nam'
 																	value={1}
 																	id='gender1'
-																	style={{ position: 'relative', top: 3 }}	onChange={(e) => {
-																		if (e.target.checked){
-																			setValue(
-																				`gender`,
-																				Number(e.target.value)
-																			);
+																	style={{ position: 'relative', top: 3 }}
+																	onChange={(e) => {
+																		if (e.target.checked) {
+																			setValue(`gender`, Number(e.target.value));
 																		}
-																			
-																			
 																	}}
 																/>
 															</div>
@@ -434,14 +447,11 @@ const PostJobs = ({ cx }) => {
 																	label='Nữ'
 																	value={2}
 																	id='gender2'
-																	style={{ position: 'relative', top: 3 }}	onChange={(e) => {
-																		if (e.target.checked){
-																			setValue(
-																				`gender`,
-																				Number(e.target.value)
-																			);
+																	style={{ position: 'relative', top: 3 }}
+																	onChange={(e) => {
+																		if (e.target.checked) {
+																			setValue(`gender`, Number(e.target.value));
 																		}
-																			
 																	}}
 																/>
 															</div>

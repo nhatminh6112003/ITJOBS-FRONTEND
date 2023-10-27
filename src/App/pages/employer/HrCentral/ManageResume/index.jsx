@@ -336,15 +336,67 @@ const ManageResume = ({ cx }) => {
 												</tr>
 											</thead>
 											<tbody>
-												<input name='list_resumes' type='hidden' defaultValue='' />
-												<input name='folder_id' type='hidden' defaultValue='' />
 												<tr>
+													<td>
+														<div className='checkbox'></div>
+													</td>
+													<td>
+														<div className='title'>
+															<a>Huỳnh Hồng Khánh Linh</a>
+														</div>
+														<div className='detail'>
+															<p>
+																<strong>Chức danh:</strong> Senior Card and Digital Partnership
+																Development Supervisor
+															</p>
+															<p>
+																<strong>Địa điểm:</strong>
+																Hồ Chí Minh{' '}
+															</p>
+															<p>
+																<strong>Thư mục</strong>
+																<a
+																	href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/4/35BFE874/*/0/*/*/7/2/6/2/1/desc/lop7cttnq.1667207375/1'
+																	title='Xem thư mục lưu trữ'>
+																	ứng viên
+																</a>{' '}
+															</p>
+															<p>
+																<strong>Việc làm gần nhất:</strong> KS Chất Lượng Và Quản Lý Khiếu Nại
+															</p>
+															<p>
+																<strong>Công ty gần nhất:</strong> Công Ty CP DV Di Động Trực Tuyến
+																Mservice - Ví Momo
+															</p>
+														</div>
+													</td>
+													<td>
+														<time>12-12-2022</time>
+													</td>
+													<td>
+														<time>13-12-2022</time>
+													</td>
+													<td>
+														<p>Chưa quyết định</p>
+													</td>
+													<td>
+														<p>Chưa xếp loại</p>
+													</td>
+													<td>
+														<p>9 năm</p>
+													</td>
+													<td>
+														<p>30 Tr - 35 Tr VND</p>
+													</td>
+												</tr>
+
+												{/* <tr>
 													<td colSpan={9}>
 														<p align='center'>
 															<strong> Hiện tại không có hồ sơ nào trong thư mục này!</strong>
 														</p>
 													</td>
-												</tr>
+												</tr> */}
 											</tbody>
 										</table>
 									</div>
