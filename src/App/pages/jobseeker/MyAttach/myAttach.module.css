@@ -2260,7 +2260,16 @@ only screen and (min-resolution:1.5dppx) {
    font-size: 16px;
    font-weight: 700;
 }
-
+.form-group input {
+   width: 100%;
+   height: 40px;
+   padding: 5px 5px;
+   border: none;
+   border-bottom: 1px solid #2f4ba0;
+   color: #172642;
+   font-size: 16px;
+   font-weight: 700;
+}
 .main-quick-upload-resume .form-group input:focus {
    outline: none;
 }

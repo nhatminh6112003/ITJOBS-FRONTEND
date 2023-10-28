@@ -4,6 +4,9 @@ import { AllowedFileExtension } from '../constants/allowedFileType';
 
 export const myAttachSchema = yup
 	.object({
+		yearOfExperience:yup.number().required().nullable().min(1).max(55),
+
+		job_degree_value:yup.number().required(),
 		// file: yup
 		// 	.mixed()
 		// 	.default('')

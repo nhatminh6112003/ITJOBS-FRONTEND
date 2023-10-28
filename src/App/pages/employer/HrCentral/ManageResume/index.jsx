@@ -398,7 +398,7 @@ const ManageResume = ({ cx }) => {
 																		<p>Chưa xếp loại</p>
 																	</td>
 																	<td>
-																		<p>9 năm</p>
+																		<p>{jobPostActivity?.resume?.my_attaches?.yearOfExperience} năm</p>
 																	</td>
 																	<td>
 																		<p>

@@ -737,7 +737,8 @@ const AllJob = () => {
 												);
 										  })}
 								</div>
-								<div className={cx('pagination')}>
+								
+								{/* <div className={cx('pagination')}>
 									<ul>
 										<li className={cx('active')}>
 											<a href=''>1</a>
@@ -761,7 +762,7 @@ const AllJob = () => {
 											</a>
 										</li>
 									</ul>
-								</div>
+								</div> */}
 							</div>
 							<div className={cx('job-bottom-banner')} style={{ textAlign: 'center' }}></div>
 						</div>
@@ -864,82 +865,7 @@ const AllJob = () => {
 					</a>
 				</div>
 			</div>
-			<div className={cx('login-modal')}>
-				<div className={cx('modal-title')}>
-					<p>Vui lòng đăng nhập để thực hiện chức năng này</p>
-				</div>
-				<div className={cx('modal-body')}>
-					<p className={cx('notes')} />
-					<form
-						method='POST'
-						id='popup_login_form'
-						action='https://careerbuilder.vn/vi/jobseekers/member/login'
-						autoComplete='off'>
-						<div className={cx('row')}>
-							<div className={cx('form-group', 'col-12')}>
-								<input
-									type='text'
-									id='username'
-									name='username'
-									placeholder='Username / Email'
-									autoComplete='off'
-								/>
-							</div>
-							<div className={cx('form-group', 'col-8')}>
-								<input
-									type='password'
-									name='password'
-									id='password'
-									placeholder='Mật khẩu'
-									autoComplete='off'
-								/>
-							</div>
-							<div className={cx('form-group', 'col-4')}>
-								<input
-									type='hidden'
-									name='csrf_token'
-									defaultValue='464ade6fd66b31c0c98201a38f039410980b13769bccd3122f9bb92627214426'
-								/>
-								<input type='hidden' name='apply_url' defaultValue='' />
-								<button type='submit'>Đăng nhập</button>
-							</div>
-						</div>
-					</form>
-					<div className={cx('sign-in-by')}>
-						<span>Đăng nhập bằng:</span>
-						<ul className={cx('list-follow')}>
-							<li>
-								<a
-									className={cx('fb')}
-									href=''
-									onClick="popupapi('facebook','aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL2pvYnNlZWtlcnMvbG9naW5mYWNlYm9vaw==');">
-									<em className={cx('fa', 'fa-facebook')} />
-									Facebook
-								</a>
-							</li>
-							<li>
-								<a
-									className={cx('gg')}
-									href=''
-									onClick="popupapi('google','aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL2pvYnNlZWtlcnMvbG9naW5nb29nbGU=');">
-									<em className={cx('fa', 'fa-google')} />
-									Google
-								</a>
-							</li>
-						</ul>
-					</div>
-					<a className={cx('register')} href='https://careerbuilder.vn/vi/jobseekers/register' title='Đăng ký'>
-						Đăng ký{' '}
-					</a>
-					<a
-						className={cx('forget-password')}
-						href='https://careerbuilder.vn/vi/jobseekers/forgotpassword'
-						title='Quên mật khẩu?'
-						rel='nofollow'>
-						Quên mật khẩu?
-					</a>
-				</div>
-			</div>
+		
 		</>
 	);
 };

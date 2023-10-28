@@ -373,9 +373,7 @@ const MyProfile = () => {
 												Careerbuilder Profile
 											</a>
 										</li>
-										<li>
-											<a href='' data-href='#t-resume-section'></a>
-										</li>
+								
 										<li>
 											<a href='' data-href='#personalinfo-section'>
 												Thông tin cá nhân

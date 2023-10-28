@@ -63,7 +63,7 @@ const Home = ({ cx }) => {
 					<div className={cx('hot-jobs-list')}>
 						<div className={cx('tabs')}>
 							<ul className={cx('tabs-toggle')}>
-								<li>
+								<li className={cx('active')}>
 									<a className={cx('pointer')} alt='#tab-1'>
 										Việc Làm Nổi Bật
 									</a>

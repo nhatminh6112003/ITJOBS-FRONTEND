@@ -1,23 +1,24 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import useModal from '~/App/hooks/useModal';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
-import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
-import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import { useGetOneResumeProfileQuery, useUpdateResumeProfileMutation } from '~/App/providers/apis/resumeProfileApi';
-import { useGetAllWorkTypeQuery } from '~/App/providers/apis/workTypeApi';
 import { resumeProfileSchema } from '~/App/schemas/resumeProfileSchema';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import Tips from '~/Core/components/common/Modal/Tips';
 import ResumeModal from './ResumeModal';
 import Widget from './Widget';
+import { useLocation } from 'react-router-dom';
+
 const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
-	const user= useSelector((state) => state.auth?.user);
+	const location = useLocation();
+	const scrollToElementRef = useRef(null);
+	const user = useSelector((state) => state.auth?.user);
 	const id = useSelector((state) => state.auth?.user?.id);
 	const { isShowing: showTips, toggle: toggleTips } = useModal({
 		t_resume_profile: false
@@ -51,12 +52,10 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 	);
 
 	const onUpdateSubmit = async (data) => {
-		console.log(data);
 		updateProfileMutation({
-			id: resume_profile?.resume_id,
+			id: user?.id,
 			payload: {
-				...data,
-				user_id: id
+				...data
 			}
 		})
 			.unwrap()
@@ -81,6 +80,28 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 			marial_status: resume_profile?.marial_status
 		});
 	}, [updateReset, resume_profile]);
+	useEffect(() => {
+		const elementId = location.hash.substring(1);
+		scrollToElement(elementId);
+	}, [location]);
+
+	const scrollToElement = (elementId) => {
+		const container = document.getElementById(elementId); // Thay 'container' bằng ID của phần tử chứa
+		const element = document.getElementById(elementId); // Thay 'elementId' bằng ID của phần tử con
+
+		if (container && element) {
+			const containerRect = container.getBoundingClientRect();
+			const elementRect = element.getBoundingClientRect();
+
+			if (elementRect.top < containerRect.top) {
+				// Phần tử cần cuộn đến nằm phía trên phần tử chứa
+				element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			} else {
+				// Phần tử cần cuộn đến nằm phía dưới phần tử chứa
+				element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+			}
+		}
+	};
 
 	return (
 		<Fragment>
@@ -167,7 +188,7 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 	);
 };
 
-const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistricts,resume_profile,user }) => {
+export const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistricts, resume_profile, user }) => {
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
@@ -272,7 +293,6 @@ const Form = ({ onSubmit, handleSubmit, control, cx, listProvinces, listDistrict
 						<div style={{ marginBottom: 20 }}>
 							<label htmlFor='email'>Email</label>
 							<input type='text' name='email	' id='email	' defaultValue={user?.email} disabled />
-
 						</div>
 					</div>
 				</div>

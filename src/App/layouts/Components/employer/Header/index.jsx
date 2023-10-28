@@ -30,9 +30,8 @@ const Header = () => {
 						<div className={cx('logo')}>
 							<Link to={routesPath.JobseekerPaths.home}>
 								<img
-									src='./img/logo.png'
-									alt='CareerBuilder.vn - Nghĩ Nhân Tài, Nghĩ CareerBuilder'
-									title='CareerBuilder.vn - Nghĩ Nhân Tài, Nghĩ CareerBuilder'
+									src='/logo.png'
+									style={{height:50}}
 								/>
 							</Link>
 						</div>

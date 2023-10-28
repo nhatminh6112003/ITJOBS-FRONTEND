@@ -10,7 +10,7 @@ const Footer = ({ cx }) => {
 									className={cx('lazy-bg')}
 									src='/logo.png'
 									alt='Tuyển dụng & Tìm kiếm việc làm nhanh'
-									style={{height:40}}
+									style={{height:50}}
 								/>
 							</div>
 							<div className={cx('col-lg-2', 'col-sm-6')}>

@@ -14,6 +14,9 @@ import { LockIcon } from '~/Core/resources';
 import LanguageIcon from '@mui/icons-material/Language';
 import BoltIcon from '@mui/icons-material/Bolt';
 import { useNavigate } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
+import { Link } from 'react-router-dom';
+import { DegreeArray } from '~/App/constants/degreeArray';
 const UpdateMyAttachForm = ({
 	sx,
 	cx,
@@ -30,7 +33,6 @@ const UpdateMyAttachForm = ({
 	my_attach,
 	watch
 }) => {
-
 	const selectFile = watch('file');
 	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
 	const { data: listProfession } = useGetAllProfessionQuery({});
@@ -58,6 +60,8 @@ const UpdateMyAttachForm = ({
 			provinces: resume_desired_job?.provinces,
 			districts: resume_desired_job?.districts,
 			work_home: resume_desired_job?.work_home,
+			job_degree_value:my_attach?.attachments?.job_degree_value,
+			yearOfExperience:my_attach?.attachments?.yearOfExperience,
 			// profession_id: resume_desired_job?.profession_id,
 			// welfare_id: resume_desired_job?.welfare_id,
 			// work_type_id: resume_desired_job?.work_type_id,
@@ -143,10 +147,10 @@ const UpdateMyAttachForm = ({
 					<div className={sx('cb-title-h3', 'd-flex', 'justify-content-sb', 'align-center', '')}>
 						<h3>Thông tin cá nhân</h3>
 						<div className={sx('link-edit', '')}>
-							<a>
+							<Link to={routesPath.JobseekerPaths.myProfile + '#personalinfo-section'}>
 								<em className={cx('material-icons', '')}>create</em>
-								<span> Chỉnh sửa</span>
-							</a>
+								<span> Chỉnh sửa </span>
+							</Link>
 						</div>
 					</div>
 					<p className={sx('noted', '')}> Xin vui lòng cập nhật thông tin cá nhân để hoàn tất hồ sơ</p>
@@ -166,6 +170,23 @@ const UpdateMyAttachForm = ({
 						</div>
 					</div>
 					<div className={cx('row')}>
+					<div className={cx('col-md-6')}>
+							<div className={sx('form-group')} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+								<label>* Số năm kinh nghiệm</label>
+								<InputFieldControl
+									id='year_experience'
+									type='number'
+									control={control}
+									name='yearOfExperience'
+								/>
+							</div>
+						</div>
+						<div className={cx('col-md-6')}>
+							<div className={sx('form-group')} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+								<label>* Bằng cấp cao nhất</label>
+								<SelectFieldControl name='job_degree_value' control={control} options={DegreeArray} />
+							</div>
+						</div>
 						<div className={cx('col-md-12', '')}>
 							<div className={sx('form-group', 'form-select', '')}>
 								<SelectFieldControl
@@ -329,14 +350,14 @@ const UpdateMyAttachForm = ({
 								)}
 								style={{
 									cursor: 'pointer',
-									display:'flex',
-									alignItems:'center',
-									gap:3,
-									justifyContent:'center'
+									display: 'flex',
+									alignItems: 'center',
+									gap: 3,
+									justifyContent: 'center'
 								}}
 								onClick={() => handleClick(1)}>
 								{/* <em className={cx('mdi', 'mdi-lock', '')} /> */}
-								<LockIcon fontSize='20'/>
+								<LockIcon fontSize='20' />
 								Khóa
 							</a>
 							<a
@@ -348,13 +369,13 @@ const UpdateMyAttachForm = ({
 								}
 								style={{
 									cursor: 'pointer',
-									display:'flex',
-									alignItems:'center',
-									gap:3,
-									justifyContent:'center'
+									display: 'flex',
+									alignItems: 'center',
+									gap: 3,
+									justifyContent: 'center'
 								}}
 								onClick={() => handleClick(2)}>
-								<LanguageIcon fontSize='20'/>
+								<LanguageIcon fontSize='20' />
 								Công khai
 							</a>
 							<a
@@ -368,13 +389,13 @@ const UpdateMyAttachForm = ({
 								)}
 								style={{
 									cursor: 'pointer',
-									display:'flex',
-									alignItems:'center',
-									gap:3,
-									justifyContent:'center'
+									display: 'flex',
+									alignItems: 'center',
+									gap: 3,
+									justifyContent: 'center'
 								}}
 								onClick={() => handleClick(3)}>
-								<BoltIcon fontSize='20'/>
+								<BoltIcon fontSize='20' />
 								Khẩn cấp
 							</a>
 						</div>

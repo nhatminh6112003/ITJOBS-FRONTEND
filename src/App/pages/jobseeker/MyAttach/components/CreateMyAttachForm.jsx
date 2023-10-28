@@ -1,30 +1,35 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import BoltIcon from '@mui/icons-material/Bolt';
+import LanguageIcon from '@mui/icons-material/Language';
 import { useForm } from 'react-hook-form';
-import { myAttachSchema } from '~/App/schemas/myAttachSchema';
-import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
-import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
-import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUploadFieldControl/FileUploadFieldControl';
-import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
-import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
-import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
+import { LevelArray } from '~/App/constants/levelEnum';
+import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
 import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
+import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import { useGetAllWorkTypeQuery } from '~/App/providers/apis/workTypeApi';
-import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
-import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
-import { LevelArray } from '~/App/constants/levelEnum';
+import { myAttachSchema } from '~/App/schemas/myAttachSchema';
+import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
+import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUploadFieldControl/FileUploadFieldControl';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
 import { LockIcon } from '~/Core/resources';
-import LanguageIcon from '@mui/icons-material/Language';
-import BoltIcon from '@mui/icons-material/Bolt';
+import { Link } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
+import { DegreeArray } from '~/App/constants/degreeArray';
 const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue }) => {
 	const { control, handleSubmit, watch, setValue } = useForm({
 		resolver: yupResolver(myAttachSchema)
 	});
+
+	const selectFile = watch('file');
+
 	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
 	const { data: listProfession } = useGetAllProfessionQuery({});
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProvinces } = useGetAllProvincesQuery();
+	console.log("TCL: listProvinces", listProvinces)
 	const selectedProvince = watch('provinces', null);
 	const { data: listDistricts } = useGetAllDistrictsQuery(
 		{
@@ -44,13 +49,11 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 					<div className={sx('cb-title-h3')}>
 						<h3>Hồ sơ</h3>
 					</div>
-					<div className={sx('form-show-file', '')} id='uploadFile_file'>
+					<div className={sx('form-show-file', selectFile?.name ? 'active' : '')} id='uploadFile_file'>
 						<label>* Tên Hồ Sơ:</label>
-						<em className={sx('material-icons')}>picture_as_pdf</em>
-						<p className={sx('show-file')} />
-						<a href='javascript:void(0)' className={sx('removefile')}>
-							<em className={sx('material-icons')}>highlight_off </em>Xóa
-						</a>
+						<em className={cx('material-icons')}>picture_as_pdf</em>
+
+						<p className={sx('show-file')}>{selectFile?.name}</p>
 					</div>
 					<div className={sx('form-choose')}>
 						<div className={sx('form-group')}>
@@ -63,7 +66,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								<div className={sx('choose-mycomputer')}>
 									{/* <label htmlFor='file'>
 										<FolderOutlinedIcon style={{ padding: 3 }} />
-										Tải hồ sơ từ máy tính
+										Tải hồ sơ từ máy tínhf
 									</label> */}
 									<FileUploadFieldControl
 										htmlFor='file'
@@ -121,10 +124,10 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 					<div className={sx('cb-title-h3', 'd-flex', 'justify-content-sb', 'align-center', '')}>
 						<h3>Thông tin cá nhân</h3>
 						<div className={sx('link-edit', '')}>
-							<a>
+							<Link to={routesPath.JobseekerPaths.myProfile + '#personalinfo-section'}>
 								<em className={cx('material-icons', '')}>create</em>
-								<span> Chỉnh sửa</span>
-							</a>
+								<span> Chỉnh sửa </span>
+							</Link>
 						</div>
 					</div>
 					<p className={sx('noted', '')}> Xin vui lòng cập nhật thông tin cá nhân để hoàn tất hồ sơ</p>
@@ -144,6 +147,23 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 						</div>
 					</div>
 					<div className={cx('row')}>
+						<div className={cx('col-md-6')}>
+							<div className={sx('form-group')} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+								<label>* Số năm kinh nghiệm</label>
+								<InputFieldControl
+									id='year_experience'
+									type='number'
+									control={control}
+									name='yearOfExperience'
+								/>
+							</div>
+						</div>
+						<div className={cx('col-md-6')}>
+							<div className={sx('form-group')} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+								<label>* Bằng cấp cao nhất</label>
+								<SelectFieldControl name='job_degree_value' control={control} options={DegreeArray} />
+							</div>
+						</div>
 						<div className={cx('col-md-12', '')}>
 							<div className={sx('form-group', 'form-select', '')}>
 								<SelectFieldControl
@@ -344,14 +364,14 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								)}
 								style={{
 									cursor: 'pointer',
-									display:'flex',
-									alignItems:'center',
-									gap:3,
-									justifyContent:'center'
+									display: 'flex',
+									alignItems: 'center',
+									gap: 3,
+									justifyContent: 'center'
 								}}
 								onClick={() => handleClick(1)}>
 								{/* <em className={cx('mdi', 'mdi-lock', '')} /> */}
-								<LockIcon fontSize='20'/>
+								<LockIcon fontSize='20' />
 								Khóa
 							</a>
 							<a
@@ -363,13 +383,13 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								}
 								style={{
 									cursor: 'pointer',
-									display:'flex',
-									alignItems:'center',
-									gap:3,
-									justifyContent:'center'
+									display: 'flex',
+									alignItems: 'center',
+									gap: 3,
+									justifyContent: 'center'
 								}}
 								onClick={() => handleClick(2)}>
-								<LanguageIcon fontSize='20'/>
+								<LanguageIcon fontSize='20' />
 								Công khai
 							</a>
 							<a
@@ -383,13 +403,13 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								)}
 								style={{
 									cursor: 'pointer',
-									display:'flex',
-									alignItems:'center',
-									gap:3,
-									justifyContent:'center'
+									display: 'flex',
+									alignItems: 'center',
+									gap: 3,
+									justifyContent: 'center'
 								}}
 								onClick={() => handleClick(3)}>
-								<BoltIcon fontSize='20'/>
+								<BoltIcon fontSize='20' />
 								Khẩn cấp
 							</a>
 						</div>
