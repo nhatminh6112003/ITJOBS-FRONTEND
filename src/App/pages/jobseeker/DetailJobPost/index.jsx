@@ -35,7 +35,6 @@ const DetailJobPost = ({ cx }) => {
 		}
 	);
 	useEffect(() => {
-		console.log(detailJobPost);
 		listProvinces?.map((item) => {
 			if (item.code == detailJobPost?.provinces) {
 				setProvinces(item.name);
@@ -300,7 +299,11 @@ const DetailJobPost = ({ cx }) => {
 							<section className={sx('apply-now-banner', '', '')}>
 								<div className={sx('image')}>
 									<img
-										src={detailJobPost?.company?.banner}
+										src={
+											detailJobPost?.company?.banner
+												? `${import.meta.env.VITE_IMAGE_URL}/${detailJobPost.company.banner}`
+												: 'https://images.careerbuilder.vn/employer_folders/lot6/181286/131718banner-doitac.jpg'
+										}
 										alt={detailJobPost?.company?.company_name}
 									/>
 								</div>
@@ -324,7 +327,10 @@ const DetailJobPost = ({ cx }) => {
 											Mức độ phù hợp...
 										</a>
 										<div className={sx('apply-now-btn', '')}>
-											<Link to={`/jobseekers/jobs/apply/${detailJobPost?.id}`} role='button' className={sx('btn-gradient', 'btnApplyClick')}>
+											<Link
+												to={`/jobseekers/jobs/apply/${detailJobPost?.id}`}
+												role='button'
+												className={sx('btn-gradient', 'btnApplyClick')}>
 												Nộp Đơn Ứng Tuyển
 											</Link>
 										</div>
@@ -865,15 +871,18 @@ const DetailJobPost = ({ cx }) => {
 													<div className={sx('apply-now-right')}>
 														<div className={sx('apply-now-btn', '', '')}>
 															{' '}
-															<Link to={`/jobseekers/jobs/apply/${detailJobPost?.id}`} role='button' className={sx('btn-gradient', 'btnApplyClick')}>
-												Nộp Đơn Ứng Tuyển
-											</Link>
+															<Link
+																to={`/jobseekers/jobs/apply/${detailJobPost?.id}`}
+																role='button'
+																className={sx('btn-gradient', 'btnApplyClick')}>
+																Nộp Đơn Ứng Tuyển
+															</Link>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-										
+
 										<div className={sx('job-detail-bottom-banner', '')} id=''>
 											<div className={sx('adsBannerOA')} data-id={852} />
 										</div>
@@ -972,9 +981,12 @@ const DetailJobPost = ({ cx }) => {
 															</div>
 														</div>
 														<div className={sx('box-apply', '')}>
-														<Link to={`/jobseekers/jobs/apply/${detailJobPost?.id}`} role='button' className={sx('btn-gradient', 'btnApplyClick')}>
-												Nộp Đơn Ứng Tuyển
-											</Link>
+															<Link
+																to={`/jobseekers/jobs/apply/${detailJobPost?.id}`}
+																role='button'
+																className={sx('btn-gradient', 'btnApplyClick')}>
+																Nộp Đơn Ứng Tuyển
+															</Link>
 														</div>
 														<div className={sx('box-contact')}>
 															<ul>

@@ -27,7 +27,6 @@ const Company = () => {
 
 	const [deleteMutation] = useDeleteCompanyMutation();
 	const tableData = useMemo(() => data?.data ?? [], [data]);
-    console.log(tableData);
 
 	const columns = useMemo(
 		() => [

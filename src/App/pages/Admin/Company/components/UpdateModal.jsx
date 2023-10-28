@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CompanySchema } from '~/App/schemas/companySchema';
 
-
 const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	const [updateCompany] = useUpdateCompanyMutation();
 	const {
@@ -21,10 +20,10 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 			company_type: dataUpdate.company_type,
 			company_size: dataUpdate.company_size,
 			tax_code: dataUpdate.tax_code,
-            address: dataUpdate.address,
-            contact_name: dataUpdate.contact_name,
-            contact_phone: dataUpdate.contact_phone,
-            position: dataUpdate.position
+			address: dataUpdate.address,
+			contact_name: dataUpdate.contact_name,
+			contact_phone: dataUpdate.contact_phone,
+			position: dataUpdate.position
 		},
 		resolver: yupResolver(CompanySchema)
 	});
@@ -32,7 +31,7 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	const onSubmit = (data) => {
 		updateCompany({
 			id: dataUpdate.id,
-			payload: data,
+			payload: data
 		})
 			.unwrap()
 			.then((r) => {
