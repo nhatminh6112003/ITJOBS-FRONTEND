@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import styles from '~/App/layouts/DefaultLayout/jobseeker/jobseeker-layout.module.css';
-
 import RoomIcon from '@mui/icons-material/Room';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -31,7 +30,7 @@ const JobItem = ({ job_post }) => {
 						title={job_post?.company?.company_name}
 						rel='noreferrer'>
 						<LazyLoadImage
-							src={`${job_post?.company?.logo}`}
+							src={`${import.meta.env.VITE_IMAGE_URL}/${job_post?.company?.logo}`}
 							effect='black-and-white'
 							alt={job_post?.company?.company_name}
 						/>

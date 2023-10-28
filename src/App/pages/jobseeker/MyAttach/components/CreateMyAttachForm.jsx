@@ -29,7 +29,6 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 	const { data: listProfession } = useGetAllProfessionQuery({});
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProvinces } = useGetAllProvincesQuery();
-	console.log("TCL: listProvinces", listProvinces)
 	const selectedProvince = watch('provinces', null);
 	const { data: listDistricts } = useGetAllDistrictsQuery(
 		{

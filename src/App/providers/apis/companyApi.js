@@ -1,8 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQueryWithUser from '../fetchBaseQuery';
+import axiosBaseQuery from '../axiosBaseQuery';
 const companyApi = createApi({
 	reducerPath: 'companyApi',
-	baseQuery: baseQueryWithUser,
+	baseQuery: axiosBaseQuery(),
 	endpoints: (build) => ({
 		getAllCompany: build.query({
 			query: (payload) => {
