@@ -118,7 +118,7 @@ const ApplyJob = ({ cx }) => {
 												Chọn từ hồ sơ của bạn
 											</label>
 											<div className={sx('list-radio')}>
-												{resume?.map((item) => (
+												{/* {resume?.map((item) => (
 													<div className={sx('form-group', 'form-radio')}>
 														<input
 															type='radio'
@@ -132,7 +132,7 @@ const ApplyJob = ({ cx }) => {
 															<Link to={routesPath.JobseekerPaths.dashboard}>[Xem]</Link>
 														</label>
 													</div>
-												))}
+												))} */}
 												{myAttach?.map((resume) => (
 													<div className={sx('form-group', 'form-radio')}>
 														<input
