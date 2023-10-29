@@ -27,7 +27,7 @@ const JobseekerPaths = {
 	detailCompany:'/nha-tuyen-dung/:id',
 	applyJobs:'/jobseekers/jobs/apply/:id',
 	jobApplied:'/jobseekers/mykiemviec/jobapplied',
-	viewJob:'/employers/hrcentral/viewjob/:id'
+	viewJob:'/employers/hrcentral/viewjob/:id',
 };
 const EmployerPaths = {
 	login: '/employers/login',
@@ -45,7 +45,8 @@ const EmployerPaths = {
 	postjobs: '/employers/postjobs',
 	updatePostJobs: '/employers/postjobs/:id',
 	viewJob: '/employers/hrcentral/viewjob/:id',
-	editEmployer:'/employers/hrcentral/accounts/edit_employer'
+	editEmployer:'/employers/hrcentral/accounts/edit_employer',
+	resumeDetail:'/employers/hrcentral/resume_detail/:id',
 };
 
 const BasePaths = {

@@ -10,12 +10,14 @@ import { DegreeArray } from '~/App/constants/degreeArray';
 import GenderEnum from '~/App/constants/genderEnum';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
+import { useGetAllJobPostActivityApiQuery } from '~/App/providers/apis/jobPostActivityApi';
 import routesPath from '~/App/config/routesPath';
-
+import { useSelector } from 'react-redux';
 const sx = classNames.bind(styles);
 
 const DetailJobPost = ({ cx }) => {
 	const { id } = useParams();
+	const user = useSelector((state) => state.auth.user);
 	const { data: detailJobPost } = useGetOneJobPostQuery(id);
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const [provinces, setProvinces] = useState('');
@@ -34,6 +36,16 @@ const DetailJobPost = ({ cx }) => {
 			skip: !detailJobPost?.provinces
 		}
 	);
+	const { data: allJobPostActivity } = useGetAllJobPostActivityApiQuery(
+		{
+			params: {
+				user_account_id: user?.id
+			}
+		},
+		{ skip: !user?.id }
+	);
+	const isIdInData = allJobPostActivity?.data.some((item) => item.job_id === id);
+
 	useEffect(() => {
 		listProvinces?.map((item) => {
 			if (item.code == detailJobPost?.provinces) {
@@ -317,7 +329,7 @@ const DetailJobPost = ({ cx }) => {
 										</a>
 									</div>
 									<div className={sx('apply-type')}>
-										<a
+										{/* <a
 											tabIndex={0}
 											role='button'
 											className={sx('btn-check-fit', '', 'matching-scores', 'matching-scores-35BE1408')}
@@ -325,14 +337,19 @@ const DetailJobPost = ({ cx }) => {
 											data-loader='customLoaderName'
 											dataid='35BE1408'>
 											Mức độ phù hợp...
-										</a>
-										<div className={sx('apply-now-btn', '')}>
-											<Link
-												to={`/jobseekers/jobs/apply/${detailJobPost?.id}`}
-												role='button'
-												className={sx('btn-gradient', 'btnApplyClick')}>
-												Nộp Đơn Ứng Tuyển
-											</Link>
+										</a> */}
+										<div className={sx('apply-now-btn', isIdInData ? 'success' : '')}>
+											{isIdInData ? (
+												<a style={{ cursor: 'pointer' }} className={sx('btn-gradient', 'btnApplyClick')}>
+													Nộp Đơn Ứng Tuyển
+												</a>
+											) : (
+												<Link
+													to={`/jobseekers/jobs/apply/${detailJobPost?.id}`}
+													className={sx('btn-gradient', 'btnApplyClick')}>
+													Nộp Đơn Ứng Tuyển
+												</Link>
+											)}
 										</div>
 									</div>
 								</div>
@@ -868,16 +885,20 @@ const DetailJobPost = ({ cx }) => {
 															</div>
 														</div>
 													</div>
-													<div className={sx('apply-now-right')}>
-														<div className={sx('apply-now-btn', '', '')}>
-															{' '}
+													<div className={sx('apply-now-btn', isIdInData ? 'success' : '')}>
+														{isIdInData ? (
+															<a
+																style={{ cursor: 'pointer' }}
+																className={sx('btn-gradient', 'btnApplyClick')}>
+																Nộp Đơn Ứng Tuyển
+															</a>
+														) : (
 															<Link
 																to={`/jobseekers/jobs/apply/${detailJobPost?.id}`}
-																role='button'
 																className={sx('btn-gradient', 'btnApplyClick')}>
 																Nộp Đơn Ứng Tuyển
 															</Link>
-														</div>
+														)}
 													</div>
 												</div>
 											</div>
@@ -981,12 +1002,21 @@ const DetailJobPost = ({ cx }) => {
 															</div>
 														</div>
 														<div className={sx('box-apply', '')}>
-															<Link
-																to={`/jobseekers/jobs/apply/${detailJobPost?.id}`}
-																role='button'
-																className={sx('btn-gradient', 'btnApplyClick')}>
-																Nộp Đơn Ứng Tuyển
-															</Link>
+															<div className={sx('apply-now-btn', isIdInData ? 'success' : '')}>
+																{isIdInData ? (
+																	<a
+																		style={{ cursor: 'pointer' }}
+																		className={sx('btn-gradient', 'btnApplyClick')}>
+																		Nộp Đơn Ứng Tuyển
+																	</a>
+																) : (
+																	<Link
+																		to={`/jobseekers/jobs/apply/${detailJobPost?.id}`}
+																		className={sx('btn-gradient', 'btnApplyClick')}>
+																		Nộp Đơn Ứng Tuyển
+																	</Link>
+																)}
+															</div>
 														</div>
 														<div className={sx('box-contact')}>
 															<ul>

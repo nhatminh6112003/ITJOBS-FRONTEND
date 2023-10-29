@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 import { useGetAllJobPostActivityApiQuery } from '~/App/providers/apis/jobPostActivityApi';
 import formatDate from '~/Core/utils/formatDate';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
-
+import { Link } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { ResumeStatusOptions } from '~/App/constants/resumeStatusEnum';
 const sx = classNames.bind(styles);
 
 const ManageResume = ({ cx }) => {
@@ -350,7 +352,7 @@ const ManageResume = ({ cx }) => {
 													<th width='27%'>Chọn tất cả</th>
 													<th width='10%'>Ngày nộp</th>
 													<th width='10%'>Cập nhật</th>
-													<th width='10%%'>Trạng thái</th>
+													{/* <th width='10%%'>Trạng thái</th> */}
 													<th width='10%'>Xếp loại</th>
 													<th width='10%'>Kinh nghiệm</th>
 													<th width='10%'>Mức lương</th>
@@ -391,14 +393,19 @@ const ManageResume = ({ cx }) => {
 																	<td>
 																		<time>{formatDate(jobPostActivity.updatedAt)}</time>
 																	</td>
-																	<td>
+																	{/* <td>
 																		<p>Chưa quyết định</p>
+																	</td> */}
+																	<td>
+																		{ResumeStatusOptions?.map(
+																			(item) =>
+																				item.value == jobPostActivity?.status && <p>{item.label}</p>
+																		)}
 																	</td>
 																	<td>
-																		<p>Chưa xếp loại</p>
-																	</td>
-																	<td>
-																		<p>{jobPostActivity?.resume?.my_attaches?.yearOfExperience} năm</p>
+																		<p>
+																			{jobPostActivity?.resume?.my_attaches?.yearOfExperience} năm
+																		</p>
 																	</td>
 																	<td>
 																		<p>
@@ -411,6 +418,13 @@ const ManageResume = ({ cx }) => {
 																				.charAt(0)}{' '}
 																			Tr VND
 																		</p>
+																	</td>
+																	<td>
+																		<Link
+																			to={`/employers/hrcentral/resume_detail/${jobPostActivity?.resume?.id}?job_id=${jobPostActivity?.job_post?.id}&jobPostActivityId=${jobPostActivity.id}`}
+																			title='Xem chi tiết hồ sơ'>
+																			<VisibilityIcon />
+																		</Link>
 																	</td>
 																</tr>
 															</>

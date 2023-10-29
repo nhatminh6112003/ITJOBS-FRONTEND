@@ -190,7 +190,7 @@ const UpdateMyAttachForm = ({
 						<div className={cx('col-md-12', '')}>
 							<div className={sx('form-group', 'form-select', '')}>
 								<SelectFieldControl
-									label='* Cấp bậc hiện tại'
+									label='* Cấp bậc mong muốn'
 									control={control}
 									name='position_id'
 									options={degreeArray}
