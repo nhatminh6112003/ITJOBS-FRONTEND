@@ -31,6 +31,14 @@ const jobPostActivityApi = createApi({
 			},
 			invalidatesTags: ['job_post_activity']
 		}),
+		updateStatusJobPostActivityResume: build.mutation({
+			query: ({ id, payload }) => {
+				return { url: `/job_post_activity/update-status-resume/${id}`, method: 'PATCH', body: payload };
+			},
+			invalidatesTags: ['job_post_activity']
+		}),
+		
+
 		deleteJobPostActivityApi: build.mutation({
 			query: (id) => {
 				return { url: `/job_post_activity/${id}`, method: 'DELETE' };
@@ -45,7 +53,8 @@ export const {
 	useGetAllJobPostActivityApiQuery,
 	useGetOneJobPostActivityApiQuery,
 	useDeleteJobPostActivityApiMutation,
-	useUpdateJobPostActivityApiMutation
+	useUpdateJobPostActivityApiMutation,
+	useUpdateStatusJobPostActivityResumeMutation,
 } = jobPostActivityApi;
 
 export default jobPostActivityApi;

@@ -141,11 +141,16 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 							</tr>
 							<tr>
 								<td className={cx('title')}>Tỉnh/ Thành phố</td>
-								{resume_profile?.provinces && <td>{resume_profile?.provinces}</td>}
+								{listProvinces?.map((item) =>
+									item.code === resume_profile?.provinces ? <td>{item.name}</td> : null
+								)}
 							</tr>
 							<tr>
 								<td className={cx('title')}>Quận/ Huyện</td>
-								{resume_profile?.districts && <td>{resume_profile?.districts}</td>}
+
+								{listDistricts?.districts?.map((item) =>
+									item.code === resume_profile?.districts ? <td>{item.name}</td> : null
+								)}
 							</tr>
 							<tr>
 								<td className={cx('title')}>Địa chỉ</td>

@@ -13,8 +13,6 @@ import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUpl
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 const sx = classNames.bind(styles);
 const EditEmployer = ({ cx }) => {
-	const [previewLogo, setPreviewLogo] = useState(null);
-	const [previewBanner, setPreviewBanner] = useState(null);
 
 	const employer = useSelector((state) => state.auth?.employer);
 	const companyId = employer?.company?.id;

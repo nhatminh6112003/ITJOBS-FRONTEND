@@ -10,6 +10,8 @@ import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import { marialStatusEnum } from '~/App/constants/marialStatusEnum';
 import { LevelArray } from '~/App/constants/levelEnum';
 import formatVND from '~/Core/utils/formatVND';
+import routesPath from '~/App/config/routesPath';
+import { Link } from 'react-router-dom';
 const MyCvDetail = ({ cx }) => {
 	const { id } = useParams();
 	const { data } = useGetOneMyAttachQuery(id);
@@ -28,7 +30,17 @@ const MyCvDetail = ({ cx }) => {
 			skip: !data?.resume_desired_job?.provinces
 		}
 	);
-
+	const { data: listDistricts2 } = useGetAllDistrictsQuery(
+		{
+			params: {
+				depth: 2
+			},
+			code: data?.user_account?.resume_profile?.provinces
+		},
+		{
+			skip: !data?.user_account?.resume_profile?.provinces
+		}
+	);
 	return (
 		<section className={cx('cb-section')}>
 			<div className={cx('container')}>
@@ -82,15 +94,15 @@ const MyCvDetail = ({ cx }) => {
 							</div>
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Giới tính</label>
-								<div className={cx('col-sm-9')}> {GenderEnum[data?.resume_profile?.gender]} </div>
+								<div className={cx('col-sm-9')}> {GenderEnum[data?.user_account?.resume_profile?.gender]} </div>
 							</div>
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Ngày sinh</label>
-								<div className={cx('col-sm-9')}>{formatDate(data?.resume_profile?.birthday)}</div>
+								<div className={cx('col-sm-9')}>{formatDate(data?.user_account?.resume_profile?.birthday)}</div>
 							</div>
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Điện thoại</label>
-								<div className={cx('col-sm-9')}>{data?.resume_profile?.phone_number}</div>
+								<div className={cx('col-sm-9')}>{data?.user_account?.resume_profile?.phone_number}</div>
 							</div>
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Email</label>
@@ -98,12 +110,14 @@ const MyCvDetail = ({ cx }) => {
 							</div>
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Tình trạng hôn nhân</label>
-								<div className={cx('col-sm-9')}>{marialStatusEnum[data?.resume_profile?.marial_status]}</div>
+								<div className={cx('col-sm-9')}>
+									{marialStatusEnum[data?.user_account?.resume_profile?.marial_status]}
+								</div>
 							</div>
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Tỉnh/ Thành phố</label>
 								{listProvinces?.map((item) =>
-									item.code === data?.resume_profile?.provinces ? (
+									item.code === data?.user_account?.resume_profile?.provinces ? (
 										<div className={cx('col-sm-9')} key={item.code}>
 											{item.name}
 										</div>
@@ -113,14 +127,14 @@ const MyCvDetail = ({ cx }) => {
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Quận/ Huyện</label>
 								<div className={cx('col-sm-9')}>
-									{listDistricts?.districts?.map((item) =>
-										item.code === data?.resume_profile?.districts ? item.name : null
+									{listDistricts2?.districts?.map((item) =>
+										item.code === data?.user_account?.resume_profile?.districts ? item.name : null
 									)}
 								</div>
 							</div>
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Địa chỉ</label>
-								<div className={cx('col-sm-9')}>{data?.resume_profile?.address}</div>
+								<div className={cx('col-sm-9')}>{data?.user_account?.resume_profile?.address}</div>
 							</div>
 						</div>
 					</div>
@@ -129,10 +143,10 @@ const MyCvDetail = ({ cx }) => {
 							<h3>Công Việc Mong Muốn</h3>
 						</div>
 						<div className={cx('data-field')}>
-							{/* <div className={cx('form-group', 'row')}>
+							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Số năm kinh nghiệm</label>
-								<div className={cx('col-sm-9')}>Chưa có kinh nghiệm</div>
-							</div> */}
+								<div className={cx('col-sm-9')}>{data?.attachments?.job_degree_value}</div>
+							</div>
 							{/* <div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Ngôn ngữ</label>
 								<div className={cx('col-sm-9')}>Anh - Trung cấp, - 123</div>
@@ -149,49 +163,36 @@ const MyCvDetail = ({ cx }) => {
 								<label className={cx('col-sm-3', 'col-form-label')}>Mức lương</label>
 								<div className={cx('col-sm-9')}>
 									{' '}
-									{formatVND(data?.resume_desired_job?.salary_to)} -{' '}
-									{formatVND(data?.resume_desired_job?.salary_from)} VND
+									{formatVND(data?.resume_desired_job?.salary_from)} -{' '}
+									{formatVND(data?.resume_desired_job?.salary_to)} VND
 								</div>
 							</div>
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Hình thức làm việc</label>
 								<div className={cx('col-sm-9')}>
-									{listWorkType?.map((workType, index) => {
-										const matchingWorkTypes = data?.resume_work_type.filter(
-											(item) => item.work_type_id == workType.id
-										);
-										const workTypeNames = matchingWorkTypes?.map((item) => workType.name).join(',');
-
-										if (index === 0) {
-											return workTypeNames;
-										} else {
-											return `, ${workTypeNames}`;
-										}
-									})}
+									{data?.resume_work_type
+										?.map((item, index) => {
+											return item?.work_type?.name;
+										})
+										.join(',')}
 								</div>
 							</div>
-							{data?.resume_desired_job?.work_home ? (
-								<div className={cx('form-group', 'row')}>
-									<label className={cx('col-sm-3', 'col-form-label')}>Phương thức công việc</label>
-								</div>
-							) : null}
+
+							<div className={cx('form-group', 'row')}>
+								<label className={cx('col-sm-3', 'col-form-label')}>Phương thức công việc</label>
+								{data?.resume_desired_job?.work_home == 1 && (
+									<div className={cx('col-sm-9')}>Làm việc từ nhà</div>
+								)}
+							</div>
+
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Ngành nghề</label>
 								<div className={cx('col-sm-9')}>
-									{listProfession?.data?.map((profession, index) => {
-										const matchingProfession = data?.profession_desired_job.filter(
-											(item) => item.profession_id == profession.id
-										);
-										console.log('TCL: matchingProfession', matchingProfession);
-
-										const professionNames = matchingProfession?.map((item) => profession.name).join(',');
-
-										if (index === 0) {
-											return professionNames;
-										} else {
-											return `, ${professionNames}`;
-										}
-									})}
+									{data?.profession_desired_job
+										?.map((item, index) => {
+											return item.profession.name;
+										})
+										.join(',')}
 								</div>
 							</div>
 							<div className={cx('form-group', 'row')}>
@@ -213,10 +214,10 @@ const MyCvDetail = ({ cx }) => {
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label', 'nonetext')}>&nbsp;</label>
 								<div className={cx('col-sm-9', 'list-button')}>
-									<a className={cx('btn-white')} href='https://careerbuilder.vn/vi/jobseekers/dashboard'>
+									<Link className={cx('btn-white')} to={routesPath.JobseekerPaths.dashboard}>
 										Quản lý hồ sơ
 										<em className={cx('fa', 'fa-bars')} />
-									</a>
+									</Link>
 									<a
 										className={cx('btn-gradient')}
 										href='https://careerbuilder.vn/vi/jobseekers/myresume/myattach?id=18151080'>

@@ -65,7 +65,6 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	);
 
 	const onUpdateSubmit = async (data) => {
-	console.log("TCL: onUpdateSubmit -> data", data)
 
 		const work_type_id = [];
 

@@ -17,7 +17,7 @@ import { useParams } from 'react-router-dom';
 import { useGetOneJobPostQuery } from '~/App/providers/apis/jobPostApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import formatDate from '~/Core/utils/formatDate';
-
+import { ResumeStatusEnum } from '~/App/constants/resumeStatusEnum';
 const sx = classNames.bind(styles);
 
 const ApplyJob = ({ cx }) => {
@@ -54,7 +54,8 @@ const ApplyJob = ({ cx }) => {
 			resume_id: resumeId,
 			user_account_id: user?.id,
 			job_id: id,
-			resume_type: data.resume_type
+			resume_type: data.resume_type,
+			status:ResumeStatusEnum.UNDECIDED
 		}).then((result) => {
 			if (result.status == 200) {
 				toast.success('Bạn đã nộp cv thành công');

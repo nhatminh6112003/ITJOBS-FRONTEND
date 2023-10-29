@@ -4,11 +4,11 @@ import classNames from 'classnames/bind';
 import { cx } from '../MyProfile';
 import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
 import { useGetAllJobPostActivityApiQuery } from '~/App/providers/apis/jobPostActivityApi';
-import { Link, useSearchParams } from 'react-router-dom';
-import useServerPagination from '~/App/hooks/useServerPagination';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import formatDate from '~/Core/utils/formatDate';
 import routesPath from '~/App/config/routesPath';
+import { ResumeStatusOptions } from '~/App/constants/resumeStatusEnum';
 const sx = classNames.bind(styles);
 const JobApplied = () => {
 	const user = useSelector((state) => state.auth?.user);
@@ -78,7 +78,12 @@ const JobApplied = () => {
 																	</div>
 																</div>
 															</td>
-															<td>{jobPostActivity?.status}</td>
+
+															<td>
+																{ResumeStatusOptions?.map(
+																	(item) => item.value == jobPostActivity?.status && item.label
+																)}
+															</td>
 															<td className={sx('date')}>
 																<p className={sx('mb-show')}>Ngày nộp: </p>
 																<time>{formatDate(jobPostActivity?.apply_date)}</time>
