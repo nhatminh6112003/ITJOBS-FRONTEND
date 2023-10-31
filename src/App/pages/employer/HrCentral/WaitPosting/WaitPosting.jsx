@@ -20,7 +20,6 @@ import formatDate from '~/Core/utils/formatDate';
 import { toast } from 'react-toastify';
 import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import { useSelector } from 'react-redux';
-import moment from 'moment';
 const sx = classNames.bind(styles);
 
 const WaitPosting = ({ cx }) => {

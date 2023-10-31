@@ -55,7 +55,9 @@ const JobApplied = () => {
 																			<Link
 																				to={`/nha-tuyen-dung/${jobPostActivity?.job_post?.company_id}`}>
 																				<img
-																					src={jobPostActivity?.job_post?.company?.logo}
+																					src={`${import.meta.env.VITE_IMAGE_URL}/${
+																						jobPostActivity?.job_post?.company?.logo
+																					}`}
 																					alt={jobPostActivity?.job_post?.company?.company_name}
 																					title={jobPostActivity?.job_post?.company?.company_name}
 																				/>{' '}
