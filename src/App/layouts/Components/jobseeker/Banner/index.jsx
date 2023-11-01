@@ -1,10 +1,15 @@
 import styles from '~/App/layouts/DefaultLayout/jobseeker/jobseeker-layout.module.css';
 import classNames from 'classnames/bind';
 import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 const cx = classNames.bind(styles);
 const Banner = () => {
-	const { data: allJobPost } = useGetAllJobPostQuery({});
-	const allJob = allJobPost?.data.filter((job_post) => job_post.isDeleted === false && job_post.status === 1);
+	const { data: allJobPost } = useGetAllJobPostQuery({
+		params: {
+			status: jobPostStatusEnum.Publish,
+			isDeleted: false
+		}
+	});
 	return (
 		<div className={cx('cb-main-search')}>
 			<section className={cx('cb-banner-home')}>
@@ -59,7 +64,7 @@ const Banner = () => {
 						<div className={cx('box-body')}>
 							<div className={cx('title')}>
 								<h1>
-									Đón lấy thành công với <span>{allJob?.length} cơ hội nghề nghiệp </span>
+									Đón lấy thành công với <span>{allJobPost?.data?.length} cơ hội nghề nghiệp </span>
 								</h1>
 							</div>
 							<form>

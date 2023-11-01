@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Widget from './Widget';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ResumeModal from './ResumeModal';
@@ -65,7 +65,6 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	);
 
 	const onUpdateSubmit = async (data) => {
-
 		const work_type_id = [];
 
 		for (let i = 1; i <= 4; i++) {
@@ -104,10 +103,10 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 			welfare_id: resume_desired_job?.welfare_id,
 			work_type_id: resume_desired_job?.work_type_id
 		});
-		resume_desired_job?.work_type_id?.forEach(item=>{
-			setValue(`work_type_id_${item}`,item)
-		})
-	}, [updateReset,resume_desired_job]);
+		resume_desired_job?.work_type_id?.forEach((item) => {
+			setValue(`work_type_id_${item}`, item);
+		});
+	}, [updateReset, resume_desired_job, setValue]);
 
 	return (
 		<Fragment>
@@ -116,142 +115,149 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 				title='Thông tin nghề nghiệp'
 				className={cx('widget', 'widget-20')}
 				id='t-resume-section'
-				status={resume_desired_job ? 'success' : 'error'}
+				status={resume_desired_job?.length > 0 ? 'success' : 'error'}
 				onOpenResume={() => toggle('update_resume_desired_job')}
 				onOpenTipSlide={() => toggleTips('t_resume_desired_job')}
 				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i5.png'>
 				<div className={cx('content')}>
 					<div className={cx('list-references')}>
-						<div className={cx('item')}>
-							<div className={cx('content')}>
-								<table>
-									<tbody>
-										<tr>
-											<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
-												Cấp bậc mong muốn
-											</td>
-											<td
-												style={{
-													paddingBottom: '12px'
-												}}>
-												{LevelArray.map((value) => {
-													const id = resume_desired_job?.position_id;
-													const positionLabel = value.value === id ? value.label : null;
-													return positionLabel;
-												})}
-											</td>
-										</tr>
-										<tr>
-											<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
-												Mức lương
-											</td>
-											<td
-												style={{
-													paddingBottom: '12px'
-												}}>
-												{resume_desired_job?.salary_to && resume_desired_job?.salary_from && (
+						{resume_desired_job?.length > 0 && (
+							<div className={cx('item')}>
+								<div className={cx('content')}>
+									<table>
+										<tbody>
+											<tr>
+												<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+													Cấp bậc mong muốn
+												</td>
+												<td
+													style={{
+														paddingBottom: '12px'
+													}}>
+													{LevelArray.map((value) => {
+														const id = resume_desired_job?.position_id;
+														const positionLabel = value.value === id ? value.label : null;
+														return positionLabel;
+													})}
+												</td>
+											</tr>
+											<tr>
+												<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+													Mức lương
+												</td>
+												<td
+													style={{
+														paddingBottom: '12px'
+													}}>
+													{resume_desired_job?.salary_to && resume_desired_job?.salary_from && (
+														<>
+															{formatVND(resume_desired_job?.salary_to)} -{' '}
+															{formatVND(resume_desired_job?.salary_from)} VND
+														</>
+													)}
+												</td>
+											</tr>
+											<tr>
+												{resume_desired_job?.work_type_id && (
 													<>
-														{formatVND(resume_desired_job?.salary_to)} -{' '}
-														{formatVND(resume_desired_job?.salary_from)} VND
+														<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+															Hình thức làm việc
+														</td>
+														<td
+															style={{
+																paddingBottom: '12px'
+															}}>
+															{listWorkType &&
+																listWorkType
+																	.filter((value) =>
+																		resume_desired_job?.work_type_id?.includes(value.id)
+																	)
+																	.map((value, index, array) => {
+																		const isLastItem = index === array.length - 1;
+																		return (
+																			<span key={value.id}>
+																				{value.name}
+																				{!isLastItem && ', '}
+																			</span>
+																		);
+																	})}
+														</td>
 													</>
 												)}
-											</td>
-										</tr>
-										<tr>
-											{resume_desired_job?.work_type_id && (
-												<>
-													<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
-														Hình thức làm việc
-													</td>
-													<td
-														style={{
-															paddingBottom: '12px'
-														}}>
-														{listWorkType &&
-															listWorkType
-																.filter((value) => resume_desired_job?.work_type_id?.includes(value.id))
-																.map((value, index, array) => {
-																	const isLastItem = index === array.length - 1;
-																	return (
-																		<span key={value.id}>
-																			{value.name}
-																			{!isLastItem && ', '}
-																		</span>
-																	);
-																})}
-													</td>
-												</>
-											)}
-										</tr>
-										<tr>
-											{resume_desired_job?.welfare_id && (
-												<>
-													<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
-														Phúc lợi mong muốn
-													</td>
-													<td
-														style={{
-															paddingBottom: '12px'
-														}}>
+											</tr>
+											<tr>
+												{resume_desired_job?.welfare_id && (
+													<>
+														<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+															Phúc lợi mong muốn
+														</td>
+														<td
+															style={{
+																paddingBottom: '12px'
+															}}>
 															{listJobWelfare?.data &&
-															listJobWelfare?.data?.
-																filter((value) => resume_desired_job?.welfare_id?.includes(value.id))
-																.map((value, index, array) => {
-																	const isLastItem = index === array.length - 1;
-																	return (
-																		<span key={value.id}>
-																			{value.welfare_type}
-																			{!isLastItem && ', '}
-																		</span>
-																	);
-																})}
-														{/* {listJobWelfare?.data?.map((value) => {
+																listJobWelfare?.data
+																	?.filter((value) =>
+																		resume_desired_job?.welfare_id?.includes(value.id)
+																	)
+																	.map((value, index, array) => {
+																		const isLastItem = index === array.length - 1;
+																		return (
+																			<span key={value.id}>
+																				{value.welfare_type}
+																				{!isLastItem && ', '}
+																			</span>
+																		);
+																	})}
+															{/* {listJobWelfare?.data?.map((value) => {
 															return resume_desired_job?.welfare_id?.map((item) => {
 																return value.id === item ? value.welfare_type : null;
 															});
 														})} */}
-													</td>
-												</>
-											)}
-										</tr>
-										<tr>
-											{resume_desired_job?.profession_id && (
-												<>
-													<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
-														Ngành nghề
-													</td>
-													<td
-														style={{
-															paddingBottom: '12px'
-														}}>
-														{listProfession?.data?.map((value) => {
-															return resume_desired_job?.profession_id?.map((item) => {
-																return value.id === item ? value.name : null;
-															});
-														})}
-													</td>
-												</>
-											)}
-										</tr>
-										<tr>
-											<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
-												Nơi làm việc
-											</td>
-											<td
-												style={{
-													paddingBottom: '12px'
-												}}>
-												{listProvinces?.map((province) => {
-													const desiredProvinceId = resume_desired_job?.provinces;
-													const positionLabel = province.code === desiredProvinceId ? province.name : null;
-													return positionLabel;
-												})}
-											</td>
-										</tr>
-									</tbody>
-								</table>
+														</td>
+													</>
+												)}
+											</tr>
+											<tr>
+												{resume_desired_job?.profession_id && (
+													<>
+														<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+															Ngành nghề
+														</td>
+														<td
+															style={{
+																paddingBottom: '12px'
+															}}>
+															{listProfession?.data?.map((value) => {
+																return resume_desired_job?.profession_id?.map((item) => {
+																	return value.id === item ? value.name : null;
+																});
+															})}
+														</td>
+													</>
+												)}
+											</tr>
+											<tr>
+												<td style={{ fontWeight: 'bold', width: '200px', paddingBottom: '12px' }}>
+													Nơi làm việc
+												</td>
+												<td
+													style={{
+														paddingBottom: '12px'
+													}}>
+													{listProvinces?.map((province) => {
+														const desiredProvinceId = resume_desired_job?.provinces;
+														const positionLabel =
+															province.code === desiredProvinceId ? province.name : null;
+														return positionLabel;
+													})}
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
-						</div>
+						)}
 					</div>
 				</div>
 			</Widget>
