@@ -39,7 +39,7 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 
 	//Gọi api rtk query
 	const { data: resumeLanguage, refetch } = useGetAllResumeLanguageQuery(resume?.id);
-	console.log("TCL: resumeLanguage", resumeLanguage)
+	console.log('TCL: resumeLanguage', resumeLanguage);
 	const [trigger, result] = useLazyGetOneResumeLanguageQuery();
 	const [createResumeLanguageMutation] = useCreateResumeLanguageMutation();
 	const [deleteResumeLanguageMutation] = useDeleteResumeLanguageMutation();
@@ -114,7 +114,6 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 			rs_language_certify: result?.data?.rs_language_certify
 		});
 	}, [updateReset, result]);
-
 	return (
 		<Fragment>
 			<Widget
@@ -122,7 +121,7 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 				title='Ngôn Ngữ'
 				className={cx('widget', 'widget-22', 'widget-17')}
 				id='t-resume-section'
-				status={resumeLanguage?.data.length > 0 ? 'success' : 'error'}
+				status='default'
 				onOpenResume={() => toggle('resume_language')}
 				onOpenTipSlide={() => toggleTips('t_resume_language')}
 				icon={
@@ -149,7 +148,7 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 												<tr>
 													<td>
 														<div className={cx('title')}>
-															<h4>Anh</h4>
+															<h4>{languages.find((lang) => lang.value === item.rs_language)?.label}</h4>
 														</div>
 													</td>
 													<td>
@@ -173,7 +172,7 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 													<td>
 														<ul className={cx('list-action')}>
 															<li className={cx('edit-link')}>
-																<a   href='javascript:void(0)'  onClick={() => onOpenModalUpdate(item.id)}>
+																<a href='javascript:void(0)' onClick={() => onOpenModalUpdate(item.id)}>
 																	<em className={cx('material-icons')}>create</em>
 																	<span>Chỉnh sửa</span>
 																</a>
@@ -181,7 +180,9 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 															<li className={cx('delete')}>
 																<a
 																	href='javascript:void(0)'
-																	onClick={() => setModalConfirmState({ open: true, payload: item.id })}>
+																	onClick={() =>
+																		setModalConfirmState({ open: true, payload: item.id })
+																	}>
 																	<em className={cx('material-icons')}>highlight_off</em>
 																	<span>Xoá</span>
 																</a>
