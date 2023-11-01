@@ -280,6 +280,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing }) =
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
 						<TextAreaFieldControl
+							maxRows={1}
 							control={control}
 							name='activity_des'
 							label='Mô tả hoạt động'

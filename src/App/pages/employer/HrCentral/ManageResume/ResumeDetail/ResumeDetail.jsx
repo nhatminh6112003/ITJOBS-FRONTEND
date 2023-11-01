@@ -6,17 +6,37 @@ import GenderEnum from '~/App/constants/genderEnum';
 import { marialStatusEnum } from '~/App/constants/marialStatusEnum';
 import { ResumeStatusOptions } from '~/App/constants/resumeStatusEnum';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
-import { useGetOneJobPostActivityApiQuery, useUpdateStatusJobPostActivityResumeMutation } from '~/App/providers/apis/jobPostActivityApi';
+import {
+	useGetOneJobPostActivityApiQuery,
+	useUpdateStatusJobPostActivityResumeMutation
+} from '~/App/providers/apis/jobPostActivityApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetOneResumeQuery } from '~/App/providers/apis/resumeApi';
 import exportPdf from '~/Core/utils/exportPdf';
 import formatDate from '~/Core/utils/formatDate';
 import formatVND from '~/Core/utils/formatVND';
 import styles from './resumeDetail.module.css';
-
+import useModal from '~/App/hooks/useModal';
+import ReactModal from 'react-modal';
+import { useSendMailJobSeekerMutation } from '~/App/providers/apis/jobPostActivityApi';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 const sx = classNames.bind(styles);
 
 const ResumeDetail = ({ cx }) => {
+	const [sendMail] = useSendMailJobSeekerMutation();
+	const user = useSelector((state) => state.auth.user);
+	const {
+		handleSubmit,
+		control,
+		formState: { errors },
+		reset
+	} = useForm({});
+	const { isShowing, toggle } = useModal({
+		mailModal: false
+	});
 	const [searchParams] = useSearchParams();
 	const jobPostActivityId = searchParams.get('jobPostActivityId');
 
@@ -25,7 +45,6 @@ const ResumeDetail = ({ cx }) => {
 	const { data: jobPostActivity } = useGetOneJobPostActivityApiQuery(jobPostActivityId, {
 		skip: !jobPostActivityId
 	});
-	console.log('TCL: ResumeDetail -> jobPostActivity', jobPostActivity);
 
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const { data: listDistricts } = useGetAllDistrictsQuery(
@@ -55,6 +74,19 @@ const ResumeDetail = ({ cx }) => {
 			}
 		});
 	};
+	const onSendMail = async (data) => {
+		sendMail({
+			user_account_id: jobPostActivity?.user_account_id,
+			...data
+		}).then((r) => {
+			if (r?.data?.status == 200) {
+				toast.success('Gửi mail thông báo thành công');
+			}
+		});
+		toggle('mailModal');
+		reset();
+	};
+
 	return (
 		<section
 			className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}
@@ -279,7 +311,7 @@ const ResumeDetail = ({ cx }) => {
 													<em className={cx('material-icons')}>email </em>
 													<a
 														href='javascript:void(0);'
-														onclick="showNotifyMail('35BFE874','35C9210A');return false;"
+														onClick={() => toggle('mailModal')}
 														title='Gửi thông báo'>
 														Gửi thông báo
 													</a>
@@ -657,6 +689,167 @@ const ResumeDetail = ({ cx }) => {
 					</div>
 				</div>
 			</div>
+
+			<ReactModal
+				isOpen={isShowing.mailModal}
+				onRequestClose={() => toggle('mailModal')}
+				style={{
+					overlay: {
+						zIndex: '9999',
+						backgroundColor: '#343434'
+					},
+					content: {
+						padding: 0,
+						margin: 30,
+						height: 450,
+						backgroundColor: '#ffff',
+						position: 'absolute',
+						left: '50%',
+						top: '50%',
+						transform: 'translate(-50%,-50%)'
+					}
+				}}>
+				<div
+					style={{ border: 'transparent', display: 'flex', justifyContent: 'center', width: '100%' }}
+					className={cx('jobs-posting-modal', 'jobs-posting-10-modal', 'fancybox-content')}
+					id='jobs-posting-10-modal'>
+					<div className={cx('modal-body')}>
+						<form id='frmResumeForNotify' name='frmResumeForNotify' onSubmit={handleSubmit(onSendMail)}>
+							<div className={cx('form-wrap')}>
+								<div className={cx('row')}>
+									<div className={cx('col-12')}>
+										<div className={cx('form-group', 'form-text')}>
+											<label>
+												Tiêu đề <font style={{ color: 'red' }}>*</font>
+											</label>
+
+											<InputFieldControl
+												type='text'
+												placeholder='Nhập nội dung'
+												name='title'
+												id='title'
+												control={control}
+											/>
+											<span className={cx('noted')}>Tối đa 150 ký tự</span>
+										</div>
+									</div>
+									<div className={cx('col-12')}>
+										<div className={cx('form-group', 'form-textarea')}>
+											<label>
+												Nội dung <font style={{ color: 'red' }}>*</font>
+											</label>
+
+											{/* <textarea
+												placeholder='Nhập nội dung'
+												name='letter_content'
+												id='letter_content'
+												defaultValue={''}
+											/> */}
+
+											<TextAreaFieldControl
+												control={control}
+												placeholder='Nhập nội dung'
+												name='content'
+												id='content'
+												maxRows={2}
+											/>
+
+											<span className={cx('noted')}>Lớn hơn 10 và nhỏ hơn 3.000 kí tự</span>
+										</div>
+									</div>
+									{/* <div className={cx('col-12')}>
+										<div className={cx('form-group', 'form-checkbox')}>
+											<div className={cx('group')}>
+												<input
+													type='checkbox'
+													defaultChecked='checked'
+													defaultValue={1}
+													id='update2mail'
+													name='update2mail'
+												/>
+												<label htmlFor='sendmail'>Gửi một bản sao đến email của tôi</label>
+											</div>
+											<div className={cx('group')}>
+												<input type='checkbox' id='update2my' name='update2my' defaultValue={1} />
+												<label htmlFor='updateText'>Cập nhật lại nội dung thư thông báo này</label>
+											</div>
+										</div>
+									</div> */}
+								</div>
+								<div className={cx('form-group', 'form-submit')}>
+									{/* <a className={cx('btn-cancel')} href='javascript:;' onclick='resetNotifyMail();'>
+										Bỏ qua
+									</a> */}
+									<button
+										className={cx('btn-gradient', 'btn-submit')}
+										id='resume_notify_mail_send'
+										type='sunmit'
+										onclick='sendNotifyMail();'>
+										Gửi
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div
+						className={cx('jobs-posting-modal', 'jobs-posting-17-modal')}
+						id='NotifyAbout'
+						style={{ display: 'none' }}>
+						<div className={cx('modal-head')}>
+							<p className={cx('title')}>Thư thông báo mẫu</p>
+						</div>
+						<div className={cx('modal-body')}>
+							<div className={cx('preview-reply-letter')}>
+								<div className={cx('title')}>
+									<p>Tiêu đề: Thanks you for applying</p>
+								</div>
+								<div className={cx('full-content')}>
+									{/*-------
+<p>Dear <strong>[firstname] [lastname],</strong></p>
+<p>We have received your resume submission for the <strong>[job-title] </strong>position. We appreciate your interest and look forward to reviewing your resume.</p>
+<p>We will contact you within seven days if your qualifications meet the requirements of the position.</p>
+<p>Thanks you again for applying!</p><br>
+<p>Best regards,</p>
+<p> <strong>[contact-name]</strong></p>
+------*/}
+									<p>
+										Dear <strong>[firstname] [lastname]</strong>,<br />
+										We have received your resume submission for this position. We appreciate your interest and
+										look forward to reviewing your resume.
+										<br />
+										We will contact you within seven days if your qualifications meet the requirements of the
+										position.
+										<br />
+										Thanks you again for applying!
+										<br />
+										<br />
+										Best regards,
+										<br />
+										<strong>[contact-name]</strong>
+									</p>
+								</div>
+							</div>
+							<div className={cx('form-group', 'form-submit')}>
+								<a
+									className={cx('btn-cancel')}
+									href='javascript:void(0);'
+									onclick="showNotifyMail('35BFE874', '35C9210A')">
+									Trở lại
+								</a>
+							</div>
+						</div>
+					</div>
+					<button
+						type='button'
+						data-fancybox-close=''
+						className={cx('fancybox-button', 'fancybox-close-small')}
+						title='Close'>
+						<svg xmlns='http://www.w3.org/2000/svg' version={1} viewBox='0 0 24 24'>
+							<path d='M13 12l5-5-1-1-5 5-5-5-1 1 5 5-5 5 1 1 5-5 5 5 1-1z' />
+						</svg>
+					</button>
+				</div>
+			</ReactModal>
 		</section>
 	);
 };

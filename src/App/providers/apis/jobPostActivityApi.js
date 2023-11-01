@@ -37,7 +37,12 @@ const jobPostActivityApi = createApi({
 			},
 			invalidatesTags: ['job_post_activity']
 		}),
-		
+		sendMailJobSeeker: build.mutation({
+			query: (payload) => {
+				return { url: `/job_post_activity/send-mail-jobSeeker`, method: 'POST', body: payload };
+			},
+			invalidatesTags: ['job_post_activity']
+		}),
 
 		deleteJobPostActivityApi: build.mutation({
 			query: (id) => {
@@ -55,6 +60,7 @@ export const {
 	useDeleteJobPostActivityApiMutation,
 	useUpdateJobPostActivityApiMutation,
 	useUpdateStatusJobPostActivityResumeMutation,
+	useSendMailJobSeekerMutation
 } = jobPostActivityApi;
 
 export default jobPostActivityApi;

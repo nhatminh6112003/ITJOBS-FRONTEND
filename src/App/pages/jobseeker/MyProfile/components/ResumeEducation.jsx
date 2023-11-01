@@ -1,31 +1,30 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import Widget from './Widget';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ResumeModal from './ResumeModal';
-import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import { Fragment, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import Tips from '~/Core/components/common/Modal/Tips';
 import useModal from '~/App/hooks/useModal';
-import NoContent from './NoContent';
 import {
-	useGetAllEducationQuery,
-	useUpdateResumeEducationMutation,
 	useCreateResumeEducationMutation,
 	useDeleteResumeEducationMutation,
+	useGetAllEducationQuery,
 	useLazyGetOneResumeEducationQuery,
+	useUpdateResumeEducationMutation,
 } from '~/App/providers/apis/resumeEducation';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import Tips from '~/Core/components/common/Modal/Tips';
+import NoContent from './NoContent';
+import ResumeModal from './ResumeModal';
+import Widget from './Widget';
 
 import { resumeEducationSchema } from '~/App/schemas/resumeEducationSchema';
 
-import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
-import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
-import { DegreeArray, degree } from '~/App/constants/degreeArray';
-import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
-import formatDate from '~/Core/utils/formatDate';
-import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import moment from 'moment';
+import { DegreeArray, degree } from '~/App/constants/degreeArray';
+import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
+import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
+import formatDate from '~/Core/utils/formatDate';
 const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 	const resume = useSelector((state) => state.auth?.user?.resume);
@@ -238,7 +237,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 			<div className={cx('form-group', 'row')}>
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
-						<TextAreaFieldControl control={control} name='redu_desc' label='Mô tả' id='redu_desc' />
+						<TextAreaFieldControl maxRows={1} control={control} name='redu_desc' label='Mô tả' id='redu_desc' />
 					</div>
 				</div>
 			</div>

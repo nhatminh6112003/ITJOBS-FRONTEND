@@ -202,6 +202,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
 						<TextAreaFieldControl
+							maxRows={1}
 							control={control}
 							name='addioninfo'
 							label='THÀNH TÍCH NỔI BẬT'

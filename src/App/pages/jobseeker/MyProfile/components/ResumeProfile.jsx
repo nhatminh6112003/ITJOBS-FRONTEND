@@ -165,7 +165,8 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 				isOpen={isShowing.update_resume_profile}
 				hide={() => toggle('update_resume_profile')}
 				className={cx}
-				title='Thông tin cá nhân'>
+				title='Thông tin cá nhân'
+				>
 				<Form
 					control={updateControl}
 					onSubmit={onUpdateSubmit}
