@@ -11,6 +11,13 @@ const jobPostApi = createApi({
 			providesTags: ['job_post'],
 			transformResponse: (response) => response
 		}),
+		annalytics: build.query({
+			query: () => {
+				return { url: `/job_post/analytics`, method: 'GET' };
+			},
+			providesTags: ['job_post'],
+			transformResponse: (response) => response.data
+		}),
 		getOneJobPost: build.query({
 			query: (id) => {
 				return { url: `/job_post/${id}`, method: 'GET' };
@@ -44,7 +51,8 @@ export const {
 	useGetAllJobPostQuery,
 	useGetOneJobPostQuery,
 	useDeleteJobPostMutation,
-	useUpdateJobPostMutation
+	useUpdateJobPostMutation,
+	useAnnalyticsQuery
 } = jobPostApi;
 
 export default jobPostApi;

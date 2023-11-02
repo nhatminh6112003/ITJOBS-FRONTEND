@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './dashboard.module.css';
 import classNames from 'classnames/bind';
 import Tooltip from '@mui/material/Tooltip';
 import InfoIcon from '@mui/icons-material/Info';
 import IconButton from '@mui/material/IconButton';
+import { useAnnalyticsQuery } from '~/App/providers/apis/jobPostApi';
+
 
 const sx = classNames.bind(styles);
 
 const EmployerDashboard = ({ cx }) => {
+
+
+	const {data} = useAnnalyticsQuery()
+	console.log(data);
+
+
+
+
+
 	return (
 		<section className={sx('employer-dasboard', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -81,25 +92,25 @@ const EmployerDashboard = ({ cx }) => {
 									<ul className={sx('list-post-management')}>
 										<li>
 											<a href='https://careerbuilder.vn/vi/employers/hrcentral/posting/user_id/lop7cttnq.1667207375'>
-												<span className={sx('number', 'green')}>0</span>
+												<span className={sx('number', 'green')}>{data?.publishStatus}</span>
 												<span className={sx('title')}>Việc làm đang đăng</span>
 											</a>
 										</li>
 										<li>
 											<a href='https://careerbuilder.vn/vi/employers/hrcentral/waitposting/user_id/lop7cttnq.1667207375'>
-												<span className={sx('number', 'blue')}>5</span>
+												<span className={sx('number', 'blue')}>{data?.pendingStatus}</span>
 												<span className={sx('title')}>Việc làm chờ đăng</span>
 											</a>
 										</li>
 										<li>
 											<a href='https://careerbuilder.vn/vi/employers/hrcentral/unposting/user_id/lop7cttnq.1667207375'>
-												<span className={sx('number', '')}>0</span>
+												<span className={sx('number', '')}>{data?.pauseStatus}</span>
 												<span className={sx('title')}>Việc làm tạm dừng đăng</span>
 											</a>
 										</li>
 										<li>
 											<a href='https://careerbuilder.vn/vi/employers/hrcentral/expireposting/user_id/lop7cttnq.1667207375'>
-												<span className={sx('number', '')}>0</span>
+												<span className={sx('number', '')}>{data?.expiredStatus}</span>
 												<span className={sx('title')}>Việc làm hết hạn</span>
 											</a>
 										</li>
