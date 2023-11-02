@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './posting.module.css';
 import classNames from 'classnames/bind';
 import CreateIcon from '@mui/icons-material/Create';
@@ -15,21 +15,43 @@ import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import { useSelector } from 'react-redux';
 import formatDate from '~/Core/utils/formatDate';
 const sx = classNames.bind(styles);
-
+import useSearchJobPost from '../../components/useSearchJobPost.js';
+import DateTypeEnum from '~/App/constants/dataTypeEnum';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import { useForm } from 'react-hook-form';
+import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 const Posting = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
 	const location = useLocation();
 	const currentPath = location.pathname;
-	const { data: allJobPost } = useGetAllJobPostQuery({
-		params: {
-			posted_by_id: employer?.id,
-			status: jobPostStatusEnum.Publish,
-			isDeleted: false
-		}
-	});
+	const { pushQuery, query } = useSearchJobPost();
 
 	const [deleteJobPost] = useDeleteJobPostMutation();
 
+	const { data: allJobPost } = useGetAllJobPostQuery({
+		params: {
+			keyword: query.keyword || '',
+			dateType: query.dateType || '',
+			fromDate: query.fromDate || '',
+			toDate: query.toDate || '',
+			posted_by_id: employer?.id,
+			status: jobPostStatusEnum.Publish,
+			isDeleted: false
+		},
+		refetchOnMountOrArgChange: true
+	});
+	const { control, handleSubmit } = useForm({
+		values: {
+			keyword: query.keyword || '',
+			fromDate: query.fromDate || '',
+			toDate: query.toDate || '',
+			dateType: query.dateType || ''
+		}
+	});
+
+	const onSubmit = (data) => {
+		pushQuery({ ...data });
+	};
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -51,38 +73,39 @@ const Posting = ({ cx }) => {
 						</div>
 					</div>
 					<div className={sx('main-form-posting')}>
-						<form
-							name='frmSearchJob'
-							id='frmSearchJob'
-							action=''
-							method='post'
-							onsubmit='return validateSearch();'>
+						<form name='frmSearchJob' id='frmSearchJob' action='' method='post' onSubmit={handleSubmit(onSubmit)}>
 							<div className={sx('form-wrap')}>
 								<div className={sx('form-group', 'form-text')}>
-									<label>Từ khóa</label>
-									<input type='text' name='keyword' id='keyword' placeholder='Nhập từ khóa' defaultValue='' />
+									<InputFieldControl
+										name='keyword'
+										id='keyword'
+										placeholder='Nhập từ khóa'
+										control={control}
+										label='Từ khóa'
+									/>
 								</div>
 								<div className={sx('form-group', 'form-select')}>
-									<label>Tìm theo ngày</label>
-									<select className={sx('fl_left', 'mar_left46')} name='date_type' id='date_type'>
-										<option value={0}>Ngày đăng</option>
-										<option value={1}>Ngày hết hạn</option>
-									</select>
+									<SelectFieldControl
+										name='dateType'
+										id='dateType'
+										control={control}
+										options={[
+											{ value: DateTypeEnum.PostDate, label: 'Ngày đăng' },
+											{ value: DateTypeEnum.ExpiredDate, label: 'Ngày hết hạn' }
+										]}
+										label='Tìm theo ngày'
+									/>
 								</div>
 								<div className={sx('form-group', 'form-date', 'start-date')}>
-									<label>Từ</label>
-									<input
-										type='text'
-										readOnly=''
-										name='date_from'
-										id='date_from'
+									<InputFieldControl
+										name='fromDate'
+										id='fromDate'
 										placeholder='Chọn'
+										type='date'
+										control={control}
 										className={sx('dates_cus_select')}
-										defaultValue=''
+										label='Từ'
 									/>
-									<div className={sx('icon')}>
-										<em className={cx('material-icons')}>event</em>
-									</div>
 									<div id='start-date' className={sx('dtpicker-overlay', 'dtpicker-mobile')}>
 										<div className={sx('dtpicker-bg')}>
 											<div className={sx('dtpicker-cont')}>
@@ -94,19 +117,15 @@ const Posting = ({ cx }) => {
 									</div>
 								</div>
 								<div className={sx('form-group', 'form-date', 'end-date')}>
-									<label>Đến</label>
-									<input
-										type='text'
-										readOnly=''
-										name='date_to'
-										id='date_to'
+									<InputFieldControl
+										type='date'
+										control={control}
+										name='toDate'
+										id='toDate'
 										placeholder='Chọn'
 										className={sx('dates_cus_select')}
-										defaultValue=''
+										label='Đến'
 									/>
-									<div className={sx('icon')}>
-										<em className={cx('material-icons')}>event</em>
-									</div>
 									<div id='end-date' className={sx('dtpicker-overlay', 'dtpicker-mobile')}>
 										<div className={sx('dtpicker-bg')}>
 											<div className={sx('dtpicker-cont')}>
