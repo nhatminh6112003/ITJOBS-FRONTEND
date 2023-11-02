@@ -34,12 +34,11 @@
 .multiselect-dropdown span.placeholder {
 	color: #5d677a;
 	font-weight: 400;
-	
 }
 .multiselect-dropdown-list-wrapper {
 	box-shadow: gray 0 3px 8px;
 	z-index: 100;
-	padding:4px;
+	padding: 4px;
 	border-radius: 4px;
 	border: solid 1px #ced4da;
 	z-index: 99999;
@@ -74,9 +73,9 @@
 	height: 1.15em;
 	width: 1.15em;
 	margin-right: 0.35em;
-
 }
-.select-item,.select-all{
+.select-item,
+.select-all {
 	display: flex;
 	align-items: center;
 }

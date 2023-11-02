@@ -5,7 +5,7 @@ const listProvincesApi = createApi({
 	endpoints: (build) => ({
 		getAllProvinces: build.query({
 			query: () => {
-				return { url: `p`, method: 'GET'};
+				return { url: `p`, method: 'GET' };
 			},
 			providesTags: ['Provinces'],
 			transformResponse: (response) => response

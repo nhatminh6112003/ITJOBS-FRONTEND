@@ -36,7 +36,8 @@ const ExpirePosting = ({ cx }) => {
 			status: jobPostStatusEnum.Expired,
 			isDeleted: false
 		}
-	});
+	})
+
 	const { control, handleSubmit } = useForm({
 		values: {
 			keyword: query.keyword || '',
@@ -47,7 +48,8 @@ const ExpirePosting = ({ cx }) => {
 	});
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
-	};
+
+	}
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>

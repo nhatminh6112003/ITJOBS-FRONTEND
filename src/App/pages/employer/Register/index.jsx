@@ -1,6 +1,5 @@
-import RegisterForm from "./components/RegisterForm";
+import RegisterForm from './components/RegisterForm';
 const Register = ({ cx }) => {
-
 	return (
 		<section className={cx('employer-signup-new', 'step-1', 'cb-section')}>
 			<div className={cx('container')}>
@@ -10,7 +9,7 @@ const Register = ({ cx }) => {
 							<div className={cx('title')}>
 								<h2>Đăng Ký Tài Khoản Nhà Tuyển Dụng</h2>
 							</div>
-						<RegisterForm  cx={cx} />
+							<RegisterForm cx={cx} />
 						</div>
 					</div>
 				</div>

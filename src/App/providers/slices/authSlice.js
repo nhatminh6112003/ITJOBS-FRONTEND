@@ -36,5 +36,5 @@ const authSlice = createSlice({
 	}
 });
 
-export const { logout, updateAccessToken,updateAdminAccessToken } = authSlice.actions;
+export const { logout, updateAccessToken, updateAdminAccessToken } = authSlice.actions;
 export default authSlice;

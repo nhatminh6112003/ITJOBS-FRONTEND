@@ -29,9 +29,7 @@ const Accounts = ({ cx }) => {
 								</a>
 							</li>
 							<li>
-								<Link
-									to={routesPath.EmployerPaths.editEmployer}
-									alt='Thông tin công ty'>
+								<Link to={routesPath.EmployerPaths.editEmployer} alt='Thông tin công ty'>
 									<span>Thông tin công ty</span>
 								</Link>
 							</li>

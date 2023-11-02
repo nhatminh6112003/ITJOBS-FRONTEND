@@ -5,7 +5,7 @@ import { useForm, Controller, useController } from 'react-hook-form';
 import './ValidationTextFieldsControl.css';
 import { useRef, forwardRef } from 'react';
 
-export default function ValidationTextFieldsControl({ name,rules, label, control, ...props }) {
+export default function ValidationTextFieldsControl({ name, rules, label, control, ...props }) {
 	const {
 		field,
 		fieldState: { error },
@@ -43,8 +43,7 @@ export default function ValidationTextFieldsControl({ name,rules, label, control
 					variant='standard'
 				/>
 			</div>
-			{errors ? <span style={{color:'red'}}>{errors[name]?.message}</span> : ''}
-
+			{errors ? <span style={{ color: 'red' }}>{errors[name]?.message}</span> : ''}
 		</Box>
 	);
 }

@@ -51,10 +51,7 @@ const LoginForm = ({ className: cx, onSubmit }) => {
 					</button>
 				</div>
 				<p>
-					<Link
-						className={cx('register')}
-						to={routesPath.EmployerPaths.register}
-						>
+					<Link className={cx('register')} to={routesPath.EmployerPaths.register}>
 						Quý khách chưa có tài khoản?
 					</Link>
 					Đăng ký dễ dàng, hoàn toàn miễn phí

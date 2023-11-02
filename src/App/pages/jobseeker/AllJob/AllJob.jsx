@@ -737,7 +737,7 @@ const AllJob = () => {
 												);
 										  })}
 								</div>
-								
+
 								{/* <div className={cx('pagination')}>
 									<ul>
 										<li className={cx('active')}>
@@ -865,7 +865,6 @@ const AllJob = () => {
 					</a>
 				</div>
 			</div>
-		
 		</>
 	);
 };

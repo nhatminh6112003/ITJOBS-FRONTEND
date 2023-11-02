@@ -312,7 +312,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing, lis
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
 						<TextAreaFieldControl
-					    	minRows={1}
+							minRows={1}
 							control={control}
 							name='rexp_workdesc'
 							label='Mô tả công việc'

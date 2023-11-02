@@ -6,7 +6,7 @@ const jobPostApi = createApi({
 	endpoints: (build) => ({
 		getAllJobPost: build.query({
 			query: (arg) => {
-				return { url: `/job_post`, method: 'GET',params:arg.params };
+				return { url: `/job_post`, method: 'GET', params: arg.params };
 			},
 			providesTags: ['job_post'],
 			transformResponse: (response) => response

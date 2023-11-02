@@ -39,7 +39,6 @@ const notifications = [
 
 // import user_image from '../../assets/images/tuat.png'
 
-
 const curr_user = {
 	display_name: 'Tuat Tran'
 };

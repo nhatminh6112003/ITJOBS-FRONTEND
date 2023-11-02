@@ -13,7 +13,6 @@ import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUpl
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 const sx = classNames.bind(styles);
 const EditEmployer = ({ cx }) => {
-
 	const employer = useSelector((state) => state.auth?.employer);
 	const companyId = employer?.company?.id;
 	const { data: company } = useGetOneCompanyQuery(companyId);
@@ -184,12 +183,12 @@ const EditEmployer = ({ cx }) => {
 											<div className={sx('form-group')}>
 												<p className={sx('title-label')}>Logo</p>
 											</div>
-											{(logo && logo instanceof Blob) || (company?.data?.logo) ? (
+											{(logo && logo instanceof Blob) || company?.data?.logo ? (
 												<div className={sx('list-image')}>
 													<div className={cx('image-item')} id='logo_path'>
 														<img
 															src={
-																logo && logo instanceof Blob 
+																logo && logo instanceof Blob
 																	? URL.createObjectURL(logo)
 																	: `${import.meta.env.VITE_IMAGE_URL}/${company?.data?.logo}`
 															}
@@ -239,12 +238,12 @@ const EditEmployer = ({ cx }) => {
 													</a>
 												</p>
 											</div>
-											{(banner && banner instanceof Blob) || (company?.data?.banner) ? (
+											{(banner && banner instanceof Blob) || company?.data?.banner ? (
 												<div className={sx('list-image')}>
 													<div className={cx('image-item')} id='logo_path'>
 														<img
 															src={
-																banner && banner instanceof Blob 
+																banner && banner instanceof Blob
 																	? URL.createObjectURL(banner)
 																	: `${import.meta.env.VITE_IMAGE_URL}/${company?.data?.banner}`
 															}

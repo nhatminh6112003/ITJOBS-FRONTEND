@@ -29,10 +29,7 @@ const Header = () => {
 						</div>
 						<div className={cx('logo')}>
 							<Link to={routesPath.JobseekerPaths.home}>
-								<img
-									src='/logo.png'
-									style={{height:50}}
-								/>
+								<img src='/logo.png' style={{ height: 50 }} />
 							</Link>
 						</div>
 						<div className={cx('main-menu')}>

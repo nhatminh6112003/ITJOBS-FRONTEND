@@ -26,13 +26,13 @@ const SideBar = (props) => {
 			route: routesPath.AdminPaths.jobWelfare,
 			icon: <CategoryIcon />
 		},
-		
+
 		{
 			title: 'Quản lý nhà tuyển dụng',
 			route: routesPath.AdminPaths.employer,
 			icon: <CategoryIcon />
 		},
-		
+
 		{
 			title: 'Quản lý ứng viên',
 			route: routesPath.AdminPaths.jobSeeker,

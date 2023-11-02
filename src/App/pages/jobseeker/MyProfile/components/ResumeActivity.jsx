@@ -214,11 +214,10 @@ const ResumeActivity = ({ className: cx, isShowing, toggle }) => {
 };
 
 const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing }) => {
-
 	const [isDisabled, setIsDisabled] = useState(false);
 
 	const handleCheckboxChange = (event) => {
-	  setIsDisabled(event.target.checked);
+		setIsDisabled(event.target.checked);
 	};
 	return (
 		<form name='references-form' id='references-form' onSubmit={handleSubmit(onSubmit)}>
@@ -264,7 +263,6 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing }) =
 			<div className={cx('row')}>
 				<div className={cx('col-lg-12')}>
 					<div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-					
 						<CheckBoxFieldControl
 							name={'activity_current'}
 							control={control}
@@ -272,7 +270,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing }) =
 							// checked={data?.activity_current === 1 ? true : false}
 							defaultChecked={data?.activity_current === 1 ? true : false}
 							onChange={handleCheckboxChange}
-						/> 
+						/>
 					</div>
 				</div>
 			</div>

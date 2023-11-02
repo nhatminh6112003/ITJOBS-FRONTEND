@@ -54,7 +54,7 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 					name='jobPositionCategoryId'
 				/>
 
-			{/* <InputFieldControl type='date' name='date' control={control}/> */}
+				{/* <InputFieldControl type='date' name='date' control={control}/> */}
 				<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
 					<Button type='submit' variant='contained'>
 						Thêm mới

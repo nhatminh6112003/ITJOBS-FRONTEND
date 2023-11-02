@@ -16,7 +16,7 @@ const MyAttach = ({ cx }) => {
 		setSelectedValue(value);
 	};
 	const navigate = useNavigate();
-	const onCreateAttach = ({ profession_id, welfare_id, ...data }) => {	
+	const onCreateAttach = ({ profession_id, welfare_id, ...data }) => {
 		const work_type_id = [];
 		for (let i = 1; i <= 4; i++) {
 			const key = `work_type_id_${i}`;

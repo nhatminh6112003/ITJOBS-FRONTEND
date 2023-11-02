@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 
 import styles from './Dashboard.module.css';
 import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
-// import config from '~/App/config/routesPath';
 
 import EditIcon from '@mui/icons-material/Edit';
 import LockIcon from '@mui/icons-material/Lock';
@@ -17,6 +16,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import formatDate from '~/Core/utils/formatDate';
+import exportPdf from '~/Core/utils/exportPdf';
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +26,6 @@ const Dashboard = () => {
 	const { data: getAllMyAttach, refetch } = useGetAllMyAttachQuery(user_account_id);
 	const [deleteMyAttach] = useDeleteMyAttachMutation();
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
-	
 
 	const handleDeleteMyAttach = (id) => {
 		console.log(id);
@@ -552,7 +551,6 @@ const Dashboard = () => {
 																	<div
 																		className={cx('switch-status', 'group_searchable')}
 																		id='cv_searchable_18020074'
-																		data-id={18020074}
 																		data-complete={1}>
 																		<a
 																			href=''
@@ -606,7 +604,7 @@ const Dashboard = () => {
 																	<div className={cx('right-action')}>
 																		<ul>
 																			<li>
-																				<Link	
+																				<Link
 																					to={`/ho-so-cua-toi/ho-so-dinh-kem/${item.id}`}
 																					title='Xem'
 																					className={cx('view')}>
@@ -617,7 +615,10 @@ const Dashboard = () => {
 																			<li>
 																				<a
 																					title='Tải hồ sơ'
-																					className={cx('down')}>
+																					className={cx('down')}
+																					style={{ cursor: 'pointer' }}
+																					href='javascript:void(0)'
+																					onClick={() => exportPdf(item?.attachments?.file)}>
 																					<em className={cx('mdi', 'mdi-download')} />
 																					Tải hồ sơ
 																				</a>
