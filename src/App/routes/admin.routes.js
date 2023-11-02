@@ -9,7 +9,7 @@ const JobSeeker = lazy(() => import('~/App/pages/Admin/JobSeeker'));
 const Employer = lazy(() => import('~/App/pages/Admin/Employer'));
 const Profession = lazy(() => import('~/App/pages/Admin/Profession'));
 const adminPublicRoutes = [{ path: routesPath.AdminPaths.login, component: Login, layout: null }];
-const Company = lazy(() => import('~/App/pages/Admin/Company'))
+const Company = lazy(() => import('~/App/pages/Admin/Company'));
 
 const adminPrivateRoutes = [
 	{ path: routesPath.AdminPaths.dashboard, component: Dashboard },

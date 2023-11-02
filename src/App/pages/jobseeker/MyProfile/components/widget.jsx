@@ -4,7 +4,7 @@ import { cx } from '..';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import { AddIcon } from '~/Core/resources';
 
-const Widget = ({ action = 'ADD', children, avatar,icon, title, status, onOpenResume, onOpenTipSlide, ...props }) => {
+const Widget = ({ action = 'ADD', children, avatar, icon, title, status, onOpenResume, onOpenTipSlide, ...props }) => {
 	const modalAction = {
 		ADD: 'THÊM MỚI',
 		EDIT: 'CHỈNH SỬA'
@@ -25,8 +25,8 @@ const Widget = ({ action = 'ADD', children, avatar,icon, title, status, onOpenRe
 				<div className={cx('cb-title-h3')}>
 					<div className={cx('figure')}>
 						<div className={cx('image')}>
-						{avatar &&  <img src={avatar} alt='' />  }
-						{icon && icon}
+							{avatar && <img src={avatar} alt='' />}
+							{icon && icon}
 						</div>
 						<div className={cx('figcaption')}>
 							<h3>{title} *</h3>
@@ -44,7 +44,7 @@ const Widget = ({ action = 'ADD', children, avatar,icon, title, status, onOpenRe
 						</div>
 						<div className={cx('link-edit')}>
 							<a href='javascript:void(0)' onClick={onOpenResume}>
-								<em style={{display:'flex'}}	className={cx('material-icons')}>
+								<em style={{ display: 'flex' }} className={cx('material-icons')}>
 									{action == 'ADD' ? <AddIcon sx={{ fontSize: '20px' }} /> : <EditIcon fontSize='normal' />}
 								</em>
 								<span>{modalAction[action]}</span>

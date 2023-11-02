@@ -1,4 +1,4 @@
-import axiosClient from "~/Core/configs/axiosConfig";
+import axiosClient from '~/Core/configs/axiosConfig';
 
 // custom base query with axios
 export default function axiosBaseQuery() {
@@ -7,7 +7,7 @@ export default function axiosBaseQuery() {
 			const response = await axiosClient.request({
 				url: url,
 				method,
-				data:body,
+				data: body,
 				params // query string object
 			});
 			return { data: response };

@@ -276,7 +276,7 @@ const WaitPosting = ({ cx }) => {
 																				<VisibilityIcon />
 																			</Link>
 																		</li>
-														
+
 																		<li>
 																			<Link
 																				to={`/employers/postjobs/${job_post.id}`}

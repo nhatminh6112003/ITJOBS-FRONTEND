@@ -53,8 +53,7 @@ export default function SelectVariantsFieldControl(
 				</FormControl>
 			</Box>
 
-			{errors ? <span style={{color:'red'}}>{errors[name]?.message}</span> : ''}
-
+			{errors ? <span style={{ color: 'red' }}>{errors[name]?.message}</span> : ''}
 		</FormControl>
 	);
 }

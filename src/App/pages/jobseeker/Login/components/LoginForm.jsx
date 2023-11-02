@@ -14,9 +14,9 @@ const LoginForm = ({ className: cx, onSubmit }) => {
 
 	return (
 		<form name='frmLogin' id={cx('frmLogin')} onSubmit={handleSubmit(onSubmit)}>
-			<div className={cx("form-group","form-text")}>
-			<InputFieldControl control={control} name='email' placeholder='Vui lòng nhập email' />
-			<InputFieldControl control={control} name='password' placeholder='Vui lòng nhập mật khẩu' type='password' />
+			<div className={cx('form-group', 'form-text')}>
+				<InputFieldControl control={control} name='email' placeholder='Vui lòng nhập email' />
+				<InputFieldControl control={control} name='password' placeholder='Vui lòng nhập mật khẩu' type='password' />
 			</div>
 			<div className={cx('form-group', 'form-submit')}>
 				<button type='submit' id='submit_login' className={cx('btn-gradient')}>

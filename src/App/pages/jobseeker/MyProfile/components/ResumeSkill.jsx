@@ -24,7 +24,7 @@ import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl/SelectFieldControl';
 import SkillEnum from '~/App/constants/skillEnum';
-const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
+const ResumeSkill = ({ className: cx, isShowing, toggle }) => {
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 	const resume = useSelector((state) => state.auth?.user?.resume);
 	const [updateId, setUpdateId] = useState(null);
@@ -126,62 +126,70 @@ const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 						{resumeSkill?.length > 0 ? (
 							resumeSkill?.map((item) => (
 								<div className={cx('widget-body')}>
-								<div className={cx('list-progress')} id='list-progress-skill'>
-									<table>
-										<thead>
-											<tr>
-												<th>Skill </th>
-												<th>Mức độ</th>
-												<th> </th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr >
-												<td>
-													<div className={cx('title')}>
-														<h4>{item.skill_name}</h4>
-													</div>
-													<div className={cx('content')}>
-														<p>{item.skill_content}</p>
-													</div>
-												</td>
-												<td>
-													<div className={cx('progress')}>
-														<progress className={cx('progress-main')} max={5} value={3} />
-														<div className={cx('level')}>
-															Mức độ <span>{item.skill_level}/5</span>
+									<div className={cx('list-progress')} id='list-progress-skill'>
+										<table>
+											<thead>
+												<tr>
+													<th>Skill </th>
+													<th>Mức độ</th>
+													<th> </th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<div className={cx('title')}>
+															<h4>{item.skill_name}</h4>
 														</div>
-													
-														<SkillLevelProgressBar cx={cx} skillLevel={item.skill_level}/>
-													</div>
-												</td>
-												<td>
-													<ul className={cx('list-action')}>
-														<li className={cx('edit-link')}>
-															<a  href='javascript:void(0);' onClick={() => onOpenModalUpdate(item.id)}>
-																{' '}
-																<em className={cx('material-icons')}>create</em>
-																<span>Chỉnh sửa</span>
-															</a>
-														</li>
-														<li className={cx('delete')}>
-															<a href='javascript:void(0);'
-													onClick={() => setModalConfirmState({ open: true, payload: item.id })}>
-																{' '}
-																<em className={cx('material-icons')}>highlight_off</em>
-																<span>Xóa</span>
-															</a>
-														</li>
-													</ul>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+														<div className={cx('content')}>
+															<p>{item.skill_content}</p>
+														</div>
+													</td>
+													<td>
+														<div className={cx('progress')}>
+															<progress className={cx('progress-main')} max={5} value={3} />
+															<div className={cx('level')}>
+																Mức độ <span>{item.skill_level}/5</span>
+															</div>
+
+															<SkillLevelProgressBar cx={cx} skillLevel={item.skill_level} />
+														</div>
+													</td>
+													<td>
+														<ul className={cx('list-action')}>
+															<li className={cx('edit-link')}>
+																<a
+																	href='javascript:void(0);'
+																	onClick={() => onOpenModalUpdate(item.id)}>
+																	{' '}
+																	<em className={cx('material-icons')}>create</em>
+																	<span>Chỉnh sửa</span>
+																</a>
+															</li>
+															<li className={cx('delete')}>
+																<a
+																	href='javascript:void(0);'
+																	onClick={() =>
+																		setModalConfirmState({ open: true, payload: item.id })
+																	}>
+																	{' '}
+																	<em className={cx('material-icons')}>highlight_off</em>
+																	<span>Xóa</span>
+																</a>
+															</li>
+														</ul>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
-							</div>
 							))
 						) : (
-							<NoContent onClick={() => toggle('resume_skill')} title='Vui lòng thêm thông tin kỹ năng chuyên môn' />
+							<NoContent
+								onClick={() => toggle('resume_skill')}
+								title='Vui lòng thêm thông tin kỹ năng chuyên môn'
+							/>
 						)}
 					</div>
 				</div>
@@ -206,9 +214,7 @@ const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 				isShowing={showTips.t_resume_skill}
 				hide={() => toggleTips('t_resume_skill')}
 				title='Để CV không chỉ Hay mà còn Đẹp trong mắt Nhà tuyển dụng'>
-				<div className='swiper-wrapper'>
-					Skill: Bạn nên lựa chọn 4-6 kỹ năng liêu quan đến vị trí ứng uyển
-				</div>
+				<div className='swiper-wrapper'>Skill: Bạn nên lựa chọn 4-6 kỹ năng liêu quan đến vị trí ứng uyển</div>
 			</Tips>
 			<ConfirmDialog
 				open={modalConfirmState.open}
@@ -219,21 +225,20 @@ const ResumeSkill= ({ className: cx, isShowing, toggle }) => {
 	);
 };
 
-
-const SkillLevelProgressBar=({ cx,skillLevel }) =>{
+const SkillLevelProgressBar = ({ cx, skillLevel }) => {
 	const classes = [];
 	for (let i = 1; i <= 5; i++) {
-	  classes.push(skillLevel >= i ? 'success' : '');
+		classes.push(skillLevel >= i ? 'success' : '');
 	}
- 
+
 	return (
-	  <div className={cx('progress-row')}>
-		 {classes.map((classValue, index) => (
-			<div key={index} className={cx('line', classValue)} />
-		 ))}
-	  </div>
+		<div className={cx('progress-row')}>
+			{classes.map((classValue, index) => (
+				<div key={index} className={cx('line', classValue)} />
+			))}
+		</div>
 	);
- }
+};
 
 const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 	const date = new Date();
@@ -245,14 +250,19 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 			<div className={cx('form-group', 'row')}>
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
-						<InputFieldControl control={control} name='skill_name' id='skill_name' label='Nhập kỹ năng, chuyên môn' />
+						<InputFieldControl
+							control={control}
+							name='skill_name'
+							id='skill_name'
+							label='Nhập kỹ năng, chuyên môn'
+						/>
 					</div>
 				</div>
 			</div>
 			<div className={cx('form-group', 'row')}>
 				<div className={cx('col-lg-12')}>
 					<div className={cx('input-group')}>
-					<InputFieldControl control={control} name='skill_content' id='skill_content' label='Mô tả kỹ năng' />
+						<InputFieldControl control={control} name='skill_content' id='skill_content' label='Mô tả kỹ năng' />
 					</div>
 				</div>
 			</div>

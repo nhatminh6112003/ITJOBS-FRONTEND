@@ -10,5 +10,3 @@ export const AllowedFileExtension = {
 	JPEG: 'jpeg',
 	GIF: 'gif'
 };
-
-

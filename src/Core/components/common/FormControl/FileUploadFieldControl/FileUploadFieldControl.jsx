@@ -1,7 +1,6 @@
 import { useController } from 'react-hook-form';
 
 const FileUploadFieldControl = ({ control, name, label, disabled, rules }) => {
-
 	const {
 		field,
 		fieldState: { error },
@@ -13,11 +12,9 @@ const FileUploadFieldControl = ({ control, name, label, disabled, rules }) => {
 		}
 	};
 	return (
-		<div style={{ display: 'flex',flexDirection:"column",gap:3 }}>
-			<label htmlFor={name}>
-				{label}
-			</label>
-			<input style={{display:'none'}} name={name} id={name}  type='file' onChange={(e) => handleChange(e)} />
+		<div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+			<label htmlFor={name}>{label}</label>
+			<input style={{ display: 'none' }} name={name} id={name} type='file' onChange={(e) => handleChange(e)} />
 			{errors ? <span style={{ color: 'red' }}>{errors[name]?.message}</span> : ''}
 		</div>
 	);

@@ -12,14 +12,14 @@ const resumeAddioninfoApi = createApi({
 			},
 			providesTags: ['resume_addioninfo'],
 			transformResponse: (response) => response.data
-		}) ,
+		}),
 		getOneResumeAddioninfo: build.query({
 			query: (id) => {
 				return { url: `/resume_addioninfo/${id}`, method: 'GET' };
 			},
 			providesTags: ['resume_addioninfo'],
 			transformResponse: (response) => response.data
-		}), 
+		}),
 		createResumeAddioninfo: build.mutation({
 			query: (payload) => {
 				return { url: `/resume_addioninfo`, method: 'POST', body: payload };

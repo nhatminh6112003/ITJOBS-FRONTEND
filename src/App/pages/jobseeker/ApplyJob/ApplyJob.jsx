@@ -55,7 +55,7 @@ const ApplyJob = ({ cx }) => {
 			user_account_id: user?.id,
 			job_id: id,
 			resume_type: data.resume_type,
-			status:ResumeStatusEnum.UNDECIDED
+			status: ResumeStatusEnum.UNDECIDED
 		}).then((result) => {
 			if (result.status == 200) {
 				toast.success('Bạn đã nộp cv thành công');

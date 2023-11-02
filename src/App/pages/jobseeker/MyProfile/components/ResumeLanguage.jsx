@@ -39,7 +39,7 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 
 	//Gọi api rtk query
 	const { data: resumeLanguage, refetch } = useGetAllResumeLanguageQuery(resume?.id);
-	console.log("TCL: resumeLanguage", resumeLanguage)
+	console.log('TCL: resumeLanguage', resumeLanguage);
 	const [trigger, result] = useLazyGetOneResumeLanguageQuery();
 	const [createResumeLanguageMutation] = useCreateResumeLanguageMutation();
 	const [deleteResumeLanguageMutation] = useDeleteResumeLanguageMutation();
@@ -173,7 +173,7 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 													<td>
 														<ul className={cx('list-action')}>
 															<li className={cx('edit-link')}>
-																<a   href='javascript:void(0)'  onClick={() => onOpenModalUpdate(item.id)}>
+																<a href='javascript:void(0)' onClick={() => onOpenModalUpdate(item.id)}>
 																	<em className={cx('material-icons')}>create</em>
 																	<span>Chỉnh sửa</span>
 																</a>
@@ -181,7 +181,9 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 															<li className={cx('delete')}>
 																<a
 																	href='javascript:void(0)'
-																	onClick={() => setModalConfirmState({ open: true, payload: item.id })}>
+																	onClick={() =>
+																		setModalConfirmState({ open: true, payload: item.id })
+																	}>
 																	<em className={cx('material-icons')}>highlight_off</em>
 																	<span>Xoá</span>
 																</a>

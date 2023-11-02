@@ -50,7 +50,7 @@ const MyProfile = () => {
 		update_resume_activity: false,
 		update_resume_experience: false,
 		update_resume_desired_job: false,
-		update_resume_language:false
+		update_resume_language: false
 	});
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -191,10 +191,10 @@ const MyProfile = () => {
 										</div>
 									</div>
 								</div>
-								
+
 								<ResumeTitle className={cx} isShowing={isShowing} toggle={toggle} />
 
-								<ResumeProfile className={cx} isShowing={isShowing} toggle={toggle}/>
+								<ResumeProfile className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeObjective className={cx} isShowing={isShowing} toggle={toggle} />
 
@@ -209,7 +209,7 @@ const MyProfile = () => {
 								<ResumeAddioninfo className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeLanguage className={cx} isShowing={isShowing} toggle={toggle} />
-							
+
 								<div className={cx('widget', 'widget-17')} id='widget-17'>
 									{/* {' '}
 									<div className={cx('widget-head')}>
@@ -304,7 +304,7 @@ const MyProfile = () => {
 									</div> */}
 									<ResumeSkill className={cx} isShowing={isShowing} toggle={toggle} />
 								</div>
-							
+
 								<ResumeActivity className={cx} isShowing={isShowing} toggle={toggle} />
 
 								<ResumeRefer className={cx} isShowing={isShowing} toggle={toggle} />
@@ -373,7 +373,7 @@ const MyProfile = () => {
 												Careerbuilder Profile
 											</a>
 										</li>
-								
+
 										<li>
 											<a href='' data-href='#personalinfo-section'>
 												Thông tin cá nhân

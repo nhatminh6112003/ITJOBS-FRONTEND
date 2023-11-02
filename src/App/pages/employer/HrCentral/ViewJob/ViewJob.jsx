@@ -17,20 +17,22 @@ const sx = classNames.bind(styles);
 
 const ViewJob = ({ cx }) => {
 	const employer = useSelector((state) => state.auth.employer);
-   const location = useLocation();
+	const location = useLocation();
 	const currentPath = location.pathname;
 	const { id } = useParams();
 	const { data: jobPost } = useGetOneJobPostQuery(id);
 
 	return (
 		<>
-			<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')} style={{padding:'0 30px'}}>
+			<section
+				className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}
+				style={{ padding: '0 30px' }}>
 				<div className={cx('container')}>
 					<div className={sx('box-manage-job-posting')}>
 						<div className={sx('heading-manage')}>
 							<div className={sx('left-heading')}>
 								<h1 className={sx('title-manage')}>Việc Làm Đang Đăng </h1>
-                        
+
 								<div className={sx('button')}>
 									<Link className={sx('btn-gradient')} to={routesPath.EmployerPaths.postjobs}>
 										<em className={cx('material-icons')}>create</em>Tạo Mẫu Tuyển Dụng
@@ -40,7 +42,6 @@ const ViewJob = ({ cx }) => {
 							<div className={sx('right-heading')}>
 								<a
 									href='https://images.careerbuilder.vn/guide/CareerBuilder_Manage_Job_Postings_User_Guide.pdf'
-								
 									className={sx('support')}>
 									Hướng dẫn
 								</a>
@@ -112,19 +113,19 @@ const ViewJob = ({ cx }) => {
 							</form>
 						</div>
 						<div className={sx('main-tabslet')}>
-                  <ul className={sx('tabslet-tab')}>
-							{TabMenu.map((item) => (
-								<li className={sx(currentPath == item.path && 'active')}>
-									<Link to={item.path}>{item.title}</Link>
-								</li>
-							))}
-						</ul>
+							<ul className={sx('tabslet-tab')}>
+								{TabMenu.map((item) => (
+									<li className={sx(currentPath == item.path && 'active')}>
+										<Link to={item.path}>{item.title}</Link>
+									</li>
+								))}
+							</ul>
 							<div className={sx('tabslet-content', 'active')}>
 								<div className={sx('main-jobs-posting')}>
 									<div className={sx('jobs-posting-detail')}>
 										<h2 className={sx('jobs-posting-title')}>
 											<a href='javascript:;' onclick='activeTab(1);'>
-      {jobPost?.job_title}
+												{jobPost?.job_title}
 											</a>
 										</h2>
 										<div className={sx('row', 'jobs-posting-detail-top')}>

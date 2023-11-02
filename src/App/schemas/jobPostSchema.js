@@ -1,8 +1,9 @@
 import * as yup from 'yup';
 export const jobPostSchema = yup.object({
-	expiry_date: yup.date()
-    .min(new Date(), 'Hạn nhận hồ sơ phải lớn hơn ngày hiện tại')
-    .required('Hạn nhận hồ sơ không được để trống'),
+	expiry_date: yup
+		.date()
+		.min(new Date(), 'Hạn nhận hồ sơ phải lớn hơn ngày hiện tại')
+		.required('Hạn nhận hồ sơ không được để trống'),
 	job_welfare_id: yup.array(),
 	job_profession_id: yup.array().required('Vui lòng chọn ngành nghề').nullable(),
 	posted_by_id: yup.string(),
@@ -14,7 +15,7 @@ export const jobPostSchema = yup.object({
 	form_age: yup.string(),
 	to_age: yup.string(),
 	job_title: yup.string().default('').required('Vui lòng nhập Chức danh tuyển dụng'),
-	gender: yup.string()	,
+	gender: yup.string(),
 	is_address_work_hidden: yup.boolean(),
 	min_salary: yup
 		.string()

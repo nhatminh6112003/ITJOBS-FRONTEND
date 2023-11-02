@@ -20,16 +20,20 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { jobPostSchema } from '~/App/schemas/jobPostSchema';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import {
-	useGetOneJobPostQuery,
-	useUpdateJobPostMutation
-} from '~/App/providers/apis/jobPostApi';
+import { useGetOneJobPostQuery, useUpdateJobPostMutation } from '~/App/providers/apis/jobPostApi';
 import { useNavigate, useParams } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
 import moment from 'moment';
 const sx = classNames.bind(styles);
 const UpdatePostJobs = ({ cx }) => {
-	const { control, handleSubmit, setValue, watch, reset, formState: { errors }  } = useForm({
+	const {
+		control,
+		handleSubmit,
+		setValue,
+		watch,
+		reset,
+		formState: { errors }
+	} = useForm({
 		resolver: yupResolver(jobPostSchema)
 	});
 	const user_account_id = useSelector((state) => state?.auth.employer?.id);
@@ -59,7 +63,7 @@ const UpdatePostJobs = ({ cx }) => {
 
 	useEffect(() => {
 		reset({
-			expiry_date:moment(jobPost?.expiry_date).format('YYYY-MM-DD'),
+			expiry_date: moment(jobPost?.expiry_date).format('YYYY-MM-DD'),
 			districts: jobPost?.districts,
 			address: jobPost?.address,
 			form_age: jobPost?.form_age,
@@ -122,11 +126,11 @@ const UpdatePostJobs = ({ cx }) => {
 				}
 			});
 	};
-	useEffect(()=>{
+	useEffect(() => {
 		if (jobPost?.job_experience_value == 1) {
 			setDisplayExperience(true);
 		}
-	},[jobPost?.job_experience_value])
+	}, [jobPost?.job_experience_value]);
 	return (
 		<>
 			<section className={sx('manage-job-posting-post-jobs', 'cb-section', 'bg-manage')}>
@@ -214,8 +218,8 @@ const UpdatePostJobs = ({ cx }) => {
 															maxItems={3}
 															control={control}
 															name='job_profession_id'
-															selectedValues={jobPost?.jobProfessionDetail?.map(
-																(item) => Number(item.profession_id)
+															selectedValues={jobPost?.jobProfessionDetail?.map((item) =>
+																Number(item.profession_id)
 															)}
 														/>
 													</div>
@@ -376,7 +380,9 @@ const UpdatePostJobs = ({ cx }) => {
 																					Number(e.target.value)
 																				);
 																		}}
-																		defaultChecked={jobPost?.jobWorkTypeDetail?.map(item=>item.work_type_id)?.includes(listWork.id)}
+																		defaultChecked={jobPost?.jobWorkTypeDetail
+																			?.map((item) => item.work_type_id)
+																			?.includes(listWork.id)}
 																	/>
 																);
 															})}
@@ -425,8 +431,9 @@ const UpdatePostJobs = ({ cx }) => {
 																					Number(e.target.value)
 																				);
 																		}}
-																										defaultChecked={jobPost?.jobWelfare?.map(item=>item.job_welfare_id)?.includes(jobWelfare.id)}
-
+																		defaultChecked={jobPost?.jobWelfare
+																			?.map((item) => item.job_welfare_id)
+																			?.includes(jobWelfare.id)}
 																	/>
 																</div>
 															</div>
@@ -1028,15 +1035,15 @@ const UpdatePostJobs = ({ cx }) => {
 					</div>
 				</div>
 				{Object.keys(errors).length > 0 && (
-        <div>
-          <p>Có lỗi xảy ra:</p>
-          <ul>
-            {Object.keys(errors).map((errorKey) => (
-              <li key={errorKey}>{errors[errorKey].message}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+					<div>
+						<p>Có lỗi xảy ra:</p>
+						<ul>
+							{Object.keys(errors).map((errorKey) => (
+								<li key={errorKey}>{errors[errorKey].message}</li>
+							))}
+						</ul>
+					</div>
+				)}
 			</section>
 		</>
 	);

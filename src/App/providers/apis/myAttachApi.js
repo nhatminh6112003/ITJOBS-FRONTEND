@@ -22,13 +22,11 @@ const myAttachApi = createApi({
 			transformResponse: (response) => response.data
 		}),
 		createMyAttach: build.mutation({
-			query: (payload) => (
-				{
-					url: `/my_attach`,
-					method: 'POST',
-					body: payload,
-				}
-			),
+			query: (payload) => ({
+				url: `/my_attach`,
+				method: 'POST',
+				body: payload
+			}),
 			invalidatesTags: ['my_attach']
 		}),
 		updateMyAttach: build.mutation({

@@ -215,7 +215,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data }) => {
 	const [isDisabled, setIsDisabled] = useState(false);
 
 	const handleCheckboxChange = (event) => {
-	  setIsDisabled(event.target.checked);
+		setIsDisabled(event.target.checked);
 	};
 
 	return (
@@ -258,14 +258,13 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data }) => {
 			<div className={cx('row')}>
 				<div className={cx('col-lg-12')}>
 					<div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-					<CheckBoxFieldControl
+						<CheckBoxFieldControl
 							name={'cer_limit'}
 							control={control}
 							label='Không giới hạn'
 							defaultChecked={data?.cer_limit === 1 ? true : false}
 							onChange={handleCheckboxChange}
-						/> 
-					
+						/>
 					</div>
 				</div>
 			</div>

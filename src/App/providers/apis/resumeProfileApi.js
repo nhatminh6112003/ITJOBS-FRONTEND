@@ -18,13 +18,10 @@ const resumeProfileApi = createApi({
 				return { url: `/resume_profile/${id}`, method: 'PATCH', body: payload };
 			},
 			invalidatesTags: ['resume_profile']
-		}),
+		})
 	})
 });
 
-export const {
-	useUpdateResumeProfileMutation,
-	useGetOneResumeProfileQuery,
-} = resumeProfileApi;
+export const { useUpdateResumeProfileMutation, useGetOneResumeProfileQuery } = resumeProfileApi;
 
 export default resumeProfileApi;

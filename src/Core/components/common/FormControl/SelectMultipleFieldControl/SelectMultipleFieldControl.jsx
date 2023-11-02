@@ -78,12 +78,11 @@ const SelectMultipleFieldControl = ({
 	// Filter options based on the searchValue
 	const filteredOptions = useMemo(() => {
 		if (!options) {
-		
-		  return []; 
+			return [];
 		} else {
-		  return options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
+			return options.filter((option) => option.label.toLowerCase().includes(searchValue.toLowerCase()));
 		}
-	 }, [searchValue, options]);
+	}, [searchValue, options]);
 
 	const {
 		field,
@@ -99,7 +98,7 @@ const SelectMultipleFieldControl = ({
 
 	useEffect(() => {
 		const handleData = selectedOptions.map((item) => item.value);
-		console.log("TCL: handleData", handleData)
+		console.log('TCL: handleData', handleData);
 		field.onChange(handleData);
 	}, [selectedOptions]);
 

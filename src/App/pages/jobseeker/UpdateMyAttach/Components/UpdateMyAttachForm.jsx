@@ -60,8 +60,8 @@ const UpdateMyAttachForm = ({
 			provinces: resume_desired_job?.provinces,
 			districts: resume_desired_job?.districts,
 			work_home: resume_desired_job?.work_home,
-			job_degree_value:my_attach?.attachments?.job_degree_value,
-			yearOfExperience:my_attach?.attachments?.yearOfExperience,
+			job_degree_value: my_attach?.attachments?.job_degree_value,
+			yearOfExperience: my_attach?.attachments?.yearOfExperience,
 			// profession_id: resume_desired_job?.profession_id,
 			// welfare_id: resume_desired_job?.welfare_id,
 			// work_type_id: resume_desired_job?.work_type_id,
@@ -170,7 +170,7 @@ const UpdateMyAttachForm = ({
 						</div>
 					</div>
 					<div className={cx('row')}>
-					<div className={cx('col-md-6')}>
+						<div className={cx('col-md-6')}>
 							<div className={sx('form-group')} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
 								<label>* Số năm kinh nghiệm</label>
 								<InputFieldControl

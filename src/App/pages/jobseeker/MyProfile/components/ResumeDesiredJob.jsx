@@ -65,7 +65,6 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	);
 
 	const onUpdateSubmit = async (data) => {
-
 		const work_type_id = [];
 
 		for (let i = 1; i <= 4; i++) {
@@ -104,10 +103,10 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 			welfare_id: resume_desired_job?.welfare_id,
 			work_type_id: resume_desired_job?.work_type_id
 		});
-		resume_desired_job?.work_type_id?.forEach(item=>{
-			setValue(`work_type_id_${item}`,item)
-		})
-	}, [updateReset,resume_desired_job]);
+		resume_desired_job?.work_type_id?.forEach((item) => {
+			setValue(`work_type_id_${item}`, item);
+		});
+	}, [updateReset, resume_desired_job]);
 
 	return (
 		<Fragment>
@@ -193,9 +192,9 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 														style={{
 															paddingBottom: '12px'
 														}}>
-															{listJobWelfare?.data &&
-															listJobWelfare?.data?.
-																filter((value) => resume_desired_job?.welfare_id?.includes(value.id))
+														{listJobWelfare?.data &&
+															listJobWelfare?.data
+																?.filter((value) => resume_desired_job?.welfare_id?.includes(value.id))
 																.map((value, index, array) => {
 																	const isLastItem = index === array.length - 1;
 																	return (

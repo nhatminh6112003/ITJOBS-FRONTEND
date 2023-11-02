@@ -44,7 +44,7 @@ const ResumeTitle = ({ className: cx, isShowing, toggle }) => {
 	return (
 		<Fragment>
 			<Widget
-		    	action='EDIT'
+				action='EDIT'
 				title='Tiêu đề hồ sơ'
 				className={cx('widget', 'widget-24')}
 				status={resumeTitle?.status == 0 ? 'error' : 'success'}

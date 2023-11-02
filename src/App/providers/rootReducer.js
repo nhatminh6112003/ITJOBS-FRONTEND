@@ -58,7 +58,7 @@ const rootReducer = combineReducers({
 	[resumeProfileApi.reducerPath]: resumeProfileApi.reducer,
 	[jobPostApi.reducerPath]: jobPostApi.reducer,
 	[resumeApi.reducerPath]: resumeApi.reducer,
-	[jobPostActivityApi.reducerPath]: jobPostActivityApi.reducer,
+	[jobPostActivityApi.reducerPath]: jobPostActivityApi.reducer
 });
 
 export default rootReducer;

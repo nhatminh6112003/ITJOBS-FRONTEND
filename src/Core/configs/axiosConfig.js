@@ -14,7 +14,7 @@ axiosClient.interceptors.request.use(
 		if (skippingCheckTokenEndpoints.includes(config.url)) {
 			return config;
 		}
-      const user = store.getState().auth.user;
+		const user = store.getState().auth.user;
 		const accessToken = user?.accessToken;
 		config.headers.Authorization = `Bearer ${accessToken}`;
 		return config;
@@ -34,7 +34,7 @@ axiosClient.interceptors.response.use(
 			const controller = new AbortController();
 			axios.request({ signal: controller.signal, ...error.config });
 			// Force signout if access token expired
-         store.dispatch(logout({ Role: UserType[UserRoleEnum.JOBSEEKER] }));
+			store.dispatch(logout({ Role: UserType[UserRoleEnum.JOBSEEKER] }));
 			return Promise.reject(error);
 		}
 		return Promise.reject(error);

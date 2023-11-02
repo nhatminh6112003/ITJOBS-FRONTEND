@@ -1,6 +1,10 @@
 import React, { Fragment, useEffect } from 'react';
 import Table from '~/Core/components/common/Table/Table';
-import { useGetAllCompanyQuery , useUpdateCompanyMutation , useDeleteCompanyMutation } from '~/App/providers/apis/companyApi';
+import {
+	useGetAllCompanyQuery,
+	useUpdateCompanyMutation,
+	useDeleteCompanyMutation
+} from '~/App/providers/apis/companyApi';
 import { useMemo } from 'react';
 import useServerPagination from '~/App/hooks/useServerPagination';
 import { useSearchParams } from 'react-router-dom';
@@ -28,52 +32,50 @@ const Company = () => {
 	const [deleteMutation] = useDeleteCompanyMutation();
 	const tableData = useMemo(() => data?.data ?? [], [data]);
 
-	const columns = useMemo(
-		() => [
-			{
-				Header: 'STT',
-				accessor: 'index',
-				isSort: true,
-				sortable: true,
-				canSort: true,
-			},
-			{ Header: 'Tên công ty', accessor: 'company_name' },
-			{ Header: 'Quy mô công ty', accessor: 'company_size' },
-			{ Header: 'Địa chỉ website', accessor: 'company_website_url' },
-			{ Header: 'Mã số thuế', accessor: 'tax_code' },
-			{ Header: 'Địa chỉ', accessor: 'address' },
-			{ Header: 'Tên Người Liên Hệ', accessor: 'contact_name' },
-			{ Header: 'Số điện thoại người liên hệ', accessor: 'contact_phone' },
-			{ Header: 'Vị Trí', accessor: 'position' },
+	const columns = useMemo(() => [
+		{
+			Header: 'STT',
+			accessor: 'index',
+			isSort: true,
+			sortable: true,
+			canSort: true
+		},
+		{ Header: 'Tên công ty', accessor: 'company_name' },
+		{ Header: 'Quy mô công ty', accessor: 'company_size' },
+		{ Header: 'Địa chỉ website', accessor: 'company_website_url' },
+		{ Header: 'Mã số thuế', accessor: 'tax_code' },
+		{ Header: 'Địa chỉ', accessor: 'address' },
+		{ Header: 'Tên Người Liên Hệ', accessor: 'contact_name' },
+		{ Header: 'Số điện thoại người liên hệ', accessor: 'contact_phone' },
+		{ Header: 'Vị Trí', accessor: 'position' },
 
-			{
-				Header: 'Thao tác',
-				accessor: 'id',
-				Cell: ({ value }) => (
-					<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-						<Tooltip title='Update'>
-							<EditIcon
-								onClick={() => {
-									toggle('update');
-									const findCate = Array.isArray(tableData) && tableData?.find((item) => item?.id === value);
-									setDataUpdate(findCate);
-								}}
-								style={{ cursor: 'pointer' }}
-								fontSize={'small'}
-							/>
-						</Tooltip>
-						<Tooltip title='Delete'>
-							<DeleteIcon
-								onClick={() => setModalConfirmState({ open: true, payload: value })}
-								style={{ cursor: 'pointer' }}
-								fontSize={'small'}
-							/>
-						</Tooltip>
-					</div>
-				)
-			}
-		],
-	);
+		{
+			Header: 'Thao tác',
+			accessor: 'id',
+			Cell: ({ value }) => (
+				<div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+					<Tooltip title='Update'>
+						<EditIcon
+							onClick={() => {
+								toggle('update');
+								const findCate = Array.isArray(tableData) && tableData?.find((item) => item?.id === value);
+								setDataUpdate(findCate);
+							}}
+							style={{ cursor: 'pointer' }}
+							fontSize={'small'}
+						/>
+					</Tooltip>
+					<Tooltip title='Delete'>
+						<DeleteIcon
+							onClick={() => setModalConfirmState({ open: true, payload: value })}
+							style={{ cursor: 'pointer' }}
+							fontSize={'small'}
+						/>
+					</Tooltip>
+				</div>
+			)
+		}
+	]);
 
 	const handleConfirmDelete = async (id) => {
 		deleteMutation(id)
@@ -99,7 +101,7 @@ const Company = () => {
 					/>
 				}
 			/>
-    		<UpdateModal isOpen={isShowing.update} onRequestClose={() => toggle('update')} dataUpdate={dataUpdate} />
+			<UpdateModal isOpen={isShowing.update} onRequestClose={() => toggle('update')} dataUpdate={dataUpdate} />
 			<ConfirmDialog
 				open={modalConfirmState.open}
 				onConfirm={() => handleConfirmDelete(modalConfirmState.payload)}

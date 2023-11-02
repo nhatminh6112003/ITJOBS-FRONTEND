@@ -218,7 +218,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx }) => {
 					</div>
 				</div>
 			</div>
-		
+
 			<div className={cx('form-group', 'row')}>
 				<div className={cx('col-lg-6')}>
 					<div className={cx('input-group')}>

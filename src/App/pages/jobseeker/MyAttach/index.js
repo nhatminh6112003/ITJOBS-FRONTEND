@@ -1,1 +1,1 @@
-export {default} from "./MyAttach.jsx"
+export { default } from './MyAttach.jsx';

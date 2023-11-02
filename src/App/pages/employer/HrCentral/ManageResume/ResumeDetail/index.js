@@ -1,1 +1,1 @@
-export {default} from "./ResumeDetail.jsx"
+export { default } from './ResumeDetail.jsx';

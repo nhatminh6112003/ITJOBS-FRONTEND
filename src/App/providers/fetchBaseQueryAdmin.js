@@ -15,7 +15,7 @@ const baseQuery = fetchBaseQuery({
 		return headers;
 	}
 });
-const baseQueryWithAdmin= async (args, api, extraOptions) => {
+const baseQueryWithAdmin = async (args, api, extraOptions) => {
 	let result = await baseQuery(args, api, extraOptions);
 	if (result?.data?.code && result?.data?.code == 401) {
 		if (result?.data?.message && result?.data?.message == 'jwt expired') {

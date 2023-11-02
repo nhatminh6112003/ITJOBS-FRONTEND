@@ -37,7 +37,7 @@ const Profession = () => {
 			refetchOnMountOrArgChange: true
 		}
 	);
-	console.log("TCL: data", data)
+	console.log('TCL: data', data);
 
 	const [deleteMutation] = useDeleteProfessionMutation();
 	const tableData = useMemo(() => data?.data ?? [], [data]);

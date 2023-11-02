@@ -9,7 +9,7 @@ import {
 	useDeleteResumeEducationMutation,
 	useGetAllEducationQuery,
 	useLazyGetOneResumeEducationQuery,
-	useUpdateResumeEducationMutation,
+	useUpdateResumeEducationMutation
 } from '~/App/providers/apis/resumeEducation';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import Tips from '~/Core/components/common/Modal/Tips';

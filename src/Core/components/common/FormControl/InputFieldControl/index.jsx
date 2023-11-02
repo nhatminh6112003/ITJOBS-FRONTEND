@@ -5,7 +5,10 @@ const cx = classNames.bind(styles);
 import { v4 as uuidv4 } from 'uuid';
 
 import { useRef, forwardRef, Fragment } from 'react';
-const InputFieldControl = ({ defaultValue, control, disabled, rules, type = 'text', name, label,id, ...props }, ref) => {
+const InputFieldControl = (
+	{ defaultValue, control, disabled, rules, type = 'text', name, label, id, ...props },
+	ref
+) => {
 	const {
 		field,
 		fieldState: { error },

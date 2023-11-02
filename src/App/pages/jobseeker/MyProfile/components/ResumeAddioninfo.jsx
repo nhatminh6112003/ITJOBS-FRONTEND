@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import Tips from '~/Core/components/common/Modal/Tips';
 import useModal from '~/App/hooks/useModal';
 import NoContent from './NoContent';
-import { 
+import {
 	useGetAllAddioninfoQuery,
 	useCreateResumeAddioninfoMutation,
 	useDeleteResumeAddioninfoMutation,
@@ -35,7 +35,7 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	const [createAddioninfoMutation] = useCreateResumeAddioninfoMutation();
 	const [deleteAddioninfoMutation] = useDeleteResumeAddioninfoMutation();
 	const [updateAddioninfoMutation] = useUpdateResumeAddioninfoMutation();
-    console.log(resume_addioninfo);
+	console.log(resume_addioninfo);
 	const { control, handleSubmit, reset } = useForm({
 		resolver: yupResolver(resumeAddioninfoSchema)
 	});
@@ -68,12 +68,11 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	};
 
 	const onUpdateSubmit = async (data) => {
-
 		updateAddioninfoMutation({
 			id: resume?.id,
 			payload: {
 				...data,
-				resume_id: resume?.id,
+				resume_id: resume?.id
 			}
 		})
 			.unwrap()
@@ -148,10 +147,7 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 								</div>
 							))
 						) : (
-							<NoContent
-								onClick={() => toggle('resume_addioninfo')}
-								title='Vui lòng thêm thành tích nổi bật'
-							/>
+							<NoContent onClick={() => toggle('resume_addioninfo')} title='Vui lòng thêm thành tích nổi bật' />
 						)}
 					</div>
 				</div>
@@ -187,7 +183,7 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 				</div>
 			</Tips>
 			<ConfirmDialog
-				open={modalConfirmState.open} 
+				open={modalConfirmState.open}
 				onConfirm={() => handleConfirmDelete(modalConfirmState.payload)}
 				onCancel={() => setModalConfirmState({ open: false, payload: null })}
 			/>

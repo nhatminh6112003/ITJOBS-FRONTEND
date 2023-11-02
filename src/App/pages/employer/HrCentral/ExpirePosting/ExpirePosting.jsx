@@ -9,11 +9,23 @@ import TabMenu from '../Posting/components/TabMenu';
 import { useLocation } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
+import { useSelector } from 'react-redux';
 const sx = classNames.bind(styles);
 
 const ExpirePosting = ({ cx }) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
+	const employer = useSelector((state) => state.auth?.employer);
+
+	const { data: allJobPost } = useGetAllJobPostQuery({
+		params: {
+			posted_by_id: employer?.id,
+			status: jobPostStatusEnum.Expired,
+			isDeleted: false
+		}
+	});
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -187,13 +199,89 @@ const ExpirePosting = ({ cx }) => {
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td colSpan={9} className={sx('cb-text-center')}>
-														<p>
-															<strong> Không có vị trí nào trong thư mục này.</strong>
-														</p>
-													</td>
-												</tr>
+												{allJobPost?.data && allJobPost?.data.length > 0 ? (
+													allJobPost?.data?.map((item) => (
+														<tr>
+															<td>
+																<div className='checkbox'></div>
+															</td>
+															<td>
+																<div className='title'>
+																	<a
+																		title='Xem chi tiết việc làm'
+																		className='name'
+																		href='https://careerbuilder.vn/vi/employers/hrcentral/viewjob/35BE12BA/user_id/lop7cttnq.1667207375/sort/desc/type/3/position/1'>
+																		{item.job_title}
+																	</a>
+																</div>
+																{/* <div className='jobs-view-detail'>
+																<p>
+																	<strong>Ngành nghề:</strong> Bán hàng / Kinh doanh, CNTT - Phần mềm
+																</p>
+																<p>
+																	<strong>Địa điểm:</strong> Hà Nội
+																</p>
+															</div> */}
+															</td>
+															<td>
+																<time>{formatDate(item.posted_date)}</time>
+															</td>
+															<td>
+																<time>{formatDate(item.expiry_date)}</time>
+															</td>
+															<td>
+																<p className='view-number'>0</p>
+															</td>
+															<td>
+																<div className='hit-filed'>
+																	<p>
+																		<a
+																			href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/1/35C37874/*/2/0/*/*/8/2/6/2/0/desc/lop7cttnq.1667207375/1'
+																			className='f_size12'
+																			title='Hồ sơ chưa xem '>
+																			0
+																		</a>
+																		/
+																		<a
+																			href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/1/35C37874/*/2/0/*/*/7/2/6/2/0/desc/lop7cttnq.1667207375/1'
+																			className='f_size12'
+																			title='Tổng số hồ sơ ứng tuyển'>
+																			0
+																		</a>
+																	</p>
+																</div>
+															</td>
+
+															<td>
+																<ul
+																	className={cx('list-manipulation', 'd-flex')}
+																	style={{ alignItems: 'center', justifyContent: 'center' }}>
+																	<li>
+																		<Link to={`/employers/postjobs/${item.id}`} title='Sửa'>
+																			<em className={cx('material-icons')}>created</em>
+																		</Link>
+																	</li>
+
+																	<li>
+																		<Link
+																			to={`/employers/hrcentral/viewjob/${item.id}`}
+																			title='Chi tiết'>
+																			<em className={cx('material-icons')}>visibility </em>
+																		</Link>
+																	</li>
+																</ul>
+															</td>
+														</tr>
+													))
+												) : (
+													<tr>
+														<td colSpan={9} className={sx('cb-text-center')}>
+															<p>
+																<strong> Không có vị trí nào trong thư mục này.</strong>
+															</p>
+														</td>
+													</tr>
+												)}
 											</tbody>
 										</table>
 									</div>

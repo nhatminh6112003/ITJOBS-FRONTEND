@@ -28,7 +28,10 @@ const DetailCompany = ({ cx }) => {
 					<div className={sx('company-info')}>
 						<div className={sx('info')}>
 							<div className={sx('img')}>
-								<img src={`${import.meta.env.VITE_IMAGE_URL}/${detailCompany?.data?.logo}`} alt={detailCompany?.data?.company_name} />
+								<img
+									src={`${import.meta.env.VITE_IMAGE_URL}/${detailCompany?.data?.logo}`}
+									alt={detailCompany?.data?.company_name}
+								/>
 							</div>
 							<div className={sx('content')}>
 								<h1 className={sx('name')}>{detailCompany?.data?.company_name}</h1>

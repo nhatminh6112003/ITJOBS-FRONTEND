@@ -35,23 +35,22 @@ const RegisterForm = ({ cx }) => {
 			lastname,
 			firstname
 		}).then(async (result) => {
-         if(result?.error){
-            toast.error(result?.error?.data?.message);
-            return;
-         }
-         
-         if (result?.data?.status == 200){
-            toast.success('Đăng ký thành công');
-         }
-			const userId=result?.data?.data.id;
-         if(userId){
-         const createCompany=await companyMutation({
-            user_account_id:userId,
-            ...data
-         });
-         navigate(routesPath.EmployerPaths.login)
-         }
-		
+			if (result?.error) {
+				toast.error(result?.error?.data?.message);
+				return;
+			}
+
+			if (result?.data?.status == 200) {
+				toast.success('Đăng ký thành công');
+			}
+			const userId = result?.data?.data.id;
+			if (userId) {
+				const createCompany = await companyMutation({
+					user_account_id: userId,
+					...data
+				});
+				navigate(routesPath.EmployerPaths.login);
+			}
 		});
 	};
 	return (
@@ -64,7 +63,7 @@ const RegisterForm = ({ cx }) => {
 					</div>
 				</div>
 				<div className={cx('main-form')}>
-            <div className={cx('form-group', 'd-flex')}>
+					<div className={cx('form-group', 'd-flex')}>
 						<div className={cx('form-info')}>
 							<span>Tên</span>
 						</div>
@@ -78,7 +77,7 @@ const RegisterForm = ({ cx }) => {
 							/>
 						</div>
 					</div>
-                 <div className={cx('form-group', 'd-flex')}>
+					<div className={cx('form-group', 'd-flex')}>
 						<div className={cx('form-info')}>
 							<span>Họ và tên lót</span>
 						</div>
@@ -137,7 +136,6 @@ const RegisterForm = ({ cx }) => {
 							/>
 						</div>
 					</div>
-			
 				</div>
 			</div>
 			<div className={cx('step-2')} id='step-2'>
@@ -292,9 +290,7 @@ const RegisterForm = ({ cx }) => {
 						</div>
 					</div>
 					<div className={cx('btn-area', 'list-btn')}>
-						<div >
-							{/* Quay lại */}
-						</div>
+						<div>{/* Quay lại */}</div>
 						<button className={cx('btn-action')} type='submit'>
 							Đăng ký
 						</button>

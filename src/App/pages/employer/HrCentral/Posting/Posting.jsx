@@ -159,7 +159,7 @@ const Posting = ({ cx }) => {
 											<li className={sx('view-posting-summary')}>
 												<a href='javascript:void(0)'>Xem tóm tắt </a>
 											</li>
-										
+
 											<li>
 												<a href='javascript:void(0);' id='unposting_multi_job'>
 													Tạm Dừng Đăng
@@ -266,21 +266,18 @@ const Posting = ({ cx }) => {
 																	</p>
 																</div>
 															</td>
-														
+
 															<td>
 																<ul
 																	className={cx('list-manipulation', 'd-flex')}
 																	style={{ alignItems: 'center', justifyContent: 'center' }}>
 																	<li>
-																		<Link
-																			to={`/employers/postjobs/${item.id}`}
-																			title='Sửa'>
+																		<Link to={`/employers/postjobs/${item.id}`} title='Sửa'>
 																			<em className={cx('material-icons')}>created</em>
 																		</Link>
 																	</li>
-																	
+
 																	<li>
-																
 																		<Link
 																			to={`/employers/hrcentral/viewjob/${item.id}`}
 																			title='Chi tiết'>
