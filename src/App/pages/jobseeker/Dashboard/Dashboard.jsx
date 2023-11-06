@@ -556,7 +556,7 @@ const Dashboard = () => {
 																			href=''
 																			data-type={2}
 																			className={
-																				item.resume_active === '2'
+																				item.resume_active === '1'
 																					? cx('lock', 'active')
 																					: cx('lock')
 																			}>
@@ -566,7 +566,7 @@ const Dashboard = () => {
 																			href=''
 																			data-type={1}
 																			className={
-																				item.resume_active === '1'
+																				item.resume_active === '2'
 																					? cx('public', 'active')
 																					: cx('public')
 																			}>

@@ -13,7 +13,7 @@ export const EmployerLayout = ({ children }) => {
 					<NavBar className={cx} />
 					{cloneElement(children, { cx })}
 				</main>
-				<Footer />
+				<Footer cx={cx} />
 			</Suspense>
 		</EmployerStyles>
 	);

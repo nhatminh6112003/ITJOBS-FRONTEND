@@ -325,7 +325,7 @@ const UpdateMyAttachForm = ({
 											name='work_home'
 											id='work_home'
 											control={control}
-											label='Work form home'
+											label='Work from home'
 											value={false}
 											defaultChecked={resume_desired_job?.work_home === 1 ? true : false}
 										/>
@@ -336,7 +336,7 @@ const UpdateMyAttachForm = ({
 					</div>
 				</div>
 				<div className={sx('quick-upload', 'quick-upload-2', '')}>
-					<div className={sx('cb-title-h3', '')}>
+					{/* <div className={sx('cb-title-h3', '')}>
 						<h3>Quyền riêng tư của hồ sơ</h3>
 					</div>
 					<div className={sx('status-area', '')}>
@@ -356,7 +356,6 @@ const UpdateMyAttachForm = ({
 									justifyContent: 'center'
 								}}
 								onClick={() => handleClick(1)}>
-								{/* <em className={cx('mdi', 'mdi-lock', '')} /> */}
 								<LockIcon fontSize='20' />
 								Khóa
 							</a>
@@ -412,7 +411,7 @@ const UpdateMyAttachForm = ({
 								bởi các nhà tuyển dụng.
 							</p>
 						</div>
-					</div>
+					</div> */}
 					{/* <div className={cx('row', 'search-resume', '')}>
 						<div className={cx('col-md-6', '')}>
 							<div className={sx('form-group', '')}>

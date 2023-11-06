@@ -339,7 +339,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 											name='work_home'
 											id='work_home'
 											control={control}
-											label='Work form home'
+											label='Work from home'
 											value={false}
 										/>
 									</div>

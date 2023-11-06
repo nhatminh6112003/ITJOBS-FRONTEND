@@ -47,7 +47,10 @@ const EmployerPaths = {
 	viewJob: '/employers/hrcentral/viewjob/:id',
 	editEmployer: '/employers/hrcentral/accounts/edit_employer',
 	resumeDetail: '/employers/hrcentral/resume_detail/:id',
-	findJobSeeker: '/tim-ung-vien'
+	findJobSeeker: '/tim-ung-vien',
+	productAndService: '/employers/products-and-services',
+	serviceAndContact: '/employers/services-and-contact',
+
 };
 
 const BasePaths = {
