@@ -19,6 +19,9 @@ const ViewJob = lazy(() => import('../pages/Employer/HrCentral/ViewJob'));
 const EditEmployer = lazy(() => import('../pages/Employer/HrCentral/Accounts/EditEmployer'));
 const ResumeDetail = lazy(() => import('../pages/Employer/HrCentral/ManageResume/ResumeDetail'));
 const FindJobSeeker = lazy(() => import('../pages/Employer/FindJobSeeker'));
+const ProductAndServices = lazy(() => import('../pages/Employer/ProductAndServices'));
+const ServicesAndContact = lazy(() => import('../pages/Employer/ServicesAndContact'));
+
 const employerPublicRoutes = [
 	{ path: routesPath.EmployerPaths.register, component: Register },
 	{ path: routesPath.EmployerPaths.login, component: Login }
@@ -88,6 +91,14 @@ const employerPrivateRoutes = [
 	{
 		path: routesPath.EmployerPaths.findJobSeeker,
 		component: FindJobSeeker
+	},
+	{
+		path: routesPath.EmployerPaths.productAndService,
+		component: ProductAndServices
+	},
+	{
+		path: routesPath.EmployerPaths.serviceAndContact,
+		component: ServicesAndContact
 	}
 ];
 export { employerPublicRoutes, employerPrivateRoutes };
