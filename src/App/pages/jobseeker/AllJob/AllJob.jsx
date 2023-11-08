@@ -1,30 +1,50 @@
 import styles from './AllJob.module.css';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { dateFilterEnum } from '~/App/constants/dateFilterEnum';
 import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
+import { LevelArray } from '~/App/constants/levelEnum';
+import { priceFilterEnum } from '~/App/constants/priceFilterEnum';
 import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
+import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 
 import { SearchIcon, FavoriteBorderIcon } from '~/Core/resources';
 import formatDate from '~/Core/utils/formatDate';
+import useSearchJobPost from '../../employer/components/useSearchJobPost';
 const cx = classNames.bind(styles);
 const AllJob = () => {
+	const { pushQuery, query } = useSearchJobPost();
 	const { data: allJobPost, isLoading } = useGetAllJobPostQuery({
 		params: {
+			keyword: query.keyword || '',
+			provinces: query.provinces || '',
+			job_position_value: query.job_position_value || '',
+			profession_id: query.profession_id || '',
+			salary: query.salary || '',
+			days: query.days || '',
 			status: jobPostStatusEnum.Publish,
 			isDeleted: false
 		}
 	});
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const [provinces, setProvinces] = useState('');
-	const [isChecked, setIsChecked] = useState(false);
 
-	const activeJobPosts = allJobPost?.data;
-	const activeJobPostsWorkHome = allJobPost?.data.filter((job_post) => job_post.work_home === true);
-	const handleCheckboxChange = () => {
-		setIsChecked(!isChecked);
-	};
+	const { control, handleSubmit, reset } = useForm({
+		values: {
+			keyword: query.keyword || '',
+			job_position_value: query.job_position_value || '',
+			profession_id: query.profession_id || '',
+			salary: query.salary || '',
+			days: query.days || '',
+			provinces: query.provinces || ''
+		}
+	});
+	const { data: listProfession } = useGetAllProfessionQuery({});
 
 	useEffect(() => {
 		allJobPost?.data?.map((detailJob) => {
@@ -36,6 +56,29 @@ const AllJob = () => {
 		});
 	}, [allJobPost, listProvinces]);
 
+	const onSubmit = (data) => {
+		pushQuery({ ...data });
+	};
+
+	const handleReset = () => {
+		reset({
+			keyword: '',
+			job_position_value: '',
+			profession_id: '',
+			salary: '',
+			days: '',
+			provinces: ''
+		});
+		pushQuery({
+			keyword: '',
+			job_position_value: '',
+			profession_id: '',
+			salary: '',
+			days: '',
+			provinces: ''
+		});
+	};
+
 	return (
 		<>
 			<section className={cx('page-heading-tool')}>
@@ -46,115 +89,59 @@ const AllJob = () => {
 							<em className={cx('lnr', 'lnr-cross')} />
 						</div>
 						<div className={cx('search-job')}>
-							<form>
+							<form onSubmit={handleSubmit(onSubmit)}>
 								<div className={cx('form-wrap')}>
 									<div className={cx('form-group', 'form-keyword')}>
-										<input
+										<InputFieldControl
 											type='search'
 											className={cx('keyword')}
 											name='keyword'
 											id='keyword'
 											placeholder='Chức danh, Kỹ năng, Tên công ty'
 											autoComplete='off'
+											control={control}
 										/>
 										<div className={cx('cleartext')}>
 											<em className='mdi mdi-close-circle' />
 										</div>
 									</div>
 									<div className={cx('form-group')}>
-										<select
-											id='industry'
-											name='industry'
+										<SelectFieldControl
+											id='profession_id'
+											name='profession_id'
 											className={cx('select-custom-nosearch', 'select-custom')}
-											data-placeholder='Tất cả ngành nghề'>
-											<option value=''>Chọn ngành nghề</option>
-											<option value='an-ninh-bao-ve_51'>An Ninh / Bảo Vệ</option>
-											<option value='an-toan-lao-dong_58'>An toàn lao động</option>
-											<option value='ban-hang-kinh-doanh_31'>Bán hàng / Kinh doanh</option>
-											<option value='ban-le-ban-si_30'>Bán lẻ / Bán sỉ</option>
-											<option value='bao-hiem_23'>Bảo hiểm</option>
-											<option value='bat-dong-san_28'>Bất động sản</option>
-											<option value='bien-phien-dich_38'>Biên phiên dịch</option>
-											<option value='buu-chinh-vien-thong_32'>Bưu chính viễn thông</option>
-											<option value='chan-nuoi-thu-y_52'>Chăn nuôi / Thú y</option>
-											<option value='chung-khoan_46'>Chứng khoán</option>
-											<option value='cntt-phan-cung-mang_63'>CNTT - Phần cứng / Mạng</option>
-											<option value='cntt-phan-mem_1'>CNTT - Phần mềm</option>
-											<option value='cong-nghe-sinh-hoc_69'>Công nghệ sinh học</option>
-											<option value='cong-nghe-thuc-pham-dinh-duong_70'>
-												Công nghệ thực phẩm / Dinh dưỡng
-											</option>
-											<option value='co-khi-o-to-tu-dong-hoa_14'>Cơ khí / Ô tô / Tự động hóa</option>
-											<option value='dau-khi_26'>Dầu khí</option>
-											<option value='det-may-da-giay-thoi-trang_39'>Dệt may / Da giày / Thời trang</option>
-										</select>
+											initialValue='Chọn ngành nghề'
+											options={listProfession?.data?.map((item) => ({
+												value: item.id,
+												label: item.name
+											}))}
+											control={control}
+										/>
 									</div>
 									<div className={cx('form-group', 'form-select-chosen')}>
-										<select
-											id='location'
-											name='location'
-											className={cx('select-custom-nosearch', 'select-custom')}
-											data-placeholder='Tất cả địa điểm'
-											multiple=''>
-											<option value=''>Chọn địa điểm</option>
-											<option value='ha-noi_4'>Hà Nội</option>
-											<option value='ho-chi-minh_8'>Hồ Chí Minh</option>
-										</select>
+										{listProvinces && listProvinces?.length > 0 && (
+											<SelectFieldControl
+												control={control}
+												id='provinces'
+												name='provinces'
+												style={{ width: 240 }}
+												className={cx('select-custom-nosearch', 'select-custom')}
+												initialValue='Tất cả địa điểm'
+												options={listProvinces?.map((item) => ({
+													value: item?.code,
+													label: item?.name
+												}))}
+											/>
+										)}
 									</div>
 									<div className={cx('form-group', 'form-submit')}>
-										<button className={cx('btn-gradient')} onClick="return validataSearchHomePage('vi');">
+										<button className={cx('btn-gradient')} type='submit'>
 											<p>Tìm Ngay</p>
 											<SearchIcon />
 										</button>
 									</div>
 								</div>
 							</form>
-						</div>
-						<div className={cx('box-right-action')}>
-							<div className='mobile-filter toollips'>
-								<span className='mdi mdi-filter-outline'></span>
-								<p>Lọc</p>
-							</div>
-							<div className={cx('switch-group', 'toollips', 'switch-group-sp')}>
-								<div className={cx('form-group')}>
-									<label htmlFor='work-home-fli'>
-										Work from home
-										<input
-											id='work-home-fli'
-											type='checkbox'
-											checked={isChecked}
-											onChange={handleCheckboxChange}
-										/>
-										<span className={cx('slider')} />
-									</label>
-								</div>
-							</div>
-							<input
-								type='hidden'
-								name='url_page_search'
-								id='url_page_search'
-								defaultValue='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-vi.html'
-							/>
-							{/* <div className={cx("change-display")}>
-            <ul>
-              <li className={cx("list-view-mode","active")}>
-                <a href="javascript:searchJobView('list')" className="active">
-                  <em className="mdi mdi-view-list" />
-                </a>
-                <div className="toolip">
-                  <p>Chuyển qua chế độ xem danh sách</p>
-                </div>
-              </li>
-              <li className={cx("quick-view-mode")}>
-                <a href="javascript:searchJobView('detail')">
-                  <em className="mdi mdi-view-quilt" />
-                </a>
-                <div className={cx("toolip")}>
-                  <p>Chuyển qua chế độ xem nhanh</p>
-                </div>
-              </li>
-            </ul>
-          </div> */}
 						</div>
 					</div>
 				</div>
@@ -303,165 +290,70 @@ const AllJob = () => {
 									</div>
 									<div className='item'>
 										<div className={cx('form-group', 'form-select')}>
-											<select
+											<SelectFieldControl
 												name='salary'
 												id='salary'
 												className={cx('select-custom', 'select-custom-nosearch')}
-												data-placeholder='Mức lương'>
-												<option value='' data-id={-1}>
-													Mức lương
-												</option>
-												<option value={3}>Từ 3.000.000 đ</option>
-												<option value={5}>Từ 5.000.000 đ</option>
-												<option value={7}>Từ 7.000.000 đ</option>
-												<option value={10}>Từ 10.000.000 đ</option>
-												<option value={15}>Từ 15.000.000 đ</option>
-												<option value={20}>Từ 20.000.000 đ</option>
-												<option value={30}>Từ 30.000.000 đ</option>
-												<option value={40}>Từ 40.000.000 đ</option>
-												<option value={50}>Từ 50.000.000 đ</option>
-												<option value={60}>Từ 60.000.000 đ</option>
-												<option value={70}>Từ 70.000.000 đ</option>
-											</select>
+												initialValue='Mức lương'
+												options={priceFilterEnum.map((item) => ({
+													value: item.value,
+													label: item.label
+												}))}
+												control={control}
+											/>
 										</div>
 									</div>
 									<div className='item'>
 										<div className={cx('form-group', 'form-select')}>
-											<select
-												id='level'
-												name='level'
+											<SelectFieldControl
+												name='job_position_value'
+												id='job_position_value'
 												className={cx('select-custom', 'select-custom-nosearch')}
-												data-placeholder='Cấp bậc'>
-												<option value='' data-id={-1}>
-													Cấp bậc
-												</option>
-												<option value='sinh-vien-thuc-tap-sinh_1' data-id={1}>
-													Sinh viên/ Thực tập sinh
-												</option>
-												<option value='moi-tot-nghiep_2' data-id={2}>
-													Mới tốt nghiệp
-												</option>
-												<option value='nhan-vien_3' data-id={3}>
-													Nhân viên
-												</option>
-												<option value='truong-nhom-giam-sat_4' data-id={4}>
-													Trưởng nhóm / Giám sát
-												</option>
-												<option value='quan-ly_5' data-id={5}>
-													Quản lý
-												</option>
-												<option value='quan-ly-cap-cao_11' data-id={11}>
-													Quản lý cấp cao
-												</option>
-												<option value='dieu-hanh-cap-cao_12' data-id={12}>
-													Điều hành cấp cao
-												</option>
-											</select>
+												initialValue='Cấp bậc'
+												options={LevelArray.map((item) => ({
+													value: item.value,
+													label: item.label
+												}))}
+												control={control}
+											/>
 										</div>
 									</div>
 									<div className='item'>
 										<div className={cx('form-group', 'form-select')}>
-											<select
+											<SelectFieldControl
+												control={control}
 												name='days'
 												id='days'
 												className={cx('select-custom', 'select-custom-nosearch')}
-												data-placeholder='Đăng trong vòng'>
-												<option value=''>Đăng trong vòng</option>
-												<option value={3} data-id={3}>
-													3 ngày trước
-												</option>
-												<option value={7} data-id={7}>
-													1 tuần trước
-												</option>
-												<option value={14} data-id={14}>
-													2 tuần trước
-												</option>
-												<option value={30} data-id={30}>
-													1 tháng trước{' '}
-												</option>
-											</select>
+												initialValue='Đăng trong vòng'
+												options={dateFilterEnum.map((item) => ({
+													value: item.value,
+													label: item.label
+												}))}
+											/>
 										</div>
 									</div>
-									<div className='item'>
+									{/* <div className='item'>
 										<div className={cx('form-group', 'form-select')}>
-											<select
+											<SelectFieldControl
+												control={control}
 												name='job_type'
 												id='job_type'
 												className={cx('select-custom', 'select-custom-nosearch')}
-												data-placeholder='Hình thức việc làm'>
-												<option value=''>Hình thức việc làm</option>
-												<option value='nhan-vien-chinh-thuc_1000'>Nhân viên chính thức</option>
-												<option value='tam-thoi-du-an_0100'>Tạm thời/Dự án</option>
-												<option value='thoi-vu-nghe-tu-do_0010'>Thời vụ - Nghề tự do</option>
-												<option value='thuc-tap_0001'>Thực tập</option>
-											</select>
+												initialValue='Hình thức việc làm'
+												options={listWorkType?.map((item) => ({
+													value: item.id,
+													label: item.name
+												}))}
+											/>
 										</div>
-									</div>
-									<div className='item'>
-										<div className={cx('form-group', 'form-select-chosen')}>
-											<select
-												multiple='multiple'
-												name='benefit'
-												id='benefit'
-												size={1}
-												className={cx('select-custom-nosearch', 'select-custom')}
-												data-placeholder='Phúc lợi mong muốn'
-												title='Chọn'
-												style={{ width: 240, display: 'none' }}>
-												<option value='che-do-bao-hiem_2' data-id={2}>
-													Chế độ bảo hiểm
-												</option>
-												<option value='du-lich_3' data-id={3}>
-													Du Lịch
-												</option>
-												<option value='che-do-thuong_8' data-id={8}>
-													Chế độ thưởng
-												</option>
-												<option value='cham-soc-suc-khoe_9' data-id={9}>
-													Chăm sóc sức khỏe
-												</option>
-												<option value='dao-tao_10' data-id={10}>
-													Đào tạo
-												</option>
-												<option value='tang-luong_11' data-id={11}>
-													Tăng lương
-												</option>
-												<option value='laptop_1' data-id={1}>
-													Laptop
-												</option>
-												<option value='phu-cap_4' data-id={4}>
-													Phụ cấp
-												</option>
-												<option value='xe-dua-don_5' data-id={5}>
-													Xe đưa đón
-												</option>
-												<option value='du-lich-nuoc-ngoai_6' data-id={6}>
-													Du lịch nước ngoài
-												</option>
-												<option value='dong-phuc_7' data-id={7}>
-													Đồng phục
-												</option>
-												<option value='cong-tac-phi_12' data-id={12}>
-													Công tác phí
-												</option>
-												<option value='phu-cap-tham-nien_13' data-id={13}>
-													Phụ cấp thâm niên
-												</option>
-												<option value='nghi-phep-nam_14' data-id={14}>
-													Nghỉ phép năm
-												</option>
-												<option value='clb-the-thao_15' data-id={15}>
-													CLB thể thao
-												</option>
-											</select>
-										</div>
-									</div>
+									</div> */}
 								</div>
 								<div className={cx('filter-action')}>
 									<a href='' className={cx('btn-apply')}>
 										Tìm Ngay
 									</a>
-									<a className={cx('btn-clear')} href=''>
+									<a className={cx('btn-clear')} onClick={() => handleReset()}>
 										Xóa bộ lọc
 									</a>
 								</div>
@@ -477,219 +369,74 @@ const AllJob = () => {
 						<div className={cx('col-lg-8', 'col-custom-xxl-9')}>
 							<div className={cx('job-found')}>
 								<div className={cx('job-found-amout')}>
-									<h1>{isChecked ? activeJobPostsWorkHome?.length : activeJobPosts?.length} việc làm</h1>
-								</div>
-								<div className={cx('job-found-sort')}>
-									<span className={cx('sort-title dropdown')}>
-										Sắp xếp theo
-										<em className={cx('mdi mdi-chevron-down')} />
-										<div className={cx('dropdown-menu')}>
-											<ul>
-												<li>
-													{' '}
-													<a
-														title='Cập nhật'
-														className='active'
-														href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-sortdv-vi.html'>
-														Cập nhật
-													</a>
-												</li>
-												<li>
-													<a
-														title='Mức lương'
-														href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-sortlg-vi.html'>
-														Mức lương
-													</a>
-												</li>
-											</ul>
-										</div>
-									</span>
+									<h1>{allJobPost?.data?.length} việc làm</h1>
 								</div>
 							</div>
 							<div className={cx('main-slide')}>
 								<div className={cx('jobs-side-list')} id='jobs-side-list-content'>
-									{isChecked
-										? allJobPost?.data.map((job_post) => {
-												if (job_post.work_home === true) {
-													return (
-														<>
-															<div className={cx('job-item')} id='job-item-35BB3D60'>
-																<div className={cx('figure')}>
-																	<div className={cx('image')}>
-																		<Link
-																			to={`/nha-tuyen-dung/${job_post?.company_id}`}
-																			target='_blank'
-																			title={job_post?.company?.company_name}
-																			rel='noreferrer'>
-																			<img
-																				className={cx('lazy-img')}
-																				src={job_post?.company?.logo}
-																				alt={job_post?.company?.company_name}
-																			/>
-																		</Link>
-																	</div>
-																	<div className={cx('figcaption')}>
-																		<div className={cx('title')}>
-																			<h2>
-																				<a
-																					className={cx('job_link')}
-																					data-id='35BB3D60'
-																					href={`/tim-viec-lam/${job_post?.id}`}
-																					target='_blank'
-																					title={job_post?.job_title}
-																					rel='noreferrer'>
-																					{job_post?.job_title}
-																					<span className={cx('new')}>
-																						<font color='ff0000'>(Mới)</font>
-																					</span>{' '}
-																				</a>
-																			</h2>
-																		</div>
-																		<div className={cx('caption')}>
-																			<a
-																				className={cx('company-name')}
-																				target='_blank'
-																				href={`/nha-tuyen-dung/${job_post?.company_id}`}
-																				title={job_post?.company?.company_name}
-																				rel='noreferrer'>
-																				{job_post?.company?.company_name}
-																			</a>
-																			<a
-																				className={cx('job_link')}
-																				data-id='35BB3D60'
-																				href={`/tim-viec-lam/${job_post?.id}`}
-																				target='_blank'
-																				title={job_post?.job_title}
-																				rel='noreferrer'>
-																				<div className={cx('salary')}>
-																					<p>
-																						<em className='fa fa-usd' />
-																						Lương:{' '}
-																						{parseInt(job_post?.min_salary)
-																							.toString()
-																							.charAt(0)}{' '}
-																						Tr -{' '}
-																						{parseInt(job_post?.max_salary).toString().charAt(0)}{' '}
-																						Tr VND
-																					</p>
-																				</div>
-																				<div className={cx('location')}>
-																					<em className='mdi mdi-map-marker' />
-																					<ul>{provinces && <li>{provinces}</li>}</ul>
-																				</div>
-																				{/* <ul className={cx('welfare')}>
-																				<li>
-																					<span className='fa fa-medkit' />
-																					Chế độ bảo hiểm
-																				</li>
-																				<li>
-																					<span className='fa fa-plane' />
-																					Du Lịch
-																				</li>
-																				<li>
-																					<span className='fa fa-usd' />
-																					Chế độ thưởng
-																				</li>
-																			</ul> */}
-																			</a>
-																		</div>
-																		<div className={cx('bottom-right-icon')}>
-																			<ul>
-																				<li>
-																					<a
-																						className={cx(
-																							'toollips',
-																							'save-job',
-																							'chk_save_35BB3D60'
-																						)}
-																						href=''
-																						data-id='35BB3D60'
-																						onClick='popuplogin()'>
-																						<FavoriteBorderIcon fontSize='small' />
-																						<span className={cx('text')}>Lưu việc làm</span>
-																					</a>
-																				</li>
-																			</ul>
-																			<div className={cx('time')}>
-																				<em className='mdi mdi-calendar' />
-																				<time>{formatDate(job_post?.updatedAt)}</time>
-																				{/* <div className={cx("toolip")}>
-									  <p>Ngày cập nhật</p>
-									</div> */}
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</>
-													);
-												}
-										  })
-										: allJobPost?.data.map((job_post) => {
-												return (
-													<>
-														<div className={cx('job-item')} id='job-item-35BB3D60'>
-															<div className={cx('figure')}>
-																<div className={cx('image')}>
-																	<Link
-																		to={`/nha-tuyen-dung/${job_post?.company_id}`}
+									{allJobPost?.data.map((job_post) => {
+										return (
+											<>
+												<div className={cx('job-item')} id='job-item-35BB3D60'>
+													<div className={cx('figure')}>
+														<div className={cx('image')}>
+															<Link
+																to={`/nha-tuyen-dung/${job_post?.company_id}`}
+																target='_blank'
+																title={job_post?.company?.company_name}
+																rel='noreferrer'>
+																<img
+																	className={cx('lazy-img')}
+																	src={job_post?.company?.logo}
+																	alt={job_post?.company?.company_name}
+																/>
+															</Link>
+														</div>
+														<div className={cx('figcaption')}>
+															<div className={cx('title')}>
+																<h2>
+																	<a
+																		className={cx('job_link')}
+																		data-id='35BB3D60'
+																		href={`/tim-viec-lam/${job_post?.id}`}
 																		target='_blank'
-																		title={job_post?.company?.company_name}
+																		title={job_post?.job_title}
 																		rel='noreferrer'>
-																		<img
-																			className={cx('lazy-img')}
-																			src={job_post?.company?.logo}
-																			alt={job_post?.company?.company_name}
-																		/>
-																	</Link>
-																</div>
-																<div className={cx('figcaption')}>
-																	<div className={cx('title')}>
-																		<h2>
-																			<a
-																				className={cx('job_link')}
-																				data-id='35BB3D60'
-																				href={`/tim-viec-lam/${job_post?.id}`}
-																				target='_blank'
-																				title={job_post?.job_title}
-																				rel='noreferrer'>
-																				{job_post?.job_title}
-																				<span className={cx('new')}>
-																					<font color='ff0000'>(Mới)</font>
-																				</span>{' '}
-																			</a>
-																		</h2>
+																		{job_post?.job_title}
+																		<span className={cx('new')}>
+																			<font color='ff0000'>(Mới)</font>
+																		</span>{' '}
+																	</a>
+																</h2>
+															</div>
+															<div className={cx('caption')}>
+																<a
+																	className={cx('company-name')}
+																	target='_blank'
+																	href={`/nha-tuyen-dung/${job_post?.company_id}`}
+																	title={job_post?.company?.company_name}
+																	rel='noreferrer'>
+																	{job_post?.company?.company_name}
+																</a>
+																<a
+																	className={cx('job_link')}
+																	data-id='35BB3D60'
+																	href={`/tim-viec-lam/${job_post?.id}`}
+																	target='_blank'
+																	title={job_post?.job_title}
+																	rel='noreferrer'>
+																	<div className={cx('salary')}>
+																		<p>
+																			<em className='fa fa-usd' />
+																			Lương: {parseInt(job_post?.min_salary).toString().charAt(0)} Tr
+																			- {parseInt(job_post?.max_salary).toString().charAt(0)} Tr VND
+																		</p>
 																	</div>
-																	<div className={cx('caption')}>
-																		<a
-																			className={cx('company-name')}
-																			target='_blank'
-																			href={`/nha-tuyen-dung/${job_post?.company_id}`}
-																			title={job_post?.company?.company_name}
-																			rel='noreferrer'>
-																			{job_post?.company?.company_name}
-																		</a>
-																		<a
-																			className={cx('job_link')}
-																			data-id='35BB3D60'
-																			href={`/tim-viec-lam/${job_post?.id}`}
-																			target='_blank'
-																			title={job_post?.job_title}
-																			rel='noreferrer'>
-																			<div className={cx('salary')}>
-																				<p>
-																					<em className='fa fa-usd' />
-																					Lương:{' '}
-																					{parseInt(job_post?.min_salary).toString().charAt(0)} Tr
-																					- {parseInt(job_post?.max_salary).toString().charAt(0)}{' '}
-																					Tr VND
-																				</p>
-																			</div>
-																			<div className={cx('location')}>
-																				<em className='mdi mdi-map-marker' />
-																				<ul>{provinces && <li>{provinces}</li>}</ul>
-																			</div>
-																			{/* <ul className={cx('welfare')}>
+																	<div className={cx('location')}>
+																		<em className='mdi mdi-map-marker' />
+																		<ul>{provinces && <li>{provinces}</li>}</ul>
+																	</div>
+																	{/* <ul className={cx('welfare')}>
 																			<li>
 																				<span className='fa fa-medkit' />
 																				Chế độ bảo hiểm
@@ -703,39 +450,35 @@ const AllJob = () => {
 																				Chế độ thưởng
 																			</li>
 																		</ul> */}
+																</a>
+															</div>
+															<div className={cx('bottom-right-icon')}>
+																<ul>
+																	<li>
+																		<a
+																			className={cx('toollips', 'save-job', 'chk_save_35BB3D60')}
+																			href=''
+																			data-id='35BB3D60'
+																			onClick='popuplogin()'>
+																			<FavoriteBorderIcon fontSize='small' />
+																			<span className={cx('text')}>Lưu việc làm</span>
 																		</a>
-																	</div>
-																	<div className={cx('bottom-right-icon')}>
-																		<ul>
-																			<li>
-																				<a
-																					className={cx(
-																						'toollips',
-																						'save-job',
-																						'chk_save_35BB3D60'
-																					)}
-																					href=''
-																					data-id='35BB3D60'
-																					onClick='popuplogin()'>
-																					<FavoriteBorderIcon fontSize='small' />
-																					<span className={cx('text')}>Lưu việc làm</span>
-																				</a>
-																			</li>
-																		</ul>
-																		<div className={cx('time')}>
-																			<em className='mdi mdi-calendar' />
-																			<time>{formatDate(job_post?.updatedAt)}</time>
-																			{/* <div className={cx("toolip")}>
+																	</li>
+																</ul>
+																<div className={cx('time')}>
+																	<em className='mdi mdi-calendar' />
+																	<time>{formatDate(job_post?.updatedAt)}</time>
+																	{/* <div className={cx("toolip")}>
 								  <p>Ngày cập nhật</p>
 								</div> */}
-																		</div>
-																	</div>
 																</div>
 															</div>
 														</div>
-													</>
-												);
-										  })}
+													</div>
+												</div>
+											</>
+										);
+									})}
 								</div>
 
 								{/* <div className={cx('pagination')}>
