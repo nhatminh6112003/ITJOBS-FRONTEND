@@ -15,10 +15,19 @@ import SelectFieldControl from '~/Core/components/common/FormControl/SelectField
 
 import { SearchIcon, FavoriteBorderIcon } from '~/Core/resources';
 import formatDate from '~/Core/utils/formatDate';
-import useSearchJobPost from '../../employer/components/useSearchJobPost';
+import useSearchJobPost from '../../Employer/components/useSearchJobPost';
+import Pagination from '~/Core/components/common/Pagination';
+import { useDispatch } from 'react-redux';
+import { PaginationActionEnums } from '~/App/hooks/useServerPagination';
+import useCustomRouter from '~/App/hooks/useCustomRouter';
+
 const cx = classNames.bind(styles);
 const AllJob = () => {
 	const { pushQuery, query } = useSearchJobPost();
+	const {
+		query: { page }
+	} = useCustomRouter();
+	const dispatch = useDispatch();
 	const { data: allJobPost, isLoading } = useGetAllJobPostQuery({
 		params: {
 			keyword: query.keyword || '',
@@ -28,7 +37,8 @@ const AllJob = () => {
 			salary: query.salary || '',
 			days: query.days || '',
 			status: jobPostStatusEnum.Publish,
-			isDeleted: false
+			isDeleted: false,
+			page: page || ''
 		}
 	});
 	const { data: listProvinces } = useGetAllProvincesQuery();
@@ -76,6 +86,21 @@ const AllJob = () => {
 			salary: '',
 			days: '',
 			provinces: ''
+		});
+	};
+
+	const gotoPreviousPage = () => {
+		dispatch({ type: PaginationActionEnums.GO_TO_PREV_PAGE });
+	};
+	const gotoNextPage = () => {
+		dispatch({ type: PaginationActionEnums.GO_TO_NEXT_PAGE });
+	};
+
+	const changePageIndex = (value) => {
+		if (allJobPost?.pagination?.pageIndex >= allJobPost?.pagination?.totalPages) gotoPreviousPage();
+		dispatch({
+			type: PaginationActionEnums.CHANGE_PAGE_INDEX,
+			payload: value
 		});
 	};
 
@@ -468,9 +493,7 @@ const AllJob = () => {
 																<div className={cx('time')}>
 																	<em className='mdi mdi-calendar' />
 																	<time>{formatDate(job_post?.updatedAt)}</time>
-																	{/* <div className={cx("toolip")}>
-								  <p>Ngày cập nhật</p>
-								</div> */}
+													
 																</div>
 															</div>
 														</div>
@@ -481,116 +504,19 @@ const AllJob = () => {
 									})}
 								</div>
 
-								{/* <div className={cx('pagination')}>
-									<ul>
-										<li className={cx('active')}>
-											<a href=''>1</a>
-										</li>
-										<li>
-											<a href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-trang-2-vi.html'>2</a>
-										</li>
-										<li>
-											<a href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-trang-3-vi.html'>3</a>
-										</li>
-										<li>
-											<a href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-trang-4-vi.html'>4</a>
-										</li>
-										<li>
-											<a href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-trang-5-vi.html'>5</a>
-										</li>
-										<li className={cx('next-page')}>
-											<a href='https://careerbuilder.vn/viec-lam/tat-ca-viec-lam-trang-2-vi.html'>
-												{' '}
-												<span className={cx('mdi mdi-chevron-right')} />
-											</a>
-										</li>
-									</ul>
-								</div> */}
+								<Pagination
+									style={{ display: 'flex', justifyContent: 'center' }}
+									total={allJobPost?.pagination?.totalPages}
+									pageSize={allJobPost?.pagination?.pageSize}
+									currentPage={allJobPost?.pagination?.pageIndex}
+									onChange={changePageIndex}
+									gotoNextPage={gotoNextPage}
+									gotoPreviousPage={gotoPreviousPage}
+								/>
 							</div>
 							<div className={cx('job-bottom-banner')} style={{ textAlign: 'center' }}></div>
 						</div>
-						<div className={cx('col-lg-4 col-custom-xxl-3')}>
-							<div className={cx('box-most-find')}>
-								<div className={cx('box-title')}>
-									<h4>Việc làm được tìm kiếm nhiều nhất</h4>
-								</div>
-								<div className={cx('box-content')}>
-									<ul>
-										<li>
-											<a
-												href='https://careerbuilder.vn/viec-lam/Kế-toán-trưởng-k-vi.html'
-												title='Kế toán trưởng'>
-												Kế toán trưởng
-											</a>
-										</li>
-										<li>
-											<a
-												href='https://careerbuilder.vn/viec-lam/Đại-diện-kinh-doanh-k-vi.html'
-												title='Đại diện kinh doanh'>
-												Đại diện kinh doanh
-											</a>
-										</li>
-										<li>
-											<a href='https://careerbuilder.vn/viec-lam/Purchasing-k-vi.html' title='Purchasing'>
-												Purchasing
-											</a>
-										</li>
-										<li>
-											<a href='https://careerbuilder.vn/viec-lam/Giám-đốc-k-vi.html' title='Giám đốc'>
-												Giám đốc
-											</a>
-										</li>
-										<li>
-											<a
-												href='https://careerbuilder.vn/viec-lam/Nhân-viên-kế-toán-k-vi.html'
-												title='Nhân viên kế toán'>
-												Nhân viên kế toán
-											</a>
-										</li>
-										<li>
-											<a
-												href='https://careerbuilder.vn/viec-lam/General-Accountant-k-vi.html'
-												title='General Accountant'>
-												General Accountant
-											</a>
-										</li>
-										<li>
-											<a
-												href='https://careerbuilder.vn/viec-lam/Head-of-Office-k-vi.html'
-												title='Head of Office'>
-												Head of Office
-											</a>
-										</li>
-										<li>
-											<a
-												href='https://careerbuilder.vn/viec-lam/Sales-Executive-k-vi.html'
-												title='Sales Executive'>
-												Sales Executive
-											</a>
-										</li>
-										<li>
-											<a href='https://careerbuilder.vn/viec-lam/Buyer-k-vi.html' title='Buyer'>
-												Buyer
-											</a>
-										</li>
-										<li>
-											<a
-												href='https://careerbuilder.vn/viec-lam/Head-of-sales-k-vi.html'
-												title='Head of sales'>
-												Head of sales
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div className={cx('list-banner-search-result')}>
-								{/* remve class sticky*/}
-								<div className={cx('banner-ad loadAds')} id={854} />
-								<div className={cx('banner-ad loadAds')} id={855} />
-								<div className={cx('banner-ad loadAds')} id={856} />
-								<div className={cx('banner-ad')} style={{ textAlign: 'center' }}></div>
-							</div>
-						</div>{' '}
+					
 					</div>
 				</div>
 			</section>

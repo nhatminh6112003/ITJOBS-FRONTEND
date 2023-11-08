@@ -72,7 +72,7 @@ const Dashboard = () => {
 																alt='Lop Minh'
 															/>
 														</div>
-														<div className={cx('edit-image', 'dropdown')}>
+														{/* <div className={cx('edit-image', 'dropdown')}>
 															<div className={cx('dropdown-menu')}>
 																<ul>
 																	<li className={cx('upload-pro')}>
@@ -88,7 +88,7 @@ const Dashboard = () => {
 																	</li>
 																</ul>
 															</div>
-														</div>
+														</div> */}
 													</div>
 													<div className={cx('mobile-show')}>
 														<div className={cx('cb-name')}>
@@ -151,7 +151,7 @@ const Dashboard = () => {
 													</ul>
 												</div>
 											</div>
-											<div className={cx('col-lg-12')}>
+											{/* <div className={cx('col-lg-12')}>
 												<div className={cx('progress-bar-status', 'not-approve')}>
 													<div className={cx('profile-strength')}>
 														<p>
@@ -183,7 +183,7 @@ const Dashboard = () => {
 														</div>
 													</div>
 												</div>
-											</div>
+											</div> */}
 											<div className={cx('col-lg-12', 'cvcht-slide')}>
 												<div
 													className={cx(
@@ -229,8 +229,8 @@ const Dashboard = () => {
 													aria-disabled='true'>
 													<span className={cx('lnr', 'lnr-chevron-left')} />
 												</div>
-											</div>{' '}
-											<div className={cx('col-lg-12', 'function-bottom')}>
+											</div>
+											{/* <div className={cx('col-lg-12', 'function-bottom')}>
 												<div className={cx('button-list')}>
 													<div className={cx('item')}>
 														<a title='Cập nhật hồ sơ' href='' className={cx('ac_refesh')} rel={17722295}>
@@ -256,7 +256,7 @@ const Dashboard = () => {
 														Chỉnh mẫu hồ sơ
 													</a>
 												</div>
-											</div>
+											</div> */}
 										</div>
 									</div>
 								</div>
@@ -292,102 +292,11 @@ const Dashboard = () => {
 									</div>
 									<p>Bạn có thể cho phép nhà tuyển dụng tìm kiếm hồ sơ CareerBuilder</p>
 								</div>
-								<div className={cx('widget-b', 'jobalert-cv-widget')}>
-									<h4>
-										Nhận thông báo việc làm
-										<div className={cx('tips', 'p2')} data-type={2}>
-											<div className={cx('icon')}>
-												<em className={cx('mdi', 'mdi-lightbulb')} />
-											</div>
-											<p>Tips</p>
-										</div>
-									</h4>
-									<div
-										className={cx('switch-status', 'group_jobalert_top')}
-										id='cv_jobalert_17722295'
-										data-id={17722295}
-										data-complete={1}>
-										<a href='' data-type={0} className={cx('inactive', '')}>
-											Không nhận
-										</a>
-										<a href='' data-type={1} className={cx('actives', '', 'active', '')}>
-											Nhận
-										</a>
-									</div>
-									<p>Nhận thông báo việc làm phù hợp với hồ sơ này mỗi 2 tuần</p>
-								</div>
+						
 							</div>
 						</div>
 						<div className={cx('row')}>
-							<div className={cx('col-sm-6', 'col-lg-3')}>
-								<div className={cx('widget-1', 'b1')}>
-									<div className={cx('widget-head')}>
-										<p>0</p>
-										<p>Nhà tuyển dụng xem hồ sơ của tôi</p>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('item')}>
-											<div className={cx('number')}>
-												<a
-													href='https://careerbuilder.vn/vi/jobseekers/myresume/viewbyemp'
-													className={cx('x1')}>
-													0
-												</a>
-											</div>
-											<p>
-												<a href='https://careerbuilder.vn/vi/jobseekers/myresume/viewbyemp'>
-													NTD xem qua hồ sơ CB
-												</a>
-											</p>
-										</div>
-										<div className={cx('item')}>
-											<div className={cx('number')}>
-												<a
-													href='https://careerbuilder.vn/vi/jobseekers/myresume/viewbyemp'
-													className={cx('x2')}>
-													0
-												</a>
-											</div>
-											<div>
-												<a href='https://careerbuilder.vn/vi/jobseekers/myresume/viewbyemp'>
-													; NTD xem qua hồ sơ việc làm khẩn cấp
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className={cx('col-sm-6', 'col-lg-3')}>
-								<div className={cx('widget-1', 'b2')}>
-									<div className={cx('widget-head')}>
-										<p>0</p>
-										<p>Nhà tuyển dụng được cài đặt hạn chế xem hồ sơ</p>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('item')}>
-											<div className={cx('nonum')}>
-												<a href='https://careerbuilder.vn/vi/jobseekers/blacklist'>; Xem thêm</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className={cx('col-sm-6', 'col-lg-3')}>
-								<div className={cx('widget-1', 'b3')}>
-									<div className={cx('widget-head')}>
-										<p>0</p>
-										<p>Việc làm đã lưu</p>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('item')}>
-											<div className={cx('nonum')}>
-												<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobsaved'>; Xem thêm</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className={cx('col-sm-6', 'col-lg-3')}>
+							<div className={cx('col-sm-12', 'col-lg-12')}>
 								<div className={cx('widget-1', 'b4')}>
 									<div className={cx('widget-head')}>
 										<p>0</p>
@@ -404,7 +313,7 @@ const Dashboard = () => {
 											</div>
 											<div>
 												<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobapplied'>
-													; Nộp ở trạng thái bình thường
+													 Nộp ở trạng thái bình thường
 												</a>
 											</div>
 										</div>
@@ -418,7 +327,7 @@ const Dashboard = () => {
 											</div>
 											<div>
 												<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobapplied'>
-													; Nộp ở trạng thái Tìm việc khẩn cấp
+													 Nộp ở trạng thái Tìm việc khẩn cấp
 												</a>
 											</div>
 										</div>
@@ -427,7 +336,7 @@ const Dashboard = () => {
 							</div>
 						</div>
 						<div className={cx('row')}>
-							<div className={cx('col-lg-8')}>
+							<div className={cx('col-lg-12')}>
 								<div className={cx('widget', 'widget-4', 'attached-resume')}>
 									<div className={cx('widget-head')}>
 										<div className={cx('cb-title-h3')}>
@@ -648,75 +557,7 @@ const Dashboard = () => {
 									</div>
 								</div>
 							</div>
-							<div className={cx('col-lg-4')}>
-								<div className={cx('widget', 'widget-5')}>
-									<div className={cx('widget-head')}>
-										<div className={cx('cb-title-h3')}>
-											<h3>Cài đặt hạn chế nhà tuyển dụng</h3>
-										</div>
-									</div>
-									<div className={cx('widget-body')}>
-										<div className={cx('main-form')}>
-											<div className={cx('form-group', 'form-text')}>
-												<div className={cx('form-group', 'form-keyword')}>
-													<input
-														type='text'
-														name='company_name_blacklist'
-														placeholder='Nhập tên công ty'
-														className={cx('company_name')}
-														id='company_name_blacklist'
-														autoComplete='off'
-													/>
-													<div className={cx('cleartext')}>
-														<em className={cx('mdi', 'mdi-close-circle')} />
-													</div>
-												</div>
-												<div className={cx('form-group', 'form-submit')}>
-													<a className={cx('btn-gradient')} href='' onClick='addBlackListDashboard();'>
-														Thêm
-													</a>
-												</div>
-											</div>
-										</div>
-										<div className={cx('top-employers-list')}></div>
-										<div className={cx('main-form')}>
-											<div className={cx('form-group', 'form-text')}>
-												<div className={cx('form-group', 'form-keyword')}>
-													<input
-														type='text'
-														name='company_domain_blacklist'
-														placeholder='Nhập domain công ty'
-														className={cx('company_domain')}
-														id='company_domain_blacklist'
-													/>
-													<div className={cx('cleartext', 'active-clear')}>
-														<em className={cx('mdi', 'mdi-close-circle')} />
-													</div>
-												</div>
-												<div className={cx('form-group', 'form-submit')}>
-													<a className={cx('btn-gradient')} href='' onClick='addBlackListDomain();'>
-														Thêm
-													</a>
-												</div>
-											</div>
-										</div>
-										<div className={cx('domain-saved')}></div>
-										<div className={cx('view-more')}>
-											<a href='https://careerbuilder.vn/vi/jobseekers/blacklist-domain'>
-												; Xem thêm <span className={cx('mdi', 'mdi-arrow-right')} />
-											</a>
-										</div>
-										<form action='' method='post' id='frmAddBlacklist'>
-											<input
-												type='hidden'
-												defaultValue={0}
-												name='jblacklist_id[]'
-												id='company_id_blacklist'
-											/>
-										</form>
-									</div>
-								</div>
-							</div>
+						
 						</div>
 						<div className={cx('row')}>
 							<div className={cx('col-12')}>

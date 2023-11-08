@@ -150,16 +150,7 @@ function Table({
 							</tr>
 						);
 					})}
-					{/* <tr>
-								{loading ? (
-									<td colSpan='10000'>Loading...</td>
-								) : (
-									<td colSpan='10000'>
-										Showing {page.length} of ~{controlledPageCount * pageSize}
-										results
-									</td>
-								)}
-							</tr> */}
+			
 				</tbody>
 			</table>
 			<Pagination

@@ -1,22 +1,26 @@
-import React from 'react';
-import classNames from 'classnames/bind';
-import styles from './pagination.module.css';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { KeyboardArrowRight } from '@mui/icons-material';
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-import { Link, useSearchParams } from 'react-router-dom';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 import useCustomRouter from '~/App/hooks/useCustomRouter';
+import styles from './pagination.module.css';
 const cx = classNames.bind(styles);
-const Pagination = ({ gotoPreviousPage, gotoNextPage, total, pageSize, currentPage, onChange, onSizeChange }) => {
+const Pagination = ({
+	gotoPreviousPage,
+	gotoNextPage,
+	total,
+	pageSize,
+	currentPage,
+	onChange,
+	onSizeChange,
+	...props
+}) => {
 	const { pushQuery } = useCustomRouter();
 
 	const pages = Array.from({ length: Math.ceil(total) }, (_, index) => index + 1);
 
 	return (
-		<div className={cx('page-container')}>
-			{/* <button className={cx('first-page')} disabled=''>
-				<KeyboardDoubleArrowLeftIcon />
-			</button> */}
+		<div className={cx('page-container')} {...props}>
 			<button className={cx('prev-page')} onClick={gotoPreviousPage} disabled={currentPage === 1}>
 				<KeyboardArrowLeftIcon />
 			</button>
