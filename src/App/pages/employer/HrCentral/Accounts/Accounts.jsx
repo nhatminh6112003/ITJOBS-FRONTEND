@@ -23,11 +23,11 @@ const Accounts = ({ cx }) => {
 					</div>
 					<div className={sx('main-tabslet')} data-toggle='tabslet'>
 						<ul className={sx('tabslet-tab')}>
-							<li className={sx('active')}>
+							{/* <li className={sx('active')}>
 								<a href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/1' alt='Quản lý user'>
 									<span>Quản lý user</span>
 								</a>
-							</li>
+							</li> */}
 							<li>
 								<Link to={routesPath.EmployerPaths.editEmployer} alt='Thông tin công ty'>
 									<span>Thông tin công ty</span>
@@ -42,43 +42,16 @@ const Accounts = ({ cx }) => {
 							</li>
 							<li>
 								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/worklocation'
-									alt='Quản Lý Địa Điểm Làm Việc'>
-									<span>Quản Lý Địa Điểm Làm Việc</span>
-								</a>
-							</li>
-							<li>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/report_task_log'
-									alt='Báo cáo tác vụ'>
-									<span>Báo cáo tác vụ</span>
-								</a>
-							</li>
-							<li>
-								<a
 									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/changepassword'
 									alt='Đổi mật khẩu'>
 									<span>Đổi mật khẩu</span>
 								</a>
 							</li>
-						</ul>{' '}
+						</ul>
 						<div className={sx('tabslet-content', '', 'active')} id='tab-1'>
 							<div className={sx('main-application-information')}>
 								<h2 className={sx('title-application', 'no-bg', 'no-pad')}>Danh sách user</h2>
 								<div className={sx('application-content')}>
-									<p>
-										Quý khách có thể tạo tối đa <strong>5</strong> user(s). Để có thể tạo thêm nhiều user phụ
-										và nhiều thông tin công ty con, vui lòng{' '}
-										<a
-											href='https://careerbuilder.vn/vi/employers/services/contact'
-											className={sx('line_bot')}>
-											liên hệ với chúng tôi
-										</a>
-										.
-									</p>
-									<p>
-										Hiện có: <strong>2</strong> user(s)
-									</p>
 								</div>
 							</div>
 							<div className={sx('main-jobs-posting')}>
