@@ -69,7 +69,7 @@ const EmployerDashboard = ({ cx }) => {
 								</div>
 							</div>
 						</div>
-						<div className={cx('col-xl-3')}>
+						<div className={cx('col-xl-5')}>
 							<div className={sx('box-dasboard-top')}>
 								<div className={sx('head')}>
 									<h2 className={sx('title-dashboard')}>Tìm Kiếm Hồ Sơ</h2>
@@ -83,7 +83,7 @@ const EmployerDashboard = ({ cx }) => {
 								</div>
 							</div>
 						</div>
-						<div className={cx('col-xl-3')}>
+						<div className={cx('col-xl-4')}>
 							<div className={sx('box-dasboard-top')}>
 								<div className={sx('head')}>
 									<h2 className={sx('title-dashboard')}>Quản Lý Đăng Tuyển</h2>
@@ -124,7 +124,7 @@ const EmployerDashboard = ({ cx }) => {
 								</div>
 							</div>
 						</div>
-						<div className={cx('col-xl-3')}>
+						{/* <div className={cx('col-xl-3')}>
 							<div className={sx('box-dasboard-top')}>
 								<div className={sx('head')}>
 									<h2 className={sx('title-dashboard')}>Lịch Sử Hoạt Động</h2>
@@ -165,46 +165,12 @@ const EmployerDashboard = ({ cx }) => {
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</div>
 				<div className={sx('main-dasboard-bottom')}>
 					<div className={cx('row')}>
-						<div className={cx('col-lg-6')}>
-							<div className={sx('box-dasboard-bottom')}>
-								<h3 className={sx('title-info')}>Thông Tin Nhân Viên Tư Vấn</h3>
-								<div className={sx('wrap-info')}>
-									<div className={sx('image')}>
-										<img
-											src='https://images.careerbuilder.vn//admin_avatar/1624174428_no_callcentrer.png'
-											alt='cs-avtar'
-										/>
-									</div>
-									<ul className={sx('list-info')}>
-										<li>
-											<p className={sx('name')}>Lan Nguyen (Athena)</p>
-										</li>
-										<li>
-											<p>
-												Tel: <a href='tel:(84.28) 3822 6060'>(84.28) 3822 6060 (Ext) 222 </a>
-											</p>
-										</li>
-										<li>
-											<div className={sx('email-and-history')}>
-												<p className={sx('email')}>
-													Email:{' '}
-													<a href='mailto:lan.nguyentt@mail.careerbuilder.vn'>
-														lan.nguyentt@mail.careerbuilder.vn
-													</a>
-												</p>
-											</div>
-										</li>
-										<li></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div className={cx('col-lg-6')}>
+						<div className={cx('col-lg-12')}>
 							<div className={sx('box-dasboard-bottom', 'topresume-list')}>
 								<div className={sx('topresume-list-head')}>
 									Top{' '}
@@ -246,7 +212,7 @@ const EmployerDashboard = ({ cx }) => {
 								<div className={sx('head')}>
 									<h3 className={sx('title')}>Biểu Đồ Tuyển Dụng</h3>
 									<div className={sx('toollips')}>
-										<em className={sx('material-icons')}>infomation</em>
+										<em className={cx('material-icons')}>infomation</em>
 										<div className={sx('toolip')}>
 											<p>Thông kê chỉ số tuyển dụng trong vòng 1 tháng gần nhất.</p>
 										</div>
@@ -697,7 +663,7 @@ const EmployerDashboard = ({ cx }) => {
 								<div className={sx('head')}>
 									<h3 className={sx('title')}>Biểu Đồ Ứng Viên</h3>
 									<div className={sx('toollips')}>
-										<em className={sx('material-icons')}>infomation</em>
+										<em className={cx('material-icons')}>infomation</em>
 										<div className={sx('toolip')}>
 											<p>Thống kê số hồ sơ ứng tuyển nhận được theo ngày.</p>
 										</div>

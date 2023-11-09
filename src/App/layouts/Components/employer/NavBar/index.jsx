@@ -23,30 +23,17 @@ const NavBar = ({ className: cx }) => {
 			label: 'Quản Lý Ứng Viên'
 		},
 		{
-			title: 'Lịch Sử Tìm Kiếm',
-			path: routesPath.EmployerPaths.searchHistory,
-			label: 'Lịch Sử Tìm Kiếm'
-		},
-		{
 			title: 'Đơn Hàng',
 			path: routesPath.EmployerPaths.ordersAvailable,
 			label: 'Đơn Hàng'
 		},
-		{
-			title: 'Cấu Hình Email',
-			path: routesPath.EmployerPaths.emailManagement,
-			label: 'Cấu Hình Email'
-		},
+	
 		{
 			title: 'Tài Khoản',
 			path: routesPath.EmployerPaths.accounts,
 			label: 'Tài Khoản'
 		}
-		// {
-		// 	title: 'CBRewards',
-		// 	path: '/employers/careerbuilder-rewards',
-		// 	label: 'CBRewards'
-		// }
+	
 	];
 
 	return (
@@ -71,9 +58,9 @@ const NavBar = ({ className: cx }) => {
 					<div className={cx('right-wrap')}>
 						<ul className={cx('list-menu')}>
 							<li>
-								<a href='https://careerbuilder.vn/vi/tim-ung-vien.html'>
+								<Link to={routesPath.EmployerPaths.findJobSeeker}>
 									<em className={cx('material-icons')}>find_in_page</em> Tìm Hồ Sơ
-								</a>
+								</Link>
 							</li>
 							<li>
 								<Link className={cx('but-createjob')} to={routesPath.EmployerPaths.postjobs}>

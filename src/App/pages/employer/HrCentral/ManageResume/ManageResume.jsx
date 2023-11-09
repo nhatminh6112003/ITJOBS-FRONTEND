@@ -117,9 +117,6 @@ const ManageResume = ({ cx }) => {
 									</button>
 								</div>
 								<div className={sx('form-group', 'form-filter-advanced')}>
-									<a className={sx('btn-filter-advanced')} href='javascript:void(0);'>
-										<em className={cx('material-icons')}>zoom_in</em> Lọc nâng cao
-									</a>
 								</div>
 							</div>
 							<div className={sx('form-wrap-advanced')}>

@@ -75,7 +75,7 @@ const MyProfile = () => {
 															<img
 																id='img_mem_avatar'
 																className={cx('cropped')}
-																src='./img/dash-board/1.png'
+																src='/avatar.webp'
 																alt=''
 															/>
 														</div>
@@ -91,7 +91,7 @@ const MyProfile = () => {
 														</div>
 													</div>
 												</div>
-												<div className={cx('action-profile')}>
+												{/* <div className={cx('action-profile')}>
 													<ul>
 														<li className={cx('edit-pro')}>
 															<input
@@ -112,7 +112,7 @@ const MyProfile = () => {
 															</a>
 														</li>
 													</ul>
-												</div>
+												</div> */}
 											</div>
 											<div className={cx('col-lg-8', 'col-xl-9')}>
 												<div className={cx('cb-name')}>
@@ -124,34 +124,19 @@ const MyProfile = () => {
 												<div id='complete_section'>
 													{' '}
 													<div className={cx('progress-bar-status', 'not-approve')}>
-														<div className={cx('profile-strength')}>
+														{/* <div className={cx('profile-strength')}>
 															<p>
 																Mức độ hoàn thành: <span>Không được duyệt</span>
 															</p>
-														</div>
-														<div className={cx('noti')}>
+														</div> */}
+														{/* <div className={cx('noti')}>
 															<em className={cx('mdi', 'mdi-alert-circle-outline')} />
 															<p>
 																Không được duyệt - Hồ sơ của bạn không được duyệt nên vui lòng check
 																mail và làm theo hướng dẫn.
 															</p>
-														</div>
-														<div className={cx('progress-bar')}>
-															<div className={cx('progress')}>
-																<progress className={cx('progress-main')} max={7} value={2} />
-															</div>
-															<div className={cx('progress-row')}>
-																<div className={cx('line', 'active')} />
-																<div className={cx('line', 'active')} />
-																<div className={cx('line', 'active')} />
-																<div className={cx('line', '')} />
-																<div className={cx('line', '')} />
-																<div className={cx('line', '')} />
-																<div className={cx('line', '')}>
-																	<span className={cx('success')} />
-																</div>
-															</div>
-														</div>
+														</div> */}
+													
 													</div>
 													<div
 														className={cx('searchable-cv-widget', 'status-area', 'attached-status-area')}>

@@ -10,9 +10,6 @@ const FindJobSeeker = ({ cx }) => {
 				<div className={sx('box-resume-search')}>
 					<div className={sx('form-head')}>
 						<h1 className={sx('title')}>Từ khóa</h1>
-						<div className={sx('toolip-support')}>
-							<p>(Hướng dẫn Tìm kiếm)</p>
-						</div>
 					</div>
 					<div className={sx('form-body')}>
 						<form name='frm_search' id='frm_search' onsubmit="return validataSearch('vi');">
@@ -323,18 +320,7 @@ const FindJobSeeker = ({ cx }) => {
 									<em className={cx('material-icons')}>search</em>Tìm
 								</button>
 							</div>
-							<div className={sx('form-group', 'form-link-advanced', 'form-hidden-advanced')}>
-								<a
-									className={sx('btn-history')}
-									href='https://careerbuilder.vn/vi/employers/hrcentral/search-history'>
-									<em className={cx('material-icons')}>update</em>
-									<span>Lịch Sử Tìm Kiếm</span>
-								</a>
-								<a className={sx('btn-advanced', 'btn-show')} href='javascript:void(0)'>
-									<em className={cx('material-icons')}>zoom_in</em>
-									<span>Tìm kiếm nâng cao</span>
-								</a>
-							</div>
+
 							<div className={sx('form-wrap', 'form-wrap-advanced')}>
 								<div className={sx('row')}>
 									<div className={sx('col-md-6', 'col-xl-4', 'col-cus-xxl-4')}>
@@ -811,9 +797,6 @@ const FindJobSeeker = ({ cx }) => {
 								Chúng tôi đã tìm thấy <strong> 52,143</strong> <strong>hồ sơ phù hợp</strong> theo như tiêu chí
 								tìm kiếm của quý khách
 							</p>
-							<a href='javascript:void(0);' className={sx('created-alerts')}>
-								Tạo thông báo email với tiêu chí tìm kiếm này
-							</a>
 						</div>
 						<div className={sx('bottom')}>
 							<div className={sx('job-name')}>
@@ -831,7 +814,6 @@ const FindJobSeeker = ({ cx }) => {
 					<div className={sx('main-jobs-posting')}>
 						<div className={sx('heading-jobs-posting')}>
 							<div className={sx('left-heading')}>
-								<p className={sx('name')}>Xem:</p>
 								<ul className={sx('list-check')}>
 									<li className={sx('view-posting-detail')}>
 										<a href='javascript:;'>Chi tiết</a>
@@ -896,16 +878,9 @@ const FindJobSeeker = ({ cx }) => {
 														<a
 															className={sx('job-title')}
 															href='https://careerbuilder.vn/vi/employers/popup/resumeinfo/35A4E900/35A4E900/director/35A57C18.html?'
-															target='_blank'
 															title='Director'>
 															<b>Director</b>
 														</a>
-														<p className={sx('status', 'viewed', 'chkBuy')} data-idcheck='35A57C18'>
-															<em className={sx('material-icons')}>visibility </em> Đã xem&nbsp;
-														</p>
-														<p className={sx('status', 'bought', 'hidden')}>
-															<em className={sx('material-icons')}>visibility </em> Đã mua&nbsp;
-														</p>
 													</div>
 													<div className={sx('status')}></div>
 													<a
@@ -945,14 +920,6 @@ Hồ sơ Theo mẫu
 														1. Sẽ trở thành một giám đốc kinh doanh chuyên nghiệp 2. Được làm việc trong
 														một công ty chuyên nghiệp và một môi trường năng động đặc biệt là PR hoặc Ma
 													</p>
-												</div>
-												<div className={sx('tag-list')}>
-													<a
-														href='javascript:void(0);'
-														className={sx('add-moretag', '')}
-														onclick='return addResumeTag(37656)'>
-														+ Thêm Tag
-													</a>
 												</div>
 											</td>
 											<td>
@@ -1015,7 +982,6 @@ Hồ sơ Theo mẫu
 												</ul>
 											</td>
 										</tr>
-										
 									</tbody>
 								</table>
 							</div>

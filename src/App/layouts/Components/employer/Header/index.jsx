@@ -152,25 +152,12 @@ const Header = () => {
 											</li>
 											<li>
 												<a
-													href='https://careerbuilder.vn/vi/employers/hrcentral/search-history'
-													title='Lịch Sử Tìm Kiếm'>
-													Lịch Sử Tìm Kiếm
-												</a>
-											</li>
-											<li>
-												<a
 													href='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_available'
 													title='Đơn Hàng '>
 													Đơn Hàng
 												</a>
 											</li>
-											<li>
-												<a
-													href='https://careerbuilder.vn/vi/employers/hrcentral/emailcontentmanagement'
-													title='Cấu Hình Email'>
-													Cấu Hình Email
-												</a>
-											</li>
+										
 											<li>
 												<a href='https://careerbuilder.vn/vi/employers/careerbuilder-rewards'>
 													CareerBuilder Rewards
