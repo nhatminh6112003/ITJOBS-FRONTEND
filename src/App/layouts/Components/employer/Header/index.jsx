@@ -35,7 +35,7 @@ const Header = () => {
 						<div className={cx('main-menu')}>
 							<ul className={cx('menu')}>
 								<li className={cx('')}>
-									<a href='https://careerbuilder.vn/vi/employers' alt='Trang chủ' title='Trang chủ'>
+									<a href='/employers/dashboard' alt='Trang chủ' title='Trang chủ'>
 										Trang Chủ
 									</a>
 								</li>
@@ -44,12 +44,12 @@ const Header = () => {
 									<div className={cx('dropdown-menu')}>
 										<ul>
 											<li>
-												<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3'>
+												<a href='/employers/postjobs'>
 													Đăng Tuyển Dụng
 												</a>
 											</li>
 											<li>
-												<a href='https://careerbuilder.vn/vi/employers/products-and-services/tim-ho-so-ung-vien/8'>
+												<a href='/tim-ung-vien'>
 													Tìm Hồ Sơ Ứng Viên
 												</a>
 											</li>
@@ -96,13 +96,13 @@ const Header = () => {
 									<div className={cx('dropdown-menu')}>
 										<ul>
 											<li>
-												<a href='https://careerbuilder.vn/vi/employers/dashboard'>Dashboard</a>
+												<a href='/employers/dashboard'>Dashboard</a>
 											</li>
 											<li>
-												<a href='https://careerbuilder.vn/vi/employers/postjobs'>Đăng Tuyển Dụng</a>
+												<a href='/employers/postjobs'>Đăng Tuyển Dụng</a>
 											</li>
 											<li>
-												<a href='https://careerbuilder.vn/vi/tim-ung-vien.html'>Tìm Hồ Sơ</a>
+												<a href='/tim-ung-vien'>Tìm Hồ Sơ</a>
 											</li>
 										</ul>
 									</div>
@@ -131,20 +131,20 @@ const Header = () => {
 									<div className={cx('dropdown-menu')}>
 										<ul>
 											<li>
-												<a href='https://careerbuilder.vn/vi/employers/dashboard' title='Dashboard'>
+												<a href='/employers/dashboard' title='Dashboard'>
 													Dashboard
 												</a>
 											</li>
 											<li>
 												<a
-													href='https://careerbuilder.vn/vi/employers/hrcentral/posting'
+													href='/employers/hrcentral/posting'
 													title='Quản Lý Đăng Tuyển'>
 													Quản Lý Đăng Tuyển
 												</a>
 											</li>
 											<li>
 												<a
-													href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume'
+													href='/employers/hrcentral/manageresume'
 													className={cx('active')}
 													title='Quản Lý Ứng Viên'>
 													Quản Lý Ứng Viên
@@ -152,7 +152,7 @@ const Header = () => {
 											</li>
 											<li>
 												<a
-													href='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_available'
+													href='/employers/hrcentral/orders-available'
 													title='Đơn Hàng '>
 													Đơn Hàng
 												</a>
@@ -164,7 +164,7 @@ const Header = () => {
 												</a>
 											</li>
 											<li>
-												<a href='https://careerbuilder.vn/vi/employers/hrcentral/accounts'> Tài khoản</a>
+												<a href='/employers/hrcentral/accounts'> Tài khoản</a>
 											</li>
 											<li>
 												<Link title='Thoát' onClick={handleLogout}>
