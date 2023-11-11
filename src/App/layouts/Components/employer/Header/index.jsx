@@ -44,14 +44,10 @@ const Header = () => {
 									<div className={cx('dropdown-menu')}>
 										<ul>
 											<li>
-												<a href='/employers/postjobs'>
-													Đăng Tuyển Dụng
-												</a>
+												<a href='/employers/postjobs'>Đăng Tuyển Dụng</a>
 											</li>
 											<li>
-												<a href='/tim-ung-vien'>
-													Tìm Hồ Sơ Ứng Viên
-												</a>
+												<a href='/tim-ung-vien'>Tìm Hồ Sơ Ứng Viên</a>
 											</li>
 											<li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services/talent-solution/'>
@@ -136,9 +132,7 @@ const Header = () => {
 												</a>
 											</li>
 											<li>
-												<a
-													href='/employers/hrcentral/posting'
-													title='Quản Lý Đăng Tuyển'>
+												<a href='/employers/hrcentral/posting' title='Quản Lý Đăng Tuyển'>
 													Quản Lý Đăng Tuyển
 												</a>
 											</li>
@@ -151,13 +145,11 @@ const Header = () => {
 												</a>
 											</li>
 											<li>
-												<a
-													href='/employers/hrcentral/orders-available'
-													title='Đơn Hàng '>
+												<a href='/employers/hrcentral/orders-available' title='Đơn Hàng '>
 													Đơn Hàng
 												</a>
 											</li>
-										
+
 											<li>
 												<a href='https://careerbuilder.vn/vi/employers/careerbuilder-rewards'>
 													CareerBuilder Rewards

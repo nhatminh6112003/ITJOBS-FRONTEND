@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
+
 const Footer = ({ cx }) => {
 	return (
 		<>
@@ -77,9 +80,9 @@ const Footer = ({ cx }) => {
 											</a>
 										</li>
 										<li>
-											<a href='https://careerbuilder.vn/vi/resume-search.html' title='Tìm Hồ Sơ'>
+											<Link to={routesPath.EmployerPaths.findJobSeeker} title='Tìm Hồ Sơ'>
 												Tìm Hồ Sơ
-											</a>
+											</Link>
 										</li>
 										<li>
 											<a href='https://careerbuilder.vn/vi/talentnetwork'>Giải Pháp Talent Solution</a>

@@ -50,7 +50,7 @@ const EmployerPaths = {
 	findJobSeeker: '/tim-ung-vien',
 	productAndService: '/employers/products-and-services',
 	serviceAndContact: '/employers/services-and-contact',
-
+	resumeInfo: '/employers/resumeinfo/:id',
 };
 
 const BasePaths = {
