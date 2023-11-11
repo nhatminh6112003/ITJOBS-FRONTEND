@@ -37,10 +37,11 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	const { data: listProvinces } = useGetAllProvincesQuery();
 
 	const { data: resume_desired_job } = useGetOneResumeDesiredJobQuery(resume?.id);
+	console.log('TCL: resume_desired_job', resume_desired_job);
 	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
 	const { data: listProfession } = useGetAllProfessionQuery({});
 
-	const [updateReferMutation] = useUpdateResumeDesiredJobMutation();
+	const [updateResumeDesiredJob] = useUpdateResumeDesiredJobMutation();
 
 	const {
 		control: updateControl,
@@ -74,8 +75,8 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 			}
 			delete data[key];
 		}
-
-		updateReferMutation({
+		console.log(resume_desired_job?.resume_id);
+		updateResumeDesiredJob({
 			id: resume_desired_job?.resume_id,
 			payload: {
 				...data,
@@ -115,13 +116,13 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 				title='Thông tin nghề nghiệp'
 				className={cx('widget', 'widget-20')}
 				id='t-resume-section'
-				status={resume_desired_job?.length > 0 ? 'success' : 'error'}
+				status={resume_desired_job && Object.keys(resume_desired_job)?.length > 0 ? 'success' : 'error'}
 				onOpenResume={() => toggle('update_resume_desired_job')}
 				onOpenTipSlide={() => toggleTips('t_resume_desired_job')}
 				avatar='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i5.png'>
 				<div className={cx('content')}>
 					<div className={cx('list-references')}>
-						{resume_desired_job?.length > 0 && (
+						{resume_desired_job && Object.keys(resume_desired_job)?.length > 0 && (
 							<div className={cx('item')}>
 								<div className={cx('content')}>
 									<table>

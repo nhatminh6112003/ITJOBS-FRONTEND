@@ -39,7 +39,6 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 
 	//Gọi api rtk query
 	const { data: resumeLanguage, refetch } = useGetAllResumeLanguageQuery(resume?.id);
-	console.log('TCL: resumeLanguage', resumeLanguage);
 	const [trigger, result] = useLazyGetOneResumeLanguageQuery();
 	const [createResumeLanguageMutation] = useCreateResumeLanguageMutation();
 	const [deleteResumeLanguageMutation] = useDeleteResumeLanguageMutation();

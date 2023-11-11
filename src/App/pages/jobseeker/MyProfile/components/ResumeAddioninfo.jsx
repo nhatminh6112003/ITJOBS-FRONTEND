@@ -28,14 +28,12 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	const { isShowing: showTips, toggle: toggleTips } = useModal({
 		t_resume_objective: false
 	});
-	console.log(resume);
 	//Gọi api rtk query
 	const { data: resume_addioninfo, refetch } = useGetAllAddioninfoQuery(resume?.id);
 	const [trigger, result] = useLazyGetOneResumeAddioninfoQuery();
 	const [createAddioninfoMutation] = useCreateResumeAddioninfoMutation();
 	const [deleteAddioninfoMutation] = useDeleteResumeAddioninfoMutation();
 	const [updateAddioninfoMutation] = useUpdateResumeAddioninfoMutation();
-	console.log(resume_addioninfo);
 	const { control, handleSubmit, reset } = useForm({
 		resolver: yupResolver(resumeAddioninfoSchema)
 	});
@@ -46,7 +44,6 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	} = useForm({
 		resolver: yupResolver(resumeAddioninfoSchema)
 	});
-	console.log(isShowing);
 
 	const onCreateSubmit = async (data) => {
 		toggle('resume_addioninfo');

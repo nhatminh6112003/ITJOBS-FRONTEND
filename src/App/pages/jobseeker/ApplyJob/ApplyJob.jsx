@@ -64,7 +64,6 @@ const ApplyJob = ({ cx }) => {
 		});
 	};
 	useEffect(() => {
-		console.log(jobPost);
 		return listProvinces?.map((item) => {
 			if (item.code == jobPost?.provinces) {
 				setProvinces(item.name);

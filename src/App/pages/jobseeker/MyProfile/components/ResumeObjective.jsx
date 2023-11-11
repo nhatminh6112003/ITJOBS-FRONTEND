@@ -68,7 +68,6 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	};
 
 	const onUpdateSubmit = async (data) => {
-		console.log('TCL: onUpdateSubmit -> updateId', updateId);
 
 		updateObjectiveMutation({
 			id: updateId,
