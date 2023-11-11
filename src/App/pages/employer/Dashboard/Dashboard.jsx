@@ -13,7 +13,6 @@ const EmployerDashboard = ({ cx }) => {
 
 
 	const {data} = useAnnalyticsQuery()
-	console.log(data);
 
 
 

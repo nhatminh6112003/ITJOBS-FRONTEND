@@ -20,7 +20,6 @@ const ManageResume = ({ cx }) => {
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const [provinces, setProvinces] = useState('');
 	useEffect(() => {
-		console.log(allJobPostActivity?.data);
 		allJobPostActivity?.data?.map((PostActivity) => {
 			return listProvinces?.map((item) => {
 				if (item.code == PostActivity?.resume?.resume_profile?.provinces) {

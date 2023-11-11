@@ -45,7 +45,6 @@ const Employer = () => {
 		],
 		[tableData]
 	);
-	console.log(data);
 	return (
 		<Fragment>
 			<Card

@@ -98,7 +98,6 @@ const SelectMultipleFieldControl = ({
 
 	useEffect(() => {
 		const handleData = selectedOptions.map((item) => item.value);
-		console.log('TCL: handleData', handleData);
 		field.onChange(handleData);
 	}, [selectedOptions]);
 
