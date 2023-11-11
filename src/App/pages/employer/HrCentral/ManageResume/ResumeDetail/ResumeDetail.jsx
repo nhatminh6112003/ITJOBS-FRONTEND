@@ -23,6 +23,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
+import { LevelArray } from '~/App/constants/levelEnum';
 const sx = classNames.bind(styles);
 
 const ResumeDetail = ({ cx }) => {
@@ -555,7 +556,13 @@ const ResumeDetail = ({ cx }) => {
 																	<p>
 																		<strong>Cấp bậc mong muốn:</strong>
 																	</p>
-																	<p>Trưởng nhóm / Giám sát</p>
+																	<p>
+																		{LevelArray.map((value) => {
+																			if (value.value == data?.resume_desired_job?.position_id) {
+																				return value.label;
+																			}
+																		})}
+																	</p>
 																</li>
 																<li>
 																	<p>

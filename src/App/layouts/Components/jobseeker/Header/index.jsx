@@ -251,7 +251,7 @@ const Header = () => {
 											</a>
 										</li>
 										<li>
-											<a href=''>Tìm Ứng Viên</a>
+											<Link to={routesPath.EmployerPaths.findJobSeeker}>Tìm Ứng Viên</Link>
 										</li>
 									</ul>
 								</div>
