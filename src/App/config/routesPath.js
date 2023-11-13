@@ -7,7 +7,8 @@ const AdminPaths = {
 	jobSeeker: '/admin/jobSeeker',
 	employer: '/admin/employer',
 	profession: '/admin/profession',
-	company: '/admin/company'
+	company: '/admin/company',
+	benefits: '/admin/benefits',
 };
 const JobseekerPaths = {
 	home: '/',
