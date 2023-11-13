@@ -51,6 +51,7 @@ const EmployerPaths = {
 	productAndService: '/employers/products-and-services',
 	serviceAndContact: '/employers/services-and-contact',
 	resumeInfo: '/employers/resumeinfo/:id',
+	resumeSaved: '/employers/hrcentral/manageresume/resume-saved'
 };
 
 const BasePaths = {
