@@ -28,7 +28,7 @@ const Header = () => {
 							<span className={cx('mdi mdi-menu')} />
 						</div>
 						<div className={cx('logo')}>
-							<Link to={routesPath.JobseekerPaths.home}>
+							<Link to={routesPath.EmployerPaths.dashboard}>
 								<img src='/logo.png' style={{ height: 50 }} />
 							</Link>
 						</div>

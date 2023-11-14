@@ -1,32 +1,50 @@
-import React from 'react';
-import styles from './manageResume.module.css';
+import React, { useEffect } from 'react';
+import styles from '../manageResume.module.css';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
-import { useGetAllJobPostActivityApiQuery } from '~/App/providers/apis/jobPostActivityApi';
-import formatDate from '~/Core/utils/formatDate';
+
 import { Link, useLocation } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { ResumeStatusOptions } from '~/App/constants/resumeStatusEnum';
-import TabMenu from './components/TabMenu';
+import TabMenu from '../components/TabMenu';
+import {
+	useDeleteEmployerResumeApiMutation,
+	useGetAllEmployerResumeApiQuery
+} from '~/App/providers/apis/employerResumeApi';
+import { toast } from 'react-toastify';
+import { DeleteIcon } from '~/Core/resources';
 const sx = classNames.bind(styles);
 
-const ManageResume = ({ cx }) => {
+const ResumeSaved = ({ cx }) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const employer = useSelector((state) => state.auth?.employer);
-	const { data: allJobPostActivity, isLoading } = useGetAllJobPostActivityApiQuery({
+	const { data: allEmployerResume, isLoading } = useGetAllEmployerResumeApiQuery({
 		params: {
-			posted_by_id: employer?.id
+			user_account_id: employer?.id
 		}
 	});
+	const [deleteEmployerResume] = useDeleteEmployerResumeApiMutation();
+	useEffect(() => {
+		console.log(allEmployerResume?.data);
+	}, [allEmployerResume]);
 
+	const handleDelete = (id) => {
+		deleteEmployerResume(id)
+			.unwrap()
+			.then(() => {
+				toast.success('Xóa thành công');
+			})
+			.catch((error) => {
+				toast.error(error);
+			});
+	};
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
 				<div className={sx('box-candidates-resume-applied')}>
 					<div className={sx('heading-manage')}>
 						<div className={sx('left-heading')}>
-							<h1 className={sx('title-manage')}>Việc Làm Đang Đăng</h1>
+							<h1 className={sx('title-manage')}>Hồ Sơ Đã Lưu</h1>
 							<div className={sx('button')}>
 								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/saved_search'>
 									<em className={cx('material-icons')}>notifications_none</em>
@@ -201,18 +219,14 @@ const ManageResume = ({ cx }) => {
 														</div>
 													</th>
 													<th width='27%'>Chọn tất cả</th>
-													<th width='10%'>Ngày nộp</th>
-													<th width='10%'>Cập nhật</th>
-													{/* <th width='10%%'>Trạng thái</th> */}
-													<th width='10%'>Xếp loại</th>
 													<th width='10%'>Kinh nghiệm</th>
 													<th width='10%'>Mức lương</th>
 													<th width='12%'>Thao tác</th>
 												</tr>
 											</thead>
 											<tbody>
-												{allJobPostActivity?.data && allJobPostActivity?.data.length > 0 ? (
-													allJobPostActivity?.data.map((jobPostActivity) => {
+												{allEmployerResume?.data && allEmployerResume?.data.length > 0 ? (
+													allEmployerResume?.data.map((employer_resume) => {
 														return (
 															<>
 																<tr>
@@ -222,53 +236,38 @@ const ManageResume = ({ cx }) => {
 																	<td>
 																		<div className={sx('title')}>
 																			<Link
-																				to={`/employers/hrcentral/resume_detail/${jobPostActivity?.resume?.id}?job_id=${jobPostActivity?.job_post?.id}&jobPostActivityId=${jobPostActivity.id}`}
+																				to={`/employers/hrcentral/resume_detail/${employer_resume?.resume?.id}`}
 																				style={{
 																					cursor: 'pointer'
 																				}}>
-																				{jobPostActivity?.user_account?.lastname +
+																				{employer_resume?.resume?.user_account?.lastname +
 																					'' +
-																					jobPostActivity?.user_account?.firstname}
+																					employer_resume?.resume?.user_account?.firstname}
 																			</Link>
 																		</div>
 																		<div className={sx('detail')}>
 																			<p>
 																				<strong>Chức danh:</strong>{' '}
-																				{jobPostActivity?.resume?.resume_title?.title}
+																				{employer_resume?.resume?.resume_title?.title}
 																			</p>
-																			{/* <p>
-																				<strong>Địa điểm:</strong>
-																				{provinces}{' '}
-																			</p> */}
 																		</div>
 																	</td>
 																	<td>
-																		<time>{formatDate(jobPostActivity.apply_date)}</time>
-																	</td>
-																	<td>
-																		<time>{formatDate(jobPostActivity.updatedAt)}</time>
-																	</td>
-																	{/* <td>
-																		<p>Chưa quyết định</p>
-																	</td> */}
-																	<td>
-																		{ResumeStatusOptions?.map(
-																			(item) =>
-																				item.value == jobPostActivity?.status && <p>{item.label}</p>
-																		)}
-																	</td>
-																	<td>
 																		<p>
-																			{jobPostActivity?.resume?.my_attaches?.yearOfExperience} năm
+																			{employer_resume?.resume?.attachments[0]?.yearOfExperience} năm
 																		</p>
 																	</td>
 																	<td>
 																		<p>
-																			{parseInt(jobPostActivity?.job_post?.min_salary)
+																			{parseInt(
+																				employer_resume?.resume?.resume_desired_job?.salary_from
+																			)
 																				.toString()
 																				.charAt(0)}{' '}
 																			Tr -{' '}
-																			{parseInt(jobPostActivity?.job_post?.max_salary)
+																			{parseInt(
+																				employer_resume?.resume?.resume_desired_job?.salary_to
+																			)
 																				.toString()
 																				.charAt(0)}{' '}
 																			Tr VND
@@ -276,10 +275,19 @@ const ManageResume = ({ cx }) => {
 																	</td>
 																	<td>
 																		<Link
-																			to={`/employers/hrcentral/resume_detail/${jobPostActivity?.resume?.id}?job_id=${jobPostActivity?.job_post?.id}&jobPostActivityId=${jobPostActivity.id}`}
+																			to={`/employers/hrcentral/resume_detail/${employer_resume?.resume?.id}`}
 																			title='Xem chi tiết hồ sơ'>
 																			<VisibilityIcon />
 																		</Link>
+																		<a
+																			style={{
+																				cursor: 'pointer',
+																				marginLeft: '4px'
+																			}}
+																			onClick={() => handleDelete(employer_resume?.id)}
+																			title='Xóa hồ sơ'>
+																			<DeleteIcon />
+																		</a>
 																	</td>
 																</tr>
 															</>
@@ -308,4 +316,4 @@ const ManageResume = ({ cx }) => {
 	);
 };
 
-export default ManageResume;
+export default ResumeSaved;
