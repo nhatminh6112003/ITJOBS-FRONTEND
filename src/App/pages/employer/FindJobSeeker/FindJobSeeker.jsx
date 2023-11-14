@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './find-job-seeker.module.css';
 import classNames from 'classnames/bind';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
@@ -9,11 +9,12 @@ import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllResumeQuery } from '~/App/providers/apis/resumeApi';
 import useSearchResume from '~/App/pages/employer/FindJobSeeker/components/useSearchResume';
 import { resumeActiveEnum } from '~/App/constants/resumeActiveEnum';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { degree } from '~/App/constants/degreeArray';
-import formatVND from '~/Core/utils/formatVND';
 import { LevelArray } from '~/App/constants/levelEnum';
-
+import { useCreateEmployerResumeApiMutation } from '~/App/providers/apis/employerResumeApi';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 const sx = classNames.bind(styles);
 
 const FindJobSeeker = ({ cx }) => {
@@ -28,6 +29,9 @@ const FindJobSeeker = ({ cx }) => {
 			provinces: query.provinces || ''
 		}
 	});
+	const [createEmployerResume] = useCreateEmployerResumeApiMutation();
+	const employer = useSelector((state) => state.auth?.employer);
+	const navigate = useNavigate();
 	const {
 		control,
 		handleSubmit,
@@ -43,6 +47,20 @@ const FindJobSeeker = ({ cx }) => {
 
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
+	};
+	const handleSaveToFolder = (resumeId) => {
+		const data = {
+			user_account_id: employer.id,
+			resume_id: resumeId
+		};
+		createEmployerResume(data)
+			.unwrap()
+			.then((res) => {
+				toast.success('Đã lưu thành công!');
+			})
+			.catch((err) => {
+				toast.error(err);
+			});
 	};
 	return (
 		<section className={sx('resume-search', 'cb-section', 'bg-manage', 'main-tabslet')}>
@@ -702,9 +720,9 @@ const FindJobSeeker = ({ cx }) => {
 																</li>
 																<li>
 																	<a
-																		href='javascript:void(0)'
-																		onclick="showFoldersSelected('35A57C18');"
+																		onClick={() => handleSaveToFolder(resume.id)}
 																		className={sx('btn-save-folder')}
+																		style={{ cursor: 'pointer' }}
 																		title='Lưu vào thư mục'>
 																		<em className={cx('material-icons')}>folder_shared </em>
 																	</a>
