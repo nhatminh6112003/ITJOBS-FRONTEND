@@ -412,7 +412,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								Khẩn cấp
 							</a>
 						</div>
-						<div className={sx('swap-content-1', '')}>
+						{/* <div className={sx('swap-content-1', '')}>
 							<p className={sx('content-1', 'active', '')}>
 								Bạn đang <span>vô hiệu hóa</span> hồ sơ. Nhà tuyển dụng sẽ không thấy được hồ sơ này của bạn.
 							</p>
@@ -424,7 +424,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								Hồ sơ của bạn đang ở trạng thái <span>Khẩn cấp</span>. Hồ sơ của bạn sẽ được ưu tiên tìm thấy
 								bởi các nhà tuyển dụng.
 							</p>
-						</div>
+						</div> */}
 					</div>
 					{/* <div className={cx('row', 'search-resume', '')}>
 						<div className={cx('col-md-6', '')}>

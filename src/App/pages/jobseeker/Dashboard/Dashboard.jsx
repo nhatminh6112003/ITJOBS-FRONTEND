@@ -11,8 +11,9 @@ import BoltIcon from '@mui/icons-material/Bolt';
 import { Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
 import { useGetAllMyAttachQuery, useDeleteMyAttachMutation } from '~/App/providers/apis/myAttachApi';
+import { useUpdateResumeMutation } from '~/App/providers/apis/resumeApi';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import formatDate from '~/Core/utils/formatDate';
@@ -25,10 +26,11 @@ const Dashboard = () => {
 	let count = 0;
 	const { data: getAllMyAttach, refetch } = useGetAllMyAttachQuery(user_account_id);
 	const [deleteMyAttach] = useDeleteMyAttachMutation();
+	const [updateResumeStatus] = useUpdateResumeMutation();
+
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 
 	const handleDeleteMyAttach = (id) => {
-		console.log(id);
 		deleteMyAttach(id)
 			.unwrap()
 			.then((r) => {
@@ -37,6 +39,16 @@ const Dashboard = () => {
 				}
 			});
 		setModalConfirmState({ open: false, payload: null });
+	};
+	const updateStatusResume = async (id, resume_active) => {
+		updateResumeStatus({ id, payload: { resume_active } })
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success(r?.message);
+					refetch();
+				}
+			});
 	};
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
@@ -277,7 +289,7 @@ const Dashboard = () => {
 										id='cv_searchable_17722295'
 										data-id={17722295}
 										data-complete={1}>
-										<a href='' data-type={2} className={cx('lock', '', 'active', '')}>
+										<a href='javascript:;' data-type={2} className={cx('lock', '', 'active', '')}>
 											<LockIcon sx={{ fontSize: '14.5px', marginRight: '5px' }} />
 											Khóa
 										</a>
@@ -292,7 +304,6 @@ const Dashboard = () => {
 									</div>
 									<p>Bạn có thể cho phép nhà tuyển dụng tìm kiếm hồ sơ CareerBuilder</p>
 								</div>
-						
 							</div>
 						</div>
 						<div className={cx('row')}>
@@ -313,7 +324,7 @@ const Dashboard = () => {
 											</div>
 											<div>
 												<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobapplied'>
-													 Nộp ở trạng thái bình thường
+													Nộp ở trạng thái bình thường
 												</a>
 											</div>
 										</div>
@@ -327,7 +338,7 @@ const Dashboard = () => {
 											</div>
 											<div>
 												<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobapplied'>
-													 Nộp ở trạng thái Tìm việc khẩn cấp
+													Nộp ở trạng thái Tìm việc khẩn cấp
 												</a>
 											</div>
 										</div>
@@ -447,10 +458,10 @@ const Dashboard = () => {
 																				href='javascript:;'
 																				rel={18020074}></a>
 																		</div>
-																		<div className={cx('view-number')}>
+																		{/* <div className={cx('view-number')}>
 																			<p>Lượt xem:</p>
 																			<span>0</span>
-																		</div>
+																		</div> */}
 																	</div>
 																</div>
 															</div>
@@ -462,7 +473,8 @@ const Dashboard = () => {
 																		id='cv_searchable_18020074'
 																		data-complete={1}>
 																		<a
-																			href=''
+																			onClick={() => updateStatusResume(item.id, '1')}
+																			href='javascript:;'
 																			data-type={2}
 																			className={
 																				item.resume_active === '1'
@@ -472,8 +484,9 @@ const Dashboard = () => {
 																			Khóa
 																		</a>
 																		<a
-																			href=''
+																			href='javascript:;'
 																			data-type={1}
+																			onClick={() => updateStatusResume(item.id, '2')}
 																			className={
 																				item.resume_active === '2'
 																					? cx('public', 'active')
@@ -482,8 +495,9 @@ const Dashboard = () => {
 																			Công khai
 																		</a>
 																		<a
-																			href=''
+																			href='javascript:;'
 																			data-type={3}
+																			onClick={() => updateStatusResume(item.id, '3')}
 																			className={
 																				item.resume_active === '3'
 																					? cx('flash', 'active')
