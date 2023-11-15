@@ -26,7 +26,8 @@ const FindJobSeeker = ({ cx }) => {
 			keyword: query.keyword || '',
 			resume_active: query.resume_active || '',
 			profession_id: query.profession_id || '',
-			provinces: query.provinces || ''
+			provinces: query.provinces || '',
+			isFindJobSeeker:true
 		}
 	});
 	const [createEmployerResume] = useCreateEmployerResumeApiMutation();

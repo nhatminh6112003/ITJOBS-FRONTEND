@@ -28,7 +28,7 @@ export default function SelectVariantsFieldControl(
 	const localRef = useRef(null);
 	const inputRef = ref || localRef;
 	return (
-		<FormControl variant='standard' sx={{ minWidth: '100%' }}>
+		<div>
 			<Box component='form' sx={{ display: 'flex', flexWrap: 'wrap' }}>
 				<FormControl sx={{ my: 1, minWidth: '100%' }}>
 					<InputLabel variant='standard' htmlFor='uncontrolled-native'>
@@ -54,6 +54,6 @@ export default function SelectVariantsFieldControl(
 			</Box>
 
 			{errors ? <span style={{ color: 'red' }}>{errors[name]?.message}</span> : ''}
-		</FormControl>
+		</div>
 	);
 }

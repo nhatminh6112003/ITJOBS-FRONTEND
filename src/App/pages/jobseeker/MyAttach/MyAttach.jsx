@@ -17,6 +17,10 @@ const MyAttach = ({ cx }) => {
 	};
 	const navigate = useNavigate();
 	const onCreateAttach = ({ profession_id, welfare_id, ...data }) => {
+		if (!data.file) {
+			toast.error('Vui lòng chọn CV của bạn');
+			return;
+		}
 		const work_type_id = [];
 		for (let i = 1; i <= 4; i++) {
 			const key = `work_type_id_${i}`;
