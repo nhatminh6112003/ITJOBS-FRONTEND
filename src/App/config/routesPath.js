@@ -9,6 +9,8 @@ const AdminPaths = {
 	profession: '/admin/profession',
 	company: '/admin/company',
 	benefits: '/admin/benefits',
+	service: '/admin/service',
+	serviceType: '/admin/service_type',
 };
 const JobseekerPaths = {
 	home: '/',

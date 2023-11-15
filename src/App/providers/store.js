@@ -35,7 +35,8 @@ import resumeApi from './apis/resumeApi';
 import jobPostActivityApi from './apis/jobPostActivityApi';
 import benefitsApi from './apis/benefits';
 import employerResumeApi from './apis/employerResumeApi';
-
+import serviceApi from './apis/serviceApi';
+import serviceTypeApi from './apis/serviceTypeApi';
 const persistConfig = {
 	key: 'root',
 	storage,
@@ -81,6 +82,8 @@ const store = configureStore({
 			jobPostActivityApi.middleware,
 			benefitsApi.middleware,
 			employerResumeApi.middleware,
+			serviceApi.middleware,
+			serviceTypeApi.middleware,
 			// logger middleware
 			RTKQueryLogger
 		])
