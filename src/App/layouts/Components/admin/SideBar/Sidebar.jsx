@@ -54,6 +54,16 @@ const SideBar = (props) => {
 			icon: <CategoryIcon />
 		},
 		{
+			title: 'Quản lý dịch vụ',
+			route: routesPath.AdminPaths.service,
+			icon: <CategoryIcon />
+		},
+		{
+			title: 'Quản lý loại hình dịch vụ',
+			route: routesPath.AdminPaths.serviceType,
+			icon: <CategoryIcon />
+		},
+		{
 			title: 'Cài đặt',
 			route: '/settings',
 			icon: <Settings />
