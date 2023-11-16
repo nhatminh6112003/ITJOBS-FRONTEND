@@ -12,12 +12,25 @@ const serviceApi = createApi({
 			providesTags: ['service'],
 			transformResponse: (response) => response
 		}),
+		getAllByServiceType: build.query({
+			query: (arg) => {
+				return { url: `/service/${arg?.id}`, method: 'GET', params: arg?.params };
+			},
+			providesTags: ['service'],
+			transformResponse: (response) => response
+		}),
 		getOneService: build.query({
 			query: (id) => {
 				return { url: `/service/${id}`, method: 'GET' };
 			},
 			providesTags: ['service'],
 			transformResponse: (response) => response.data
+		}),
+		createPaymentUrl: build.mutation({
+			query: (payload) => {
+				return { url: `/service/create_payment_url`, method: 'POST', body: payload };
+			},
+			invalidatesTags: ['service'],
 		}),
 		createService: build.mutation({
 			query: (payload) => {
@@ -45,7 +58,9 @@ export const {
 	useGetAllServiceQuery,
 	useGetOneServiceQuery,
 	useDeleteServiceMutation,
-	useUpdateServiceMutation
+	useUpdateServiceMutation,
+	useGetAllByServiceTypeQuery,
+	useCreatePaymentUrlMutation
 } = serviceApi;
 
 export default serviceApi;
