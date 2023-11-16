@@ -228,11 +228,13 @@ const ResumeSaved = ({ cx }) => {
 																		<a
 																			style={{
 																				cursor: 'pointer',
-																				marginLeft: '4px'
+																				marginLeft: '6px'
 																			}}
 																			onClick={() => handleDelete(employer_resume?.id)}
 																			title='Xóa hồ sơ'>
-																			<DeleteIcon />
+																			<DeleteIcon 
+																			style={{color:'#2f4ba0'}}
+																			/>
 																		</a>
 																	</td>
 																</tr>

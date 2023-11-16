@@ -10,7 +10,6 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 import { useCreatePaymentUrlMutation, useGetAllByServiceTypeQuery } from '~/App/providers/apis/serviceApi';
-import { useNavigate } from 'react-router-dom';
 const ServicesAndContact = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
 	console.log(employer);

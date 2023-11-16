@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
-import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 import classNames from 'classnames/bind';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -40,7 +39,7 @@ const Header = () => {
 									</a>
 								</li>
 								<li className={cx('dropdown')}>
-									<a href='https://careerbuilder.vn/vi/employers/products-and-services'>Sản Phẩm và Dịch Vụ</a>
+									<Link to={routesPath.EmployerPaths.serviceAndContact}>Sản Phẩm và Dịch Vụ</Link>
 									<div className={cx('dropdown-menu')}>
 										<ul>
 											<li>

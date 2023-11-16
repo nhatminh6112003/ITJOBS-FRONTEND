@@ -4,8 +4,15 @@ import classNames from 'classnames/bind';
 import Tooltip from '@mui/material/Tooltip';
 import InfoIcon from '@mui/icons-material/Info';
 import IconButton from '@mui/material/IconButton';
-import { useAnalyticsQuery, useCalculateCorrelationIndexQuery } from '~/App/providers/apis/jobPostApi';
+import {
+	useAnalyticsQuery,
+	useCalculateCorrelationIndexQuery,
+	useAnalyticJobSeekerApplyByDayQuery,
+	useAnalyticResumeStatusQuery,
+	useAnalyticDegreeValueQuery
+} from '~/App/providers/apis/jobPostApi';
 import Chart from 'react-apexcharts';
+import ReactApexChart from 'react-apexcharts';
 import { useSelector } from 'react-redux';
 
 const sx = classNames.bind(styles);
@@ -31,8 +38,24 @@ const EmployerDashboard = ({ cx }) => {
 
 		setCurrentDate(formattedToday);
 		setNextMonthDate(formattedNextMonth);
-	}, []); 
+	}, []);
 	const { data } = useAnalyticsQuery();
+	const { data: analyticDegreeValueQuery } = useAnalyticDegreeValueQuery({
+		params: {
+			user_account_id: employer?.id,
+			startDate: '2023-11-11',
+			endDate: '2023-11-20'
+		}
+	});
+	console.log('TCL: EmployerDashboard -> analyticDegreeValueQuery', analyticDegreeValueQuery?.label);
+	const { data: analyticResumeStatus } = useAnalyticResumeStatusQuery({
+		params: {
+			user_account_id: employer?.id,
+			startDate: '2023-11-11',
+			endDate: '2023-11-20'
+		}
+	});
+
 	const { data: calculateCorrelationIndexData } = useCalculateCorrelationIndexQuery({
 		params: {
 			user_account_id: employer?.id,
@@ -41,15 +64,19 @@ const EmployerDashboard = ({ cx }) => {
 		}
 	});
 
-	const calculateCorrelationchartOptions = {
+	const { data: analyticJobSeekerApplyByDayQuery } = useAnalyticJobSeekerApplyByDayQuery({
+		params: {
+			user_account_id: employer?.id,
+			startDate: '2023-11-11',
+			endDate: '2023-11-20'
+		}
+	});
+
+	const analyticJobSeekerApplyByDayQueryOptions = {
 		series: [
 			{
 				name: calculateCorrelationIndexData?.title_1,
-				data: calculateCorrelationIndexData?.data_1
-			},
-			{
-				name: calculateCorrelationIndexData?.title_2,
-				data: calculateCorrelationIndexData?.data_2
+				data: analyticJobSeekerApplyByDayQuery?.data_1
 			}
 		],
 		options: {
@@ -64,7 +91,7 @@ const EmployerDashboard = ({ cx }) => {
 				curve: 'smooth'
 			},
 			xaxis: {
-				categories: calculateCorrelationIndexData?.label
+				categories: analyticJobSeekerApplyByDayQuery?.label
 			},
 			legend: {
 				position: 'top'
@@ -72,6 +99,128 @@ const EmployerDashboard = ({ cx }) => {
 			grid: {
 				show: false
 			}
+		}
+	};
+
+	const calculateCorrelationchartOptions = {
+		series: [
+			{
+				name: calculateCorrelationIndexData?.title_1,
+				data: calculateCorrelationIndexData?.data_1
+			},
+			{
+				name: calculateCorrelationIndexData?.title_2,
+				data: calculateCorrelationIndexData?.data_2
+			}
+		],
+
+		options: {
+			chart: {
+				type: 'bar',
+				height: 350
+			},
+			plotOptions: {
+				bar: {
+					horizontal: false,
+					columnWidth: '55%',
+					endingShape: 'rounded'
+				}
+			},
+			dataLabels: {
+				enabled: false
+			},
+			stroke: {
+				show: true,
+				width: 2,
+				colors: ['transparent']
+			},
+			xaxis: {
+				categories: calculateCorrelationIndexData?.label
+			},
+			fill: {
+				opacity: 1
+			},
+			tooltip: {
+				y: {
+					formatter: function (val) {
+						return val;
+					}
+				}
+			}
+		}
+	};
+
+	const analyticResumeStatusOption = {
+		series: [
+			{
+				name: 'Số lượng',
+				data: analyticResumeStatus?.data_1
+			}
+		],
+		options: {
+			chart: {
+				height: 350,
+				type: 'bar',
+				events: {
+					click: function (chart, w, e) {
+					}
+				}
+			},
+			colors: ['#bd2352', '#1da1f2'],
+			plotOptions: {
+				bar: {
+					columnWidth: '45%',
+					distributed: true
+				}
+			},
+			dataLabels: {
+				enabled: false
+			},
+			legend: {
+				show: false
+			},
+			xaxis: {
+				categories: analyticResumeStatus?.label.map((status, index) => {
+					return index % 2 === 0 ? [status, ''] : status;
+				}),
+				labels: {
+					style: {
+						colors: ['red', 'blue', 'purple', 'green', 'purple', 'orange'],
+						fontSize: '12px',
+						fontWeight: 'bold'
+					}
+				}
+			}
+		}
+	};
+
+	const analyticDegreeValueQueryOptions = {
+		series: analyticDegreeValueQuery?.data_1,
+		options: {
+			chart: {
+				width: 380,
+				type: 'pie'
+			},
+			labels: ['Chưa tốt nghiệp', 'Trung học', 'Trung cấp', 'Cao đẳng', 'Đại học', 'Sau đại học', 'Khác'],
+			dataLabels: {
+				formatter(val, opts) {
+					const name = opts.w.globals.labels[opts.seriesIndex];
+					return [name, val.toFixed(0) + '%'];
+				}
+			},
+			responsive: [
+				{
+					breakpoint: 480,
+					options: {
+						chart: {
+							width: 200
+						},
+						legend: {
+							position: 'bottom'
+						}
+					}
+				}
+			]
 		}
 	};
 
@@ -266,12 +415,12 @@ const EmployerDashboard = ({ cx }) => {
 						<div className={cx('col-lg-6')}>
 							<div className={sx('box-dasboard-middle')}>
 								<div className={sx('head')}>
-									<h3 className={sx('title')}>Biểu Đồ Tuyển Dụng</h3>
+									<h3 className={sx('title')}>Biểu Đồ Số lượng ứng viên theo trạng thái</h3>
 									<div className={sx('toollips')}>
 										<em className={cx('material-icons')}>infomation</em>
-										<div className={sx('toolip')}>
-											<p>Thông kê chỉ số tuyển dụng trong vòng 1 tháng gần nhất.</p>
-										</div>
+										{/* <div className={sx('toolip')}>
+											<p>Thông kê </p>
+										</div> */}
 									</div>
 								</div>
 								<div className={sx('body')}>
@@ -294,428 +443,17 @@ const EmployerDashboard = ({ cx }) => {
 											</button>
 										</div>
 									</div>
-									<div className={sx('chart')}>
-										<div id='mychart1' style={{ overflow: 'hidden', textAlign: 'left' }}>
-											<div
-												className={sx('amcharts-main-div')}
-												style={{
-													position: 'relative',
-													width: '100%',
-													height: '100%'
-												}}>
-												<div
-													className={sx('amcharts-chart-div')}
-													style={{
-														overflow: 'hidden',
-														position: 'absolute',
-														textAlign: 'left',
-														width: '280.025px',
-														height: 153,
-														padding: 0,
-														left: 0
-													}}>
-													<svg
-														version='1.1'
-														style={{
-															position: 'absolute',
-															width: 480,
-															height: 153,
-															top: '-0.200012px',
-															left: '-0.399994px'
-														}}>
-														<desc>JavaScript chart by amCharts 3.21.15</desc>
-														<g>
-															<path
-																cs='100,100'
-																d='M0.5,0.5 L279.5,0.5 L279.5,152.5 L0.5,152.5 Z'
-																fill='#FFFFFF'
-																stroke='#000000'
-																fillOpacity={0}
-																strokeWidth={1}
-																strokeOpacity={0}
-															/>
-														</g>
-														<g />
-														<g />
-														<g />
-														<g />
-														<g />
-														<g />
-														<g />
-														<g />
-														<g />
-														<g />
-														<g />
-														<g>
-															<g />
-														</g>
-														<g />
-														<g />
-														<g />
-														<g />
-														<g />
-													</svg>
-												</div>
-												<div
-													className={sx('amChartsLegend', 'amcharts-legend-div')}
-													style={{
-														overflow: 'hidden',
-														position: 'relative',
-														textAlign: 'left',
-														width: '199.975px',
-														top: 0,
-														height: 153,
-														left: '280.025px'
-													}}>
-													<svg
-														version='1.1'
-														style={{
-															position: 'absolute',
-															width: '199.975px',
-															height: '152.6px',
-															top: '-0.200012px',
-															left: '-0.375px'
-														}}>
-														<desc>JavaScript chart by amCharts 3.21.15</desc>
-														<g transform='translate(10,0)'>
-															<path
-																cs='100,100'
-																d='M0.5,0.5 L180.5,0.5 L180.5,152.5 L0.5,152.5 Z'
-																fill='#FFFFFF'
-																stroke='#000000'
-																fillOpacity={0}
-																strokeWidth={1}
-																strokeOpacity={0}
-															/>
-															<g transform='translate(0,11)'>
-																<g cursor='pointer' aria-label='Lượt xem' transform='translate(0,0)'>
-																	<path
-																		cs='100,100'
-																		d='M-7.5,8.5 L8.5,8.5 L8.5,-7.5 L-7.5,-7.5 Z'
-																		fill='#FF0F00'
-																		stroke='#FF0F00'
-																		fillOpacity={1}
-																		strokeWidth={1}
-																		strokeOpacity={1}
-																		transform='translate(8,8)'
-																	/>
-																	<g transform='translate(8,8)' visibility='hidden'>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,-5.5 L6.5,6.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,6.5 L6.5,-5.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																	</g>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='start'
-																		transform='translate(21,7)'>
-																		<tspan y={6} x={0}>
-																			Lượt xem
-																		</tspan>
-																	</text>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='end'
-																		transform='translate(180,7)'>
-																		0
-																	</text>
-																	<rect
-																		x={16}
-																		y={0}
-																		width='164.4749984741211'
-																		height='18.600000381469727'
-																		rx={0}
-																		ry={0}
-																		strokeWidth={0}
-																		stroke='none'
-																		fill='#fff'
-																		fillOpacity='0.005'
-																	/>
-																</g>
-																<g
-																	cursor='pointer'
-																	aria-label='Tổng số ứng tuyển'
-																	transform='translate(0,29)'>
-																	<path
-																		cs='100,100'
-																		d='M-7.5,8.5 L8.5,8.5 L8.5,-7.5 L-7.5,-7.5 Z'
-																		fill='#FF6600'
-																		stroke='#FF6600'
-																		fillOpacity={1}
-																		strokeWidth={1}
-																		strokeOpacity={1}
-																		transform='translate(8,8)'
-																	/>
-																	<g transform='translate(8,8)' visibility='hidden'>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,-5.5 L6.5,6.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,6.5 L6.5,-5.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																	</g>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='start'
-																		transform='translate(21,7)'>
-																		<tspan y={6} x={0}>
-																			Tổng số ứng tuyển
-																		</tspan>
-																	</text>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='end'
-																		transform='translate(180,7)'>
-																		0
-																	</text>
-																	<rect
-																		x={16}
-																		y={0}
-																		width='164.4749984741211'
-																		height='18.600000381469727'
-																		rx={0}
-																		ry={0}
-																		strokeWidth={0}
-																		stroke='none'
-																		fill='#fff'
-																		fillOpacity='0.005'
-																	/>
-																</g>
-																<g cursor='pointer' aria-label='Chưa xem' transform='translate(0,57)'>
-																	<path
-																		cs='100,100'
-																		d='M-7.5,8.5 L8.5,8.5 L8.5,-7.5 L-7.5,-7.5 Z'
-																		fill='#FF9E01'
-																		stroke='#FF9E01'
-																		fillOpacity={1}
-																		strokeWidth={1}
-																		strokeOpacity={1}
-																		transform='translate(8,8)'
-																	/>
-																	<g transform='translate(8,8)' visibility='hidden'>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,-5.5 L6.5,6.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,6.5 L6.5,-5.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																	</g>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='start'
-																		transform='translate(21,7)'>
-																		<tspan y={6} x={0}>
-																			Chưa xem
-																		</tspan>
-																	</text>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='end'
-																		transform='translate(180,7)'>
-																		0
-																	</text>
-																	<rect
-																		x={16}
-																		y={0}
-																		width='164.4749984741211'
-																		height='18.600000381469727'
-																		rx={0}
-																		ry={0}
-																		strokeWidth={0}
-																		stroke='none'
-																		fill='#fff'
-																		fillOpacity='0.005'
-																	/>
-																</g>
-																<g cursor='pointer' aria-label='Đang xử lý' transform='translate(0,86)'>
-																	<path
-																		cs='100,100'
-																		d='M-7.5,8.5 L8.5,8.5 L8.5,-7.5 L-7.5,-7.5 Z'
-																		fill='#FCD202'
-																		stroke='#FCD202'
-																		fillOpacity={1}
-																		strokeWidth={1}
-																		strokeOpacity={1}
-																		transform='translate(8,8)'
-																	/>
-																	<g transform='translate(8,8)' visibility='hidden'>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,-5.5 L6.5,6.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,6.5 L6.5,-5.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																	</g>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='start'
-																		transform='translate(21,7)'>
-																		<tspan y={6} x={0}>
-																			Đang xử lý
-																		</tspan>
-																	</text>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='end'
-																		transform='translate(180,7)'>
-																		0
-																	</text>
-																	<rect
-																		x={16}
-																		y={0}
-																		width='164.4749984741211'
-																		height='18.600000381469727'
-																		rx={0}
-																		ry={0}
-																		strokeWidth={0}
-																		stroke='none'
-																		fill='#fff'
-																		fillOpacity='0.005'
-																	/>
-																</g>
-																<g
-																	cursor='pointer'
-																	aria-label='Mời nhận việc'
-																	transform='translate(0,114)'>
-																	<path
-																		cs='100,100'
-																		d='M-7.5,8.5 L8.5,8.5 L8.5,-7.5 L-7.5,-7.5 Z'
-																		fill='#F8FF01'
-																		stroke='#F8FF01'
-																		fillOpacity={1}
-																		strokeWidth={1}
-																		strokeOpacity={1}
-																		transform='translate(8,8)'
-																	/>
-																	<g transform='translate(8,8)' visibility='hidden'>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,-5.5 L6.5,6.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																		<path
-																			cs='100,100'
-																			d='M-5.5,6.5 L6.5,-5.5'
-																			fill='none'
-																			stroke='#FFFFFF'
-																			strokeWidth={3}
-																		/>
-																	</g>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='start'
-																		transform='translate(21,7)'>
-																		<tspan y={6} x={0}>
-																			Mời nhận việc
-																		</tspan>
-																	</text>
-																	<text
-																		y={6}
-																		fill='#000000'
-																		fontFamily='Verdana'
-																		fontSize='11px'
-																		opacity={1}
-																		textAnchor='end'
-																		transform='translate(180,7)'>
-																		0
-																	</text>
-																	<rect
-																		x={16}
-																		y={0}
-																		width='164.4749984741211'
-																		height='18.600000381469727'
-																		rx={0}
-																		ry={0}
-																		strokeWidth={0}
-																		stroke='none'
-																		fill='#fff'
-																		fillOpacity='0.005'
-																	/>
-																</g>
-															</g>
-														</g>
-													</svg>
-												</div>
-											</div>
-										</div>
-									</div>
+									<ReactApexChart
+										options={analyticResumeStatusOption.options}
+										series={analyticResumeStatusOption.series}
+										type='bar'
+										height={350}
+									/>
 								</div>
 							</div>
 						</div>
 						<div className={cx('col-lg-6')}>
-							<div className={sx('box-dasboard-middle')}>
+							<div className={sx('box-dasboard-middle')} style={{ height: 487 }}>
 								<div className={sx('head')}>
 									<h3 className={sx('title')}>Biểu Đồ Ứng Viên</h3>
 									<div className={sx('toollips')}>
@@ -754,12 +492,11 @@ const EmployerDashboard = ({ cx }) => {
 												<div className={sx('')} />
 											</div>
 										</div>
-										<canvas
-											id='myChart2'
-											style={{ display: 'block', height: 200, width: 480 }}
-											width={600}
-											height={250}
-											className={sx('chartjs-render-monitor')}
+										<Chart
+											options={analyticJobSeekerApplyByDayQueryOptions.options}
+											series={analyticJobSeekerApplyByDayQueryOptions.series}
+											type='line'
+											height='260'
 										/>
 									</div>
 								</div>
@@ -799,11 +536,12 @@ const EmployerDashboard = ({ cx }) => {
 												<div className={sx('')} />
 											</div>
 										</div>
-										<Chart
+
+										<ReactApexChart
 											options={calculateCorrelationchartOptions.options}
 											series={calculateCorrelationchartOptions.series}
-											type='line'
-											height='100%'
+											type='bar'
+											height={240}
 										/>
 									</div>
 								</div>
@@ -848,12 +586,11 @@ const EmployerDashboard = ({ cx }) => {
 												<div className={sx('')} />
 											</div>
 										</div>
-										<canvas
-											id='myChart3'
-											style={{ display: 'block', height: 200, width: 480 }}
-											width={600}
-											height={250}
-											className={sx('chartjs-render-monitor')}
+										<ReactApexChart
+											options={analyticDegreeValueQueryOptions.options}
+											series={analyticDegreeValueQueryOptions.series}
+											type='pie'
+											width={380}
 										/>
 									</div>
 								</div>
