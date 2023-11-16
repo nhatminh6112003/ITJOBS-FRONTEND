@@ -31,7 +31,7 @@ const ServicesAndContact = ({ cx }) => {
 			language: 'vn'
 		})
 			.unwrap()
-			.then((res) => window.location = res.data);
+			.then((res) => (window.location = res.data));
 	};
 	const selectedServiceType = watch('service_type', null);
 	const { data: listService } = useGetAllByServiceTypeQuery(

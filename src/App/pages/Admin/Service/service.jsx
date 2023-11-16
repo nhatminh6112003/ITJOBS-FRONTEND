@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useModal from '~/App/hooks/useModal';
 import useServerPagination from '~/App/hooks/useServerPagination';
-import { useGetAllServiceQuery , useDeleteServiceMutation } from '~/App/providers/apis/serviceApi';
+import { useGetAllServiceQuery, useDeleteServiceMutation } from '~/App/providers/apis/serviceApi';
 import Card from '~/Core/components/common/Card';
 import { Button } from '@mui/material';
 import { AddIcon, DeleteIcon, EditIcon } from '~/Core/resources';
@@ -27,6 +27,13 @@ const Service = () => {
 	const page = searchParams.get('page') || paginationState.queryPageIndex;
 	const { data, isFetching } = useGetAllServiceQuery(
 		{
+			params: {
+				keyword,
+				limit: pageSize,
+				page
+			}
+		},
+		{
 			refetchOnMountOrArgChange: true
 		}
 	);
@@ -41,21 +48,27 @@ const Service = () => {
 				isSort: true,
 				sortable: true,
 				canSort: true,
+				Cell: ({ row }) => data?.pagination.itemsPerPage * (data?.pagination.pageIndex - 1) + Number(row.index) + 1
 			},
 			{ Header: 'Tên dịch vụ', accessor: 'name' },
 			{
 				Header: 'loại hình dịch vụ',
-				accessor: 'service_type_id',
-
+				accessor: 'service_type',
+				Cell: ({ row: { values } }) => {
+					console.log('TCL: values', values);
+					return values.service_type.name;
+				}
 			},
 			{
 				Header: 'Giá dịch vụ',
-				accessor: 'price_list',
+				accessor: 'price_list'
 			},
-            {
+			{
 				Header: 'Lợi ích',
-				accessor: 'benefits_id',
-
+				accessor: 'benefit',
+				Cell: ({ row: { values } }) => {
+					return values.benefit.name;
+				}
 			},
 			{
 				Header: 'Thao tác',
@@ -86,7 +99,7 @@ const Service = () => {
 		],
 		[tableData, toggle]
 	);
-
+	console.log('tetee');
 	const handleConfirmDelete = async (id) => {
 		deleteMutation(id)
 			.unwrap()
