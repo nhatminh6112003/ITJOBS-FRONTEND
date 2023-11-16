@@ -186,10 +186,10 @@ const Header = () => {
 												<Link to={routesPath.JobseekerPaths.myProfile}>Hồ sơ của tôi</Link>
 											</li>
 											<li>
-												<a>Việc làm đã lưu</a>
+												<Link to={routesPath.JobseekerPaths.jobSaved}>Việc làm đã lưu</Link>
 											</li>
 											<li>
-												<a>Việc làm đã ứng tuyển</a>
+												<Link to={routesPath.JobseekerPaths.jobApplied}>Việc làm đã ứng tuyển</Link>
 											</li>
 											<li>
 												<a>Cài đặt</a>

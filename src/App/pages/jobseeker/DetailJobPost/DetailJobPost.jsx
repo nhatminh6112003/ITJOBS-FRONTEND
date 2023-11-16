@@ -11,8 +11,13 @@ import GenderEnum from '~/App/constants/genderEnum';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
 import { useGetAllJobPostActivityApiQuery } from '~/App/providers/apis/jobPostActivityApi';
-import routesPath from '~/App/config/routesPath';
 import { useSelector } from 'react-redux';
+import {
+	useCreateJobSavedMutation,
+	useDeleteJobSavedMutation,
+	useGetAllJobSavedQuery
+} from '~/App/providers/apis/jobSavedApi';
+import { toast } from 'react-toastify';
 const sx = classNames.bind(styles);
 
 const DetailJobPost = ({ cx }) => {
@@ -22,6 +27,7 @@ const DetailJobPost = ({ cx }) => {
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const [provinces, setProvinces] = useState('');
 	const [districts, setDistricts] = useState('');
+	const { data: allJobSaved } = useGetAllJobSavedQuery(user?.id);
 	const jobExperienceLabel = experienceEnum[detailJobPost?.job_experience_value]?.label;
 	const jobFormExperience = detailJobPost?.job_formExperience;
 	const jobToExperience = detailJobPost?.job_ToExperience;
@@ -36,6 +42,8 @@ const DetailJobPost = ({ cx }) => {
 			skip: !detailJobPost?.provinces
 		}
 	);
+	const [createJobSaved] = useCreateJobSavedMutation();
+	const [deleteJobSaved] = useDeleteJobSavedMutation();
 	const { data: allJobPostActivity } = useGetAllJobPostActivityApiQuery(
 		{
 			params: {
@@ -57,7 +65,31 @@ const DetailJobPost = ({ cx }) => {
 				setDistricts(item.name);
 			}
 		});
-	}, [detailJobPost, listProvinces, listDistricts]);
+	}, [detailJobPost, listProvinces, listDistricts, allJobSaved]);
+	const handleCreateJobSaved = (id) => {
+		const data = {
+			user_account_id: user?.id,
+			job_id: id
+		};
+		createJobSaved(data)
+			.unwrap()
+			.then((value) => {
+				toast.success('Đã lưu tin tuyển dụng');
+			})
+			.catch((error) => {
+				toast.error(error.data.message);
+			});
+	};
+	const handleDeleteJobSaved = (id) => {
+		deleteJobSaved(id)
+			.unwrap()
+			.then((res) => {
+				toast.success('Xóa thành công');
+			})
+			.catch((err) => {
+				toast.error(err.data?.message);
+			});
+	};
 	return (
 		<>
 			<section className={sx('find-jobs-form')}>
@@ -761,21 +793,37 @@ const DetailJobPost = ({ cx }) => {
 															tabIndex={0}
 															role='button'
 															className={sx('toollips', 'save-job', 'chk_save_35BE1408', '')}
-															data-id='35BE1408'
-															onclick="savejob('35BE1408')">
+															onClick={
+																allJobSaved?.length > 0 &&
+																allJobSaved.some((item) => item.job_post_saved.id === detailJobPost?.id)
+																	? () =>
+																			handleDeleteJobSaved(
+																				allJobSaved.find(
+																					(item) => item.job_post_saved.id === detailJobPost?.id
+																				).id
+																			)
+																	: () => handleCreateJobSaved(detailJobPost?.id)
+															}
+															style={{ cursor: 'pointer' }}>
 															<i className={sx('mdi', 'mdi-heart-outline')} />
-															<span className={sx('text')}>Lưu việc làm</span>
+															{allJobSaved?.length > 0 &&
+															allJobSaved.some(
+																(item) => item.job_post_saved.id === detailJobPost?.id
+															) ? (
+																<span className={sx('text')} style={{ color: '#e8c80d' }}>
+																	Việc làm đã lưu
+																</span>
+															) : (
+																<span className={sx('text')}>Lưu việc làm</span>
+															)}
 														</a>
-														<a tabIndex={0} role='button' onclick='showboxJobalert()'>
-															<i className={sx('mdi', 'mdi-email-outline')} />
-															<span className={sx('text')}>Gửi tôi việc làm tương tự</span>
-														</a>
-														<a tabIndex={0} role='button' className={sx('report-job', 'toollips')}>
+														<a
+															tabIndex={0}
+															role='button'
+															className={sx('report-job', 'toollips')}
+															style={{ cursor: 'pointer' }}>
 															<i className={sx('fa', 'fa-flag-o')} />
 															<span>Báo xấu</span>
-															<div className={sx('toolip')}>
-																<p> Báo xấu </p>
-															</div>
 														</a>
 														<div className={sx('report-modal')} style={{ display: 'none' }}>
 															<div className={sx('modal-title')}>
