@@ -70,7 +70,11 @@ const SideBar = ({ className: cx }) => {
 							</a>
 							<ul className={cx('list-unstyled', 'collapse')} style={{ display: isOpen ? 'block' : 'none' }}>
 								<li>
-									<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobsaved'>Việc làm đã lưu</a>
+									<NavLink
+										className={({ isActive }) => (isActive ? cx('active') : undefined)}
+										to={routesPath.JobseekerPaths.jobSaved}>
+										Việc làm đã lưu
+									</NavLink>
 								</li>
 								<li>
 									<NavLink
