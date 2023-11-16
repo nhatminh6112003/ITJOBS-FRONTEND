@@ -1,4 +1,3 @@
-import Select from 'react-select';
 const Product = () => {
 	const options = [
 		{ value: 'chocolate', label: 'Chocolate' },
@@ -6,9 +5,9 @@ const Product = () => {
 		{ value: 'vanilla', label: 'Vanilla' }
 	];
 	return (
-		<>
-			<Select isMulti options={options} />
-		</>
+		<div>
+			test
+		</div>
 	);
 };
 

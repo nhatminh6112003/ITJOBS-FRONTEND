@@ -4,19 +4,76 @@ import classNames from 'classnames/bind';
 import Tooltip from '@mui/material/Tooltip';
 import InfoIcon from '@mui/icons-material/Info';
 import IconButton from '@mui/material/IconButton';
-import { useAnnalyticsQuery } from '~/App/providers/apis/jobPostApi';
-
+import { useAnalyticsQuery, useCalculateCorrelationIndexQuery } from '~/App/providers/apis/jobPostApi';
+import Chart from 'react-apexcharts';
+import { useSelector } from 'react-redux';
 
 const sx = classNames.bind(styles);
 
 const EmployerDashboard = ({ cx }) => {
+	const employer = useSelector((state) => state.auth?.employer);
+	const [currentDate, setCurrentDate] = useState('');
+	const [nextMonthDate, setNextMonthDate] = useState('');
 
+	useEffect(() => {
+		const today = new Date();
+		const year = today.getFullYear();
+		const month = (today.getMonth() + 1).toString().padStart(2, '0');
+		const day = today.getDate().toString().padStart(2, '0');
+		const formattedToday = `${year}-${month}-${day}`;
 
-	const {data} = useAnnalyticsQuery()
+		const nextMonth = new Date(today);
+		nextMonth.setMonth(nextMonth.getMonth() + 1);
+		const nextMonthYear = nextMonth.getFullYear();
+		const nextMonthMonth = (nextMonth.getMonth() + 1).toString().padStart(2, '0');
+		const nextMonthDay = nextMonth.getDate().toString().padStart(2, '0');
+		const formattedNextMonth = `${nextMonthYear}-${nextMonthMonth}-${nextMonthDay}`;
 
+		setCurrentDate(formattedToday);
+		setNextMonthDate(formattedNextMonth);
+	}, []); 
+	const { data } = useAnalyticsQuery();
+	const { data: calculateCorrelationIndexData } = useCalculateCorrelationIndexQuery({
+		params: {
+			user_account_id: employer?.id,
+			startDate: '2023-11-11',
+			endDate: '2023-11-20'
+		}
+	});
 
-
-
+	const calculateCorrelationchartOptions = {
+		series: [
+			{
+				name: calculateCorrelationIndexData?.title_1,
+				data: calculateCorrelationIndexData?.data_1
+			},
+			{
+				name: calculateCorrelationIndexData?.title_2,
+				data: calculateCorrelationIndexData?.data_2
+			}
+		],
+		options: {
+			color: ['#6ab04c', '#2980b9'],
+			chart: {
+				background: 'transparent'
+			},
+			dataLabels: {
+				enabled: false
+			},
+			stroke: {
+				curve: 'smooth'
+			},
+			xaxis: {
+				categories: calculateCorrelationIndexData?.label
+			},
+			legend: {
+				position: 'top'
+			},
+			grid: {
+				show: false
+			}
+		}
+	};
 
 	return (
 		<section className={sx('employer-dasboard', 'cb-section', 'bg-manage')}>
@@ -721,12 +778,7 @@ const EmployerDashboard = ({ cx }) => {
 								<div className={sx('body')}>
 									<div className={sx('form-wrap')}>
 										<div className={sx('form-group', 'form-date')}>
-											<input
-												className={sx('dates_range')}
-												id='date_mychart3'
-												readOnly=''
-												defaultValue='16/08/2023 - 16/09/2023'
-											/>
+											<input type='date' name='dates' value='01/01/2018 - 01/15/2018' />
 										</div>
 										<div className={sx('form-group', 'form-submit')}>
 											<button
@@ -747,12 +799,11 @@ const EmployerDashboard = ({ cx }) => {
 												<div className={sx('')} />
 											</div>
 										</div>
-										<canvas
-											id='myChart3'
-											style={{ display: 'block', height: 200, width: 480 }}
-											width={600}
-											height={250}
-											className={sx('chartjs-render-monitor')}
+										<Chart
+											options={calculateCorrelationchartOptions.options}
+											series={calculateCorrelationchartOptions.series}
+											type='line'
+											height='100%'
 										/>
 									</div>
 								</div>

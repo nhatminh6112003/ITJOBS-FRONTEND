@@ -11,9 +11,16 @@ const jobPostApi = createApi({
 			providesTags: ['job_post'],
 			transformResponse: (response) => response
 		}),
-		annalytics: build.query({
+		analytics: build.query({
 			query: () => {
 				return { url: `/job_post/analytics`, method: 'GET' };
+			},
+			providesTags: ['job_post'],
+			transformResponse: (response) => response.data
+		}),
+		calculateCorrelationIndex: build.query({
+			query: (arg) => {
+				return { url: `/job_post/analytics/calculateCorrelationIndex`, method: 'GET', params: arg.params };
 			},
 			providesTags: ['job_post'],
 			transformResponse: (response) => response.data
@@ -52,7 +59,8 @@ export const {
 	useGetOneJobPostQuery,
 	useDeleteJobPostMutation,
 	useUpdateJobPostMutation,
-	useAnnalyticsQuery
+	useAnalyticsQuery,
+	useCalculateCorrelationIndexQuery
 } = jobPostApi;
 
 export default jobPostApi;
