@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './servicesAndContact.module.css';
 import classNames from 'classnames/bind';
 const sx = classNames.bind(styles);
@@ -25,20 +25,24 @@ const ServicesAndContact = ({ cx }) => {
 		resolver: yupResolver(contactSchema)
 	});
 	const onUpdateSubmit = async (data) => {
+		const array = data?.service?.trim().split(' ');
+		const info = employer?.id + " " + employer?.company?.id + " " + array[0]
 		CreatePaymentUrl({
-			amount: 1000000,
-			language: 'vn'
+			amount: array[1],
+			language: 'vn',
+			info: info
 		})
 			.unwrap()
 			.then((res) => (window.location = res.data));
 	};
 	const selectedServiceType = watch('service_type', null);
+	const selectedService = watch('service', null);
 	const { data: listService } = useGetAllByServiceTypeQuery(
 		{
-			id: selectedServiceType
+			id: selectedServiceType,
 		},
 		{
-			skip: !selectedServiceType
+			skip: !selectedServiceType,
 		}
 	);
 	useEffect(() => {
@@ -117,6 +121,7 @@ const ServicesAndContact = ({ cx }) => {
 								<h3 className={sx('form-title')}> Liên hệ chuyên viên tư vấn của JobHunter.com </h3>
 								<div className={sx('contact-us-form')}>
 									<Form
+										selectedService={selectedService}
 										control={addFormControl}
 										onSubmit={onUpdateSubmit}
 										handleSubmit={handleUpdateSubmit}
@@ -126,6 +131,7 @@ const ServicesAndContact = ({ cx }) => {
 										setValue={setValue}
 										employer={employer}
 									/>
+									{selectedService && <>{selectedService?.price_list}</>}
 								</div>
 							</div>
 						</div>
@@ -136,7 +142,7 @@ const ServicesAndContact = ({ cx }) => {
 	);
 };
 
-export const Form = ({ onSubmit, handleSubmit, control, cx, listServiceType, listService, employer }) => {
+export const Form = ({ onSubmit, handleSubmit, control, cx, listServiceType, listService, selectedService }) => {
 	return (
 		<form name='frmContactUs' id='frmContactUs' onSubmit={handleSubmit(onSubmit)}>
 			<div className={cx('form-group', 'row')}>
@@ -216,17 +222,11 @@ export const Form = ({ onSubmit, handleSubmit, control, cx, listServiceType, lis
 							id='service'
 							options={listService?.data.map((value) => {
 								return {
-									value: value.id,
+									value: value.id + ' ' + value.price_list,
 									label: value.name
 								};
 							})}
 						/>
-					</div>
-				</div>
-				<div className={cx('col-lg-12')}>
-					<div className={sx('form-group', 'form-text')}>
-						<InputFieldControl control={control} name='description' id='description' />
-						<label htmlFor=''>Nội dung</label>
 					</div>
 				</div>
 			</div>
