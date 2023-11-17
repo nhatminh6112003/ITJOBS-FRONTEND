@@ -2,7 +2,7 @@ import styles from './AllJob.module.css';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { dateFilterEnum } from '~/App/constants/dateFilterEnum';
 import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import { LevelArray } from '~/App/constants/levelEnum';
@@ -20,6 +20,13 @@ import Pagination from '~/Core/components/common/Pagination';
 import { useDispatch } from 'react-redux';
 import { PaginationActionEnums } from '~/App/hooks/useServerPagination';
 import useCustomRouter from '~/App/hooks/useCustomRouter';
+import { toast } from 'react-toastify';
+import {
+	useCreateJobSavedMutation,
+	useDeleteJobSavedMutation,
+	useGetAllJobSavedQuery
+} from '~/App/providers/apis/jobSavedApi';
+import { useSelector } from 'react-redux';
 
 const cx = classNames.bind(styles);
 const AllJob = () => {
@@ -54,7 +61,13 @@ const AllJob = () => {
 			provinces: query.provinces || ''
 		}
 	});
+
 	const { data: listProfession } = useGetAllProfessionQuery({});
+	const user = useSelector((state) => state.auth.user);
+	const { data: allJobSaved } = useGetAllJobSavedQuery(user?.id);
+	const [createJobSaved] = useCreateJobSavedMutation();
+	const [deleteJobSaved] = useDeleteJobSavedMutation();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		allJobPost?.data?.map((detailJob) => {
@@ -103,7 +116,34 @@ const AllJob = () => {
 			payload: value
 		});
 	};
-
+	const handleCreateJobSaved = (id) => {
+		if (!user.id) {
+			navigate('/account/login');
+			return;
+		}
+		const data = {
+			user_account_id: user?.id,
+			job_id: id
+		};
+		createJobSaved(data)
+			.unwrap()
+			.then((value) => {
+				toast.success('Lưu thành công');
+			})
+			.catch((error) => {
+				toast.error(error.data.message);
+			});
+	};
+	const handleDeleteJobSaved = (id) => {
+		deleteJobSaved(id)
+			.unwrap()
+			.then((res) => {
+				toast.success('Xóa thành công');
+			})
+			.catch((err) => {
+				toast.error(err.data?.message);
+			});
+	};
 	return (
 		<>
 			<section className={cx('page-heading-tool')}>
@@ -358,21 +398,6 @@ const AllJob = () => {
 											/>
 										</div>
 									</div>
-									{/* <div className='item'>
-										<div className={cx('form-group', 'form-select')}>
-											<SelectFieldControl
-												control={control}
-												name='job_type'
-												id='job_type'
-												className={cx('select-custom', 'select-custom-nosearch')}
-												initialValue='Hình thức việc làm'
-												options={listWorkType?.map((item) => ({
-													value: item.id,
-													label: item.name
-												}))}
-											/>
-										</div>
-									</div> */}
 								</div>
 								<div className={cx('filter-action')}>
 									<a href='' className={cx('btn-apply')}>
@@ -386,7 +411,6 @@ const AllJob = () => {
 						</div>
 					</div>
 				</div>
-				<input type='hidden' id='recommend' name='recommend' defaultValue='' />
 			</section>
 			<section className={cx('search-result-list')}>
 				<div className={cx('container')}>
@@ -412,8 +436,8 @@ const AllJob = () => {
 																rel='noreferrer'>
 																<img
 																	className={cx('lazy-img')}
-																	src={job_post?.company?.logo}
 																	alt={job_post?.company?.company_name}
+																	src={`${import.meta.env.VITE_IMAGE_URL}/${job_post?.company?.logo}`}
 																/>
 															</Link>
 														</div>
@@ -428,9 +452,6 @@ const AllJob = () => {
 																		title={job_post?.job_title}
 																		rel='noreferrer'>
 																		{job_post?.job_title}
-																		<span className={cx('new')}>
-																			<font color='ff0000'>(Mới)</font>
-																		</span>{' '}
 																	</a>
 																</h2>
 															</div>
@@ -461,20 +482,6 @@ const AllJob = () => {
 																		<em className='mdi mdi-map-marker' />
 																		<ul>{provinces && <li>{provinces}</li>}</ul>
 																	</div>
-																	{/* <ul className={cx('welfare')}>
-																			<li>
-																				<span className='fa fa-medkit' />
-																				Chế độ bảo hiểm
-																			</li>
-																			<li>
-																				<span className='fa fa-plane' />
-																				Du Lịch
-																			</li>
-																			<li>
-																				<span className='fa fa-usd' />
-																				Chế độ thưởng
-																			</li>
-																		</ul> */}
 																</a>
 															</div>
 															<div className={cx('bottom-right-icon')}>
@@ -482,18 +489,52 @@ const AllJob = () => {
 																	<li>
 																		<a
 																			className={cx('toollips', 'save-job', 'chk_save_35BB3D60')}
-																			href=''
 																			data-id='35BB3D60'
-																			onClick='popuplogin()'>
-																			<FavoriteBorderIcon fontSize='small' />
-																			<span className={cx('text')}>Lưu việc làm</span>
+																			style={{ cursor: 'pointer' }}
+																			onClick={
+																				allJobSaved?.length > 0 &&
+																				allJobSaved.some(
+																					(item) => item.job_post_saved.id === job_post?.id
+																				)
+																					? () =>
+																							handleDeleteJobSaved(
+																								allJobSaved.find(
+																									(item) =>
+																										item.job_post_saved.id === job_post?.id
+																								).id
+																							)
+																					: () => handleCreateJobSaved(job_post?.id)
+																			}>
+																			{allJobSaved?.length > 0 &&
+																			allJobSaved.some(
+																				(item) => item.job_post_saved.id === job_post?.id
+																			) ? (
+																				<>
+																					<FavoriteBorderIcon
+																						fontSize='small'
+																						style={{ color: '#e8c80d', marginRight: '8px' }}
+																					/>
+																					<span
+																						className={cx('text')}
+																						style={{ color: '#e8c80d' }}>
+																						Việc làm đã lưu
+																					</span>
+																				</>
+																			) : (
+																				<>
+																					<FavoriteBorderIcon
+																						fontSize='small'
+																						style={{ marginRight: '8px' }}
+																					/>
+																					<span className={cx('text')}>Lưu việc làm</span>
+																				</>
+																			)}
 																		</a>
 																	</li>
 																</ul>
 																<div className={cx('time')}>
 																	<em className='mdi mdi-calendar' />
 																	<time>{formatDate(job_post?.updatedAt)}</time>
-													
 																</div>
 															</div>
 														</div>
@@ -516,7 +557,6 @@ const AllJob = () => {
 							</div>
 							<div className={cx('job-bottom-banner')} style={{ textAlign: 'center' }}></div>
 						</div>
-					
 					</div>
 				</div>
 			</section>
