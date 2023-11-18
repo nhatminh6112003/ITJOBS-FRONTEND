@@ -75,7 +75,7 @@ const SideBar = (props) => {
 	return (
 		<div className='sidebar'>
 			<div className='sidebar__logo'>
-				<img src={'/vite.svg'} alt='company logo' />
+				<img src={'/logo.png'} alt='company logo' />
 			</div>
 			{SideBarMenu.map((item, index) => (
 				<Link to={item.route} key={index}>
