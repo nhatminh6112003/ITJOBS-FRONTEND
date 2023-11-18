@@ -32,43 +32,45 @@ const EmployerDashboard = ({ cx }) => {
 		const nextMonth = new Date(today);
 		nextMonth.setMonth(nextMonth.getMonth() + 1);
 		const nextMonthYear = nextMonth.getFullYear();
-		const nextMonthMonth = (nextMonth.getMonth() + 1).toString().padStart(2, '0');
+		const nextMonthMonth = (nextMonth.getMonth() - 1).toString().padStart(2, '0');
 		const nextMonthDay = nextMonth.getDate().toString().padStart(2, '0');
 		const formattedNextMonth = `${nextMonthYear}-${nextMonthMonth}-${nextMonthDay}`;
 
 		setCurrentDate(formattedToday);
+		console.log('TCL: EmployerDashboard -> formattedToday', formattedToday);
 		setNextMonthDate(formattedNextMonth);
+		console.log('TCL: EmployerDashboard -> formattedNextMonth', formattedNextMonth);
 	}, []);
 	const { data } = useAnalyticsQuery();
 	const { data: analyticDegreeValueQuery } = useAnalyticDegreeValueQuery({
 		params: {
 			user_account_id: employer?.id,
-			startDate: '2023-11-11',
-			endDate: '2023-11-20'
+			startDate: nextMonthDate,
+			endDate: currentDate
 		}
 	});
-	console.log('TCL: EmployerDashboard -> analyticDegreeValueQuery', analyticDegreeValueQuery?.label);
+
 	const { data: analyticResumeStatus } = useAnalyticResumeStatusQuery({
 		params: {
 			user_account_id: employer?.id,
-			startDate: '2023-11-11',
-			endDate: '2023-11-20'
+			startDate: nextMonthDate,
+			endDate: currentDate
 		}
 	});
 
 	const { data: calculateCorrelationIndexData } = useCalculateCorrelationIndexQuery({
 		params: {
 			user_account_id: employer?.id,
-			startDate: '2023-11-11',
-			endDate: '2023-11-20'
+			startDate: nextMonthDate,
+			endDate: currentDate
 		}
 	});
 
 	const { data: analyticJobSeekerApplyByDayQuery } = useAnalyticJobSeekerApplyByDayQuery({
 		params: {
 			user_account_id: employer?.id,
-			startDate: '2023-11-11',
-			endDate: '2023-11-20'
+			startDate: nextMonthDate,
+			endDate: currentDate
 		}
 	});
 
@@ -162,8 +164,7 @@ const EmployerDashboard = ({ cx }) => {
 				height: 350,
 				type: 'bar',
 				events: {
-					click: function (chart, w, e) {
-					}
+					click: function (chart, w, e) {}
 				}
 			},
 			colors: ['#bd2352', '#1da1f2'],
