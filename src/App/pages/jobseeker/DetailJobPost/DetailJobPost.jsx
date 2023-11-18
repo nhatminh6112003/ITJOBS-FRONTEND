@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './DetailJobPost.module.css';
 import classNames from 'classnames/bind';
 import { useGetOneJobPostQuery } from '~/App/providers/apis/jobPostApi';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import formatDate from '~/Core/utils/formatDate';
 import { experienceEnum } from '~/App/constants/experienceEnum';
 import { LevelArray } from '~/App/constants/levelEnum';
@@ -18,6 +18,7 @@ import {
 	useGetAllJobSavedQuery
 } from '~/App/providers/apis/jobSavedApi';
 import { toast } from 'react-toastify';
+import { FavoriteBorderIcon } from '~/Core/resources';
 const sx = classNames.bind(styles);
 
 const DetailJobPost = ({ cx }) => {
@@ -44,6 +45,7 @@ const DetailJobPost = ({ cx }) => {
 	);
 	const [createJobSaved] = useCreateJobSavedMutation();
 	const [deleteJobSaved] = useDeleteJobSavedMutation();
+	const navigate = useNavigate();
 	const { data: allJobPostActivity } = useGetAllJobPostActivityApiQuery(
 		{
 			params: {
@@ -67,6 +69,10 @@ const DetailJobPost = ({ cx }) => {
 		});
 	}, [detailJobPost, listProvinces, listDistricts, allJobSaved]);
 	const handleCreateJobSaved = (id) => {
+		if (!user.id) {
+			navigate('/account/login');
+			return;
+		}
 		const data = {
 			user_account_id: user?.id,
 			job_id: id
@@ -74,7 +80,7 @@ const DetailJobPost = ({ cx }) => {
 		createJobSaved(data)
 			.unwrap()
 			.then((value) => {
-				toast.success('Đã lưu tin tuyển dụng');
+				toast.success('Lưu thành công');
 			})
 			.catch((error) => {
 				toast.error(error.data.message);
@@ -490,14 +496,11 @@ const DetailJobPost = ({ cx }) => {
 															)}
 															{detailJobPost?.is_address_work_hidden === 0 && (
 																<p>
-																	<a href='https://careerbuilder.vn/viec-lam/ho-chi-minh-l8-vi.html'>
+																	<a href={`/tim-viec-lam/${detailJobPost?.id}`}>
 																		{provinces} / {districts} / {detailJobPost?.address}
 																	</a>
 																</p>
 															)}
-															{/* <a tabIndex={0} role='button' onclick='show_map_detail_job();'>
-																<img src='img/icon-map.svg' alt=' Hồ Chí Minh' />
-															</a> */}
 														</div>
 													</div>
 												</div>
@@ -680,40 +683,7 @@ const DetailJobPost = ({ cx }) => {
 										</div>
 										<div className={sx('detail-row')} reset-bullet=''>
 											<h2 className={sx('detail-title')}>Yêu Cầu Công Việc</h2>
-											{/* <ul>
-												<li>
-													<strong>Nữ</strong>, tốt nghiệp Cao Đẳng chuyên ngành Kế toán trở lên;
-												</li>
-												<li>
-													Tuổi: <strong>sinh năm từ 1995-2000</strong>
-												</li>
-												<li>
-													Sử dụng Excel thành thạo; sử dụng khá các kỹ năng tiếng Anh, đặc biệt là kỹ năng
-													đọc và viết. <strong>Ưu tiên: TOEIC 500.</strong>
-												</li>
-												<li>Có ít nhất 1 năm kinh nghiệm làm Kế toán nội bộ hoặc Kế toán thanh toán;</li>
-												<li>
-													Năng động, có khả năng làm việc độc lập, làm việc nhóm, chịu được áp lực công
-													việc,;
-												</li>
-												<li>Tôn trọng kỷ luật làm việc.</li>
-											</ul>
-											<p>
-												<strong>QUYỀN LỢI</strong>
-											</p>
-											<ul>
-												<li>Mức lương: 8-10tr</li>
-												<li>Được tham gia bảo hiểm đầy đủ theo quy định nhà nước</li>
-												<li>Được hỗ trợ tiền ăn trưa</li>
-												<li>Được hỗ trợ chi phí gởi xe</li>
-												<li>Tổng số ngày nghỉ có phép 17 ngày/năm</li>
-												<li>Được xem xét lương thưởng hàng năm</li>
-												<li>Làm việc trong môi trường thân thiện, quản lý nhiệt tình hỗ trợ</li>
-												<li>Các hoạt động sinh nhật, team building, …</li>
-											</ul>
-											<p>
-												<strong>Địa điểm: Hồ Chí Minh</strong>
-											</p> */}
+
 											<div>{detailJobPost?.job_request}</div>
 										</div>
 										<div className={sx('detail-row')}>
@@ -805,16 +775,27 @@ const DetailJobPost = ({ cx }) => {
 																	: () => handleCreateJobSaved(detailJobPost?.id)
 															}
 															style={{ cursor: 'pointer' }}>
-															<i className={sx('mdi', 'mdi-heart-outline')} />
 															{allJobSaved?.length > 0 &&
 															allJobSaved.some(
 																(item) => item.job_post_saved.id === detailJobPost?.id
 															) ? (
-																<span className={sx('text')} style={{ color: '#e8c80d' }}>
-																	Việc làm đã lưu
-																</span>
+																<>
+																	<FavoriteBorderIcon
+																		fontSize='small'
+																		style={{ color: '#e8c80d', marginRight: '8px' }}
+																	/>
+																	<span className={sx('text')} style={{ color: '#e8c80d' }}>
+																		Việc làm đã lưu
+																	</span>
+																</>
 															) : (
-																<span className={sx('text')}>Lưu việc làm</span>
+																<>
+																	<FavoriteBorderIcon
+																		fontSize='small'
+																		style={{ marginRight: '8px' }}
+																	/>
+																	<span className={sx('text')}>Lưu việc làm</span>
+																</>
 															)}
 														</a>
 														<a
