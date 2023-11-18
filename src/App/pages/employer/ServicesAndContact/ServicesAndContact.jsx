@@ -12,7 +12,6 @@ import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 import { useCreatePaymentUrlMutation, useGetAllByServiceTypeQuery } from '~/App/providers/apis/serviceApi';
 const ServicesAndContact = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
-	console.log(employer);
 	const [CreatePaymentUrl] = useCreatePaymentUrlMutation();
 	const { data: listServiceType } = useGetAllServiceTypeQuery();
 	const {

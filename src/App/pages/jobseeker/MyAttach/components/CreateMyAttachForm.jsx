@@ -352,7 +352,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 					<div className={sx('cb-title-h3', '')}>
 						<h3>Quyền riêng tư của hồ sơ</h3>
 					</div>
-					<div className={sx('status-area', '')}>
+					<div className={sx('status-area')} style={{ margin: '20px 0' }}>
 						<div className={sx('switch-status', 'switch-status-element', '')}>
 							<a
 								data-type={1}

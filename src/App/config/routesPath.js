@@ -30,7 +30,8 @@ const JobseekerPaths = {
 	detailCompany: '/nha-tuyen-dung/:id',
 	applyJobs: '/jobseekers/jobs/apply/:id',
 	jobApplied: '/jobseekers/mykiemviec/jobapplied',
-	viewJob: '/employers/hrcentral/viewjob/:id'
+	viewJob: '/employers/hrcentral/viewjob/:id',
+	jobSaved:"/jobseekers/mykiemviec/jobsaved"
 };
 const EmployerPaths = {
 	login: '/employers/login',
