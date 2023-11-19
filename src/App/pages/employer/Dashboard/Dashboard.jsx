@@ -42,37 +42,57 @@ const EmployerDashboard = ({ cx }) => {
 		console.log('TCL: EmployerDashboard -> formattedNextMonth', formattedNextMonth);
 	}, []);
 	const { data } = useAnalyticsQuery();
-	const { data: analyticDegreeValueQuery } = useAnalyticDegreeValueQuery({
-		params: {
-			user_account_id: employer?.id,
-			startDate: nextMonthDate,
-			endDate: currentDate
+	const { data: analyticDegreeValueQuery } = useAnalyticDegreeValueQuery(
+		{
+			params: {
+				user_account_id: employer?.id,
+				startDate: nextMonthDate,
+				endDate: currentDate
+			}
+		},
+		{
+			skip: !nextMonthDate && !nextMonthDate
 		}
-	});
+	);
 
-	const { data: analyticResumeStatus } = useAnalyticResumeStatusQuery({
-		params: {
-			user_account_id: employer?.id,
-			startDate: nextMonthDate,
-			endDate: currentDate
+	const { data: analyticResumeStatus } = useAnalyticResumeStatusQuery(
+		{
+			params: {
+				user_account_id: employer?.id,
+				startDate: nextMonthDate,
+				endDate: currentDate
+			}
+		},
+		{
+			skip: !nextMonthDate && !nextMonthDate
 		}
-	});
+	);
 
-	const { data: calculateCorrelationIndexData } = useCalculateCorrelationIndexQuery({
-		params: {
-			user_account_id: employer?.id,
-			startDate: nextMonthDate,
-			endDate: currentDate
+	const { data: calculateCorrelationIndexData } = useCalculateCorrelationIndexQuery(
+		{
+			params: {
+				user_account_id: employer?.id,
+				startDate: nextMonthDate,
+				endDate: currentDate
+			}
+		},
+		{
+			skip: !nextMonthDate && !nextMonthDate
 		}
-	});
+	);
 
-	const { data: analyticJobSeekerApplyByDayQuery } = useAnalyticJobSeekerApplyByDayQuery({
-		params: {
-			user_account_id: employer?.id,
-			startDate: nextMonthDate,
-			endDate: currentDate
+	const { data: analyticJobSeekerApplyByDayQuery } = useAnalyticJobSeekerApplyByDayQuery(
+		{
+			params: {
+				user_account_id: employer?.id,
+				startDate: nextMonthDate,
+				endDate: currentDate
+			}
+		},
+		{
+			skip: !nextMonthDate && !nextMonthDate
 		}
-	});
+	);
 
 	const analyticJobSeekerApplyByDayQueryOptions = {
 		series: [
