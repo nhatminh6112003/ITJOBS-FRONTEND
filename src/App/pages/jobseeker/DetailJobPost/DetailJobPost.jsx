@@ -18,7 +18,10 @@ import {
 	useGetAllJobSavedQuery
 } from '~/App/providers/apis/jobSavedApi';
 import { toast } from 'react-toastify';
-import { FavoriteBorderIcon } from '~/Core/resources';
+import { FavoriteBorderIcon, OutlinedFlagIcon } from '~/Core/resources';
+import useModal from '~/App/hooks/useModal';
+import FeedBackModal from './components/FeedBackModal';
+
 const sx = classNames.bind(styles);
 
 const DetailJobPost = ({ cx }) => {
@@ -32,6 +35,7 @@ const DetailJobPost = ({ cx }) => {
 	const jobExperienceLabel = experienceEnum[detailJobPost?.job_experience_value]?.label;
 	const jobFormExperience = detailJobPost?.job_formExperience;
 	const jobToExperience = detailJobPost?.job_ToExperience;
+	const currentUrl = window.location.href;
 	const { data: listDistricts } = useGetAllDistrictsQuery(
 		{
 			params: {
@@ -55,7 +59,9 @@ const DetailJobPost = ({ cx }) => {
 		{ skip: !user?.id }
 	);
 	const isIdInData = allJobPostActivity?.data.some((item) => item.job_id === id);
-
+	const { isShowing, toggle } = useModal({
+		feedback: false
+	});
 	useEffect(() => {
 		listProvinces?.map((item) => {
 			if (item.code == detailJobPost?.provinces) {
@@ -95,6 +101,14 @@ const DetailJobPost = ({ cx }) => {
 			.catch((err) => {
 				toast.error(err.data?.message);
 			});
+	};
+	const handleModelFeedBack = () => {
+		if (!user.id) {
+			navigate('/account/login');
+			return;
+		} else {
+			toggle('feedback');
+		}
 	};
 	return (
 		<>
@@ -367,15 +381,6 @@ const DetailJobPost = ({ cx }) => {
 										</a>
 									</div>
 									<div className={sx('apply-type')}>
-										{/* <a
-											tabIndex={0}
-											role='button'
-											className={sx('btn-check-fit', '', 'matching-scores', 'matching-scores-35BE1408')}
-											id='matching-scores-35BE1408'
-											data-loader='customLoaderName'
-											dataid='35BE1408'>
-											Mức độ phù hợp...
-										</a> */}
 										<div className={sx('apply-now-btn', isIdInData ? 'success' : '')}>
 											{isIdInData ? (
 												<a style={{ cursor: 'pointer' }} className={sx('btn-gradient', 'btnApplyClick')}>
@@ -609,76 +614,6 @@ const DetailJobPost = ({ cx }) => {
 										</div>
 										<div className={sx('detail-row', 'reset-bullet')}>
 											<h2 className={sx('detail-title')}>Mô tả Công việc</h2>
-											{/* <p>
-												<strong>Tóm tắt nhiệm vụ:</strong>
-											</p>
-											<ul>
-												<li>Hoàn thành các công việc trên phần mềm theo dõi vụ việc luật sư</li>
-												<li>Hoàn thành chính xác, đầy đủ các công việc trên Phần Mềm Kế toán</li>
-												<li>Công việc phân bổ doanh số và các công việc phát sinh khác</li>
-												<li>Các nhiệm vụ chính:</li>
-											</ul>
-											<p>
-												<strong>
-													Nhiệm vụ 1: Hoàn thành các công việc trên phần mềm theo dõi vụ việc luật sư
-												</strong>
-											</p>
-											<ul>
-												<li>
-													Theo dõi, tập hợp danh sách khách hàng, thông tin hợp đồng, chi tiết các vụ việc
-													(giá trị hợp đồng, phương thức thanh toán, kỳ hạn thanh toán…), lập báo cáo tiến
-													độ của các hợp đồng hàng tháng
-												</li>
-												<li>
-													Đảm bảo theo dõi kịp thời các yêu cầu ra Đề Nghị Thanh Toán cho khách hàng, thực
-													hiện lập Đề Nghị Thanh Toán theo quy trình của Công ty, gửi Đề Nghị thanh toán
-													cho khách hàng trong và ngoài nước
-												</li>
-												<li>
-													Chủ động theo dõi tiến độ thanh toán của khách hàng, liên hệ trực tiếp với khách
-													để yêu cầu thanh toán, nhắc nợ
-												</li>
-												<li>
-													Lập file theo dõi các Đề Nghị Thanh Toán, lập báo cáo Công nợ phải thu và tình
-													hình thu tiền hàng tuần, hàng tháng
-												</li>
-											</ul>
-											<p>
-												<strong>
-													Nhiệm vụ 2: Hoàn thành chính xác, đầy đủ các công việc trên Phần Mềm Kế toán
-												</strong>
-											</p>
-											<ul>
-												<li>
-													Kiểm tra sao kê ngân hàng mỗi ngày, ghi nhận lên file theo dõi và phần mềm kế
-													toán các khoản thanh toán của khách hàng
-												</li>
-												<li>
-													Xuất hóa đơn GTGT cho các khoản phí dịch vụ, xử lý các vấn đề phát sinh liên quan
-													đến hóa đơn GTGT, lập và trình ký biên bản điều chỉnh hóa đơn, biên bản hủy hóa
-													đơn, chỉnh sửa các thông tin sai xót trên Đề nghị thanh toán
-												</li>
-												<li>
-													Ghi nhận các hóa đơn GTGT lên Phần mềm kế toán, kiểm tra số liệu và tổng hợp bảng
-													kê thuế GTGT đầu ra hàng quý.
-												</li>
-											</ul>
-											<p>
-												<strong>
-													Nhiệm vụ 3: Công việc phân bổ doanh số và các công việc phát sinh khác
-												</strong>
-											</p>
-											<ul>
-												<li>Nhập các bảng phân bổ doanh số của từng hợp đồng lên phần mềm</li>
-												<li>
-													Tổng hợp và gửi báo cáo cập nhật doanh số theo từng người phụ trách hàng tháng,
-													hàng quý
-												</li>
-												<li>
-													Hỗ trợ các công việc liên quan và các báo cáo khác khi có yêu cầu từ trưởng bộ
-													phận hoặc Giám đốc.
-												</li>
-											</ul> */}
 											<div>{detailJobPost?.job_desc}</div>
 										</div>
 										<div className={sx('detail-row')} reset-bullet=''>
@@ -799,120 +734,20 @@ const DetailJobPost = ({ cx }) => {
 															)}
 														</a>
 														<a
+															onClick={() => handleModelFeedBack()}
 															tabIndex={0}
-															role='button'
 															className={sx('report-job', 'toollips')}
 															style={{ cursor: 'pointer' }}>
-															<i className={sx('fa', 'fa-flag-o')} />
+															<OutlinedFlagIcon fontSize='small' style={{ marginRight: '8px' }} />
 															<span>Báo xấu</span>
 														</a>
-														<div className={sx('report-modal')} style={{ display: 'none' }}>
-															<div className={sx('modal-title')}>
-																<p>Vì sao bạn muốn báo xấu nhà tuyển dụng này? </p>
-															</div>
-															<div className={sx('modal-body')}>
-																<form
-																	name='feedback_job'
-																	id='feedback_job'
-																	method='POST'
-																	autoComplete='off'>
-																	<input
-																		type='hidden'
-																		name='job_url'
-																		id='job_url'
-																		defaultValue='https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html'
-																	/>
-																	<div className={sx('form-group')}>
-																		<input
-																			type='text'
-																			id='email'
-																			name='email'
-																			placeholder='Nhập địa chỉ email '
-																			onkeyup="this.setAttribute('value', this.value);"
-																			defaultValue='lop7cttnq@gmail.com'
-																		/>
-																		<p className={sx('text-validate', 'error_email')}> </p>
-																	</div>
-																	<div className={sx('list-radio')} id='reason' name='reason'>
-																		<input
-																			type='radio'
-																			id='reason-1'
-																			name='reason'
-																			defaultValue={1}
-																		/>
-																		<label htmlFor='reason-1'> Việc làm không hợp pháp </label>
-																		<br />
-																		<input
-																			type='radio'
-																			id='reason-2'
-																			name='reason'
-																			defaultValue={2}
-																		/>
-																		<label htmlFor='reason-2'> Không cung cấp đủ thông tin </label>
-																		<br />
-																		<input
-																			type='radio'
-																			id='reason-3'
-																			name='reason'
-																			defaultValue={3}
-																		/>
-																		<label htmlFor='reason-3'> Khác </label>
-																		<p className={sx('text-validate', 'error_reason')} />
-																	</div>
-																	<div className={sx('box-reason', 'form-group')}>
-																		<input type='text' id='box_reason' name='box_reason' />
-																		<p className={sx('text-validate', 'error_box_reason')}> </p>
-																	</div>
-																	<div className={sx('form-group')}>
-																		<input
-																			type='text'
-																			name='captcha'
-																			id='captcha'
-																			autoComplete='off'
-																			placeholder='Mã xác nhận'
-																			onkeyup="this.setAttribute('value', this.value);"
-																			defaultValue=''
-																		/>
-																		<p className={sx('text-validate', 'error_captcha')} />
-																	</div>
-																	<div
-																		id='captchaim'
-																		style={{ float: 'left' }}
-																		className={sx('form-group')}>
-																		<img
-																			width={150}
-																			height={50}
-																			alt='captcha'
-																			src='https://images.careerbuilder.vn/rws/captcha/9046b657648bb882d009f3360396542b.png'
-																			className={sx('img_code')}
-																		/>
-																		<input
-																			type='hidden'
-																			name='key_captcha'
-																			id='key_captcha'
-																			defaultValue='9046b657648bb882d009f3360396542b'
-																		/>
-																	</div>
-																	<a
-																		tabIndex={0}
-																		role='button'
-																		style={{ paddingLeft: 10 }}
-																		onclick="refeshImgCaptcha('captchaim');"
-																		className={sx('line_bot')}
-																		id='trynewcode'>
-																		Thử mã mới
-																	</a>
-																	<div className={sx('form-group')} style={{ clear: 'left' }}>
-																		<button
-																			className={sx('btn-send-report')}
-																			onclick='saveFeedbackJob();return false;'>
-																			{' '}
-																			Báo xấu{' '}
-																		</button>
-																	</div>
-																</form>
-															</div>
-														</div>
+														<FeedBackModal
+															isOpen={isShowing?.feedback}
+															onRequestClose={() => toggle('feedback')}
+															currentUrl={currentUrl}
+															sx={sx}
+															cx={cx}
+														/>
 													</div>
 													<div className={sx('apply-now-btn', isIdInData ? 'success' : '')}>
 														{isIdInData ? (

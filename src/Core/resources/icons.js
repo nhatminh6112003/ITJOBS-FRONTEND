@@ -17,6 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Notifications from '@mui/icons-material/Notifications';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
 
 import Settings from '@mui/icons-material/Settings';
 import HomeIcon from '@mui/icons-material/Home';
@@ -43,5 +44,6 @@ export {
 	DeleteIcon,
 	Settings,
 	HomeIcon,
-	CategoryIcon
+	CategoryIcon,
+	OutlinedFlagIcon
 };
