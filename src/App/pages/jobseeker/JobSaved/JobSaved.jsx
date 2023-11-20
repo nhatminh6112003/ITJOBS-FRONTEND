@@ -129,6 +129,9 @@ const JobSaved = () => {
 														</tr>
 													</>
 												))}
+												<td colSpan={3} className={cx('record-tbl')}>
+													{allJobSaved?.length === 0 && <div>Hiện tại chưa có dữ liệu</div>}
+												</td>
 											</tbody>
 										</table>
 										<div className={sx('main-pagination')}> </div>

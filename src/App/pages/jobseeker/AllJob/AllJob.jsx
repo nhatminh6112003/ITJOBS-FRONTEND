@@ -471,16 +471,20 @@ const AllJob = () => {
 																	target='_blank'
 																	title={job_post?.job_title}
 																	rel='noreferrer'>
-																	<div className={cx('salary')}>
+																	<div style={{ color: '#008563', fontSize: '14px' }}>
 																		<p>
 																			<em className='fa fa-usd' />
 																			Lương: {parseInt(job_post?.min_salary).toString().charAt(0)} Tr
 																			- {parseInt(job_post?.max_salary).toString().charAt(0)} Tr VND
 																		</p>
 																	</div>
-																	<div className={cx('location')}>
+																	<div style={{ color: '#333333', fontSize: '14px' }}>
 																		<em className='mdi mdi-map-marker' />
-																		<ul>{provinces && <li>{provinces}</li>}</ul>
+																		<p>{provinces}</p>
+																	</div>
+																	<div style={{ color: '#333333', fontSize: '14px' }}>
+																		<em className='fa fa-clock-o' />
+																		<p>Hạn nộp: {formatDate(job_post?.expiry_date)}</p>
 																	</div>
 																</a>
 															</div>
@@ -512,11 +516,14 @@ const AllJob = () => {
 																				<>
 																					<FavoriteBorderIcon
 																						fontSize='small'
-																						style={{ color: '#e8c80d', marginRight: '8px' }}
+																						style={{
+																							color: 'rgba(93, 103, 122, 0.5)',
+																							marginRight: '8px'
+																						}}
 																					/>
 																					<span
 																						className={cx('text')}
-																						style={{ color: '#e8c80d' }}>
+																						style={{ color: 'rgba(93, 103, 122, 0.5)' }}>
 																						Việc làm đã lưu
 																					</span>
 																				</>
@@ -534,6 +541,7 @@ const AllJob = () => {
 																</ul>
 																<div className={cx('time')}>
 																	<em className='mdi mdi-calendar' />
+																	Cập nhật:
 																	<time>{formatDate(job_post?.updatedAt)}</time>
 																</div>
 															</div>
@@ -543,6 +551,7 @@ const AllJob = () => {
 											</>
 										);
 									})}
+									{allJobPost?.data?.length === 0 && <div>Hiện tại chưa có dữ liệu</div>}
 								</div>
 
 								<Pagination

@@ -14,12 +14,12 @@ const Accounts = ({ cx }) => {
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}> Thông Tin Tài Khoản</h1>
 						</div>
-						<div className={sx('right-heading')}>
+						{/* <div className={sx('right-heading')}>
 							{' '}
 							<a className={sx('support')} href='https://careerbuilder.vn/vi/employers/faq'>
 								Hướng dẫn
 							</a>
-						</div>
+						</div> */}
 					</div>
 					<div className={sx('main-tabslet')} data-toggle='tabslet'>
 						<ul className={sx('tabslet-tab')}>
@@ -33,20 +33,20 @@ const Accounts = ({ cx }) => {
 									<span>Thông tin công ty</span>
 								</Link>
 							</li>
-							<li>
+							{/* <li>
 								<a
 									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/edit_contact'
 									alt='Thông tin liên hệ'>
 									<span>Thông tin liên hệ</span>
 								</a>
-							</li>
-							<li>
+							</li> */}
+							{/* <li>
 								<a
 									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/changepassword'
 									alt='Đổi mật khẩu'>
 									<span>Đổi mật khẩu</span>
 								</a>
-							</li>
+							</li> */}
 						</ul>
 						<div className={sx('tabslet-content', '', 'active')} id='tab-1'>
 							<div className={sx('main-application-information')}>

@@ -48,36 +48,36 @@ const Header = () => {
 											<li>
 												<a href='/tim-ung-vien'>Tìm Hồ Sơ Ứng Viên</a>
 											</li>
-											<li>
+											{/* <li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services/talent-solution/'>
 													Talent Solution
 												</a>
-											</li>
+											</li> */}
 											<li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services/quang-cao-tuyen-dung/9'>
 													Quảng Cáo Tuyển Dụng
 												</a>
 											</li>
-											<li>
+											{/* <li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services/talent-driver/14'>
 													Talent Driver
 												</a>
-											</li>
-											<li>
+											</li> */}
+											{/* <li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services/targeted-email-marketing/'>
 													Targeted Email Marketing
 												</a>
-											</li>
-											<li>
+											</li> */}
+											{/* <li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services/talent-referral/'>
 													Talent Referral
 												</a>
-											</li>
-											<li>
+											</li> */}
+											{/* <li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung-va-tim-ho-so-quoc-te/10'>
 													Đăng Tuyển Dụng và Tìm Hồ Sơ Quốc tế
 												</a>
-											</li>
+											</li> */}
 											<li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services'>
 													Xem tất cả sản phẩm / dịch vụ
@@ -102,11 +102,11 @@ const Header = () => {
 										</ul>
 									</div>
 								</li>
-								<li className=''>
+								{/* <li className=''>
 									<a href='https://careerbuilder.vn/vi/hiringsite'>Cẩm Nang Tuyển Dụng</a>
-								</li>
+								</li> */}
 								<li className=''>
-									<a href='https://careerbuilder.vn/vi/employers/services/contact'>Liên hệ</a>
+									<Link to={routesPath.EmployerPaths.serviceAndContact}>Liên hệ</Link>
 								</li>
 							</ul>
 						</div>
@@ -148,12 +148,11 @@ const Header = () => {
 													Đơn Hàng
 												</a>
 											</li>
-
-											<li>
+											{/* <li>
 												<a href='https://careerbuilder.vn/vi/employers/careerbuilder-rewards'>
 													CareerBuilder Rewards
 												</a>
-											</li>
+											</li> */}
 											<li>
 												<a href='/employers/hrcentral/accounts'> Tài khoản</a>
 											</li>
@@ -193,7 +192,7 @@ const Header = () => {
 									<ExpandMoreIcon fontSize='small' />
 								</p>
 							</div>
-							<div className={cx('dropdown-menu')}>
+							{/* <div className={cx('dropdown-menu')}>
 								<div className={cx('item', 'active')}>
 									<CheckIcon fontSize='small' sx={{ paddingRight: '5px' }} />
 									<a className='dropdown-item' href='' title='Change language'>
@@ -209,7 +208,7 @@ const Header = () => {
 										EN
 									</a>
 								</div>
-							</div>
+							</div> */}
 						</div>
 						<div className={cx('main-candidates')}>
 							<Link to={routesPath.JobseekerPaths.home}>

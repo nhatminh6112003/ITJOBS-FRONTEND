@@ -89,11 +89,11 @@ const WaitPosting = ({ cx }) => {
 								</Link>
 							</div>
 						</div>
-						<div className={sx('right-heading')}>
+						{/* <div className={sx('right-heading')}>
 							<a href='https://careerbuilder.vn/vi/employers/faq' className={sx('support')}>
 								Hướng dẫn
 							</a>
-						</div>
+						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form name='frmSearchJob' id='frmSearchJob' action='' method='post' onSubmit={handleSubmit(onSubmit)}>
@@ -179,7 +179,7 @@ const WaitPosting = ({ cx }) => {
 									<div className={sx('left-heading')}>
 										<p className={sx('name')}>Chọn và thao tác</p>
 										<ul className={sx('list-check')}>
-											<li className={sx('view-posting-detail', 'active')}>
+											{/* <li className={sx('view-posting-detail', 'active')}>
 												<a href='javascript:void(0);' id='dtail'>
 													Chi tiết
 												</a>
@@ -191,10 +191,10 @@ const WaitPosting = ({ cx }) => {
 												<a href='javascript:void(0);' id='copy_multi_job'>
 													Nhân bản
 												</a>
-											</li>
+											</li> */}
 										</ul>
 									</div>
-									<div className={sx('right-heading')}>
+									{/* <div className={sx('right-heading')}>
 										<div className={sx('to-display')}>
 											<p className={sx('name')}>Hiển thị </p>
 											<div className={sx('form-display')}>
@@ -209,7 +209,7 @@ const WaitPosting = ({ cx }) => {
 											</div>
 											<p className={sx('name-display')}>Hiển thị 1 - 5 của 5 việc làm</p>
 										</div>
-									</div>
+									</div> */}
 								</div>
 								<div className={sx('boding-jobs-posting')}>
 									<div className={sx('table', 'table-jobs-posting')}>

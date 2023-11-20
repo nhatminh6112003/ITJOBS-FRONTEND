@@ -75,11 +75,11 @@ const UnPosting = ({ cx }) => {
 								</Link>
 							</div>
 						</div>
-						<div className={sx('right-heading')}>
+						{/* <div className={sx('right-heading')}>
 							<a href='https://careerbuilder.vn/vi/employers/faq' className={sx('support')}>
 								Hướng dẫn
 							</a>
-						</div>
+						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form name='frmSearchJob' id='frmSearchJob' action='' method='post' onSubmit={handleSubmit(onSubmit)}>
@@ -168,7 +168,7 @@ const UnPosting = ({ cx }) => {
 									<div className={sx('left-heading')}>
 										<p className={sx('name')}>Hiển thị </p>
 										<ul className={sx('list-check')}>
-											<li className={sx('view-posting-detail', 'active')}>
+											{/* <li className={sx('view-posting-detail', 'active')}>
 												<a href='javascript:void(0);' id='dtail'>
 													Chi tiết
 												</a>
@@ -180,7 +180,7 @@ const UnPosting = ({ cx }) => {
 												<a href='javascript:void(0);' id='copy_multi_job'>
 													Nhân bản
 												</a>
-											</li>
+											</li> */}
 										</ul>
 									</div>
 									<div className={sx('right-heading')}>
@@ -190,7 +190,7 @@ const UnPosting = ({ cx }) => {
 												Xuất file job
 											</a>
 										</div>
-										<div className={sx('to-display')}>
+										{/* <div className={sx('to-display')}>
 											<p className={sx('name')}>Hiển thị </p>
 											<div className={sx('form-display')}>
 												<select name='limit' id='limit'>
@@ -203,7 +203,7 @@ const UnPosting = ({ cx }) => {
 												</select>
 											</div>
 											<p className={sx('name-display')} />
-										</div>
+										</div> */}
 									</div>
 								</div>
 								<div className={sx('boding-jobs-posting')}>
