@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { DegreeArray } from '~/App/constants/degreeArray';
 import GenderEnum from '~/App/constants/genderEnum';
@@ -97,14 +97,14 @@ const ResumeDetail = ({ cx }) => {
 					<div className={sx('heading-manage')}>
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}></h1>
-							<div className={sx('button')}>
+							{/* <div className={sx('button')}>
 								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/saved_search'>
 									<em className={cx('material-icons')}>notifications_none</em>
 									Thông Báo Ứng Viên
 								</a>
-							</div>
+							</div> */}
 						</div>
-						<div className={sx('right-heading')}>
+						{/* <div className={sx('right-heading')}>
 							<a
 								className={sx('support')}
 								target='_blank'
@@ -112,7 +112,7 @@ const ResumeDetail = ({ cx }) => {
 								rel='noreferrer'>
 								Hướng dẫn
 							</a>
-						</div>
+						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form name='frmSearchResume'>
@@ -249,15 +249,15 @@ const ResumeDetail = ({ cx }) => {
 					</div>
 					<div className={sx('main-tabslet')} data-toggle='tabslet'>
 						<ul className={sx('tabslet-tab')}>
+							<li>
+								<Link to={'/employers/hrcentral/manageresume'}>Hồ Sơ Ứng Tuyển</Link>
+							</li>
 							<li className={sx('active')}>
-								<a>Hồ Sơ Ứng Tuyển</a>
+								<Link to={'/employers/hrcentral/manageresume/resume-saved'}>Hồ Sơ Đã Lưu</Link>
 							</li>
-							<li>
-								<a>Hồ Sơ Đã Lưu</a>
-							</li>
-							<li>
+							{/* <li>
 								<a>Hồ Sơ Đã Xóa</a>
-							</li>
+							</li> */}
 						</ul>
 						<div className={sx('tabslet-content', 'active')} id='tab-1'>
 							<div className={sx('main-resume-applied')}>
@@ -281,7 +281,7 @@ const ResumeDetail = ({ cx }) => {
 										</div>
 										<div className={sx('action')}>
 											<ul className={sx('list-manipulation')}>
-												<li>
+												{/* <li>
 													<em className={cx('material-icons')}>folder_shared </em>
 													<a
 														href='javascript:void(0);'
@@ -289,7 +289,7 @@ const ResumeDetail = ({ cx }) => {
 														title='Lưu thư mục'>
 														Lưu thư mục
 													</a>
-												</li>
+												</li> */}
 												<li>
 													<i className={sx('fa', 'fa-star')} aria-hidden='true' />
 													<a
@@ -299,7 +299,7 @@ const ResumeDetail = ({ cx }) => {
 														Cập nhật trạng thái
 													</a>
 												</li>
-												<li>
+												{/* <li>
 													<i className={sx('fa', 'fa-forward')} aria-hidden='true' />
 													<a
 														href='javascript:void(0);'
@@ -307,7 +307,7 @@ const ResumeDetail = ({ cx }) => {
 														title='Giới thiệu hồ sơ '>
 														Giới thiệu hồ sơ
 													</a>
-												</li>
+												</li> */}
 												<li>
 													<em className={cx('material-icons')}>email </em>
 													<a
@@ -423,16 +423,16 @@ const ResumeDetail = ({ cx }) => {
 												<li className={sx('active')} data-tab-detail={1}>
 													<a href='javascript:void(0)'>Chi Tiết Hồ Sơ</a>
 												</li>
-												<li data-tab-detail={2}>
+												{/* <li data-tab-detail={2}>
 													<a href='javascript:void(0)'>Thư Giới Thiệu</a>
-												</li>
-												<li id='tab_intro' data-tab-detail={3}>
+												</li> */}
+												{/* <li id='tab_intro' data-tab-detail={3}>
 													<a
 														href='javascript:void(0)'
 														onclick="loadResumeNoted(0, '35C9210A','35BFE874');">
 														Ghi Chú
 													</a>
-												</li>
+												</li> */}
 											</ul>
 											<div className={sx('tabslet-content-detail', 'active')}>
 												<div className={sx('box-flip-view')}>

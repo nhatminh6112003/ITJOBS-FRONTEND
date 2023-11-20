@@ -58,19 +58,19 @@ const ManageResume = ({ cx }) => {
 				<div className={sx('box-candidates-resume-applied')}>
 					<div className={sx('heading-manage')}>
 						<div className={sx('left-heading')}>
-							<h1 className={sx('title-manage')}>Việc Làm Đang Đăng</h1>
-							<div className={sx('button')}>
+							<h1 className={sx('title-manage')}>Quản lý hồ sơ</h1>
+							{/* <div className={sx('button')}>
 								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/saved_search'>
 									<em className={cx('material-icons')}>notifications_none</em>
 									Thông Báo Ứng Viên
 								</a>
-							</div>
+							</div> */}
 						</div>
-						<div className={sx('right-heading')}>
+						{/* <div className={sx('right-heading')}>
 							<a className={sx('support')} href='https://careerbuilder.vn/vi/employers/faq'>
 								Hướng dẫn
 							</a>
-						</div>
+						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form onSubmit={handleSubmit(onSubmit)}>

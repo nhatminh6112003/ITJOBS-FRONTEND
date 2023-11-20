@@ -77,18 +77,18 @@ const ResumeSaved = ({ cx }) => {
 					<div className={sx('heading-manage')}>
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}>Hồ Sơ Đã Lưu</h1>
-							<div className={sx('button')}>
+							{/* <div className={sx('button')}>
 								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/saved_search'>
 									<em className={cx('material-icons')}>notifications_none</em>
 									Thông Báo Ứng Viên
 								</a>
-							</div>
+							</div> */}
 						</div>
-						<div className={sx('right-heading')}>
+						{/* <div className={sx('right-heading')}>
 							<a className={sx('support')} href='https://careerbuilder.vn/vi/employers/faq'>
 								Hướng dẫn
 							</a>
-						</div>
+						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form onSubmit={handleSubmit(onSubmit)}>

@@ -98,11 +98,11 @@ const PostJobs = ({ cx }) => {
 							<div className={sx('left-heading')}>
 								<h1 className={sx('title-manage')}>Đăng Tuyển Dụng</h1>
 							</div>
-							<div className={sx('right-heading')}>
+							{/* <div className={sx('right-heading')}>
 								<a href='https://careerbuilder.vn/vi/employers/faq' className={sx('support')}>
 									Hướng dẫn
 								</a>
-							</div>
+							</div> */}
 						</div>
 						<form onSubmit={handleSubmit(onCreatePostJobs)}>
 							<div className={sx('main-tabslet')}>
@@ -111,7 +111,7 @@ const PostJobs = ({ cx }) => {
 										{' '}
 										<a href='javascript:void(0);'>Thông Tin Tuyển Dụng</a>
 									</li>
-									<li>
+									{/* <li>
 										{' '}
 										<a href='javascript:void(0)' onclick='is_Filter_Form();'>
 											Thông Tin Liên Hệ
@@ -122,7 +122,7 @@ const PostJobs = ({ cx }) => {
 										<a href='javascript:void(0)' onclick='is_Filter_Form();'>
 											Thiết Lập Độ Phù Hợp Ứng Viên
 										</a>
-									</li>
+									</li> */}
 								</ul>
 								<div className={sx('tabslet-content', 'active')} id='tab-1'>
 									<input name='ispublic' type='hidden' defaultValue={0} />
@@ -600,13 +600,13 @@ const PostJobs = ({ cx }) => {
 												</div>
 											</div>
 											<div className={sx('form-group', 'form-submit', 'form-continue')}>
-												<button
+												{/* <button
 													className={sx('btn-gradient', 'btn-submit')}
 													id='btn_submit_form_postjobs'
 													type='button'
 													onclick='is_Filter_Form();'>
 													Tiếp tục
-												</button>
+												</button> */}
 												<button
 													className={sx('btn-gradient', 'btn-post')}
 													id='btn_submit_form_postjobs_finish'

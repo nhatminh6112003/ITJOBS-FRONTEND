@@ -613,7 +613,7 @@ const FindJobSeeker = ({ cx }) => {
 								như tiêu chí tìm kiếm của quý khách
 							</p>
 						</div>
-						<div className={sx('bottom')}>
+						{/* <div className={sx('bottom')}>
 							<div className={sx('job-name')}>
 								<p>
 									<strong>Ngành nghề: </strong>
@@ -624,7 +624,7 @@ const FindJobSeeker = ({ cx }) => {
 									</span>
 								</p>
 							</div>
-						</div>
+						</div> */}
 					</div>
 					<div className={sx('main-jobs-posting')}>
 						<div className={sx('boding-jobs-posting')}>
@@ -710,7 +710,7 @@ const FindJobSeeker = ({ cx }) => {
 														</td>
 														<td>
 															<ul className={sx('list-manipulation')}>
-																<li>
+																{/* <li>
 																	<a
 																		className={sx('btn-popup-flipview')}
 																		title='Xem hồ sơ dạng Flipview'
@@ -718,7 +718,7 @@ const FindJobSeeker = ({ cx }) => {
 																		onclick="windowFlipView('bmdhbmgtbmdoZS9jbnR0LXBoYW4tbWVtL3NvcnQvZGF0ZV9hc2M=',0, 3);">
 																		<em className={cx('material-icons')}>import_contacts </em>
 																	</a>
-																</li>
+																</li> */}
 																<li>
 																	<a
 																		onClick={() => handleSaveToFolder(resume.id)}
@@ -728,14 +728,14 @@ const FindJobSeeker = ({ cx }) => {
 																		<em className={cx('material-icons')}>folder_shared </em>
 																	</a>
 																</li>
-																<li>
+																{/* <li>
 																	<a
 																		href='https://careerbuilder.vn/vi/tim-ung-vien/tu-khoa/director/noi-lam-viec/ha-noi'
 																		title='Xem hồ sơ tương tự'>
 																		{' '}
 																		<em className={cx('material-icons')}>account_box </em>
 																	</a>
-																</li>
+																</li> */}
 																<li>
 																	<a
 																		className={sx('btn-delete')}

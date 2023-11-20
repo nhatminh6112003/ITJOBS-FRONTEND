@@ -121,7 +121,7 @@ const Header = () => {
 							</div>
 						</div>
 						<div className={cx('right-wrap')}>
-							<div className={cx('main-noti', 'dropdown')}>
+							{/* <div className={cx('main-noti', 'dropdown')}>
 								<Fragment>
 									<Notifications style={{ cursor: 'pointer' }} />
 									<div className={cx('dropdown-menu')}>
@@ -144,7 +144,7 @@ const Header = () => {
 										</div>
 									</div>
 								</Fragment>
-							</div>
+							</div> */}
 							{/* <div className={cx("main-login","dropdown")}>
           <div className={cx("title-login")}>
             <a title="Đăng nhập" onClick={redirectLogin} >
@@ -204,7 +204,7 @@ const Header = () => {
 								</div>
 							)}
 
-							<div className={cx('main-language', 'dropdown')}>
+							{/* <div className={cx('main-language', 'dropdown')}>
 								<div className={cx('dropdown-toggle')}>
 									<p>
 										VI
@@ -213,13 +213,13 @@ const Header = () => {
 								</div>
 								<div className={cx('dropdown-menu')}>
 									<div className={cx('item', 'active')}>
-										{/* <CheckIcon fontSize="small" sx={{paddingRight:'5px'}} /> */}
+										<CheckIcon fontSize="small" sx={{paddingRight:'5px'}} />
 										<a className='dropdown-item' href='' title='Change language'>
 											VI
 										</a>
 									</div>
 									<div className={cx('item')}>
-										{/* <CheckIcon fontSize="small" sx={{paddingRight:'5px'}} /> */}
+										<CheckIcon fontSize="small" sx={{paddingRight:'5px'}} />
 										<a
 											className={cx('dropdown-item')}
 											href='https://careerbuilder.vn/en/employers/login'
@@ -228,7 +228,7 @@ const Header = () => {
 										</a>
 									</div>
 								</div>
-							</div>
+							</div> */}
 
 							<div className={cx('main-employer', 'dropdown')}>
 								<a>

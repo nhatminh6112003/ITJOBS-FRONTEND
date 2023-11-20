@@ -107,6 +107,9 @@ const JobApplied = () => {
 														</tr>
 													</>
 												))}
+												<td colSpan={4}>
+													{allJobPostActivity?.data.length === 0 && <div>Hiện tại chưa có dữ liệu</div>}
+												</td>
 											</tbody>
 										</table>
 										<div className={sx('main-pagination')}> </div>

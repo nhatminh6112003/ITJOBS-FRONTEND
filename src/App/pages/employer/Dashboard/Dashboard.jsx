@@ -14,6 +14,7 @@ import {
 import Chart from 'react-apexcharts';
 import ReactApexChart from 'react-apexcharts';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const sx = classNames.bind(styles);
 
@@ -406,8 +407,7 @@ const EmployerDashboard = ({ cx }) => {
 										<span className={sx('swiper-pagination-current')}>1</span> /{' '}
 										<span className={sx('swiper-pagination-total')}>10</span>
 									</span>{' '}
-									hồ sơ mới{' '}
-									<a href='https://careerbuilder.vn/vi/tim-ung-vien.html'>Xem thêm tìm kiếm ứng viên</a>
+									hồ sơ mới <Link to='/tim-ung-vien'>Xem thêm tìm kiếm ứng viên</Link>
 									<div className={sx('main-button')}>
 										<div className={sx('button-prev')} tabIndex={0} role='button' aria-label='Previous slide'>
 											<em className={sx('mdi', 'mdi-chevron-left')} />

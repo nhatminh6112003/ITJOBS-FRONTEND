@@ -36,7 +36,7 @@ const ExpirePosting = ({ cx }) => {
 			status: jobPostStatusEnum.Expired,
 			isDeleted: false
 		}
-	})
+	});
 
 	const { control, handleSubmit } = useForm({
 		values: {
@@ -48,8 +48,7 @@ const ExpirePosting = ({ cx }) => {
 	});
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
-
-	}
+	};
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -64,11 +63,11 @@ const ExpirePosting = ({ cx }) => {
 								</Link>
 							</div>
 						</div>
-						<div className={sx('right-heading')}>
+						{/* <div className={sx('right-heading')}>
 							<a href='https://careerbuilder.vn/vi/employers/faq' className={sx('support')}>
 								Hướng dẫn
 							</a>
-						</div>
+						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form name='frmSearchJob' id='frmSearchJob' action='' method='post' onSubmit={handleSubmit(onSubmit)}>
@@ -158,7 +157,7 @@ const ExpirePosting = ({ cx }) => {
 									<div className={sx('left-heading')}>
 										<p className={sx('name')}>Hiển thị </p>
 										<ul className={sx('list-check')}>
-											<li className={sx('view-posting-detail', 'active')}>
+											{/* <li className={sx('view-posting-detail', 'active')}>
 												<a href='javascript:void(0);' id='dtail'>
 													Chi tiết
 												</a>
@@ -170,7 +169,7 @@ const ExpirePosting = ({ cx }) => {
 												<a href='javascript:void(0);' id='copy_multi_job'>
 													Nhân bản
 												</a>
-											</li>
+											</li> */}
 										</ul>
 									</div>
 									<div className={sx('right-heading')}>
@@ -180,7 +179,7 @@ const ExpirePosting = ({ cx }) => {
 												Xuất file job
 											</a>
 										</div>
-										<div className={sx('to-display')}>
+										{/* <div className={sx('to-display')}>
 											<p className={sx('name')}>Hiển thị </p>
 											<div className={sx('form-display')}>
 												<select name='limit' id='limit'>
@@ -193,7 +192,7 @@ const ExpirePosting = ({ cx }) => {
 												</select>
 											</div>
 											<p className={sx('name-display')} />
-										</div>
+										</div> */}
 									</div>
 								</div>
 								<div className={sx('boding-jobs-posting')}>
