@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from '../Posting/posting.module.css';
 import classNames from 'classnames/bind';
 import CreateIcon from '@mui/icons-material/Create';
@@ -9,7 +9,11 @@ import TabMenu from '../Posting/components/TabMenu';
 import { useLocation } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import GetAppIcon from '@mui/icons-material/GetApp';
-import { useDeleteJobPostMutation, useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import {
+	useDeleteJobPostMutation,
+	useGetAllJobPostQuery,
+	useUpdateJobPostMutation
+} from '~/App/providers/apis/jobPostApi';
 import { toast } from 'react-toastify';
 import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import { useSelector } from 'react-redux';
@@ -19,6 +23,8 @@ import formatDate from '~/Core/utils/formatDate';
 import { useForm } from 'react-hook-form';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import CancelIcon from '@mui/icons-material/Cancel';
+
 const sx = classNames.bind(styles);
 
 const UnPosting = ({ cx }) => {
@@ -28,7 +34,7 @@ const UnPosting = ({ cx }) => {
 
 	const { pushQuery, query } = useSearchJobPost();
 	const [deleteJobPost] = useDeleteJobPostMutation();
-
+	const [updateJobPost] = useUpdateJobPostMutation();
 	const { data: allJobPost } = useGetAllJobPostQuery({
 		params: {
 			keyword: query.keyword || '',
@@ -61,6 +67,15 @@ const UnPosting = ({ cx }) => {
 				}
 			});
 	};
+	const updateStatusJobPost = async (id) => {
+		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date() } })
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success('Đăng tuyển thành công');
+				}
+			});
+	};
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -75,11 +90,6 @@ const UnPosting = ({ cx }) => {
 								</Link>
 							</div>
 						</div>
-						{/* <div className={sx('right-heading')}>
-							<a href='https://careerbuilder.vn/vi/employers/faq' className={sx('support')}>
-								Hướng dẫn
-							</a>
-						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form name='frmSearchJob' id='frmSearchJob' action='' method='post' onSubmit={handleSubmit(onSubmit)}>
@@ -167,21 +177,6 @@ const UnPosting = ({ cx }) => {
 								<div className={sx('heading-jobs-posting')}>
 									<div className={sx('left-heading')}>
 										<p className={sx('name')}>Hiển thị </p>
-										<ul className={sx('list-check')}>
-											{/* <li className={sx('view-posting-detail', 'active')}>
-												<a href='javascript:void(0);' id='dtail'>
-													Chi tiết
-												</a>
-											</li>
-											<li className={sx('view-posting-summary')}>
-												<a href='javascript:void(0)'>Xem tóm tắt </a>
-											</li>
-											<li>
-												<a href='javascript:void(0);' id='copy_multi_job'>
-													Nhân bản
-												</a>
-											</li> */}
-										</ul>
 									</div>
 									<div className={sx('right-heading')}>
 										<div className={sx('export-file')}>
@@ -190,20 +185,6 @@ const UnPosting = ({ cx }) => {
 												Xuất file job
 											</a>
 										</div>
-										{/* <div className={sx('to-display')}>
-											<p className={sx('name')}>Hiển thị </p>
-											<div className={sx('form-display')}>
-												<select name='limit' id='limit'>
-													<option value={20} selected=''>
-														20
-													</option>
-													<option value={30}>30</option>
-													<option value={50}>50</option>
-													<option value={100}>100</option>
-												</select>
-											</div>
-											<p className={sx('name-display')} />
-										</div> */}
 									</div>
 								</div>
 								<div className={sx('boding-jobs-posting')}>
@@ -220,13 +201,10 @@ const UnPosting = ({ cx }) => {
 													<th width='10%' onclick="setTypeSort('posting', 'asc', 4)">
 														Hết hạn <SortIcon style={{ paddingLeft: 5 }} />
 													</th>
-													<th width='10%' onclick="setTypeSort('posting', 'asc', 0)">
-														Lượt Xem <SortIcon style={{ paddingLeft: 5 }} />
+													<th width='10%'>
+														Đăng tuyển
+														<em className={sx('material-icons')} />
 													</th>
-													<th width='10%' onclick="setTypeSort('posting', 'asc', 1)">
-														Lượt Nộp <SortIcon style={{ paddingLeft: 5 }} />
-													</th>
-													<th width='10%'>Email</th>
 													<th width='15%'>Thao tác</th>
 												</tr>
 											</thead>
@@ -246,14 +224,6 @@ const UnPosting = ({ cx }) => {
 																		{item.job_title}
 																	</a>
 																</div>
-																{/* <div className='jobs-view-detail'>
-																<p>
-																	<strong>Ngành nghề:</strong> Bán hàng / Kinh doanh, CNTT - Phần mềm
-																</p>
-																<p>
-																	<strong>Địa điểm:</strong> Hà Nội
-																</p>
-															</div> */}
 															</td>
 															<td>
 																<time>{formatDate(item.posted_date)}</time>
@@ -262,28 +232,16 @@ const UnPosting = ({ cx }) => {
 																<time>{formatDate(item.expiry_date)}</time>
 															</td>
 															<td>
-																<p className='view-number'>0</p>
+																<a
+																	href='javascript:void(0);'
+																	onClick={() => updateStatusJobPost(item.id)}
+																	title='Thực hiện đăng tuyển'>
+																	<img
+																		alt='Thực hiện đăng tuyển'
+																		src='https://static.careerbuilder.vn/images/icons/posted_13x16.png'
+																	/>
+																</a>
 															</td>
-															<td>
-																<div className='hit-filed'>
-																	<p>
-																		<a
-																			href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/1/35C37874/*/2/0/*/*/8/2/6/2/0/desc/lop7cttnq.1667207375/1'
-																			className='f_size12'
-																			title='Hồ sơ chưa xem '>
-																			0
-																		</a>
-																		/
-																		<a
-																			href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/1/35C37874/*/2/0/*/*/7/2/6/2/0/desc/lop7cttnq.1667207375/1'
-																			className='f_size12'
-																			title='Tổng số hồ sơ ứng tuyển'>
-																			0
-																		</a>
-																	</p>
-																</div>
-															</td>
-
 															<td>
 																<ul
 																	className={cx('list-manipulation', 'd-flex')}
@@ -300,6 +258,21 @@ const UnPosting = ({ cx }) => {
 																			title='Chi tiết'>
 																			<em className={cx('material-icons')}>visibility </em>
 																		</Link>
+																	</li>
+
+																	<li
+																		style={{
+																			width: 48,
+																			height: 24,
+																			marginLeft: 12,
+																			marginBottom: 6
+																		}}>
+																		<a
+																			title='Xóa'
+																			onClick={() => handleDeleteJobPost(item.id)}
+																			style={{ cursor: 'pointer' }}>
+																			<CancelIcon />
+																		</a>
 																	</li>
 																</ul>
 															</td>

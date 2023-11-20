@@ -89,11 +89,6 @@ const WaitPosting = ({ cx }) => {
 								</Link>
 							</div>
 						</div>
-						{/* <div className={sx('right-heading')}>
-							<a href='https://careerbuilder.vn/vi/employers/faq' className={sx('support')}>
-								Hướng dẫn
-							</a>
-						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form name='frmSearchJob' id='frmSearchJob' action='' method='post' onSubmit={handleSubmit(onSubmit)}>
@@ -178,38 +173,7 @@ const WaitPosting = ({ cx }) => {
 								<div className={sx('heading-jobs-posting')}>
 									<div className={sx('left-heading')}>
 										<p className={sx('name')}>Chọn và thao tác</p>
-										<ul className={sx('list-check')}>
-											{/* <li className={sx('view-posting-detail', 'active')}>
-												<a href='javascript:void(0);' id='dtail'>
-													Chi tiết
-												</a>
-											</li>
-											<li className={sx('view-posting-summary')}>
-												<a href='javascript:void(0)'>Xem tóm tắt</a>
-											</li>
-											<li>
-												<a href='javascript:void(0);' id='copy_multi_job'>
-													Nhân bản
-												</a>
-											</li> */}
-										</ul>
 									</div>
-									{/* <div className={sx('right-heading')}>
-										<div className={sx('to-display')}>
-											<p className={sx('name')}>Hiển thị </p>
-											<div className={sx('form-display')}>
-												<select name='limit' id='limit'>
-													<option value={20} selected=''>
-														20
-													</option>
-													<option value={30}>30</option>
-													<option value={50}>50</option>
-													<option value={100}>100</option>
-												</select>
-											</div>
-											<p className={sx('name-display')}>Hiển thị 1 - 5 của 5 việc làm</p>
-										</div>
-									</div> */}
 								</div>
 								<div className={sx('boding-jobs-posting')}>
 									<div className={sx('table', 'table-jobs-posting')}>
@@ -222,7 +186,6 @@ const WaitPosting = ({ cx }) => {
 														Cập nhật
 														<SortIcon style={{ paddingLeft: 5 }} />
 													</th>
-													<th width='15%'>Trạng thái</th>
 													<th width='10%'>
 														Đăng tuyển
 														<em className={sx('material-icons')} />
@@ -264,9 +227,6 @@ const WaitPosting = ({ cx }) => {
 																	<time>{formatDate(job_post.updatedAt)}</time>
 																</td>
 																<td>
-																	<p>Hoàn tất</p>
-																</td>
-																<td>
 																	<a
 																		href='javascript:void(0);'
 																		onClick={() => updateStatusJobPost(job_post.id)}
@@ -281,7 +241,6 @@ const WaitPosting = ({ cx }) => {
 																	<ul className={sx('list-manipulation')}>
 																		<li>
 																			<a
-																				href='javascript:void(0);'
 																				onClick={() => updateStatusJobPost(job_post.id)}
 																				title='Đăng tuyển'>
 																				<PublishIcon />
