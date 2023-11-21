@@ -13,11 +13,17 @@ import DateTypeEnum from '~/App/constants/dataTypeEnum';
 import useSearchJobPost from '../../components/useSearchJobPost';
 import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import { useSelector } from 'react-redux';
-import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import {
+	useDeleteJobPostMutation,
+	useGetAllJobPostQuery,
+	useUpdateJobPostMutation
+} from '~/App/providers/apis/jobPostApi';
 import formatDate from '~/Core/utils/formatDate';
 import { useForm } from 'react-hook-form';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import { toast } from 'react-toastify';
+import CancelIcon from '@mui/icons-material/Cancel';
 const sx = classNames.bind(styles);
 
 const ExpirePosting = ({ cx }) => {
@@ -25,6 +31,8 @@ const ExpirePosting = ({ cx }) => {
 	const currentPath = location.pathname;
 	const employer = useSelector((state) => state.auth?.employer);
 	const { pushQuery, query } = useSearchJobPost();
+	const [updateJobPost] = useUpdateJobPostMutation();
+	const [deleteJobPost] = useDeleteJobPostMutation();
 
 	const { data: allJobPost } = useGetAllJobPostQuery({
 		params: {
@@ -46,8 +54,28 @@ const ExpirePosting = ({ cx }) => {
 			dateType: query.dateType || ''
 		}
 	});
+
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
+	};
+
+	const updateStatusJobPost = async (id) => {
+		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date() } })
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success('Đăng tuyển thành công');
+				}
+			});
+	};
+	const handleDeleteJobPost = (id) => {
+		deleteJobPost(id)
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success(r?.message);
+				}
+			});
 	};
 	return (
 		<section className={sx('manage-job-posting-active-jobs', 'cb-section', 'bg-manage')}>
@@ -63,11 +91,6 @@ const ExpirePosting = ({ cx }) => {
 								</Link>
 							</div>
 						</div>
-						{/* <div className={sx('right-heading')}>
-							<a href='https://careerbuilder.vn/vi/employers/faq' className={sx('support')}>
-								Hướng dẫn
-							</a>
-						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form name='frmSearchJob' id='frmSearchJob' action='' method='post' onSubmit={handleSubmit(onSubmit)}>
@@ -156,21 +179,6 @@ const ExpirePosting = ({ cx }) => {
 								<div className={sx('heading-jobs-posting')}>
 									<div className={sx('left-heading')}>
 										<p className={sx('name')}>Hiển thị </p>
-										<ul className={sx('list-check')}>
-											{/* <li className={sx('view-posting-detail', 'active')}>
-												<a href='javascript:void(0);' id='dtail'>
-													Chi tiết
-												</a>
-											</li>
-											<li className={sx('view-posting-summary')}>
-												<a href='javascript:void(0)'>Xem tóm tắt </a>
-											</li>
-											<li>
-												<a href='javascript:void(0);' id='copy_multi_job'>
-													Nhân bản
-												</a>
-											</li> */}
-										</ul>
 									</div>
 									<div className={sx('right-heading')}>
 										<div className={sx('export-file')}>
@@ -179,20 +187,6 @@ const ExpirePosting = ({ cx }) => {
 												Xuất file job
 											</a>
 										</div>
-										{/* <div className={sx('to-display')}>
-											<p className={sx('name')}>Hiển thị </p>
-											<div className={sx('form-display')}>
-												<select name='limit' id='limit'>
-													<option value={20} selected=''>
-														20
-													</option>
-													<option value={30}>30</option>
-													<option value={50}>50</option>
-													<option value={100}>100</option>
-												</select>
-											</div>
-											<p className={sx('name-display')} />
-										</div> */}
 									</div>
 								</div>
 								<div className={sx('boding-jobs-posting')}>
@@ -209,13 +203,10 @@ const ExpirePosting = ({ cx }) => {
 													<th width='10%' onclick="setTypeSort('posting', 'asc', 4)">
 														Hết hạn <SortIcon style={{ paddingLeft: 5 }} />
 													</th>
-													<th width='10%' onclick="setTypeSort('posting', 'asc', 0)">
-														Lượt Xem <SortIcon style={{ paddingLeft: 5 }} />
+													<th width='10%'>
+														Đăng tuyển
+														<em className={sx('material-icons')} />
 													</th>
-													<th width='10%' onclick="setTypeSort('posting', 'asc', 1)">
-														Lượt Nộp <SortIcon style={{ paddingLeft: 5 }} />
-													</th>
-													<th width='10%'>Email</th>
 													<th width='15%'>Thao tác</th>
 												</tr>
 											</thead>
@@ -235,14 +226,6 @@ const ExpirePosting = ({ cx }) => {
 																		{item.job_title}
 																	</a>
 																</div>
-																{/* <div className='jobs-view-detail'>
-																<p>
-																	<strong>Ngành nghề:</strong> Bán hàng / Kinh doanh, CNTT - Phần mềm
-																</p>
-																<p>
-																	<strong>Địa điểm:</strong> Hà Nội
-																</p>
-															</div> */}
 															</td>
 															<td>
 																<time>{formatDate(item.posted_date)}</time>
@@ -251,28 +234,16 @@ const ExpirePosting = ({ cx }) => {
 																<time>{formatDate(item.expiry_date)}</time>
 															</td>
 															<td>
-																<p className='view-number'>0</p>
+																<a
+																	href='javascript:void(0);'
+																	onClick={() => updateStatusJobPost(item.id)}
+																	title='Thực hiện đăng tuyển'>
+																	<img
+																		alt='Thực hiện đăng tuyển'
+																		src='https://static.careerbuilder.vn/images/icons/posted_13x16.png'
+																	/>
+																</a>
 															</td>
-															<td>
-																<div className='hit-filed'>
-																	<p>
-																		<a
-																			href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/1/35C37874/*/2/0/*/*/8/2/6/2/0/desc/lop7cttnq.1667207375/1'
-																			className='f_size12'
-																			title='Hồ sơ chưa xem '>
-																			0
-																		</a>
-																		/
-																		<a
-																			href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/1/35C37874/*/2/0/*/*/7/2/6/2/0/desc/lop7cttnq.1667207375/1'
-																			className='f_size12'
-																			title='Tổng số hồ sơ ứng tuyển'>
-																			0
-																		</a>
-																	</p>
-																</div>
-															</td>
-
 															<td>
 																<ul
 																	className={cx('list-manipulation', 'd-flex')}
@@ -289,6 +260,21 @@ const ExpirePosting = ({ cx }) => {
 																			title='Chi tiết'>
 																			<em className={cx('material-icons')}>visibility </em>
 																		</Link>
+																	</li>
+
+																	<li
+																		style={{
+																			width: 48,
+																			height: 24,
+																			marginLeft: 12,
+																			marginBottom: 6
+																		}}>
+																		<a
+																			title='Xóa'
+																			onClick={() => handleDeleteJobPost(item.id)}
+																			style={{ cursor: 'pointer' }}>
+																			<CancelIcon />
+																		</a>
 																	</li>
 																</ul>
 															</td>
