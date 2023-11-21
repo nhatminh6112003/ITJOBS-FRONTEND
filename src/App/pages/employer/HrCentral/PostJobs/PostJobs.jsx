@@ -22,6 +22,7 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useCreateJobPostMutation } from '~/App/providers/apis/jobPostApi';
 import { useNavigate } from 'react-router-dom';
+import { listProvinces } from '~/App/constants/provincesData';
 const sx = classNames.bind(styles);
 const PostJobs = ({ cx }) => {
 	const { control, handleSubmit, setValue, watch } = useForm({
@@ -31,7 +32,6 @@ const PostJobs = ({ cx }) => {
 	const company_id = useSelector((state) => state?.auth?.employer?.company?.id);
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProfession } = useGetAllProfessionQuery({});
-	const { data: listProvinces } = useGetAllProvincesQuery();
 	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
 	const selectedProvince = watch('provinces', null);
 	const { data: listDistricts } = useGetAllDistrictsQuery(

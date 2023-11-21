@@ -1,15 +1,18 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import useModal from '~/App/hooks/useModal';
 import styles from '~/App/pages/Jobseeker/ChangeTemplate/changetemplate.module.css';
 
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { marialStatusEnum } from '~/App/constants/marialStatusEnum';
 import { colorsEnum, fontSize, fontsEnum } from '~/App/constants/resumeTemplateEnum';
-import { useGetOneQuery, useUpdateUiMutation } from '~/App/providers/apis/resumeTemplateApi';
 import { useGetOneResumeQuery } from '~/App/providers/apis/resumeApi';
-import { languages } from '~/App/constants/resumeLanguageEnum';
+import { useGetOneQuery } from '~/App/providers/apis/resumeTemplateApi';
+import formatDate from '~/Core/utils/formatDate';
+import { DegreeArray } from '~/App/constants/degreeArray';
+import formatVND from '~/Core/utils/formatVND';
+import { LevelArray } from '~/App/constants/levelEnum';
+import { listProvinces } from '~/App/constants/provincesData';
 const sx = classNames.bind(styles);
 
 const ResumeStyle = () => {
@@ -23,7 +26,6 @@ const ResumeStyle = () => {
 
 	const { data: myResume, refetch } = useGetOneQuery(resume?.id);
 	const { data: resumeData } = useGetOneResumeQuery(resume?.id);
-	console.log('TCL: ResumeStyle -> resumeData', resumeData);
 
 	useEffect(() => {
 		changeLanguage(myResume?.cv_language);
@@ -32,7 +34,145 @@ const ResumeStyle = () => {
 	}, [myResume]);
 
 	useEffect(() => {
+		const headerBlock = document.querySelectorAll('._col-sm-6_1hw82_84 h3');
 		const allSkill = document.querySelectorAll('._skill_1hw82_1616');
+		const headerContentResume = document.querySelectorAll('._content_1hw82_1507 ._col-xs-12_1hw82_2635 h3');
+		const resumeDesiredBlock = document.querySelector('._content_1hw82_1507 ._col-xs-12_1hw82_2635');
+		const resumeTitle = document.querySelector('._col-xs-12_1hw82_2635 ._name_1hw82_1499 h4');
+		if (resumeData?.resume_title?.title) {
+			resumeTitle.innerHTML = resumeData?.resume_title?.title;
+		}
+
+		if (resumeDesiredBlock && resumeData?.resume_desired_job && listProvinces) {
+			resumeDesiredBlock.insertAdjacentHTML(
+				'beforebegin',
+				`
+				<div class="_col-xs-12_1hw82_2635">
+				<h3><span>CÔNG VIỆC MONG MUỐN</span></h3>
+				<div class="expected-job">
+				<ul class="contact">
+					<li>
+					<label>Cấp bậc </label> : ${LevelArray.map((value) => {
+						if (value.value === resumeData?.resume_desired_job?.position_id) {
+							return value.label;
+						}
+					}).join('')}
+											<li class="dbl-line">
+											<label>Mức lương</label>:&nbsp;</>
+											<span class="txt">					  					  ${formatVND(resumeData?.resume_desired_job?.salary_from)} - ${formatVND(
+					resumeData?.resume_desired_job?.salary_to
+				)} 
+					   VND
+					  </span>
+					  </li>
+																										                    <li class="dbl-line"><label>Hình thức công việc</label><span>:&nbsp;</span><span class="txt">
+												${resumeData?.work_type?.map((item) => item.name)}																				  </span></li>
+                                        					<li class="dbl-line"><label>Ngành nghề</label><span>:&nbsp;</span><span class="txt">${resumeData?.professions?.map(
+																			(item) => item.name
+																		)}	</span></li>
+					<li class="dbl-line"><label>Nơi làm việc</label><span>:&nbsp;</span><span class="txt"> ${listProvinces
+						?.map((province) => {
+							const desiredProvinceId = resumeData?.resume_desired_job?.provinces;
+							const positionLabel = province.code === desiredProvinceId ? province.name : null;
+							return positionLabel;
+						})
+						.join('')}
+						  						  </span></li>
+					
+				</ul>
+			</div>
+				</div>
+			`
+			);
+		}
+		for (const itemContentResume of headerContentResume) {
+			const lowerCaseText = itemContentResume.innerText.toLowerCase();
+			const nextElementSibling = itemContentResume.nextElementSibling;
+			if (lowerCaseText.includes('objectives') || lowerCaseText.includes('mục tiêu nghề nghiệp')) {
+				nextElementSibling.innerHTML = `<div class="_content_fck_1hw82_1507">${
+					resumeData?.resume_objective ? resumeData?.resume_objective?.objective_job : ''
+				}</div>`;
+			}
+			if (lowerCaseText.includes('work experience') || lowerCaseText.includes('kinh nghiệm làm việc')) {
+				nextElementSibling.innerHTML =
+					resumeData?.resume_experiences && resumeData?.resume_experiences?.length > 0
+						? resumeData?.resume_experiences?.map(
+								(item) => `
+				<div class="_text-edt_1hw82_3533">
+				<div class="_title_1hw82_1464">${formatDate(item?.rexp_form)} -${formatDate(item?.rexp_to)}
+				:
+${item?.rexp_title} - ${item?.rexp_company}
+	 
+</div>
+				<div class="_content_fck_1hw82_1507">${item?.rexp_workdesc}</div>`
+						  )
+						: [];
+				nextElementSibling.nextElementSibling.style = 'display:none';
+			}
+			if (lowerCaseText.includes('educations') || lowerCaseText.includes('học vấn')) {
+				nextElementSibling.innerHTML =
+					resumeData?.resume_education && resumeData?.resume_education?.length > 0
+						? resumeData?.resume_education?.map(
+								(item) => `
+								<div class="_text-edt_1hw82_3533">
+								<div class="_title_1hw82_1464">Tốt nghiệp ${formatDate(item?.redu_date)}</br>${DegreeArray?.map((degree) => {
+									if (degree.value == item?.redu_degree) {
+										return degree.label;
+									}
+								}).join('')} - ${item?.redu_name} </div>
+								<div class="_content_fck_1hw82_1507">${item?.redu_desc}</div>`
+						  )
+						: [];
+			}
+			if (lowerCaseText.includes('references') || lowerCaseText.includes('người tham khảo')) {
+				nextElementSibling.innerHTML =
+					resumeData?.resume_certificate && resumeData?.resume_certificate?.length > 0
+						? resumeData?.resume_certificate?.map(
+								(item) => `
+								<div class="_text-edt_1hw82_3533">
+								<div class="_title_1hw82_1464">
+								${item.cer_title}
+								</br>
+								${item.cer_by}
+								</br>
+								${formatDate(item?.cer_form)} - ${formatDate(item?.cer_to)}
+								</div>
+								<div class="_content_fck_1hw82_1507"></div>`
+						  )
+						: [];
+				nextElementSibling.nextElementSibling.style = 'display:none';
+			}
+		}
+		for (const itemBlock of headerBlock) {
+			const profileUser = resumeData?.user_account?.resume_profile;
+			const lowerCaseText = itemBlock.innerText.toLowerCase();
+			if (lowerCaseText.includes('contact') || lowerCaseText.includes('liên hệ')) {
+				const ulBlock = itemBlock.parentElement.querySelector('._contact_1hw82_2730');
+				const liBlock = ulBlock.querySelector('li');
+				const labelBlock = liBlock.querySelector('li label');
+
+				if (labelBlock) {
+					ulBlock.innerHTML = `
+					<ul class="_contact_1hw82_2730">
+					<li><label>Birthday</label> : ${profileUser?.birthday ? formatDate(profileUser?.birthday) : 'MM/DD/YYYY'}</li>
+					<li><label>Marital status</label> : ${
+						profileUser?.marial_status ? marialStatusEnum[profileUser?.marial_status] : 'Độc thân'
+					}</li>
+					`;
+				} else {
+					ulBlock.innerHTML = `
+					<ul class="_contact_1hw82_2730"><li>
+					<i class="_fa_1hw82_1464 fa-phone"></i>${profileUser?.phone_number ? profileUser?.phone_number : 'Số điện thoại'}</li>
+					<li class="_dbl-line_1hw82_4872">
+					<i class="_fa_1hw82_1464 _fa-envelope_1hw82_5989"></i> <span>${resumeData?.user_account?.email}</span></li>
+					<li class="_dbl-line_1hw82_4872">
+					<i class="_fa_1hw82_1464 fa-home"></i> 
+					<span class="_txt_1hw82_2113">${profileUser?.address ? profileUser?.address : 'Địa chỉ'}</span></li>
+					</ul>`;
+				}
+			}
+		}
+
 		for (const itemSkill of allSkill) {
 			if (itemSkill.className == '_skill_1hw82_1616') {
 				const resume_skill =
@@ -71,7 +211,7 @@ const ResumeStyle = () => {
 		<div id='uni_wrapper'>
 			<div className={sx('swc-wrapper')}>
 				<div className={sx('container-fluid')}>
-					<div className={sx('col-xs-12', 'step-content', 'cv-mode-finish')} style={{ marginTop: 0 }}>
+					<div className={sx('col-xs-12', 'step-content', 'cv-mode-finish')}>
 						<div className={sx('editCVtemplate-wrapper', 'editCVtemplate')}>
 							<div className={sx('col-xs-12')}>
 								{language == 'en' ? (

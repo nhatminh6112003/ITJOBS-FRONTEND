@@ -24,6 +24,7 @@ import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
 import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
 import formatVND from '~/Core/utils/formatVND';
+import { listProvinces } from '~/App/constants/provincesData';
 const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	const resume = useSelector((state) => state.auth?.user?.resume);
 	// const [updateId, setUpdateId] = useState(null);
@@ -34,10 +35,8 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 	//Gọi api rtk query
 	const [trigger, result] = useLazyGetOneResumeDesiredJobQuery();
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
-	const { data: listProvinces } = useGetAllProvincesQuery();
 
 	const { data: resume_desired_job } = useGetOneResumeDesiredJobQuery(resume?.id);
-	console.log('TCL: resume_desired_job', resume_desired_job);
 	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
 	const { data: listProfession } = useGetAllProfessionQuery({});
 

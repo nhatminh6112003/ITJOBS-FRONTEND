@@ -7,7 +7,7 @@ import SelectFieldControl from '~/Core/components/common/FormControl/SelectField
 import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllResumeQuery } from '~/App/providers/apis/resumeApi';
-import useSearchResume from '~/App/pages/employer/FindJobSeeker/components/useSearchResume';
+import useSearchResume from '~/App/pages/Employer/FindJobSeeker/components/useSearchResume';
 import { resumeActiveEnum } from '~/App/constants/resumeActiveEnum';
 import { Link, useNavigate } from 'react-router-dom';
 import { degree } from '~/App/constants/degreeArray';
@@ -15,19 +15,20 @@ import { LevelArray } from '~/App/constants/levelEnum';
 import { useCreateEmployerResumeApiMutation } from '~/App/providers/apis/employerResumeApi';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-const sx = classNames.bind(styles);
+import { listProvinces } from '~/App/constants/provincesData';
 
+const sx = classNames.bind(styles);
 const FindJobSeeker = ({ cx }) => {
 	const { pushQuery, query } = useSearchResume();
 	const { data: listProfession } = useGetAllProfessionQuery({});
-	const { data: listProvinces } = useGetAllProvincesQuery();
+
 	const { data: listResume } = useGetAllResumeQuery({
 		params: {
 			keyword: query.keyword || '',
 			resume_active: query.resume_active || '',
 			profession_id: query.profession_id || '',
 			provinces: query.provinces || '',
-			isFindJobSeeker:true
+			isFindJobSeeker: true
 		}
 	});
 	const [createEmployerResume] = useCreateEmployerResumeApiMutation();

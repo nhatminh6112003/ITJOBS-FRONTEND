@@ -7,19 +7,18 @@ import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
-
+import { listProvinces } from '~/App/constants/provincesData';
 const cx = classNames.bind(styles);
 
 const JobItem = ({ job_post }) => {
 	const [provinces, setProvinces] = useState('');
-	const { data: listProvinces } = useGetAllProvincesQuery();
 	useEffect(() => {
 		listProvinces?.map((item) => {
 			if (item.code == job_post?.provinces) {
 				setProvinces(item.name);
 			}
 		});
-	}, [job_post, listProvinces]);
+	}, [job_post]);
 	return (
 		<div className={cx('job-item')}>
 			<div className={cx('figure')}>

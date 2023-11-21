@@ -32,6 +32,8 @@ const ApplyJob = ({ cx }) => {
 	const { data: resume } = useGetAllResumeQuery({
 		params: { user_account_id: user?.id, isDeleted: false, resume_type_id: 1 }
 	});
+	console.log('TCL: ApplyJob -> resume', resume);
+
 	const { data: myAttach } = useGetAllMyAttachQuery(user?.id);
 	const [createMutation] = useCreateJobPostActivityApiMutation();
 	const [provinces, setProvinces] = useState('');
@@ -118,21 +120,24 @@ const ApplyJob = ({ cx }) => {
 												Chọn từ hồ sơ của bạn
 											</label>
 											<div className={sx('list-radio')}>
-												{/* {resume?.map((item) => (
-													<div className={sx('form-group', 'form-radio')}>
-														<input
-															type='radio'
-															name='resume_id'
-															id={`resume_${item.id}`}
-															defaultValue={item.id}
-															onChange={(e) => handleChooseResume(e, item)}
-														/>
-														<label htmlFor={`resume_${item.id}`}>
-															{item?.resume_title?.title}
-															<Link to={routesPath.JobseekerPaths.dashboard}>[Xem]</Link>
-														</label>
-													</div>
-												))} */}
+												{resume?.map(
+													(item) =>
+														item?.resume_title?.title && (
+															<div className={sx('form-group', 'form-radio')}>
+																<input
+																	type='radio'
+																	name='resume_id'
+																	id={`resume_${item.id}`}
+																	defaultValue={item.id}
+																	onChange={(e) => handleChooseResume(e, item)}
+																/>
+																<label htmlFor={`resume_${item.id}`}>
+																	{item?.resume_title?.title}
+																	<Link to={routesPath.JobseekerPaths.dashboard}>[Xem]</Link>
+																</label>
+															</div>
+														)
+												)}
 												{myAttach?.map((resume) => (
 													<div className={sx('form-group', 'form-radio')}>
 														<input

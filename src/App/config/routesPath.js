@@ -10,7 +10,7 @@ const AdminPaths = {
 	company: '/admin/company',
 	benefits: '/admin/benefits',
 	service: '/admin/service',
-	serviceType: '/admin/service_type',
+	serviceType: '/admin/service_type'
 };
 const JobseekerPaths = {
 	home: '/',
@@ -31,7 +31,7 @@ const JobseekerPaths = {
 	applyJobs: '/jobseekers/jobs/apply/:id',
 	jobApplied: '/jobseekers/mykiemviec/jobapplied',
 	viewJob: '/employers/hrcentral/viewjob/:id',
-	jobSaved:"/jobseekers/mykiemviec/jobsaved"
+	jobSaved: '/jobseekers/mykiemviec/jobsaved'
 };
 const EmployerPaths = {
 	login: '/employers/login',
@@ -67,6 +67,7 @@ const routesPath = {
 	JobseekerPaths,
 	AdminPaths,
 	EmployerPaths,
-	BasePaths
+	BasePaths,
+	DownloadResumeProfile: '/download/resume-profile/:id'
 };
 export default routesPath;

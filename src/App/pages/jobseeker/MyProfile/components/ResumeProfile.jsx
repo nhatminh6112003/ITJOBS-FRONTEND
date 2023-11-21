@@ -14,7 +14,8 @@ import Tips from '~/Core/components/common/Modal/Tips';
 import ResumeModal from './ResumeModal';
 import Widget from './Widget';
 import { useLocation } from 'react-router-dom';
-
+import axiosClient from '~/Core/configs/axiosConfig';
+import { saveAs } from 'file-saver';
 const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 	const location = useLocation();
 	const scrollToElementRef = useRef(null);
@@ -102,6 +103,8 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 			}
 		}
 	};
+
+
 
 	return (
 		<Fragment>

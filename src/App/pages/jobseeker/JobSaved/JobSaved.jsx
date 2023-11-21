@@ -34,7 +34,7 @@ const JobSaved = () => {
 						<div className={sx('widget', 'widget-10')}>
 							<div className={sx('widget-head')}>
 								<div className={sx('cb-title-h3')}>
-									<h3>Việc làm đã nộp</h3>
+									<h3>Việc làm đã lưu</h3>
 								</div>
 							</div>
 							<div className={sx('widget-body')}>

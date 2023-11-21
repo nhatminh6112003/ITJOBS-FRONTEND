@@ -1,29 +1,29 @@
 import classNames from 'classnames/bind';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import ReactModal from 'react-modal';
+import { useSelector } from 'react-redux';
+import { useParams, useSearchParams,Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { DegreeArray } from '~/App/constants/degreeArray';
 import GenderEnum from '~/App/constants/genderEnum';
+import { LevelArray } from '~/App/constants/levelEnum';
 import { marialStatusEnum } from '~/App/constants/marialStatusEnum';
-import { ResumeStatusOptions } from '~/App/constants/resumeStatusEnum';
+import { listProvinces } from '~/App/constants/provincesData';
+import { ResumeCvEnum, ResumeStatusOptions } from '~/App/constants/resumeStatusEnum';
+import useModal from '~/App/hooks/useModal';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
 import {
 	useGetOneJobPostActivityApiQuery,
+	useSendMailJobSeekerMutation,
 	useUpdateStatusJobPostActivityResumeMutation
 } from '~/App/providers/apis/jobPostActivityApi';
-import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetOneResumeQuery } from '~/App/providers/apis/resumeApi';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import exportPdf from '~/Core/utils/exportPdf';
 import formatDate from '~/Core/utils/formatDate';
 import formatVND from '~/Core/utils/formatVND';
 import styles from './resumeDetail.module.css';
-import useModal from '~/App/hooks/useModal';
-import ReactModal from 'react-modal';
-import { useSendMailJobSeekerMutation } from '~/App/providers/apis/jobPostActivityApi';
-import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
-import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
-import { LevelArray } from '~/App/constants/levelEnum';
 const sx = classNames.bind(styles);
 
 const ResumeDetail = ({ cx }) => {
@@ -47,7 +47,6 @@ const ResumeDetail = ({ cx }) => {
 		skip: !jobPostActivityId
 	});
 
-	const { data: listProvinces } = useGetAllProvincesQuery();
 	const { data: listDistricts } = useGetAllDistrictsQuery(
 		{
 			params: {
@@ -580,12 +579,13 @@ const ResumeDetail = ({ cx }) => {
 																	</p>
 
 																	<p>
-																		{' '}
 																		{data?.profession_desired_job
 																			?.map((item, index) => {
 																				return item.profession.name;
 																			})
 																			.join(' - ')}
+
+																		{data?.professions?.map((item, index) => item.name).join(' - ')}
 																	</p>
 																</li>
 																<li>
@@ -609,6 +609,7 @@ const ResumeDetail = ({ cx }) => {
 																				return item?.work_type?.name;
 																			})
 																			.join(',')}
+																		{data?.work_type?.map((item) => item.name).join(' , ')}
 																	</p>
 																</li>
 
@@ -622,12 +623,26 @@ const ResumeDetail = ({ cx }) => {
 														</div>
 														<p className={sx('title-flip')}>Nội dung hồ sơ</p>
 														<div className={sx('profile-iframe')}>
-															{data?.attachments?.file && (
+															{data?.attachments?.file &&
+																data?.resume_type_id == ResumeCvEnum.MY_ATTACH && (
+																	<iframe
+																		id='frm_view_pdf'
+																		frameBorder={0}
+																		scrolling='no'
+																		src={`${import.meta.env.VITE_IMAGE_URL}/${data.attachments.file}`}
+																		height={934}
+																		width='100%'
+																	/>
+																)}
+
+															{ResumeCvEnum.CV_PROFILE && (
 																<iframe
 																	id='frm_view_pdf'
 																	frameBorder={0}
 																	scrolling='no'
-																	src={`${import.meta.env.VITE_IMAGE_URL}/${data.attachments.file}`}
+																	src={`${import.meta.env.VITE_FRONT_END_URL}/resume-style/${
+																		data?.id
+																	}`}
 																	height={934}
 																	width='100%'
 																/>

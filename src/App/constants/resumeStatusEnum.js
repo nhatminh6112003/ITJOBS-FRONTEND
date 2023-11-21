@@ -16,3 +16,7 @@ export const ResumeStatusOptions = [
 	{ label: 'Đề nghị tuyển dụng', value: ResumeStatusEnum.OFFERED },
 	{ label: 'Nhận việc', value: ResumeStatusEnum.HIRED }
 ];
+export const ResumeCvEnum = {
+	CV_PROFILE: 1,
+	MY_ATTACH: 2
+};
