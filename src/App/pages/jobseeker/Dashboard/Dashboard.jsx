@@ -18,11 +18,12 @@ import { toast } from 'react-toastify';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import formatDate from '~/Core/utils/formatDate';
 import exportPdf from '~/Core/utils/exportPdf';
-
 const cx = classNames.bind(styles);
 
 const Dashboard = () => {
 	const user_account_id = useSelector((state) => state.auth?.user?.id);
+	const user = useSelector((state) => state.auth?.user);
+
 	let count = 0;
 	const { data: getAllMyAttach, refetch } = useGetAllMyAttachQuery(user_account_id);
 	const [deleteMyAttach] = useDeleteMyAttachMutation();
@@ -61,7 +62,7 @@ const Dashboard = () => {
 								<div className={cx('widget', 'widget-2')}>
 									<div className={cx('widget-head')}>
 										<div className={cx('cb-title-h3')}>
-											<h3>Careerbuilder Profile</h3>
+											<h3>Hồ sơ Profile</h3>
 										</div>
 									</div>
 									<div className={cx('widget-body')}>
@@ -104,7 +105,9 @@ const Dashboard = () => {
 													</div>
 													<div className={cx('mobile-show')}>
 														<div className={cx('cb-name')}>
-															<h2>Lop Minh</h2>
+															<h2>
+																{user?.firstname} {user?.lastname} 
+															</h2>
 														</div>
 														<div className={cx('information')}>
 															<div className={cx('assistant')}>
@@ -124,7 +127,7 @@ const Dashboard = () => {
 											</div>
 											<div className={cx('col-lg-8', 'col-xl-9')}>
 												<div className={cx('cb-name')}>
-													<h2>Lop Minh</h2>
+													<h2>{user?.firstname} {user?.lastname}</h2>
 												</div>
 												<div className={cx('information')}>
 													<div className={cx('assistant')}>
@@ -273,10 +276,10 @@ const Dashboard = () => {
 									</div>
 								</div>
 							</div>
-							<div className={cx('col-lg-4')}>
+							{/* <div className={cx('col-lg-4')}>
 								<div className={cx('widget-b', 'searchable-cv-widget')}>
 									<h4>
-										Cho phép tìm kiếm Profile CareerBuilder
+										Cho phép tìm kiếm Hồ sơ Profile
 										<div className={cx('tips', 'p1')} data-type={1}>
 											<div className={cx('icon')}>
 												<em className={cx('mdi', 'mdi-lightbulb')} />
@@ -304,10 +307,10 @@ const Dashboard = () => {
 									</div>
 									<p>Bạn có thể cho phép nhà tuyển dụng tìm kiếm hồ sơ CareerBuilder</p>
 								</div>
-							</div>
+							</div> */}
 						</div>
 						<div className={cx('row')}>
-							<div className={cx('col-sm-12', 'col-lg-12')}>
+							<div className={cx('col-sm-6', 'col-lg-6')}>
 								<div className={cx('widget-1', 'b4')}>
 									<div className={cx('widget-head')}>
 										<p>0</p>
@@ -315,31 +318,23 @@ const Dashboard = () => {
 									</div>
 									<div className={cx('widget-body')}>
 										<div className={cx('item')}>
-											<div className={cx('number')}>
-												<a
-													href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobapplied'
-													className={cx('x3')}>
-													0
-												</a>
-											</div>
-											<div>
-												<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobapplied'>
-													Nộp ở trạng thái bình thường
-												</a>
+											<div className={cx('nonum')}>
+												<Link to={routesPath.JobseekerPaths.jobApplied}>Xem thêm</Link>
 											</div>
 										</div>
+									</div>
+								</div>
+							</div>
+							<div className={cx('col-sm-6', 'col-lg-6')}>
+								<div className={cx('widget-1', 'b4')}>
+									<div className={cx('widget-head')}>
+										<p>0</p>
+										<p>Việc làm đã lưu</p>
+									</div>
+									<div className={cx('widget-body')}>
 										<div className={cx('item')}>
-											<div className={cx('number')}>
-												<a
-													href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobapplied'
-													className={cx('x4')}>
-													0
-												</a>
-											</div>
-											<div>
-												<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/jobapplied'>
-													Nộp ở trạng thái Tìm việc khẩn cấp
-												</a>
+											<div className={cx('nonum')}>
+												<Link to={routesPath.JobseekerPaths.jobSaved}>Xem thêm</Link>
 											</div>
 										</div>
 									</div>

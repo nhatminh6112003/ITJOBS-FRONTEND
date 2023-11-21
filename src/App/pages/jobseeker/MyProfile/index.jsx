@@ -27,10 +27,18 @@ import ResumeSkill from './components/ResumeSkill';
 import ResumeDesiredJob from './components/ResumeDesiredJob';
 import ResumeLanguage from './components/Resumelanguage';
 import ResumeProfile from './components/ResumeProfile';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
+import axiosClient from '~/Core/configs/axiosConfig';
+import { saveAs } from 'file-saver';
+import { useEffect } from 'react';
 
 export const cx = classNames.bind(styles);
 
 const MyProfile = () => {
+	const user = useSelector((state) => state.auth?.user);
+
 	const { isShowing, toggle } = useModal({
 		resume_title: false,
 		resume_refer: false,
@@ -136,7 +144,6 @@ const MyProfile = () => {
 																mail và làm theo hướng dẫn.
 															</p>
 														</div> */}
-													
 													</div>
 													<div
 														className={cx('searchable-cv-widget', 'status-area', 'attached-status-area')}>
@@ -316,8 +323,9 @@ const MyProfile = () => {
 												</a>
 											</li>
 											<li>
-												{' '}
-												<a href='' id='btn_view_cbprofile'>
+												<a
+													href={routesPath.BasePaths.ResumeStyle.replace(/:id/g, user.resume.id)}
+													id='btn_view_cbprofile'>
 													<em className={cx('material-icons')}>
 														<RemoveRedEyeIcon fontSize='normal' />
 													</em>
@@ -325,7 +333,7 @@ const MyProfile = () => {
 												</a>
 											</li>
 											<li id='btn_download' style={{ display: 'block' }}>
-												<a href='' onClick='downloadCvProfile(17722295)'>
+												<a href='javascript:;'>
 													<em className={cx('material-icons')}>
 														<GetAppIcon fontSize='normal' />
 													</em>

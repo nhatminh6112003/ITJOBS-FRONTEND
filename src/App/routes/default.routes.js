@@ -1,8 +1,7 @@
 import { lazy } from 'react';
-
+import ResumeStyle from '../pages/Default/ResumeStyle';
 import routesPath from '~/App/config/routesPath';
 const NotFound = lazy(() => import('~/App/pages/Default/NotFound'));
-const ResumeStyle = lazy(() => import('~/App/pages/Default/ResumeStyle'));
 
 const defaultRoutes = [
 	{ path: routesPath.BasePaths.NOT_FOUND, component: NotFound, layout: null },
