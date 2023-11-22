@@ -30,7 +30,7 @@ const Dashboard = () => {
 	const { data: analysisJobSaved } = useAnalysisJobSavedQuery(user_account_id);
 
 	const [updateResumeStatus] = useUpdateResumeMutation();
-	
+
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 
 	const handleDeleteMyAttach = (id) => {
@@ -201,7 +201,7 @@ const Dashboard = () => {
 							<div className={cx('col-sm-6', 'col-lg-6')}>
 								<div className={cx('widget-1', 'b4')}>
 									<div className={cx('widget-head')}>
-										<p>{analysisJobPostActivity}</p>
+										<p>{analysisJobPostActivity ? analysisJobPostActivity : 0}</p>
 										<p>Việc làm đã nộp</p>
 									</div>
 									<div className={cx('widget-body')}>
@@ -216,7 +216,7 @@ const Dashboard = () => {
 							<div className={cx('col-sm-6', 'col-lg-6')}>
 								<div className={cx('widget-1', 'b4')}>
 									<div className={cx('widget-head')}>
-										<p>{analysisJobSaved}</p>
+										<p>{analysisJobSaved ? analysisJobSaved : 0}</p>
 										<p>Việc làm đã lưu</p>
 									</div>
 									<div className={cx('widget-body')}>
