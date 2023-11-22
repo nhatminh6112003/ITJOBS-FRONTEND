@@ -45,7 +45,7 @@ const AllJob = () => {
 			days: query.days || '',
 			status: jobPostStatusEnum.Publish,
 			isDeleted: false,
-			page: page || ''
+			page: page || '',
 		}
 	});
 	const { data: listProvinces } = useGetAllProvincesQuery();

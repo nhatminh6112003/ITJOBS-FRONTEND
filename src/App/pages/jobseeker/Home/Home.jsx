@@ -7,13 +7,39 @@ import Banner from '~/App/layouts/components/Jobseeker/Banner';
 import JobItem from '~/App/layouts/components/Jobseeker/JobItem';
 import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
 import ItemLoading from '~/Core/components/common/ItemLoading';
+import { useDispatch } from 'react-redux';
+import { PaginationActionEnums } from '~/App/hooks/useServerPagination';
+import Pagination from '~/Core/components/common/Pagination';
+import useCustomRouter from '~/App/hooks/useCustomRouter';
 const Home = ({ cx }) => {
+	const {
+		query: { page }
+	} = useCustomRouter();
+
 	const { data: allJobPost, isLoading } = useGetAllJobPostQuery({
 		params: {
+			limit: 10,
 			status: jobPostStatusEnum.Publish,
-			isDeleted: false
+			isDeleted: false,
+			page: page || 1
 		}
 	});
+	const dispatch = useDispatch();
+
+	const gotoPreviousPage = () => {
+		dispatch({ type: PaginationActionEnums.GO_TO_PREV_PAGE });
+	};
+	const gotoNextPage = () => {
+		dispatch({ type: PaginationActionEnums.GO_TO_NEXT_PAGE });
+	};
+
+	const changePageIndex = (value) => {
+		if (allJobPost?.pagination?.pageIndex >= allJobPost?.pagination?.totalPages) gotoPreviousPage();
+		dispatch({
+			type: PaginationActionEnums.CHANGE_PAGE_INDEX,
+			payload: value
+		});
+	};
 
 	return (
 		<>
@@ -90,17 +116,15 @@ const Home = ({ cx }) => {
 											</div>
 										</div>
 										<div className={cx('swiper-bottom')}>
-											<div className={cx('swiper-navigation')}>
-												<div className={cx('swiper-prev')}>
-													<span className={cx('mdi', 'mdi-chevron-left')} />
-												</div>
-												<div className={cx('main-pagination')}>
-													<div className={cx('swiper-pagination')} />
-												</div>
-												<div className={cx('swiper-next')}>
-													<span className={cx('mdi', 'mdi-chevron-right')} />
-												</div>
-											</div>
+											<Pagination
+												style={{ display: 'flex', justifyContent: 'center' }}
+												total={allJobPost?.pagination?.totalPages}
+												pageSize={allJobPost?.pagination?.pageSize}
+												currentPage={allJobPost?.pagination?.pageIndex}
+												onChange={changePageIndex}
+												gotoNextPage={gotoNextPage}
+												gotoPreviousPage={gotoPreviousPage}
+											/>
 											<div className={cx('view-more')}>
 												<Link to={routesPath.JobseekerPaths.allJob}>
 													Xem việc làm mới cập nhật
