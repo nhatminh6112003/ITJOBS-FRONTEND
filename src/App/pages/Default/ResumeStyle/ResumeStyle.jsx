@@ -34,6 +34,11 @@ const ResumeStyle = () => {
 	}, [myResume]);
 
 	useEffect(() => {
+		const titleBlock = document.querySelector('._col-xs-12_1hw82_2635 ._name_1hw82_1499 h2');
+		if (titleBlock) {
+			titleBlock.innerHTML = resumeData?.user_account?.firstname + ' ' + resumeData?.user_account?.lastname;
+		}
+
 		const headerBlock = document.querySelectorAll('._col-sm-6_1hw82_84 h3');
 		const allSkill = document.querySelectorAll('._skill_1hw82_1616');
 		const headerContentResume = document.querySelectorAll('._content_1hw82_1507 ._col-xs-12_1hw82_2635 h3');

@@ -13,7 +13,6 @@ import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 const cx = classNames.bind(styles);
 
 const Header = () => {
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.auth?.user);
 	const { data } = useGetOneUserQuery(user?.id);
@@ -26,9 +25,7 @@ const Header = () => {
 	const handleLogout = () => {
 		dispatch(logout({ Role: UserType[UserRoleEnum.JOBSEEKER] }));
 	};
-	useEffect(() => {
-		console.log(allProfession);
-	}, [allProfession]);
+	
 	return (
 		<>
 			<header>
