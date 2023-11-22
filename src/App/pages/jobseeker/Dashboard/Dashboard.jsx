@@ -5,19 +5,18 @@ import styles from './Dashboard.module.css';
 import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
 
 import EditIcon from '@mui/icons-material/Edit';
-import LockIcon from '@mui/icons-material/Lock';
-import LanguageIcon from '@mui/icons-material/Language';
-import BoltIcon from '@mui/icons-material/Bolt';
 import { Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
 import { useGetAllMyAttachQuery, useDeleteMyAttachMutation } from '~/App/providers/apis/myAttachApi';
 import { useUpdateResumeMutation } from '~/App/providers/apis/resumeApi';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import formatDate from '~/Core/utils/formatDate';
 import exportPdf from '~/Core/utils/exportPdf';
+import { useAnalysisJobPostActivityQuery } from '~/App/providers/apis/jobPostActivityApi';
+import { useAnalysisJobSavedQuery } from '~/App/providers/apis/jobSavedApi';
 const cx = classNames.bind(styles);
 
 const Dashboard = () => {
@@ -27,8 +26,11 @@ const Dashboard = () => {
 	let count = 0;
 	const { data: getAllMyAttach, refetch } = useGetAllMyAttachQuery(user_account_id);
 	const [deleteMyAttach] = useDeleteMyAttachMutation();
-	const [updateResumeStatus] = useUpdateResumeMutation();
+	const { data: analysisJobPostActivity } = useAnalysisJobPostActivityQuery(user_account_id);
+	const { data: analysisJobSaved } = useAnalysisJobSavedQuery(user_account_id);
 
+	const [updateResumeStatus] = useUpdateResumeMutation();
+	
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 
 	const handleDeleteMyAttach = (id) => {
@@ -85,28 +87,11 @@ const Dashboard = () => {
 																alt='Lop Minh'
 															/>
 														</div>
-														{/* <div className={cx('edit-image', 'dropdown')}>
-															<div className={cx('dropdown-menu')}>
-																<ul>
-																	<li className={cx('upload-pro')}>
-																		<a href='' onClick='choose_file();'>
-																			<span>Tải hình ảnh</span>
-																		</a>
-																	</li>
-																	<li className={cx('view-pro')}>
-																		<a href='' onClick='removeAvarta();'>
-																			{' '}
-																			<span>Xóa hình ảnh</span>
-																		</a>
-																	</li>
-																</ul>
-															</div>
-														</div> */}
 													</div>
 													<div className={cx('mobile-show')}>
 														<div className={cx('cb-name')}>
 															<h2>
-																{user?.firstname} {user?.lastname} 
+																{user?.firstname} {user?.lastname}
 															</h2>
 														</div>
 														<div className={cx('information')}>
@@ -127,7 +112,9 @@ const Dashboard = () => {
 											</div>
 											<div className={cx('col-lg-8', 'col-xl-9')}>
 												<div className={cx('cb-name')}>
-													<h2>{user?.firstname} {user?.lastname}</h2>
+													<h2>
+														{user?.firstname} {user?.lastname}
+													</h2>
 												</div>
 												<div className={cx('information')}>
 													<div className={cx('assistant')}>
@@ -166,39 +153,6 @@ const Dashboard = () => {
 													</ul>
 												</div>
 											</div>
-											{/* <div className={cx('col-lg-12')}>
-												<div className={cx('progress-bar-status', 'not-approve')}>
-													<div className={cx('profile-strength')}>
-														<p>
-															Mức độ hoàn thành: <span>Không được duyệt</span>
-														</p>
-													</div>
-													<div className={cx('noti')}>
-														<em className={cx('mdi', 'mdi-alert-circle-outline')} />
-														<p>
-															Không được duyệt - Hồ sơ của bạn không được duyệt nên vui lòng check mail
-															và làm theo hướng dẫn.
-														</p>
-													</div>
-													<div className={cx('progress-bar')}>
-														<div className={cx('progress')}>
-															<progress className={cx('progress-main')} max={7} value={2} />
-														</div>
-														<div className={cx('progress-row')}>
-															{' '}
-															<div className={cx('line', 'active')} />
-															<div className={cx('line', 'active')} />
-															<div className={cx('line', 'active')} />
-															<div className={cx('line', '')} />
-															<div className={cx('line', '')} />
-															<div className={cx('line', '')} />
-															<div className={cx('line', '')}>
-																<span className={cx('success')} />
-															</div>
-														</div>
-													</div>
-												</div>
-											</div> */}
 											<div className={cx('col-lg-12', 'cvcht-slide')}>
 												<div
 													className={cx(
@@ -212,14 +166,7 @@ const Dashboard = () => {
 														<div
 															className={cx('swiper-slide', 'swiper-slide-active')}
 															style={{ width: '300.5px', marginRight: 15 }}>
-															<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/my-profile#other-activity-section'>
-																{/* <div className={cx('item-cvcht')}>
-																	<div className={cx('col-sm-3', 'icon')}>
-																		<img src='img/dash-board/i13.png' alt='' />
-																	</div>
-																	<div className={cx('col-sm-9', 'txt')}>Hoạt động khác</div>
-																</div> */}
-															</a>
+															<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/my-profile#other-activity-section'></a>
 														</div>
 													</div>
 													<span
@@ -245,75 +192,16 @@ const Dashboard = () => {
 													<span className={cx('lnr', 'lnr-chevron-left')} />
 												</div>
 											</div>
-											{/* <div className={cx('col-lg-12', 'function-bottom')}>
-												<div className={cx('button-list')}>
-													<div className={cx('item')}>
-														<a title='Cập nhật hồ sơ' href='' className={cx('ac_refesh')} rel={17722295}>
-															<span className={cx('mdi', 'mdi-rotate-3d-variant')} />
-															Cập nhật hồ sơ
-														</a>
-													</div>
-													<div className={cx('item')}>
-														<a id='btn_view_cbprofile' href=''>
-															<span className={cx('mdi', 'mdi-eye')} />
-															Xem hồ sơ
-														</a>
-													</div>
-													<div className={cx('item')}>
-														<a href='' onClick='downloadCvProfile(17722295)'>
-															<span className={cx('mdi', 'mdi-download')} />
-															Tải hồ sơ
-														</a>
-													</div>
-												</div>
-												<div className={cx('edit-profile')}>
-													<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/changetemplate'>
-														Chỉnh mẫu hồ sơ
-													</a>
-												</div>
-											</div> */}
 										</div>
 									</div>
 								</div>
 							</div>
-							{/* <div className={cx('col-lg-4')}>
-								<div className={cx('widget-b', 'searchable-cv-widget')}>
-									<h4>
-										Cho phép tìm kiếm Hồ sơ Profile
-										<div className={cx('tips', 'p1')} data-type={1}>
-											<div className={cx('icon')}>
-												<em className={cx('mdi', 'mdi-lightbulb')} />
-											</div>
-											<p>Tips</p>
-										</div>
-									</h4>
-									<div
-										className={cx('switch-status', 'group_searchable')}
-										id='cv_searchable_17722295'
-										data-id={17722295}
-										data-complete={1}>
-										<a href='javascript:;' data-type={2} className={cx('lock', '', 'active', '')}>
-											<LockIcon sx={{ fontSize: '14.5px', marginRight: '5px' }} />
-											Khóa
-										</a>
-										<a href='' data-type={1} className={cx('public', '')}>
-											<LanguageIcon sx={{ fontSize: '14.5px', marginRight: '5px' }} />
-											Công khai
-										</a>
-										<a href='' data-type={3} className={cx('flash', '')}>
-											<BoltIcon sx={{ fontSize: '14.5px', marginRight: '5px' }} />
-											Khẩn cấp
-										</a>
-									</div>
-									<p>Bạn có thể cho phép nhà tuyển dụng tìm kiếm hồ sơ CareerBuilder</p>
-								</div>
-							</div> */}
 						</div>
 						<div className={cx('row')}>
 							<div className={cx('col-sm-6', 'col-lg-6')}>
 								<div className={cx('widget-1', 'b4')}>
 									<div className={cx('widget-head')}>
-										<p>0</p>
+										<p>{analysisJobPostActivity}</p>
 										<p>Việc làm đã nộp</p>
 									</div>
 									<div className={cx('widget-body')}>
@@ -328,7 +216,7 @@ const Dashboard = () => {
 							<div className={cx('col-sm-6', 'col-lg-6')}>
 								<div className={cx('widget-1', 'b4')}>
 									<div className={cx('widget-head')}>
-										<p>0</p>
+										<p>{analysisJobSaved}</p>
 										<p>Việc làm đã lưu</p>
 									</div>
 									<div className={cx('widget-body')}>
@@ -453,10 +341,6 @@ const Dashboard = () => {
 																				href='javascript:;'
 																				rel={18020074}></a>
 																		</div>
-																		{/* <div className={cx('view-number')}>
-																			<p>Lượt xem:</p>
-																			<span>0</span>
-																		</div> */}
 																	</div>
 																</div>
 															</div>
