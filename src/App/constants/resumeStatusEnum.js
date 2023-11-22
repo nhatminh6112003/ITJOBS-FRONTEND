@@ -10,10 +10,7 @@ export const ResumeStatusEnum = {
 export const ResumeStatusOptions = [
 	{ label: 'Chưa quyết định', value: ResumeStatusEnum.UNDECIDED },
 	{ label: 'Không phù hợp', value: ResumeStatusEnum.NOT_MATCHED },
-	{ label: 'Từ chối', value: ResumeStatusEnum.REJECTED },
-	{ label: 'Kiểm tra', value: ResumeStatusEnum.UNDER_REVIEW },
 	{ label: 'Phỏng vấn', value: ResumeStatusEnum.INTERVIEW },
-	{ label: 'Đề nghị tuyển dụng', value: ResumeStatusEnum.OFFERED },
 	{ label: 'Nhận việc', value: ResumeStatusEnum.HIRED }
 ];
 export const ResumeCvEnum = {

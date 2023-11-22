@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import ReactModal from 'react-modal';
 import { useSelector } from 'react-redux';
-import { useParams, useSearchParams,Link } from 'react-router-dom';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { DegreeArray } from '~/App/constants/degreeArray';
 import GenderEnum from '~/App/constants/genderEnum';
@@ -24,6 +24,7 @@ import exportPdf from '~/Core/utils/exportPdf';
 import formatDate from '~/Core/utils/formatDate';
 import formatVND from '~/Core/utils/formatVND';
 import styles from './resumeDetail.module.css';
+
 const sx = classNames.bind(styles);
 
 const ResumeDetail = ({ cx }) => {
@@ -72,6 +73,16 @@ const ResumeDetail = ({ cx }) => {
 			if (r?.data?.status == 200) {
 				toast.success('Thay đổi trạng thái hồ sơ thành công');
 			}
+		});
+		const getStatusName = ResumeStatusOptions.map((item) => {
+			if (item.value == value) {
+				return item.label;
+			}
+		}).join('');
+		await sendMail({
+			user_account_id: jobPostActivity?.user_account_id,
+			title: 'Kết quả ứng tuyển',
+			content: `Trạng thái ứng tuyển của bạn là ${getStatusName}`
 		});
 	};
 	const onSendMail = async (data) => {
