@@ -1,13 +1,12 @@
 import classNames from 'classnames/bind';
 import styles from '~/App/layouts/DefaultLayout/jobseeker/jobseeker-layout.module.css';
-import RoomIcon from '@mui/icons-material/Room';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { listProvinces } from '~/App/constants/provincesData';
+import formatDate from '~/Core/utils/formatDate';
 const cx = classNames.bind(styles);
 
 const JobItem = ({ job_post }) => {
@@ -55,9 +54,12 @@ const JobItem = ({ job_post }) => {
 							Lương: {parseInt(job_post?.min_salary).toString().charAt(0)} Tr -{' '}
 							{parseInt(job_post?.max_salary).toString().charAt(0)} Tr VND
 						</p>
+						<div>
+							<em className='fa fa-clock-o' />
+							<p>Hạn nộp: {formatDate(job_post?.expiry_date)}</p>
+						</div>
 						<div className={cx('location')}>
-							<RoomIcon sx={{ fontSize: '14px' }} />
-							<p> {provinces}</p>
+							<p>{provinces}</p>
 						</div>
 					</div>
 				</div>

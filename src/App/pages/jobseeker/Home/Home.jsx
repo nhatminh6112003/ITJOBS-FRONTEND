@@ -68,16 +68,6 @@ const Home = ({ cx }) => {
 										Việc Làm Nổi Bật
 									</a>
 								</li>
-								<li>
-									<a className={cx('pointer')} alt='#tab-2'>
-										Việc Làm VIP ($1000+)
-									</a>
-								</li>
-								<li>
-									<a className={cx('pointer')} alt='#tab-3'>
-										Việc Làm Từ Top Headhunter
-									</a>
-								</li>
 							</ul>
 							<div className={cx('tab-content')} id='tab-1'>
 								<div className={cx('hot-jobs-slide')} id='hot-jobs-slide'>
