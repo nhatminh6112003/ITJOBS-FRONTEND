@@ -1,6 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '~/App/providers/slices/authSlice';
 import { UserType } from '~/App/constants/roleEnum';
@@ -10,7 +9,6 @@ import { useLocation } from 'react-router-dom';
 const SideBar = ({ className: cx }) => {
 	const location = useLocation();
 	const [isOpen, setIsOpen] = useState(false);
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const handleLogout = () => {
@@ -82,60 +80,6 @@ const SideBar = ({ className: cx }) => {
 										to={routesPath.JobseekerPaths.jobApplied}>
 										Việc làm đã nộp
 									</NavLink>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href='https://careerbuilder.vn/vi/jobseekers/jobalert'>
-								<span>Thông Báo Việc Làm</span>
-							</a>
-						</li>
-						{/* <li>
-							<a className={cx('collapse')} href='javascript:;'>
-								<span>Nhà tuyển dụng của tôi</span>
-							</a>
-							<ul className={cx('list-unstyled', 'collapse')}>
-								<li>
-									<a href='https://careerbuilder.vn/vi/jobseekers/myresume/viewbyemp'>
-										Nhà tuyển dụng xem hồ sơ của tôi
-									</a>
-								</li>
-								<li>
-									<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/following'>Following</a>
-								</li>
-								<li>
-									<a href='https://careerbuilder.vn/vi/jobseekers/blacklist'>
-										Nhà tuyển dụng được cài đặt hạn chế xem hồ sơ của tôi
-									</a>
-								</li>
-								<li>
-									<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/feedback'>
-										Phản hồi từ nhà tuyển dụng
-									</a>
-								</li>
-							</ul>
-						</li> */}
-						<li>
-							<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/notify' title='Xem tất cả thông báo'>
-								<span>Xem tất cả thông báo</span>
-							</a>
-						</li>
-						<li>
-							<a className={cx('collapse')} href='javascript:;'>
-								<span>Cài đặt</span>
-							</a>
-							<ul className={cx('list-unstyled', 'collapse')}>
-								<li>
-									<a href='https://careerbuilder.vn/vi/jobseekers/member/myaccount' title='Tài Khoản'>
-										Tài Khoản
-									</a>
-								</li>
-								<li>
-									<a
-										href='https://careerbuilder.vn/vi/jobseekers/member/emailmanagement'
-										title='Cài Đặt Thông Báo'>
-										Cài Đặt Thông Báo
-									</a>
 								</li>
 							</ul>
 						</li>

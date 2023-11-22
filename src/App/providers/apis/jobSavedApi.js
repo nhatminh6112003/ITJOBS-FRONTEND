@@ -11,6 +11,13 @@ const jobSavedApi = createApi({
 			providesTags: ['jobSaved'],
 			transformResponse: (response) => response.data
 		}),
+		analysisJobSaved: build.query({
+			query: (id) => {
+				return { url: `/job_saved/analysis/${id}`, method: 'GET' };
+			},
+			providesTags: ['jobSaved'],
+			transformResponse: (response) => response.data
+		}),
 		getOneJobSaved: build.query({
 			query: (id) => {
 				return { url: `/job_saved/${id}`, method: 'GET' };
@@ -44,7 +51,8 @@ export const {
 	useGetOneJobSavedQuery,
 	useCreateJobSavedMutation,
 	useUpdateJobSavedMutation,
-	useDeleteJobSavedMutation
+	useDeleteJobSavedMutation,
+	useAnalysisJobSavedQuery
 } = jobSavedApi;
 
 export default jobSavedApi;
