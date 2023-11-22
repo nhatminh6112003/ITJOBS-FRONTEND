@@ -146,9 +146,13 @@ const DetailCompany = ({ cx }) => {
 													<div className={sx('caption')}>
 														<p className={sx('company-name')}>{job_post?.company?.company_name}</p>
 														<p className={sx('salary')}>
-															$ {parseInt(job_post?.min_salary).toString().charAt(0)} Tr -{' '}
+															{parseInt(job_post?.min_salary).toString().charAt(0)} Tr -{' '}
 															{parseInt(job_post?.max_salary).toString().charAt(0)} Tr VND
 														</p>
+														<div>
+															<em className='fa fa-clock-o' />
+															<p>Hạn nộp: {formatDate(job_post?.expiry_date)}</p>
+														</div>
 														<div className={sx('location')}>
 															<ul>
 																<li>
