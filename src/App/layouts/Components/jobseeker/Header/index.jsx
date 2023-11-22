@@ -6,9 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import routesPath from '~/App/config/routesPath';
 import { AccountCircleIcon, ExpandMoreIcon, CheckIcon, Notifications } from '~/Core/resources';
 import { logout } from '~/App/providers/slices/authSlice';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import UserRoleEnum, { UserType } from '~/App/constants/roleEnum';
 import { useGetOneUserQuery } from '~/App/providers/apis/userApi';
+import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 const cx = classNames.bind(styles);
 
 const Header = () => {
@@ -16,10 +17,18 @@ const Header = () => {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.auth?.user);
 	const { data } = useGetOneUserQuery(user?.id);
+	const { data: allProfession } = useGetAllProfessionQuery({
+		params: {
+			limit: 5
+		}
+	});
 
 	const handleLogout = () => {
 		dispatch(logout({ Role: UserType[UserRoleEnum.JOBSEEKER] }));
 	};
+	useEffect(() => {
+		console.log(allProfession);
+	}, [allProfession]);
 	return (
 		<>
 			<header>
@@ -47,112 +56,49 @@ const Header = () => {
 														Việc làm mới nhất
 													</Link>
 												</li>
-												<li>
-													<a
-														href='https://careerbuilder.vn/tim-viec-lam.html'
-														title='Ngành nghề / Địa điểm'>
-														Ngành nghề / Địa điểm
-													</a>
-												</li>
-												<li>
-													<a
-														href='https://careerbuilder.vn/viec-lam/ban-hang-kinh-doanh-c31-vi.html'
-														title='Bán hàng / Kinh doanh'>
-														Bán hàng / Kinh doanh
-													</a>
-												</li>
-												<li>
-													<a
-														href='https://careerbuilder.vn/viec-lam/hanh-chinh-thu-ky-c3-vi.html'
-														title='Hành chính / Thư ký'>
-														Hành chính / Thư ký
-													</a>
-												</li>
-												<li>
-													<a
-														href='https://careerbuilder.vn/viec-lam/ke-toan-kiem-toan-c2-vi.html'
-														title='Kế toán / Kiểm toán'>
-														Kế toán / Kiểm toán
-													</a>
-												</li>
-												<li>
-													<a href='https://careerbuilder.vn/viec-lam/nhan-su-c22-vi.html' title='Nhân sự'>
-														Nhân sự
-													</a>
-												</li>
-												<li>
-													<a
-														href='https://careerbuilder.vn/viec-lam/tiep-thi-marketing-c4-vi.html'
-														title='Tiếp thị / Marketing'>
-														Tiếp thị / Marketing
-													</a>
-												</li>
+												{allProfession?.data &&
+													allProfession?.data.map((profession) => {
+														return (
+															<li key={profession.id}>
+																<Link
+																	to={{
+																		pathname: routesPath.JobseekerPaths.allJob,
+																		search: `?profession_id=${profession.id}`
+																	}}
+																	title={profession.name}>
+																	{profession.name}
+																</Link>
+															</li>
+														);
+													})}
 											</ul>
 										</div>
 									</li>
-									<li>
-										<a href="<?= _WEB_ROOT.'/tim_viec_lam' ?>" title='Ngành nghề / Địa điểm'>
-											Ngành nghề / Địa điểm
-										</a>
-									</li>
-									<li>
-										{' '}
-										<a
-											href='http://localhost//itjobs/Alljob?keyword=&industry%5B%5D=1'
-											title='Tiếp thị / Marketing'>
-											Tiếp thị / Marketing
-										</a>
-									</li>
-									<li>
-										{' '}
-										<a
-											href='http://localhost//itjobs/Alljob?keyword=&industry%5B%5D=2'
-											title='CNTT - Phần mềm'>
-											CNTT - Phần mềm
-										</a>
-									</li>
-									<li>
+									{allProfession?.data &&
+										allProfession?.data.map((profession) => {
+											return (
+												<li key={profession.id}>
+													<Link
+														to={{
+															pathname: routesPath.JobseekerPaths.allJob,
+															search: `?profession_id=${profession.id}`
+														}}
+														title={profession.name}>
+														{profession.name}
+													</Link>
+												</li>
+											);
+										})}
+									{/* <li>
 										{' '}
 										<a href="<?= _WEB_ROOT.'/tinh_luong_gross_net' ?>" title='Tính Lương'>
 											Tính Lương
 										</a>
-									</li>
+									</li> */}
 								</ul>
 							</div>
 						</div>
 						<div className={cx('right-wrap')}>
-							{/* <div className={cx('main-noti', 'dropdown')}>
-								<Fragment>
-									<Notifications style={{ cursor: 'pointer' }} />
-									<div className={cx('dropdown-menu')}>
-										<div className={cx('noti')}>
-											<p />
-											<p>Chào mừng bạn đến CareerBuilder.vn</p>
-											<p>
-												Đăng nhập ngay để xem việc làm phù hợp với bạn, nhà tuyển dụng đã xem hồ sơ của bạn
-												và cập nhật nhiều hơn nữa ...
-												<br />
-												<br />
-											</p>
-											<p />
-											<a
-												className={cx('email')}
-												href='https://careerbuilder.vn/thong-bao-viec-lam'
-												title='Tạo Ngay'>
-												Tạo Ngay
-											</a>
-										</div>
-									</div>
-								</Fragment>
-							</div> */}
-							{/* <div className={cx("main-login","dropdown")}>
-          <div className={cx("title-login")}>
-            <a title="Đăng nhập" onClick={redirectLogin} >
-              <span className={cx("mdi","mdi-account-circle")}></span>
-              Đăng nhập
-            </a>
-          </div>
-        </div> */}
 							{/* hide */}
 							{!user ? (
 								<>
@@ -192,9 +138,6 @@ const Header = () => {
 												<Link to={routesPath.JobseekerPaths.jobApplied}>Việc làm đã ứng tuyển</Link>
 											</li>
 											<li>
-												<a>Cài đặt</a>
-											</li>
-											<li>
 												<Link title='Thoát' onClick={handleLogout}>
 													Thoát
 												</Link>
@@ -203,32 +146,6 @@ const Header = () => {
 									</div>
 								</div>
 							)}
-
-							{/* <div className={cx('main-language', 'dropdown')}>
-								<div className={cx('dropdown-toggle')}>
-									<p>
-										VI
-										<ExpandMoreIcon fontSize='small' />
-									</p>
-								</div>
-								<div className={cx('dropdown-menu')}>
-									<div className={cx('item', 'active')}>
-										<CheckIcon fontSize="small" sx={{paddingRight:'5px'}} />
-										<a className='dropdown-item' href='' title='Change language'>
-											VI
-										</a>
-									</div>
-									<div className={cx('item')}>
-										<CheckIcon fontSize="small" sx={{paddingRight:'5px'}} />
-										<a
-											className={cx('dropdown-item')}
-											href='https://careerbuilder.vn/en/employers/login'
-											title='Change language'>
-											EN
-										</a>
-									</div>
-								</div>
-							</div> */}
 
 							<div className={cx('main-employer', 'dropdown')}>
 								<a>
