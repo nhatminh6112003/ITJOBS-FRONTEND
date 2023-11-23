@@ -1,24 +1,24 @@
 import { lazy } from 'react';
 
 import routesPath from '~/App/config/routesPath';
-const Home = lazy(() => import('../pages/Jobseeker/Home'));
-const About = lazy(() => import('../pages/Jobseeker/About'));
-const Cart = lazy(() => import('../pages/Jobseeker/Cart'));
-const Product = lazy(() => import('../pages/Jobseeker/Product'));
-const Login = lazy(() => import('../pages/Jobseeker/Login'));
-const Register = lazy(() => import('../pages/Jobseeker/Register'));
-const AllJob = lazy(() => import('../pages/Jobseeker/AllJob'));
-const Dashboard = lazy(() => import('../pages/Jobseeker/Dashboard'));
-const MyProfile = lazy(() => import('../pages/Jobseeker/MyProfile'));
-const ChangeTemplate = lazy(() => import('../pages/Jobseeker/ChangeTemplate'));
-const MyAttach = lazy(() => import('../pages/Jobseeker/MyAttach'));
-const UpdateMyAttach = lazy(() => import('../pages/Jobseeker/UpdateMyAttach'));
-const MyCvDetail = lazy(() => import('../pages/Jobseeker/MyCvDetail'));
-const FindJob = lazy(() => import('../pages/Jobseeker/DetailJobPost'));
-const DetailCompany = lazy(() => import('../pages/Jobseeker/DetailCompany'));
-const ApplyJob = lazy(() => import('../pages/Jobseeker/ApplyJob'));
-const JobApplied = lazy(() => import('../pages/Jobseeker/JobApplied'));
-const JobSaved = lazy(() => import('../pages/Jobseeker/JobSaved'));
+const Home = lazy(() => import('../pages/jobseeker/Home'));
+const About = lazy(() => import('../pages/jobseeker/About'));
+const Cart = lazy(() => import('../pages/jobseeker/Cart'));
+const Product = lazy(() => import('../pages/jobseeker/Product'));
+const Login = lazy(() => import('../pages/jobseeker/Login'));
+const Register = lazy(() => import('../pages/jobseeker/Register'));
+const AllJob = lazy(() => import('../pages/jobseeker/AllJob'));
+const Dashboard = lazy(() => import('../pages/jobseeker/Dashboard'));
+const MyProfile = lazy(() => import('../pages/jobseeker/MyProfile'));
+const ChangeTemplate = lazy(() => import('../pages/jobseeker/ChangeTemplate'));
+const MyAttach = lazy(() => import('../pages/jobseeker/MyAttach'));
+const UpdateMyAttach = lazy(() => import('../pages/jobseeker/UpdateMyAttach'));
+const MyCvDetail = lazy(() => import('../pages/jobseeker/MyCvDetail'));
+const FindJob = lazy(() => import('../pages/jobseeker/DetailJobPost'));
+const DetailCompany = lazy(() => import('../pages/jobseeker/DetailCompany'));
+const ApplyJob = lazy(() => import('../pages/jobseeker/ApplyJob'));
+const JobApplied = lazy(() => import('../pages/jobseeker/JobApplied'));
+const JobSaved = lazy(() => import('../pages/jobseeker/JobSaved'));
 
 const jobSeekerPublicRoutes = [
 	{ path: routesPath.JobseekerPaths.home, component: Home },
