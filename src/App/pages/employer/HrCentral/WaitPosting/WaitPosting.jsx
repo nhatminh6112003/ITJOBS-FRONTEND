@@ -66,11 +66,13 @@ const WaitPosting = ({ cx }) => {
 		}
 	});
 	const updateStatusJobPost = async (id) => {
-		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date() } }).then((r) => {
-			if (r.status == 200) {
-				toast.success('Đăng tuyển thành công');
-			}
-		});
+		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date() } })
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success('Đăng tuyển thành công');
+				}
+			});
 	};
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
