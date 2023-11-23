@@ -114,7 +114,7 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 				action='EDIT'
 				title='Thông tin nghề nghiệp'
 				className={cx('widget', 'widget-20')}
-				id='t-resume-section'
+				id='widget-18'
 				status={resume_desired_job && Object.keys(resume_desired_job)?.length > 0 ? 'success' : 'error'}
 				onOpenResume={() => toggle('update_resume_desired_job')}
 				onOpenTipSlide={() => toggleTips('t_resume_desired_job')}

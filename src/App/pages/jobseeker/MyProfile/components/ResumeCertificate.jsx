@@ -122,7 +122,7 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 				action='ADD'
 				title='Chứng chỉ khác'
 				className={cx('widget', 'widget-20')}
-				id='t-resume-section'
+				id='certificate-section'
 				status='default'
 				onOpenResume={() => toggle('resume_certificate')}
 				onOpenTipSlide={() => toggleTips('t_resume_certificate')}

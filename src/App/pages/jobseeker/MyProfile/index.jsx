@@ -203,54 +203,36 @@ const MyProfile = () => {
 											</a>
 										</li>
 										<li>
-											<a href='' data-href='#personalinfo-section'>
-												Thông tin cá nhân
-											</a>
+											<Link to='#personalinfo-section'>Thông tin cá nhân</Link>
 										</li>
 										<li>
-											<a href='' data-href='#widget-14'>
-												Mục tiêu nghề nghiệp
-											</a>
+											<Link to='#widget-14'>Mục tiêu nghề nghiệp</Link>
 										</li>
 										<li>
-											<a href='' data-href='#widget-18'>
-												Thông tin nghề nghiệp
-											</a>
+											<Link to='#widget-18'>Thông tin nghề nghiệp</Link>
 										</li>
 										<li>
-											<a href='' data-href='#widget-15'>
+											<Link to='#widget-15' data-href='#widget-15'>
 												Kinh nghiệm làm việc
-											</a>
+											</Link>
 										</li>
 										<li>
-											<a href='' data-href='#widget-16'>
-												Học vấn
-											</a>
+											<Link to='#widget-16'>Học vấn</Link>
 										</li>
 										<li>
-											<a href='' data-href='#certificate-section'>
-												Chứng chỉ khác
-											</a>
+											<Link to='#certificate-section'>Chứng chỉ khác</Link>
 										</li>
 										<li>
-											<a href='' data-href='#language-section'>
-												Ngôn ngữ
-											</a>
+											<Link to='#language-section'>Ngôn ngữ</Link>
 										</li>
 										<li>
-											<a href='' data-href='#widget-17'>
-												Kỹ năng chuyên môn
-											</a>
+											<Link to='#widget-17'>Kỹ năng chuyên môn</Link>
 										</li>
 										<li>
-											<a href='' data-href='#other-activity-section'>
-												Hoạt động khác
-											</a>
+											<Link to='#other-activity-section'>Hoạt động khác</Link>
 										</li>
 										<li>
-											<a href='' data-href='#widget-20'>
-												Người tham khảo
-											</a>
+											<Link to='#widget-20'>Người tham khảo</Link>
 										</li>
 									</ul>
 								</div>

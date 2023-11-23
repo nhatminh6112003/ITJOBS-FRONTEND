@@ -112,7 +112,7 @@ const ResumeRefer = ({ className: cx, isShowing, toggle }) => {
 				action='ADD'
 				title='Người tham khảo'
 				className={cx('widget', 'widget-20')}
-				id='t-resume-section'
+				id='widget-20'
 				status='default'
 				onOpenResume={() => toggle('resume_refer')}
 				onOpenTipSlide={() => toggleTips('t_resume_refer')}

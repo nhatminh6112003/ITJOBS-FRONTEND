@@ -126,7 +126,7 @@ const ResumeExperience = ({ className: cx, isShowing, toggle }) => {
 				action='ADD'
 				title='Kinh nghiệm làm việc'
 				className={cx('widget', 'widget-20')}
-				id='t-resume-section'
+				id='widget-15'
 				status={resumeExperience?.length > 0 ? 'success' : 'error'}
 				onOpenResume={() => toggle('resume_experience')}
 				onOpenTipSlide={() => toggleTips('t_resume_experience')}

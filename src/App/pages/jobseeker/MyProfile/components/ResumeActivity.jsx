@@ -121,7 +121,7 @@ const ResumeActivity = ({ className: cx, isShowing, toggle }) => {
 				action='ADD'
 				title='Hoạt động khác'
 				className={cx('widget', 'widget-20')}
-				id='t-resume-section'
+				id='other-activity-section'
 				status='default'
 				onOpenResume={() => toggle('resume_activity')}
 				onOpenTipSlide={() => toggleTips('t_resume_activity')}

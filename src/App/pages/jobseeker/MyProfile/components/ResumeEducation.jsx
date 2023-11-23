@@ -119,7 +119,7 @@ const ResumeEducation = ({ className: cx, isShowing, toggle }) => {
 				action='ADD'
 				title='Học vấn'
 				className={cx('widget', 'widget-20')}
-				id='t-resume-section'
+				id='widget-16'
 				status='default'
 				onOpenResume={() => toggle('resume_education')}
 				onOpenTipSlide={() => toggleTips('t_resume_education')}

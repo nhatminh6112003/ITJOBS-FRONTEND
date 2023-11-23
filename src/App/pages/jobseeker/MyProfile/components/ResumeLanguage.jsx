@@ -119,7 +119,7 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 				action='ADD'
 				title='Ngôn Ngữ'
 				className={cx('widget', 'widget-22', 'widget-17')}
-				id='t-resume-section'
+				id='language-section'
 				status='default'
 				onOpenResume={() => toggle('resume_language')}
 				onOpenTipSlide={() => toggleTips('t_resume_language')}

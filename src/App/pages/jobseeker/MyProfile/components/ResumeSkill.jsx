@@ -116,7 +116,7 @@ const ResumeSkill = ({ className: cx, isShowing, toggle }) => {
 			<Widget
 				action='ADD'
 				title='Kỹ năng chuyên môn'
-				id='t-resume-section'
+				id='widget-17'
 				status='default'
 				onOpenResume={() => toggle('resume_skill')}
 				onOpenTipSlide={() => toggleTips('t_resume_skill')}

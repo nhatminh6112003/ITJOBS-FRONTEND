@@ -110,7 +110,7 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 				action={resume_addioninfo?.length > 0 ? 'EDIT' : 'ADD'}
 				title='Thành tích nổi bật'
 				className={cx('widget', 'widget-20')}
-				id='t-resume-section'
+				id='widget-15'
 				status='default'
 				onOpenResume={
 					resume_addioninfo?.length > 0
