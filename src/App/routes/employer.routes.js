@@ -14,7 +14,7 @@ const WaitPosting = lazy(() => import('~/App/pages/employer/HrCentral/WaitPostin
 const UnPosting = lazy(() => import('~/App/pages/employer/HrCentral/UnPosting'));
 const ExpirePosting = lazy(() => import('~/App/pages/employer/HrCentral/ExpirePosting'));
 const PostJobs = lazy(() => import('~/App/pages/employer/HrCentral/PostJobs/PostJobs'));
-const UpdatePostJobs = lazy(() => import('~/App/pages/Employer/HrCentral/PostJobs/components/UpdatePostJobs'));
+const UpdatePostJobs = lazy(() => import('~/App/pages/employer/HrCentral/PostJobs/components/UpdatePostJobs'));
 const ViewJob = lazy(() => import('../pages/employer/HrCentral/ViewJob'));
 const EditEmployer = lazy(() => import('../pages/employer/HrCentral/Accounts/EditEmployer'));
 const ResumeDetail = lazy(() => import('../pages/employer/HrCentral/ManageResume/ResumeDetail'));
