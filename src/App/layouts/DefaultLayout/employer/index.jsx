@@ -1,12 +1,12 @@
 import { cloneElement, lazy, Suspense } from 'react';
-import Header from '../../components/Employer/Header';
+import Header from '../../Components/employer/Header';
 import EmployerStyles, { cx } from './EmployerStyles';
 import Loading from '~/Core/components/common/Loading';
-import NavBar from '../../components/Employer/NavBar';
+import NavBar from '../../Components/employer/NavBar';
 import { useLocation } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
 
-const Footer = lazy(() => import('../../components/Employer/Footer'));
+const Footer = lazy(() => import('../../Components/employer/Footer'));
 export const EmployerLayout = ({ children }) => {
 	const location = useLocation();
 
