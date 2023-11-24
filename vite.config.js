@@ -5,9 +5,11 @@ import path from 'path';
 // import compression from 'vite-plugin-compression';
 
 export default defineConfig({
-	plugins: [react({
-    include:"**/*.jsx"
-  })],
+	plugins: [
+		react({
+			include: '**/*.jsx'
+		})
+	],
 	server: {
 		watch: {
 			usePolling: true
@@ -23,8 +25,11 @@ export default defineConfig({
 	},
 
 	resolve: {
-		alias: {
-			'~': path.resolve(__dirname, './src')
-		}
+		alias: [
+			{
+				find: '~',
+				replacement: path.resolve(__dirname, 'src')
+			}
+		]
 	}
 });
