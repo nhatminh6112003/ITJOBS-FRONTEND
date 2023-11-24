@@ -15,7 +15,7 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import Tips from '~/Core/components/common/Modal/Tips';
 import NoContent from './NoContent';
 import ResumeModal from './ResumeModal';
-import Widget from './Widget';
+import Widget from './widget';
 
 import { resumeEducationSchema } from '~/App/schemas/resumeEducationSchema';
 

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
+import SideBar from '~/App/layouts/Components/jobseeker/SideBar';
 import styles from './changetemplate.module.css';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';

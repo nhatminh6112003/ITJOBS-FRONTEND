@@ -9,8 +9,8 @@ import Card from '~/Core/components/common/Card';
 import { Button } from '@mui/material';
 import { AddIcon, DeleteIcon, EditIcon } from '~/Core/resources';
 import Table from '~/Core/components/common/Table/Table';
-import UpdateModal from './components/UpdateModal';
-import CreateModal from './components/CreateModal';
+import UpdateModal from './components/updateModal';
+import CreateModal from './components/createModal';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import { useGetAllBenefitsQuery } from '~/App/providers/apis/benefits';
 const Service = () => {

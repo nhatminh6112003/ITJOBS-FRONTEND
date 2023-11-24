@@ -6,7 +6,7 @@ import useServerPagination from '~/App/hooks/useServerPagination';
 import { useSearchParams } from 'react-router-dom';
 import { DeleteIcon, IconButton, EditIcon } from '~/Core/resources';
 import Tooltip from '@mui/material/Tooltip';
-import UpdateModal from './components/UpdateModal';
+import UpdateModal from './components/updateModal';
 import useModal from '~/App/hooks/useModal';
 import { useState } from 'react';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import Card from '~/Core/components/common/Card';
 import { AddIcon } from '~/Core/resources';
 import { Button } from '@mui/material';
-import CreateModal from './components/CreateModal';
+import CreateModal from './components/createModal';
 
 const ServiceType = () => {
 	const [dataUpdate, setDataUpdate] = useState(null);

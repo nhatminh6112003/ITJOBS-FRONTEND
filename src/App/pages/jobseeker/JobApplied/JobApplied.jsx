@@ -2,7 +2,7 @@ import React, { Frgament, useEffect } from 'react';
 import styles from './jobApplied.module.css';
 import classNames from 'classnames/bind';
 import { cx } from '../MyProfile';
-import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
+import SideBar from '~/App/layouts/Components/jobseeker/SideBar';
 import { useGetAllJobPostActivityApiQuery } from '~/App/providers/apis/jobPostActivityApi';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';

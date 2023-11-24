@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Widget from './Widget';
+import Widget from './widget';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ResumeModal from './ResumeModal';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';

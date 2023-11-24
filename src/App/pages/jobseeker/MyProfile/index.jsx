@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './MyProfile.module.css';
-import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
+import SideBar from '~/App/layouts/Components/jobseeker/SideBar';
 import { LockIcon, EditIcon, RemoveRedEyeIcon } from '~/Core/resources';
 
 import useModal from '~/App/hooks/useModal';

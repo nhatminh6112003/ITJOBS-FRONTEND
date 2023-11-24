@@ -1,15 +1,13 @@
-import { Link } from 'react-router-dom';
-import styles from './Header.module.css';
 import classNames from 'classnames/bind';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
-import { AccountCircleIcon, ExpandMoreIcon, CheckIcon, Notifications } from '~/Core/resources';
-import { logout } from '~/App/providers/slices/authSlice';
-import { Fragment, useEffect } from 'react';
 import UserRoleEnum, { UserType } from '~/App/constants/roleEnum';
-import { useGetOneUserQuery } from '~/App/providers/apis/userApi';
 import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
+import { useGetOneUserQuery } from '~/App/providers/apis/userApi';
+import { logout } from '~/App/providers/slices/authSlice';
+import { AccountCircleIcon, ExpandMoreIcon } from '~/Core/resources';
+import styles from './Header.module.css';
 const cx = classNames.bind(styles);
 
 const Header = () => {

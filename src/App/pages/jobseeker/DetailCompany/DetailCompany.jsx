@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './DetailCompany.module.css';
+import styles from './detailCompany.module.css';
 import classNames from 'classnames/bind';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useGetOneCompanyQuery } from '~/App/providers/apis/companyApi';
