@@ -34,6 +34,8 @@ import serviceApi from './apis/serviceApi';
 import serviceTypeApi from './apis/serviceTypeApi';
 import jobSavedApi from './apis/jobSavedApi';
 import feedBackApi from './apis/feedBackApi';
+import company_serviceApi from './apis/company_serviceApi';
+
 const rootReducer = combineReducers({
 	[authSlice.name]: authSlice.reducer,
 	[themeSlice.name]: themeSlice.reducer,
@@ -70,7 +72,8 @@ const rootReducer = combineReducers({
 	[serviceApi.reducerPath]: serviceApi.reducer,
 	[serviceTypeApi.reducerPath]: serviceTypeApi.reducer,
 	[jobSavedApi.reducerPath]: jobSavedApi.reducer,
-	[feedBackApi.reducerPath]: feedBackApi.reducer
+	[feedBackApi.reducerPath]: feedBackApi.reducer,
+	[company_serviceApi.reducerPath]: company_serviceApi.reducer,
 });
 
 export default rootReducer;
