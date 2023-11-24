@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 import routesPath from '~/App/config/routesPath';
 
-const Login = lazy(() => import('~/App/pages/Employer/Login'));
-const Register = lazy(() => import('~/App/pages/Employer/Register'));
+const Login = lazy(() => import('~/App/pages/employer/Login'));
+const Register = lazy(() => import('~/App/pages/employer/Register'));
 const EmployerDashboard = lazy(() => import('~/App/pages/employer/Dashboard'));
 const Posting = lazy(() => import('~/App/pages/employer/HrCentral/Posting'));
 const ManageResume = lazy(() => import('~/App/pages/employer/HrCentral/ManageResume'));
