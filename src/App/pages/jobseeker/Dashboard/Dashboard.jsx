@@ -2,7 +2,7 @@
 import classNames from 'classnames/bind';
 
 import styles from './Dashboard.module.css';
-import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
+import SideBar from '~/App/layouts/Components/jobseeker/SideBar';
 
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';

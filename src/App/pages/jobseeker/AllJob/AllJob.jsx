@@ -15,7 +15,7 @@ import SelectFieldControl from '~/Core/components/common/FormControl/SelectField
 
 import { SearchIcon, FavoriteBorderIcon } from '~/Core/resources';
 import formatDate from '~/Core/utils/formatDate';
-import useSearchJobPost from '../../Employer/components/useSearchJobPost';
+import useSearchJobPost from '../../employer/components/useSearchJobPost';
 import Pagination from '~/Core/components/common/Pagination';
 import { useDispatch } from 'react-redux';
 import { PaginationActionEnums } from '~/App/hooks/useServerPagination';

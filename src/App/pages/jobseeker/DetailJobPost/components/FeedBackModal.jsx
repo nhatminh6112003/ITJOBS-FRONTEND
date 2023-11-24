@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { feedBackEnum } from '~/App/constants/feedBackEnum';
-import { useCreateFeedBackMutation } from '~/App/providers/apis/feedbackApi';
+import { useCreateFeedBackMutation } from '~/App/providers/apis/feedBackApi';
 import { feedBackSchema } from '~/App/schemas/feedBackSchema';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';

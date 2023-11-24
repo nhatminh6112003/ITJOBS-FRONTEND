@@ -1,20 +1,19 @@
-import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import './sidebar.css';
-import SidebarItem from './SidebarItem';
-import { HomeIcon, CategoryIcon, Settings } from '~/Core/resources';
-import routesPath from '~/App/config/routesPath';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import ApartmentIcon from '@mui/icons-material/Apartment';
-import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
-import BadgeIcon from '@mui/icons-material/Badge';
-import FeedIcon from '@mui/icons-material/Feed';
-import Diversity1Icon from '@mui/icons-material/Diversity1';
-import LayersIcon from '@mui/icons-material/Layers';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import BadgeIcon from '@mui/icons-material/Badge';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
+import FeedIcon from '@mui/icons-material/Feed';
+import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import LayersIcon from '@mui/icons-material/Layers';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import routesPath from '~/App/config/routesPath';
+import { CategoryIcon, Settings } from '~/Core/resources';
+import SidebarItem from './SidebarItem';
+import './sidebar.css';
 
 const SideBar = (props) => {
 	const SideBarMenu = [

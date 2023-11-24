@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Widget from './Widget';
+import Widget from './widget';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ResumeModal from './ResumeModal';
 import { useForm } from 'react-hook-form';
@@ -68,7 +68,6 @@ const ResumeObjective = ({ className: cx, isShowing, toggle }) => {
 	};
 
 	const onUpdateSubmit = async (data) => {
-
 		updateObjectiveMutation({
 			id: updateId,
 			payload: {

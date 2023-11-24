@@ -12,7 +12,7 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import Tips from '~/Core/components/common/Modal/Tips';
 import ResumeModal from './ResumeModal';
-import Widget from './Widget';
+import Widget from './widget';
 import { useLocation } from 'react-router-dom';
 import axiosClient from '~/Core/configs/axiosConfig';
 import { saveAs } from 'file-saver';
@@ -87,9 +87,9 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 	}, [location]);
 
 	const scrollToElement = (elementId) => {
-		console.log("TCL: scrollToElement -> elementId", elementId)
+		console.log('TCL: scrollToElement -> elementId', elementId);
 		const container = document.getElementById(elementId); // Thay 'container' bằng ID của phần tử chứa
-		console.log("TCL: scrollToElement -> container", container)
+		console.log('TCL: scrollToElement -> container', container);
 		const element = document.getElementById(elementId); // Thay 'elementId' bằng ID của phần tử con
 
 		if (container && element) {
@@ -105,8 +105,6 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 			}
 		}
 	};
-
-
 
 	return (
 		<Fragment>

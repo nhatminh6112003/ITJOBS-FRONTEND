@@ -7,7 +7,7 @@ import SelectFieldControl from '~/Core/components/common/FormControl/SelectField
 import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllResumeQuery } from '~/App/providers/apis/resumeApi';
-import useSearchResume from '~/App/pages/Employer/FindJobSeeker/components/useSearchResume';
+import useSearchResume from '~/App/pages/employer/FindJobSeeker/components/useSearchResume';
 import { resumeActiveEnum } from '~/App/constants/resumeActiveEnum';
 import { Link, useNavigate } from 'react-router-dom';
 import { degree } from '~/App/constants/degreeArray';

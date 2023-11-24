@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import styles from '~/App/pages/Jobseeker/ChangeTemplate/changetemplate.module.css';
+import styles from '~/App/pages/jobseeker/ChangeTemplate/changetemplate.module.css';
 
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';

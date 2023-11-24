@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import styles from '../JobApplied/JobApplied.module.css';
+import styles from '../JobApplied/jobApplied.module.css';
 import classNames from 'classnames/bind';
 import { cx } from '../MyProfile';
-import SideBar from '~/App/layouts/components/Jobseeker/SideBar';
+import SideBar from '~/App/layouts/Components/jobseeker/SideBar';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useDeleteJobSavedMutation, useGetAllJobSavedQuery } from '~/App/providers/apis/jobSavedApi';
