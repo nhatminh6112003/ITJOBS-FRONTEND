@@ -14,7 +14,7 @@ import ResumeActivity from './components/ResumeActivity';
 import ResumeExperience from './components/ResumeExperience';
 import ResumeSkill from './components/ResumeSkill';
 import ResumeDesiredJob from './components/ResumeDesiredJob';
-import ResumeLanguage from './components/Resumelanguage';
+import ResumeLanguage from './components/ResumeLanguage';
 import ResumeProfile from './components/ResumeProfile';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
