@@ -6,13 +6,22 @@ import './sidebar.css';
 import SidebarItem from './SidebarItem';
 import { HomeIcon, CategoryIcon, Settings } from '~/Core/resources';
 import routesPath from '~/App/config/routesPath';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import BadgeIcon from '@mui/icons-material/Badge';
+import FeedIcon from '@mui/icons-material/Feed';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
+import LayersIcon from '@mui/icons-material/Layers';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 
 const SideBar = (props) => {
 	const SideBarMenu = [
 		{
 			title: 'Dashboard',
 			route: routesPath.AdminPaths.dashboard,
-			icon: <HomeIcon />
+			icon: <AssessmentIcon />
 		},
 
 		{
@@ -24,44 +33,44 @@ const SideBar = (props) => {
 		{
 			title: 'Phúc lợi công việc',
 			route: routesPath.AdminPaths.jobWelfare,
-			icon: <CategoryIcon />
+			icon: <Diversity1Icon />
 		},
 
 		{
 			title: 'Quản lý nhà tuyển dụng',
 			route: routesPath.AdminPaths.employer,
-			icon: <CategoryIcon />
+			icon: <BadgeIcon />
 		},
 
 		{
 			title: 'Quản lý ứng viên',
 			route: routesPath.AdminPaths.jobSeeker,
-			icon: <CategoryIcon />
+			icon: <PeopleAltIcon/>
 		},
 		{
 			title: 'Quản lý nghề nghiệp',
 			route: routesPath.AdminPaths.profession,
-			icon: <CategoryIcon />
+			icon: <FeedIcon />
 		},
 		{
 			title: 'Quản lý công ty',
 			route: routesPath.AdminPaths.company,
-			icon: <CategoryIcon />
+			icon: <ApartmentIcon />
 		},
 		{
 			title: 'Quản lý lợi ích',
 			route: routesPath.AdminPaths.benefits,
-			icon: <CategoryIcon />
+			icon: <AnalyticsIcon />
 		},
 		{
 			title: 'Quản lý dịch vụ',
 			route: routesPath.AdminPaths.service,
-			icon: <CategoryIcon />
+			icon: <HomeRepairServiceIcon />
 		},
 		{
 			title: 'Quản lý loại hình dịch vụ',
 			route: routesPath.AdminPaths.serviceType,
-			icon: <CategoryIcon />
+			icon: <LayersIcon />
 		},
 		{
 			title: 'Cài đặt',
