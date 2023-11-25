@@ -14,86 +14,66 @@ import {
 import Chart from 'react-apexcharts';
 import ReactApexChart from 'react-apexcharts';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import useSearchDateDashBoard from '../components/useSearchDateDashBoard';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 
 const sx = classNames.bind(styles);
 
 const EmployerDashboard = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
-	const [currentDate, setCurrentDate] = useState('');
-	const [nextMonthDate, setNextMonthDate] = useState('');
+	const { pushQuery, query } = useSearchDateDashBoard();
+	const {
+		control,
+		handleSubmit,
+		formState: { errors }
+	} = useForm({
+		values: {
+			startDate_1: '' || query.startDate_1,
+			endDate_1: '' || query.endDate_1,
+			startDate_2: '' || query.startDate_2,
+			endDate_2: '' || query.endDate_2,
+			startDate_3: '' || query.startDate_3,
+			endDate_3: '' || query.endDate_3
+		}
+	});
+	const onSubmit = (data) => {
+		pushQuery({ ...data });
+		console.log('TCL: EmployerDashboard -> onsubmit -> data', data);
+	};
 
-	useEffect(() => {
-		const today = new Date();
-		const year = today.getFullYear();
-		const month = (today.getMonth() + 1).toString().padStart(2, '0');
-		const day = today.getDate().toString().padStart(2, '0');
-		const formattedToday = `${year}-${month}-${day}`;
-
-		const nextMonth = new Date(today);
-		nextMonth.setMonth(nextMonth.getMonth() + 1);
-		const nextMonthYear = nextMonth.getFullYear();
-		const nextMonthMonth = (nextMonth.getMonth() - 1).toString().padStart(2, '0');
-		const nextMonthDay = nextMonth.getDate().toString().padStart(2, '0');
-		const formattedNextMonth = `${nextMonthYear}-${nextMonthMonth}-${nextMonthDay}`;
-
-		setCurrentDate(formattedToday);
-		console.log('TCL: EmployerDashboard -> formattedToday', formattedToday);
-		setNextMonthDate(formattedNextMonth);
-		console.log('TCL: EmployerDashboard -> formattedNextMonth', formattedNextMonth);
-	}, []);
 	const { data } = useAnalyticsQuery();
-	const { data: analyticDegreeValueQuery } = useAnalyticDegreeValueQuery(
-		{
-			params: {
-				user_account_id: employer?.id,
-				startDate: nextMonthDate,
-				endDate: currentDate
-			}
-		},
-		{
-			skip: !nextMonthDate && !nextMonthDate
+	const { data: analyticDegreeValueQuery } = useAnalyticDegreeValueQuery({
+		params: {
+			user_account_id: employer?.id,
+			startDate: query.startDate_3,
+			endDate: query.endDate_3
 		}
-	);
+	});
 
-	const { data: analyticResumeStatus } = useAnalyticResumeStatusQuery(
-		{
-			params: {
-				user_account_id: employer?.id,
-				startDate: nextMonthDate,
-				endDate: currentDate
-			}
-		},
-		{
-			skip: !nextMonthDate && !nextMonthDate
+	const { data: analyticResumeStatus } = useAnalyticResumeStatusQuery({
+		params: {
+			user_account_id: employer?.id,
+			startDate: query.startDate_1,
+			endDate: query.endDate_1
 		}
-	);
+	});
 
-	const { data: calculateCorrelationIndexData } = useCalculateCorrelationIndexQuery(
-		{
-			params: {
-				user_account_id: employer?.id,
-				startDate: nextMonthDate,
-				endDate: currentDate
-			}
-		},
-		{
-			skip: !nextMonthDate && !nextMonthDate
+	const { data: calculateCorrelationIndexData } = useCalculateCorrelationIndexQuery({
+		params: {
+			user_account_id: employer?.id,
+			startDate: query.startDate_2,
+			endDate: query.endDate_2
 		}
-	);
+	});
 
-	const { data: analyticJobSeekerApplyByDayQuery } = useAnalyticJobSeekerApplyByDayQuery(
-		{
-			params: {
-				user_account_id: employer?.id,
-				startDate: nextMonthDate,
-				endDate: currentDate
-			}
-		},
-		{
-			skip: !nextMonthDate && !nextMonthDate
+	const { data: analyticJobSeekerApplyByDayQuery } = useAnalyticJobSeekerApplyByDayQuery({
+		params: {
+			user_account_id: employer?.id,
+			startDate: query.startDate_2,
+			endDate: query.endDate_2
 		}
-	);
+	});
 
 	const analyticJobSeekerApplyByDayQueryOptions = {
 		series: [
@@ -251,7 +231,7 @@ const EmployerDashboard = ({ cx }) => {
 			<div className={cx('container')}>
 				<div className={sx('main-dasboard-top')}>
 					<div className={cx('row')}>
-						<div className={cx('col-xl-3')}>
+						<div className={cx('col-xl-6')}>
 							<div className={sx('box-dasboard-top')}>
 								<div className={sx('head')}>
 									<h2 className={sx('title-dashboard')}>Thông tin tài khoản</h2>
@@ -268,14 +248,14 @@ const EmployerDashboard = ({ cx }) => {
 										</a>
 									</div>
 									<ul className={sx('list-account-information')}>
-										<li>
+										{/* <li>
 											<p className={sx('number', 'intNumPostNoUse')}>0</p>
 											<a
 												className={sx('title')}
 												href='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_available'>
 												Vị trí chưa sử dụng
 											</a>
-										</li>
+										</li> */}
 										<li>
 											<p className={sx('number', 'orderNew')}>0</p>
 											<a
@@ -296,21 +276,7 @@ const EmployerDashboard = ({ cx }) => {
 								</div>
 							</div>
 						</div>
-						<div className={cx('col-xl-5')}>
-							<div className={sx('box-dasboard-top')}>
-								<div className={sx('head')}>
-									<h2 className={sx('title-dashboard')}>Tìm Kiếm Hồ Sơ</h2>
-								</div>
-								<div className={sx('body')}>
-									<ul className={sx('list-search-management')}>
-										<li>
-											<p className={sx('textNodata')}>Chưa có điểm xem hồ sơ</p>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div className={cx('col-xl-4')}>
+						<div className={cx('col-xl-6')}>
 							<div className={sx('box-dasboard-top')}>
 								<div className={sx('head')}>
 									<h2 className={sx('title-dashboard')}>Quản Lý Đăng Tuyển</h2>
@@ -341,91 +307,7 @@ const EmployerDashboard = ({ cx }) => {
 												<span className={sx('title')}>Việc làm hết hạn</span>
 											</a>
 										</li>
-										<li>
-											<a href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/followers'>
-												<span className={sx('number', '')}>0</span>
-												<span className={sx('title')}>Followers</span>
-											</a>
-										</li>
 									</ul>
-								</div>
-							</div>
-						</div>
-						{/* <div className={cx('col-xl-3')}>
-							<div className={sx('box-dasboard-top')}>
-								<div className={sx('head')}>
-									<h2 className={sx('title-dashboard')}>Lịch Sử Hoạt Động</h2>
-								</div>
-								<div className={sx('body')}>
-									<ul className={sx('list-operation-management')}>
-										<li>
-											<p className={sx('time')}>
-												<time>30/07/2023</time>
-											</p>
-											<p className={sx('title')}>
-												IP 58.186.70.135, Change Pass User lop7cttnq.1667207375 At 19:29:12 30-07-2023
-											</p>
-										</li>
-										<li>
-											<p className={sx('time')}>
-												<time>02/07/2023</time>
-											</p>
-											<p className={sx('title')}>
-												IP 1.53.89.109, Change Pass User lop7cttnq.1667207375 At 11:34:32 02-07-2023
-											</p>
-										</li>
-										<li>
-											<p className={sx('time')}>
-												<time>03/05/2023</time>
-											</p>
-											<p className={sx('title')}>
-												IP 27.73.242.118, Change Pass User lop7cttnq.1667207375 At 22:39:31 03-05-2023
-											</p>
-										</li>
-									</ul>
-									<div className={sx('view-more')}>
-										<a
-											className={sx('btn-view-more')}
-											href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/report_task_log'>
-											Xem thêm
-										</a>
-									</div>
-								</div>
-							</div>
-						</div> */}
-					</div>
-				</div>
-				<div className={sx('main-dasboard-bottom')}>
-					<div className={cx('row')}>
-						<div className={cx('col-lg-12')}>
-							<div className={sx('box-dasboard-bottom', 'topresume-list')}>
-								<div className={sx('topresume-list-head')}>
-									Top{' '}
-									<span
-										className={sx('swiper-pagination', 'swiper-pagination-fraction')}
-										style={{ position: 'inherit' }}>
-										<span className={sx('swiper-pagination-current')}>1</span> /{' '}
-										<span className={sx('swiper-pagination-total')}>10</span>
-									</span>{' '}
-									hồ sơ mới <Link to='/tim-ung-vien'>Xem thêm tìm kiếm ứng viên</Link>
-									<div className={sx('main-button')}>
-										<div className={sx('button-prev')} tabIndex={0} role='button' aria-label='Previous slide'>
-											<em className={sx('mdi', 'mdi-chevron-left')} />
-										</div>
-										<div className={sx('button-next')} tabIndex={0} role='button' aria-label='Next slide'>
-											<em className={sx('mdi', 'mdi-chevron-right')} />
-										</div>
-									</div>
-								</div>
-								<div className={sx('main-slide')}>
-									<div
-										className={sx(
-											'swiper-container',
-											'swiper-container-initialized',
-											'swiper-container-horizontal'
-										)}>
-										<span className={sx('swiper-notification')} aria-live='assertive' aria-atomic='true' />
-									</div>
 								</div>
 							</div>
 						</div>
@@ -436,34 +318,40 @@ const EmployerDashboard = ({ cx }) => {
 						<div className={cx('col-lg-6')}>
 							<div className={sx('box-dasboard-middle')}>
 								<div className={sx('head')}>
-									<h3 className={sx('title')}>Biểu Đồ Số lượng ứng viên theo trạng thái</h3>
-									<div className={sx('toollips')}>
-										<em className={cx('material-icons')}>infomation</em>
-										{/* <div className={sx('toolip')}>
-											<p>Thông kê </p>
-										</div> */}
-									</div>
+									<h3 className={sx('title')}>Biểu Đồ Trạng Thái Nộp CV</h3>
+									<Tooltip title='Biểu đồ số lượng ứng viên theo trạng thái'>
+										<IconButton>
+											<InfoIcon style={{ color: '#0097d1' }} />
+										</IconButton>
+									</Tooltip>
 								</div>
 								<div className={sx('body')}>
-									<div className={sx('form-wrap')}>
-										<div className={sx('form-group', 'form-date')}>
-											<input
-												className={sx('dates_range')}
-												id='date_mychart1'
-												readOnly=''
-												defaultValue='16/08/2023 - 16/09/2023'
-											/>
+									<form className={sx('form')} onSubmit={handleSubmit(onSubmit)}>
+										<div className={sx('form-wrap')}>
+											<div className={sx('form-group', 'form-date')}>
+												<InputFieldControl
+													className={sx('dates_range')}
+													id='startDate_1'
+													type='date'
+													name='startDate_1'
+													control={control}
+												/>
+												<div style={{ paddingRight: '10px' }}> </div>
+												<InputFieldControl
+													className={sx('dates_range')}
+													id='endDate_1'
+													type='date'
+													name='endDate_1'
+													control={control}
+												/>
+											</div>
+											<div className={sx('form-group', 'form-submit')}>
+												<button className={sx('btn-gradient', 'btn-submit')} id='btn_chart1' type='submit'>
+													Áp dụng
+												</button>
+											</div>
 										</div>
-										<div className={sx('form-group', 'form-submit')}>
-											<button
-												className={sx('btn-gradient', 'btn-submit')}
-												id='btn_chart1'
-												type='button'
-												onclick='actChart1(this);'>
-												Áp dụng
-											</button>
-										</div>
-									</div>
+									</form>
 									<ReactApexChart
 										options={analyticResumeStatusOption.options}
 										series={analyticResumeStatusOption.series}
@@ -477,42 +365,40 @@ const EmployerDashboard = ({ cx }) => {
 							<div className={sx('box-dasboard-middle')} style={{ height: 487 }}>
 								<div className={sx('head')}>
 									<h3 className={sx('title')}>Biểu Đồ Ứng Viên</h3>
-									<div className={sx('toollips')}>
-										<em className={cx('material-icons')}>infomation</em>
-										<div className={sx('toolip')}>
-											<p>Thống kê số hồ sơ ứng tuyển nhận được theo ngày.</p>
-										</div>
-									</div>
+									<Tooltip title='Thống kê số hồ sơ ứng tuyển nhận được theo ngày.'>
+										<IconButton>
+											<InfoIcon style={{ color: '#0097d1' }} />
+										</IconButton>
+									</Tooltip>
 								</div>
 								<div className={sx('body')}>
-									<div className={sx('form-wrap')}>
-										<div className={sx('form-group', 'form-date')}>
-											<input
-												className={sx('dates_range')}
-												id='date_mychart2'
-												readOnly=''
-												defaultValue='16/08/2023 - 16/09/2023'
-											/>
+									<form className={sx('form')} onSubmit={handleSubmit(onSubmit)}>
+										<div className={sx('form-wrap')}>
+											<div className={sx('form-group', 'form-date')}>
+												<InputFieldControl
+													className={sx('dates_range')}
+													id='startDate_2'
+													type='date'
+													name='startDate_2'
+													control={control}
+												/>
+												<div style={{ paddingRight: '10px' }}> </div>
+												<InputFieldControl
+													className={sx('dates_range')}
+													id='endDate_2'
+													type='date'
+													name='endDate_2'
+													control={control}
+												/>
+											</div>
+											<div className={sx('form-group', 'form-submit')}>
+												<button className={sx('btn-gradient', 'btn-submit')} id='btn_chart1' type='submit'>
+													Áp dụng
+												</button>
+											</div>
 										</div>
-										<div className={sx('form-group', 'form-submit')}>
-											<button
-												className={sx('btn-gradient', 'btn-submit')}
-												id='btn_chart2'
-												type='button'
-												onclick='actChart2(this);'>
-												Áp dụng
-											</button>
-										</div>
-									</div>
+									</form>
 									<div className={sx('chart')}>
-										<div className={sx('chartjs-size-monitor')}>
-											<div className={sx('chartjs-size-monitor-expand')}>
-												<div className={sx('')} />
-											</div>
-											<div className={sx('chartjs-size-monitor-shrink')}>
-												<div className={sx('')} />
-											</div>
-										</div>
 										<Chart
 											options={analyticJobSeekerApplyByDayQueryOptions.options}
 											series={analyticJobSeekerApplyByDayQueryOptions.series}
@@ -534,30 +420,33 @@ const EmployerDashboard = ({ cx }) => {
 									</Tooltip>
 								</div>
 								<div className={sx('body')}>
-									<div className={sx('form-wrap')}>
-										<div className={sx('form-group', 'form-date')}>
-											<input type='date' name='dates' value='01/01/2018 - 01/15/2018' />
+									<form className={sx('form')} onSubmit={handleSubmit(onSubmit)}>
+										<div className={sx('form-wrap')}>
+											<div className={sx('form-group', 'form-date')}>
+												<InputFieldControl
+													className={sx('dates_range')}
+													id='startDate_2'
+													type='date'
+													name='startDate_2'
+													control={control}
+												/>
+												<div style={{ paddingRight: '10px' }}> </div>
+												<InputFieldControl
+													className={sx('dates_range')}
+													id='endDate_2'
+													type='date'
+													name='endDate_2'
+													control={control}
+												/>
+											</div>
+											<div className={sx('form-group', 'form-submit')}>
+												<button className={sx('btn-gradient', 'btn-submit')} id='btn_chart1' type='submit'>
+													Áp dụng
+												</button>
+											</div>
 										</div>
-										<div className={sx('form-group', 'form-submit')}>
-											<button
-												className={sx('btn-gradient', 'btn-submit')}
-												id='btn_chart3'
-												type='button'
-												onclick='actChart3(this);'>
-												Áp dụng
-											</button>
-										</div>
-									</div>
+									</form>
 									<div className={sx('chart')}>
-										<div className={sx('chartjs-size-monitor')}>
-											<div className={sx('chartjs-size-monitor-expand')}>
-												<div className={sx('')} />
-											</div>
-											<div className={sx('chartjs-size-monitor-shrink')}>
-												<div className={sx('')} />
-											</div>
-										</div>
-
 										<ReactApexChart
 											options={calculateCorrelationchartOptions.options}
 											series={calculateCorrelationchartOptions.series}
@@ -579,34 +468,33 @@ const EmployerDashboard = ({ cx }) => {
 									</Tooltip>
 								</div>
 								<div className={sx('body')}>
-									<div className={sx('form-wrap')}>
-										<div className={sx('form-group', 'form-date')}>
-											<input
-												className={sx('dates_range')}
-												id='date_mychart3'
-												readOnly=''
-												defaultValue='16/08/2023 - 16/09/2023'
-											/>
+									<form className={sx('form')} onSubmit={handleSubmit(onSubmit)}>
+										<div className={sx('form-wrap')}>
+											<div className={sx('form-group', 'form-date')}>
+												<InputFieldControl
+													className={sx('dates_range')}
+													id='startDate_3'
+													type='date'
+													name='startDate_3'
+													control={control}
+												/>
+												<div style={{ paddingRight: '10px' }}> </div>
+												<InputFieldControl
+													className={sx('dates_range')}
+													id='endDate_3'
+													type='date'
+													name='endDate_3'
+													control={control}
+												/>
+											</div>
+											<div className={sx('form-group', 'form-submit')}>
+												<button className={sx('btn-gradient', 'btn-submit')} id='btn_chart1' type='submit'>
+													Áp dụng
+												</button>
+											</div>
 										</div>
-										<div className={sx('form-group', 'form-submit')}>
-											<button
-												className={sx('btn-gradient', 'btn-submit')}
-												id='btn_chart3'
-												type='button'
-												onclick='actChart3(this);'>
-												Áp dụng
-											</button>
-										</div>
-									</div>
+									</form>
 									<div className={sx('chart')}>
-										<div className={sx('chartjs-size-monitor')}>
-											<div className={sx('chartjs-size-monitor-expand')}>
-												<div className={sx('')} />
-											</div>
-											<div className={sx('chartjs-size-monitor-shrink')}>
-												<div className={sx('')} />
-											</div>
-										</div>
 										<ReactApexChart
 											options={analyticDegreeValueQueryOptions.options}
 											series={analyticDegreeValueQueryOptions.series}

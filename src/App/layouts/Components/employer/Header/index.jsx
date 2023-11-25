@@ -3,8 +3,6 @@ import routesPath from '~/App/config/routesPath';
 import styles from './Header.module.css';
 import classNames from 'classnames/bind';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import CheckIcon from '@mui/icons-material/Check';
 import { useSelector, useDispatch } from 'react-redux';
 import UserRoleEnum, { UserType } from '~/App/constants/roleEnum';
 import { logout } from '~/App/providers/slices/authSlice';
@@ -48,39 +46,14 @@ const Header = () => {
 											<li>
 												<a href='/tim-ung-vien'>Tìm Hồ Sơ Ứng Viên</a>
 											</li>
-											{/* <li>
-												<a href='https://careerbuilder.vn/vi/employers/products-and-services/talent-solution/'>
-													Talent Solution
-												</a>
-											</li> */}
 											<li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services/quang-cao-tuyen-dung/9'>
 													Quảng Cáo Tuyển Dụng
 												</a>
 											</li>
-											{/* <li>
-												<a href='https://careerbuilder.vn/vi/employers/products-and-services/talent-driver/14'>
-													Talent Driver
-												</a>
-											</li> */}
-											{/* <li>
-												<a href='https://careerbuilder.vn/vi/employers/products-and-services/targeted-email-marketing/'>
-													Targeted Email Marketing
-												</a>
-											</li> */}
-											{/* <li>
-												<a href='https://careerbuilder.vn/vi/employers/products-and-services/talent-referral/'>
-													Talent Referral
-												</a>
-											</li> */}
-											{/* <li>
-												<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung-va-tim-ho-so-quoc-te/10'>
-													Đăng Tuyển Dụng và Tìm Hồ Sơ Quốc tế
-												</a>
-											</li> */}
 											<li>
 												<a href='https://careerbuilder.vn/vi/employers/products-and-services'>
-													Xem tất cả sản phẩm / dịch vụ
+													Xem tất cả dịch vụ
 												</a>
 											</li>
 										</ul>
@@ -102,9 +75,6 @@ const Header = () => {
 										</ul>
 									</div>
 								</li>
-								{/* <li className=''>
-									<a href='https://careerbuilder.vn/vi/hiringsite'>Cẩm Nang Tuyển Dụng</a>
-								</li> */}
 								<li className=''>
 									<Link to={routesPath.EmployerPaths.serviceAndContact}>Liên hệ</Link>
 								</li>
@@ -148,11 +118,6 @@ const Header = () => {
 													Đơn Hàng
 												</a>
 											</li>
-											{/* <li>
-												<a href='https://careerbuilder.vn/vi/employers/careerbuilder-rewards'>
-													CareerBuilder Rewards
-												</a>
-											</li> */}
 											<li>
 												<a href='/employers/hrcentral/accounts'> Tài khoản</a>
 											</li>
@@ -184,31 +149,6 @@ const Header = () => {
 							<a href=''>
 								<span className='mdi mdi-cart' />
 							</a>
-						</div>
-						<div className={cx('main-language', 'dropdown')}>
-							<div className={cx('dropdown-toggle')}>
-								<p>
-									VI
-									<ExpandMoreIcon fontSize='small' />
-								</p>
-							</div>
-							{/* <div className={cx('dropdown-menu')}>
-								<div className={cx('item', 'active')}>
-									<CheckIcon fontSize='small' sx={{ paddingRight: '5px' }} />
-									<a className='dropdown-item' href='' title='Change language'>
-										VI
-									</a>
-								</div>
-								<div className={cx('item')}>
-									<CheckIcon fontSize='small' sx={{ paddingRight: '5px' }} />
-									<a
-										className={cx('dropdown-item')}
-										href='https://careerbuilder.vn/en/employers/login'
-										title='Change language'>
-										EN
-									</a>
-								</div>
-							</div> */}
 						</div>
 						<div className={cx('main-candidates')}>
 							<Link to={routesPath.JobseekerPaths.home}>
