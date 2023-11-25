@@ -55,8 +55,7 @@ const Service = () => {
 				Header: 'loại hình dịch vụ',
 				accessor: 'service_type',
 				Cell: ({ row: { values } }) => {
-					console.log('TCL: values', values);
-					return values.service_type.name;
+					return values?.service_type.name;
 				}
 			},
 			{
@@ -67,7 +66,7 @@ const Service = () => {
 				Header: 'Lợi ích',
 				accessor: 'benefit',
 				Cell: ({ row: { values } }) => {
-					return values.benefit.name;
+					return values?.benefit?.name;
 				}
 			},
 			{
