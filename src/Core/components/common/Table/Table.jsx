@@ -10,7 +10,7 @@ import SortIcon from '@mui/icons-material/Sort';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import Card from '../Card';
-import './table.scss';
+import './table.css';
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
 	return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
