@@ -10,7 +10,8 @@ const AdminPaths = {
 	company: '/admin/company',
 	benefits: '/admin/benefits',
 	service: '/admin/service',
-	serviceType: '/admin/service_type'
+	serviceType: '/admin/service_type',
+	feedBack: '/admin/feedBack'
 };
 const JobseekerPaths = {
 	home: '/',
@@ -61,7 +62,7 @@ const EmployerPaths = {
 
 const BasePaths = {
 	NOT_FOUND: '*',
-	ResumeStyle: '/resume-style/:id',
+	ResumeStyle: '/resume-style/:id'
 };
 const routesPath = {
 	JobseekerPaths,

@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 
 import AnalyticsIcon from '@mui/icons-material/Analytics';
@@ -44,7 +43,7 @@ const SideBar = (props) => {
 		{
 			title: 'Quản lý ứng viên',
 			route: routesPath.AdminPaths.jobSeeker,
-			icon: <PeopleAltIcon/>
+			icon: <PeopleAltIcon />
 		},
 		{
 			title: 'Quản lý nghề nghiệp',
@@ -56,11 +55,11 @@ const SideBar = (props) => {
 			route: routesPath.AdminPaths.company,
 			icon: <ApartmentIcon />
 		},
-		{
-			title: 'Quản lý lợi ích',
-			route: routesPath.AdminPaths.benefits,
-			icon: <AnalyticsIcon />
-		},
+		// {
+		// 	title: 'Quản lý lợi ích',
+		// 	route: routesPath.AdminPaths.benefits,
+		// 	icon: <AnalyticsIcon />
+		// },
 		{
 			title: 'Quản lý dịch vụ',
 			route: routesPath.AdminPaths.service,
@@ -69,6 +68,11 @@ const SideBar = (props) => {
 		{
 			title: 'Quản lý loại hình dịch vụ',
 			route: routesPath.AdminPaths.serviceType,
+			icon: <LayersIcon />
+		},
+		{
+			title: 'Quản lý báo cáo xấu',
+			route: routesPath.AdminPaths.feedBack,
 			icon: <LayersIcon />
 		},
 		{

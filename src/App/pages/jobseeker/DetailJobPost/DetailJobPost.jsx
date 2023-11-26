@@ -356,12 +356,25 @@ const DetailJobPost = ({ cx }) => {
 																	<i className={sx('mdi', 'mdi-calendar-check')} />
 																	Hết hạn nộp
 																</strong>
-																<p>23/11/2023</p>
+																<p>{formatDate(detailJobPost?.expiry_date)}</p>
 															</li>
 														</ul>
 													</div>
 												</div>
 											</div>
+										</div>
+										<div className={sx('detail-row', 'reset-bullet')}>
+											<h2 className={sx('detail-title')}>Phúc lợi </h2>
+											<ul className={sx('welfare-list')}>
+												{detailJobPost?.jobWelfare?.map((jobWelfare) => {
+													return (
+														<li>
+															<span className={sx('fa', 'fa-medkit')} />{' '}
+															{jobWelfare?.job_welfare?.welfare_type}
+														</li>
+													);
+												})}
+											</ul>
 										</div>
 										<div className={sx('detail-row', 'reset-bullet')}>
 											<h2 className={sx('detail-title')}>Mô tả Công việc</h2>
