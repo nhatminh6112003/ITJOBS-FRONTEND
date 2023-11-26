@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import styles from './editEmployer.module.css';
 import classNames from 'classnames/bind';
+import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { useGetOneCompanyQuery } from '~/App/providers/apis/companyApi';
-import { useForm, Controller } from 'react-hook-form';
-import { useUpdateCompanyMutation } from '~/App/providers/apis/companyApi';
+import { toast } from 'react-toastify';
+import { CompanySize, CompanyTypeArray } from '~/App/constants/companyEnum';
+import { useGetOneCompanyQuery, useUpdateCompanyMutation } from '~/App/providers/apis/companyApi';
+import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUploadFieldControl/FileUploadFieldControl';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
-import { toast } from 'react-toastify';
-import { CompanyTypeArray, CompanySize } from '~/App/constants/companyEnum';
-import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUploadFieldControl/FileUploadFieldControl';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
+import styles from './editEmployer.module.css';
 const sx = classNames.bind(styles);
 const EditEmployer = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);

@@ -1,30 +1,32 @@
-import React from 'react';
-import styles from '../Posting/posting.module.css';
-import classNames from 'classnames/bind';
-import CreateIcon from '@mui/icons-material/Create';
-import TabMenu from '../Posting/components/TabMenu';
-import { useLocation, Link } from 'react-router-dom';
-import { SearchIcon } from '~/Core/resources';
-import SortIcon from '@mui/icons-material/Sort';
-import PublishIcon from '@mui/icons-material/Publish';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import EditIcon from '@mui/icons-material/Edit';
 import CancelIcon from '@mui/icons-material/Cancel';
+import CreateIcon from '@mui/icons-material/Create';
+import EditIcon from '@mui/icons-material/Edit';
+import PublishIcon from '@mui/icons-material/Publish';
+import SortIcon from '@mui/icons-material/Sort';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import classNames from 'classnames/bind';
+import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import DateTypeEnum from '~/App/constants/dataTypeEnum';
+import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import {
 	useDeleteJobPostMutation,
 	useGetAllJobPostQuery,
 	useUpdateJobPostMutation
 } from '~/App/providers/apis/jobPostApi';
-import formatDate from '~/Core/utils/formatDate';
-import { toast } from 'react-toastify';
-import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
-import { useSelector } from 'react-redux';
-import moment from 'moment';
-import useSearchJobPost from '../../components/useSearchJobPost';
-import DateTypeEnum from '~/App/constants/dataTypeEnum';
-import { useForm } from 'react-hook-form';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import { SearchIcon } from '~/Core/resources';
+import formatDate from '~/Core/utils/formatDate';
+import useSearchJobPost from '../../components/useSearchJobPost';
+import TabMenu from '../Posting/components/TabMenu';
+import styles from '../Posting/posting.module.css';
+import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
+import ServiceSlugEnum from '~/App/constants/serviceEnum';
+import useRegisterService from '../components/useRegisterService.js';
+import moment from 'moment';
 const sx = classNames.bind(styles);
 
 const WaitPosting = ({ cx }) => {
@@ -44,6 +46,13 @@ const WaitPosting = ({ cx }) => {
 			isDeleted: false
 		}
 	});
+	const isServiceJobPostExits = useRegisterService(employer?.company?.id, ServiceSlugEnum.PostJob);
+	const { data: myCompanyService } = useGetAllCompany_serviceQuery({
+		params: {
+			company_id: employer?.company?.id
+		}
+	});
+
 	const [deleteJobPost] = useDeleteJobPostMutation();
 	const [updateJobPost] = useUpdateJobPostMutation();
 
@@ -65,7 +74,20 @@ const WaitPosting = ({ cx }) => {
 			dateType: query.dateType || ''
 		}
 	});
+
 	const updateStatusJobPost = async (id) => {
+		if (!isServiceJobPostExits) {
+			toast.error('Bạn chưa đăng ký dịch vụ đăng tuyển');
+			return;
+		}
+		const currentDate = moment();
+		const getServiceJobPost = myCompanyService?.data?.find((item) => item.service?.slug === ServiceSlugEnum.PostJob);
+
+		if (currentDate.isAfter(getServiceJobPost?.expiration_date)) {
+			toast.error('Dịch vụ đăng tuyển của bạn đã hết hạn');
+			return;
+		}
+
 		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date() } })
 			.unwrap()
 			.then((r) => {

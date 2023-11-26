@@ -25,8 +25,10 @@ const ServicesAndContact = ({ cx }) => {
 	});
 	const onUpdateSubmit = async (data) => {
 		const array = data?.service?.trim().split(' ');
-		console.log("TCL: onUpdateSubmit -> array", array)
-		const info = employer?.id + " " + employer?.company?.id + " " + array[0]
+		console.log('TCL: onUpdateSubmit -> data?.service', data?.service);
+		console.log('TCL: onUpdateSubmit -> array', array);
+		const info = employer?.id + ' ' + employer?.company?.id + ' ' + array[0];
+		console.log('TCL: onUpdateSubmit -> info', info);
 		CreatePaymentUrl({
 			amount: array[1],
 			language: 'vn',
@@ -39,10 +41,10 @@ const ServicesAndContact = ({ cx }) => {
 	const selectedService = watch('service', null);
 	const { data: listService } = useGetAllByServiceTypeQuery(
 		{
-			id: selectedServiceType,
+			id: selectedServiceType
 		},
 		{
-			skip: !selectedServiceType,
+			skip: !selectedServiceType
 		}
 	);
 	useEffect(() => {
@@ -131,7 +133,7 @@ const ServicesAndContact = ({ cx }) => {
 										setValue={setValue}
 										employer={employer}
 									/>
-									{selectedService && <>{selectedService?.price_list}</>}
+									{selectedService && <>{selectedService?.price}</>}
 								</div>
 							</div>
 						</div>
@@ -222,7 +224,7 @@ export const Form = ({ onSubmit, handleSubmit, control, cx, listServiceType, lis
 							id='service'
 							options={listService?.data.map((value) => {
 								return {
-									value: value.id + ' ' + value.price_list,
+									value: value.id + ' ' + value.price,
 									label: value.name
 								};
 							})}
