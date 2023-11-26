@@ -7,6 +7,7 @@ const serviceApi = createApi({
 	endpoints: (build) => ({
 		getAllCompany_service: build.query({
 			query: (arg) => {
+				console.log("TCL: arg", arg)
 				return { url: `/company_service`, method: 'GET', params: arg?.params };
 			},
 			providesTags: ['company_service'],

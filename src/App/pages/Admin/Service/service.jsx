@@ -52,22 +52,16 @@ const Service = () => {
 			},
 			{ Header: 'Tên dịch vụ', accessor: 'name' },
 			{
-				Header: 'loại hình dịch vụ',
+				Header: 'Loại hình dịch vụ',
 				accessor: 'service_type',
 				Cell: ({ row: { values } }) => {
-					return values?.service_type.name;
+					if (values?.service_type) return values?.service_type?.name;
+					return '';
 				}
 			},
 			{
 				Header: 'Giá dịch vụ',
-				accessor: 'price_list'
-			},
-			{
-				Header: 'Lợi ích',
-				accessor: 'benefit',
-				Cell: ({ row: { values } }) => {
-					return values?.benefit?.name;
-				}
+				accessor: 'price'
 			},
 			{
 				Header: 'Thao tác',
@@ -79,6 +73,7 @@ const Service = () => {
 								onClick={() => {
 									toggle('update');
 									const findCate = Array.isArray(tableData) && tableData?.find((item) => item?.id === value);
+									console.log('TCL: findCate', findCate);
 									setDataUpdate(findCate);
 								}}
 								style={{ cursor: 'pointer' }}

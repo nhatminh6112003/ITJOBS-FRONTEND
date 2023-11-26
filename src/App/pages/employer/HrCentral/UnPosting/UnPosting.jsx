@@ -24,6 +24,10 @@ import { useForm } from 'react-hook-form';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import CancelIcon from '@mui/icons-material/Cancel';
+import moment from "moment";
+import ServiceSlugEnum from '~/App/constants/serviceEnum';
+import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
+import useRegisterService from '../components/useRegisterService';
 
 const sx = classNames.bind(styles);
 
@@ -55,6 +59,13 @@ const UnPosting = ({ cx }) => {
 			dateType: query.dateType || ''
 		}
 	});
+
+	const isServiceJobPostExits = useRegisterService(employer?.company?.id, ServiceSlugEnum.PostJob);
+	const { data: myCompanyService } = useGetAllCompany_serviceQuery({
+		params: {
+			company_id: employer?.company?.id
+		}
+	});
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
 	};
@@ -68,6 +79,17 @@ const UnPosting = ({ cx }) => {
 			});
 	};
 	const updateStatusJobPost = async (id) => {
+		if (!isServiceJobPostExits) {
+			toast.error('Bạn chưa đăng ký dịch vụ đăng tuyển');
+			return;
+		}
+		const currentDate = moment();
+		const getServiceJobPost = myCompanyService?.data?.find((item) => item.service?.slug === ServiceSlugEnum.PostJob);
+		if (currentDate.isAfter(getServiceJobPost?.expiration_date)) {
+			toast.error('Dịch vụ đăng tuyển của bạn đã hết hạn');
+			return;
+		}
+
 		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date() } })
 			.unwrap()
 			.then((r) => {
