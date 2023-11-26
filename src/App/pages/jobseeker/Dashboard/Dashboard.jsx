@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
 import { useGetAllMyAttachQuery, useDeleteMyAttachMutation } from '~/App/providers/apis/myAttachApi';
-import { useUpdateResumeMutation } from '~/App/providers/apis/resumeApi';
+import { useGetAllResumeQuery, useGetOneResumeQuery, useUpdateResumeMutation } from '~/App/providers/apis/resumeApi';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -17,6 +17,8 @@ import formatDate from '~/Core/utils/formatDate';
 import exportPdf from '~/Core/utils/exportPdf';
 import { useAnalysisJobPostActivityQuery } from '~/App/providers/apis/jobPostActivityApi';
 import { useAnalysisJobSavedQuery } from '~/App/providers/apis/jobSavedApi';
+import { LevelArray } from '~/App/constants/levelEnum';
+import formatVND from '~/Core/utils/formatVND';
 const cx = classNames.bind(styles);
 
 const Dashboard = () => {
@@ -28,11 +30,16 @@ const Dashboard = () => {
 	const [deleteMyAttach] = useDeleteMyAttachMutation();
 	const { data: analysisJobPostActivity } = useAnalysisJobPostActivityQuery(user_account_id);
 	const { data: analysisJobSaved } = useAnalysisJobSavedQuery(user_account_id);
-
+	const resume = useSelector((state) => state.auth?.user?.resume);
 	const [updateResumeStatus] = useUpdateResumeMutation();
 
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
-
+	const { data: resumeDetail } = useGetOneResumeQuery(resume.id, {
+		params: { resume_type_id: 1 }
+	});
+	useEffect(() => {
+		console.log(resumeDetail);
+	}, [resumeDetail]);
 	const handleDeleteMyAttach = (id) => {
 		deleteMyAttach(id)
 			.unwrap()
@@ -88,26 +95,6 @@ const Dashboard = () => {
 															/>
 														</div>
 													</div>
-													<div className={cx('mobile-show')}>
-														<div className={cx('cb-name')}>
-															<h2>
-																{user?.firstname} {user?.lastname}
-															</h2>
-														</div>
-														<div className={cx('information')}>
-															<div className={cx('assistant')}>
-																<span id='titleresume_17722295'>Frontend Developer</span>{' '}
-																<a
-																	href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/my-profile'
-																	style={{ marginLeft: 10 }}
-																	title='Hồ sơ Careerbuilder'>
-																	<em className={cx('material-icons')} style={{ fontSize: 16 }}>
-																		create
-																	</em>
-																</a>
-															</div>
-														</div>
-													</div>
 												</div>
 											</div>
 											<div className={cx('col-lg-8', 'col-xl-9')}>
@@ -118,36 +105,47 @@ const Dashboard = () => {
 												</div>
 												<div className={cx('information')}>
 													<div className={cx('assistant')}>
-														<span>Frontend Developer</span>{' '}
-														<a
-															href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/my-profile'
+														<span>{resumeDetail?.resume_title?.title}</span>{' '}
+														<Link
+															to='/jobseekers/my-profile'
 															style={{ marginLeft: 10 }}
 															title='Hồ sơ Careerbuilder'>
 															<EditIcon fontSize='small' />
-														</a>
+														</Link>
 													</div>
 													<ul className={cx('desired')}>
 														<li>
-															<p>Chưa có kinh nghiệm</p>
+															{resumeDetail?.attachments?.yearOfExperience ? (
+																<p>{resumeDetail?.attachments?.yearOfExperience} kinh nghiệm</p>
+															) : (
+																<p>Chưa có kinh nghiệm</p>
+															)}
 														</li>
 														<li>
 															<p>
-																Cấp bậc mong muốn: <span>Sinh viên/ Thực tập sinh</span>
+																Cấp bậc mong muốn:{' '}
+																<span>
+																	{LevelArray[resumeDetail?.resume_desired_job?.position_id]?.label}
+																</span>
 															</p>
 														</li>
 														<li>
 															<p>
-																Mức lương mong muốn: <span> 500,000 - 1,000,000 VND</span>
+																Mức lương mong muốn:{' '}
+																<span>
+																	{resumeDetail?.resume_desired_job?.salary_to &&
+																		resumeDetail?.resume_desired_job?.salary_from && (
+																			<>
+																				{formatVND(resumeDetail?.resume_desired_job?.salary_from)} -{' '}
+																				{formatVND(resumeDetail?.resume_desired_job?.salary_to)} VND
+																			</>
+																		)}
+																</span>
 															</p>
 														</li>
 														<li style={{ position: 'relative' }}>
 															<p id='date_17722295'>
-																Ngày cập nhật: 27/12/2022
-																<a
-																	title='Cập nhật hồ sơ'
-																	href=''
-																	className={cx('ac_refesh')}
-																	rel={17722295}></a>
+																Ngày cập nhật: {formatDate(resumeDetail?.updatedAt)}
 															</p>
 														</li>
 													</ul>
