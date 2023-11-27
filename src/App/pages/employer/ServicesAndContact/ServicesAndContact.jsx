@@ -68,42 +68,24 @@ const ServicesAndContact = ({ cx }) => {
 						<div className={cx('col-lg-6')}>
 							<div className={sx('box-left')}>
 								<ul className={sx('contact-list')}>
-									<li></li>
-									<li>
-										<p className={sx('title')}>Tp. Hồ Chí Minh</p>
-										<p>
-											{' '}
-											<em className={sx('mdi', 'mdi-phone')}> </em>Điện thoại: (84.28) 3822 6060
-										</p>
-										<p>
-											{' '}
-											<em className={sx('mdi', 'mdi-email')}> </em>Email: sales@careerbuilder.vn
-										</p>
-										<p>
-											{' '}
-											<em className={sx('mdi', 'mdi-map-marker')}> </em>Địa chỉ: Pasteur Tower, 139 Pasteur,
-											Phường 6, Quận 3
-										</p>
-									</li>
-									<li></li>
 									<li>
 										<p className={sx('title')}>Hà Nội</p>
 										<p>
 											{' '}
-											<em className={sx('mdi', 'mdi-phone')}> </em>Điện thoại : (84.24) 7305 6060
+											<em className={sx('mdi', 'mdi-phone')}> </em>Điện thoại : 0921706999
 										</p>
 										<p>
 											{' '}
-											<em className={sx('mdi', 'mdi-email')}> </em>Email : sales.north@careerbuilder.vn
+											<em className={sx('mdi', 'mdi-email')}> </em>Email : caodangfpt@gmail.com
 										</p>
 										<p>
 											{' '}
-											<em className={sx('mdi', 'mdi-map-marker')}> </em>Địa chỉ : VIT Tower, tầng 17- 519 Kim
-											Mã, Ba Đình
+											<em className={sx('mdi', 'mdi-map-marker')}> </em>Địa chỉ : Cao đẳng FPT Phố Trịnh Văn
+											Bô , Phường Phương Canh , quận Từ Liêm
 										</p>
 									</li>
 								</ul>
-								<div className={sx('maps')}>
+								{/* <div className={sx('maps')}>
 									<iframe
 										id='map_cb_office'
 										src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.3639812238152!2d106.68978781523721!3d10.783409692316816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f31657477bf%3A0x9c5d979e75996fc4!2zMTM5IFBhc3RldXIsIFBoxrDhu51uZyA2LCBRdeG6rW4gMywgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1609139708588!5m2!1svi!2s'
@@ -115,7 +97,7 @@ const ServicesAndContact = ({ cx }) => {
 										aria-hidden='false'
 										tabIndex={0}
 									/>
-								</div>
+								</div> */}
 							</div>
 						</div>
 						<div className={cx('col-lg-6')}>
@@ -223,9 +205,13 @@ export const Form = ({ onSubmit, handleSubmit, control, cx, listServiceType, lis
 							name='service'
 							id='service'
 							options={listService?.data.map((value) => {
+								const formattedPrice = parseFloat(value.price).toLocaleString('vi-VN', {
+									style: 'currency',
+									currency: 'VND'
+								});
 								return {
 									value: value.id + ' ' + value.price,
-									label: value.name
+									label: value.name + '. Giá: ' + formattedPrice
 								};
 							})}
 						/>

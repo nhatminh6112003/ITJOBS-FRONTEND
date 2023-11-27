@@ -9,6 +9,8 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import styles from './editEmployer.module.css';
+import { Link } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
 const sx = classNames.bind(styles);
 const EditEmployer = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
@@ -69,26 +71,13 @@ const EditEmployer = ({ cx }) => {
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}> Thông Tin Tài Khoản</h1>
 						</div>
-						<div className={sx('right-heading')}>
-							{' '}
-							<a className={sx('support')} href='https://careerbuilder.vn/vi/employers/faq'>
-								Hướng dẫn{' '}
-							</a>
-						</div>
 					</div>
 					<div className={sx('main-tabslet')} data-toggle='tabslet'>
 						<ul className={sx('tabslet-tab')}>
-							<li>
-								<a href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/1' alt='Quản lý user'>
-									<span>Quản lý user</span>
-								</a>
-							</li>
 							<li className={sx('active')}>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/edit_employer'
-									alt='Thông tin công ty'>
+								<Link to={routesPath.EmployerPaths.editEmployer} alt='Thông tin công ty'>
 									<span>Thông tin công ty</span>
-								</a>
+								</Link>
 							</li>
 							<li>
 								<a
