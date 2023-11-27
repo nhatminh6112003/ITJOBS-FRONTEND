@@ -9,10 +9,13 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import styles from './editEmployer.module.css';
-import { Link } from 'react-router-dom';
-import routesPath from '~/App/config/routesPath';
+import { Link, useLocation } from 'react-router-dom';
+import TabMenu from '../components/TabMenu';
+
 const sx = classNames.bind(styles);
 const EditEmployer = ({ cx }) => {
+	const location = useLocation();
+	const currentPath = location.pathname;
 	const employer = useSelector((state) => state.auth?.employer);
 	const companyId = employer?.company?.id;
 	const { data: company } = useGetOneCompanyQuery(companyId);
@@ -60,6 +63,9 @@ const EditEmployer = ({ cx }) => {
 					toast.success('Sửa thành công');
 					return;
 				}
+			})
+			.catch((err) => {
+				toast.error(err.data.message);
 			});
 	};
 
@@ -74,19 +80,14 @@ const EditEmployer = ({ cx }) => {
 					</div>
 					<div className={sx('main-tabslet')} data-toggle='tabslet'>
 						<ul className={sx('tabslet-tab')}>
-							<li className={sx('active')}>
-								<Link to={routesPath.EmployerPaths.editEmployer} alt='Thông tin công ty'>
-									<span>Thông tin công ty</span>
-								</Link>
-							</li>
-							<li>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/edit_contact'
-									alt='Thông tin liên hệ'>
-									<span>Thông tin liên hệ</span>
-								</a>
-							</li>
-							<li>
+							{TabMenu.map((item) => (
+								<li className={sx(currentPath == item.path && 'active')}>
+									<Link to={item.path} alt={item.title}>
+										{item.title}
+									</Link>
+								</li>
+							))}
+							{/* <li>
 								<a
 									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/worklocation'
 									alt='Quản Lý Địa Điểm Làm Việc'>
@@ -99,14 +100,7 @@ const EditEmployer = ({ cx }) => {
 									alt='Báo cáo tác vụ'>
 									<span>Báo cáo tác vụ</span>
 								</a>
-							</li>
-							<li>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/changepassword'
-									alt='Đổi mật khẩu'>
-									<span>Đổi mật khẩu</span>
-								</a>
-							</li>
+							</li> */}
 						</ul>
 						<div className={sx('tabslet-content', 'active')} id='tab-2'>
 							<form

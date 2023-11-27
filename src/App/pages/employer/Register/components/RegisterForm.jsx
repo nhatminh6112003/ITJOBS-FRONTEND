@@ -59,7 +59,7 @@ const RegisterForm = ({ cx }) => {
 				<div className={cx('step-title', 'd-flex')}>
 					<div className={cx('main-step-title')}>
 						<h3>Bước 1 : Thông Tin Đăng Nhập</h3>
-						<p>Quý khách sử dụng thông tin tài khoản này để đăng nhập vào CareerBuilder.vn</p>
+						<p>Quý khách sử dụng thông tin tài khoản này để đăng nhập vào JobHunter.vn</p>
 					</div>
 				</div>
 				<div className={cx('main-form')}>
@@ -142,7 +142,7 @@ const RegisterForm = ({ cx }) => {
 				<div className={cx('step-title', 'd-flex')}>
 					<div className={cx('main-step-title')}>
 						<h3>Bước 2 : Thông Tin Công Ty</h3>
-						<p>Thông tin doanh nghiệp của Quý Công ty trên CareerBuilder</p>
+						<p>Thông tin doanh nghiệp của Quý Công ty trên JobHunter</p>
 					</div>
 				</div>
 				<div className={cx('main-form')}>
@@ -294,12 +294,6 @@ const RegisterForm = ({ cx }) => {
 						<button className={cx('btn-action')} type='submit'>
 							Đăng ký
 						</button>
-					</div>
-					<div className='right-note'>
-						<p>
-							Bằng việc nhấp vào "Đăng Ký Ngay!", bạn đã đồng ý với các điều khoản ghi trong
-							<a href='https://careerbuilder.vn/vi/jobseekers/use'>Thỏa thuận dịch vụ của CareerBuilder.vn.</a>
-						</p>
 					</div>
 				</div>
 			</div>

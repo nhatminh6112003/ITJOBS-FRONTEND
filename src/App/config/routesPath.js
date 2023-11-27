@@ -51,6 +51,7 @@ const EmployerPaths = {
 	updatePostJobs: '/employers/postjobs/:id',
 	viewJob: '/employers/hrcentral/viewjob/:id',
 	editEmployer: '/employers/hrcentral/accounts/edit_employer',
+	editContact: '/employers/hrcentral/accounts/edit_contact',
 	resumeDetail: '/employers/hrcentral/resume_detail/:id',
 	findJobSeeker: '/tim-ung-vien',
 	productAndService: '/employers/products-and-services',
