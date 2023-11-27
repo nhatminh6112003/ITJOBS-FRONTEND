@@ -119,7 +119,7 @@ const Header = () => {
 												</a>
 											</li>
 											<li>
-												<a href='/employers/hrcentral/accounts'> Tài khoản</a>
+												<a href='/employers/hrcentral/accounts/edit_employer'> Tài khoản</a>
 											</li>
 											<li>
 												<Link title='Thoát' onClick={handleLogout}>

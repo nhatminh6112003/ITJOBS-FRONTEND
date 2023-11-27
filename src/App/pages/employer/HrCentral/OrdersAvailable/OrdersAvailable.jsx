@@ -1,9 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ordersAvailable.module.css';
 import classNames from 'classnames/bind';
+import { useSelector } from 'react-redux';
+import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
+import { Link } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const sx = classNames.bind(styles);
+import moment from 'moment';
+import formatDate from '~/Core/utils/formatDate';
 const OrdersAvailable = ({ cx }) => {
+	const employer = useSelector((state) => state.auth?.employer);
+	const [expirationDate, setExpirationDate] = useState(0);
+	const { data: allOrder } = useGetAllCompany_serviceQuery({
+		params: {
+			company_id: employer?.company?.id
+		}
+	});
+	const now = moment();
+	const expirationMoment = moment(expirationDate);
+	const duration = moment.duration(expirationMoment.diff(now));
+	// Lấy số ngày
+	const daysRemaining = duration.asDays();
+	useEffect(() => {
+		allOrder?.data?.map((value) => {
+			const expirationDate = value?.expiration_date;
+			setExpirationDate(expirationDate);
+		});
+	}, [allOrder, now, setExpirationDate]);
+
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -11,12 +36,6 @@ const OrdersAvailable = ({ cx }) => {
 					<div className={sx('heading-manage')}>
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}>Quản Lý Đơn Hàng</h1>
-						</div>
-						<div className={sx('right-heading')}>
-							{' '}
-							<a className={sx('support')} href='https://careerbuilder.vn/vi/employers/faq' target='_blank'>
-								Hướng dẫn{' '}
-							</a>
 						</div>
 					</div>
 					<div className={sx('main-tabslet')} data-toggle='tabslet'>
@@ -43,7 +62,10 @@ const OrdersAvailable = ({ cx }) => {
 								</a>
 							</li>
 							<li>
-								<a href='https://careerbuilder.vn/vi/employers/services/services_price' target='_blank'>
+								<a
+									href='https://careerbuilder.vn/vi/employers/services/services_price'
+									target='_blank'
+									rel='noreferrer'>
 									Mua dịch vụ
 								</a>
 							</li>
@@ -118,11 +140,11 @@ const OrdersAvailable = ({ cx }) => {
 												<option value={2}>Dịch vụ khác</option>
 											</select>
 										</div>
-										<div className={sx('form-group', 'form-reset')}>
+										{/* <div className={sx('form-group', 'form-reset')}>
 											<button className={sx('btn-reset')} type='reset' href='javascript:void(0);'>
 												<em className={cx('material-icons')}>loop</em> Bỏ qua{' '}
 											</button>
-										</div>
+										</div> */}
 										<div className={sx('form-group', 'form-submit', 'form-submit-less')}>
 											<button className={sx('btn-submit', 'btn-gradient')} type='submit'>
 												<em className={cx('material-icons')}>find_in_page</em> Tìm
@@ -142,25 +164,6 @@ const OrdersAvailable = ({ cx }) => {
 												</li>
 											</ul>
 										</div>
-										<div className={sx('right-heading')}>
-											<div className={sx('to-display')}>
-												<p className={sx('name')}> Hiển thị</p>
-												<div className={sx('form-display')}>
-													<select name='limit' id='limit'>
-														<option value={15} selected=''>
-															15
-														</option>
-														<option value={30}>30</option>
-														<option value={50}>50</option>
-													</select>
-												</div>
-												<p className={sx('name-display')}>
-													{' '}
-													Hiển thị
-													<span> 0</span>của <span> 0</span>kết quả{' '}
-												</p>
-											</div>
-										</div>
 									</div>
 									<div className={sx('boding-resume-applied')}>
 										<div className={sx('table', 'table-resume-applied')}>
@@ -169,7 +172,6 @@ const OrdersAvailable = ({ cx }) => {
 													<tr>
 														<th width='15%'>Số đơn hàng</th>
 														<th width='24%'>Gói dịch vụ</th>
-														<th width='10%'>Số lượng</th>
 														<th width='10%'>Còn lại</th>
 														<th width='13%'>Ngày bắt đầu kích hoạt</th>
 														<th width='13%'>Ngày hết hạn kích hoạt</th>
@@ -177,11 +179,42 @@ const OrdersAvailable = ({ cx }) => {
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td colSpan={7} className={sx('cb-text-center')}>
-															Không có dữ liệu!
-														</td>
-													</tr>
+													{allOrder?.data && allOrder?.data.length > 0 ? (
+														allOrder?.data.map((order) => {
+															return (
+																<>
+																	<tr>
+																		<td>{order?.id}</td>
+																		<td>
+																			<div className={sx('title')}>
+																				<p>{order?.service?.name}</p>
+																			</div>
+																		</td>
+																		<td>
+																			<div className={sx('title')}>
+																				<p> {Math.floor(daysRemaining % 30)} ngày</p>
+																			</div>
+																		</td>
+																		<td>
+																			<p>{formatDate(order?.register_date)}</p>
+																		</td>
+																		<td>
+																			<p>{formatDate(order?.expiration_date)}</p>
+																		</td>
+																		<td>
+																			<p>{order?.expiration_date !== 0 ? 'Còn hạn' : 'Hết hạn'}</p>
+																		</td>
+																	</tr>
+																</>
+															);
+														})
+													) : (
+														<tr>
+															<td colSpan={7} className={sx('cb-text-center')}>
+																Không có dữ liệu!
+															</td>
+														</tr>
+													)}
 												</tbody>
 											</table>
 										</div>

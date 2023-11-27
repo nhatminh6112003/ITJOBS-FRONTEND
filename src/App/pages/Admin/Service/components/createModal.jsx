@@ -11,18 +11,17 @@ import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 import { useGetAllBenefitsQuery } from '~/App/providers/apis/benefits';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 const CreateModal = ({ isOpen, onRequestClose }) => {
-	const [createBenefits] = useCreateServiceMutation();
+	const [createService] = useCreateServiceMutation();
 	const { data: listServiceType } = useGetAllServiceTypeQuery();
-	const { data: listBenefits } = useGetAllBenefitsQuery();
 	const {
 		handleSubmit,
 		control,
+		reset,
 		formState: { errors }
-	} = useForm({
-	});
+	} = useForm({});
 
 	const onSubmit = (data) => {
-		createBenefits(data)
+		createService(data)
 			.unwrap()
 			.then((r) => {
 				if (r.status == 200) {
@@ -31,6 +30,7 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 				}
 			});
 		onRequestClose();
+		reset();
 	};
 
 	return (
@@ -49,7 +49,7 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 					label='Chọn loại hình dịch vụ'
 					name='service_type_id'
 				/>
-				<ValidationTextFieldsControl name='price_list' label='Giá' control={control} />
+				<ValidationTextFieldsControl name='price' label='Giá' control={control} />
 				<TextAreaFieldControl name='description' label='Mô tả lợi ích' control={control} />
 				<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
 					<Button type='submit' variant='contained'>

@@ -27,13 +27,12 @@ const NavBar = ({ className: cx }) => {
 			path: routesPath.EmployerPaths.ordersAvailable,
 			label: 'Đơn Hàng'
 		},
-	
+
 		{
 			title: 'Tài Khoản',
-			path: routesPath.EmployerPaths.accounts,
+			path: routesPath.EmployerPaths.editEmployer,
 			label: 'Tài Khoản'
 		}
-	
 	];
 
 	return (
