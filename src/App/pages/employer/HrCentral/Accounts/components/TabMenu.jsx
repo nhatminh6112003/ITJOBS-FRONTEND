@@ -9,10 +9,10 @@ const TabMenu = [
 		title: 'Thông tin liên hệ',
 		path: routesPath.EmployerPaths.editContact
 	},
-	// {
-	// 	title: 'Đổi mật khẩu',
-	// 	path: routesPath.EmployerPaths.editContact
-	// }
+	{
+		title: 'Đổi mật khẩu',
+		path: routesPath.EmployerPaths.changePassword
+	}
 ];
 
 export default TabMenu;

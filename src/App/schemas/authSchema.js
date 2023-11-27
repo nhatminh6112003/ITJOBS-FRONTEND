@@ -32,7 +32,28 @@ export const registerSchema = yup.object({
 			password ? field.required().oneOf([yup.ref('password')], 'Mật khẩu nhập không khớp. Vui lòng thử lại.') : field
 		)
 });
-
+export const changePasswordSchema = yup.object({
+	password: yup
+		.string()
+		.default('')
+		.required('Vui lòng nhập mật khẩu cũ')
+		.min(8, 'Vui lòng nhập mật khẩu của bạn từ 8 ký tự trở lên .'),
+	newPassword: yup
+		.string()
+		.default('')
+		.required('Vui lòng nhập mật khẩu mới')
+		.min(8, 'Vui lòng nhập mật khẩu của bạn từ 8 ký tự trở lên .'),
+	confirmPassword: yup
+		.string()
+		.required('Vui lòng nhập lại mật khẩu mới')
+		.when('password', (newPassword, field) =>
+			newPassword
+				? field
+						.required('Vui lòng nhập lại mật khẩu mới')
+						.oneOf([yup.ref('newPassword')], 'Mật khẩu nhập không khớp. Vui lòng thử lại.')
+				: field
+		)
+});
 export const registerEmployerSchema = yup.object({
 	firstname: yup.string().default('').trim('Vui lòng không nhập khoảng trắng').required('Nhập Tên của bạn'),
 	lastname: yup.string().default('').trim('Vui lòng không nhập khoảng trắng').required('Nhập Họ và Tên Lót của bạn'),
