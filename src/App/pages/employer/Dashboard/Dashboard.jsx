@@ -20,26 +20,31 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import { useAnalysisQuery } from '~/App/providers/apis/company_serviceApi';
 import { Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
+import moment from 'moment';
 
 const sx = classNames.bind(styles);
 
 const EmployerDashboard = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
 	const { pushQuery, query } = useSearchDateDashBoard();
+
+	const [startDate, setStartDate] = useState(moment().subtract(15, 'days').format('YYYY-MM-DD'));
+	const [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD'));
 	const {
 		control,
 		handleSubmit,
 		formState: { errors }
 	} = useForm({
 		values: {
-			startDate_1: '' || query.startDate_1,
-			endDate_1: '' || query.endDate_1,
-			startDate_2: '' || query.startDate_2,
-			endDate_2: '' || query.endDate_2,
-			startDate_3: '' || query.startDate_3,
-			endDate_3: '' || query.endDate_3
+			startDate_1: query.startDate_1 || startDate,
+			endDate_1: query.endDate_1 || endDate,
+			startDate_2: query.startDate_2 || startDate,
+			endDate_2: query.endDate_2 || endDate,
+			startDate_3: query.startDate_3 || startDate,
+			endDate_3: query.endDate_3 || endDate
 		}
 	});
+
 	const { data: countCompanyService } = useAnalysisQuery(employer?.company?.id);
 
 	const onSubmit = (data) => {
@@ -51,32 +56,32 @@ const EmployerDashboard = ({ cx }) => {
 	const { data: analyticDegreeValueQuery } = useAnalyticDegreeValueQuery({
 		params: {
 			user_account_id: employer?.id,
-			startDate: query.startDate_3,
-			endDate: query.endDate_3
+			startDate: query.startDate_3 || startDate,
+			endDate: query.endDate_3 || endDate
 		}
 	});
 
 	const { data: analyticResumeStatus } = useAnalyticResumeStatusQuery({
 		params: {
 			user_account_id: employer?.id,
-			startDate: query.startDate_1,
-			endDate: query.endDate_1
+			startDate: query.startDate_1 || startDate,
+			endDate: query.endDate_1 || endDate
 		}
 	});
 
 	const { data: calculateCorrelationIndexData } = useCalculateCorrelationIndexQuery({
 		params: {
 			user_account_id: employer?.id,
-			startDate: query.startDate_2,
-			endDate: query.endDate_2
+			startDate: query.startDate_2 || startDate,
+			endDate: query.endDate_2 || endDate
 		}
 	});
 
 	const { data: analyticJobSeekerApplyByDayQuery } = useAnalyticJobSeekerApplyByDayQuery({
 		params: {
 			user_account_id: employer?.id,
-			startDate: query.startDate_2,
-			endDate: query.endDate_2
+			startDate: query.startDate_2 || startDate,
+			endDate: query.endDate_2 || endDate
 		}
 	});
 
@@ -255,7 +260,7 @@ const EmployerDashboard = ({ cx }) => {
 									<ul className={sx('list-account-information')}>
 										<li>
 											<p className={sx('number', 'orderNew')}>
-												{countCompanyService.data ? countCompanyService.data : 0}
+												{countCompanyService?.data ? countCompanyService?.data : 0}
 											</p>
 											<Link className={sx('title')} to={routesPath.EmployerPaths.ordersAvailable}>
 												Đơn hàng đang sử dụng

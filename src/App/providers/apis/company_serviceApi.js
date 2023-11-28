@@ -7,7 +7,6 @@ const serviceApi = createApi({
 	endpoints: (build) => ({
 		getAllCompany_service: build.query({
 			query: (arg) => {
-				console.log('TCL: arg', arg);
 				return { url: `/company_service`, method: 'GET', params: arg?.params };
 			},
 			providesTags: ['company_service'],
@@ -44,6 +43,13 @@ const serviceApi = createApi({
 			},
 			providesTags: ['company_service'],
 			transformResponse: (response) => response
+		}),
+		calculateTotalRevenue: build.query({
+			query: (arg) => {
+				return { url: `/company_service/calculateTotalRevenue`, method: 'GET', params: arg?.params };
+			},
+			providesTags: ['company_service'],
+			transformResponse: (response) => response
 		})
 	})
 });
@@ -54,7 +60,8 @@ export const {
 	useGetAllCompany_serviceQuery,
 	useGetOneCompany_serviceQuery,
 	useUpdateCompany_serviceMutation,
-	useAnalysisQuery
+	useAnalysisQuery,
+	useCalculateTotalRevenueQuery
 } = serviceApi;
 
 export default serviceApi;
