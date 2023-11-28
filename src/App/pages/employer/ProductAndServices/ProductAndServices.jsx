@@ -1,6 +1,8 @@
 import React, { Frgament } from 'react';
 import styles from './productServices.module.css';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
 const sx = classNames.bind(styles);
 
 const ProductAndServices = ({ cx }) => {
@@ -19,11 +21,8 @@ const ProductAndServices = ({ cx }) => {
 						<li className={sx('')} data-menu={61}>
 							<a href='javascript:void(0)'>Bảng giá</a>
 						</li>
-						<li data-menu={99}>
-							<a href='javascript:void(0)'> Cẩm nang tuyển dụng</a>
-						</li>
 						<li className={sx('contact')} data-menu={100}>
-							<a href='https://careerbuilder.vn/vi/employers/services/contact'>Liên hệ</a>
+							<Link to={routesPath.EmployerPaths.serviceAndContact}>Liên hệ</Link>
 						</li>
 					</ul>
 				</div>
@@ -37,7 +36,7 @@ const ProductAndServices = ({ cx }) => {
 						<div className={sx('button')}>
 							<div className={sx('full-content')}>
 								<p style={{ textAlign: 'center' }}>
-									Hơn 1.000.000+ hồ sơ chất lượng tại CareerBuilder được cập nhật mới mỗi ngày phù hợp với nhu
+									Hơn 1.000.000+ hồ sơ chất lượng tại Job Hunters được cập nhật mới mỗi ngày phù hợp với nhu
 									cầu tìm kiếm ứng viên của các doanh nghiệp.
 								</p>
 							</div>
@@ -56,7 +55,10 @@ const ProductAndServices = ({ cx }) => {
 								<div className={cx('col-md-6')}>
 									<div className={sx('attractive-item')}>
 										<div className={sx('image')}>
-											<img alt='' src='https://static.careerbuilder.vn/themes/employer/img/employer/32.png' />
+											<img
+												alt=''
+												src='https://static.careerbuilder.vn/themes/employer/img/employer/32.png'
+											/>
 										</div>
 										<div className={sx('caption')}>
 											<h3 className={sx('title')}>
@@ -68,7 +70,10 @@ const ProductAndServices = ({ cx }) => {
 								<div className={cx('col-md-6')}>
 									<div className={sx('attractive-item')}>
 										<div className={sx('image')}>
-											<img alt='' src='https://static.careerbuilder.vn/themes/employer/img/employer/34.png' />
+											<img
+												alt=''
+												src='https://static.careerbuilder.vn/themes/employer/img/employer/34.png'
+											/>
 										</div>
 										<div className={sx('caption')}>
 											<h3 className={sx('title')}>Tìm ứng viên phù hợp với 1 cú nhấp chuột</h3>
@@ -78,7 +83,10 @@ const ProductAndServices = ({ cx }) => {
 								<div className={cx('col-md-6')}>
 									<div className={sx('attractive-item')}>
 										<div className={sx('image')}>
-											<img alt='' src='https://static.careerbuilder.vn/themes/employer/img/employer/21.png' />
+											<img
+												alt=''
+												src='https://static.careerbuilder.vn/themes/employer/img/employer/21.png'
+											/>
 										</div>
 										<div className={sx('caption')}>
 											<h3 className={sx('title')}>Chủ động liên hệ với ứng viên tiềm năng.</h3>
@@ -101,7 +109,10 @@ const ProductAndServices = ({ cx }) => {
 								<div className={cx('col-md-6')}>
 									<div className={sx('attractive-item')}>
 										<div className={sx('image')}>
-											<img alt='' src='https://static.careerbuilder.vn/themes/employer/img/employer/35.png' />
+											<img
+												alt=''
+												src='https://static.careerbuilder.vn/themes/employer/img/employer/35.png'
+											/>
 										</div>
 										<div className={sx('caption')}>
 											<h3 className={sx('title')}>Dễ dàng quản lý và phân loại hồ sơ ứng viên.</h3>
@@ -111,7 +122,10 @@ const ProductAndServices = ({ cx }) => {
 								<div className={cx('col-md-6')}>
 									<div className={sx('attractive-item')}>
 										<div className={sx('image')}>
-											<img alt='' src='https://static.careerbuilder.vn/themes/employer/img/employer/33.png' />
+											<img
+												alt=''
+												src='https://static.careerbuilder.vn/themes/employer/img/employer/33.png'
+											/>
 										</div>
 										<div className={sx('caption')}>
 											<h3 className={sx('title')}>

@@ -7,6 +7,7 @@ const EmployerDashboard = lazy(() => import('~/App/pages/employer/Dashboard'));
 const Posting = lazy(() => import('~/App/pages/employer/HrCentral/Posting'));
 const ManageResume = lazy(() => import('~/App/pages/employer/HrCentral/ManageResume'));
 const OrdersAvailable = lazy(() => import('~/App/pages/employer/HrCentral/OrdersAvailable'));
+const OrdersExpired = lazy(() => import('~/App/pages/employer/HrCentral/OrdersExpired/OrdersExpired'));
 const SearchHistory = lazy(() => import('~/App/pages/employer/HrCentral/SearchHistory'));
 const EmailManagement = lazy(() => import('~/App/pages/employer/HrCentral/EmailManagement'));
 const Accounts = lazy(() => import('~/App/pages/employer/HrCentral/Accounts'));
@@ -51,6 +52,10 @@ const employerPrivateRoutes = [
 	{
 		path: routesPath.EmployerPaths.ordersAvailable,
 		component: OrdersAvailable
+	},
+	{
+		path: routesPath.EmployerPaths.ordersExpired,
+		component: OrdersExpired
 	},
 	{
 		path: routesPath.EmployerPaths.emailManagement,

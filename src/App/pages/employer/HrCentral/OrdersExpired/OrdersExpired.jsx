@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './ordersAvailable.module.css';
+import styles from '../OrdersAvailable/ordersAvailable.module.css';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
 import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
@@ -9,7 +9,7 @@ const sx = classNames.bind(styles);
 import moment from 'moment';
 import formatDate from '~/Core/utils/formatDate';
 import TabMenu from '../components/TabMenu';
-const OrdersAvailable = ({ cx }) => {
+const OrdersExpired = ({ cx }) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const employer = useSelector((state) => state.auth?.employer);
@@ -141,37 +141,49 @@ const OrdersAvailable = ({ cx }) => {
 												<tbody>
 													{allOrder?.data && allOrder?.data.length > 0 ? (
 														allOrder?.data.map((order) => {
-															return (
-																<>
-																	<tr>
-																		<td>{order?.id}</td>
-																		<td>
-																			<div className={sx('title')}>
-																				<p>{order?.service?.name}</p>
-																			</div>
-																		</td>
-																		<td>
-																			<div className={sx('title')}>
+															if (order?.expiration_date === 0) {
+																return (
+																	<>
+																		<tr>
+																			<td>{order?.id}</td>
+																			<td>
+																				<div className={sx('title')}>
+																					<p>{order?.service?.name}</p>
+																				</div>
+																			</td>
+																			<td>
+																				<div className={sx('title')}>
+																					<p>
+																						{' '}
+																						{daysRemaining
+																							? Math.floor(daysRemaining % 30) + ' ngày'
+																							: '0 ngày'}
+																					</p>
+																				</div>
+																			</td>
+																			<td>
+																				<p>{formatDate(order?.register_date)}</p>
+																			</td>
+																			<td>
+																				<p>{formatDate(order?.expiration_date)}</p>
+																			</td>
+																			<td>
 																				<p>
-																					{' '}
-																					{daysRemaining
-																						? Math.floor(daysRemaining % 30) + ' ngày'
-																						: '0 ngày'}
+																					{order?.expiration_date !== 0 ? 'Còn hạn' : 'Hết hạn'}
 																				</p>
-																			</div>
-																		</td>
-																		<td>
-																			<p>{formatDate(order?.register_date)}</p>
-																		</td>
-																		<td>
-																			<p>{formatDate(order?.expiration_date)}</p>
-																		</td>
-																		<td>
-																			<p>{order?.expiration_date !== 0 ? 'Còn hạn' : 'Hết hạn'}</p>
+																			</td>
+																		</tr>
+																	</>
+																);
+															} else {
+																return (
+																	<tr>
+																		<td colSpan={7} className={sx('cb-text-center')}>
+																			Không có dữ liệu!
 																		</td>
 																	</tr>
-																</>
-															);
+																);
+															}
 														})
 													) : (
 														<tr>
@@ -203,4 +215,4 @@ const OrdersAvailable = ({ cx }) => {
 	);
 };
 
-export default OrdersAvailable;
+export default OrdersExpired;

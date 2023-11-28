@@ -42,6 +42,7 @@ const EmployerPaths = {
 	manageResume: '/employers/hrcentral/manageresume',
 	searchHistory: '/employers/hrcentral/search-history',
 	ordersAvailable: '/employers/hrcentral/orders-available',
+	ordersExpired: '/employers/hrcentral/orders-expired',
 	emailManagement: '/employers/hrcentral/emailcontentmanagement',
 	accounts: '/employers/hrcentral/accounts',
 	waitPosting: '/employers/hrcentral/waitposting',
