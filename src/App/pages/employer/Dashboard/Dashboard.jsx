@@ -17,6 +17,9 @@ import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import useSearchDateDashBoard from '../components/useSearchDateDashBoard';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import { useAnalysisQuery } from '~/App/providers/apis/company_serviceApi';
+import { Link } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
 
 const sx = classNames.bind(styles);
 
@@ -37,6 +40,8 @@ const EmployerDashboard = ({ cx }) => {
 			endDate_3: '' || query.endDate_3
 		}
 	});
+	const { data: countCompanyService } = useAnalysisQuery(employer?.company?.id);
+
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
 		console.log('TCL: EmployerDashboard -> onsubmit -> data', data);
@@ -248,21 +253,13 @@ const EmployerDashboard = ({ cx }) => {
 										</a>
 									</div>
 									<ul className={sx('list-account-information')}>
-										{/* <li>
-											<p className={sx('number', 'intNumPostNoUse')}>0</p>
-											<a
-												className={sx('title')}
-												href='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_available'>
-												Vị trí chưa sử dụng
-											</a>
-										</li> */}
 										<li>
-											<p className={sx('number', 'orderNew')}>0</p>
-											<a
-												className={sx('title')}
-												href='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_available'>
+											<p className={sx('number', 'orderNew')}>
+												{countCompanyService.data ? countCompanyService.data : 0}
+											</p>
+											<Link className={sx('title')} to={routesPath.EmployerPaths.ordersAvailable}>
 												Đơn hàng đang sử dụng
-											</a>
+											</Link>
 										</li>
 										<li>
 											<p className={sx('number', 'JskNew')}>0</p>
