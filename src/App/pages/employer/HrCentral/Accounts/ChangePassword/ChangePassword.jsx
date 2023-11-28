@@ -95,14 +95,24 @@ const ChangePassword = ({ cx }) => {
 										<div className={sx('row')}>
 											<div className={cx('col-lg-6')}>
 												<div className={sx('form-group')}>
-													<InputFieldControl control={control} name='password' label='Mật khẩu cũ' />
+													<InputFieldControl
+														control={control}
+														name='password'
+														label='Mật khẩu cũ'
+														type='password'
+													/>
 												</div>
 											</div>
 										</div>
 										<div className={sx('row')}>
 											<div className={cx('col-lg-6')}>
 												<div className={sx('form-group')}>
-													<InputFieldControl control={control} name='newPassword' label='Mật khẩu mới' />
+													<InputFieldControl
+														control={control}
+														name='newPassword'
+														label='Mật khẩu mới'
+														type='password'
+													/>
 												</div>
 											</div>
 										</div>
