@@ -158,9 +158,9 @@ const Header = () => {
 											<Link to={routesPath.EmployerPaths.login}>Đăng nhập</Link>
 										</li>
 										<li>
-											<a href='' title='Đăng Tuyển Dụng'>
+											<Link to={routesPath.EmployerPaths.postjobs} title='Đăng Tuyển Dụng'>
 												Đăng Tuyển Dụng
-											</a>
+											</Link>
 										</li>
 										<li>
 											<Link to={routesPath.EmployerPaths.findJobSeeker}>Tìm Ứng Viên</Link>

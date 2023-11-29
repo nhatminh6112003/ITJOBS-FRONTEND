@@ -29,7 +29,7 @@ const VnpayReturn = () => {
 				setSearchParams(searchParams);
 			}
 		}
-	}, []);
+	}, [CreateCompanyService, searchParams, setSearchParams, vnp_OrderInfo, vnp_TransactionStatus]);
 	return (
 		<div className={sx('container')}>
 			<div className={sx('center-div')}>

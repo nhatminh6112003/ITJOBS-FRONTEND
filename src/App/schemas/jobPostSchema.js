@@ -17,16 +17,8 @@ export const jobPostSchema = yup.object({
 	job_title: yup.string().default('').required('Vui lòng nhập Chức danh tuyển dụng'),
 	gender: yup.string(),
 	is_address_work_hidden: yup.boolean(),
-	min_salary: yup
-		.string()
-		.default('')
-		.required('Vui lòng nhập lương tối thiểu')
-		.trim('Vui lòng không nhập khoảng trắng'),
-	max_salary: yup
-		.string()
-		.default('')
-		.required('Vui lòng nhập lương cao nhất')
-		.trim('Vui lòng không nhập khoảng trắng'),
+	min_salary: yup.number().nullable().default('').typeError('Vui lòng nhập số lương tối thiểu'),
+	max_salary: yup.number().nullable().default('').typeError('Vui lòng nhập số lương cao nhất'),
 	posted_date: yup.date(),
 	job_desc: yup
 		.string()
@@ -68,5 +60,6 @@ export const jobPostSchema = yup.object({
 	job_formExperience: yup.number().nullable(),
 	job_ToExperience: yup.number().nullable(),
 	provinces: yup.string().default('').required('Vui lòng chọn Tỉnh/Thành phố').nullable(),
-	districts: yup.string().default('').nullable()
+	districts: yup.string().default('').nullable(),
+	isAgreement: yup.boolean().default(false)
 });

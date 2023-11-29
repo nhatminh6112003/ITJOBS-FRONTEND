@@ -60,7 +60,7 @@ const UpdatePostJobs = ({ cx }) => {
 	const { data: jobPost } = useGetOneJobPostQuery(id);
 
 	const [displayExperience, setDisplayExperience] = useState(false);
-
+	const [isAgreementChecked, setIsAgreementChecked] = useState();
 	useEffect(() => {
 		reset({
 			expiry_date: moment(jobPost?.expiry_date).format('YYYY-MM-DD'),
@@ -79,9 +79,10 @@ const UpdatePostJobs = ({ cx }) => {
 			provinces: jobPost?.provinces,
 			work_home: jobPost?.work_home,
 			job_formExperience: jobPost?.job_formExperience,
-			job_ToExperience: jobPost?.job_ToExperience
+			job_ToExperience: jobPost?.job_ToExperience,
+			isAgreement: jobPost?.isAgreement
 		});
-	}, [jobPost, reset]);
+	}, [jobPost, reset, isAgreementChecked]);
 	const handleExperienceChange = (selectedValue) => {
 		if (Number(selectedValue) === 1) {
 			setDisplayExperience(true);
@@ -140,11 +141,6 @@ const UpdatePostJobs = ({ cx }) => {
 							<div className={sx('left-heading')}>
 								<h1 className={sx('title-manage')}>Đăng Tuyển Dụng</h1>
 							</div>
-							<div className={sx('right-heading')}>
-								<a href='https://careerbuilder.vn/vi/employers/faq' className={sx('support')}>
-									Hướng dẫn
-								</a>
-							</div>
 						</div>
 						<form onSubmit={handleSubmit(onUpdatePostJobs)}>
 							<div className={sx('main-tabslet')}>
@@ -152,28 +148,8 @@ const UpdatePostJobs = ({ cx }) => {
 									<li className={sx('active')}>
 										<a href='javascript:void(0);'>Thông Tin Tuyển Dụng</a>
 									</li>
-									<li>
-										<a href='javascript:void(0)' onclick='is_Filter_Form();'>
-											Thông Tin Liên Hệ
-										</a>
-									</li>
-									<li>
-										<a href='javascript:void(0)' onclick='is_Filter_Form();'>
-											Thiết Lập Độ Phù Hợp Ứng Viên
-										</a>
-									</li>
 								</ul>
 								<div className={sx('tabslet-content', 'active')} id='tab-1'>
-									<input name='ispublic' type='hidden' defaultValue={0} />
-									<input name='emp_id' type='hidden' defaultValue='35A94C80' />
-									<input name='job_id' type='hidden' defaultValue='35A4E900' />
-									<input type='hidden' id='jobsamp_id' name='jobsamp_id' defaultValue='' />
-									<input type='hidden' id='lang' name='lang' defaultValue='' />
-									<input name='intSave' id='intSave' type='hidden' defaultValue={1} />
-									<input name='job_source' id='job_source' type='hidden' defaultValue={1} />
-									<input name='work_location_0' id='work_location_0' type='hidden' defaultValue='' />
-									<input name='work_location_1' id='work_location_1' type='hidden' defaultValue='' />
-									<input name='work_location_2' id='work_location_2' type='hidden' defaultValue='' />
 									<div className={sx('main-application-information')}>
 										<h2 className={sx('title-application')}>Thông tin tuyển dụng</h2>
 										<div className={sx('form-wrap')}>
@@ -317,17 +293,37 @@ const UpdatePostJobs = ({ cx }) => {
 														<div className={sx('form-group', 'form-text')}>
 															<InputFieldControl
 																name='min_salary'
+																id='min_salary'
+																defaultValue={0}
 																control={control}
 																maxLength={12}
 																placeholder='Tối Thiểu *'
+																disabled={isAgreementChecked}
 															/>
 														</div>
 														<div className={sx('form-group', 'form-text')}>
 															<InputFieldControl
 																name='max_salary'
+																id='max_salary'
+																defaultValue={0}
 																control={control}
 																maxLength={12}
 																placeholder='Tối Đa *'
+																disabled={isAgreementChecked}
+															/>
+														</div>
+														<div
+															style={{
+																display: 'flex',
+																justifyContent: 'center'
+															}}>
+															<CheckBoxFieldControl
+																name='isAgreement'
+																id='isAgreement'
+																control={control}
+																label='Thỏa thuận'
+																onChange={(e) => setIsAgreementChecked(e.target.checked)}
+																defaultChecked={isAgreementChecked}
 															/>
 														</div>
 													</div>
@@ -651,13 +647,6 @@ const UpdatePostJobs = ({ cx }) => {
 												</div>
 											</div>
 											<div className={sx('form-group', 'form-submit', 'form-continue')}>
-												<button
-													className={sx('btn-gradient', 'btn-submit')}
-													id='btn_submit_form_postjobs'
-													type='button'
-													onclick='is_Filter_Form();'>
-													Tiếp tục
-												</button>
 												<button
 													className={sx('btn-gradient', 'btn-post')}
 													id='btn_submit_form_postjobs_finish'

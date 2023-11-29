@@ -50,9 +50,17 @@ const JobItem = ({ job_post }) => {
 							{job_post?.company?.company_name}
 						</Link>
 						<p className={cx('salary')}>
-							<em className={cx('fa', 'fa-usd')} />
-							Lương: {parseInt(job_post?.min_salary).toString().charAt(0)} Tr -{' '}
-							{parseInt(job_post?.max_salary).toString().charAt(0)} Tr VND
+							{job_post?.isAgreement === false ? (
+								<>
+									<em className={cx('fa', 'fa-usd')} />
+									Lương: {parseInt(job_post?.min_salary).toString().charAt(0)} Tr -{' '}
+									{parseInt(job_post?.max_salary).toString().charAt(0)} Tr VND
+								</>
+							) : (
+								<>
+									<div>Lương: Thỏa thuận</div>
+								</>
+							)}
 						</p>
 						<div>
 							<em className='fa fa-clock-o' />

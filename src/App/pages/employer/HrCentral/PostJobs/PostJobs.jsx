@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './postjobs.module.css';
 import classNames from 'classnames/bind';
 import Tooltip from '@mui/material/Tooltip';
@@ -10,7 +10,6 @@ import SelectFieldControl from '~/Core/components/common/FormControl/SelectField
 import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
 import { useGetAllWorkTypeQuery } from '~/App/providers/apis/workTypeApi';
 import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
-import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
 import { experienceEnum } from '~/App/constants/experienceEnum';
 import { LevelArray } from '~/App/constants/levelEnum';
@@ -26,7 +25,11 @@ import { listProvinces } from '~/App/constants/provincesData';
 const sx = classNames.bind(styles);
 const PostJobs = ({ cx }) => {
 	const { control, handleSubmit, setValue, watch } = useForm({
-		resolver: yupResolver(jobPostSchema)
+		resolver: yupResolver(jobPostSchema),
+		values: {
+			min_salary: 0,
+			max_salary: 0
+		}
 	});
 	const user_account_id = useSelector((state) => state?.auth.employer?.id);
 	const company_id = useSelector((state) => state?.auth?.employer?.company?.id);
@@ -47,6 +50,8 @@ const PostJobs = ({ cx }) => {
 	);
 	const [createJobPost] = useCreateJobPostMutation();
 	const navigate = useNavigate();
+	const [isAgreementChecked, setIsAgreementChecked] = useState(false);
+
 	const [displayExperience, setDisplayExperience] = useState(false);
 	const handleExperienceChange = (selectedValue) => {
 		if (Number(selectedValue) === 1) {
@@ -55,6 +60,7 @@ const PostJobs = ({ cx }) => {
 			setDisplayExperience(false);
 		}
 	};
+
 	const onCreatePostJobs = (data) => {
 		const job_work_type_id = [];
 		for (let i = 1; i <= 4; i++) {
@@ -98,11 +104,6 @@ const PostJobs = ({ cx }) => {
 							<div className={sx('left-heading')}>
 								<h1 className={sx('title-manage')}>Đăng Tuyển Dụng</h1>
 							</div>
-							{/* <div className={sx('right-heading')}>
-								<a href='https://careerbuilder.vn/vi/employers/faq' className={sx('support')}>
-									Hướng dẫn
-								</a>
-							</div> */}
 						</div>
 						<form onSubmit={handleSubmit(onCreatePostJobs)}>
 							<div className={sx('main-tabslet')}>
@@ -111,30 +112,8 @@ const PostJobs = ({ cx }) => {
 										{' '}
 										<a href='javascript:void(0);'>Thông Tin Tuyển Dụng</a>
 									</li>
-									{/* <li>
-										{' '}
-										<a href='javascript:void(0)' onclick='is_Filter_Form();'>
-											Thông Tin Liên Hệ
-										</a>
-									</li>
-									<li>
-										{' '}
-										<a href='javascript:void(0)' onclick='is_Filter_Form();'>
-											Thiết Lập Độ Phù Hợp Ứng Viên
-										</a>
-									</li> */}
 								</ul>
 								<div className={sx('tabslet-content', 'active')} id='tab-1'>
-									<input name='ispublic' type='hidden' defaultValue={0} />
-									<input name='emp_id' type='hidden' defaultValue='35A94C80' />
-									<input name='job_id' type='hidden' defaultValue='35A4E900' />
-									<input type='hidden' id='jobsamp_id' name='jobsamp_id' defaultValue='' />
-									<input type='hidden' id='lang' name='lang' defaultValue='' />
-									<input name='intSave' id='intSave' type='hidden' defaultValue={1} />
-									<input name='job_source' id='job_source' type='hidden' defaultValue={1} />
-									<input name='work_location_0' id='work_location_0' type='hidden' defaultValue='' />
-									<input name='work_location_1' id='work_location_1' type='hidden' defaultValue='' />
-									<input name='work_location_2' id='work_location_2' type='hidden' defaultValue='' />
 									<div className={sx('main-application-information')}>
 										<h2 className={sx('title-application')}>Thông tin tuyển dụng</h2>
 										<div className={sx('form-wrap')}>
@@ -236,16 +215,6 @@ const PostJobs = ({ cx }) => {
 																/>
 															</div>
 														</div>
-														<div className={cx('col-lg-6', 'd-flex', 'align-center')}>
-															<div className={sx('form-group', 'form-checkbox', 'mt-5')}>
-																{/* <CheckBoxFieldControl
-																	label='Hiển thị trên tin tuyển dụng để thu hút ứng viên hơn'
-																	control={control}
-																	name='is_address_work_hidden'
-																	defaultValue={false}
-																/> */}
-															</div>
-														</div>
 													</div>
 												</div>
 											</div>
@@ -274,17 +243,36 @@ const PostJobs = ({ cx }) => {
 														<div className={sx('form-group', 'form-text')}>
 															<InputFieldControl
 																name='min_salary'
+																id='min_salary'
+																defaultValue={0}
 																control={control}
 																maxLength={12}
 																placeholder='Tối Thiểu *'
+																disabled={isAgreementChecked}
 															/>
 														</div>
 														<div className={sx('form-group', 'form-text')}>
 															<InputFieldControl
 																name='max_salary'
+																id='max_salary'
+																defaultValue={0}
 																control={control}
 																maxLength={12}
 																placeholder='Tối Đa *'
+																disabled={isAgreementChecked}
+															/>
+														</div>
+														<div
+															style={{
+																display: 'flex',
+																justifyContent: 'center'
+															}}>
+															<CheckBoxFieldControl
+																name='isAgreement'
+																id='isAgreement'
+																control={control}
+																label={'Thỏa thuận'}
+																onChange={(e) => setIsAgreementChecked(e.target.checked)}
 															/>
 														</div>
 													</div>
