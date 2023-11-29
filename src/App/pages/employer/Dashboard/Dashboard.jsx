@@ -21,6 +21,10 @@ import { useAnalysisQuery } from '~/App/providers/apis/company_serviceApi';
 import { Link } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
 import moment from 'moment';
+import {
+	useAnalysisCandidateCompanyQuery,
+	useAnalysisJobPostActivityQuery
+} from '~/App/providers/apis/jobPostActivityApi';
 
 const sx = classNames.bind(styles);
 
@@ -46,10 +50,13 @@ const EmployerDashboard = ({ cx }) => {
 	});
 
 	const { data: countCompanyService } = useAnalysisQuery(employer?.company?.id);
+	useEffect(() => {
+		console.log(countCompanyService);
+	}, [countCompanyService]);
+	const { data: analysisCandidateCompany } = useAnalysisCandidateCompanyQuery(employer?.company?.id);
 
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
-		console.log('TCL: EmployerDashboard -> onsubmit -> data', data);
 	};
 
 	const { data } = useAnalyticsQuery();
@@ -247,32 +254,30 @@ const EmployerDashboard = ({ cx }) => {
 									<h2 className={sx('title-dashboard')}>Thông tin tài khoản</h2>
 								</div>
 								<div className={sx('body')}>
-									<div className={sx('image')}>
-										<a
-											href='https://careerbuilder.vn/careerbuilder-rewards'
-											title='CareerBuilder Rewards 2022'>
+									{/* <div className={sx('image')}>
+										<a title='CareerBuilder Rewards 2022'>
 											<img
 												src='https://images.careerbuilder.vn/content/Event/CBR2023/icon/CB_CBR_2023_standard.jpg'
 												alt='CareerBuilder Rewards 2022'
 											/>
 										</a>
-									</div>
+									</div> */}
 									<ul className={sx('list-account-information')}>
 										<li>
 											<p className={sx('number', 'orderNew')}>
-												{countCompanyService?.data ? countCompanyService?.data : 0}
+												{countCompanyService?.data ? countCompanyService?.data.length : 0}
 											</p>
 											<Link className={sx('title')} to={routesPath.EmployerPaths.ordersAvailable}>
 												Đơn hàng đang sử dụng
 											</Link>
 										</li>
 										<li>
-											<p className={sx('number', 'JskNew')}>0</p>
-											<a
-												className={sx('title')}
-												href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume'>
+											<p className={sx('number', 'JskNew')}>
+												{analysisCandidateCompany ? analysisCandidateCompany?.length : 0}
+											</p>
+											<Link className={sx('title')} to={routesPath.EmployerPaths.manageResume}>
 												Ứng viên ứng tuyển
-											</a>
+											</Link>
 										</li>
 									</ul>
 								</div>

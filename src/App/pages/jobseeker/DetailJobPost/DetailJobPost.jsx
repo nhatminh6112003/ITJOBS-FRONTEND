@@ -328,8 +328,16 @@ const DetailJobPost = ({ cx }) => {
 																	Lương
 																</strong>
 																<p>
-																	{parseInt(detailJobPost?.min_salary).toString().charAt(0)} Tr -{' '}
-																	{parseInt(detailJobPost?.max_salary).toString().charAt(0)} Tr VND
+																	{detailJobPost?.isAgreement === false ? (
+																		<>
+																			{' '}
+																			{parseInt(detailJobPost?.min_salary).toString().charAt(0)} Tr -{' '}
+																			{parseInt(detailJobPost?.max_salary).toString().charAt(0)} Tr
+																			VND
+																		</>
+																	) : (
+																		<div>Thỏa thuận</div>
+																	)}
 																</p>
 															</li>
 															<li>

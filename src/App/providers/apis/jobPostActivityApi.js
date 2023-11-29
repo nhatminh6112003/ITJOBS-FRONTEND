@@ -19,6 +19,13 @@ const jobPostActivityApi = createApi({
 			providesTags: ['jobSaved'],
 			transformResponse: (response) => response.data
 		}),
+		analysisCandidateCompany: build.query({
+			query: (id) => {
+				return { url: `/job_post_activity/analysisCandidateCompany/${id}`, method: 'GET' };
+			},
+			providesTags: ['jobSaved'],
+			transformResponse: (response) => response.data
+		}),
 		getOneJobPostActivityApi: build.query({
 			query: (id) => {
 				return { url: `/job_post_activity/${id}`, method: 'GET' };
@@ -68,7 +75,8 @@ export const {
 	useUpdateJobPostActivityApiMutation,
 	useUpdateStatusJobPostActivityResumeMutation,
 	useSendMailJobSeekerMutation,
-	useAnalysisJobPostActivityQuery
+	useAnalysisJobPostActivityQuery,
+	useAnalysisCandidateCompanyQuery
 } = jobPostActivityApi;
 
 export default jobPostActivityApi;

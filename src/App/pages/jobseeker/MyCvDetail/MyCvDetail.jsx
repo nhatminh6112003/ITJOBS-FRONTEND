@@ -218,11 +218,9 @@ const MyCvDetail = ({ cx }) => {
 										Quản lý hồ sơ
 										<em className={cx('fa', 'fa-bars')} />
 									</Link>
-									<a
-										className={cx('btn-gradient')}
-										href='https://careerbuilder.vn/vi/jobseekers/myresume/myattach?id=18151080'>
+									<Link className={cx('btn-gradient')} to={'/jobseekers/my-profile'}>
 										Chỉnh sửa
-									</a>
+									</Link>
 								</div>
 							</div>
 						</div>

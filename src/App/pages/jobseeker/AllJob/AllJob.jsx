@@ -45,7 +45,7 @@ const AllJob = () => {
 			days: query.days || '',
 			status: jobPostStatusEnum.Publish,
 			isDeleted: false,
-			page: page || '',
+			page: page || ''
 		}
 	});
 	const { data: listProvinces } = useGetAllProvincesQuery();
@@ -473,9 +473,19 @@ const AllJob = () => {
 																	rel='noreferrer'>
 																	<div style={{ color: '#008563', fontSize: '14px' }}>
 																		<p>
-																			<em className='fa fa-usd' />
-																			Lương: {parseInt(job_post?.min_salary).toString().charAt(0)} Tr
-																			- {parseInt(job_post?.max_salary).toString().charAt(0)} Tr VND
+																			{job_post?.isAgreement === false ? (
+																				<>
+																					<em className={cx('fa', 'fa-usd')} />
+																					Lương:{' '}
+																					{parseInt(job_post?.min_salary).toString().charAt(0)} Tr
+																					- {parseInt(job_post?.max_salary).toString().charAt(0)}{' '}
+																					Tr VND
+																				</>
+																			) : (
+																				<>
+																					<div>Lương: Thỏa thuận</div>
+																				</>
+																			)}
 																		</p>
 																	</div>
 																	<div style={{ color: '#333333', fontSize: '14px' }}>

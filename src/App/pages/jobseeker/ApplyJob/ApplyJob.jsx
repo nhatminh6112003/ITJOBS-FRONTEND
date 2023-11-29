@@ -58,12 +58,14 @@ const ApplyJob = ({ cx }) => {
 			job_id: id,
 			resume_type: data.resume_type,
 			status: ResumeStatusEnum.UNDECIDED
-		}).then((result) => {
-			if (result.status == 200) {
-				toast.success('Bạn đã nộp cv thành công');
-			}
-			navigate(routesPath.JobseekerPaths.jobApplied);
-		});
+		})
+			.unwrap()
+			.then((result) => {
+				if (result.status == 200) {
+					toast.success('Bạn đã nộp hồ sơ thành công');
+				}
+				navigate(routesPath.JobseekerPaths.jobApplied);
+			});
 	};
 	useEffect(() => {
 		return listProvinces?.map((item) => {
