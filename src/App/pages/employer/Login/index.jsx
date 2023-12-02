@@ -4,11 +4,10 @@ import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
-import { Fragment } from 'react';
 const Login = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
 
-	const [loginMutation] = useLoginMutation();
+	const [loginMutation, { isLoading }] = useLoginMutation();
 	const handleLoginFormSubmit = async (data) => {
 		loginMutation(data)
 			.unwrap()
@@ -48,7 +47,7 @@ const Login = ({ cx }) => {
 								</div>
 							</div>
 							<div className={cx('main-form')}>
-								<LoginForm onSubmit={handleLoginFormSubmit} className={cx} />
+								<LoginForm onSubmit={handleLoginFormSubmit} className={cx} isLoading={isLoading} />
 							</div>
 						</div>
 					</div>

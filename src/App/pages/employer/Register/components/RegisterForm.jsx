@@ -291,7 +291,7 @@ const RegisterForm = ({ cx }) => {
 					</div>
 					<div className={cx('btn-area', 'list-btn')}>
 						<div>{/* Quay lại */}</div>
-						<button className={cx('btn-action')} type='submit'>
+						<button className={cx('btn-action')} type='submit' disabled={isLoading}>
 							Đăng ký
 						</button>
 					</div>

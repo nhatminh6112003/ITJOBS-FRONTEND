@@ -45,7 +45,9 @@ const RegisterForm = ({ className: cx }) => {
 				/>
 			</div>
 			<div className='form-group form-submit'>
-				<button className={cx('btn-gradient')}>Đăng ký</button>
+				<button className={cx('btn-gradient')} disabled={isLoading}>
+					Đăng ký
+				</button>
 			</div>
 		</form>
 	);

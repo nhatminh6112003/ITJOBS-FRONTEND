@@ -5,7 +5,7 @@ import UserRoleEnum from '~/App/constants/roleEnum';
 import { loginSchema } from '~/App/schemas/authSchema';
 import routesPath from '~/App/config/routesPath';
 import { Link } from 'react-router-dom';
-const LoginForm = ({ className: cx, onSubmit }) => {
+const LoginForm = ({ className: cx, onSubmit, isLoading }) => {
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
 			...loginSchema.getDefault(),
@@ -45,7 +45,7 @@ const LoginForm = ({ className: cx, onSubmit }) => {
 			</div>
 			<div className={cx('user-action')}>
 				<div className={cx('btn-area')}>
-					<button type='submit' className='btn-action'>
+					<button type='submit' className={`btn-action`} disabled={isLoading}>
 						Đăng nhập
 					</button>
 				</div>
