@@ -1,16 +1,16 @@
-import { useState, useMemo, useReducer, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { matchSorter } from 'match-sorter';
+import { Fragment, useMemo } from 'react';
 import { useFilters, useGlobalFilter, usePagination, useRowSelect, useSortBy, useTable } from 'react-table';
 import { PaginationActionEnums } from '~/App/hooks/useServerPagination';
-import { matchSorter } from 'match-sorter';
 
-import { GlobalFilter } from './components/ReactTableFilters';
-import Pagination from '../Pagination';
-import SortIcon from '@mui/icons-material/Sort';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import Card from '../Card';
-import './table.scss';
+import SortIcon from '@mui/icons-material/Sort';
+import classNames from 'classnames/bind';
+import Pagination from '../Pagination';
+import { GlobalFilter } from './components/ReactTableFilters';
+import styles from './table.css';
+const cx = classNames.bind(styles);
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
 	return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
@@ -101,7 +101,7 @@ function Table({
 				globalFilter={globalFilter}
 				setGlobalFilter={setGlobalFilter}
 			/>
-			<table {...getTableProps()} className='responsive-table'>
+			<table {...getTableProps()} className={cx('content-table')}>
 				<thead className='responsive-table__head'>
 					{headerGroups.map((headerGroup) => (
 						<tr {...headerGroup.getHeaderGroupProps()} className='responsive-table__row'>
@@ -150,7 +150,6 @@ function Table({
 							</tr>
 						);
 					})}
-			
 				</tbody>
 			</table>
 			<Pagination

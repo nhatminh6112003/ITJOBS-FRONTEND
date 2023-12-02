@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import TabMenu from '../Posting/components/TabMenu';
 import routesPath from '~/App/config/routesPath';
 import { useLocation } from 'react-router-dom';
+import formatVND from '~/Core/utils/formatVND';
 const sx = classNames.bind(styles);
 
 const ViewJob = ({ cx }) => {
@@ -31,23 +32,15 @@ const ViewJob = ({ cx }) => {
 					<div className={sx('box-manage-job-posting')}>
 						<div className={sx('heading-manage')}>
 							<div className={sx('left-heading')}>
-								<h1 className={sx('title-manage')}>Việc Làm Đang Đăng </h1>
-
+								<h1 className={sx('title-manage')}>Chi Tiết Bài Đăng </h1>
 								<div className={sx('button')}>
 									<Link className={sx('btn-gradient')} to={routesPath.EmployerPaths.postjobs}>
 										<em className={cx('material-icons')}>create</em>Tạo Mẫu Tuyển Dụng
 									</Link>
 								</div>
 							</div>
-							<div className={sx('right-heading')}>
-								<a
-									href='https://images.careerbuilder.vn/guide/CareerBuilder_Manage_Job_Postings_User_Guide.pdf'
-									className={sx('support')}>
-									Hướng dẫn
-								</a>
-							</div>
 						</div>
-						<div className={sx('main-form-posting')}>
+						{/* <div className={sx('main-form-posting')}>
 							<form
 								name='frmSearchJob'
 								id='frmSearchJob'
@@ -111,7 +104,7 @@ const ViewJob = ({ cx }) => {
 									</div>
 								</div>
 							</form>
-						</div>
+						</div> */}
 						<div className={sx('main-tabslet')}>
 							<ul className={sx('tabslet-tab')}>
 								{TabMenu.map((item) => (
@@ -131,33 +124,14 @@ const ViewJob = ({ cx }) => {
 										<div className={sx('row', 'jobs-posting-detail-top')}>
 											<div className={sx('col-lg-6', 'col-xl-4')}>
 												<ul className={sx('list-info-posting')}>
-													<li>
+													{/* <li>
 														<p className={sx('name')}>Trạng thái</p>
 														<p>Hoàn tất</p>
-													</li>
+													</li> */}
 													<li>
 														<p className={sx('name')}>Hết hạn</p>
 														<p>{formatDate(jobPost?.expiry_date)}</p>
 													</li>
-													{/* <li>
-														<p className={sx('name')}>Hỗ trợ gia hạn</p>
-														<p>-</p>
-													</li> */}
-												</ul>
-											</div>
-											<div className={sx('col-lg-6', 'col-xl-4')}>
-												<ul className={sx('list-info-posting')}></ul>
-											</div>
-											<div className={sx('col-lg-6', 'col-xl-4')}>
-												<ul className={sx('list-action')}>
-													{/* <li className={sx('end')}>
-														<a
-															href='javascript:void(0);'
-															onclick='activeTab(3);'
-															title='Mail trả lời tự động'>
-															<em className={sx('material-icons')}>email </em> Mail trả lời tự động
-														</a>
-													</li> */}
 												</ul>
 											</div>
 										</div>
@@ -167,28 +141,19 @@ const ViewJob = ({ cx }) => {
 													<li className={sx('active')} data-tab-detail={1}>
 														<a href='javascript:void(0);'>Chi Tiết Công Việc</a>
 													</li>
-													<li data-tab-detail={2}>
-														<a href='javascript:void(0);'>Thông Tin Đăng Tuyển</a>
-													</li>
-													<li data-tab-detail={3}>
-														<a href='javascript:void(0);'>Thư Trả Lời Tự Động</a>
-													</li>
-													<li data-tab-detail={4}>
-														<a href='javascript:void(0);'>Quản Lý Tag</a>
-													</li>
 												</ul>
 												<div className={sx('tabslet-content-detail', 'active')} data-content-detail={1}>
 													<div className={sx('content-detail-top')}>
 														<div className={sx('head')}>
 															<h3 className={sx('title')}>
-																Chức danh: <span>Fresher Developer</span>
+																Chức danh: <span>{jobPost?.job_title}</span>
 															</h3>
-															<a
+															<Link
 																className={sx('edit')}
-																href='https://careerbuilder.vn/vi/employers/postjobs/35BE12BA'
+																to={'/employers/postjobs/' + jobPost?.id}
 																title='Sửa'>
 																<em className={cx('material-icons')}>created </em> Sửa
-															</a>
+															</Link>
 														</div>
 														<div className={sx('body')}>
 															<div className={sx('row')}>
@@ -196,7 +161,7 @@ const ViewJob = ({ cx }) => {
 																	<ul className={sx('list-info-posting')}>
 																		<li>
 																			<p className={sx('name')}>Mã số</p>
-																			<p />
+																			<p>{jobPost?.id}</p>
 																		</li>
 																		<li>
 																			<p className={sx('name')}>Địa điểm</p>
@@ -204,7 +169,27 @@ const ViewJob = ({ cx }) => {
 																		</li>
 																		<li>
 																			<p className={sx('name')}>Mức lương</p>
-																			<p>Cạnh tranh</p>
+																			<p>
+																				{jobPost?.isAgreement === 1 ? (
+																					<>
+																						<p>Thỏa thuận</p>
+																					</>
+																				) : (
+																					<>
+																						<div>
+																							{jobPost?.min_salary.toLocaleString('vi-VN', {
+																								style: 'currency',
+																								currency: 'VND'
+																							}) +
+																								' - ' +
+																								jobPost?.max_salary.toLocaleString('vi-VN', {
+																									style: 'currency',
+																									currency: 'VND'
+																								})}
+																						</div>
+																					</>
+																				)}
+																			</p>
 																		</li>
 																		<li>
 																			<p className={sx('name')}>Cấp bậc</p>
@@ -257,13 +242,17 @@ const ViewJob = ({ cx }) => {
 																				</p>
 																			</p>
 																		</li>
-																		<li>
-																			<p className={sx('name')}>Tuổi</p>
-																			<p>
-																				{' '}
-																				{jobPost?.form_age} - {jobPost?.to_age}{' '}
-																			</p>
-																		</li>
+																		{jobPost?.form_age && jobPost?.to_age && (
+																			<>
+																				<li>
+																					<p className={sx('name')}>Tuổi</p>
+																					<p>
+																						{' '}
+																						{jobPost?.form_age} - {jobPost?.to_age}{' '}
+																					</p>
+																				</li>
+																			</>
+																		)}
 																		<li>
 																			<p className={sx('name')}>Giới tính</p>
 																			{GenderArray?.map(

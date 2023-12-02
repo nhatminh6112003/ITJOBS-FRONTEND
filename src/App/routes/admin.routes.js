@@ -10,9 +10,10 @@ const Employer = lazy(() => import('~/App/pages/Admin/Employer'));
 const Profession = lazy(() => import('~/App/pages/Admin/Profession'));
 const adminPublicRoutes = [{ path: routesPath.AdminPaths.login, component: Login, layout: null }];
 const Company = lazy(() => import('~/App/pages/Admin/Company'));
-const Benefits = lazy(() => import('~/App/pages/Admin/Benefits'))
-const Service = lazy(() => import('~/App/pages/Admin/Service'))
-const ServiceType = lazy(() => import('~/App/pages/Admin/ServiceType'))
+const Benefits = lazy(() => import('~/App/pages/Admin/Benefits'));
+const Service = lazy(() => import('~/App/pages/Admin/Service'));
+const ServiceType = lazy(() => import('~/App/pages/Admin/ServiceType'));
+const FeedBack = lazy(() => import('~/App/pages/Admin/FeedBack/FeedBack'));
 
 const adminPrivateRoutes = [
 	{ path: routesPath.AdminPaths.dashboard, component: Dashboard },
@@ -25,6 +26,7 @@ const adminPrivateRoutes = [
 	{ path: routesPath.AdminPaths.company, component: Company },
 	{ path: routesPath.AdminPaths.benefits, component: Benefits },
 	{ path: routesPath.AdminPaths.service, component: Service },
-	{ path: routesPath.AdminPaths.serviceType, component: ServiceType }
+	{ path: routesPath.AdminPaths.serviceType, component: ServiceType },
+	{ path: routesPath.AdminPaths.feedBack, component: FeedBack }
 ];
 export { adminPublicRoutes, adminPrivateRoutes };

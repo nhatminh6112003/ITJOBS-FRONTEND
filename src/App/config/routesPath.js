@@ -10,7 +10,8 @@ const AdminPaths = {
 	company: '/admin/company',
 	benefits: '/admin/benefits',
 	service: '/admin/service',
-	serviceType: '/admin/service_type'
+	serviceType: '/admin/service_type',
+	feedBack: '/admin/feedBack'
 };
 const JobseekerPaths = {
 	home: '/',
@@ -41,6 +42,7 @@ const EmployerPaths = {
 	manageResume: '/employers/hrcentral/manageresume',
 	searchHistory: '/employers/hrcentral/search-history',
 	ordersAvailable: '/employers/hrcentral/orders-available',
+	ordersExpired: '/employers/hrcentral/orders-expired',
 	emailManagement: '/employers/hrcentral/emailcontentmanagement',
 	accounts: '/employers/hrcentral/accounts',
 	waitPosting: '/employers/hrcentral/waitposting',
@@ -50,6 +52,8 @@ const EmployerPaths = {
 	updatePostJobs: '/employers/postjobs/:id',
 	viewJob: '/employers/hrcentral/viewjob/:id',
 	editEmployer: '/employers/hrcentral/accounts/edit_employer',
+	editContact: '/employers/hrcentral/accounts/edit_contact',
+	changePassword: '/employers/hrcentral/accounts/changepassword',
 	resumeDetail: '/employers/hrcentral/resume_detail/:id',
 	findJobSeeker: '/tim-ung-vien',
 	productAndService: '/employers/products-and-services',
@@ -61,7 +65,7 @@ const EmployerPaths = {
 
 const BasePaths = {
 	NOT_FOUND: '*',
-	ResumeStyle: '/resume-style/:id',
+	ResumeStyle: '/resume-style/:id'
 };
 const routesPath = {
 	JobseekerPaths,

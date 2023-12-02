@@ -16,10 +16,16 @@ const userApi = createApi({
 			},
 			providesTags: ['users'],
 			transformResponse: (response) => response.data
+		}),
+		changePassword: build.mutation({
+			query: ({ id, payload }) => {
+				return { url: `/users/changePassword/${id}`, method: 'PATCH', body: payload };
+			},
+			invalidatesTags: ['users']
 		})
 	})
 });
 
-export const { useGetAllQuery, useGetOneUserQuery } = userApi;
+export const { useGetAllQuery, useGetOneUserQuery, useChangePasswordMutation } = userApi;
 
 export default userApi;

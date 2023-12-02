@@ -7,6 +7,7 @@ const EmployerDashboard = lazy(() => import('~/App/pages/employer/Dashboard'));
 const Posting = lazy(() => import('~/App/pages/employer/HrCentral/Posting'));
 const ManageResume = lazy(() => import('~/App/pages/employer/HrCentral/ManageResume'));
 const OrdersAvailable = lazy(() => import('~/App/pages/employer/HrCentral/OrdersAvailable'));
+const OrdersExpired = lazy(() => import('~/App/pages/employer/HrCentral/OrdersExpired/OrdersExpired'));
 const SearchHistory = lazy(() => import('~/App/pages/employer/HrCentral/SearchHistory'));
 const EmailManagement = lazy(() => import('~/App/pages/employer/HrCentral/EmailManagement'));
 const Accounts = lazy(() => import('~/App/pages/employer/HrCentral/Accounts'));
@@ -17,6 +18,8 @@ const PostJobs = lazy(() => import('~/App/pages/employer/HrCentral/PostJobs/Post
 const UpdatePostJobs = lazy(() => import('~/App/pages/employer/HrCentral/PostJobs/components/UpdatePostJobs'));
 const ViewJob = lazy(() => import('../pages/employer/HrCentral/ViewJob'));
 const EditEmployer = lazy(() => import('../pages/employer/HrCentral/Accounts/EditEmployer'));
+const EditContact = lazy(() => import('../pages/employer/HrCentral/Accounts/EditContact/EditContact'));
+const ChangePassword = lazy(() => import('../pages/employer/HrCentral/Accounts/ChangePassword/ChangePassword'));
 const ResumeDetail = lazy(() => import('../pages/employer/HrCentral/ManageResume/ResumeDetail'));
 const FindJobSeeker = lazy(() => import('../pages/employer/FindJobSeeker'));
 const ProductAndServices = lazy(() => import('../pages/employer/ProductAndServices'));
@@ -49,6 +52,10 @@ const employerPrivateRoutes = [
 	{
 		path: routesPath.EmployerPaths.ordersAvailable,
 		component: OrdersAvailable
+	},
+	{
+		path: routesPath.EmployerPaths.ordersExpired,
+		component: OrdersExpired
 	},
 	{
 		path: routesPath.EmployerPaths.emailManagement,
@@ -85,6 +92,14 @@ const employerPrivateRoutes = [
 	{
 		path: routesPath.EmployerPaths.editEmployer,
 		component: EditEmployer
+	},
+	{
+		path: routesPath.EmployerPaths.editContact,
+		component: EditContact
+	},
+	{
+		path: routesPath.EmployerPaths.changePassword,
+		component: ChangePassword
 	},
 	{
 		path: routesPath.EmployerPaths.resumeDetail,

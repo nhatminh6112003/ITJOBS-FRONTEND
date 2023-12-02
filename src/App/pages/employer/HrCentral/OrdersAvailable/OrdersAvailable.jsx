@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ordersAvailable.module.css';
 import classNames from 'classnames/bind';
+import { useSelector } from 'react-redux';
+import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
+import { Link, useLocation } from 'react-router-dom';
 
 const sx = classNames.bind(styles);
+import moment from 'moment';
+import formatDate from '~/Core/utils/formatDate';
+import TabMenu from '../components/TabMenu';
 const OrdersAvailable = ({ cx }) => {
+	const location = useLocation();
+	const currentPath = location.pathname;
+	const employer = useSelector((state) => state.auth?.employer);
+	const [expirationDate, setExpirationDate] = useState(0);
+	const { data: allOrder } = useGetAllCompany_serviceQuery({
+		params: {
+			company_id: employer?.company?.id
+		}
+	});
+	const now = moment();
+	const expirationMoment = moment(expirationDate);
+	const duration = moment.duration(expirationMoment.diff(now));
+	// Lấy số ngày
+	const daysRemaining = duration.asDays();
+	useEffect(() => {
+		allOrder?.data?.map((value) => {
+			const expirationDate = value?.expiration_date;
+			setExpirationDate(expirationDate);
+		});
+	}, [allOrder, now, setExpirationDate]);
+
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -12,47 +39,19 @@ const OrdersAvailable = ({ cx }) => {
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}>Quản Lý Đơn Hàng</h1>
 						</div>
-						<div className={sx('right-heading')}>
-							{' '}
-							<a className={sx('support')} href='https://careerbuilder.vn/vi/employers/faq' target='_blank'>
-								Hướng dẫn{' '}
-							</a>
-						</div>
 					</div>
 					<div className={sx('main-tabslet')} data-toggle='tabslet'>
 						<ul className={sx('tabslet-tab')}>
-							<li className={sx('active')}>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_available'
-									className={sx('expand')}>
-									Đơn Hàng Đang Sử Dụng
-								</a>
-							</li>
-							<li>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_expired'
-									className={sx('collapse')}>
-									Đơn Hàng Hết Hạn/Đã Sử Dụng
-								</a>
-							</li>
-							<li>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_search'
-									className={sx('collapse')}>
-									Báo Cáo Dịch Vụ Hồ Sơ
-								</a>
-							</li>
-							<li>
-								<a href='https://careerbuilder.vn/vi/employers/services/services_price' target='_blank'>
-									Mua dịch vụ
-								</a>
-							</li>
+							{TabMenu.map((item) => (
+								<li className={sx(currentPath == item.path && 'active')}>
+									<Link to={item.path} alt={item.title}>
+										{item.title}
+									</Link>
+								</li>
+							))}
 						</ul>{' '}
 						<div className={sx('tabslet-content', 'active')} id='tab-1'>
-							<form
-								method='post'
-								id='frm-filter-reports'
-								action='https://careerbuilder.vn/vi/employers/hrcentral/reports/orders_available'>
+							<form method='post' id='frm-filter-reports'>
 								<div className={sx('main-form-posting')}>
 									<div className={sx('form-wrap')}>
 										<div className={sx('form-group', 'form-text')}>
@@ -118,11 +117,6 @@ const OrdersAvailable = ({ cx }) => {
 												<option value={2}>Dịch vụ khác</option>
 											</select>
 										</div>
-										<div className={sx('form-group', 'form-reset')}>
-											<button className={sx('btn-reset')} type='reset' href='javascript:void(0);'>
-												<em className={cx('material-icons')}>loop</em> Bỏ qua{' '}
-											</button>
-										</div>
 										<div className={sx('form-group', 'form-submit', 'form-submit-less')}>
 											<button className={sx('btn-submit', 'btn-gradient')} type='submit'>
 												<em className={cx('material-icons')}>find_in_page</em> Tìm
@@ -131,37 +125,6 @@ const OrdersAvailable = ({ cx }) => {
 									</div>
 								</div>
 								<div className={sx('main-resume-applied')}>
-									<div className={sx('heading-resume-applied')}>
-										<div className={sx('left-heading')}>
-											<ul className={sx('list-check')}>
-												<li className={sx('view-posting-detail', 'active')}>
-													<a href='javascript:void(0)'>Xem chi tiết</a>
-												</li>
-												<li className={sx('view-posting-summary')}>
-													<a href='javascript:void(0)'>Xem tóm tắt</a>
-												</li>
-											</ul>
-										</div>
-										<div className={sx('right-heading')}>
-											<div className={sx('to-display')}>
-												<p className={sx('name')}> Hiển thị</p>
-												<div className={sx('form-display')}>
-													<select name='limit' id='limit'>
-														<option value={15} selected=''>
-															15
-														</option>
-														<option value={30}>30</option>
-														<option value={50}>50</option>
-													</select>
-												</div>
-												<p className={sx('name-display')}>
-													{' '}
-													Hiển thị
-													<span> 0</span>của <span> 0</span>kết quả{' '}
-												</p>
-											</div>
-										</div>
-									</div>
 									<div className={sx('boding-resume-applied')}>
 										<div className={sx('table', 'table-resume-applied')}>
 											<table>
@@ -169,7 +132,6 @@ const OrdersAvailable = ({ cx }) => {
 													<tr>
 														<th width='15%'>Số đơn hàng</th>
 														<th width='24%'>Gói dịch vụ</th>
-														<th width='10%'>Số lượng</th>
 														<th width='10%'>Còn lại</th>
 														<th width='13%'>Ngày bắt đầu kích hoạt</th>
 														<th width='13%'>Ngày hết hạn kích hoạt</th>
@@ -177,11 +139,47 @@ const OrdersAvailable = ({ cx }) => {
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td colSpan={7} className={sx('cb-text-center')}>
-															Không có dữ liệu!
-														</td>
-													</tr>
+													{allOrder?.data && allOrder?.data.length > 0 ? (
+														allOrder?.data.map((order) => {
+															return (
+																<>
+																	<tr>
+																		<td>{order?.id}</td>
+																		<td>
+																			<div className={sx('title')}>
+																				<p>{order?.service?.name}</p>
+																			</div>
+																		</td>
+																		<td>
+																			<div className={sx('title')}>
+																				<p>
+																					{' '}
+																					{daysRemaining
+																						? Math.floor(daysRemaining % 30) + ' ngày'
+																						: '0 ngày'}
+																				</p>
+																			</div>
+																		</td>
+																		<td>
+																			<p>{formatDate(order?.register_date)}</p>
+																		</td>
+																		<td>
+																			<p>{formatDate(order?.expiration_date)}</p>
+																		</td>
+																		<td>
+																			<p>{order?.expiration_date !== 0 ? 'Còn hạn' : 'Hết hạn'}</p>
+																		</td>
+																	</tr>
+																</>
+															);
+														})
+													) : (
+														<tr>
+															<td colSpan={7} className={sx('cb-text-center')}>
+																Không có dữ liệu!
+															</td>
+														</tr>
+													)}
 												</tbody>
 											</table>
 										</div>

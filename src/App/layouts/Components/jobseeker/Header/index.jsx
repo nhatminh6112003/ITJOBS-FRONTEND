@@ -23,7 +23,7 @@ const Header = () => {
 	const handleLogout = () => {
 		dispatch(logout({ Role: UserType[UserRoleEnum.JOBSEEKER] }));
 	};
-	
+
 	return (
 		<>
 			<header>
@@ -158,12 +158,15 @@ const Header = () => {
 											<Link to={routesPath.EmployerPaths.login}>Đăng nhập</Link>
 										</li>
 										<li>
-											<a href='' title='Đăng Tuyển Dụng'>
+											<Link to={routesPath.EmployerPaths.postjobs} title='Đăng Tuyển Dụng'>
 												Đăng Tuyển Dụng
-											</a>
+											</Link>
 										</li>
 										<li>
 											<Link to={routesPath.EmployerPaths.findJobSeeker}>Tìm Ứng Viên</Link>
+										</li>
+										<li>
+											<Link to={routesPath.EmployerPaths.serviceAndContact}>Sản Phẩm và Dịch Vụ</Link>
 										</li>
 									</ul>
 								</div>

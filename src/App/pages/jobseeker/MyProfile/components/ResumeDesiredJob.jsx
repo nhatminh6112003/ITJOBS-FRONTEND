@@ -151,8 +151,8 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 													}}>
 													{resume_desired_job?.salary_to && resume_desired_job?.salary_from && (
 														<>
-															{formatVND(resume_desired_job?.salary_to)} -{' '}
-															{formatVND(resume_desired_job?.salary_from)} VND
+															{formatVND(resume_desired_job?.salary_from)} -{' '}
+															{formatVND(resume_desired_job?.salary_to)} VND
 														</>
 													)}
 												</td>
@@ -228,11 +228,20 @@ const ResumeDesiredJob = ({ className: cx, isShowing, toggle }) => {
 															style={{
 																paddingBottom: '12px'
 															}}>
-															{listProfession?.data?.map((value) => {
-																return resume_desired_job?.profession_id?.map((item) => {
-																	return value.id === item ? value.name : null;
-																});
-															})}
+															{listProfession?.data &&
+																listProfession?.data
+																	?.filter((value) =>
+																		resume_desired_job?.profession_id?.includes(value.id)
+																	)
+																	.map((value, index, array) => {
+																		const isLastItem = index === array.length - 1;
+																		return (
+																			<span key={value.id}>
+																				{value.name}
+																				{!isLastItem && ', '}
+																			</span>
+																		);
+																	})}
 														</td>
 													</>
 												)}

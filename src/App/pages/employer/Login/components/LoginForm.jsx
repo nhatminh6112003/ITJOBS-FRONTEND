@@ -44,7 +44,6 @@ const LoginForm = ({ className: cx, onSubmit }) => {
 				</div>
 			</div>
 			<div className={cx('user-action')}>
-				<a href='https://careerbuilder.vn/vi/employers/forgetpassword.html'>Quên Mật Khẩu</a>
 				<div className={cx('btn-area')}>
 					<button type='submit' className='btn-action'>
 						Đăng nhập
