@@ -30,13 +30,7 @@ const Login = ({ cx }) => {
 		<section className={cx('employer-signup-new', 'login', 'cb-section')}>
 			<div className={cx('container')}>
 				<div className={cx('row', 'row-sp')}>
-					<div className={cx('col-xl-5')}>
-						<div className={cx('box-img')}>
-							{/* Tạo ảnh thay ảnh đó */}
-							<img src='https://images.careerbuilder.vn/content/images/Banner/pic-laptop.png' alt='' />
-						</div>
-					</div>
-					<div className={cx('col-xl-7')}>
+					<div className={cx('col-xl-12')}>
 						<div className={cx('box-info-signup')}>
 							<div className={cx('title')}>
 								<h2>Dành Cho Nhà Tuyển Dụng</h2>

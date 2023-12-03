@@ -85,13 +85,13 @@ const MyProfile = () => {
 									<div className={cx('list-button')}>
 										<ul>
 											<li>
-												<a href='https://careerbuilder.vn/vi/jobseekers/mykiemviec/changetemplate'>
+												<Link to='/jobseekers/changetemplate'>
 													{' '}
 													<em className={cx('material-icons')}>
 														<EditIcon fontSize='normal' />
 													</em>
 													<span>Chỉnh Mẫu Hồ Sơ</span>
-												</a>
+												</Link>
 											</li>
 											<li>
 												<a
@@ -108,7 +108,7 @@ const MyProfile = () => {
 									<div className={cx('head-menu')}>
 										<div className={cx('name-shortchut')}>
 											<a className={cx('active')} href=''>
-												Careerbuilder Profile
+												Job Hunters Profile
 											</a>
 										</div>
 										<div className={cx('toggle-menu')}>
@@ -117,8 +117,8 @@ const MyProfile = () => {
 									</div>
 									<ul className={cx('list-shortchut')}>
 										<li className={cx('active')}>
-											<a className={cx('active')} href='' data-href='#widget-11'>
-												Careerbuilder Profile
+											<a className={cx('active')} data-href='#widget-11'>
+												Job Hunters Profile
 											</a>
 										</li>
 										<li>

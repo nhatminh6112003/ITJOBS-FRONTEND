@@ -53,7 +53,12 @@ const LoginForm = ({ className: cx, onSubmit, isLoading }) => {
 					<Link className={cx('register')} to={routesPath.EmployerPaths.register}>
 						Quý khách chưa có tài khoản?
 					</Link>
-					Đăng ký dễ dàng, hoàn toàn miễn phí
+					<span
+						style={{
+							marginLeft: '4px'
+						}}>
+						Đăng ký dễ dàng, hoàn toàn miễn phí
+					</span>
 				</p>
 			</div>
 		</form>

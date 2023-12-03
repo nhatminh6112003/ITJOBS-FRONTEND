@@ -120,9 +120,6 @@ const Login = () => {
 								<div className={cx('form-login')}>
 									<LoginForm onSubmit={handleLoginFormSubmit} className={cx} isLoading={isLoading} />
 								</div>
-								<div className={cx('forgot-password')}>
-									<a href='https://careerbuilder.vn/vi/jobseekers/forgotpassword'>Quên mật khẩu?</a>
-								</div>
 							</div>
 						</div>
 					</div>
