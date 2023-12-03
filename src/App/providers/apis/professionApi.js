@@ -1,8 +1,8 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import baseQueryWithAdmin from '../fetchBaseQueryAdmin';
+import baseQueryWithUser from '../fetchBaseQuery';
 const professionApi = createApi({
 	reducerPath: 'profession',
-	baseQuery: baseQueryWithAdmin,
+	baseQuery: baseQueryWithUser,
 	endpoints: (build) => ({
 		getAllProfession: build.query({
 			query: (arg) => {
@@ -35,6 +35,13 @@ const professionApi = createApi({
 				return { url: `/profession/${id}`, method: 'DELETE' };
 			},
 			invalidatesTags: ['profession']
+		}),
+		analysisProfession: build.query({
+			query: () => {
+				return { url: `/profession/analysisProfession`, method: 'GET' };
+			},
+			providesTags: ['profession'],
+			transformResponse: (response) => response
 		})
 	})
 });
@@ -44,7 +51,8 @@ export const {
 	useGetOneProfessionQuery,
 	useCreateProfessionMutation,
 	useUpdateProfessionMutation,
-	useDeleteProfessionMutation
+	useDeleteProfessionMutation,
+	useAnalysisProfessionQuery
 } = professionApi;
 
 export default professionApi;
