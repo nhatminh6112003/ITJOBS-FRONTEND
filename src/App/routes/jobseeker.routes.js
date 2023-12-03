@@ -19,6 +19,7 @@ const DetailCompany = lazy(() => import('../pages/jobseeker/DetailCompany'));
 const ApplyJob = lazy(() => import('../pages/jobseeker/ApplyJob'));
 const JobApplied = lazy(() => import('../pages/jobseeker/JobApplied'));
 const JobSaved = lazy(() => import('../pages/jobseeker/JobSaved'));
+const FindAllJob = lazy(() => import('../pages/jobseeker/FindAllJob'));
 
 const jobSeekerPublicRoutes = [
 	{ path: routesPath.JobseekerPaths.home, component: Home },
@@ -28,7 +29,8 @@ const jobSeekerPublicRoutes = [
 	{ path: routesPath.JobseekerPaths.login, component: Login },
 	{ path: routesPath.JobseekerPaths.register, component: Register },
 	{ path: routesPath.JobseekerPaths.detailCompany, component: DetailCompany },
-	{ path: routesPath.JobseekerPaths.findJob, component: FindJob }
+	{ path: routesPath.JobseekerPaths.findJob, component: FindJob },
+	{ path: routesPath.JobseekerPaths.findAllJob, component: FindAllJob }
 ];
 
 const jobSeekerPrivateRoutes = [

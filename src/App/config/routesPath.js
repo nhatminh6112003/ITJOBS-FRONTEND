@@ -32,7 +32,8 @@ const JobseekerPaths = {
 	applyJobs: '/jobseekers/jobs/apply/:id',
 	jobApplied: '/jobseekers/mykiemviec/jobapplied',
 	viewJob: '/employers/hrcentral/viewjob/:id',
-	jobSaved: '/jobseekers/mykiemviec/jobsaved'
+	jobSaved: '/jobseekers/mykiemviec/jobsaved',
+	findAllJob: '/tim-viec-lam'
 };
 const EmployerPaths = {
 	login: '/employers/login',
