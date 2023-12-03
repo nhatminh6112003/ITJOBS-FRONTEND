@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './find-all-job.module.css';
 import classNames from 'classnames/bind';
+import { useAnalysisProfessionQuery } from '~/App/providers/apis/professionApi';
+import { Link } from 'react-router-dom';
+import routesPath from '~/App/config/routesPath';
 const sx = classNames.bind(styles);
 
 const FindAllJob = ({ cx }) => {
+	const { data: listProfession } = useAnalysisProfessionQuery();
+	useEffect(() => {
+		console.log(listProfession?.data);
+	}, [listProfession]);
 	return (
 		<section className={sx('find-jobsby-categories', 'cb-section')} style={{ padding: '60px 0', margin: '30px 0' }}>
 			<div className={cx('container')}>
@@ -12,224 +19,61 @@ const FindAllJob = ({ cx }) => {
 						<div className={sx('cb-title')}>
 							<h1
 								style={{
+									fontSize: '1.2rem',
+									borderBottom: '1px solid #cccc',
 									marginBottom: '1.875rem',
-									color: ' #182642',
-									fontSize: '1.875rem',
-									fontweight: 700
+									color: ' #182642'
 								}}>
 								Tìm Việc Làm Theo Ngành Nghề
 							</h1>
 						</div>
 						<div className={sx('row', 'list-of-working-positions')}>
-							<div className={cx('col-md-6', 'col-lg-4', 'cus-col')}>
-								<div className={sx('title-h3')}>
-									<h2>Tìm việc làm Bán hàng / Tiếp thị</h2>
-								</div>
-								<ul className={sx('list-jobs')}>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/ban-hang-kinh-doanh-c31-vi.html'
-											title='Bán hàng / Kinh doanh'>
-											Bán hàng / Kinh doanh
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/ban-hang-kinh-doanh-c31-vi.html'
-												title='Bán hàng / Kinh doanh'>
-												5.899
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/ban-le-ban-si-c30-vi.html'
-											title='Bán lẻ / Bán sỉ'>
-											Bán lẻ / Bán sỉ
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/ban-le-ban-si-c30-vi.html'
-												title='Bán lẻ / Bán sỉ'>
-												2.109
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/tiep-thi-marketing-c4-vi.html'
-											title='Tiếp thị / Marketing'>
-											Tiếp thị / Marketing
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/tiep-thi-marketing-c4-vi.html'
-												title='Tiếp thị / Marketing'>
-												2.452
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/tiep-thi-truc-tuyen-c37-vi.html'
-											title='Tiếp thị trực tuyến'>
-											Tiếp thị trực tuyến
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/tiep-thi-truc-tuyen-c37-vi.html'
-												title='Tiếp thị trực tuyến'>
-												625
-											</a>
-										</span>
-									</li>
-								</ul>
-							</div>
-							<div className={cx('col-md-6', 'col-lg-4', 'cus-col')}>
-								<div className={sx('title-h3')}>
-									<h2>Tìm việc làm Dịch vụ</h2>
-								</div>
-								<ul className={sx('list-jobs')}>
-									<li>
-										<a href='https://careerbuilder.vn/viec-lam/tu-van-c9-vi.html' title='Tư vấn'>
-											Tư vấn
-										</a>
-										<span>
-											<a href='https://careerbuilder.vn/viec-lam/tu-van-c9-vi.html' title='Tư vấn'>
-												1.158
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/van-chuyen-giao-nhan-kho-van-c33-vi.html'
-											title='Vận chuyển / Giao nhận / Kho vận'>
-											Vận chuyển / Giao nhận / Kho vận
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/van-chuyen-giao-nhan-kho-van-c33-vi.html'
-												title='Vận chuyển / Giao nhận / Kho vận'>
-												654
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/lao-dong-pho-thong-c44-vi.html'
-											title='Lao động phổ thông'>
-											Lao động phổ thông
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/lao-dong-pho-thong-c44-vi.html'
-												title='Lao động phổ thông'>
-												187
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/dich-vu-khach-hang-c12-vi.html'
-											title='Dịch vụ khách hàng'>
-											Dịch vụ khách hàng
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/dich-vu-khach-hang-c12-vi.html'
-												title='Dịch vụ khách hàng'>
-												1.951
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/phi-chinh-phu-phi-loi-nhuan-c20-vi.html'
-											title='Phi chính phủ / Phi lợi nhuận'>
-											Phi chính phủ / Phi lợi nhuận
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/phi-chinh-phu-phi-loi-nhuan-c20-vi.html'
-												title='Phi chính phủ / Phi lợi nhuận'>
-												11
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/an-ninh-bao-ve-c51-vi.html'
-											title='An Ninh / Bảo Vệ'>
-											An Ninh / Bảo Vệ
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/an-ninh-bao-ve-c51-vi.html'
-												title='An Ninh / Bảo Vệ'>
-												59
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/luat-phap-ly-c24-vi.html'
-											title='Luật / Pháp lý'>
-											Luật / Pháp lý
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/luat-phap-ly-c24-vi.html'
-												title='Luật / Pháp lý'>
-												663
-											</a>
-										</span>
-									</li>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/buu-chinh-vien-thong-c32-vi.html'
-											title='Bưu chính viễn thông'>
-											Bưu chính viễn thông
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/buu-chinh-vien-thong-c32-vi.html'
-												title='Bưu chính viễn thông'>
-												95
-											</a>
-										</span>
-									</li>
-								</ul>
-							</div>
-							<div className={cx('col-md-6', 'col-lg-4', 'cus-col')}>
-								<div className={sx('title-h3')}>
-									<h2>Tìm việc làm Chăm sóc sức khỏe</h2>
-								</div>
-								<ul className={sx('list-jobs')}>
-									<li>
-										<a
-											href='https://careerbuilder.vn/viec-lam/y-te-cham-soc-suc-khoe-c56-vi.html'
-											title='Y tế / Chăm sóc sức khỏe'>
-											Y tế / Chăm sóc sức khỏe
-										</a>
-										<span>
-											<a
-												href='https://careerbuilder.vn/viec-lam/y-te-cham-soc-suc-khoe-c56-vi.html'
-												title='Y tế / Chăm sóc sức khỏe'>
-												772
-											</a>
-										</span>
-									</li>
-									<li>
-										<a href='https://careerbuilder.vn/viec-lam/duoc-pham-c7-vi.html' title='Dược phẩm'>
-											Dược phẩm
-										</a>
-										<span>
-											<a href='https://careerbuilder.vn/viec-lam/duoc-pham-c7-vi.html' title='Dược phẩm'>
-												494
-											</a>
-										</span>
-									</li>
-								</ul>
-							</div>
+							{listProfession?.data &&
+								listProfession.data.map((item) => {
+									return (
+										<>
+											<div
+												className={cx('col-md-6', 'col-lg-4', 'cus-col')}
+												style={{
+													paddingRight: '30px'
+												}}>
+												<div
+													className={sx('title-h3')}
+													style={{ marginBottom: '0.5rem', borderBottom: '1px solid #2f4ba0' }}>
+													<h2>{item.job_position_category_name}</h2>
+												</div>
+												<ul className={sx('list-jobs')}>
+													{item.profession_data.map((profession) => {
+														return (
+															<>
+																<li>
+																	<Link
+																		to={{
+																			pathname: routesPath.JobseekerPaths.allJob,
+																			search: `?profession_id=${profession.profession_id}`
+																		}}
+																		title={profession.profession_name}>
+																		{profession.profession_name}
+																	</Link>
+																	<span>
+																		<Link
+																			to={{
+																				pathname: routesPath.JobseekerPaths.allJob,
+																				search: `?profession_id=${profession.profession_id}`
+																			}}
+																			title={profession.profession_name}>
+																			{profession.count}
+																		</Link>
+																	</span>
+																</li>
+															</>
+														);
+													})}
+												</ul>
+											</div>
+										</>
+									);
+								})}
 						</div>
 					</div>
 				</div>
