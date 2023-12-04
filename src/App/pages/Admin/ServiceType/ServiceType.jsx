@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import Table from '~/Core/components/common/Table/Table';
-import { useGetAllServiceTypeQuery , useDeleteServiceTypeMutation } from '~/App/providers/apis/serviceTypeApi';
+import { useGetAllServiceTypeQuery, useDeleteServiceTypeMutation } from '~/App/providers/apis/serviceTypeApi';
 import { useMemo } from 'react';
 import useServerPagination from '~/App/hooks/useServerPagination';
 import { useSearchParams } from 'react-router-dom';
@@ -29,11 +29,9 @@ const ServiceType = () => {
 	const pageSize = searchParams.get('pageSize') || paginationState.queryPageSize;
 	const page = searchParams.get('page') || paginationState.queryPageIndex;
 
-	const { data, isFetching } = useGetAllServiceTypeQuery(
-		{
-			refetchOnMountOrArgChange: true
-		}
-	);
+	const { data, isFetching } = useGetAllServiceTypeQuery({
+		refetchOnMountOrArgChange: true
+	});
 
 	const [deleteMutation] = useDeleteServiceTypeMutation();
 	const tableData = useMemo(() => data?.data ?? [], [data]);
@@ -45,7 +43,7 @@ const ServiceType = () => {
 				accessor: 'index',
 				isSort: true,
 				sortable: true,
-				canSort: true,
+				canSort: true
 			},
 			{ Header: 'Tên loại hình dịch vụ', accessor: 'name' },
 			{
@@ -85,6 +83,9 @@ const ServiceType = () => {
 				if (r.status == 200) {
 					toast.success(r?.message);
 				}
+			})
+			.catch((err) => {
+				toast.error(err?.data?.message);
 			});
 		setModalConfirmState({ open: false, payload: null });
 	};
@@ -92,7 +93,7 @@ const ServiceType = () => {
 	return (
 		<Fragment>
 			<Card
-				header={'Danh mục vị trí công việc'}
+				header={'Danh mục dịch vụ'}
 				toolbar={
 					<Button onClick={() => toggle('create')} color='info' variant='contained' startIcon={<AddIcon />}>
 						Thêm mới
@@ -120,4 +121,4 @@ const ServiceType = () => {
 	);
 };
 
-export default ServiceType ;
+export default ServiceType;

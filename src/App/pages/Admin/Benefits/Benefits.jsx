@@ -84,7 +84,7 @@ const Benefits = () => {
 				)
 			}
 		],
-		[tableData, toggle]
+		[data?.pagination.itemsPerPage, data?.pagination.pageIndex, tableData, toggle]
 	);
 
 	const handleConfirmDelete = async (id) => {
@@ -94,6 +94,9 @@ const Benefits = () => {
 				if (r.status == 200) {
 					toast.success(r?.message);
 				}
+			})
+			.catch((err) => {
+				toast.error(err?.data?.message);
 			});
 		setModalConfirmState({ open: false, payload: null });
 	};
@@ -129,4 +132,4 @@ const Benefits = () => {
 	);
 };
 
-export default Benefits ;
+export default Benefits;

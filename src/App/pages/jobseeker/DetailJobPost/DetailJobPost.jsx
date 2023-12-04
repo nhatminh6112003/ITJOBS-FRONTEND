@@ -83,8 +83,22 @@ const DetailJobPost = ({ cx }) => {
 				setDistricts(item.name);
 			}
 		});
-		console.log(allJobPst?.data);
 	}, [detailJobPost, listProvinces, listDistricts, allJobPst]);
+	const formatSalary = (salary) => {
+		if (!salary) {
+			return '0';
+		}
+
+		const salaryNumber = parseInt(salary);
+		const salaryInMillions = Math.floor(salaryNumber / 1000000);
+		const remainingDigits = salaryInMillions % 10;
+
+		if (remainingDigits === 0) {
+			return `${salaryInMillions / 10} Tr`;
+		} else {
+			return `${salaryInMillions} Tr`;
+		}
+	};
 	const handleCreateJobSaved = (id) => {
 		if (!user.id) {
 			navigate('/account/login');
@@ -331,9 +345,8 @@ const DetailJobPost = ({ cx }) => {
 																	{detailJobPost?.isAgreement === false ? (
 																		<>
 																			{' '}
-																			{parseInt(detailJobPost?.min_salary).toString().charAt(0)} Tr -{' '}
-																			{parseInt(detailJobPost?.max_salary).toString().charAt(0)} Tr
-																			VND
+																			Lương: {formatSalary(detailJobPost?.min_salary)} -{' '}
+																			{formatSalary(detailJobPost?.max_salary)} VND
 																		</>
 																	) : (
 																		<div>Thỏa thuận</div>
@@ -404,10 +417,16 @@ const DetailJobPost = ({ cx }) => {
 														Độ tuổi: {detailJobPost?.form_age} - {detailJobPost?.to_age}
 													</li>
 													<li>
-														Lương:
 														<span>
-															{parseInt(detailJobPost?.min_salary).toString().charAt(0)} Tr -{' '}
-															{parseInt(detailJobPost?.max_salary).toString().charAt(0)} Tr VND
+															{detailJobPost?.isAgreement === false ? (
+																<>
+																	<i className={sx('fa', 'fa-usd')} />
+																	Luong: {formatSalary(detailJobPost?.min_salary)} -{' '}
+																	{formatSalary(detailJobPost?.max_salary)} VND
+																</>
+															) : (
+																<div>Lương: Thỏa thuận</div>
+															)}
 														</span>
 													</li>
 												</ul>
@@ -570,9 +589,17 @@ const DetailJobPost = ({ cx }) => {
 																			{item.company.company_name}
 																		</Link>
 																		<p className={sx('salary')}>
-																			<em className={sx('fa', 'fa-usd')} />
-																			{parseInt(item?.min_salary).toString().charAt(0)} Tr -{' '}
-																			{parseInt(item?.max_salary).toString().charAt(0)} Tr VND
+																			{item.isAgreement === false ? (
+																				<>
+																					<em className={cx('fa', 'fa-usd')} />
+																					Lương: {formatSalary(item?.min_salary)} -{' '}
+																					{formatSalary(item?.max_salary)} VND
+																				</>
+																			) : (
+																				<>
+																					<span className={sx('text')}>Thỏa thuận</span>
+																				</>
+																			)}
 																		</p>
 																		<div className={sx('location')}>
 																			<em className={sx('mdi', 'mdi-map-marker')} />

@@ -68,6 +68,21 @@ const DetailCompany = ({ cx }) => {
 				toast.error(err.data?.message);
 			});
 	};
+	const formatSalary = (salary) => {
+		if (!salary) {
+			return '0';
+		}
+
+		const salaryNumber = parseInt(salary);
+		const salaryInMillions = Math.floor(salaryNumber / 1000000);
+		const remainingDigits = salaryInMillions % 10;
+
+		if (remainingDigits === 0) {
+			return `${salaryInMillions / 10} Tr`;
+		} else {
+			return `${salaryInMillions} Tr`;
+		}
+	};
 	return (
 		<section className={sx('jobsby-company', 'cb-section')}>
 			<div className={cx('container')}>
@@ -148,8 +163,8 @@ const DetailCompany = ({ cx }) => {
 														{job_post?.isAgreement === false ? (
 															<>
 																<em className={cx('fa', 'fa-usd')} />
-																Lương: {parseInt(job_post?.min_salary).toString().charAt(0)} Tr -{' '}
-																{parseInt(job_post?.max_salary).toString().charAt(0)} Tr VND
+																Lương: {formatSalary(job_post?.min_salary)} -{' '}
+																{formatSalary(job_post?.max_salary)} VND
 															</>
 														) : (
 															<>

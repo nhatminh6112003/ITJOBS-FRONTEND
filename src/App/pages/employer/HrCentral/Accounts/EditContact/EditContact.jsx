@@ -103,14 +103,14 @@ const EditContact = ({ cx }) => {
 										<div className={sx('row')}>
 											<div className={cx('col-lg-6')}>
 												<div className={sx('form-group')}>
-													<InputFieldControl control={control} name='firstname' label='Họ ' />
+													<InputFieldControl control={control} name='contact_name' label='Tên liên hệ ' />
 												</div>
 											</div>
-											<div className={cx('col-lg-6')}>
+											{/* <div className={cx('col-lg-6')}>
 												<div className={sx('form-group')}>
 													<InputFieldControl control={control} name='lastname' label='Tên' />
 												</div>
-											</div>
+											</div> */}
 										</div>
 										<div className={sx('row')}>
 											<div className={cx('col-lg-6')}>

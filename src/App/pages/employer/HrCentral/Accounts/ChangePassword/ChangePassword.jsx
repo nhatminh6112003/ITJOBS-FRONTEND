@@ -123,6 +123,7 @@ const ChangePassword = ({ cx }) => {
 														control={control}
 														name='confirmPassword'
 														label='Xác nhận mật khẩu mới'
+														type='password'
 													/>
 												</div>
 											</div>

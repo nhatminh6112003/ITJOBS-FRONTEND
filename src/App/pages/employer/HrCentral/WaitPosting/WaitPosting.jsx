@@ -222,15 +222,7 @@ const WaitPosting = ({ cx }) => {
 													allJobPost?.data?.map((job_post) => {
 														return (
 															<tr key={job_post.id}>
-																<td>
-																	<div className={sx('checkbox')}>
-																		<input
-																			type='checkbox'
-																			name='listresumes[]'
-																			defaultValue='35BADBC3'
-																		/>
-																	</div>
-																</td>
+																<td></td>
 																<td>
 																	<div className={sx('title')}>
 																		<Link to={`/employers/hrcentral/viewjob/${job_post.id}`}>

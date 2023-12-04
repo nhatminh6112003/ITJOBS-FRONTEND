@@ -43,15 +43,27 @@ const ManageResume = ({ cx }) => {
 			posted_by_id: employer?.id
 		}
 	});
-	useEffect(() => {
-		console.log(allJobPostActivity?.data);
-	}, [allJobPostActivity]);
+
 	const onSubmit = (data) => {
 		pushQuery({
 			...data
 		});
 	};
+	const formatSalary = (salary) => {
+		if (!salary) {
+			return '0';
+		}
 
+		const salaryNumber = parseInt(salary);
+		const salaryInMillions = Math.floor(salaryNumber / 1000000);
+		const remainingDigits = salaryInMillions % 10;
+
+		if (remainingDigits === 0) {
+			return `${salaryInMillions / 10} Tr`;
+		} else {
+			return `${salaryInMillions} Tr`;
+		}
+	};
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -59,18 +71,7 @@ const ManageResume = ({ cx }) => {
 					<div className={sx('heading-manage')}>
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}>Quản lý hồ sơ</h1>
-							{/* <div className={sx('button')}>
-								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/saved_search'>
-									<em className={cx('material-icons')}>notifications_none</em>
-									Thông Báo Ứng Viên
-								</a>
-							</div> */}
 						</div>
-						{/* <div className={sx('right-heading')}>
-							<a className={sx('support')} href='https://careerbuilder.vn/vi/employers/faq'>
-								Hướng dẫn
-							</a>
-						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form onSubmit={handleSubmit(onSubmit)}>
@@ -150,7 +151,7 @@ const ManageResume = ({ cx }) => {
 													<th width='10%'>Ngày nộp</th>
 													<th width='10%'>Cập nhật</th>
 													{/* <th width='10%%'>Trạng thái</th> */}
-													<th width='10%'>Xếp loại</th>
+													<th width='10%'>Trạng thái</th>
 													<th width='10%'>Kinh nghiệm</th>
 													<th width='10%'>Mức lương</th>
 													<th width='12%'>Thao tác</th>
@@ -182,10 +183,6 @@ const ManageResume = ({ cx }) => {
 																				<strong>Chức danh:</strong>{' '}
 																				{jobPostActivity?.resume?.resume_title?.title}
 																			</p>
-																			{/* <p>
-																				<strong>Địa điểm:</strong>
-																				{provinces}{' '}
-																			</p> */}
 																		</div>
 																	</td>
 																	<td>
@@ -194,9 +191,7 @@ const ManageResume = ({ cx }) => {
 																	<td>
 																		<time>{formatDate(jobPostActivity.updatedAt)}</time>
 																	</td>
-																	{/* <td>
-																		<p>Chưa quyết định</p>
-																	</td> */}
+
 																	<td>
 																		{ResumeStatusOptions?.map(
 																			(item) =>
@@ -205,19 +200,16 @@ const ManageResume = ({ cx }) => {
 																	</td>
 																	<td>
 																		<p>
-																			{jobPostActivity?.resume?.my_attaches?.yearOfExperience} năm
+																			{jobPostActivity?.resume?.my_attaches[0]?.yearOfExperience
+																				? jobPostActivity?.resume?.my_attaches[0]
+																						?.yearOfExperience + 'năm'
+																				: 'Không có kinh nghiệm'}{' '}
 																		</p>
 																	</td>
 																	<td>
 																		<p>
-																			{parseInt(jobPostActivity?.job_post?.min_salary)
-																				.toString()
-																				.charAt(0)}{' '}
-																			Tr -{' '}
-																			{parseInt(jobPostActivity?.job_post?.max_salary)
-																				.toString()
-																				.charAt(0)}{' '}
-																			Tr VND
+																			{formatSalary(jobPostActivity?.job_post?.min_salary)} -{' '}
+																			{formatSalary(jobPostActivity?.job_post?.max_salary)} VND
 																		</p>
 																	</td>
 																	<td>

@@ -71,7 +71,7 @@ const SideBar = (props) => {
 			icon: <LayersIcon />
 		},
 		{
-			title: 'Quản lý báo cáo xấu',
+			title: 'Quản lý báo cáo ',
 			route: routesPath.AdminPaths.feedBack,
 			icon: <LayersIcon />
 		}

@@ -84,6 +84,9 @@ const Company = () => {
 				if (r.status == 200) {
 					toast.success(r?.message);
 				}
+			})
+			.catch((err) => {
+				toast.error(err?.data?.message);
 			});
 		setModalConfirmState({ open: false, payload: null });
 	};
