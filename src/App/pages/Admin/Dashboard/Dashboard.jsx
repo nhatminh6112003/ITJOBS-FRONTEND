@@ -279,8 +279,9 @@ const Dashboard = ({ cx }) => {
 						<div className={cx('card__body')}>
 							<form className={sx('form')} onSubmit={handleSubmit(onSubmit)}>
 								<div className={sx('form-wrap')}>
-									<div className={sx('form-group', 'form-date')} style={{ display: 'flex' }}>
+									<div className={sx('form-group', 'form-date')} style={{ display: 'flex',justifyContent:'end',marginBottom:12 }}>
 										<InputFieldControl
+											style={{ border: '1px solid #6c6e6f', padding: '2px', borderRadius: 5 }}
 											className={sx('dates_range')}
 											id='startDate_1'
 											type='date'
@@ -289,6 +290,7 @@ const Dashboard = ({ cx }) => {
 										/>
 										<div style={{ paddingRight: '10px' }}> </div>
 										<InputFieldControl
+											style={{ border: '1px solid #6c6e6f', padding: '2px', borderRadius: 5 }}
 											className={sx('dates_range')}
 											id='endDate_1'
 											type='date'
@@ -296,7 +298,16 @@ const Dashboard = ({ cx }) => {
 											control={control}
 										/>
 										<div className={sx('form-group', 'form-submit')} style={{ marginLeft: '10px' }}>
-											<button className={sx('btn-gradient', 'btn-submit')} id='btn_chart1' type='submit'>
+											<button
+												className={sx('btn-gradient', 'btn-submit')}
+												id='btn_chart1'
+												type='submit'
+												style={{
+													backgroundColor: '#349eff',
+													color: 'white',
+													padding: '4px 8px',
+													borderRadius: 5
+												}}>
 												Áp dụng
 											</button>
 										</div>

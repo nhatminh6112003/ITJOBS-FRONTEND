@@ -50,13 +50,21 @@ const Login = () => {
 					<form className={cx('sign-in-form')} onSubmit={handleSubmit(handleLoginFormSubmit)}>
 						<h2 className={cx('title')}>Sign In</h2>
 						<div className={cx('input-field')}>
-							<i className={cx('fas', 'fa-user')} />
-							<input type='text' placeholder='Email' {...register('email')} />
+							<input
+								style={{ width: 300, paddingLeft: 12 }}
+								type='text'
+								placeholder='Email'
+								{...register('email')}
+							/>
 						</div>
 						{errors?.email && <span className={cx('error-message')}>{errors?.email.message}</span>}
 						<div className={cx('input-field')}>
-							<i className={cx('fas', 'fa-lock')} />
-							<input {...register('password')} type='password' placeholder='Password' />
+							<input
+								{...register('password')}
+								type='password'
+								placeholder='Password'
+								style={{ width: 300, paddingLeft: 12 }}
+							/>
 						</div>
 						{errors?.password && <span className={cx('error-message')}>{errors?.password.message}</span>}
 
