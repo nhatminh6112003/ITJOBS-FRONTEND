@@ -59,7 +59,11 @@ const EmployerDashboard = ({ cx }) => {
 		pushQuery({ ...data });
 	};
 
-	const { data } = useAnalyticsQuery();
+	const { data } = useAnalyticsQuery({
+		params: {
+			posted_by_id: employer?.id
+		}
+	});
 	const { data: analyticDegreeValueQuery } = useAnalyticDegreeValueQuery({
 		params: {
 			user_account_id: employer?.id,
