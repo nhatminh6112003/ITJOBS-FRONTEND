@@ -487,7 +487,7 @@ const ResumeDetail = ({ cx }) => {
 																	/>
 																)}
 
-															{ResumeCvEnum.CV_PROFILE && (
+															{jobPostActivity?.resume_type === ResumeCvEnum.CV_PROFILE && (
 																<iframe
 																	id='frm_view_pdf'
 																	frameBorder={0}
