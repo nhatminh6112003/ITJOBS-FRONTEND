@@ -12,8 +12,8 @@ const jobPostApi = createApi({
 			transformResponse: (response) => response
 		}),
 		analytics: build.query({
-			query: () => {
-				return { url: `/job_post/analytics`, method: 'GET' };
+			query: (arg) => {
+				return { url: `/job_post/analytics`, method: 'GET',params: arg.params };
 			},
 			providesTags: ['job_post'],
 			transformResponse: (response) => response.data
