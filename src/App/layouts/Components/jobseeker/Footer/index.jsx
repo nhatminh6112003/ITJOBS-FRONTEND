@@ -282,7 +282,7 @@ const Footer = ({ cx }) => {
 									</div>
 								</div>
 								<div className={cx('footer-social-links')}>
-									<h3>Kết nối với CareerBuilder.vn</h3>
+									<h3>Kết nối với Job .vn</h3>
 									<ul>
 										<li>
 											<a
