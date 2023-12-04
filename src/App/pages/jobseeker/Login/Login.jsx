@@ -34,7 +34,7 @@ const Login = () => {
 		<section className={cx('signin-form', 'cb-section')}>
 			<div className={cx('container')}>
 				<div className={cx('cb-title', 'cb-title-center')}>
-					<h2>Chào mừng bạn tham gia ItJobs</h2>
+					<h2>Chào mừng bạn tham gia Job Hunters</h2>
 				</div>
 				<div className={cx('box-shadown')}>
 					<div className={cx('row')}>
