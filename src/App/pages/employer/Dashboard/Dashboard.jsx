@@ -50,9 +50,7 @@ const EmployerDashboard = ({ cx }) => {
 	});
 
 	const { data: countCompanyService } = useAnalysisQuery(employer?.company?.id);
-	useEffect(() => {
-		console.log(countCompanyService);
-	}, [countCompanyService]);
+
 	const { data: analysisCandidateCompany } = useAnalysisCandidateCompanyQuery(employer?.company?.id);
 
 	const onSubmit = (data) => {

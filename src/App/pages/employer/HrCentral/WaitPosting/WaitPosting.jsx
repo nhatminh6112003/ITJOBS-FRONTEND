@@ -76,17 +76,17 @@ const WaitPosting = ({ cx }) => {
 	});
 
 	const updateStatusJobPost = async (id) => {
-		// if (!isServiceJobPostExits) {
-		// 	toast.error('Bạn chưa đăng ký dịch vụ đăng tuyển');
-		// 	return;
-		// }
-		// const currentDate = moment();
-		// const getServiceJobPost = myCompanyService?.data?.find((item) => item.service?.slug === ServiceSlugEnum.PostJob);
+		if (!isServiceJobPostExits) {
+			toast.error('Bạn chưa đăng ký dịch vụ đăng tuyển');
+			return;
+		}
+		const currentDate = moment();
+		const getServiceJobPost = myCompanyService?.data?.find((item) => item.service?.slug === ServiceSlugEnum.PostJob);
 
-		// if (currentDate.isAfter(getServiceJobPost?.expiration_date)) {
-		// 	toast.error('Dịch vụ đăng tuyển của bạn đã hết hạn');
-		// 	return;
-		// }
+		if (currentDate.isAfter(getServiceJobPost?.expiration_date)) {
+			toast.error('Dịch vụ đăng tuyển của bạn đã hết hạn');
+			return;
+		}
 
 		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date() } })
 			.unwrap()

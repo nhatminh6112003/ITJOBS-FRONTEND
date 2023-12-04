@@ -25,10 +25,7 @@ const ServicesAndContact = ({ cx }) => {
 	});
 	const onUpdateSubmit = async (data) => {
 		const array = data?.service?.trim().split(' ');
-		console.log('TCL: onUpdateSubmit -> data?.service', data?.service);
-		console.log('TCL: onUpdateSubmit -> array', array);
 		const info = employer?.id + ' ' + employer?.company?.id + ' ' + array[0];
-		console.log('TCL: onUpdateSubmit -> info', info);
 		CreatePaymentUrl({
 			amount: array[1],
 			language: 'vn',
