@@ -16,6 +16,7 @@ import { useCreateEmployerResumeApiMutation } from '~/App/providers/apis/employe
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { listProvinces } from '~/App/constants/provincesData';
+import formatVND from '~/Core/utils/formatVND';
 
 const sx = classNames.bind(styles);
 const FindJobSeeker = ({ cx }) => {
@@ -33,7 +34,6 @@ const FindJobSeeker = ({ cx }) => {
 	});
 	const [createEmployerResume] = useCreateEmployerResumeApiMutation();
 	const employer = useSelector((state) => state.auth?.employer);
-	const navigate = useNavigate();
 	const {
 		control,
 		handleSubmit,
@@ -64,6 +64,7 @@ const FindJobSeeker = ({ cx }) => {
 				toast.error(err);
 			});
 	};
+
 	return (
 		<section className={sx('resume-search', 'cb-section', 'bg-manage', 'main-tabslet')}>
 			<div className={cx('container')}>
@@ -402,16 +403,8 @@ const FindJobSeeker = ({ cx }) => {
 									<thead>
 										<tr>
 											<th width='48%'>Ứng Viên</th>
-											<th width='10%'>
-												<a href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem/sort/kng_desc'>
-													Kinh nghiệm
-												</a>
-											</th>
-											<th width='10%'>
-												<a href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem/sort/lng_desc'>
-													Lương
-												</a>
-											</th>
+											<th width='10%'>Kinh nghiệm</th>
+											<th width='10%'>Lương</th>
 											<th width='10%'>Nơi làm việc</th>
 											<th width='10%'>Thao tác</th>
 										</tr>
@@ -460,14 +453,16 @@ const FindJobSeeker = ({ cx }) => {
 															</div>
 														</td>
 														<td>
-															<p>{resume?.attachments[0]?.yearOfExperience}</p>
+															<p>
+																{resume?.attachments[0]?.yearOfExperience
+																	? resume?.attachments[0]?.yearOfExperience + ' Năm'
+																	: 'Chưa có kinh nghiệm'}
+															</p>
 														</td>
 														<td>
-															<p>
-																{parseInt(resume?.resume_desired_job?.salary_from).toString().charAt(0)}{' '}
-																Tr -{' '}
-																{parseInt(resume?.resume_desired_job?.salary_to).toString().charAt(0)}{' '}
-																Tr VND
+															<p style={{ width: '200px' }}>
+																{formatVND(resume?.resume_desired_job?.salary_from)} -{' '}
+																{formatVND(resume?.resume_desired_job?.salary_to)} VND
 															</p>
 														</td>
 														<td>
@@ -494,6 +489,13 @@ const FindJobSeeker = ({ cx }) => {
 												</>
 											);
 										})}
+										{listResume?.length === 0 && (
+											<tr>
+												<td colSpan={5} style={{ textAlign: 'center' }}>
+													Không tìm kiếm được hồ sơ phụ hợp
+												</td>
+											</tr>
+										)}
 									</tbody>
 								</table>
 							</div>

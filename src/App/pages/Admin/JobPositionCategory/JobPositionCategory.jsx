@@ -86,7 +86,7 @@ const JobPositionCategory = () => {
 				)
 			}
 		],
-		[tableData, toggle]
+		[data?.pagination.itemsPerPage, data?.pagination.pageIndex, tableData, toggle]
 	);
 
 	const handleConfirmDelete = async (id) => {
@@ -96,6 +96,9 @@ const JobPositionCategory = () => {
 				if (r.status == 200) {
 					toast.success(r?.message);
 				}
+			})
+			.catch((err) => {
+				toast.error(err?.data?.message);
 			});
 		setModalConfirmState({ open: false, payload: null });
 	};

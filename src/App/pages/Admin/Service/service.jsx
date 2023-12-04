@@ -91,9 +91,8 @@ const Service = () => {
 				)
 			}
 		],
-		[tableData, toggle]
+		[data?.pagination.itemsPerPage, data?.pagination.pageIndex, tableData, toggle]
 	);
-	console.log('tetee');
 	const handleConfirmDelete = async (id) => {
 		deleteMutation(id)
 			.unwrap()
@@ -101,6 +100,9 @@ const Service = () => {
 				if (r.status == 200) {
 					toast.success(r?.message);
 				}
+			})
+			.catch((err) => {
+				toast.error(err?.data?.message);
 			});
 		setModalConfirmState({ open: false, payload: null });
 	};
@@ -108,7 +110,7 @@ const Service = () => {
 	return (
 		<Fragment>
 			<Card
-				header={'Danh sách nghề nghiệp'}
+				header={'Danh sách dịch vụ'}
 				toolbar={
 					<Button onClick={() => toggle('create')} color='info' variant='contained' startIcon={<AddIcon />}>
 						Thêm mới

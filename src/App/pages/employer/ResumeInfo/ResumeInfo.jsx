@@ -15,7 +15,9 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { LevelArray } from '~/App/constants/levelEnum';
+import { useCreateEmployerResumeApiMutation } from '~/App/providers/apis/employerResumeApi';
 const sx = classNames.bind(styles);
+import { toast } from 'react-toastify';
 
 const ResumeInfo = ({ cx }) => {
 	const [sendMail] = useSendMailJobSeekerMutation();
@@ -29,6 +31,8 @@ const ResumeInfo = ({ cx }) => {
 
 	const { id } = useParams();
 	const { data } = useGetOneResumeQuery(id);
+	const employer = useSelector((state) => state.auth?.employer);
+	const [createEmployerResume] = useCreateEmployerResumeApiMutation();
 
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const { data: listDistricts } = useGetAllDistrictsQuery(
@@ -42,7 +46,20 @@ const ResumeInfo = ({ cx }) => {
 			skip: !data?.user_account?.resume_profile?.provinces
 		}
 	);
-
+	const handleSaveToFolder = (resumeId) => {
+		const data = {
+			user_account_id: employer.id,
+			resume_id: resumeId
+		};
+		createEmployerResume(data)
+			.unwrap()
+			.then((res) => {
+				toast.success('Đã lưu thành công!');
+			})
+			.catch((err) => {
+				toast.error(err);
+			});
+	};
 	useEffect(() => {
 		console.log(data);
 	}, [data]);
@@ -62,32 +79,10 @@ const ResumeInfo = ({ cx }) => {
 												<li>
 													<em className={cx('material-icons')}>folder_shared </em>
 													<a
-														href='javascript:void(0);'
-														onclick="showFoldersSelected('35C9210A', 'listresumes[]');"
-														title='Lưu thư mục'>
+														onClick={() => handleSaveToFolder(data.id)}
+														title='Lưu thư mục'
+														style={{ cursor: 'pointer' }}>
 														Lưu thư mục
-													</a>
-												</li>
-												<li>
-													<em className={cx('material-icons')}>account_box</em>
-													<a
-														href='javascript:void(0);'
-														onclick="showResumeForInvite('35BFE874','35C9210A');return false;"
-														title='Xem hồ sơ tương tự'>
-														Xem hồ sơ tương tự
-													</a>
-												</li>
-												<li>
-													<em className={cx('material-icons')}>picture_as_pdf </em>
-
-													<a onClick={() => exportPdf(data?.attachments?.file)} href='javascript:void(0)'>
-														Xuất file PDF
-													</a>
-												</li>
-												<li>
-													<em className={cx('material-icons')}>highlight_off</em>
-													<a className={cx('btn-hidden-resume')} style={{ cursor: 'pointer' }}>
-														Ẩn hồ sơ
 													</a>
 												</li>
 											</ul>

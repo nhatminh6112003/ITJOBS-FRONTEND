@@ -101,7 +101,21 @@ const AllJob = () => {
 			provinces: ''
 		});
 	};
+	const formatSalary = (salary) => {
+		if (!salary) {
+			return '0';
+		}
 
+		const salaryNumber = parseInt(salary);
+		const salaryInMillions = Math.floor(salaryNumber / 1000000);
+		const remainingDigits = salaryInMillions % 10;
+
+		if (remainingDigits === 0) {
+			return `${salaryInMillions / 10} Tr`;
+		} else {
+			return `${salaryInMillions} Tr`;
+		}
+	};
 	const gotoPreviousPage = () => {
 		dispatch({ type: PaginationActionEnums.GO_TO_PREV_PAGE });
 	};
@@ -476,10 +490,8 @@ const AllJob = () => {
 																			{job_post?.isAgreement === false ? (
 																				<>
 																					<em className={cx('fa', 'fa-usd')} />
-																					Lương:{' '}
-																					{parseInt(job_post?.min_salary).toString().charAt(0)} Tr
-																					- {parseInt(job_post?.max_salary).toString().charAt(0)}{' '}
-																					Tr VND
+																					Lương: {formatSalary(job_post?.min_salary)} -{' '}
+																					{formatSalary(job_post?.max_salary)} VND
 																				</>
 																			) : (
 																				<>
