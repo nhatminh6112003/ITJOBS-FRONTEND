@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { fontsEnum, colorsEnum, fontSize } from '~/App/constants/resumeTemplateEnum';
 import ChooseTemplate from './components/ChooseTemplate';
 import { toast } from 'react-toastify';
+import routesPath from '~/App/config/routesPath';
 const cx = classNames.bind(styles);
 const ChangeTemplate = () => {
 	let [currentFont, changeFont] = useState('');
@@ -18,7 +19,7 @@ const ChangeTemplate = () => {
 	let [language, changeLanguage] = useState('');
 	let [cvColor, setCvColor] = useState('');
 	const resume = useSelector((state) => state.auth?.user?.resume);
-
+	const user = useSelector((state) => state.auth?.user);
 	const { data: myResume, refetch } = useGetOneQuery(resume?.id);
 	const [updateUi, updateUiState] = useUpdateUiMutation();
 
@@ -69,7 +70,7 @@ const ChangeTemplate = () => {
 						<div className={cx('button')}>
 							<div className={cx('left')}>
 								<div className={cx('view-back')}>
-									<a href='javascript:void(0)' id='btn_preview'>
+									<a href={routesPath.BasePaths.ResumeStyle.replace(/:id/g, user.resume.id)} id='btn_preview'>
 										Xem CV Template
 									</a>
 								</div>
@@ -80,7 +81,7 @@ const ChangeTemplate = () => {
 										<span style={{ cursor: 'pointer' }}>Lưu Lại</span>
 									</a>
 								</div>
-								<div className={cx('download-profile')}>
+								{/* <div className={cx('download-profile')}>
 									<a
 										className={cx('btn-gradient')}
 										href='javascript:void(0);'
@@ -88,7 +89,7 @@ const ChangeTemplate = () => {
 										<span>Tải hồ sơ</span>
 										<em className={cx('material-icons')}>get_app</em>
 									</a>
-								</div>
+								</div> */}
 							</div>
 						</div>
 						<form method='post' name='frmTemplatePattern' id='frmTemplatePattern'>

@@ -32,16 +32,16 @@ export default function AccountMenu() {
 	};
 
 	const user_menu = [
-		{
-			id: 'profile',
-			icon: <PersonIcon />,
-			content: 'Profile'
-		},
-		{
-			id: 'setting',
-			icon: <Settings />,
-			content: 'Settings'
-		},
+		// {
+		// 	id: 'profile',
+		// 	icon: <PersonIcon />,
+		// 	content: 'Profile'
+		// },
+		// {
+		// 	id: 'setting',
+		// 	icon: <Settings />,
+		// 	content: 'Settings'
+		// },
 		{
 			id: 'logout',
 			icon: <Logout />,

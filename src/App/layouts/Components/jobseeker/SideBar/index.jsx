@@ -25,7 +25,7 @@ const SideBar = ({ className: cx }) => {
 			<nav className={cx('side-navbar')}>
 				<div className={cx('head-nav')}>
 					<div className={cx('my-cb-center')}>
-						<h2>My CareerBuilder Center </h2>
+						<h2>My Job Hunters Center </h2>
 					</div>
 					<ul className={cx('list-unstyled')}>
 						<li>
@@ -45,7 +45,7 @@ const SideBar = ({ className: cx }) => {
 							<NavLink
 								className={({ isActive }) => (isActive ? cx('active') : undefined)}
 								to={routesPath.JobseekerPaths.myProfile}>
-								<span>Hồ sơ Careerbuilder</span>
+								<span>Hồ sơ Job Hunters</span>
 							</NavLink>
 						</li>
 						<li>

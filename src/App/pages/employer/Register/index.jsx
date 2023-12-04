@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import RegisterForm from './components/RegisterForm';
+import routesPath from '~/App/config/routesPath';
 const Register = ({ cx }) => {
 	return (
 		<section className={cx('employer-signup-new', 'step-1', 'cb-section')}>
@@ -41,8 +43,13 @@ const Register = ({ cx }) => {
 					<div className={cx('col-12')}>
 						<div className={cx('right-note')}>
 							<p>
-								Nếu bạn đã có tài khoản. Vui lòng
-								<a href='https://careerbuilder.vn/vi/employers/login'>Đăng nhập</a>
+								<span
+									style={{
+										marginRight: '4px'
+									}}>
+									Nếu bạn đã có tài khoản. Vui lòng
+								</span>
+								<Link to={routesPath.EmployerPaths.login}>Đăng nhập</Link>
 							</p>
 						</div>
 					</div>

@@ -22,10 +22,15 @@ const userApi = createApi({
 				return { url: `/users/changePassword/${id}`, method: 'PATCH', body: payload };
 			},
 			invalidatesTags: ['users']
+		}),
+		analysisUser: build.query({
+			query: (arg) => {
+				return { url: '/users/analysis', method: 'GET', params: arg.params };
+			}
 		})
 	})
 });
 
-export const { useGetAllQuery, useGetOneUserQuery, useChangePasswordMutation } = userApi;
+export const { useGetAllQuery, useGetOneUserQuery, useChangePasswordMutation, useAnalysisUserQuery } = userApi;
 
 export default userApi;

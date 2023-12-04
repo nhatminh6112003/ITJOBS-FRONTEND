@@ -47,20 +47,13 @@ const Header = () => {
 												<a href='/tim-ung-vien'>Tìm Hồ Sơ Ứng Viên</a>
 											</li>
 											<li>
-												<a href='https://careerbuilder.vn/vi/employers/products-and-services/quang-cao-tuyen-dung/9'>
-													Quảng Cáo Tuyển Dụng
-												</a>
-											</li>
-											<li>
-												<a href='https://careerbuilder.vn/vi/employers/products-and-services'>
-													Xem tất cả dịch vụ
-												</a>
+												<a href='/employers/products-and-services'>Xem tất cả dịch vụ</a>
 											</li>
 										</ul>
 									</div>
 								</li>
 								<li className={cx('dropdown')}>
-									<Link to={routesPath.JobseekerPaths.dashboard}>HR Central</Link>
+									<Link to={routesPath.EmployerPaths.dashboard}>HR Central</Link>
 									<div className={cx('dropdown-menu')}>
 										<ul>
 											<li>
@@ -85,7 +78,9 @@ const Header = () => {
 						<div className={cx('main-login', 'dropdown')}>
 							{employer ? (
 								<Fragment>
-									<Link to='https://careerbuilder.vn/vi/employers/hrcentral/accounts' title='minh nguyễn 123'>
+									<Link
+										to='/employers/hrcentral/accounts/edit_employer'
+										title={employer?.firstname + employer?.lastname}>
 										<AccountCircleIcon sx={{ fontSize: 20, paddingRight: '5px' }} />
 										Hi,{' '}
 										<span className={cx('name')}>
@@ -145,11 +140,6 @@ const Header = () => {
 							)}
 						</div>
 
-						<div className={cx('main-noti')} style={{ display: 'none' }}>
-							<a href=''>
-								<span className='mdi mdi-cart' />
-							</a>
-						</div>
 						<div className={cx('main-candidates')}>
 							<Link to={routesPath.JobseekerPaths.home}>
 								<em className={cx('fa', 'fa-external-link')} />

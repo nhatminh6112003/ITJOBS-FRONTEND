@@ -74,12 +74,12 @@ const SideBar = (props) => {
 			title: 'Quản lý báo cáo xấu',
 			route: routesPath.AdminPaths.feedBack,
 			icon: <LayersIcon />
-		},
-		{
-			title: 'Cài đặt',
-			route: '/settings',
-			icon: <Settings />
 		}
+		// {
+		// 	title: 'Cài đặt',
+		// 	route: '/settings',
+		// 	icon: <Settings />
+		// }
 	];
 
 	const activeItem = SideBarMenu.findIndex((item) => item.route === props?.location?.pathname);
