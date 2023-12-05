@@ -285,7 +285,7 @@ const Footer = ({ cx }) => {
 									</div>
 								</div>
 								<div className={cx('footer-social-links')}>
-									<h3></h3>
+									<h3>Kết nối với CareerBuilder.vn</h3>
 									<ul>
 										<li>
 											<a
@@ -318,16 +318,16 @@ const Footer = ({ cx }) => {
 					</section>
 					<section className={cx('bottom-footer')}>
 						<div className={cx('left-bottom-footer')}>
-							{/* <p>
+							<p>
 								Trụ sở chính: Tầng 6, Tòa nhà Pasteur, 139 Pasteur, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh -
 								Tel: (84.28) 3822 6060{' '}
 							</p>
 							<p>
 								Văn phòng Hà Nội: Tầng 17, Tòa nhà VIT, 519 Kim Mã, Quận Ba Đình, Hà Nội - Tel: (84.24) 7305
 								6060{' '}
-							</p> */}
-							{/* <p>Email: contact@careerbuilder.vn</p> */}
-							{/* <p>Copyright © CareerBuilder Vietnam.</p> */}
+							</p>
+							<p>Email: contact@careerbuilder.vn</p>
+							<p>Copyright © CareerBuilder Vietnam.</p>
 						</div>
 						<div className={cx('right-bottom-footer')}></div>
 					</section>

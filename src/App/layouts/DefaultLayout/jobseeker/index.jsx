@@ -4,7 +4,7 @@ import { cx } from './JobSeekerStyles';
 import Loading from '~/Core/components/common/Loading';
 
 const JobSeekerStyles = lazy(() => import('./JobSeekerStyles'));
-const Footer = lazy(() => import('../../components/Jobseeker/Footer'));
+const Footer = lazy(() => import('../../Components/jobseeker/Footer'));
 export const JobSeekerLayout = ({ children }) => {
 	return (
 		<>

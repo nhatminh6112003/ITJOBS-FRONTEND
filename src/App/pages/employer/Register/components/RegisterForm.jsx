@@ -14,12 +14,12 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
 import UserRoleEnum from '~/App/constants/roleEnum';
-import { listProvinces } from '~/App/constants/provincesData';
 const RegisterForm = ({ cx }) => {
 	const [registerMutation, { isLoading }] = useRegisterMutation();
 	const [companyMutation] = useCreateCompanyMutation();
 	const navigate = useNavigate();
 
+	const { data: listProvinces } = useGetAllProvincesQuery({});
 	const { control, handleSubmit, register } = useForm({
 		defaultValues: {
 			user_type_id: UserRoleEnum.EMPLOYER,
