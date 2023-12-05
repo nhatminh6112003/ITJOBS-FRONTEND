@@ -24,7 +24,7 @@ const LoginForm = ({ className: cx, onSubmit, isLoading }) => {
 					id='submit_login'
 					className={cx('btn-gradient')}
 					disabled={isLoading}
-					style={{ backgroundImage: isLoading ? 'linear-gradient(270deg, #5c5c5c, #5c5c5c, #5c5c5c)' : '' }}>
+					style={{ backgroundImage: isLoading ? 'linear-gradient(270deg, #bdc3c7, #bdc2c4)' : '' }}>
 					Đăng nhập
 				</button>
 			</div>
