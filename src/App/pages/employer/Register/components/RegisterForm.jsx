@@ -59,7 +59,7 @@ const RegisterForm = ({ cx }) => {
 				<div className={cx('step-title', 'd-flex')}>
 					<div className={cx('main-step-title')}>
 						<h3>Bước 1 : Thông Tin Đăng Nhập</h3>
-						<p>Quý khách sử dụng thông tin tài khoản này để đăng nhập vào JobHunter.vn</p>
+						<p>Quý khách sử dụng thông tin tài khoản này để đăng nhập vào JobHunters.vn</p>
 					</div>
 				</div>
 				<div className={cx('main-form')}>
@@ -142,7 +142,7 @@ const RegisterForm = ({ cx }) => {
 				<div className={cx('step-title', 'd-flex')}>
 					<div className={cx('main-step-title')}>
 						<h3>Bước 2 : Thông Tin Công Ty</h3>
-						<p>Thông tin doanh nghiệp của Quý Công ty trên JobHunter</p>
+						<p>Thông tin doanh nghiệp của Quý Công ty trên JobHunters</p>
 					</div>
 				</div>
 				<div className={cx('main-form')}>

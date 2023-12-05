@@ -10,6 +10,7 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 import { useCreatePaymentUrlMutation, useGetAllByServiceTypeQuery } from '~/App/providers/apis/serviceApi';
+import { useCreateOrderMutation } from '~/App/providers/apis/orderApi';
 const ServicesAndContact = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
 	const [CreatePaymentUrl] = useCreatePaymentUrlMutation();
@@ -26,6 +27,16 @@ const ServicesAndContact = ({ cx }) => {
 	const onUpdateSubmit = async (data) => {
 		const array = data?.service?.trim().split(' ');
 		const info = employer?.id + ' ' + employer?.company?.id + ' ' + array[0];
+		createOrder({
+			company_id: employer?.company?.id,
+			total: array[1],
+			status: 'SUCCESS'
+		})
+			.unwrap()
+			.then((r) => {
+				console.log(r);
+			});
+
 		CreatePaymentUrl({
 			amount: array[1],
 			language: 'vn',
@@ -44,6 +55,7 @@ const ServicesAndContact = ({ cx }) => {
 			skip: !selectedServiceType
 		}
 	);
+	const [createOrder] = useCreateOrderMutation();
 	useEffect(() => {
 		updateReset({
 			name: employer?.firstname + ' ' + employer?.lastname,
