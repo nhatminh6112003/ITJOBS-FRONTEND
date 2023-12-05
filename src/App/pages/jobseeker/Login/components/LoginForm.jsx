@@ -19,7 +19,12 @@ const LoginForm = ({ className: cx, onSubmit, isLoading }) => {
 				<InputFieldControl control={control} name='password' placeholder='Vui lòng nhập mật khẩu' type='password' />
 			</div>
 			<div className={cx('form-group', 'form-submit')}>
-				<button type='submit' id='submit_login' className={cx('btn-gradient')} disabled={isLoading}>
+				<button
+					type='submit'
+					id='submit_login'
+					className={cx('btn-gradient')}
+					disabled={isLoading}
+					style={{ backgroundImage: isLoading ? 'linear-gradient(270deg, #5c5c5c, #5c5c5c, #5c5c5c)' : '' }}>
 					Đăng nhập
 				</button>
 			</div>
