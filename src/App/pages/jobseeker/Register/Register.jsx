@@ -7,7 +7,7 @@ import styles from './Register.module.css';
 const cx = classNames.bind(styles);
 const Register = () => {
 	return (
-		<section className={cx('register-form', 'cb-section')}>
+		<section className={cx('register-form', 'cb-section')} style={{ paddingBottom: 60 }}>
 			<div className={cx('container')}>
 				<div className={cx('cb-title', 'cb-title-center')}>
 					<h2
