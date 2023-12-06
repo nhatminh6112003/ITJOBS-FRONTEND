@@ -7,11 +7,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import UserRoleEnum, { UserType } from '~/App/constants/roleEnum';
 import { logout } from '~/App/providers/slices/authSlice';
 import { Fragment } from 'react';
+import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 
 const cx = classNames.bind(styles);
 const Header = () => {
 	const employer = useSelector((state) => state.auth?.employer);
 	const dispatch = useDispatch();
+	const { data: listServiceType } = useGetAllServiceTypeQuery();
 
 	const handleLogout = () => {
 		dispatch(logout({ Role: UserType[UserRoleEnum.EMPLOYER] }));
@@ -40,14 +42,13 @@ const Header = () => {
 									<Link to={routesPath.EmployerPaths.serviceAndContact}>Sản Phẩm và Dịch Vụ</Link>
 									<div className={cx('dropdown-menu')}>
 										<ul>
+											{listServiceType?.data?.map((item) => (
+												<li key={item.id}>
+													<Link to={`/employers/products-and-services/${item.id}`}>{item.name}</Link>
+												</li>
+											))}
 											<li>
-												<a href='/employers/postjobs'>Đăng Tuyển Dụng</a>
-											</li>
-											<li>
-												<a href='/tim-ung-vien'>Tìm Hồ Sơ Ứng Viên</a>
-											</li>
-											<li>
-												<a href='/employers/products-and-services'>Xem tất cả dịch vụ</a>
+												<Link to={routesPath.EmployerPaths.serviceAndContact}>Xem tất cả dịch vụ</Link>
 											</li>
 										</ul>
 									</div>

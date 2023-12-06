@@ -11,7 +11,7 @@ const TabMenu = [
 	},
 	{
 		title: 'Mua dịch vụ',
-		path: routesPath.EmployerPaths.productAndService
+		path: routesPath.EmployerPaths.serviceAndContact
 	}
 ];
 
