@@ -13,7 +13,7 @@ const jobPostApi = createApi({
 		}),
 		analytics: build.query({
 			query: (arg) => {
-				return { url: `/job_post/analytics`, method: 'GET',params: arg.params };
+				return { url: `/job_post/analytics`, method: 'GET', params: arg.params };
 			},
 			providesTags: ['job_post'],
 			transformResponse: (response) => response.data
@@ -70,6 +70,13 @@ const jobPostApi = createApi({
 				return { url: `/job_post/${id}`, method: 'DELETE' };
 			},
 			invalidatesTags: ['job_post']
+		}),
+		analyticTotalPost: build.query({
+			query: () => {
+				return { url: `/job_post/analyticTotalPost`, method: 'GET' };
+			},
+			providesTags: ['job_post'],
+			transformResponse: (response) => response.data
 		})
 	})
 });
@@ -84,7 +91,8 @@ export const {
 	useCalculateCorrelationIndexQuery,
 	useAnalyticJobSeekerApplyByDayQuery,
 	useAnalyticResumeStatusQuery,
-	useAnalyticDegreeValueQuery
+	useAnalyticDegreeValueQuery,
+	useAnalyticTotalPostQuery
 } = jobPostApi;
 
 export default jobPostApi;

@@ -19,7 +19,8 @@ import moment from 'moment';
 import formatVND from '~/Core/utils/formatVND';
 import UserRoleEnum from '~/App/constants/roleEnum';
 import { useAnalysisUserQuery } from '~/App/providers/apis/userApi';
-
+import { useAnalysisOrderQuery } from '~/App/providers/apis/orderApi';
+import { useAnalyticTotalPostQuery } from '~/App/providers/apis/jobPostApi';
 const sx = classNames.bind(styles);
 const Dashboard = ({ cx }) => {
 	const themeReducer = useSelector((state) => state.theme.mode);
@@ -38,6 +39,8 @@ const Dashboard = ({ cx }) => {
 	});
 	const { data: countEmployer } = useAnalysisUserQuery({ params: { user_type_id: UserRoleEnum.EMPLOYER } });
 	const { data: countJobSeeker } = useAnalysisUserQuery({ params: { user_type_id: UserRoleEnum.JOBSEEKER } });
+	const { data: countOrder } = useAnalysisOrderQuery();
+	const { data: countJobPost } = useAnalyticTotalPostQuery();
 
 	const statusCards = [
 		{
@@ -47,6 +50,14 @@ const Dashboard = ({ cx }) => {
 		{
 			count: countJobSeeker?.data,
 			title: 'Ứng viên'
+		},
+		{
+			count: countOrder,
+			title: 'Đơn hàng'
+		},
+		{
+			count: countJobPost?.length,
+			title: 'Bài đăng tuyển dụng'
 		}
 	];
 	const onSubmit = (data) => {
@@ -110,7 +121,9 @@ const Dashboard = ({ cx }) => {
 						<div className={cx('card__body')}>
 							<form className={sx('form')} onSubmit={handleSubmit(onSubmit)}>
 								<div className={sx('form-wrap')}>
-									<div className={sx('form-group', 'form-date')} style={{ display: 'flex',justifyContent:'end',marginBottom:12 }}>
+									<div
+										className={sx('form-group', 'form-date')}
+										style={{ display: 'flex', justifyContent: 'end', marginBottom: 12 }}>
 										<InputFieldControl
 											style={{ border: '1px solid #6c6e6f', padding: '2px', borderRadius: 5 }}
 											className={sx('dates_range')}
@@ -154,7 +167,7 @@ const Dashboard = ({ cx }) => {
 						</div>
 					</div>
 				</div>
-				<div className={cx('col-12')}>
+				{/* <div className={cx('col-12')}>
 					<div className={cx('card')}>
 						<div className={cx('card__header')}>
 							<h3>latest orders</h3>
@@ -164,7 +177,7 @@ const Dashboard = ({ cx }) => {
 							<Link to='/'>view all</Link>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

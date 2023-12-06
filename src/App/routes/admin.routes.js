@@ -14,6 +14,7 @@ const Benefits = lazy(() => import('~/App/pages/Admin/Benefits'));
 const Service = lazy(() => import('~/App/pages/Admin/Service'));
 const ServiceType = lazy(() => import('~/App/pages/Admin/ServiceType'));
 const FeedBack = lazy(() => import('~/App/pages/Admin/FeedBack/FeedBack'));
+const Order = lazy(() => import('~/App/pages/Admin/Order/Order'));
 
 const adminPrivateRoutes = [
 	{ path: routesPath.AdminPaths.dashboard, component: Dashboard },
@@ -27,6 +28,7 @@ const adminPrivateRoutes = [
 	{ path: routesPath.AdminPaths.benefits, component: Benefits },
 	{ path: routesPath.AdminPaths.service, component: Service },
 	{ path: routesPath.AdminPaths.serviceType, component: ServiceType },
-	{ path: routesPath.AdminPaths.feedBack, component: FeedBack }
+	{ path: routesPath.AdminPaths.feedBack, component: FeedBack },
+	{ path: routesPath.AdminPaths.order, component: Order }
 ];
 export { adminPublicRoutes, adminPrivateRoutes };
