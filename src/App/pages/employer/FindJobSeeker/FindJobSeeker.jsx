@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './find-job-seeker.module.css';
 import classNames from 'classnames/bind';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
@@ -17,6 +17,10 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { listProvinces } from '~/App/constants/provincesData';
 import formatVND from '~/Core/utils/formatVND';
+import useRegisterServiceResume from './components/useRegisterServiceResume';
+import ServiceSlugEnum from '~/App/constants/serviceEnum';
+import moment from 'moment';
+import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
 
 const sx = classNames.bind(styles);
 const FindJobSeeker = ({ cx }) => {
@@ -46,6 +50,13 @@ const FindJobSeeker = ({ cx }) => {
 			provinces: query.provinces || ''
 		}
 	});
+	const isServiceJobPostExits = useRegisterServiceResume(employer?.company?.id, ServiceSlugEnum.FindResume);
+	const { data: myCompanyService } = useGetAllCompany_serviceQuery({
+		params: {
+			company_id: employer?.company?.id
+		}
+	});
+	const navigate = useNavigate();
 
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
@@ -65,6 +76,21 @@ const FindJobSeeker = ({ cx }) => {
 			});
 	};
 
+	useEffect(() => {
+		const currentDate = moment();
+		const getServiceFindResume = myCompanyService?.data?.find(
+			(item) => item.service?.slug === ServiceSlugEnum.FindResume
+		);
+
+		if (currentDate.isAfter(getServiceFindResume?.expiration_date)) {
+			toast.error('Dịch vụ tìm hồ sơ ứng viên của bạn đã hết hạn');
+			return;
+		}
+		
+		if (!isServiceJobPostExits) {
+			navigate(`/employers/services-and-contact`);
+		}
+	}, [isServiceJobPostExits, myCompanyService?.data, navigate]);
 	return (
 		<section className={sx('resume-search', 'cb-section', 'bg-manage', 'main-tabslet')}>
 			<div className={cx('container')}>
@@ -410,86 +436,92 @@ const FindJobSeeker = ({ cx }) => {
 										</tr>
 									</thead>
 									<tbody>
-										{listResume?.map((resume) => {
-											return (
-												<>
-													<tr key={resume.id}>
-														<td>
-															<div className={sx('title')}>
-																<div className={sx('job-name')}>
+										{isServiceJobPostExits &&
+											listResume?.map((resume) => {
+												return (
+													<>
+														<tr key={resume.id}>
+															<td>
+																<div className={sx('title')}>
+																	<div className={sx('job-name')}>
+																		<Link
+																			className={sx('job-title')}
+																			to={`/employers/resumeinfo/${resume.id}`}
+																			title={resume?.resume_title?.title}>
+																			<b>{resume?.resume_title?.title}</b>
+																		</Link>
+																	</div>
+																	<div className={sx('status')}></div>
 																	<Link
-																		className={sx('job-title')}
-																		to={`/employers/resumeinfo/${resume.id}`}
-																		title={resume?.resume_title?.title}>
-																		<b>{resume?.resume_title?.title}</b>
+																		className={sx('name')}
+																		to={`/employers/resumeinfo/${resume.id}`}>
+																		{resume.user_account.lastname +
+																			' ' +
+																			resume.user_account.firstname}
 																	</Link>
+																	<ul className={sx('info-list')}>
+																		<li>
+																			<p>
+																				{' '}
+																				<strong>Học vấn: </strong>
+																				{degree?.[resume?.attachments[0]?.job_degree_value]}
+																			</p>
+																		</li>
+																		<li>
+																			<p>
+																				{' '}
+																				<strong>Cấp bậc: </strong>
+																				{LevelArray.map((value) => {
+																					if (
+																						resume?.resume_desired_job?.position_id ===
+																						value.value
+																					) {
+																						return value.label;
+																					}
+																				})}
+																			</p>
+																		</li>
+																	</ul>
 																</div>
-																<div className={sx('status')}></div>
-																<Link className={sx('name')} to={`/employers/resumeinfo/${resume.id}`}>
-																	{resume.user_account.lastname + ' ' + resume.user_account.firstname}
-																</Link>
-																<ul className={sx('info-list')}>
+															</td>
+															<td>
+																<p>
+																	{resume?.attachments[0]?.yearOfExperience
+																		? resume?.attachments[0]?.yearOfExperience + ' Năm'
+																		: 'Chưa có kinh nghiệm'}
+																</p>
+															</td>
+															<td>
+																<p style={{ width: '200px' }}>
+																	{formatVND(resume?.resume_desired_job?.salary_from)} -{' '}
+																	{formatVND(resume?.resume_desired_job?.salary_to)} VND
+																</p>
+															</td>
+															<td>
+																{listProvinces?.map((item) => {
+																	if (resume?.resume_desired_job?.provinces === item?.code) {
+																		return <p>{item?.name}</p>;
+																	}
+																})}
+															</td>
+															<td>
+																<ul className={sx('list-manipulation')}>
 																	<li>
-																		<p>
-																			{' '}
-																			<strong>Học vấn: </strong>
-																			{degree?.[resume?.attachments[0]?.job_degree_value]}
-																		</p>
-																	</li>
-																	<li>
-																		<p>
-																			{' '}
-																			<strong>Cấp bậc: </strong>
-																			{LevelArray.map((value) => {
-																				if (
-																					resume?.resume_desired_job?.position_id === value.value
-																				) {
-																					return value.label;
-																				}
-																			})}
-																		</p>
+																		<a
+																			onClick={() => handleSaveToFolder(resume.id)}
+																			className={sx('btn-save-folder')}
+																			style={{ cursor: 'pointer' }}
+																			title='Lưu vào thư mục'>
+																			<em className={cx('material-icons')}>folder_shared </em>
+																		</a>
 																	</li>
 																</ul>
-															</div>
-														</td>
-														<td>
-															<p>
-																{resume?.attachments[0]?.yearOfExperience
-																	? resume?.attachments[0]?.yearOfExperience + ' Năm'
-																	: 'Chưa có kinh nghiệm'}
-															</p>
-														</td>
-														<td>
-															<p style={{ width: '200px' }}>
-																{formatVND(resume?.resume_desired_job?.salary_from)} -{' '}
-																{formatVND(resume?.resume_desired_job?.salary_to)} VND
-															</p>
-														</td>
-														<td>
-															{listProvinces?.map((item) => {
-																if (resume?.resume_desired_job?.provinces === item?.code) {
-																	return <p>{item?.name}</p>;
-																}
-															})}
-														</td>
-														<td>
-															<ul className={sx('list-manipulation')}>
-																<li>
-																	<a
-																		onClick={() => handleSaveToFolder(resume.id)}
-																		className={sx('btn-save-folder')}
-																		style={{ cursor: 'pointer' }}
-																		title='Lưu vào thư mục'>
-																		<em className={cx('material-icons')}>folder_shared </em>
-																	</a>
-																</li>
-															</ul>
-														</td>
-													</tr>
-												</>
-											);
-										})}
-										{listResume?.length === 0 && (
+															</td>
+														</tr>
+													</>
+												);
+											})}
+										{isServiceJobPostExits && listResume?.length === 0 && (
 											<tr>
 												<td colSpan={5} style={{ textAlign: 'center' }}>
 													Không tìm kiếm được hồ sơ phụ hợp

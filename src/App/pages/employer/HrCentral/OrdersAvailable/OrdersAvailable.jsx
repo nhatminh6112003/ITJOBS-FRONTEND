@@ -13,23 +13,21 @@ const OrdersAvailable = ({ cx }) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const employer = useSelector((state) => state.auth?.employer);
-	const [expirationDate, setExpirationDate] = useState(0);
 	const { data: allOrder } = useGetAllCompany_serviceQuery({
 		params: {
 			company_id: employer?.company?.id
 		}
 	});
-	const now = moment();
-	const expirationMoment = moment(expirationDate);
-	const duration = moment.duration(expirationMoment.diff(now));
-	// Lấy số ngày
-	const daysRemaining = duration.asDays();
-	useEffect(() => {
-		allOrder?.data?.map((value) => {
-			const expirationDate = value?.expiration_date;
-			setExpirationDate(expirationDate);
-		});
-	}, [allOrder, now, setExpirationDate]);
+
+	const calculateRemainingDays = (order) => {
+		if (order?.expiration_date) {
+			const expirationDate = moment(order.expiration_date);
+			const currentDate = moment();
+			const remainingDays = expirationDate.diff(currentDate, 'days');
+			return Math.max(0, remainingDays) + ' ngày';
+		}
+		return '0 ngày';
+	};
 
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
@@ -152,12 +150,7 @@ const OrdersAvailable = ({ cx }) => {
 																		</td>
 																		<td>
 																			<div className={sx('title')}>
-																				<p>
-																					{' '}
-																					{daysRemaining
-																						? Math.floor(daysRemaining % 30) + ' ngày'
-																						: '0 ngày'}
-																				</p>
+																				<p>{calculateRemainingDays(order)}</p>
 																			</div>
 																		</td>
 																		<td>
@@ -167,7 +160,11 @@ const OrdersAvailable = ({ cx }) => {
 																			<p>{formatDate(order?.expiration_date)}</p>
 																		</td>
 																		<td>
-																			<p>{order?.expiration_date !== 0 ? 'Còn hạn' : 'Hết hạn'}</p>
+																			<p>
+																				{moment(order?.expiration_date).isAfter(moment(), 'day')
+																					? 'Còn hạn'
+																					: 'Hết hạn'}
+																			</p>
 																		</td>
 																	</tr>
 																</>
