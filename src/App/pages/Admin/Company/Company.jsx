@@ -1,10 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import Table from '~/Core/components/common/Table/Table';
-import {
-	useGetAllCompanyQuery,
-	useUpdateCompanyMutation,
-	useDeleteCompanyMutation
-} from '~/App/providers/apis/companyApi';
+import { useGetAllCompanyQuery, useDeleteCompanyMutation } from '~/App/providers/apis/companyApi';
 import { useMemo } from 'react';
 import useServerPagination from '~/App/hooks/useServerPagination';
 import { useSearchParams } from 'react-router-dom';
@@ -16,8 +12,7 @@ import { useState } from 'react';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import { toast } from 'react-toastify';
 import Card from '~/Core/components/common/Card';
-import { AddIcon } from '~/Core/resources';
-import { Button } from '@mui/material';
+import { CompanyTypeArray } from '~/App/constants/companyEnum';
 
 const Company = () => {
 	const [dataUpdate, setDataUpdate] = useState(null);
@@ -26,8 +21,23 @@ const Company = () => {
 		update: false,
 		create: false
 	});
-
-	const { data, isFetching } = useGetAllCompanyQuery();
+	const { paginationState, handlePaginate } = useServerPagination();
+	const [searchParams] = useSearchParams();
+	const keyword = searchParams.get('keyword') || paginationState.queryPageFilter;
+	const pageSize = searchParams.get('pageSize') || paginationState.queryPageSize;
+	const page = searchParams.get('page') || paginationState.queryPageIndex;
+	const { data, isFetching } = useGetAllCompanyQuery(
+		{
+			params: {
+				keyword,
+				limit: pageSize,
+				page
+			}
+		},
+		{
+			refetchOnMountOrArgChange: true
+		}
+	);
 
 	const [deleteMutation] = useDeleteCompanyMutation();
 	const tableData = useMemo(() => data?.data ?? [], [data]);
@@ -38,17 +48,27 @@ const Company = () => {
 			accessor: 'index',
 			isSort: true,
 			sortable: true,
-			canSort: true
+			canSort: true,
+			Cell: ({ row }) => +data?.pagination?.itemsPerPage * (data?.pagination?.pageIndex - 1) + Number(row.index) + 1
 		},
 		{ Header: 'Tên công ty', accessor: 'company_name' },
-		{ Header: 'Quy mô công ty', accessor: 'company_size' },
-		{ Header: 'Địa chỉ website', accessor: 'company_website_url' },
+		{
+			Header: 'Loại hình công ty',
+			accessor: 'company_type',
+			Cell: ({ row: { values } }) => {
+				const companyType = CompanyTypeArray.find((item) => item.value === values?.company_type);
+				return companyType ? companyType.label : '';
+			}
+		},
+		{
+			Header: 'Quy mô công ty',
+			accessor: 'company_size'
+		},
 		{ Header: 'Mã số thuế', accessor: 'tax_code' },
 		{ Header: 'Địa chỉ', accessor: 'address' },
 		{ Header: 'Tên Người Liên Hệ', accessor: 'contact_name' },
 		{ Header: 'Số điện thoại người liên hệ', accessor: 'contact_phone' },
-		{ Header: 'Vị Trí', accessor: 'position' },
-
+		{ Header: 'Chức danh', accessor: 'position' },
 		{
 			Header: 'Thao tác',
 			accessor: 'id',
@@ -97,9 +117,11 @@ const Company = () => {
 				header={'Quản lý công ty'}
 				body={
 					<Table
+						pageCount={data?.pagination?.totalPages}
 						loading={isFetching}
 						columns={columns}
 						data={tableData || []}
+						onServerPaginate={handlePaginate}
 						serverPaginationProps={data?.pagination}
 					/>
 				}
