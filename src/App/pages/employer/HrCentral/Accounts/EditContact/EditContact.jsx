@@ -13,6 +13,8 @@ import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import TabMenu from '../components/TabMenu';
 import { useEffect } from 'react';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import { CompanySchema } from '~/App/schemas/companySchema';
+import { yupResolver } from '@hookform/resolvers/yup';
 const sx = classNames.bind(styles);
 const EditContact = ({ cx }) => {
 	const location = useLocation();
@@ -41,11 +43,9 @@ const EditContact = ({ cx }) => {
 			company_website_url: company?.data?.company_website_url,
 			company_summary: company?.data?.company_summary,
 			provinces: company?.data?.provinces,
-			email: company?.data?.user_account?.email,
-			lastname: company?.data?.user_account?.lastname,
-			firstname: company?.data?.user_account?.firstname,
-			user_account_id: company?.data?.user_account?.id
-		}
+			email: company?.data?.user_account?.email
+		},
+		resolver: yupResolver(CompanySchema)
 	});
 	const onSubmit = ({ banner, logo, ...data }) => {
 		const formData = new FormData();
