@@ -5,8 +5,8 @@ const Register = ({ cx }) => {
 	return (
 		<section className={cx('employer-signup-new', 'step-1', 'cb-section')}>
 			<div className={cx('container')}>
-				<div className={cx('row', 'row-sp')}>
-					<div className={cx('col-xl-12')}>
+				<div className={cx('row', 'row-sp')} style={{ justifyContent: 'center' }}>
+					<div className={cx('col-xl-8')}>
 						<div className={cx('box-info-signup')}>
 							<div className={cx('title')}>
 								<h2>Đăng Ký Tài Khoản Nhà Tuyển Dụng</h2>

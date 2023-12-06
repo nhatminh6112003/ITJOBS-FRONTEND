@@ -45,7 +45,7 @@ const UnPosting = ({ cx }) => {
 			dateType: query.dateType || '',
 			fromDate: query.fromDate || '',
 			toDate: query.toDate || '',
-			posted_by_id: employer?.id,
+			user_account_id: employer?.id,
 			status: jobPostStatusEnum.Pause,
 			isDeleted: false
 		},

@@ -18,10 +18,7 @@ const Banner = () => {
 					<div className={cx('swiper-container')}>
 						<div className={cx('swiper-wrapper', 'pc-swiper-wrapper')}>
 							<div className={cx('swiper-slide')}>
-								<a
-									href='https://careerbuilder.vn/vi/jobseekers/ajax/counterbannerclick?url=aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL25oYS10dXllbi1kdW5nL25nYW4taGFuZy10bWNwLXF1YW4tZG9pLjM1QTY2RDcwLmh0bWw=&id=291'
-									rel='nofollow; noreferrer'
-									target='_blank'>
+								<a href='/' target='_blank'>
 									<div className={cx('image')}>
 										<img
 											src='https://images.careerbuilder.vn/background/mbbank_1900x570_2022_12_12_1670843523.jpg'
@@ -40,15 +37,9 @@ const Banner = () => {
 					<div className={cx('swiper-container')}>
 						<div className={cx('swiper-wrapper', 'mobile-swiper-wrapper')}>
 							<div className={cx('swiper-slide')}>
-								<a
-									href='https://careerbuilder.vn/vi/jobseekers/ajax/counterbannerclick?url=aHR0cHM6Ly9jYXJlZXJidWlsZGVyLnZuL3ZpL25oYS10dXllbi1kdW5nL25nYW4taGFuZy10bWNwLXF1YW4tZG9pLjM1QTY2RDcwLmh0bWw=&id=291'
-									rel='nofollow; noreferrer'
-									target='_blank'>
+								<a href='/' target='_blank'>
 									<div className={cx('image')}>
-										<img
-											src='https://images.careerbuilder.vn/background/mbbank_640x430_2022_12_12_1670843523.jpg'
-											alt='Banner'
-										/>
+										<img alt='Banner' />
 									</div>
 								</a>
 							</div>

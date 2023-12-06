@@ -45,7 +45,11 @@ const LoginForm = ({ className: cx, onSubmit, isLoading }) => {
 			</div>
 			<div className={cx('user-action')}>
 				<div className={cx('btn-area')}>
-					<button type='submit' className={`btn-action`} disabled={isLoading}>
+					<button
+						type='submit'
+						className={`btn-action`}
+						disabled={isLoading}
+						style={{ backgroundImage: isLoading ? 'linear-gradient(270deg, #bdc3c7, #bdc2c4)' : '' }}>
 						Đăng nhập
 					</button>
 				</div>
