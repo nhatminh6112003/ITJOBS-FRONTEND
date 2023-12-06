@@ -11,7 +11,8 @@ const AdminPaths = {
 	benefits: '/admin/benefits',
 	service: '/admin/service',
 	serviceType: '/admin/service_type',
-	feedBack: '/admin/feedBack'
+	feedBack: '/admin/feedBack',
+	order: '/admin/order'
 };
 const JobseekerPaths = {
 	home: '/',

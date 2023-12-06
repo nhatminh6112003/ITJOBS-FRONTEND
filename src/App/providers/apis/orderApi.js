@@ -11,7 +11,7 @@ const orderApi = createApi({
 				return { url: `/order`, method: 'GET', params: arg.params };
 			},
 			providesTags: ['order'],
-			transformResponse: (response) => response.data
+			transformResponse: (response) => response
 		}),
 		getOneOrder: build.query({
 			query: (id) => {
@@ -37,6 +37,13 @@ const orderApi = createApi({
 				return { url: `/order/${id}`, method: 'DELETE' };
 			},
 			invalidatesTags: ['order']
+		}),
+		analysisOrder: build.query({
+			query: () => {
+				return { url: `/order/analysis`, method: 'GET' };
+			},
+			providesTags: ['order'],
+			transformResponse: (response) => response.data
 		})
 	})
 });
@@ -47,7 +54,8 @@ export const {
 	useGetAllOrderQuery,
 	useGetOneOrderQuery,
 	useLazyGetOneOrderQuery,
-	useUpdateOrderMutation
+	useUpdateOrderMutation,
+	useAnalysisOrderQuery
 } = orderApi;
 
 export default orderApi;
