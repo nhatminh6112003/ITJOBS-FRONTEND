@@ -5,7 +5,7 @@ import routesPath from '~/App/config/routesPath';
 import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import Banner from '~/App/layouts/Components/jobseeker/Banner';
 import JobItem from '~/App/layouts/Components/jobseeker/JobItem';
-import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import { useGetAllJobPostSortedQuery } from '~/App/providers/apis/jobPostApi';
 import ItemLoading from '~/Core/components/common/ItemLoading';
 import { useDispatch } from 'react-redux';
 import { PaginationActionEnums } from '~/App/hooks/useServerPagination';
@@ -16,7 +16,7 @@ const Home = ({ cx }) => {
 		query: { page }
 	} = useCustomRouter();
 
-	const { data: allJobPost, isLoading } = useGetAllJobPostQuery({
+	const { data: allJobPost, isLoading } = useGetAllJobPostSortedQuery({
 		params: {
 			limit: 10,
 			status: jobPostStatusEnum.Publish,
