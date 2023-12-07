@@ -62,7 +62,8 @@ const EmployerPaths = {
 	serviceAndContact: '/employers/services-and-contact',
 	resumeInfo: '/employers/resumeinfo/:id',
 	resumeSaved: '/employers/hrcentral/manageresume/resume-saved',
-	vnpay_return: '/employers/vnpay_return'
+	vnpay_return: '/employers/vnpay_return',
+	allService:'/employers/products-and-services'
 };
 
 const BasePaths = {

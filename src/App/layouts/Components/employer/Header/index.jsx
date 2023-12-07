@@ -48,7 +48,7 @@ const Header = () => {
 												</li>
 											))}
 											<li>
-												<Link to={routesPath.EmployerPaths.serviceAndContact}>Xem tất cả dịch vụ</Link>
+												<Link to={routesPath.EmployerPaths.allService}>Xem tất cả dịch vụ</Link>
 											</li>
 										</ul>
 									</div>

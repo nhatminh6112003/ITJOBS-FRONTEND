@@ -73,7 +73,7 @@ const Dashboard = ({ cx }) => {
 	const analyticJobSeekerApplyByDayQueryOptions = {
 		series: [
 			{
-				name: CalculateTotalRevenue?.data?.service_name,
+				name: 'Tổng tiền',
 				data: CalculateTotalRevenue?.data?.data
 			}
 		],
