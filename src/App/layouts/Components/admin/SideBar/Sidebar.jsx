@@ -10,6 +10,8 @@ import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import LayersIcon from '@mui/icons-material/Layers';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import routesPath from '~/App/config/routesPath';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import FlagIcon from '@mui/icons-material/Flag';
 import { CategoryIcon, Settings } from '~/Core/resources';
 import SidebarItem from './SidebarItem';
 import './sidebar.css';
@@ -71,14 +73,14 @@ const SideBar = (props) => {
 			icon: <LayersIcon />
 		},
 		{
-			title: 'Quản lý báo cáo xấu',
+			title: 'Quản lý báo cáo ',
 			route: routesPath.AdminPaths.feedBack,
-			icon: <LayersIcon />
+			icon: <FlagIcon />
 		},
 		{
-			title: 'Cài đặt',
-			route: '/settings',
-			icon: <Settings />
+			title: 'Quản lý đơn hàng',
+			route: routesPath.AdminPaths.order,
+			icon: <AccountBalanceIcon />
 		}
 	];
 

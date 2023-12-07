@@ -11,6 +11,8 @@ import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaF
 import styles from './editEmployer.module.css';
 import { Link, useLocation } from 'react-router-dom';
 import TabMenu from '../components/TabMenu';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { CompanySchema } from '~/App/schemas/companySchema';
 
 const sx = classNames.bind(styles);
 const EditEmployer = ({ cx }) => {
@@ -39,7 +41,8 @@ const EditEmployer = ({ cx }) => {
 			position: company?.data?.position,
 			company_website_url: company?.data?.company_website_url,
 			company_summary: company?.data?.company_summary
-		}
+		},
+		resolver: yupResolver(CompanySchema)
 	});
 	const logo = watch('logo');
 	const banner = watch('banner');

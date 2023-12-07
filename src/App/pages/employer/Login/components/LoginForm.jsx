@@ -5,7 +5,7 @@ import UserRoleEnum from '~/App/constants/roleEnum';
 import { loginSchema } from '~/App/schemas/authSchema';
 import routesPath from '~/App/config/routesPath';
 import { Link } from 'react-router-dom';
-const LoginForm = ({ className: cx, onSubmit }) => {
+const LoginForm = ({ className: cx, onSubmit, isLoading }) => {
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
 			...loginSchema.getDefault(),
@@ -45,7 +45,11 @@ const LoginForm = ({ className: cx, onSubmit }) => {
 			</div>
 			<div className={cx('user-action')}>
 				<div className={cx('btn-area')}>
-					<button type='submit' className='btn-action'>
+					<button
+						type='submit'
+						className={`btn-action`}
+						disabled={isLoading}
+						style={{ backgroundImage: isLoading ? 'linear-gradient(270deg, #bdc3c7, #bdc2c4)' : '' }}>
 						Đăng nhập
 					</button>
 				</div>
@@ -53,7 +57,12 @@ const LoginForm = ({ className: cx, onSubmit }) => {
 					<Link className={cx('register')} to={routesPath.EmployerPaths.register}>
 						Quý khách chưa có tài khoản?
 					</Link>
-					Đăng ký dễ dàng, hoàn toàn miễn phí
+					<span
+						style={{
+							marginLeft: '4px'
+						}}>
+						Đăng ký dễ dàng, hoàn toàn miễn phí
+					</span>
 				</p>
 			</div>
 		</form>

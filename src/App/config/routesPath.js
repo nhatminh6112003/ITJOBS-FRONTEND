@@ -11,7 +11,8 @@ const AdminPaths = {
 	benefits: '/admin/benefits',
 	service: '/admin/service',
 	serviceType: '/admin/service_type',
-	feedBack: '/admin/feedBack'
+	feedBack: '/admin/feedBack',
+	order: '/admin/order'
 };
 const JobseekerPaths = {
 	home: '/',
@@ -32,7 +33,8 @@ const JobseekerPaths = {
 	applyJobs: '/jobseekers/jobs/apply/:id',
 	jobApplied: '/jobseekers/mykiemviec/jobapplied',
 	viewJob: '/employers/hrcentral/viewjob/:id',
-	jobSaved: '/jobseekers/mykiemviec/jobsaved'
+	jobSaved: '/jobseekers/mykiemviec/jobsaved',
+	findAllJob: '/tim-viec-lam'
 };
 const EmployerPaths = {
 	login: '/employers/login',
@@ -56,11 +58,12 @@ const EmployerPaths = {
 	changePassword: '/employers/hrcentral/accounts/changepassword',
 	resumeDetail: '/employers/hrcentral/resume_detail/:id',
 	findJobSeeker: '/tim-ung-vien',
-	productAndService: '/employers/products-and-services',
+	productAndService: '/employers/products-and-services/:id',
 	serviceAndContact: '/employers/services-and-contact',
 	resumeInfo: '/employers/resumeinfo/:id',
 	resumeSaved: '/employers/hrcentral/manageresume/resume-saved',
-	vnpay_return: '/employers/vnpay_return'
+	vnpay_return: '/employers/vnpay_return',
+	allService:'/employers/products-and-services'
 };
 
 const BasePaths = {

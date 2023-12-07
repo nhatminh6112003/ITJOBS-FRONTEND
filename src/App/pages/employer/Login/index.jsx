@@ -4,11 +4,10 @@ import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
-import { Fragment } from 'react';
 const Login = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
 
-	const [loginMutation] = useLoginMutation();
+	const [loginMutation, { isLoading }] = useLoginMutation();
 	const handleLoginFormSubmit = async (data) => {
 		loginMutation(data)
 			.unwrap()
@@ -30,14 +29,8 @@ const Login = ({ cx }) => {
 	return (
 		<section className={cx('employer-signup-new', 'login', 'cb-section')}>
 			<div className={cx('container')}>
-				<div className={cx('row', 'row-sp')}>
-					<div className={cx('col-xl-5')}>
-						<div className={cx('box-img')}>
-							{/* Tạo ảnh thay ảnh đó */}
-							<img src='https://images.careerbuilder.vn/content/images/Banner/pic-laptop.png' alt='' />
-						</div>
-					</div>
-					<div className={cx('col-xl-7')}>
+				<div className={cx('row', 'row-sp')} style={{ justifyContent: 'center' }}>
+					<div className={cx('col-xl-8')}>
 						<div className={cx('box-info-signup')}>
 							<div className={cx('title')}>
 								<h2>Dành Cho Nhà Tuyển Dụng</h2>
@@ -48,7 +41,7 @@ const Login = ({ cx }) => {
 								</div>
 							</div>
 							<div className={cx('main-form')}>
-								<LoginForm onSubmit={handleLoginFormSubmit} className={cx} />
+								<LoginForm onSubmit={handleLoginFormSubmit} className={cx} isLoading={isLoading} />
 							</div>
 						</div>
 					</div>

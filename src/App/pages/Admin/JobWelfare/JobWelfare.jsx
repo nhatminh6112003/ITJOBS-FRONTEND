@@ -83,7 +83,7 @@ const JobWelfare = () => {
 				)
 			}
 		],
-		[tableData, toggle]
+		[data?.pagination.itemsPerPage, data?.pagination.pageIndex, tableData, toggle]
 	);
 
 	const handleConfirmDelete = async (id) => {

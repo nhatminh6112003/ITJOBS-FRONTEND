@@ -107,155 +107,7 @@ const ResumeDetail = ({ cx }) => {
 					<div className={sx('heading-manage')}>
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}></h1>
-							{/* <div className={sx('button')}>
-								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/saved_search'>
-									<em className={cx('material-icons')}>notifications_none</em>
-									Thông Báo Ứng Viên
-								</a>
-							</div> */}
 						</div>
-						{/* <div className={sx('right-heading')}>
-							<a
-								className={sx('support')}
-								target='_blank'
-								href='https://careerbuilder.vn/vi/employers/faq'
-								rel='noreferrer'>
-								Hướng dẫn
-							</a>
-						</div> */}
-					</div>
-					<div className={sx('main-form-posting')}>
-						<form name='frmSearchResume'>
-							<div className={sx('form-wrap')}>
-								<div className={sx('form-group', 'form-text')}>
-									<label>Từ khóa</label>
-									<input type='text' id='strKeyword' defaultValue maxLength={200} placeholder='Nhập từ khóa' />
-								</div>
-								<div className={sx('form-group', 'form-select')}>
-									<label>Tìm theo</label>
-									<select id='intKeywordType'>
-										<option value={0}>Tên hồ sơ</option>
-										<option value={1}>Tên ứng viên</option>
-									</select>
-								</div>
-								<div className={sx('form-group', 'form-select')}>
-									<label>Trạng thái tìm việc</label>
-									<select name='urgentjob' id='inturgentjob'>
-										<option value={0}>Tất cả</option>
-										<option value={1}>Ứng viên tìm việc khẩn cấp</option>
-									</select>
-								</div>
-								<div className={sx('form-group', 'form-date', 'start-date')}>
-									<label>Từ</label>
-									<input
-										type='text'
-										name
-										id='strFromDate'
-										defaultValue
-										className={sx('dates_cus_select')}
-										placeholder='Chọn'
-										autoComplete='off'
-										readOnly
-									/>
-									<div className={sx('icon')}>
-										<em className={cx('material-icons')}>event</em>
-									</div>
-								</div>
-								<div className={sx('form-group', 'form-date', 'end-date')}>
-									<label>Đến</label>
-									<input
-										type='text'
-										name
-										id='strToDate'
-										defaultValue
-										className={sx('dates_cus_select')}
-										placeholder='Chọn'
-										autoComplete='off'
-										readOnly
-									/>
-									<div className={sx('icon')}>
-										<em className={sx('material-icons')}>event</em>
-									</div>
-								</div>
-								<div className={sx('form-group', 'form-submit', 'form-submit-less')}>
-									<button
-										className={sx('btn-submit', 'btn-gradient')}
-										type='button'
-										onclick='searchResumeApply()'>
-										<em className={cx('material-icons')}>find_in_page</em>Tìm
-									</button>
-								</div>
-							</div>
-							<div className={sx('form-wrap-advanced')}>
-								<div className={sx('form-wrap')}>
-									<div className={sx('form-group', 'form-select')}>
-										<label>Trạng thái</label>
-										<select id='intStatus'>
-											<option value={7}>Tất cả</option>
-											<option value={8}>Chưa Xem </option>
-											<option value={0}>Chưa quyết định</option>
-											<option value={1}>Không phù hợp</option>
-											<option value={2}>Từ chối</option>
-											<option value={3}>Kiểm tra</option>
-											<option value={4}>Phỏng vấn</option>
-											<option value={5}>Đề nghị tuyển dụng</option>
-											<option value={6}>Nhận việc</option>
-										</select>
-									</div>
-									<div className={sx('form-group', 'form-select')}>
-										<label>Phân loại tự động</label>
-										<select id='intSuitable'>
-											<option value={2} selected='selected'>
-												Tất cả
-											</option>
-											<option value={1}>Phù hợp</option>
-											<option value={0}>Tiềm Năng</option>
-										</select>
-									</div>
-									<div className={sx('form-group', 'form-select')}>
-										<label>Xếp loại</label>
-										<select id='intType'>
-											<option value={6}>Tất cả</option>
-											<option value={0}>Chưa xếp loại</option>
-											<option value={1}>Kém</option>
-											<option value={2}>Trung bình</option>
-											<option value={3}>Khá</option>
-											<option value={4}>Tốt</option>
-											<option value={5}>Rất Tốt</option>
-										</select>
-									</div>
-									<div className={sx('form-group', 'form-select')}>
-										<label>Ghi chú</label>
-										<select id='intNote'>
-											<option value={2} selected='selected'>
-												Tất cả
-											</option>
-											<option value={1}>Có ghi chú</option>
-											<option value={0}>Không có ghi chú</option>
-										</select>
-									</div>
-									<div className={sx('form-group', 'form-reset')}>
-										<button className={sx('btn-reset')} type='button' onclick='resetFormSearchResume()'>
-											<em className={sx('material-icons')}>loop</em>Xóa
-										</button>
-									</div>
-									<div className={sx('form-group', 'form-submit')}>
-										<button
-											className={sx('btn-submit', 'btn-gradient')}
-											type='button'
-											onclick='searchResumeApply()'>
-											<em className={sx('material-icons')}>find_in_page</em>Tìm
-										</button>
-									</div>
-									<div className={sx('form-group', 'form-filter-less')}>
-										<a className={sx('btn-filter-less')} href='javascript:void(0);;'>
-											<em className={sx('material-icons')}>highlight_off</em>
-											Thu gọn
-										</a>
-									</div>
-								</div>
-							</div>
-						</form>
 					</div>
 					<div className={sx('main-tabslet')} data-toggle='tabslet'>
 						<ul className={sx('tabslet-tab')}>
@@ -433,16 +285,6 @@ const ResumeDetail = ({ cx }) => {
 												<li className={sx('active')} data-tab-detail={1}>
 													<a href='javascript:void(0)'>Chi Tiết Hồ Sơ</a>
 												</li>
-												{/* <li data-tab-detail={2}>
-													<a href='javascript:void(0)'>Thư Giới Thiệu</a>
-												</li> */}
-												{/* <li id='tab_intro' data-tab-detail={3}>
-													<a
-														href='javascript:void(0)'
-														onclick="loadResumeNoted(0, '35C9210A','35BFE874');">
-														Ghi Chú
-													</a>
-												</li> */}
 											</ul>
 											<div className={sx('tabslet-content-detail', 'active')}>
 												<div className={sx('box-flip-view')}>
@@ -533,7 +375,11 @@ const ResumeDetail = ({ cx }) => {
 																	<p>
 																		<strong>Năm kinh nghiệm:</strong>
 																	</p>
-																	<p>{data?.attachments?.yearOfExperience} Năm</p>
+																	<p>
+																		{data?.attachments?.yearOfExperience
+																			? data?.attachments?.yearOfExperience + 'Năm'
+																			: 'Không có kinh nghiệm'}{' '}
+																	</p>
 																</li>
 																{/* <li>
 																	<p>
@@ -556,12 +402,7 @@ const ResumeDetail = ({ cx }) => {
 																		) : null
 																	)}
 																</li>
-																{/* <li>
-																	<p>
-																		<strong>Ngoại ngữ:</strong>
-																	</p>
-																	<p>Tiếng Anh - Trung cấp</p>
-																</li> */}
+
 																<li>
 																	<p>
 																		<strong>Cấp bậc mong muốn:</strong>
@@ -646,7 +487,7 @@ const ResumeDetail = ({ cx }) => {
 																	/>
 																)}
 
-															{ResumeCvEnum.CV_PROFILE && (
+															{jobPostActivity?.resume_type === ResumeCvEnum.CV_PROFILE && (
 																<iframe
 																	id='frm_view_pdf'
 																	frameBorder={0}

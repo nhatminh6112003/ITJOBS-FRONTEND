@@ -28,6 +28,7 @@ export const registerSchema = yup.object({
 		.min(8, 'Vui lòng nhập mật khẩu của bạn từ 8 ký tự trở lên .'),
 	confirm_password: yup
 		.string()
+		// .required('Vui phải nhập lại mật khẩu xác nhận')
 		.when('password', (password, field) =>
 			password ? field.required().oneOf([yup.ref('password')], 'Mật khẩu nhập không khớp. Vui lòng thử lại.') : field
 		)

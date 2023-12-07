@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import UserRoleEnum from '~/App/constants/roleEnum';
 import { loginSchema } from '~/App/schemas/authSchema';
-const LoginForm = ({ className: cx, onSubmit }) => {
+const LoginForm = ({ className: cx, onSubmit, isLoading }) => {
 	const { control, handleSubmit } = useForm({
 		defaultValues: {
 			...loginSchema.getDefault(),
@@ -19,7 +19,12 @@ const LoginForm = ({ className: cx, onSubmit }) => {
 				<InputFieldControl control={control} name='password' placeholder='Vui lòng nhập mật khẩu' type='password' />
 			</div>
 			<div className={cx('form-group', 'form-submit')}>
-				<button type='submit' id='submit_login' className={cx('btn-gradient')}>
+				<button
+					type='submit'
+					id='submit_login'
+					className={cx('btn-gradient')}
+					disabled={isLoading}
+					style={{ backgroundImage: isLoading ? 'linear-gradient(270deg, #bdc3c7, #bdc2c4)' : '' }}>
 					Đăng nhập
 				</button>
 			</div>

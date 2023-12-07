@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './find-job-seeker.module.css';
 import classNames from 'classnames/bind';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
@@ -16,6 +16,11 @@ import { useCreateEmployerResumeApiMutation } from '~/App/providers/apis/employe
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { listProvinces } from '~/App/constants/provincesData';
+import formatVND from '~/Core/utils/formatVND';
+import useRegisterServiceResume from './components/useRegisterServiceResume';
+import ServiceSlugEnum from '~/App/constants/serviceEnum';
+import moment from 'moment';
+import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
 
 const sx = classNames.bind(styles);
 const FindJobSeeker = ({ cx }) => {
@@ -33,7 +38,6 @@ const FindJobSeeker = ({ cx }) => {
 	});
 	const [createEmployerResume] = useCreateEmployerResumeApiMutation();
 	const employer = useSelector((state) => state.auth?.employer);
-	const navigate = useNavigate();
 	const {
 		control,
 		handleSubmit,
@@ -46,6 +50,13 @@ const FindJobSeeker = ({ cx }) => {
 			provinces: query.provinces || ''
 		}
 	});
+	const isServiceJobPostExits = useRegisterServiceResume(employer?.company?.id, ServiceSlugEnum.FindResume);
+	const { data: myCompanyService } = useGetAllCompany_serviceQuery({
+		params: {
+			company_id: employer?.company?.id
+		}
+	});
+	const navigate = useNavigate();
 
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
@@ -64,6 +75,22 @@ const FindJobSeeker = ({ cx }) => {
 				toast.error(err);
 			});
 	};
+
+	useEffect(() => {
+		const currentDate = moment();
+		const getServiceFindResume = myCompanyService?.data?.find(
+			(item) => item.service?.slug === ServiceSlugEnum.FindResume
+		);
+
+		if (currentDate.isAfter(getServiceFindResume?.expiration_date)) {
+			toast.error('Dịch vụ tìm hồ sơ ứng viên của bạn đã hết hạn');
+			return;
+		}
+		
+		if (!isServiceJobPostExits) {
+			navigate(`/employers/services-and-contact`);
+		}
+	}, [isServiceJobPostExits, myCompanyService?.data, navigate]);
 	return (
 		<section className={sx('resume-search', 'cb-section', 'bg-manage', 'main-tabslet')}>
 			<div className={cx('container')}>
@@ -386,226 +413,6 @@ const FindJobSeeker = ({ cx }) => {
 						</form>
 					</div>
 				</div>
-				<div className={sx('search-support-modal')} style={{ display: 'none' }}>
-					<div className={sx('modal-head')}>
-						<p className={sx('title')}>Hướng dẫn tìm kiếm</p>
-					</div>
-					<div className={sx('modal-body')}>
-						<div className={sx('search-support')}>
-							<div className={sx('modal-body')}>
-								<div className={sx('search-support')}>
-									<p>
-										{' '}
-										<strong>Từ khóa giúp bạn có kết quả tìm kiếm chính xác nhất.</strong>
-									</p>
-									<ul>
-										<li>
-											<p>
-												Nhập một từ khóa tìm kiếm, Công cụ tìm kiếm sẽ giúp bạn tìm kiếm thông tin trong{' '}
-												<strong>toàn bộ nội dung của Hồ Sơ Ứng Viên.</strong>
-											</p>
-										</li>
-										<li>
-											<p>
-												Nhập cụm từ khóa tìm kiếm, kết quả tìm kiếm sẽ bao gồm tất cả Hồ Sơ Ứng Viên chứa
-												bất kỳ từ nào trong cụm từ khóa tìm kiếm của bạn, theo thứ tự bất kỳ và hiển thị
-												theo thời gian ứng viên truy cập.
-											</p>
-										</li>
-									</ul>
-									<p>Để tìm kiếm chính xác, vui lòng sắp xếp kết quả theo thứ tự “Phù Hợp”</p>
-									<p>
-										{' '}
-										<strong>Tìm kiếm nâng cao</strong>
-									</p>
-									<p>
-										Sử dụng các ký tự hỗ trợ tìm kiếm như :“Ngoặc kép”, ( Ngoặc đơn ), AND, OR, dấu * trong
-										phần từ khóa tìm kiếm. Chi tiết như sau :
-									</p>
-									<table>
-										<thead>
-											<tr>
-												<th>cách sử dụng</th>
-												<th>ví dụ</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td className={sx('title')} colSpan={2}>
-													<p>1.AND và OR</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>
-														{' '}
-														<strong>AND </strong>cho phép bạn kết hợp các từ khóa tìm kiếm
-													</p>
-												</td>
-												<td>
-													<p>
-														{' '}
-														<strong>PHP AND JAVA </strong>(tất cả hồ sơ chứa từ PHP và từ JAVA)
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>
-														{' '}
-														<strong>OR </strong>cho phép bạn tìm kiếm từ khóa bất kỳ
-													</p>
-												</td>
-												<td>
-													<p>
-														{' '}
-														<strong>PHP OR JAVA </strong>(tất cả hồ sơ chứa từ PHP và tất cả hồ sơ chứa từ
-														JAVA)
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>
-														Kết hợp <strong>AND </strong>và <strong>OR</strong>
-													</p>
-												</td>
-												<td>
-													<p>
-														{' '}
-														<strong>PHP OR JAVA AND Developer </strong>(tất cả các hồ sơ chứa PHP
-														Developer hoặc JAVA Developer)
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>
-														{' '}
-														<strong className={sx('noted')}>Lưu ý : </strong>
-													</p>
-													<ul>
-														<li>
-															<p>
-																{' '}
-																<strong>AND </strong>và <strong>OR </strong>phải được viết hoa. Nếu viết
-																thường sẽ được hiểu là từ khóa cần tìm kiếm
-															</p>
-														</li>
-														<li>
-															<p>Hỗ trợ sử dụng tối đa 3 AND hoặc OR trong mỗi cụm tìm kiếm</p>
-														</li>
-													</ul>
-												</td>
-												<td> </td>
-											</tr>
-											<tr>
-												<td className={sx('title')} colSpan={2}>
-													<p>2. Kết hợp () trong từ khóa tìm kiếm</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>
-														{' '}
-														<strong>(A OR B) AND (C OR D)</strong>
-													</p>
-												</td>
-												<td>
-													<p>
-														{' '}
-														<strong>(Java OR PHP) AND (Developer OR Programmer) </strong>
-														(tất cả hồ sơ chứa từ PHP Developer, PHP Programmer, Java Developer hoặc JAVA
-														Programmer)
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<td className={sx('title')} colSpan={2}>
-													<p>3. Tìm kiếm chính xác với “”</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>
-														{' '}
-														<strong>“Ngoặc Kép”</strong> để tìm chính xác cụm từ
-													</p>
-												</td>
-												<td>
-													<p>
-														{' '}
-														<strong>“PHP Developer”</strong> ( tất cả hồ sơ chỉ chứa từ “PHP Developer” )
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>
-														Sử dụng <strong>kết hợp AND, OR, “Ngoặc Kép” </strong>để có kết quả tìm kiếm
-														chính xác nhất
-													</p>
-												</td>
-												<td>
-													<p>
-														{' '}
-														<strong>"Software Engineer" AND Html5</strong> ( tất cả hồ sơ có từ khóa chính
-														xác là Software Engineer và có từ khóa HTML5 hoặc các từ khóa đồng nghĩa với
-														HTML5)
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>
-														{' '}
-														<strong className={sx('noted')}>Lưu ý : </strong>
-													</p>
-													<p>
-														Khi sử dụng “” hoặc (), nếu không có dấu đóng ngoặc: thông báo chuỗi tìm kiếm
-														không hợp lệ.
-													</p>
-												</td>
-												<td> </td>
-											</tr>
-											<tr>
-												<td className={sx('title')} colSpan={2}>
-													<p>
-														4. Sử dụng cụm từ đại diện cho từ, cụm từ trong kết quả tìm kiếm với dấu *:
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>Sử dụng dấu * sau một từ/cụm từ</p>
-												</td>
-												<td>
-													<p>
-														{' '}
-														<strong>JAVA Dev*</strong> (các hồ sơ có chứa cụm JAVA Dev, có thể là JAVA
-														Develop, JAVA Developing, JAVA Developer…)
-													</p>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<p>Sử dụng dấu * trước và sau một từ/cụm từ</p>
-												</td>
-												<td>
-													<p>
-														{' '}
-														<strong>*Dev* </strong>(các hồ sơ có chứa Dev, có thể là JAVA Developer, PHP
-														Develop, Game Develop…)Develop, JAVA Developing, JAVA Developer…)
-													</p>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 				<div className={sx('box-resume-search-search-result')}>
 					<div className={sx('search-result-top')}>
 						<div className={sx('top')}>
@@ -614,18 +421,6 @@ const FindJobSeeker = ({ cx }) => {
 								như tiêu chí tìm kiếm của quý khách
 							</p>
 						</div>
-						{/* <div className={sx('bottom')}>
-							<div className={sx('job-name')}>
-								<p>
-									<strong>Ngành nghề: </strong>
-									<span>
-										<a href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem'>
-											CNTT - Phần mềm
-										</a>
-									</span>
-								</p>
-							</div>
-						</div> */}
 					</div>
 					<div className={sx('main-jobs-posting')}>
 						<div className={sx('boding-jobs-posting')}>
@@ -634,171 +429,107 @@ const FindJobSeeker = ({ cx }) => {
 									<thead>
 										<tr>
 											<th width='48%'>Ứng Viên</th>
-											<th width='10%'>
-												<a href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem/sort/kng_desc'>
-													Kinh nghiệm
-												</a>
-											</th>
-											<th width='10%'>
-												<a href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem/sort/lng_desc'>
-													Lương
-												</a>
-											</th>
+											<th width='10%'>Kinh nghiệm</th>
+											<th width='10%'>Lương</th>
 											<th width='10%'>Nơi làm việc</th>
 											<th width='10%'>Thao tác</th>
 										</tr>
 									</thead>
 									<tbody>
-										{listResume?.map((resume) => {
-											return (
-												<>
-													<tr key={resume.id}>
-														<td>
-															<div className={sx('title')}>
-																<div className={sx('job-name')}>
+										{isServiceJobPostExits &&
+											listResume?.map((resume) => {
+												return (
+													<>
+														<tr key={resume.id}>
+															<td>
+																<div className={sx('title')}>
+																	<div className={sx('job-name')}>
+																		<Link
+																			className={sx('job-title')}
+																			to={`/employers/resumeinfo/${resume.id}`}
+																			title={resume?.resume_title?.title}>
+																			<b>{resume?.resume_title?.title}</b>
+																		</Link>
+																	</div>
+																	<div className={sx('status')}></div>
 																	<Link
-																		className={sx('job-title')}
-																		to={`/employers/resumeinfo/${resume.id}`}
-																		title={resume?.resume_title?.title}>
-																		<b>{resume?.resume_title?.title}</b>
+																		className={sx('name')}
+																		to={`/employers/resumeinfo/${resume.id}`}>
+																		{resume.user_account.lastname +
+																			' ' +
+																			resume.user_account.firstname}
 																	</Link>
+																	<ul className={sx('info-list')}>
+																		<li>
+																			<p>
+																				{' '}
+																				<strong>Học vấn: </strong>
+																				{degree?.[resume?.attachments[0]?.job_degree_value]}
+																			</p>
+																		</li>
+																		<li>
+																			<p>
+																				{' '}
+																				<strong>Cấp bậc: </strong>
+																				{LevelArray.map((value) => {
+																					if (
+																						resume?.resume_desired_job?.position_id ===
+																						value.value
+																					) {
+																						return value.label;
+																					}
+																				})}
+																			</p>
+																		</li>
+																	</ul>
 																</div>
-																<div className={sx('status')}></div>
-																<Link className={sx('name')} to={`/employers/resumeinfo/${resume.id}`}>
-																	{resume.user_account.lastname + ' ' + resume.user_account.firstname}
-																</Link>
-																<ul className={sx('info-list')}>
+															</td>
+															<td>
+																<p>
+																	{resume?.attachments[0]?.yearOfExperience
+																		? resume?.attachments[0]?.yearOfExperience + ' Năm'
+																		: 'Chưa có kinh nghiệm'}
+																</p>
+															</td>
+															<td>
+																<p style={{ width: '200px' }}>
+																	{formatVND(resume?.resume_desired_job?.salary_from)} -{' '}
+																	{formatVND(resume?.resume_desired_job?.salary_to)} VND
+																</p>
+															</td>
+															<td>
+																{listProvinces?.map((item) => {
+																	if (resume?.resume_desired_job?.provinces === item?.code) {
+																		return <p>{item?.name}</p>;
+																	}
+																})}
+															</td>
+															<td>
+																<ul className={sx('list-manipulation')}>
 																	<li>
-																		<p>
-																			{' '}
-																			<strong>Học vấn: </strong>
-																			{degree?.[resume?.attachments[0]?.job_degree_value]}
-																		</p>
-																	</li>
-																	<li>
-																		<p>
-																			{' '}
-																			<strong>Cấp bậc: </strong>
-																			{LevelArray.map((value) => {
-																				if (
-																					resume?.resume_desired_job?.position_id === value.value
-																				) {
-																					return value.label;
-																				}
-																			})}
-																		</p>
+																		<a
+																			onClick={() => handleSaveToFolder(resume.id)}
+																			className={sx('btn-save-folder')}
+																			style={{ cursor: 'pointer' }}
+																			title='Lưu vào thư mục'>
+																			<em className={cx('material-icons')}>folder_shared </em>
+																		</a>
 																	</li>
 																</ul>
-															</div>
-														</td>
-														<td>
-															<p>{resume?.attachments[0]?.yearOfExperience}</p>
-														</td>
-														<td>
-															<p>
-																{parseInt(resume?.resume_desired_job?.salary_from).toString().charAt(0)}{' '}
-																Tr -{' '}
-																{parseInt(resume?.resume_desired_job?.salary_to).toString().charAt(0)}{' '}
-																Tr VND
-															</p>
-														</td>
-														<td>
-															{listProvinces?.map((item) => {
-																if (resume?.resume_desired_job?.provinces === item?.code) {
-																	return <p>{item?.name}</p>;
-																}
-															})}
-														</td>
-														<td>
-															<ul className={sx('list-manipulation')}>
-																{/* <li>
-																	<a
-																		className={sx('btn-popup-flipview')}
-																		title='Xem hồ sơ dạng Flipview'
-																		href='javascript:void(0)'
-																		onclick="windowFlipView('bmdhbmgtbmdoZS9jbnR0LXBoYW4tbWVtL3NvcnQvZGF0ZV9hc2M=',0, 3);">
-																		<em className={cx('material-icons')}>import_contacts </em>
-																	</a>
-																</li> */}
-																<li>
-																	<a
-																		onClick={() => handleSaveToFolder(resume.id)}
-																		className={sx('btn-save-folder')}
-																		style={{ cursor: 'pointer' }}
-																		title='Lưu vào thư mục'>
-																		<em className={cx('material-icons')}>folder_shared </em>
-																	</a>
-																</li>
-																{/* <li>
-																	<a
-																		href='https://careerbuilder.vn/vi/tim-ung-vien/tu-khoa/director/noi-lam-viec/ha-noi'
-																		title='Xem hồ sơ tương tự'>
-																		{' '}
-																		<em className={cx('material-icons')}>account_box </em>
-																	</a>
-																</li> */}
-																<li>
-																	<a
-																		className={sx('btn-delete')}
-																		href='javascript:void(0)'
-																		onclick='return addResumeHidden(1, 37656);'
-																		title='Ẩn hồ sơ'>
-																		{' '}
-																		<em className={cx('material-icons')}>cancel </em>
-																	</a>
-																</li>
-															</ul>
-														</td>
-													</tr>
-												</>
-											);
-										})}
+															</td>
+														</tr>
+													</>
+												);
+											})}
+										{isServiceJobPostExits && listResume?.length === 0 && (
+											<tr>
+												<td colSpan={5} style={{ textAlign: 'center' }}>
+													Không tìm kiếm được hồ sơ phụ hợp
+												</td>
+											</tr>
+										)}
 									</tbody>
 								</table>
-							</div>
-							<div className={sx('main-pagination')}>
-								<div className={sx('main-pagination')}>
-									<ul className={sx('pagination')}>
-										<li className={sx('PagerOtherPageCells', 'active')}>
-											<a href='javascript:void(0);'>1</a>
-										</li>
-										<li className={sx('PagerOtherPageCells')}>
-											<a href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem/sort/date_asc/page/2'>
-												2
-											</a>
-										</li>
-										<li className={sx('PagerOtherPageCells')}>
-											<a href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem/sort/date_asc/page/3'>
-												3
-											</a>
-										</li>
-										<li className={sx('PagerOtherPageCells')}>
-											<a href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem/sort/date_asc/page/4'>
-												4
-											</a>
-										</li>
-										<li className={sx('PagerOtherPageCells')}>
-											<a href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem/sort/date_asc/page/5'>
-												5
-											</a>
-										</li>
-										<li className={sx('PagerOtherPageCells')}>
-											<a
-												className={sx('LastPage')}
-												href='https://careerbuilder.vn/vi/tim-ung-vien/nganh-nghe/cntt-phan-mem/sort/date_asc/page/2'>
-												<em className={cx('mdi', 'mdi-chevron-right')} />
-											</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div className={sx('main-button-sticky')}>
-								<div className={sx('button-prev', 'disabled')}>
-									<em className={cx('mdi', 'mdi-chevron-left')} />
-								</div>
-								<div className={sx('button-next')}>
-									<em className={cx('mdi', 'mdi-chevron-right')} />
-								</div>
 							</div>
 						</div>
 					</div>

@@ -45,7 +45,12 @@ const RegisterForm = ({ className: cx }) => {
 				/>
 			</div>
 			<div className='form-group form-submit'>
-				<button className={cx('btn-gradient')}>Đăng ký</button>
+				<button
+					className={cx('btn-gradient')}
+					disabled={isLoading}
+					style={{ backgroundImage: isLoading ? 'linear-gradient(270deg, #bdc3c7, #bdc2c4)' : '' }}>
+					Đăng ký
+				</button>
 			</div>
 		</form>
 	);

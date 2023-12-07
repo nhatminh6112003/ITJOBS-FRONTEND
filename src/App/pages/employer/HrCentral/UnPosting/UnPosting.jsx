@@ -24,7 +24,7 @@ import { useForm } from 'react-hook-form';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import CancelIcon from '@mui/icons-material/Cancel';
-import moment from "moment";
+import moment from 'moment';
 import ServiceSlugEnum from '~/App/constants/serviceEnum';
 import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
 import useRegisterService from '../components/useRegisterService';
@@ -45,7 +45,7 @@ const UnPosting = ({ cx }) => {
 			dateType: query.dateType || '',
 			fromDate: query.fromDate || '',
 			toDate: query.toDate || '',
-			posted_by_id: employer?.id,
+			user_account_id: employer?.id,
 			status: jobPostStatusEnum.Pause,
 			isDeleted: false
 		},
@@ -200,14 +200,6 @@ const UnPosting = ({ cx }) => {
 									<div className={sx('left-heading')}>
 										<p className={sx('name')}>Hiển thị </p>
 									</div>
-									<div className={sx('right-heading')}>
-										<div className={sx('export-file')}>
-											<a href='javascript:void(0);' onclick='exportJobs();'>
-												<GetAppIcon style={{ paddingRight: 5 }} />
-												Xuất file job
-											</a>
-										</div>
-									</div>
 								</div>
 								<div className={sx('boding-jobs-posting')}>
 									<div className={sx('table', 'table-jobs-posting')}>
@@ -234,17 +226,15 @@ const UnPosting = ({ cx }) => {
 												{allJobPost?.data && allJobPost?.data.length > 0 ? (
 													allJobPost?.data?.map((item) => (
 														<tr>
-															<td>
-																<div className='checkbox'></div>
-															</td>
+															<td></td>
 															<td>
 																<div className='title'>
-																	<a
+																	<Link
 																		title='Xem chi tiết việc làm'
 																		className='name'
-																		href='https://careerbuilder.vn/vi/employers/hrcentral/viewjob/35BE12BA/user_id/lop7cttnq.1667207375/sort/desc/type/3/position/1'>
+																		to={`/employers/hrcentral/viewjob/${item.id}`}>
 																		{item.job_title}
-																	</a>
+																	</Link>
 																</div>
 															</td>
 															<td>

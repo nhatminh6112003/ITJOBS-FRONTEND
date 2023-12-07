@@ -1,0 +1,57 @@
+.find-jobsby-categories .list-of-working-positions .title-h3 h2 {
+	padding-bottom: 9px;
+	color: #2f4ba0;
+	font-size: 16px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+.find-jobsby-categories .list-of-working-positions .list-jobs li {
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 5px;
+}
+.find-jobsby-categories .list-of-working-positions .list-jobs li span,
+.find-jobsby-categories .list-of-working-positions .list-jobs li span a {
+	color: #00b2a3;
+	font-size: 14.5px;
+	font-weight: 500;
+}
+.find-jobsby-categories .list-of-working-positions .list-jobs li a {
+	-webkit-transition: 0.4s ease-in-out all;
+	-o-transition: 0.4s ease-in-out all;
+	color: #5d677a;
+	font-size: 14.5px;
+	font-weight: 500;
+	transition: 0.4s ease-in-out all;
+}
+.find-jobsby-categories .cb-title h1 {
+	margin-bottom: 0;
+	padding-bottom: 8px;
+	font-size: 18px;
+}
+.row {
+   margin-bottom: -30px;
+}
+
+.row {
+   -ms-flex-wrap: wrap;
+   display: -ms-flexbox;
+   display: -webkit-box;
+   display: flex;
+   flex-wrap: wrap;
+   margin-right: -15px;
+   margin-left: -15px;
+}
+.cb-title * {
+	margin-bottom: 1.875rem;
+	color: #182642;
+	font-size: 1.875rem;
+	font-weight: 700;
+}

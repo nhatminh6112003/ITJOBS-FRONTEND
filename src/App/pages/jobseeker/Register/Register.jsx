@@ -7,10 +7,19 @@ import styles from './Register.module.css';
 const cx = classNames.bind(styles);
 const Register = () => {
 	return (
-		<section className={cx('register-form', 'cb-section')}>
+		<section className={cx('register-form', 'cb-section')} style={{ paddingBottom: 60 }}>
 			<div className={cx('container')}>
 				<div className={cx('cb-title', 'cb-title-center')}>
-					<h2>Tham gia ngay hôm nay</h2>
+					<h2
+						style={{
+							marginBottom: '1.875rem',
+							color: '#182642',
+							fontSize: '1.875rem',
+							fontWeight: '700',
+							paddingTop: '60px'
+						}}>
+						Tham gia hôm nay
+					</h2>
 				</div>
 				<div className={cx('box-shadown')}>
 					<div className={cx('row')}>
@@ -20,7 +29,11 @@ const Register = () => {
 									<div className={cx('job-item')}>
 										<div className={cx('figure')}>
 											<div className={cx('image', 'is-blue')}>
-												<img className='lazy-bg' alt='' src='./img/job-alert/i1.png' style={{}} />
+												<img
+													className='lazy-bg'
+													src='	https://static.careerbuilder.vn/themes/careerbuilder/img/job-alert/i1.png'
+													alt=''
+												/>
 											</div>
 											<div className={cx('figcaption')}>
 												<div className={cx('title')}>
@@ -35,7 +48,11 @@ const Register = () => {
 									<div className={cx('job-item')}>
 										<div className={cx('figure')}>
 											<div className={cx('image', 'is-green')}>
-												<img className='lazy-bg' alt='' src='./img/job-alert/i2.png' style={{}} />
+												<img
+													className='lazy-bg'
+													src='	https://static.careerbuilder.vn/themes/careerbuilder/img/job-alert/i2.png'
+													alt=''
+												/>
 											</div>
 											<div className={cx('figcaption')}>
 												<div className={cx('title')}>
@@ -52,7 +69,11 @@ const Register = () => {
 									<div className={cx('job-item')}>
 										<div className={cx('figure')}>
 											<div className={cx('image', 'is-yellow')}>
-												<img className='lazy-bg' alt='' src='./img/job-alert/i3.png' style={{}} />
+												<img
+													className='lazy-bg'
+													src='	https://static.careerbuilder.vn/themes/careerbuilder/img/job-alert/i3.png'
+													alt=''
+												/>
 											</div>
 											<div className={cx('figcaption')}>
 												<div className={cx('title')}>

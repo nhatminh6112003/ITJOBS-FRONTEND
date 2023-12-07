@@ -39,7 +39,8 @@ import serviceApi from './apis/serviceApi';
 import serviceTypeApi from './apis/serviceTypeApi';
 import jobSavedApi from './apis/jobSavedApi';
 import feedBackApi from './apis/feedBackApi';
-import company_serviceApi from './apis/company_serviceApi'
+import company_serviceApi from './apis/company_serviceApi';
+import orderApi from './apis/orderApi';
 const persistConfig = {
 	key: 'root',
 	storage,
@@ -90,6 +91,7 @@ const store = configureStore({
 			jobSavedApi.middleware,
 			feedBackApi.middleware,
 			company_serviceApi.middleware,
+			orderApi.middleware,
 			// logger middleware
 			RTKQueryLogger
 		])

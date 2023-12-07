@@ -7,6 +7,8 @@ import { useUpdateCompanyMutation } from '~/App/providers/apis/companyApi';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CompanySchema } from '~/App/schemas/companySchema';
+import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
+import { CompanySize, CompanyTypeArray } from '~/App/constants/companyEnum';
 
 const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	const [updateCompany] = useUpdateCompanyMutation();
@@ -28,10 +30,18 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 		resolver: yupResolver(CompanySchema)
 	});
 
-	const onSubmit = (data) => {
+	const onSubmit = ({ banner, logo, ...data }) => {
+		const formData = new FormData();
+
+		Object.entries(data).forEach(([key, value]) => {
+			formData.append(key, value);
+		});
+		formData.append('files', logo);
+		formData.append('files', banner);
+
 		updateCompany({
 			id: dataUpdate.id,
-			payload: data
+			payload: formData
 		})
 			.unwrap()
 			.then((r) => {
@@ -39,6 +49,9 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 					toast.success('Sửa thành công');
 					return;
 				}
+			})
+			.catch((err) => {
+				toast.error(err.data.message);
 			});
 		onRequestClose();
 	};
@@ -47,13 +60,33 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 		<Modal isOpen={isOpen} onRequestClose={onRequestClose}>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<ValidationTextFieldsControl name='company_name' label='Tên công ty' control={control} />
-				<ValidationTextFieldsControl name='company_type' label='Loại hình công ty' control={control} />
-				<ValidationTextFieldsControl name='company_size' label='Quy mô công ty' control={control} />
+				<SelectVariantsFieldControl
+					name='company_type'
+					label='Loại hình công ty'
+					control={control}
+					options={CompanyTypeArray.map((value) => {
+						return {
+							value: value.value,
+							label: value.label
+						};
+					})}
+				/>
+				<SelectVariantsFieldControl
+					name='company_size'
+					label='Quy mô công ty'
+					control={control}
+					options={CompanySize.map((value) => {
+						return {
+							value: value.value,
+							label: value.label
+						};
+					})}
+				/>
 				<ValidationTextFieldsControl name='tax_code' label='Mã số thuế' control={control} />
 				<ValidationTextFieldsControl name='address' label='Đia chỉ' control={control} />
 				<ValidationTextFieldsControl name='contact_name' label='Tên người liên hệ' control={control} />
 				<ValidationTextFieldsControl name='contact_phone' label='Số điện thoại người liên hệ' control={control} />
-				<ValidationTextFieldsControl name='position' label='vị trí' control={control} />
+				<ValidationTextFieldsControl name='position' label='Chức danh' control={control} />
 				<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
 					<Button type='submit' variant='contained'>
 						Sửa

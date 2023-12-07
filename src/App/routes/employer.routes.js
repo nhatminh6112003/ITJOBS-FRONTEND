@@ -27,9 +27,12 @@ const ServicesAndContact = lazy(() => import('../pages/employer/ServicesAndConta
 const ResumeInfo = lazy(() => import('../pages/employer/ResumeInfo'));
 const ResumeSaved = lazy(() => import('../pages/employer/HrCentral/ManageResume/ResumeSaved'));
 const VnpayReturn = lazy(() => import('../pages/employer/VnpayReturn'));
+const AllProduct = lazy(() => import('../pages/employer/AllProduct'));
+
 const employerPublicRoutes = [
 	{ path: routesPath.EmployerPaths.register, component: Register },
-	{ path: routesPath.EmployerPaths.login, component: Login }
+	{ path: routesPath.EmployerPaths.login, component: Login },
+	{ path: routesPath.EmployerPaths.allService, component: AllProduct },
 ];
 
 const employerPrivateRoutes = [

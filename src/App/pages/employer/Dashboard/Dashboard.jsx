@@ -50,16 +50,18 @@ const EmployerDashboard = ({ cx }) => {
 	});
 
 	const { data: countCompanyService } = useAnalysisQuery(employer?.company?.id);
-	useEffect(() => {
-		console.log(countCompanyService);
-	}, [countCompanyService]);
+
 	const { data: analysisCandidateCompany } = useAnalysisCandidateCompanyQuery(employer?.company?.id);
 
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
 	};
 
-	const { data } = useAnalyticsQuery();
+	const { data } = useAnalyticsQuery({
+		params: {
+			posted_by_id: employer?.id
+		}
+	});
 	const { data: analyticDegreeValueQuery } = useAnalyticDegreeValueQuery({
 		params: {
 			user_account_id: employer?.id,
@@ -291,28 +293,28 @@ const EmployerDashboard = ({ cx }) => {
 								<div className={sx('body')}>
 									<ul className={sx('list-post-management')}>
 										<li>
-											<a href='https://careerbuilder.vn/vi/employers/hrcentral/posting/user_id/lop7cttnq.1667207375'>
+											<Link to='/employers/hrcentral/posting'>
 												<span className={sx('number', 'green')}>{data?.publishStatus}</span>
 												<span className={sx('title')}>Việc làm đang đăng</span>
-											</a>
+											</Link>
 										</li>
 										<li>
-											<a href='https://careerbuilder.vn/vi/employers/hrcentral/waitposting/user_id/lop7cttnq.1667207375'>
+											<Link to='/employers/hrcentral/waitposting'>
 												<span className={sx('number', 'blue')}>{data?.pendingStatus}</span>
 												<span className={sx('title')}>Việc làm chờ đăng</span>
-											</a>
+											</Link>
 										</li>
 										<li>
-											<a href='https://careerbuilder.vn/vi/employers/hrcentral/unposting/user_id/lop7cttnq.1667207375'>
+											<Link to='/employers/hrcentral/unposting'>
 												<span className={sx('number', '')}>{data?.pauseStatus}</span>
 												<span className={sx('title')}>Việc làm tạm dừng đăng</span>
-											</a>
+											</Link>
 										</li>
 										<li>
-											<a href='https://careerbuilder.vn/vi/employers/hrcentral/expireposting/user_id/lop7cttnq.1667207375'>
+											<Link to='/employers/hrcentral/expireposting'>
 												<span className={sx('number', '')}>{data?.expiredStatus}</span>
 												<span className={sx('title')}>Việc làm hết hạn</span>
-											</a>
+											</Link>
 										</li>
 									</ul>
 								</div>

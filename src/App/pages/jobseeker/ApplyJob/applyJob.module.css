@@ -30,11 +30,9 @@
 	margin: 0em;
 }
 
-#popup_content.alert {
-}
+#popup_content.alert {}
 
-#popup_content.confirm {
-}
+#popup_content.confirm {}
 
 #popup_content.prompt {
 	background-image: url('https://static.careerbuilder.vn/js/jquery.alerts/images/help.gif');
@@ -505,16 +503,14 @@ body.compensate-for-scrollbar {
 }
 
 .fancybox-caption {
-	background: linear-gradient(
-		to top,
-		rgba(0, 0, 0, 0.85) 0%,
-		rgba(0, 0, 0, 0.3) 50%,
-		rgba(0, 0, 0, 0.15) 65%,
-		rgba(0, 0, 0, 0.075) 75.5%,
-		rgba(0, 0, 0, 0.037) 82.85%,
-		rgba(0, 0, 0, 0.019) 88%,
-		rgba(0, 0, 0, 0) 100%
-	);
+	background: linear-gradient(to top,
+			rgba(0, 0, 0, 0.85) 0%,
+			rgba(0, 0, 0, 0.3) 50%,
+			rgba(0, 0, 0, 0.15) 65%,
+			rgba(0, 0, 0, 0.075) 75.5%,
+			rgba(0, 0, 0, 0.037) 82.85%,
+			rgba(0, 0, 0, 0.019) 88%,
+			rgba(0, 0, 0, 0) 100%);
 	bottom: 0;
 	color: #eee;
 	font-size: 14px;
@@ -530,8 +526,7 @@ body.compensate-for-scrollbar {
 
 @supports (padding: max(0px)) {
 	.fancybox-caption {
-		padding: 75px max(44px, env(safe-area-inset-right)) max(25px, env(safe-area-inset-bottom))
-			max(44px, env(safe-area-inset-left));
+		padding: 75px max(44px, env(safe-area-inset-right)) max(25px, env(safe-area-inset-bottom)) max(44px, env(safe-area-inset-left));
 	}
 }
 
@@ -674,12 +669,15 @@ body.compensate-for-scrollbar {
 		padding-left: 6px;
 		padding-right: 6px;
 	}
+
 	.fancybox-slide--image {
 		padding: 6px 0;
 	}
+
 	.fancybox-close-small {
 		right: -6px;
 	}
+
 	.fancybox-slide--image .fancybox-close-small {
 		background: #4e4e4e;
 		color: #f2f4f6;
@@ -690,10 +688,12 @@ body.compensate-for-scrollbar {
 		top: 0;
 		width: 36px;
 	}
+
 	.fancybox-caption {
 		padding-left: 12px;
 		padding-right: 12px;
 	}
+
 	@supports (padding: max(0px)) {
 		.fancybox-caption {
 			padding-left: max(12px, env(safe-area-inset-left));
@@ -908,9 +908,11 @@ body.compensate-for-scrollbar {
 	.fancybox-thumbs {
 		width: 110px;
 	}
+
 	.fancybox-show-thumbs .fancybox-inner {
 		right: 110px;
 	}
+
 	.fancybox-thumbs__list a {
 		max-width: calc(100% - 10px);
 	}
@@ -1031,15 +1033,15 @@ body.compensate-for-scrollbar {
 	transition: 0.5s;
 }
 
-.main-form .form-group.form-text input:focus ~ label,
-.main-form .form-group.form-text input:not([value='']) ~ label {
+.main-form .form-group.form-text input:focus~label,
+.main-form .form-group.form-text input:not([value=''])~label {
 	top: -12px;
 	left: 0;
 	font-size: 14.5px;
 }
 
-.main-form .form-group.form-text input:focus ~ label span,
-.main-form .form-group.form-text input:not([value='']) ~ label span {
+.main-form .form-group.form-text input:focus~label span,
+.main-form .form-group.form-text input:not([value=''])~label span {
 	font-size: 10px;
 }
 
@@ -1097,7 +1099,7 @@ body.compensate-for-scrollbar {
 	background: black;
 }
 
-.main-form .form-group.form-radio input:checked ~ label:after {
+.main-form .form-group.form-radio input:checked~label:after {
 	color: #5d677a;
 	content: '\f43e';
 }
@@ -1277,12 +1279,7 @@ body.compensate-for-scrollbar {
 	content: '\f156';
 }
 
-.main-form
-	.form-group.form-select-chosen
-	.chosen-container
-	.chosen-choices
-	.search-choice
-	.search-choice-close:hover:before {
+.main-form .form-group.form-select-chosen .chosen-container .chosen-choices .search-choice .search-choice-close:hover:before {
 	color: #fc0821;
 }
 
@@ -1304,11 +1301,7 @@ body.compensate-for-scrollbar {
 	background: #7fcb42 !important;
 }
 
-.main-form
-	.form-group.form-select-chosen
-	.chosen-container
-	.chosen-drop
-	.chosen-results::-webkit-scrollbar-thumb:hover {
+.main-form .form-group.form-select-chosen .chosen-container .chosen-drop .chosen-results::-webkit-scrollbar-thumb:hover {
 	background: #7fcb42 !important;
 }
 
@@ -1393,7 +1386,7 @@ body.compensate-for-scrollbar {
 	background: black;
 }
 
-.main-form .form-group.form-checkbox input:checked ~ label:after {
+.main-form .form-group.form-checkbox input:checked~label:after {
 	color: #5d677a;
 	content: '\f132';
 }
@@ -1467,7 +1460,7 @@ body.compensate-for-scrollbar {
 	width: 100%;
 }
 
-.member-form .upload-resume .form-group.form-radio input:checked ~ .list-radio {
+.member-form .upload-resume .form-group.form-radio input:checked~.list-radio {
 	display: block;
 }
 
@@ -1595,6 +1588,7 @@ body.compensate-for-scrollbar {
 		margin: 0 -5px;
 		margin-bottom: 10px;
 	}
+
 	.member-form .upload-resume .form-group .list-choose .list-choose {
 		-webkit-box-pack: center;
 		-ms-flex-pack: center;
@@ -1607,9 +1601,11 @@ body.compensate-for-scrollbar {
 		justify-content: center;
 		margin-bottom: 0;
 	}
+
 	.member-form .upload-resume .form-group .list-choose .form-group:first-child {
 		padding-right: 20px;
 	}
+
 	.member-form .upload-resume .form-group .list-choose .choose-mycomputer,
 	.member-form .upload-resume .form-group .list-choose .choose-drive,
 	.member-form .upload-resume .form-group .list-choose .choose-dropbox {
@@ -1619,6 +1615,7 @@ body.compensate-for-scrollbar {
 		cursor: pointer;
 		transition: 0.4s;
 	}
+
 	.member-form .upload-resume .form-group .list-choose .choose-mycomputer label:hover,
 	.member-form .upload-resume .form-group .list-choose .choose-drive label:hover,
 	.member-form .upload-resume .form-group .list-choose .choose-dropbox label:hover {
@@ -1626,6 +1623,7 @@ body.compensate-for-scrollbar {
 		box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 		cursor: pointer;
 	}
+
 	.member-form .upload-resume .form-group .list-choose .choose-mycomputer:hover,
 	.member-form .upload-resume .form-group .list-choose .choose-drive:hover,
 	.member-form .upload-resume .form-group .list-choose .choose-dropbox:hover {
@@ -1694,19 +1692,19 @@ body.compensate-for-scrollbar {
 	display: none;
 }
 
-.member-form .upload-resume .form-group.form-checkbox input:checked ~ .checkbox-group .list-sample {
+.member-form .upload-resume .form-group.form-checkbox input:checked~.checkbox-group .list-sample {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 }
 
-.member-form .upload-resume .form-group.form-checkbox input:checked ~ textarea,
-.member-form .upload-resume .form-group.form-checkbox input:checked ~ .notice,
-.member-form .upload-resume .form-group.form-checkbox input:checked ~ span {
+.member-form .upload-resume .form-group.form-checkbox input:checked~textarea,
+.member-form .upload-resume .form-group.form-checkbox input:checked~.notice,
+.member-form .upload-resume .form-group.form-checkbox input:checked~span {
 	display: block;
 }
 
-.member-form .upload-resume .form-group.form-checkbox input:checked ~ .checkbox-group label::after {
+.member-form .upload-resume .form-group.form-checkbox input:checked~.checkbox-group label::after {
 	content: '\f132';
 }
 
@@ -1754,6 +1752,7 @@ body.compensate-for-scrollbar {
 		display: flex;
 		flex-wrap: wrap;
 	}
+
 	.member-form .upload-resume .form-group.form-checkbox input,
 	.member-form .upload-resume .form-group.form-checkbox textarea,
 	.member-form .upload-resume .form-group.form-checkbox .notice {
@@ -1762,6 +1761,7 @@ body.compensate-for-scrollbar {
 		flex: 0 0 100%;
 		max-width: 100%;
 	}
+
 	.member-form .upload-resume .form-group.form-checkbox .list-sample {
 		margin-top: 0;
 	}
@@ -1978,16 +1978,16 @@ body.compensate-for-scrollbar {
 	display: none;
 }
 
-.member-form .save-and-allow .form-group input:checked ~ .slider {
+.member-form .save-and-allow .form-group input:checked~.slider {
 	background-color: #2aba2a;
 }
 
-.member-form .save-and-allow .form-group input:focus ~ .slider {
+.member-form .save-and-allow .form-group input:focus~.slider {
 	-webkit-box-shadow: 0 0 1px #2aba2a;
 	box-shadow: 0 0 1px #2aba2a;
 }
 
-.member-form .save-and-allow .form-group input:checked ~ .slider::before {
+.member-form .save-and-allow .form-group input:checked~.slider::before {
 	-webkit-transform: translate(16px, -50%);
 	-ms-transform: translate(16px, -50%);
 	transform: translate(16px, -50%);
@@ -1998,6 +1998,7 @@ body.compensate-for-scrollbar {
 		margin-bottom: 30px;
 		padding-bottom: 14px;
 	}
+
 	.member-form .save-and-allow .form-group .slider {
 		right: initial;
 		left: 290px;
@@ -2157,9 +2158,11 @@ body.compensate-for-scrollbar {
 	.apply-form-job-detail {
 		padding: 35px 50px;
 	}
+
 	.apply-form-job-detail .table {
 		margin-bottom: 15px;
 	}
+
 	.apply-form-job-detail .table table tr td {
 		padding: 12px 0;
 	}
@@ -2169,6 +2172,7 @@ body.compensate-for-scrollbar {
 	.cb-member .cus-row {
 		margin: 0 -15px;
 	}
+
 	.cb-member .cus-col {
 		padding: 0 25px;
 	}
@@ -2188,7 +2192,7 @@ body.compensate-for-scrollbar {
 	content: '';
 	width: 20px;
 	height: 20px;
-	background: url('https://static.careerbuilder.vn/themes/careerbuilder/img/sm-icon-logo.png') no-repeat;
+	background: url('https://img.lovepik.com/free-png/20210922/lovepik-document-record-icon-element-png-image_401033946_wh1200.png') no-repeat;
 	background-size: cover !important;
 	position: absolute;
 	left: 30px;
@@ -2205,7 +2209,7 @@ body.compensate-for-scrollbar {
 	margin-bottom: 10px;
 }
 
-.switch-box > p {
+.switch-box>p {
 	color: #172642;
 	font-size: 18px;
 }
@@ -2222,7 +2226,7 @@ body.compensate-for-scrollbar {
 	font-weight: 700;
 }
 
-.switch-box input:checked ~ .slider {
+.switch-box input:checked~.slider {
 	background-color: #00b2a3;
 }
 
@@ -2270,19 +2274,19 @@ body.compensate-for-scrollbar {
 	color: #aaa;
 }
 
-.switch-box input:checked ~ .slider .icon {
+.switch-box input:checked~.slider .icon {
 	-webkit-transform: translate(20px, -50%);
 	-ms-transform: translate(20px, -50%);
 	transform: translate(20px, -50%);
 	color: #00b2a3;
 }
 
-.switch-box input:checked ~ .slider .icon:before {
+.switch-box input:checked~.slider .icon:before {
 	content: '\f12c';
 	color: #00b2a3;
 }
 
-.status-area > p {
+.status-area>p {
 	color: #172642;
 	font-weight: 700;
 }
@@ -2298,12 +2302,14 @@ body.compensate-for-scrollbar {
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
+
 	.switch-box,
-	.switch-box > p,
-	.switch-box > label {
+	.switch-box>p,
+	.switch-box>label {
 		display: inline-block;
 	}
-	.switch-box > label {
+
+	.switch-box>label {
 		margin-top: 10px;
 	}
 }
@@ -2312,18 +2318,21 @@ body.compensate-for-scrollbar {
 	.switch-box {
 		margin-top: 15px;
 	}
-	.switch-box > p {
+
+	.switch-box>p {
 		font-size: 16px;
 	}
 }
 
 @media screen and (max-width: 640px) {
+
 	.switch-box,
-	.switch-box > p,
-	.switch-box > label {
+	.switch-box>p,
+	.switch-box>label {
 		display: inline-block;
 	}
-	.switch-box > label {
+
+	.switch-box>label {
 		margin-top: 10px;
 	}
 }
@@ -2333,6 +2342,7 @@ body.compensate-for-scrollbar {
 		padding: 20px;
 		width: 100%;
 	}
+
 	.choose-profile-modal ul li button {
 		width: 120px;
 		padding-left: 10px;
@@ -2399,13 +2409,13 @@ body.compensate-for-scrollbar {
 	display: block;
 }
 
-.choose-profile-modal > span {
+.choose-profile-modal>span {
 	color: #ec4570;
 	display: inline-block;
 	margin-bottom: 5px;
 }
 
-.choose-profile-modal > p {
+.choose-profile-modal>p {
 	margin-bottom: 20px;
 	color: #0e0e24;
 }
@@ -2441,7 +2451,7 @@ body.compensate-for-scrollbar {
 	border: 1px solid #5d677a;
 }
 
-.container-radio input:checked ~ .checkmark {
+.container-radio input:checked~.checkmark {
 	background-color: #fff;
 	border-color: #00b2a4;
 }
@@ -2452,7 +2462,7 @@ body.compensate-for-scrollbar {
 	display: none;
 }
 
-.container-radio input:checked ~ .checkmark:after {
+.container-radio input:checked~.checkmark:after {
 	display: block;
 }
 
@@ -2514,6 +2524,7 @@ body.compensate-for-scrollbar {
 		padding: 20px;
 		width: 100%;
 	}
+
 	.choose-profile-modal ul li button {
 		width: 120px;
 		padding-left: 10px;
@@ -2618,15 +2629,13 @@ body.compensate-for-scrollbar {
 	border: 1px solid #aaa;
 	border-radius: 5px;
 	background-color: #fff;
-	background: -webkit-gradient(
-		linear,
-		left top,
-		left bottom,
-		color-stop(20%, #fff),
-		color-stop(50%, #f6f6f6),
-		color-stop(52%, #eee),
-		to(#f4f4f4)
-	);
+	background: -webkit-gradient(linear,
+			left top,
+			left bottom,
+			color-stop(20%, #fff),
+			color-stop(50%, #f6f6f6),
+			color-stop(52%, #eee),
+			to(#f4f4f4));
 	background: linear-gradient(#fff 20%, #f6f6f6 50%, #eee 52%, #f4f4f4 100%);
 	background-clip: padding-box;
 	-webkit-box-shadow: 0 0 3px #fff inset, 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -2685,8 +2694,7 @@ body.compensate-for-scrollbar {
 	display: block;
 	width: 100%;
 	height: 100%;
-	background: url('https://static.careerbuilder.vn/themes/careerbuilder/gallery/chosen/chosen-sprite.png') no-repeat
-		0px 2px;
+	background: url('https://static.careerbuilder.vn/themes/careerbuilder/gallery/chosen/chosen-sprite.png') no-repeat 0px 2px;
 }
 
 .chosen-container-single .chosen-search {
@@ -2705,8 +2713,7 @@ body.compensate-for-scrollbar {
 	height: auto;
 	outline: 0;
 	border: 1px solid #aaa;
-	background: url('https://static.careerbuilder.vn/themes/careerbuilder/gallery/chosen/chosen-sprite.png') no-repeat
-		100% -20px;
+	background: url('https://static.careerbuilder.vn/themes/careerbuilder/gallery/chosen/chosen-sprite.png') no-repeat 100% -20px;
 	font-size: 1em;
 	font-family: sans-serif;
 	line-height: normal;
@@ -2760,13 +2767,11 @@ body.compensate-for-scrollbar {
 
 .chosen-container .chosen-results li.highlighted {
 	background-color: #3875d7;
-	background-image: -webkit-gradient(
-		linear,
-		left top,
-		left bottom,
-		color-stop(20%, #3875d7),
-		color-stop(90%, #2a62bc)
-	);
+	background-image: -webkit-gradient(linear,
+			left top,
+			left bottom,
+			color-stop(20%, #3875d7),
+			color-stop(90%, #2a62bc));
 	background-image: linear-gradient(#3875d7 20%, #2a62bc 90%);
 	color: #fff;
 }
@@ -2850,15 +2855,13 @@ body.compensate-for-scrollbar {
 	max-width: 100%;
 	border-radius: 3px;
 	background-color: #eeeeee;
-	background-image: -webkit-gradient(
-		linear,
-		left top,
-		left bottom,
-		color-stop(20%, #f4f4f4),
-		color-stop(50%, #f0f0f0),
-		color-stop(52%, #e8e8e8),
-		to(#eee)
-	);
+	background-image: -webkit-gradient(linear,
+			left top,
+			left bottom,
+			color-stop(20%, #f4f4f4),
+			color-stop(50%, #f0f0f0),
+			color-stop(52%, #e8e8e8),
+			to(#eee));
 	background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
 	background-size: 100% 19px;
 	background-repeat: repeat-x;
@@ -2893,15 +2896,13 @@ body.compensate-for-scrollbar {
 	padding-right: 5px;
 	border: 1px solid #ccc;
 	background-color: #e4e4e4;
-	background-image: -webkit-gradient(
-		linear,
-		left top,
-		left bottom,
-		color-stop(20%, #f4f4f4),
-		color-stop(50%, #f0f0f0),
-		color-stop(52%, #e8e8e8),
-		to(#eee)
-	);
+	background-image: -webkit-gradient(linear,
+			left top,
+			left bottom,
+			color-stop(20%, #f4f4f4),
+			color-stop(50%, #f0f0f0),
+			color-stop(52%, #e8e8e8),
+			to(#eee));
 	background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
 	color: #666;
 }
@@ -3059,8 +3060,9 @@ input[type='search']::-webkit-search-results-decoration {
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-	only screen and (min-resolution: 144dpi),
-	only screen and (min-resolution: 1.5dppx) {
+only screen and (min-resolution: 144dpi),
+only screen and (min-resolution: 1.5dppx) {
+
 	.chosen-rtl .chosen-search input[type='text'],
 	.chosen-rtl .chosen-search input[type='search'],
 	.chosen-container-single .chosen-single abbr,

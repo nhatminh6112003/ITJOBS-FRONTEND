@@ -51,9 +51,9 @@ const Home = ({ cx }) => {
 			/>
 			<section className={cx('cb-section', 'cb-section-border-bottom')}>
 				<div className={cx('container')}>
-					<div className={cx('cb-title', 'cb-title-center')}>
+					{/* <div className={cx('cb-title', 'cb-title-center')}>
 						<h2>NHÀ TUYỂN DỤNG HÀNG ĐẦU</h2>
-					</div>
+					</div> */}
 					<div className={cx('top-employers-list')}></div>
 					<div className={cx('top-employers-banner')}>
 						<div className={cx('row')}>

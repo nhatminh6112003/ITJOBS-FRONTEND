@@ -43,7 +43,7 @@ const JobSeeker = () => {
 			{ Header: 'Họ', accessor: 'firstname' },
 			{ Header: 'Email', accessor: 'email' }
 		],
-		[tableData]
+		[data?.pagination.itemsPerPage, data?.pagination.pageIndex]
 	);
 	return (
 		<Fragment>

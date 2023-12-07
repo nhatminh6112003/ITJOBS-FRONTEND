@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import { resumeActiveEnum } from '~/App/constants/resumeActiveEnum';
 import useSearchResume from '../components/useSearchResume';
+import formatVND from '~/Core/utils/formatVND';
 const sx = classNames.bind(styles);
 
 const ResumeSaved = ({ cx }) => {
@@ -36,7 +37,21 @@ const ResumeSaved = ({ cx }) => {
 			toDate: '' || query.toDate
 		}
 	});
+	const formatSalary = (salary) => {
+		if (!salary) {
+			return '0';
+		}
 
+		const salaryNumber = parseInt(salary);
+		const salaryInMillions = Math.floor(salaryNumber / 1000000);
+		const remainingDigits = salaryInMillions % 10;
+
+		if (remainingDigits === 0) {
+			return `${salaryInMillions / 10} Tr`;
+		} else {
+			return `${salaryInMillions} Tr`;
+		}
+	};
 	const { data: allEmployerResume, isLoading } = useGetAllEmployerResumeApiQuery({
 		params: {
 			user_account_id: employer?.id,
@@ -48,9 +63,6 @@ const ResumeSaved = ({ cx }) => {
 	});
 
 	const [deleteEmployerResume] = useDeleteEmployerResumeApiMutation();
-	useEffect(() => {
-		console.log(allEmployerResume?.data);
-	}, [allEmployerResume]);
 
 	const handleDelete = (id) => {
 		deleteEmployerResume(id)
@@ -77,18 +89,7 @@ const ResumeSaved = ({ cx }) => {
 					<div className={sx('heading-manage')}>
 						<div className={sx('left-heading')}>
 							<h1 className={sx('title-manage')}>Hồ Sơ Đã Lưu</h1>
-							{/* <div className={sx('button')}>
-								<a className={sx('btn-gradient')} href='https://careerbuilder.vn/vi/employers/saved_search'>
-									<em className={cx('material-icons')}>notifications_none</em>
-									Thông Báo Ứng Viên
-								</a>
-							</div> */}
 						</div>
-						{/* <div className={sx('right-heading')}>
-							<a className={sx('support')} href='https://careerbuilder.vn/vi/employers/faq'>
-								Hướng dẫn
-							</a>
-						</div> */}
 					</div>
 					<div className={sx('main-form-posting')}>
 						<form onSubmit={handleSubmit(onSubmit)}>
@@ -200,23 +201,22 @@ const ResumeSaved = ({ cx }) => {
 																	</td>
 																	<td>
 																		<p>
-																			{employer_resume?.resume?.attachments[0]?.yearOfExperience} năm
+																			{employer_resume?.resume?.attachments[0]?.yearOfExperience
+																				? employer_resume?.resume?.attachments[0]
+																						?.yearOfExperience + 'năm'
+																				: 'Không có kinh nghiệm'}{' '}
 																		</p>
 																	</td>
 																	<td>
 																		<p>
-																			{parseInt(
+																			{formatVND(
 																				employer_resume?.resume?.resume_desired_job?.salary_from
-																			)
-																				.toString()
-																				.charAt(0)}{' '}
-																			Tr -{' '}
-																			{parseInt(
+																			)}{' '}
+																			-{' '}
+																			{formatVND(
 																				employer_resume?.resume?.resume_desired_job?.salary_to
-																			)
-																				.toString()
-																				.charAt(0)}{' '}
-																			Tr VND
+																			)}{' '}
+																			VND
 																		</p>
 																	</td>
 																	<td>
@@ -232,9 +232,7 @@ const ResumeSaved = ({ cx }) => {
 																			}}
 																			onClick={() => handleDelete(employer_resume?.id)}
 																			title='Xóa hồ sơ'>
-																			<DeleteIcon 
-																			style={{color:'#2f4ba0'}}
-																			/>
+																			<DeleteIcon style={{ color: '#2f4ba0' }} />
 																		</a>
 																	</td>
 																</tr>
