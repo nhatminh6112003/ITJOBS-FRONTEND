@@ -1,9 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import baseQueryWithAdmin from '../fetchBaseQueryAdmin';
+import baseQueryWithEmployer from '../fetchBaseQueryEmployer';
 
 const serviceTypeApi = createApi({
 	reducerPath: 'service_type',
-	baseQuery: baseQueryWithAdmin,
+	baseQuery: baseQueryWithEmployer,
 	endpoints: (build) => ({
 		getAllServiceType: build.query({
 			query: (arg) => {
@@ -23,19 +23,19 @@ const serviceTypeApi = createApi({
 			query: (payload) => {
 				return { url: `/service_type`, method: 'POST', body: payload };
 			},
-			invalidatesTags: ['service_type'],
+			invalidatesTags: ['service_type']
 		}),
 		updateServiceType: build.mutation({
 			query: ({ id, payload }) => {
 				return { url: `/service_type/${id}`, method: 'PATCH', body: payload };
 			},
-			invalidatesTags: ['service_type'],
+			invalidatesTags: ['service_type']
 		}),
 		deleteServiceType: build.mutation({
 			query: (id) => {
 				return { url: `/service_type/${id}`, method: 'DELETE' };
 			},
-			invalidatesTags: ['service_type'],
+			invalidatesTags: ['service_type']
 		})
 	})
 });

@@ -1,116 +1,78 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './all-product.module.css';
 import classNames from 'classnames/bind';
+import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
+import { Link } from 'react-router-dom';
 const sx = classNames.bind(styles);
 
 const AllProduct = ({ cx }) => {
+	const { data } = useGetAllServiceTypeQuery();
+
+	useEffect(() => {
+		console.log(data?.data);
+	}, [data?.data]);
 	return (
 		<>
-			<section className={sx('all-product-banner')}>
-				<div className={sx('swiper-container')}>
-					<div className={sx('swiper-wrapper')}>
-						<div className={sx('swiper-slide')}>
-							<div className={sx('banner-pc')}>
-								<div className={sx('image')}>
-									<img
-										className={sx('swiper-lazy')}
-										src='https://images.careerbuilder.vn/content/images/Banner/CB%20landingpage_employer%20banner%20copy.jpg'
-										alt=' '
-									/>
-									<div className={sx('swiper-lazy-preloader')} />
-								</div>
-							</div>
-					
-							<div className={cx('container')}>
-								<div className={sx('box-content')}>
-									<h1> </h1>
-									<div className={sx('content')}></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
 			<section className={sx('all-product-service', 'cb-section')}>
 				<div className={cx('container')}>
-					<h2 className={sx('cb-title', 'cb-title-center')}>Chúng tôi mang đến trải nghiệm dịch vụ tốt nhất</h2>
-					<div className={sx('sub-title')}>
-						<p>
-							Tại Việt Nam, CareerBuilder là lựa chọn của hơn 17.000 doanh nghiệp hàng đầu với các ưu thế: Tiếp
-							cận hiệu quả nhiều nguồn ứng viên tiềm năng với Giải pháp kết nối, tuyển dụng và quản lý nhân tài
-							Talent Solution, Talent Driver, Targeted Email Marketing, Talent Referral. Thu hút hàng trăm ngàn
-							hồ sơ ứng viên hoàn chỉnh và được cập nhật mới thường xuyên
-						</p>
-					</div>
+					<h2
+						className={sx('cb-title', 'cb-title-center')}
+						style={{
+							marginTop: 25
+						}}>
+						Chúng tôi mang đến trải nghiệm dịch vụ tốt nhất
+					</h2>
 					<div className={sx('list-service')}>
 						<div className={cx('row')}>
-							<div className={cx('col-md-6')}>
-								<div className={sx('item')}>
-									<div className={sx('image')}>
-										<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3'>
-											<img
-												className={sx('lazy-new')}
-												src='https://static.careerbuilder.vn/themes/employer/img/employer/i1.png'
-												alt='Đăng Tuyển Dụng'
-											/>
-										</a>
-									</div>
-									<div className={sx('caption')}>
-										<h3 className={sx('title')}>
-											<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3'>
-												Đăng Tuyển Dụng
-											</a>
-										</h3>
-										<div className={sx('content')}>
-											<p style={{ fontWeight: 'bold' }}>Xây dựng đội ngũ nhân tài cho doanh nghiệp</p>
-											<p>
-												Thông tin đăng tuyển của bạn sẽ hiển thị trực tuyến trên CareerBuilder.vn và các
-												trang đối tác của chúng tôi trong vòng 30 ngày.
-											</p>
+							{data?.data.map((value) => {
+								return (
+									<>
+										<div className={cx('col-md-6')}>
+											<div className={sx('item')}>
+												<div className={sx('image')}>
+													<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3'>
+														<img
+															className={sx('lazy-new')}
+															src={
+																value.name === 'Đăng tuyển dụng'
+																	? 'https://static.careerbuilder.vn/themes/employer/img/employer/i1.png'
+																	: 'https://static.careerbuilder.vn/themes/employer/img/employer/i2.png'
+															}
+															alt={value.name}
+														/>
+													</a>
+												</div>
+												<div className={sx('caption')}>
+													<h3 className={sx('title')}>
+														<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3'>
+															{value.name}
+														</a>
+													</h3>
+													<div className={sx('content')}>
+														<p style={{ fontWeight: 'bold' }}>
+															{value.name === 'Đăng tuyển dụng'
+																? 'Xây dựng đội ngũ nhân tài cho doanh nghiệp'
+																: 'Không bỏ lỡ nhân tài'}
+														</p>
+														<p>
+															{value.name === 'Đăng tuyển dụng'
+																? 'Truy cập vào hàng trăm ngàn hồ sơ hoàn chỉnh và được cập nhật mới thường xuyên để tìm kiếm những ứng viên phù hợp nhất với vị trí tuyển dụng.'
+																: 'Tin đăng tuyển của bạn sẽ hiển thị trực tuyến trên JobHunters.vn và các trang đối tác của chúng tôi trong vòng 30 ngày.'}
+														</p>
+													</div>
+													<Link
+														className={sx('view-more')}
+														to={`/employers/products-and-services/${value.id}`}>
+														Xem thêm
+														<em className={sx('mdi', 'mdi-chevron-right')} />
+													</Link>
+												</div>
+											</div>
 										</div>
-										<a
-											className={sx('view-more')}
-											href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3'>
-											Xem thêm
-											<em className={sx('mdi', 'mdi-chevron-right')} />
-										</a>
-									</div>
-								</div>
-							</div>
-							<div className={cx('col-md-6')}>
-								<div className={sx('item')}>
-									<div className={sx('image')}>
-										<a href='https://careerbuilder.vn/vi/employers/products-and-services/tim-ho-so-ung-vien/8'>
-											<img
-												className={sx('lazy-new')}
-												src='https://static.careerbuilder.vn/themes/employer/img/employer/i2.png'
-												alt='Tìm Hồ Sơ Ứng Viên'
-											/>
-										</a>
-									</div>
-									<div className={sx('caption')}>
-										<h3 className={sx('title')}>
-											<a href='https://careerbuilder.vn/vi/employers/products-and-services/tim-ho-so-ung-vien/8'>
-												Tìm Hồ Sơ Ứng Viên
-											</a>
-										</h3>
-										<div className={sx('content')}>
-											<p style={{ fontWeight: 'bold' }}>Không bỏ lỡ nhân tài</p>
-											<p>
-												Truy cập vào hàng trăm ngàn hồ sơ hoàn chỉnh và được cập nhật mới thường xuyên để
-												tìm kiếm những ứng viên phù hợp nhất với vị trí tuyển dụng.
-											</p>
-										</div>
-										<a
-											className={sx('view-more')}
-											href='https://careerbuilder.vn/vi/employers/products-and-services/tim-ho-so-ung-vien/8'>
-											Xem thêm
-											<em className={sx('mdi', 'mdi-chevron-right')} />
-										</a>
-									</div>
-								</div>
-							</div>
-							<div className={cx('col-md-6')}>
+									</>
+								);
+							})}
+							{/* <div className={cx('col-md-6')}>
 								<div className={sx('item')}>
 									<div className={sx('image')}>
 										<a href='https://careerbuilder.vn/vi/employers/products-and-services/talent-solution/'>
@@ -144,8 +106,8 @@ const AllProduct = ({ cx }) => {
 										</a>
 									</div>
 								</div>
-							</div>
-							<div className={cx('col-md-6')}>
+							</div> */}
+							{/* <div className={cx('col-md-6')}>
 								<div className={sx('item')}>
 									<div className={sx('image')}>
 										<a href='https://careerbuilder.vn/vi/employers/products-and-services/quang-cao-tuyen-dung/9'>
@@ -179,8 +141,8 @@ const AllProduct = ({ cx }) => {
 										</a>
 									</div>
 								</div>
-							</div>
-							<div className={cx('col-md-6')}>
+							</div> */}
+							{/* <div className={cx('col-md-6')}>
 								<div className={sx('item')}>
 									<div className={sx('image')}>
 										<a href='https://careerbuilder.vn/vi/employers/products-and-services/talent-driver/14'>
@@ -316,7 +278,7 @@ const AllProduct = ({ cx }) => {
 										</a>
 									</div>
 								</div>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>
