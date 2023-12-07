@@ -161,15 +161,6 @@ const ResumeDetail = ({ cx }) => {
 														Cập nhật trạng thái
 													</a>
 												</li>
-												{/* <li>
-													<i className={sx('fa', 'fa-forward')} aria-hidden='true' />
-													<a
-														href='javascript:void(0);'
-														onclick="showResumeForInvite('35BFE874','35C9210A');return false;"
-														title='Giới thiệu hồ sơ '>
-														Giới thiệu hồ sơ
-													</a>
-												</li> */}
 												<li>
 													<em className={cx('material-icons')}>email </em>
 													<a
@@ -177,13 +168,6 @@ const ResumeDetail = ({ cx }) => {
 														onClick={() => toggle('mailModal')}
 														title='Gửi thông báo'>
 														Gửi thông báo
-													</a>
-												</li>
-												<li>
-													<em className={cx('material-icons')}>picture_as_pdf </em>
-
-													<a onClick={() => exportPdf(data?.attachments?.file)} href='javascript:void(0)'>
-														Xuất file PDF
 													</a>
 												</li>
 											</ul>
