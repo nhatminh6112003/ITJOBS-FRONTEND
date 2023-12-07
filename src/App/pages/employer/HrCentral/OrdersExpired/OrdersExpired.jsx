@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styles from '../OrdersAvailable/ordersAvailable.module.css';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
-import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
+import {
+	useGetAllCompany_serviceQuery,
+	useUpdateCompany_serviceMutation
+} from '~/App/providers/apis/company_serviceApi';
 import { Link, useLocation } from 'react-router-dom';
 
 const sx = classNames.bind(styles);
@@ -15,10 +18,11 @@ const OrdersExpired = ({ cx }) => {
 	const employer = useSelector((state) => state.auth?.employer);
 	const { data: allOrder } = useGetAllCompany_serviceQuery({
 		params: {
-			company_id: employer?.company?.id
+			company_id: employer?.company?.id,
+			isExpiry: 1
 		}
 	});
-
+	console.log(allOrder);
 	const calculateRemainingDays = (order) => {
 		if (order?.expiration_date) {
 			const expirationDate = moment(order.expiration_date);
@@ -137,56 +141,38 @@ const OrdersExpired = ({ cx }) => {
 													</tr>
 												</thead>
 												<tbody>
-													{allOrder?.data && allOrder?.data.length > 0 ? (
-														allOrder?.data.map((order) => {
-															if (order?.expiration_date === 0) {
-																return (
-																	<>
-																		<tr>
-																			<td>{order?.id}</td>
-																			<td>
-																				<div className={sx('title')}>
-																					<p>{order?.service?.name}</p>
-																				</div>
-																			</td>
-																			<td>
-																				<div className={sx('title')}>
-																					<p>{calculateRemainingDays(order)}</p>
-																				</div>
-																			</td>
-																			<td>
-																				<p>{formatDate(order?.register_date)}</p>
-																			</td>
-																			<td>
-																				<p>{formatDate(order?.expiration_date)}</p>
-																			</td>
-																			<td>
-																				<p>
-																					{moment(order?.expiration_date).isAfter(moment(), 'day')
-																						? 'Còn hạn'
-																						: 'Hết hạn'}
-																				</p>
-																			</td>
-																		</tr>
-																	</>
-																);
-															} else {
-																return (
-																	<tr>
-																		<td colSpan={7} className={sx('cb-text-center')}>
-																			Không có dữ liệu!
-																		</td>
-																	</tr>
-																);
-															}
-														})
-													) : (
-														<tr>
-															<td colSpan={7} className={sx('cb-text-center')}>
-																Không có dữ liệu!
-															</td>
-														</tr>
-													)}
+													{allOrder?.data?.map((order) => {
+														return (
+															<>
+																<tr>
+																	<td>{order?.id}</td>
+																	<td>
+																		<div className={sx('title')}>
+																			<p>{order?.service?.name}</p>
+																		</div>
+																	</td>
+																	<td>
+																		<div className={sx('title')}>
+																			<p>{calculateRemainingDays(order)}</p>
+																		</div>
+																	</td>
+																	<td>
+																		<p>{formatDate(order?.register_date)}</p>
+																	</td>
+																	<td>
+																		<p>{formatDate(order?.expiration_date)}</p>
+																	</td>
+																	<td>
+																		<p>
+																			{moment(order?.expiration_date).isAfter(moment(), 'day')
+																				? 'Còn hạn'
+																				: 'Hết hạn'}
+																		</p>
+																	</td>
+																</tr>
+															</>
+														);
+													})}
 												</tbody>
 											</table>
 										</div>
