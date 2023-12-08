@@ -6,7 +6,14 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function ConfirmDialog({ open, onOpen, onConfirm, onCancel }) {
+export default function ConfirmDialog({
+	open,
+	onOpen,
+	onConfirm,
+	onCancel,
+	title = 'Vui lòng thao tác đầy đủ để hoàn thành',
+	contentText = 'Bạn có chắc chắn muốn thực hiện hành động này?'
+}) {
 	return (
 		<div>
 			<Dialog
@@ -14,11 +21,9 @@ export default function ConfirmDialog({ open, onOpen, onConfirm, onCancel }) {
 				onClose={onCancel}
 				aria-labelledby='alert-dialog-title'
 				aria-describedby='alert-dialog-description'>
-				<DialogTitle id='alert-dialog-title'>Vui lòng thao tác đầy đủ để hoàn thành</DialogTitle>
+				<DialogTitle id='alert-dialog-title'>{title}</DialogTitle>
 				<DialogContent>
-					<DialogContentText id='alert-dialog-description'>
-						Bạn có chắc chắn muốn thực hiện hành động này?
-					</DialogContentText>
+					<DialogContentText id='alert-dialog-description'>{contentText}</DialogContentText>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={onCancel} variant='outlined' color='error'>

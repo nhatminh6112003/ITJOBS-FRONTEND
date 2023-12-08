@@ -2,22 +2,54 @@ import React, { useEffect, useState } from 'react';
 import styles from './ordersAvailable.module.css';
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
-import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
+import {
+	useGetAllCompany_serviceQuery,
+	useUpdateCompany_serviceMutation
+} from '~/App/providers/apis/company_serviceApi';
 import { Link, useLocation } from 'react-router-dom';
 
 const sx = classNames.bind(styles);
 import moment from 'moment';
 import formatDate from '~/Core/utils/formatDate';
 import TabMenu from '../components/TabMenu';
+import Button from '~/Core/components/common/Button';
+import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
+import { toast } from 'react-toastify';
 const OrdersAvailable = ({ cx }) => {
+	const [dataUpdate, setDataUpdate] = useState(null);
+	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
+
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const employer = useSelector((state) => state.auth?.employer);
 	const { data: allOrder } = useGetAllCompany_serviceQuery({
 		params: {
-			company_id: employer?.company?.id
+			company_id: employer?.company?.id,
+			isExpiry: 0
 		}
 	});
+	const activedOrder = allOrder?.data?.filter((item) => {
+		return item?.isActive === true
+	});
+	console.log(activedOrder);
+	const [update] = useUpdateCompany_serviceMutation();
+
+	const updateCompany_service = (id) => {
+		const now = moment();
+		const register_date = now.format('YYYY-MM-DD');
+		const expiration_date = now.add(30, 'days').format('YYYY-MM-DD');
+		update({ id, payload: { isActive: true, register_date: register_date, expiration_date: expiration_date } })
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success(r?.message);
+				}
+			})
+			.catch((err) => {
+				toast.error(err?.data?.message);
+			});
+		setModalConfirmState({ open: false, payload: null });
+	};
 
 	const calculateRemainingDays = (order) => {
 		if (order?.expiration_date) {
@@ -49,7 +81,7 @@ const OrdersAvailable = ({ cx }) => {
 							))}
 						</ul>{' '}
 						<div className={sx('tabslet-content', 'active')} id='tab-1'>
-							<form method='post' id='frm-filter-reports'>
+							<div id='frm-filter-reports'>
 								<div className={sx('main-form-posting')}>
 									<div className={sx('form-wrap')}>
 										<div className={sx('form-group', 'form-text')}>
@@ -128,21 +160,23 @@ const OrdersAvailable = ({ cx }) => {
 											<table>
 												<thead>
 													<tr>
-														<th width='15%'>Số đơn hàng</th>
-														<th width='24%'>Gói dịch vụ</th>
-														<th width='10%'>Còn lại</th>
-														<th width='13%'>Ngày bắt đầu kích hoạt</th>
-														<th width='13%'>Ngày hết hạn kích hoạt</th>
-														<th width='15%'>Tình trạng</th>
+														<th width='6%'>Số thứ tự</th>
+														<th width='15%'>Gói dịch vụ</th>
+														<th width='6%'>Số lượng</th>
+														<th width='6%'>Còn lại</th>
+														<th width='15%'>Ngày bắt đầu kích hoạt</th>
+														<th width='15%'>Ngày hết hạn kích hoạt</th>
+														<th width='15%'>Trạng thái</th>
+														<th width='10%'>Hành động</th>
 													</tr>
 												</thead>
 												<tbody>
 													{allOrder?.data && allOrder?.data.length > 0 ? (
-														allOrder?.data.map((order) => {
+														allOrder?.data.map((order, index) => {
 															return (
 																<>
 																	<tr>
-																		<td>{order?.id}</td>
+																		<td>{index + 1}</td>
 																		<td>
 																			<div className={sx('title')}>
 																				<p>{order?.service?.name}</p>
@@ -150,21 +184,45 @@ const OrdersAvailable = ({ cx }) => {
 																		</td>
 																		<td>
 																			<div className={sx('title')}>
-																				<p>{calculateRemainingDays(order)}</p>
+																				<p>{order?.quantity}</p>
 																			</div>
 																		</td>
 																		<td>
-																			<p>{formatDate(order?.register_date)}</p>
+																			<div className={sx('title')}>
+																				<p>
+																					{order?.isActive === true
+																						? calculateRemainingDays(order)
+																						: '30 ngày'}
+																				</p>
+																			</div>
 																		</td>
 																		<td>
-																			<p>{formatDate(order?.expiration_date)}</p>
+																			<p>{formatDate(order?.register_date) || 'Chưa bắt đầu'}</p>
+																		</td>
+																		<td>
+																			<p>{formatDate(order?.expiration_date) || 'Chưa bắt đầu'}</p>
 																		</td>
 																		<td>
 																			<p>
-																				{moment(order?.expiration_date).isAfter(moment(), 'day')
-																					? 'Còn hạn'
-																					: 'Hết hạn'}
+																				{order?.isActive === true
+																					? 'Đang kích hoạt'
+																					: 'Chưa kích hoạt'}
 																			</p>
+																		</td>
+																		<td>
+																			<button
+																				onClick={() => {
+																					const checkActive = activedOrder.some((item) => {
+																						return item?.service?.service_type_id === order?.service?.service_type_id
+																					})
+																					if(checkActive) {
+																						return toast.error("Bạn không thể thực hiện!")
+																					}
+																					return setModalConfirmState({ open: true, payload: order?.id })
+																				}
+																				}>
+																				Kích hoạt
+																			</button>
 																		</td>
 																	</tr>
 																</>
@@ -191,10 +249,16 @@ const OrdersAvailable = ({ cx }) => {
 										</div>
 									</div>
 								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
+				<ConfirmDialog
+					contentText='Bạn sẽ không thể thay đổi cùng 1 loại dịch vụ trong 30 ngày!'
+					open={modalConfirmState.open}
+					onConfirm={() => updateCompany_service(modalConfirmState.payload)}
+					onCancel={() => setModalConfirmState({ open: false, payload: null })}
+				/>
 			</div>
 		</section>
 	);
