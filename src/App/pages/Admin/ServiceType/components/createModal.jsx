@@ -12,6 +12,7 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 	const {
 		handleSubmit,
 		control,
+		reset,
 		formState: { errors }
 	} = useForm({
 		resolver: yupResolver(jobPositionCategorySchema)
@@ -27,6 +28,7 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 				}
 			});
 		onRequestClose();
+		reset();
 	};
 
 	return (

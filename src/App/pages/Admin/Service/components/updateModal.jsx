@@ -3,7 +3,7 @@ import Modal from '~/Core/components/common/Modal';
 import ValidationTextFieldsControl from '~/Core/components/common/FormControl/ValidationTextFieldsControl';
 import { useForm, Controller } from 'react-hook-form';
 import Button from '@mui/material/Button';
-import { useUpdateServiceMutation } from '~/App/providers/apis/serviceApi';
+import { useGetOneServiceQuery, useUpdateServiceMutation } from '~/App/providers/apis/serviceApi';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { professionSchema } from '~/App/schemas/professionSchema';
@@ -11,10 +11,10 @@ import { useGetAllBenefitsQuery } from '~/App/providers/apis/benefits';
 import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
-const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
-	console.log("TCL: UpdateModal -> dataUpdate", dataUpdate)
-	const { data: listBenefits } = useGetAllBenefitsQuery();
+import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
+const UpdateModal = ({ isOpen, onRequestClose, dataUpdate, listBenefits }) => {
 	const { data: listServiceType } = useGetAllServiceTypeQuery();
+	const { data: serviceDetail } = useGetOneServiceQuery(dataUpdate?.id || '');
 	const [updateService] = useUpdateServiceMutation();
 	const {
 		handleSubmit,
@@ -29,7 +29,9 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 			description: dataUpdate.description
 		}
 	});
-
+	useEffect(() => {
+		console.log(serviceDetail?.serviceBenefits?.map((item) => item.id));
+	}, [serviceDetail]);
 	const onSubmit = (data) => {
 		updateService({
 			id: dataUpdate.id,
@@ -43,6 +45,7 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 				}
 			});
 		onRequestClose();
+		reset();
 	};
 
 	return (
@@ -62,6 +65,20 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 					name='service_type_id'
 				/>
 				<ValidationTextFieldsControl name='price' label='Giá' control={control} />
+				<SelectMultipleFieldControl
+					label='Lợi ích'
+					options={listBenefits?.data?.map((value) => {
+						return {
+							label: value.name,
+							value: value.id
+						};
+					})}
+					placeholder='Chọn'
+					maxItems={1}
+					control={control}
+					name='benefit_ids'
+					selectedValues={serviceDetail?.serviceBenefits?.map((item) => item.benefit?.id)}
+				/>
 				<TextAreaFieldControl name='description' label='Mô tả lợi ích' control={control} />
 				<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
 					<Button type='submit' variant='contained'>

@@ -15,6 +15,7 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	const {
 		handleSubmit,
 		control,
+		reset,
 		formState: { errors }
 	} = useForm({
 		values: dataUpdate && {
@@ -54,6 +55,7 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 				toast.error(err.data.message);
 			});
 		onRequestClose();
+		reset();
 	};
 
 	return (

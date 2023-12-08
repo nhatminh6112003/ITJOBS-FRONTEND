@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from '~/Core/components/common/Modal';
 import ValidationTextFieldsControl from '~/Core/components/common/FormControl/ValidationTextFieldsControl';
 import { useForm, Controller } from 'react-hook-form';
@@ -8,11 +8,13 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
 import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
-import { useGetAllBenefitsQuery } from '~/App/providers/apis/benefits';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
-const CreateModal = ({ isOpen, onRequestClose }) => {
+import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
+const CreateModal = ({ isOpen, onRequestClose, listBenefits }) => {
 	const [createService] = useCreateServiceMutation();
 	const { data: listServiceType } = useGetAllServiceTypeQuery();
+	// const { data: listBenefits } = useGetAllBenefitsQuery();
+
 	const {
 		handleSubmit,
 		control,
@@ -21,6 +23,7 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 	} = useForm({});
 
 	const onSubmit = (data) => {
+		console.log(data);
 		createService(data)
 			.unwrap()
 			.then((r) => {
@@ -50,6 +53,19 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 					name='service_type_id'
 				/>
 				<ValidationTextFieldsControl name='price' label='Giá' control={control} />
+				<SelectMultipleFieldControl
+					label='Lợi ích'
+					options={listBenefits?.data?.map((value) => {
+						return {
+							label: value.name,
+							value: value.id
+						};
+					})}
+					placeholder='Chọn'
+					maxItems={1}
+					control={control}
+					name='benefit_ids'
+				/>
 				<TextAreaFieldControl name='description' label='Mô tả lợi ích' control={control} />
 				<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
 					<Button type='submit' variant='contained'>
