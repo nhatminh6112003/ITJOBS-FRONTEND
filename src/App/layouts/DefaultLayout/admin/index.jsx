@@ -17,7 +17,9 @@ export const AdminLayout = ({ children }) => {
 			<div className={cx('layout__content')}>
 				<TopNav />
 				<Suspense fallback={<Loading color='#349eff' />}>
-					<div className={cx('layout__content-main')}>{cloneElement(children, { cx })}</div>
+					<div className={cx('layout__content-main')}>
+						<div className={cx('container')}>{cloneElement(children, { cx })}</div>
+					</div>
 				</Suspense>
 			</div>
 		</div>

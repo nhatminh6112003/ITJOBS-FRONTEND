@@ -101,8 +101,7 @@ const Dashboard = ({ cx }) => {
 	};
 
 	return (
-		<div className={cx('container')}>
-			<h2 className={cx('page-header')}>Dashboard</h2>
+		<div >
 			<div className={cx('row')}>
 				<div className={cx('col-12')}>
 					<div className={cx('row')}>

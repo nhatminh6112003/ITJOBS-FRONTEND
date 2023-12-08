@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
-
-body,
 input {
 	font-family: 'Poppins', sans-serif;
 }
@@ -33,7 +31,7 @@ input {
 	z-index: 5;
 }
 
-form {
+.sign-in-form {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -177,8 +175,6 @@ form.sign-in-form {
 .panel {
 	display: flex;
 	flex-direction: column;
-	/* align-items: flex-end;
-  justify-content: space-around; */
 	text-align: center;
 	z-index: 6;
 }
@@ -225,8 +221,6 @@ form.sign-in-form {
 .right-panel .content {
 	transform: translateX(800px);
 }
-
-/* ANIMATION */
 
 .container.sign-up-mode:before {
 	transform: translate(100%, -50%);
