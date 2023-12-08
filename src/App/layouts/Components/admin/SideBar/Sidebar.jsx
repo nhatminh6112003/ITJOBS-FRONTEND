@@ -14,8 +14,9 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import FlagIcon from '@mui/icons-material/Flag';
 import { CategoryIcon, Settings } from '~/Core/resources';
 import SidebarItem from './SidebarItem';
-import './sidebar.css';
-
+import styles from './sidebar.module.css';
+import classNames from 'classnames/bind';
+const cx = classNames.bind(styles);
 const SideBar = (props) => {
 	const SideBarMenu = [
 		{
@@ -57,11 +58,11 @@ const SideBar = (props) => {
 			route: routesPath.AdminPaths.company,
 			icon: <ApartmentIcon />
 		},
-		// {
-		// 	title: 'Quản lý lợi ích',
-		// 	route: routesPath.AdminPaths.benefits,
-		// 	icon: <AnalyticsIcon />
-		// },
+		{
+			title: 'Quản lý lợi ích',
+			route: routesPath.AdminPaths.benefits,
+			icon: <AnalyticsIcon />
+		},
 		{
 			title: 'Quản lý dịch vụ',
 			route: routesPath.AdminPaths.service,
@@ -87,13 +88,13 @@ const SideBar = (props) => {
 	const activeItem = SideBarMenu.findIndex((item) => item.route === props?.location?.pathname);
 
 	return (
-		<div className='sidebar'>
-			<div className='sidebar__logo'>
+		<div className={cx('sidebar')}>
+			<div className={cx('sidebar__logo')}>
 				<img src={'/logo.png'} alt='company logo' />
 			</div>
 			{SideBarMenu.map((item, index) => (
 				<Link to={item.route} key={index}>
-					<SidebarItem title={item.title} icon={item.icon} active={index === activeItem} />
+					<SidebarItem title={item.title} icon={item.icon} active={index === activeItem} cx={cx} />
 				</Link>
 			))}
 		</div>
