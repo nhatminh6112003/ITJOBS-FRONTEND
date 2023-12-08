@@ -44,19 +44,19 @@ const Dashboard = ({ cx }) => {
 
 	const statusCards = [
 		{
-			count: countEmployer?.data,
+			count: countEmployer?.data ? countEmployer?.data : 0,
 			title: 'Nhà tuyển dụng'
 		},
 		{
-			count: countJobSeeker?.data,
+			count: countJobSeeker?.data ? countJobSeeker?.data : 0,
 			title: 'Ứng viên'
 		},
 		{
-			count: countOrder,
+			count: countOrder ? countOrder : 0,
 			title: 'Đơn hàng'
 		},
 		{
-			count: countJobPost?.length,
+			count: countJobPost?.length ? countJobPost?.length : 0,
 			title: 'Bài đăng tuyển dụng'
 		}
 	];
