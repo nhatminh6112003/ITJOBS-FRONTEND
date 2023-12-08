@@ -279,13 +279,13 @@ const ViewJob = ({ cx }) => {
 															</ul>
 														</div>
 														<h4 className={sx('detail-title')}>Mô tả công việc</h4>
-														<div className={sx('full-content')}>{jobPost?.job_desc}</div>
-														<h4 className={sx('detail-title')}>Yêu cầu công việc</h4>
-														<div className={sx('full-content')}>{jobPost?.job_request}</div>
-														{/* <h4 className={sx('detail-title')}>Thông tin khác</h4>
 														<div className={sx('full-content')}>
-															<ul className={sx('jobother')}></ul>
-														</div> */}
+															<div dangerouslySetInnerHTML={{ __html: jobPost?.job_desc }} />
+														</div>
+														<h4 className={sx('detail-title')}>Yêu cầu công việc</h4>
+														<div className={sx('full-content')}>
+															<div dangerouslySetInnerHTML={{ __html: jobPost?.job_request }} />
+														</div>
 														<h4 className={sx('detail-title')}>Thông tin liên hệ</h4>
 														<div className={sx('full-content')}>
 															<ul className={sx('jobother')}>

@@ -399,12 +399,11 @@ const DetailJobPost = ({ cx }) => {
 										</div>
 										<div className={sx('detail-row', 'reset-bullet')}>
 											<h2 className={sx('detail-title')}>Mô tả Công việc</h2>
-											<div>{detailJobPost?.job_desc}</div>
+											<div dangerouslySetInnerHTML={{ __html: detailJobPost?.job_desc }} />
 										</div>
 										<div className={sx('detail-row')} reset-bullet=''>
 											<h2 className={sx('detail-title')}>Yêu Cầu Công Việc</h2>
-
-											<div>{detailJobPost?.job_request}</div>
+											<div dangerouslySetInnerHTML={{ __html: detailJobPost?.job_request }} />
 										</div>
 										<div className={sx('detail-row')}>
 											<h3 className={sx('detail-title')}>Thông tin khác</h3>

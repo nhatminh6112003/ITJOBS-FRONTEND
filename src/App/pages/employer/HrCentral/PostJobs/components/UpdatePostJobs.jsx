@@ -3,7 +3,6 @@ import styles from '../postjobs.module.css';
 import classNames from 'classnames/bind';
 import Tooltip from '@mui/material/Tooltip';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
-import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import { useForm } from 'react-hook-form';
 import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
@@ -24,6 +23,9 @@ import { useGetOneJobPostQuery, useUpdateJobPostMutation } from '~/App/providers
 import { useNavigate, useParams } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
 import moment from 'moment';
+import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
+import { modules, formats } from '~/App/constants/reactQuill';
 const sx = classNames.bind(styles);
 const UpdatePostJobs = ({ cx }) => {
 	const {
@@ -61,6 +63,8 @@ const UpdatePostJobs = ({ cx }) => {
 
 	const [displayExperience, setDisplayExperience] = useState(false);
 	const [isAgreementChecked, setIsAgreementChecked] = useState();
+	const [description, setDescription] = useState('');
+	const [requirements, setRequirements] = useState('');
 	useEffect(() => {
 		reset({
 			expiry_date: moment(jobPost?.expiry_date).format('YYYY-MM-DD'),
@@ -69,10 +73,8 @@ const UpdatePostJobs = ({ cx }) => {
 			form_age: jobPost?.form_age,
 			to_age: jobPost?.to_age,
 			job_degree_value: jobPost?.job_degree_value,
-			job_desc: jobPost?.job_desc,
 			job_experience_value: jobPost?.job_experience_value,
 			job_position_value: jobPost?.job_position_value,
-			job_request: jobPost?.job_request,
 			job_title: jobPost?.job_title,
 			max_salary: jobPost?.max_salary,
 			min_salary: jobPost?.min_salary,
@@ -82,7 +84,19 @@ const UpdatePostJobs = ({ cx }) => {
 			job_ToExperience: jobPost?.job_ToExperience,
 			isAgreement: jobPost?.isAgreement
 		});
+		if (jobPost && jobPost?.job_request) {
+			setRequirements(jobPost?.job_request);
+		}
+		if (jobPost && jobPost?.job_desc) {
+			setDescription(jobPost?.job_desc);
+		}
 	}, [jobPost, reset, isAgreementChecked]);
+	const handleDescription = (Description) => {
+		setDescription(Description);
+	};
+	const handleRequirements = (Requirements) => {
+		setRequirements(Requirements);
+	};
 	const handleExperienceChange = (selectedValue) => {
 		if (Number(selectedValue) === 1) {
 			setDisplayExperience(true);
@@ -112,6 +126,8 @@ const UpdatePostJobs = ({ cx }) => {
 			job_work_type_id,
 			posted_by_id: user_account_id,
 			company_id,
+			job_desc: description,
+			job_request: requirements,
 			...data
 		};
 		updateJobPost({
@@ -268,20 +284,48 @@ const UpdatePostJobs = ({ cx }) => {
 													</div>
 												</div>
 											</div>
-											<div className={sx('form-group', 'form-editor')} id='div_jobdesc'>
-												<TextAreaFieldControl
-													rows={30}
-													label='Mô Tả Công Việc'
-													name='job_desc'
-													control={control}
+											<div
+												className={sx('form-group', 'form-editor')}
+												id='div_jobdesc'
+												style={{
+													margin: '60px 0'
+												}}>
+												<label
+													style={{
+														padding: '4px'
+													}}>
+													Mô tả Công Việc
+												</label>
+												<ReactQuill
+													value={description}
+													onChange={handleDescription}
+													theme={'snow'}
+													formats={formats}
+													placeholder='Mô tả công việc'
+													modules={modules}
+													style={{ height: '200px' }}
 												/>
 											</div>
-											<div className={sx('form-group', 'form-editor')} id='div_jobreq'>
-												<TextAreaFieldControl
-													rows={30}
-													label='Yêu cầu công việc'
-													name='job_request'
-													control={control}
+											<div
+												className={sx('form-group', 'form-editor')}
+												id='div_jobreq'
+												style={{
+													margin: '60px 0'
+												}}>
+												<label
+													style={{
+														padding: '4px'
+													}}>
+													Yêu cầu công việc
+												</label>
+												<ReactQuill
+													value={requirements}
+													onChange={handleRequirements}
+													theme={'snow'}
+													formats={formats}
+													placeholder='Yêu cầu công việc'
+													modules={modules}
+													style={{ height: '200px' }}
 												/>
 											</div>
 											<div className={cx('row')}>
@@ -710,28 +754,7 @@ const UpdatePostJobs = ({ cx }) => {
 																placeholder='Tên công ty *'
 															/>
 														</div>
-														<div id='security_client' style={{ display: 'none' }}>
-															<div className={sx('form-group', 'form-checkbox')}>
-																<input
-																	type='radio'
-																	name='Hide_Job'
-																	id='JOB_CONTACT_SECRECY'
-																	defaultChecked='checked'
-																	defaultValue={0}
-																/>
-																<label htmlFor='JOB_CONTACT_SECRECY'>Bảo mật</label>
-															</div>
-															<div className={sx('form-group', 'form-checkbox')}>
-																<input
-																	type='radio'
-																	className={sx('input_margin')}
-																	name='Hide_Job'
-																	defaultValue={1}
-																	id='JOB_CONTACT_CLIENT'
-																/>
-																<label htmlFor='JOB_CONTACT_CLIENT'>CareerBuilder's client</label>
-															</div>
-														</div>
+
 														<input
 															name='company_profile'
 															id='company_profile'
@@ -954,53 +977,6 @@ const UpdatePostJobs = ({ cx }) => {
 																	</div>
 																</div>
 															</div>
-														</div>
-													</div>
-												</div>
-												<div
-													className={sx('jobs-posting-modal', 'jobs-posting-17-modal')}
-													id='LetterAbout'
-													style={{ display: 'none' }}>
-													<div className={sx('modal-head')}>
-														<p className={sx('title')}>Thư trả lời tự động mẫu</p>
-													</div>
-													<div className={sx('modal-body')}>
-														<div className={sx('preview-reply-letter')}>
-															<div className={sx('title')}>
-																<p>Tiêu đề: Thanks you for applying</p>
-															</div>
-															<div className={sx('full-content')}>
-																Dear <strong>[firstname] [lastname]</strong>,<br />
-																We have received your resume submission for the
-																<strong>[job-title]</strong> position. We appreciate your interest and
-																look forward to reviewing your resume.
-																<br />
-																We will contact you within seven days if your qualifications meet the
-																requirements of the position.
-																<br />
-																Thanks you again for applying!
-																<br />
-																<br />
-																Best regards,
-																<br />
-																<strong>[contact-name]</strong>
-															</div>
-														</div>
-														<div className={sx('form-group', 'form-submit')}>
-															<button
-																className={sx('btn-gradient')}
-																type='button'
-																name='save'
-																id='btn_preview_sample'
-																onclick="createMail('35A4E900');">
-																Trở lại
-															</button>
-															<a
-																className={sx('btn-cancel')}
-																href='javascript:void(0);'
-																data-fancybox-close=''>
-																Bỏ qua
-															</a>
 														</div>
 													</div>
 												</div>
