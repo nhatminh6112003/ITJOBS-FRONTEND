@@ -14,7 +14,7 @@ const serviceApi = createApi({
 		}),
 		getAllByServiceType: build.query({
 			query: (arg) => {
-				return { url: `/service/${arg?.id}`, method: 'GET', params: arg?.params };
+				return { url: `/service/getAll/${arg?.id}`, method: 'GET', params: arg?.params };
 			},
 			providesTags: ['service'],
 			transformResponse: (response) => response

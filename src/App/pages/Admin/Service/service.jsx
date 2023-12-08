@@ -37,7 +37,7 @@ const Service = () => {
 			refetchOnMountOrArgChange: true
 		}
 	);
-
+	const { data: listBenefits } = useGetAllBenefitsQuery();
 	const [deleteMutation] = useDeleteServiceMutation();
 	const tableData = useMemo(() => data?.data ?? [], [data]);
 	const columns = useMemo(
@@ -127,8 +127,13 @@ const Service = () => {
 					/>
 				}
 			/>
-			<UpdateModal isOpen={isShowing.update} onRequestClose={() => toggle('update')} dataUpdate={dataUpdate} />
-			<CreateModal isOpen={isShowing.create} onRequestClose={() => toggle('create')} />
+			<UpdateModal
+				isOpen={isShowing.update}
+				onRequestClose={() => toggle('update')}
+				dataUpdate={dataUpdate}
+				listBenefits={listBenefits}
+			/>
+			<CreateModal isOpen={isShowing.create} onRequestClose={() => toggle('create')} listBenefits={listBenefits} />
 			<ConfirmDialog
 				open={modalConfirmState.open}
 				onConfirm={() => handleConfirmDelete(modalConfirmState.payload)}

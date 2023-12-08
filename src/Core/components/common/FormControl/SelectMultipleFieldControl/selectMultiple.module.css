@@ -7,6 +7,7 @@
 	color: #172642;
 	font-size: 16px;
 	font-weight: 700;
+	position: relative;
 }
 .multiselect-dropdown span.optext,
 .multiselect-dropdown span.placeholder {

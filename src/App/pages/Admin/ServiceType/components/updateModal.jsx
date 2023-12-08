@@ -13,10 +13,11 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	const {
 		handleSubmit,
 		control,
+		reset,
 		formState: { errors }
 	} = useForm({
 		values: dataUpdate && {
-			name: dataUpdate.name,
+			name: dataUpdate.name
 		},
 		resolver: yupResolver(jobPositionCategorySchema)
 	});
@@ -34,6 +35,7 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 				}
 			});
 		onRequestClose();
+		reset();
 	};
 
 	return (
