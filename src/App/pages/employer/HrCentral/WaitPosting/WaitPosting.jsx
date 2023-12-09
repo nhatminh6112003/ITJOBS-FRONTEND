@@ -25,8 +25,10 @@ import TabMenu from '../Posting/components/TabMenu';
 import styles from '../Posting/posting.module.css';
 import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
 import ServiceSlugEnum from '~/App/constants/serviceEnum';
+import { ServiceTypeSlugEnum } from '~/App/constants/serviceEnum';
 import useRegisterService from '../components/useRegisterService.js';
 import moment from 'moment';
+
 const sx = classNames.bind(styles);
 
 const WaitPosting = ({ cx }) => {
@@ -46,12 +48,7 @@ const WaitPosting = ({ cx }) => {
 			isDeleted: false
 		}
 	});
-	const isServiceJobPostExits = useRegisterService(employer?.company?.id, ServiceSlugEnum.PostJob);
-	const { data: myCompanyService } = useGetAllCompany_serviceQuery({
-		params: {
-			company_id: employer?.company?.id
-		}
-	});
+	const { isServiceExits, isServiceActive } = useRegisterService(employer?.company?.id, ServiceTypeSlugEnum.PostJob);
 
 	const [deleteJobPost] = useDeleteJobPostMutation();
 	const [updateJobPost] = useUpdateJobPostMutation();
@@ -76,15 +73,12 @@ const WaitPosting = ({ cx }) => {
 	});
 
 	const updateStatusJobPost = async (id) => {
-		if (!isServiceJobPostExits) {
-			toast.error('Bạn chưa đăng ký dịch vụ đăng tuyển');
+		if (!isServiceExits) {
+			toast.error('Bạn chưa đăng kí dịch vụ đăng tuyển');
 			return;
 		}
-		const currentDate = moment();
-		const getServiceJobPost = myCompanyService?.data?.find((item) => item.service?.slug === ServiceSlugEnum.PostJob);
-
-		if (currentDate.isAfter(getServiceJobPost?.expiration_date)) {
-			toast.error('Dịch vụ đăng tuyển của bạn đã hết hạn');
+		if (!isServiceActive) {
+			toast.error('Bạn chưa kích hoạt sử dụng dịch vụ đăng tuyển');
 			return;
 		}
 

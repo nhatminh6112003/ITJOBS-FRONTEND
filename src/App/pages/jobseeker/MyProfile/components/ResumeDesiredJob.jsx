@@ -459,7 +459,7 @@ const Form = ({
 						name='work_home'
 						id='work_home'
 						control={control}
-						label='Work form home'
+						label='Work from home'
 						value={false}
 						defaultChecked={work_home === 1 ? true : false}
 					/>

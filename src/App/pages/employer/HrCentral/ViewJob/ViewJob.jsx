@@ -159,10 +159,10 @@ const ViewJob = ({ cx }) => {
 															<div className={sx('row')}>
 																<div className={sx('col-md-6', 'col-lg-4')}>
 																	<ul className={sx('list-info-posting')}>
-																		<li>
+																		{/* <li>
 																			<p className={sx('name')}>Mã số</p>
 																			<p>{jobPost?.id}</p>
-																		</li>
+																		</li> */}
 																		<li>
 																			<p className={sx('name')}>Địa điểm</p>
 																			<p> {jobPost?.address}</p>

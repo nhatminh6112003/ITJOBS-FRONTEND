@@ -144,10 +144,10 @@ const ManageResume = ({ cx }) => {
 												<tr>
 													<th width='1%'>
 														<div className={sx('checkbox')}>
-															<input type='checkbox' id='check-all' />
+												
 														</div>
 													</th>
-													<th width='27%'>Chọn tất cả</th>
+													<th width='27%'>Thông tin</th>
 													<th width='10%'>Ngày nộp</th>
 													<th width='10%'>Cập nhật</th>
 													{/* <th width='10%%'>Trạng thái</th> */}

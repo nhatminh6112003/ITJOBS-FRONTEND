@@ -626,7 +626,7 @@ const PostJobs = ({ cx }) => {
 															name='work_home'
 															id='work_home'
 															control={control}
-															label='Work form home'
+															label='Work from home'
 															defaultValue={false}
 														/>
 													</div>

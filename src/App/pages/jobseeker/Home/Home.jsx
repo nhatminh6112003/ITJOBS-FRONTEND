@@ -19,7 +19,7 @@ const Home = ({ cx }) => {
 	const { data: allJobPost, isLoading } = useGetAllJobPostQuery({
 		params: {
 			limit: 10,
-			status: jobPostStatusEnum.Publish,
+			stringStatus: `${jobPostStatusEnum.Publish},${jobPostStatusEnum.Expired}`,
 			isDeleted: false,
 			page: page || 1
 		}
@@ -51,9 +51,7 @@ const Home = ({ cx }) => {
 			/>
 			<section className={cx('cb-section', 'cb-section-border-bottom')}>
 				<div className={cx('container')}>
-					{/* <div className={cx('cb-title', 'cb-title-center')}>
-						<h2>NHÀ TUYỂN DỤNG HÀNG ĐẦU</h2>
-					</div> */}
+				
 					<div className={cx('top-employers-list')}></div>
 					<div className={cx('top-employers-banner')}>
 						<div className={cx('row')}>
@@ -107,7 +105,7 @@ const Home = ({ cx }) => {
 														allJobPost?.data?.map((job_post) => (
 															<div className={cx('col-lg-6')}>
 																<Suspense fallback={<div>...loading</div>}>
-																	<JobItem job_post={job_post} />
+																	{job_post.posted_date && <JobItem job_post={job_post} />}
 																</Suspense>
 															</div>
 														))

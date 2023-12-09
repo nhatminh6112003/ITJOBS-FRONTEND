@@ -28,6 +28,7 @@ const sx = classNames.bind(styles);
 
 const DetailJobPost = ({ cx }) => {
 	const { id } = useParams();
+	const currentDate = new Date();
 	const user = useSelector((state) => state.auth.user);
 	const { data: detailJobPost } = useGetOneJobPostQuery(id);
 	const { data: listProvinces } = useGetAllProvincesQuery();
@@ -60,7 +61,7 @@ const DetailJobPost = ({ cx }) => {
 		},
 		{ skip: !user?.id }
 	);
-	const { data: allJobPst } = useGetAllJobPostQuery({
+	const { data: allJobPost } = useGetAllJobPostQuery({
 		params: {
 			isDeleted: false,
 			limit: 10,
@@ -69,6 +70,7 @@ const DetailJobPost = ({ cx }) => {
 		}
 	});
 	const isIdInData = allJobPostActivity?.data.some((item) => item.job_id === id);
+	const isJobExpiry = formatDate(currentDate) > formatDate(detailJobPost?.expiry_date);
 	const { isShowing, toggle } = useModal({
 		feedback: false
 	});
@@ -83,7 +85,7 @@ const DetailJobPost = ({ cx }) => {
 				setDistricts(item.name);
 			}
 		});
-	}, [detailJobPost, listProvinces, listDistricts, allJobPst]);
+	}, [detailJobPost, listProvinces, listDistricts]);
 	const formatSalary = (salary) => {
 		if (!salary) {
 			return '0';
@@ -162,8 +164,9 @@ const DetailJobPost = ({ cx }) => {
 										</Link>
 									</div>
 									<div className={sx('apply-type')}>
-										<div className={sx('apply-now-btn', isIdInData ? 'success' : '')}>
-											{isIdInData ? (
+										<div
+											className={sx('apply-now-btn', isIdInData ? 'success' : isJobExpiry ? 'success' : '')}>
+											{isIdInData || isJobExpiry ? (
 												<a style={{ cursor: 'pointer' }} className={sx('btn-gradient', 'btnApplyClick')}>
 													Nộp Đơn Ứng Tuyển
 												</a>
@@ -240,7 +243,6 @@ const DetailJobPost = ({ cx }) => {
 															<div
 																className={sx('zalo-share-button')}
 																data-href=''
-																data-oaid={579745863508352884}
 																data-layout={2}
 																data-color='white'
 																data-customize='false'
@@ -504,8 +506,12 @@ const DetailJobPost = ({ cx }) => {
 															cx={cx}
 														/>
 													</div>
-													<div className={sx('apply-now-btn', isIdInData ? 'success' : '')}>
-														{isIdInData ? (
+													<div
+														className={sx(
+															'apply-now-btn',
+															isIdInData ? 'success' : isJobExpiry ? 'success' : ''
+														)}>
+														{isIdInData || isJobExpiry ? (
 															<a
 																style={{ cursor: 'pointer' }}
 																className={sx('btn-gradient', 'btnApplyClick')}>
@@ -543,7 +549,7 @@ const DetailJobPost = ({ cx }) => {
 								</div>
 								<section className={sx('jobs-side-list')}>
 									<div className={sx('jobs-list')}>
-										{allJobPst?.data?.map((item) => {
+										{allJobPost?.data?.map((item) => {
 											if (item.id !== detailJobPost?.id) {
 												return (
 													<>

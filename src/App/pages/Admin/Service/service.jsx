@@ -13,6 +13,7 @@ import UpdateModal from './components/updateModal';
 import CreateModal from './components/createModal';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import { useGetAllBenefitsQuery } from '~/App/providers/apis/benefits';
+import formatVND from '~/Core/utils/formatVND';
 const Service = () => {
 	const [dataUpdate, setDataUpdate] = useState(null);
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
@@ -61,7 +62,12 @@ const Service = () => {
 			},
 			{
 				Header: 'Giá dịch vụ',
-				accessor: 'price'
+				accessor: 'price',
+				Cell: ({ row: { values } }) => {
+					console.log('TCL: values', values);
+
+					return values?.price ? `${formatVND(values?.price.toString())} VNĐ` : '';
+				}
 			},
 			{
 				Header: 'Thao tác',

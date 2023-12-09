@@ -1,24 +1,33 @@
 /* CSS */
 .button-76 {
-	background-color: #cf245f;
-	background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
-	border: 0;
-	border-radius: 0.25rem;
-	box-sizing: border-box;
-	color: #fff;
-	cursor: pointer;
-	font-family: ui-sans-serif, system-ui, -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-		'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-	font-size: 1rem;
-	/* 18px */
-	font-weight: 600;
-	line-height: 1.5rem;
-	/* 28px */
-	padding: 1rem 1.25rem;
+	-webkit-transition: 0.4s ease-in-out all;
+	-o-transition: 0.4s ease-in-out all;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 42px;
+	padding: 12px;
+	border-radius: 4px;
+	background-image: -webkit-gradient(linear, left top, right top, from(#24ebc8), color-stop(#00b2a3), to(#24ebc8));
+	background-image: -o-linear-gradient(left, #24ebc8, #00b2a3, #24ebc8);
+	background-image: linear-gradient(to right, #24ebc8, #00b2a3, #24ebc8);
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 500;
 	text-align: center;
-	user-select: none;
-	-webkit-user-select: none;
-	touch-action: manipulation;
+	transition: 0.4s ease-in-out all;
+	padding: 5px;
+}
+.button-76 a {
+	color: white;
+	font-size: 18px;
 }
 
 .button-76:hover {
@@ -44,11 +53,11 @@
 }
 
 .success {
-	color: #5cb85c
+	color: #5cb85c;
 }
 
 .error {
-	color: #f8615c
+	color: #f8615c;
 }
 
 @media (min-width: 1024px) {
