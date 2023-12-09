@@ -43,13 +43,6 @@ const serviceApi = createApi({
 			},
 			providesTags: ['company_service'],
 			transformResponse: (response) => response
-		}),
-		calculateTotalRevenue: build.query({
-			query: (arg) => {
-				return { url: `/company_service/calculateTotalRevenue`, method: 'GET', params: arg?.params };
-			},
-			providesTags: ['company_service'],
-			transformResponse: (response) => response
 		})
 	})
 });
@@ -60,8 +53,7 @@ export const {
 	useGetAllCompany_serviceQuery,
 	useGetOneCompany_serviceQuery,
 	useUpdateCompany_serviceMutation,
-	useAnalysisQuery,
-	useCalculateTotalRevenueQuery
+	useAnalysisQuery
 } = serviceApi;
 
 export default serviceApi;

@@ -27,15 +27,7 @@ const ServicesAndContact = ({ cx }) => {
 	const onUpdateSubmit = async (data) => {
 		const array = data?.service?.trim().split(' ');
 		const info = employer?.id + ' ' + employer?.company?.id + ' ' + array[0];
-		createOrder({
-			company_id: employer?.company?.id,
-			total: array[1],
-			status: 'SUCCESS'
-		})
-			.unwrap()
-			.then((r) => {
-				console.log(r);
-			});
+	
 
 		CreatePaymentUrl({
 			amount: array[1],
@@ -55,7 +47,6 @@ const ServicesAndContact = ({ cx }) => {
 			skip: !selectedServiceType
 		}
 	);
-	const [createOrder] = useCreateOrderMutation();
 	useEffect(() => {
 		updateReset({
 			name: employer?.firstname + ' ' + employer?.lastname,
