@@ -44,6 +44,13 @@ const orderApi = createApi({
 			},
 			providesTags: ['order'],
 			transformResponse: (response) => response.data
+		}),
+		calculateTotalRevenue: build.query({
+			query: (arg) => {
+				return { url: `/order/calculateTotalRevenue`, method: 'GET', params: arg?.params };
+			},
+			providesTags: ['order'],
+			transformResponse: (response) => response
 		})
 	})
 });
@@ -55,7 +62,8 @@ export const {
 	useGetOneOrderQuery,
 	useLazyGetOneOrderQuery,
 	useUpdateOrderMutation,
-	useAnalysisOrderQuery
+	useAnalysisOrderQuery,
+	useCalculateTotalRevenueQuery
 } = orderApi;
 
 export default orderApi;

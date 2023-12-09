@@ -14,7 +14,7 @@ import classNames from 'classnames/bind';
 
 import ReactApexChart from 'react-apexcharts';
 
-import { useCalculateTotalRevenueQuery } from '~/App/providers/apis/company_serviceApi';
+import { useCalculateTotalRevenueQuery } from '~/App/providers/apis/orderApi';
 import moment from 'moment';
 import formatVND from '~/Core/utils/formatVND';
 import UserRoleEnum from '~/App/constants/roleEnum';
@@ -101,7 +101,7 @@ const Dashboard = ({ cx }) => {
 	};
 
 	return (
-		<div >
+		<div>
 			<div className={cx('row')}>
 				<div className={cx('col-12')}>
 					<div className={cx('row')}>
