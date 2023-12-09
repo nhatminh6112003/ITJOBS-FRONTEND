@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import routesPath from '~/App/config/routesPath';
-import ServiceSlugEnum from '~/App/constants/serviceEnum';
+import ServiceSlugEnum, { ServiceTypeSlugEnum } from '~/App/constants/serviceEnum';
 import useRegisterServiceResume from '~/App/pages/employer/FindJobSeeker/components/useRegisterServiceResume';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
+import useRegisterService from '~/App/pages/employer/HrCentral/components/useRegisterService';
 const NavBar = ({ className: cx }) => {
 	const location = useLocation();
-	const navigate = useNavigate();
 	const currentPath = location.pathname;
 
 	const NavBarMenu = [
@@ -43,24 +43,18 @@ const NavBar = ({ className: cx }) => {
 	];
 	const employer = useSelector((state) => state.auth?.employer);
 
-	const isServiceJobPostExits = useRegisterServiceResume(employer?.company?.id, ServiceSlugEnum.FindResume);
-	const { data: myCompanyService } = useGetAllCompany_serviceQuery({
-		params: {
-			company_id: employer?.company?.id
-		}
-	});
-	const useFindJobSeeker = () => {
-		const currentDate = moment();
-		const getServiceFindResume = myCompanyService?.data?.find(
-			(item) => item.service?.slug === ServiceSlugEnum.FindResume
-		);
+	const { isServiceExits, isServiceActive } = useRegisterService(
+		employer?.company?.id,
+		ServiceTypeSlugEnum.FindResume
+	);
 
-		if (currentDate.isAfter(getServiceFindResume?.expiration_date)) {
-			toast.error('Dịch vụ tìm hồ sơ ứng viên của bạn đã hết hạn');
+	const handleFindJobSeeker = () => {
+		if (!isServiceExits) {
+			toast.error('Bạn chưa đăng ký dịch vụ tìm hồ sơ ứng viên');
 			return;
 		}
-		if (!isServiceJobPostExits) {
-			toast.error('Bạn chưa đăng ký dịch vụ tìm hồ sơ ứng viên');
+		if (!isServiceActive) {
+			toast.error('Bạn chưa kích hoạt sử dụng dịch vụ tìm hồ sơ ứng viên');
 			return;
 		}
 	};
@@ -87,9 +81,9 @@ const NavBar = ({ className: cx }) => {
 						<ul className={cx('list-menu')}>
 							<li>
 								<Link
-									to={isServiceJobPostExits && routesPath.EmployerPaths.findJobSeeker}
+									to={isServiceActive && isServiceExits && routesPath.EmployerPaths.findJobSeeker}
 									onClick={() => {
-										useFindJobSeeker();
+										handleFindJobSeeker();
 									}}>
 									<em className={cx('material-icons')}>find_in_page</em> Tìm Hồ Sơ
 								</Link>

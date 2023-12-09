@@ -29,9 +29,8 @@ const OrdersAvailable = ({ cx }) => {
 		}
 	});
 	const activedOrder = allOrder?.data?.filter((item) => {
-		return item?.isActive === true
+		return item?.isActive === true;
 	});
-	console.log(activedOrder);
 	const [update] = useUpdateCompany_serviceMutation();
 
 	const updateCompany_service = (id) => {
@@ -211,16 +210,22 @@ const OrdersAvailable = ({ cx }) => {
 																		</td>
 																		<td>
 																			<button
+																				className={sx('btn-submit', 'btn-gradient')}
 																				onClick={() => {
 																					const checkActive = activedOrder.some((item) => {
-																						return item?.service?.service_type_id === order?.service?.service_type_id
-																					})
-																					if(checkActive) {
-																						return toast.error("Bạn không thể thực hiện!")
+																						return (
+																							item?.service?.service_type_id ===
+																							order?.service?.service_type_id
+																						);
+																					});
+																					if (checkActive) {
+																						return toast.error('Bạn không thể thực hiện!');
 																					}
-																					return setModalConfirmState({ open: true, payload: order?.id })
-																				}
-																				}>
+																					return setModalConfirmState({
+																						open: true,
+																						payload: order?.id
+																					});
+																				}}>
 																				Kích hoạt
 																			</button>
 																		</td>

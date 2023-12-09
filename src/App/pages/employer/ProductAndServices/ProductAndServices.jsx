@@ -1,27 +1,23 @@
-import React, { Frgament, useEffect } from 'react';
-import styles from './productServices.module.css';
 import classNames from 'classnames/bind';
-import { Link, useParams } from 'react-router-dom';
-import routesPath from '~/App/config/routesPath';
-import { useGetAllServiceTypeQuery, useGetOneServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
-import { useGetAllByServiceTypeQuery } from '~/App/providers/apis/serviceApi';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useGetAllServiceQuery } from '~/App/providers/apis/serviceApi';
+import styles from './productServices.module.css';
 const sx = classNames.bind(styles);
 
 const ProductAndServices = ({ cx }) => {
 	const { id } = useParams();
-	const { data: listService } = useGetAllByServiceTypeQuery(
+	const { data: listService } = useGetAllServiceQuery(
 		{
-			id: id
+			params: {
+				service_type_id: id
+			}
 		},
 		{
 			skip: !id
 		}
 	);
 
-	useEffect(() => {
-		console.log(id);
-		console.log(listService?.data);
-	}, [listService]);
 	return (
 		<div>
 			<img

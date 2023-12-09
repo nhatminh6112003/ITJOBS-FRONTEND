@@ -27,7 +27,6 @@ const ServicesAndContact = ({ cx }) => {
 	const onUpdateSubmit = async (data) => {
 		const array = data?.service?.trim().split(' ');
 		const info = employer?.id + ' ' + employer?.company?.id + ' ' + array[0];
-	
 
 		CreatePaymentUrl({
 			amount: array[1],
@@ -58,10 +57,14 @@ const ServicesAndContact = ({ cx }) => {
 		});
 	}, [updateReset, employer]);
 	return (
-		<section className={sx('employer-contact-us', 'cb-section')}>
+		<section className={sx('employer-contact-us', 'cb-section')} style={{
+			padding: '60px 0'
+		}}>
 			<div className={cx('container')}>
-				<div className={sx('cb-title', 'cb-title-center')}>
-					<h2> Liên hệ</h2>
+				<div
+					className={sx('cb-title', 'cb-title-center')}
+					style={{ textAlign: 'center', marginBottom: '1.875rem',  }}>
+					<h1 style={{fontWeight:'bold',fontSize: '1.875rem'}}> Liên hệ</h1>
 				</div>
 				<div className={sx('box-contact-us')}>
 					<div className={cx('row', 'no-gutters')}>

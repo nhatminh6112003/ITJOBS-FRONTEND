@@ -18,9 +18,10 @@ import { toast } from 'react-toastify';
 import { listProvinces } from '~/App/constants/provincesData';
 import formatVND from '~/Core/utils/formatVND';
 import useRegisterServiceResume from './components/useRegisterServiceResume';
-import ServiceSlugEnum from '~/App/constants/serviceEnum';
+import ServiceSlugEnum, { ServiceTypeSlugEnum } from '~/App/constants/serviceEnum';
 import moment from 'moment';
 import { useGetAllCompany_serviceQuery } from '~/App/providers/apis/company_serviceApi';
+import useRegisterService from '../HrCentral/components/useRegisterService';
 
 const sx = classNames.bind(styles);
 const FindJobSeeker = ({ cx }) => {
@@ -50,7 +51,11 @@ const FindJobSeeker = ({ cx }) => {
 			provinces: query.provinces || ''
 		}
 	});
-	const isServiceJobPostExits = useRegisterServiceResume(employer?.company?.id, ServiceSlugEnum.FindResume);
+	const { isServiceExits, isServiceActive } = useRegisterService(
+		employer?.company?.id,
+		ServiceTypeSlugEnum.FindResume
+	);
+
 	const { data: myCompanyService } = useGetAllCompany_serviceQuery({
 		params: {
 			company_id: employer?.company?.id
@@ -77,20 +82,10 @@ const FindJobSeeker = ({ cx }) => {
 	};
 
 	useEffect(() => {
-		const currentDate = moment();
-		const getServiceFindResume = myCompanyService?.data?.find(
-			(item) => item.service?.slug === ServiceSlugEnum.FindResume
-		);
-
-		if (currentDate.isAfter(getServiceFindResume?.expiration_date)) {
-			toast.error('Dịch vụ tìm hồ sơ ứng viên của bạn đã hết hạn');
-			return;
-		}
-		
-		if (!isServiceJobPostExits) {
+		if (!isServiceExits || !isServiceActive) {
 			navigate(`/employers/services-and-contact`);
 		}
-	}, [isServiceJobPostExits, myCompanyService?.data, navigate]);
+	}, [isServiceExits, navigate, isServiceActive]);
 	return (
 		<section className={sx('resume-search', 'cb-section', 'bg-manage', 'main-tabslet')}>
 			<div className={cx('container')}>
@@ -436,7 +431,7 @@ const FindJobSeeker = ({ cx }) => {
 										</tr>
 									</thead>
 									<tbody>
-										{isServiceJobPostExits &&
+										{isServiceExits &&
 											listResume?.map((resume) => {
 												return (
 													<>
@@ -521,7 +516,7 @@ const FindJobSeeker = ({ cx }) => {
 													</>
 												);
 											})}
-										{isServiceJobPostExits && listResume?.length === 0 && (
+										{isServiceExits && listResume?.length === 0 && (
 											<tr>
 												<td colSpan={5} style={{ textAlign: 'center' }}>
 													Không tìm kiếm được hồ sơ phụ hợp
