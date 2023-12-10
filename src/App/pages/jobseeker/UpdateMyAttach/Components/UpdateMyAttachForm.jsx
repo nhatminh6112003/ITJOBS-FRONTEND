@@ -120,8 +120,8 @@ const UpdateMyAttachForm = ({
 						<div className={sx('box-noti')} style={{ color: 'red' }}>
 							<p></p>
 							<div>
-								<b>Lưu ý:</b> Theo thống kê của CareerBuilder.vn hồ sơ Tiếng Anh được nhà tuyển dụng xem nhiều
-								hơn 150% so với hồ sơ Tiếng Việt
+								<b>Lưu ý:</b> Theo thống kê của Job Hunters hồ sơ Tiếng Anh được nhà tuyển dụng xem nhiều hơn
+								150% so với hồ sơ Tiếng Việt
 								<br />
 								<span
 									className={sx('note', '')}
@@ -425,11 +425,6 @@ const UpdateMyAttachForm = ({
 								<button type='submit' className={sx('btn-gradient', 'save-and-finish', '')}>
 									Lưu và hoàn thành
 								</button>
-							</div>
-						</div>
-						<div className={cx('col-md-12')}>
-							<div className={sx('form-group', 'form-note', '')}>
-								<p>* Thông tin bắt buộc</p>
 							</div>
 						</div>
 					</div>

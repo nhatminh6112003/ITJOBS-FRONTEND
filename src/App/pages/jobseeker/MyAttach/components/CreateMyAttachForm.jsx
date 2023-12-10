@@ -441,11 +441,6 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								</button>
 							</div>
 						</div>
-						<div className={cx('col-md-12')}>
-							<div className={sx('form-group', 'form-note', '')}>
-								<p>* Thông tin bắt buộc</p>
-							</div>
-						</div>
 					</div>
 				</div>
 			</form>

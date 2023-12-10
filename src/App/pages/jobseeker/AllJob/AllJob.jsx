@@ -107,14 +107,10 @@ const AllJob = () => {
 		}
 
 		const salaryNumber = parseInt(salary);
-		const salaryInMillions = Math.floor(salaryNumber / 1000000);
-		const remainingDigits = salaryInMillions % 10;
-
-		if (remainingDigits === 0) {
-			return `${salaryInMillions / 10} Tr`;
-		} else {
-			return `${salaryInMillions} Tr`;
-		}
+		const salaryInMillions = (salaryNumber / 1000000).toString();
+		return salaryInMillions.includes('.')
+			? salaryInMillions.replace(/(\.[0-9]*[1-9])0*$/, '$1') + ' Tr'
+			: salaryInMillions + ' Tr';
 	};
 	const gotoPreviousPage = () => {
 		dispatch({ type: PaginationActionEnums.GO_TO_PREV_PAGE });

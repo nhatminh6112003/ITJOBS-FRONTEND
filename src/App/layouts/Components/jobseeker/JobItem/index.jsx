@@ -24,14 +24,10 @@ const JobItem = ({ job_post }) => {
 		}
 
 		const salaryNumber = parseInt(salary);
-		const salaryInMillions = Math.floor(salaryNumber / 1000000);
-		const remainingDigits = salaryInMillions % 10;
-
-		if (remainingDigits === 0) {
-			return `${salaryInMillions / 10} Tr`;
-		} else {
-			return `${salaryInMillions} Tr`;
-		}
+		const salaryInMillions = (salaryNumber / 1000000).toString();
+		return salaryInMillions.includes('.')
+			? salaryInMillions.replace(/(\.[0-9]*[1-9])0*$/, '$1') + ' Tr'
+			: salaryInMillions + ' Tr';
 	};
 	return (
 		<div className={cx('job-item')}>

@@ -15,7 +15,8 @@ export const EmployerLayout = ({ children }) => {
 			<Header />
 			<Suspense fallback={<Loading />}>
 				<main>
-					{location.pathname !== routesPath.EmployerPaths.login && <NavBar className={cx} />}
+					{location.pathname !== routesPath.EmployerPaths.login &&
+						location.pathname !== routesPath.EmployerPaths.register && <NavBar className={cx} />}
 					{cloneElement(children, { cx })}
 				</main>
 				<Footer cx={cx} />

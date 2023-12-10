@@ -55,15 +55,13 @@ const ManageResume = ({ cx }) => {
 		}
 
 		const salaryNumber = parseInt(salary);
-		const salaryInMillions = Math.floor(salaryNumber / 1000000);
-		const remainingDigits = salaryInMillions % 10;
+		const salaryInMillions = (salaryNumber / 1000000).toString();
 
-		if (remainingDigits === 0) {
-			return `${salaryInMillions / 10} Tr`;
-		} else {
-			return `${salaryInMillions} Tr`;
-		}
+		return salaryInMillions.includes('.')
+			? salaryInMillions.replace(/(\.[0-9]*[1-9])0*$/, '$1') + ' Tr'
+			: salaryInMillions + ' Tr';
 	};
+
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -143,9 +141,7 @@ const ManageResume = ({ cx }) => {
 											<thead>
 												<tr>
 													<th width='1%'>
-														<div className={sx('checkbox')}>
-												
-														</div>
+														<div className={sx('checkbox')}></div>
 													</th>
 													<th width='27%'>Thông tin</th>
 													<th width='10%'>Ngày nộp</th>
@@ -202,14 +198,20 @@ const ManageResume = ({ cx }) => {
 																		<p>
 																			{jobPostActivity?.resume?.my_attaches[0]?.yearOfExperience
 																				? jobPostActivity?.resume?.my_attaches[0]
-																						?.yearOfExperience + 'năm'
+																						?.yearOfExperience + ' Năm'
 																				: 'Không có kinh nghiệm'}{' '}
 																		</p>
 																	</td>
 																	<td>
 																		<p>
-																			{formatSalary(jobPostActivity?.job_post?.min_salary)} -{' '}
-																			{formatSalary(jobPostActivity?.job_post?.max_salary)} VND
+																			{formatSalary(
+																				jobPostActivity?.resume?.resume_desired_job?.salary_from
+																			)}{' '}
+																			-{' '}
+																			{formatSalary(
+																				jobPostActivity?.resume?.resume_desired_job?.salary_to
+																			)}{' '}
+																			VND
 																		</p>
 																	</td>
 																	<td>
