@@ -550,14 +550,14 @@ button,
 select {
 	text-transform: none;
 }
-select {
+/* select {
 	word-wrap: normal;
 	width: 100%;
 	height: 40px;
 	background-image: url('https://static.careerbuilder.vn/themes/careerbuilder/img/sl.png');
 	background-position: 95% 50%;
 	background-repeat: no-repeat;
-}
+} */
 [type='button'],
 [type='reset'],
 [type='submit'],
