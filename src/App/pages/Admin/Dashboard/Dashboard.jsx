@@ -1,40 +1,33 @@
-import React, { useEffect, useState } from 'react';
-
-import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
 
 import { useSelector } from 'react-redux';
 
 import StatusCard from '../components/status-card/StatusCard';
 
-import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
-import { useForm } from 'react-hook-form';
-import useSearchDateDashBoard from '../../employer/components/useSearchDateDashBoard';
-import styles from './dashboard.module.css';
 import classNames from 'classnames/bind';
+import { useForm } from 'react-hook-form';
+import styles from './dashboard.module.css';
 
 import ReactApexChart from 'react-apexcharts';
 
-import { useCalculateTotalRevenueQuery } from '~/App/providers/apis/orderApi';
-import moment from 'moment';
-import formatVND from '~/Core/utils/formatVND';
 import UserRoleEnum from '~/App/constants/roleEnum';
-import { useAnalysisUserQuery } from '~/App/providers/apis/userApi';
-import { useAnalysisOrderQuery } from '~/App/providers/apis/orderApi';
 import { useAnalyticTotalPostQuery } from '~/App/providers/apis/jobPostApi';
+import { useAnalysisOrderQuery, useCalculateTotalRevenueQuery } from '~/App/providers/apis/orderApi';
+import { useAnalysisUserQuery } from '~/App/providers/apis/userApi';
+import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import useSearchAdminDashBoard from '../components/useSearchAdminDashboard/useSearchAdminDashboard';
+import formatVND from '~/Core/utils/formatVND';
 const sx = classNames.bind(styles);
 const Dashboard = ({ cx }) => {
 	const themeReducer = useSelector((state) => state.theme.mode);
-	const { pushQuery, query } = useSearchDateDashBoard();
-	const [startDate, setStartDate] = useState(moment().subtract(15, 'days').format('YYYY-MM-DD'));
-	const [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD'));
+	const { pushQuery, query } = useSearchAdminDashBoard();
 	const {
 		control,
 		handleSubmit,
 		formState: { errors }
 	} = useForm({
 		values: {
-			startDate_1: query.startDate_1 || startDate,
-			endDate_1: query.endDate_1 || endDate
+			year: query.year || new Date().getFullYear()
 		}
 	});
 	const { data: countEmployer } = useAnalysisUserQuery({ params: { user_type_id: UserRoleEnum.EMPLOYER } });
@@ -63,18 +56,28 @@ const Dashboard = ({ cx }) => {
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
 	};
-	const { data: CalculateTotalRevenue } = useCalculateTotalRevenueQuery({
+	const { data: calculateTotalRevenue } = useCalculateTotalRevenueQuery({
 		params: {
-			startDate: query.startDate_1 || startDate,
-			endDate: query.endDate_1 || endDate
+			year: query.year || new Date().getFullYear()
 		}
 	});
+
+	const getLast20Years = useMemo(() => {
+		const currentYear = new Date().getFullYear();
+		const years = [];
+
+		for (let i = 0; i < 20; i++) {
+			years.push({ label: (currentYear - i).toString(), value: currentYear - i });
+		}
+
+		return years;
+	}, []);
 
 	const analyticJobSeekerApplyByDayQueryOptions = {
 		series: [
 			{
 				name: 'Tổng tiền',
-				data: CalculateTotalRevenue?.data?.data
+				data: calculateTotalRevenue?.data?.data
 			}
 		],
 		options: {
@@ -89,7 +92,7 @@ const Dashboard = ({ cx }) => {
 				curve: 'smooth'
 			},
 			xaxis: {
-				categories: CalculateTotalRevenue?.data?.label
+				categories: calculateTotalRevenue?.data?.labels
 			},
 			legend: {
 				position: 'top'
@@ -123,22 +126,13 @@ const Dashboard = ({ cx }) => {
 									<div
 										className={sx('form-group', 'form-date')}
 										style={{ display: 'flex', justifyContent: 'end', marginBottom: 12 }}>
-										<InputFieldControl
+										<SelectFieldControl
 											style={{ border: '1px solid #6c6e6f', padding: '2px', borderRadius: 5 }}
+											initialValue={'Chọn năm'}
 											className={sx('dates_range')}
-											id='startDate_1'
-											type='date'
-											name='startDate_1'
+											name='year'
 											control={control}
-										/>
-										<div style={{ paddingRight: '10px' }}> </div>
-										<InputFieldControl
-											style={{ border: '1px solid #6c6e6f', padding: '2px', borderRadius: 5 }}
-											className={sx('dates_range')}
-											id='endDate_1'
-											type='date'
-											name='endDate_1'
-											control={control}
+											options={getLast20Years && getLast20Years}
 										/>
 										<div className={sx('form-group', 'form-submit')} style={{ marginLeft: '10px' }}>
 											<button
