@@ -3,6 +3,7 @@ import styles from './all-product.module.css';
 import classNames from 'classnames/bind';
 import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 import { Link } from 'react-router-dom';
+import { ServiceTypeSlugEnum } from '~/App/constants/serviceEnum';
 const sx = classNames.bind(styles);
 
 const AllProduct = ({ cx }) => {
@@ -29,37 +30,12 @@ const AllProduct = ({ cx }) => {
 									<>
 										<div className={cx('col-md-6')}>
 											<div className={sx('item')}>
-												<div className={sx('image')}>
-													<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3'>
-														<img
-															className={sx('lazy-new')}
-															src={
-																value.name === 'Đăng tuyển dụng'
-																	? 'https://static.careerbuilder.vn/themes/employer/img/employer/i1.png'
-																	: 'https://static.careerbuilder.vn/themes/employer/img/employer/i2.png'
-															}
-															alt={value.name}
-														/>
-													</a>
-												</div>
 												<div className={sx('caption')}>
 													<h3 className={sx('title')}>
 														<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3'>
 															{value.name}
 														</a>
 													</h3>
-													<div className={sx('content')}>
-														<p style={{ fontWeight: 'bold' }}>
-															{value.name === 'Đăng tuyển dụng'
-																? 'Xây dựng đội ngũ nhân tài cho doanh nghiệp'
-																: 'Không bỏ lỡ nhân tài'}
-														</p>
-														<p>
-															{value.name === 'Đăng tuyển dụng'
-																? 'Truy cập vào hàng trăm ngàn hồ sơ hoàn chỉnh và được cập nhật mới thường xuyên để tìm kiếm những ứng viên phù hợp nhất với vị trí tuyển dụng.'
-																: 'Tin đăng tuyển của bạn sẽ hiển thị trực tuyến trên JobHunters.vn và các trang đối tác của chúng tôi trong vòng 30 ngày.'}
-														</p>
-													</div>
 													<Link
 														className={sx('view-more')}
 														to={`/employers/products-and-services/${value.id}`}>

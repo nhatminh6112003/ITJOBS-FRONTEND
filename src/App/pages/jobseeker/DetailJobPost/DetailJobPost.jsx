@@ -92,14 +92,10 @@ const DetailJobPost = ({ cx }) => {
 		}
 
 		const salaryNumber = parseInt(salary);
-		const salaryInMillions = Math.floor(salaryNumber / 1000000);
-		const remainingDigits = salaryInMillions % 10;
-
-		if (remainingDigits === 0) {
-			return `${salaryInMillions / 10} Tr`;
-		} else {
-			return `${salaryInMillions} Tr`;
-		}
+		const salaryInMillions = (salaryNumber / 1000000).toString();
+		return salaryInMillions.includes('.')
+			? salaryInMillions.replace(/(\.[0-9]*[1-9])0*$/, '$1') + ' Tr'
+			: salaryInMillions + ' Tr';
 	};
 	const handleCreateJobSaved = (id) => {
 		if (!user.id) {
@@ -294,18 +290,12 @@ const DetailJobPost = ({ cx }) => {
 														<ul>
 															<li>
 																{' '}
-																<strong>
-																	<em className={sx('mdi', 'mdi-update')}> </em>Ngày cập nhật
-																</strong>
+																<strong>Ngày cập nhật</strong>
 																<p>{formatDate(detailJobPost?.updatedAt)}</p>
 															</li>
 															<li>
 																{' '}
-																<strong>
-																	{' '}
-																	<em className={sx('mdi', 'mdi-briefcase')} />
-																	Ngành nghề
-																</strong>
+																<strong> Ngành nghề</strong>
 																<p>
 																	{detailJobPost?.jobProfessionDetail?.map((jobProfessionDetail) => {
 																		return (
@@ -321,9 +311,7 @@ const DetailJobPost = ({ cx }) => {
 															</li>
 															<li>
 																{' '}
-																<strong>
-																	<em className={sx('mdi', 'mdi-briefcase-edit')}> </em>Hình thức
-																</strong>
+																<strong>Hình thức</strong>
 																{detailJobPost?.jobWorkTypeDetail?.map((jobWorkTypeDetail) => {
 																	return (
 																		<p style={{ marginBottom: '2px' }}>
@@ -344,10 +332,10 @@ const DetailJobPost = ({ cx }) => {
 																	Lương
 																</strong>
 																<p>
-																	{detailJobPost?.isAgreement === false ? (
+																	{detailJobPost?.isAgreement === 0 ? (
 																		<>
 																			{' '}
-																			Lương: {formatSalary(detailJobPost?.min_salary)} -{' '}
+																			{formatSalary(detailJobPost?.min_salary)} -{' '}
 																			{formatSalary(detailJobPost?.max_salary)} VND
 																		</>
 																	) : (
@@ -419,7 +407,7 @@ const DetailJobPost = ({ cx }) => {
 													</li>
 													<li>
 														<span>
-															{detailJobPost?.isAgreement === false ? (
+															{detailJobPost?.isAgreement === 0 ? (
 																<>
 																	<i className={sx('fa', 'fa-usd')} />
 																	Luong: {formatSalary(detailJobPost?.min_salary)} -{' '}

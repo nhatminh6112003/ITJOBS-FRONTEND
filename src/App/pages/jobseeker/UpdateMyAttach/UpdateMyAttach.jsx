@@ -26,11 +26,6 @@ const UpdateMyAttach = ({ cx }) => {
 	const navigate = useNavigate();
 
 	const onUpdateAttach = ({ profession_id, welfare_id, ...data }) => {
-		if (!data.file) {
-			toast.error('Vui lòng chọn CV của bạn');
-			return;
-		}
-
 		const work_type_id = [];
 		for (let i = 1; i <= 4; i++) {
 			const key = `work_type_id_${i}`;
@@ -68,7 +63,7 @@ const UpdateMyAttach = ({ cx }) => {
 			<section className={sx('cb-section')}>
 				<div className={cx('container')}>
 					<div className={cx('cb-title', 'cb-title-center', 'm-0')}>
-						<h2 style={{ marginTop: 20 }}>Tạo Hồ Sơ Đính Kèm</h2>
+						<h2 style={{ marginTop: 20 }}>Chỉnh Sửa Hồ Sơ Đính Kèm</h2>
 					</div>
 					<div className={sx('main-quick-upload-resume', 'created-now-wrap')}>
 						<UpdateMyAttachForm

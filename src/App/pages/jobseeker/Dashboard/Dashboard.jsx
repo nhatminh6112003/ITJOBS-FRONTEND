@@ -116,7 +116,7 @@ const Dashboard = () => {
 													<ul className={cx('desired')}>
 														<li>
 															{resumeDetail?.attachments?.yearOfExperience ? (
-																<p>{resumeDetail?.attachments?.yearOfExperience} kinh nghiệm</p>
+																<p>{resumeDetail?.attachments?.yearOfExperience} Kinh nghiệm</p>
 															) : (
 																<p>Chưa có kinh nghiệm</p>
 															)}
@@ -125,7 +125,11 @@ const Dashboard = () => {
 															<p>
 																Cấp bậc mong muốn:{' '}
 																<span>
-																	{LevelArray[resumeDetail?.resume_desired_job?.position_id]?.label}
+																	{LevelArray.map((value) => {
+																		const id = resumeDetail?.resume_desired_job?.position_id;
+																		const positionLabel = value.value === id ? value.label : null;
+																		return positionLabel;
+																	})}
 																</span>
 															</p>
 														</li>
