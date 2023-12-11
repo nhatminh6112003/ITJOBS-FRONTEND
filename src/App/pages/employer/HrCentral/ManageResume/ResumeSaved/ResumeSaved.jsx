@@ -183,7 +183,7 @@ const ResumeSaved = ({ cx }) => {
 																	<td>
 																		<div className={sx('title')}>
 																			<Link
-																				to={`/employers/hrcentral/resume_detail/${employer_resume?.resume?.id}`}
+																				to={`/employers/resumeinfo/${employer_resume?.resume?.id}`}
 																				style={{
 																					cursor: 'pointer'
 																				}}>
@@ -221,7 +221,7 @@ const ResumeSaved = ({ cx }) => {
 																	</td>
 																	<td>
 																		<Link
-																			to={`/employers/hrcentral/resume_detail/${employer_resume?.resume?.id}`}
+																			to={`/employers/resumeinfo/${employer_resume?.resume?.id}`}
 																			title='Xem chi tiết hồ sơ'>
 																			<VisibilityIcon />
 																		</Link>

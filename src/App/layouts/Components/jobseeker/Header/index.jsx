@@ -51,6 +51,11 @@ const Header = () => {
 														Việc làm mới nhất
 													</Link>
 												</li>
+												<li>
+													<Link to={routesPath.JobseekerPaths.findAllJob} title='Việc làm mới nhất'>
+														Ngày nghề / Địa điểm
+													</Link>
+												</li>
 												{allProfession?.data &&
 													allProfession?.data.map((profession) => {
 														return (
@@ -166,7 +171,7 @@ const Header = () => {
 											<Link to={routesPath.EmployerPaths.findJobSeeker}>Tìm Ứng Viên</Link>
 										</li>
 										<li>
-											<Link to={routesPath.EmployerPaths.serviceAndContact}>Sản Phẩm và Dịch Vụ</Link>
+											<Link to={routesPath.EmployerPaths.allService}>Sản Phẩm và Dịch Vụ</Link>
 										</li>
 									</ul>
 								</div>

@@ -400,7 +400,7 @@ const Form = ({
 							})}
 							selectedValues={resume_desired_job?.welfare_id}
 							placeholder='Chọn'
-							maxItems={3}
+							maxItems={1}
 							control={control}
 							name='welfare_id'
 						/>
@@ -418,7 +418,7 @@ const Form = ({
 							})}
 							selectedValues={resume_desired_job?.profession_id}
 							placeholder='Chọn'
-							maxItems={3}
+							maxItems={1}
 							control={control}
 							name='profession_id'
 						/>

@@ -239,8 +239,8 @@ const Dashboard = () => {
 											<h3>Hồ sơ đính kèm</h3>
 										</div>
 										<p>
-											Ngoài hồ sơ CareerBuilder, bạn có thể tạo hồ sơ đính kèm để ứng tuyển và tìm kiếm bởi
-											nhà tuyển dụng
+											Ngoài hồ sơ JobHunters, bạn có thể tạo hồ sơ đính kèm để ứng tuyển và tìm kiếm bởi nhà
+											tuyển dụng
 										</p>
 									</div>
 									<div className={cx('widget-body')}>
@@ -264,16 +264,7 @@ const Dashboard = () => {
 																		<div className={cx('col-lg-7')}>
 																			<div className={cx('top-action')}>
 																				<div className={cx('switch-box', 'jobalert-cv-widget')}>
-																					<label htmlFor={`cv_jobalert_${item.id}`}>
-																						Thông báo việc làm
-																						<input
-																							type='checkbox'
-																							id={`cv_jobalert_${item.id}`}
-																							className={cx('group_jobalert')}
-																							data-id={item.id}
-																						/>
-																						<span className={cx('slider')} />
-																					</label>
+																					<label htmlFor={`cv_jobalert_${item.id}`}></label>
 																				</div>
 																				<div className={cx('action')}>
 																					<ul>

@@ -4,9 +4,14 @@ import { AllowedFileExtension } from '../constants/allowedFileType';
 
 export const myAttachSchema = yup
 	.object({
-		yearOfExperience: yup.number().required().nullable().min(1).max(55),
-
-		job_degree_value: yup.number().required(),
+		yearOfExperience: yup
+			.number()
+			.required('Vui lòng nhập số năm kinh nghiệm')
+			.nullable()
+			.min(1, 'Vui lòng nhập số năm >= 1')
+			.max(55, 'Vui lòng nhập số năm <= 55')
+			.typeError('Vui lòng nhập số năm'),
+		job_degree_value: yup.number().required('Vui lòng chọn bằng cấp cao nhất'),
 		// file: yup
 		// 	.mixed()
 		// 	.default('')

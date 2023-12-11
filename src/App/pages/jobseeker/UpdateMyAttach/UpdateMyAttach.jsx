@@ -21,7 +21,7 @@ const UpdateMyAttach = ({ cx }) => {
 		resolver: yupResolver(myAttachSchema)
 	});
 	const user_account_id = useSelector((state) => state.auth?.user?.id);
-	const [selectedValue, setSelectedValue] = useState(1);
+	// const [selectedValue, setSelectedValue] = useState(my_attach && my_attach?.resume_active);
 
 	const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ const UpdateMyAttach = ({ cx }) => {
 		formData.append('profession_id', JSON.stringify(profession_id));
 		formData.append('welfare_id', JSON.stringify(welfare_id));
 		formData.append('work_type_id', JSON.stringify(work_type_id));
-		formData.append('resume_active', Number(selectedValue));
+		// formData.append('resume_active', Number(selectedValue));
 		formData.append('user_account_id', user_account_id);
 		updateMyAttach({
 			id,
@@ -77,8 +77,6 @@ const UpdateMyAttach = ({ cx }) => {
 							control={control}
 							resume_desired_job={my_attach?.resume_desired_job}
 							resume_title={my_attach?.resume_title}
-							setSelectedValue={setSelectedValue}
-							selectedValue={selectedValue}
 							watch={watch}
 							my_attach={my_attach}
 						/>

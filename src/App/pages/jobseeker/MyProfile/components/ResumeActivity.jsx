@@ -152,8 +152,8 @@ const ResumeActivity = ({ className: cx, isShowing, toggle }) => {
 										<ul>
 											<li>{item?.role}</li>
 											<li>
-												{formatDate(item.cer_form)}-
-												{item.activity_current ? 'Hiện tại' : formatDate(item.end_date)}
+												{formatDate(item.start_date)} - 
+												{item.activity_current ? ' Hiện tại ' : formatDate(item.end_date)}
 											</li>
 											<li>{item?.activity_des}</li>
 										</ul>
