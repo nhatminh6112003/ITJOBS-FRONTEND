@@ -45,7 +45,7 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 	const [updateResumeLanguageMutation] = useUpdateResumeLanguageMutation();
 
 	const { control, handleSubmit, reset, watch } = useForm({
-		// resolver: yupResolver(resumeLanguageSchema)
+		resolver: yupResolver(resumeLanguageSchema)
 	});
 	const {
 		control: updateControl,

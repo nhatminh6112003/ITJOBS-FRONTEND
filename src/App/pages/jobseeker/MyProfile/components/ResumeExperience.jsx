@@ -317,6 +317,7 @@ const Form = ({ onSubmit, handleSubmit, control, cx, watch, data, isShowing, lis
 							name='rexp_workdesc'
 							label='Mô tả công việc'
 							id='rexp_workdesc'
+							placeholder='Vui lòng ko nhập quá 4.000 ký tự'
 						/>
 					</div>
 				</div>

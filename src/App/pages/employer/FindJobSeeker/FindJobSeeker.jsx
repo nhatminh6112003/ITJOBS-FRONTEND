@@ -31,7 +31,7 @@ const FindJobSeeker = ({ cx }) => {
 	const { data: listResume } = useGetAllResumeQuery({
 		params: {
 			keyword: query.keyword || '',
-			resume_active: query.resume_active || '',
+			resume_active: query.resume_active || 2,
 			profession_id: query.profession_id || '',
 			provinces: query.provinces || '',
 			isFindJobSeeker: true

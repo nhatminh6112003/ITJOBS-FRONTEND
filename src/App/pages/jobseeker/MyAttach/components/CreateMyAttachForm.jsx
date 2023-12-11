@@ -96,8 +96,8 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 						<div className={sx('box-noti')} style={{ color: 'red' }}>
 							<p></p>
 							<div>
-								<b>Lưu ý:</b> Theo thống kê của CareerBuilder.vn hồ sơ Tiếng Anh được nhà tuyển dụng xem nhiều
-								hơn 150% so với hồ sơ Tiếng Việt
+								<b>Lưu ý:</b> Theo thống kê của JobHunters.vn hồ sơ Tiếng Anh được nhà tuyển dụng xem nhiều hơn
+								150% so với hồ sơ Tiếng Việt
 								<br />
 								<span
 									className={sx('note', '')}
@@ -139,7 +139,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								<li>
 									<a title=' ' className={sx('action-1', '')}>
 										<em className={sx('fa', 'fa-sync', '')} />
-										Đồng bộ thông tin với Hồ Sơ CareerBuilder
+										Đồng bộ thông tin với Hồ Sơ JobHunters
 									</a>
 								</li>
 							</ul>
@@ -183,7 +183,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 										label: value.name
 									}))}
 									placeholder='Chọn'
-									maxItems={3}
+									maxItems={2}
 									control={control}
 									name='profession_id'
 								/>
@@ -412,19 +412,24 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								Khẩn cấp
 							</a>
 						</div>
-						{/* <div className={sx('swap-content-1', '')}>
+						<div className={sx('swap-content-1', '')}></div>
+						{selectedValue === 1 && (
 							<p className={sx('content-1', 'active', '')}>
 								Bạn đang <span>vô hiệu hóa</span> hồ sơ. Nhà tuyển dụng sẽ không thấy được hồ sơ này của bạn.
 							</p>
+						)}
+						{selectedValue === 2 && (
 							<p className={sx('content-2', '')}>
 								Hồ sơ của bạn đang ở trạng thái <span>Công Khai</span>. Nhà tuyển dụng có thể tìm thấy Hồ sơ này
 								của bạn.
 							</p>
+						)}
+						{selectedValue === 3 && (
 							<p className={sx('content-3', '')}>
 								Hồ sơ của bạn đang ở trạng thái <span>Khẩn cấp</span>. Hồ sơ của bạn sẽ được ưu tiên tìm thấy
 								bởi các nhà tuyển dụng.
 							</p>
-						</div> */}
+						)}
 					</div>
 					{/* <div className={cx('row', 'search-resume', '')}>
 						<div className={cx('col-md-6', '')}>

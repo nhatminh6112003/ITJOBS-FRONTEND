@@ -24,6 +24,8 @@ import exportPdf from '~/Core/utils/exportPdf';
 import formatDate from '~/Core/utils/formatDate';
 import formatVND from '~/Core/utils/formatVND';
 import styles from './resumeDetail.module.css';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { sendEmailSchema } from '~/App/schemas/sendEmailSchema';
 
 const sx = classNames.bind(styles);
 
@@ -35,7 +37,9 @@ const ResumeDetail = ({ cx }) => {
 		control,
 		formState: { errors },
 		reset
-	} = useForm({});
+	} = useForm({
+		resolver: yupResolver(sendEmailSchema)
+	});
 	const { isShowing, toggle } = useModal({
 		mailModal: false
 	});
@@ -111,15 +115,12 @@ const ResumeDetail = ({ cx }) => {
 					</div>
 					<div className={sx('main-tabslet')} data-toggle='tabslet'>
 						<ul className={sx('tabslet-tab')}>
-							<li>
+							<li className={sx('active')}>
 								<Link to={'/employers/hrcentral/manageresume'}>Hồ Sơ Ứng Tuyển</Link>
 							</li>
-							<li className={sx('active')}>
+							<li>
 								<Link to={'/employers/hrcentral/manageresume/resume-saved'}>Hồ Sơ Đã Lưu</Link>
 							</li>
-							{/* <li>
-								<a>Hồ Sơ Đã Xóa</a>
-							</li> */}
 						</ul>
 						<div className={sx('tabslet-content', 'active')} id='tab-1'>
 							<div className={sx('main-resume-applied')}>
@@ -129,14 +130,10 @@ const ResumeDetail = ({ cx }) => {
 											<nav aria-label='breadcrumb'>
 												<ol className={sx('breadcrumb')}>
 													<li className={sx('breadcrumb-item')}>
-														<a href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/4/35A4E900/*/0/*/*/7/2/6/2/1/desc/lop7cttnq.1667207375/1'>
-															Hồ Sơ Đã Lưu
-														</a>
+														<Link to='/employers/hrcentral/manageresume'>Hồ Sơ Ứng Tuyển</Link>
 													</li>
 													<li className={sx('breadcrumb-item', 'active')} aria-current='page'>
-														<a href='https://careerbuilder.vn/vi/employers/hrcentral/manageresume/4/35BFE874/*/0/*/*/7/2/6/2/0/desc/lop7cttnq.1667207375/1'>
-															ứng viên
-														</a>
+														<a>ứng viên</a>
 													</li>
 												</ol>
 											</nav>
@@ -588,7 +585,7 @@ const ResumeDetail = ({ cx }) => {
 												id='title'
 												control={control}
 											/>
-											<span className={cx('noted')}>Tối đa 150 ký tự</span>
+											{/* <span className={cx('noted')}>Tối đa 150 ký tự</span> */}
 										</div>
 									</div>
 									<div className={cx('col-12')}>
@@ -609,10 +606,10 @@ const ResumeDetail = ({ cx }) => {
 												placeholder='Nhập nội dung'
 												name='content'
 												id='content'
-												maxRows={2}
+												maxRows={5}
 											/>
 
-											<span className={cx('noted')}>Lớn hơn 10 và nhỏ hơn 3.000 kí tự</span>
+											{/* <span className={cx('noted')}>Lớn hơn 10 và nhỏ hơn 3.000 kí tự</span> */}
 										</div>
 									</div>
 									{/* <div className={cx('col-12')}>

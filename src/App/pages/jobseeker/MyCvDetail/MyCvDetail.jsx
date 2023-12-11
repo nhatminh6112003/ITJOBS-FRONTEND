@@ -180,8 +180,10 @@ const MyCvDetail = ({ cx }) => {
 
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Phương thức công việc</label>
-								{data?.resume_desired_job?.work_home == 1 && (
+								{data?.resume_desired_job?.work_home == 1 ? (
 									<div className={cx('col-sm-9')}>Làm việc từ nhà</div>
+								) : (
+									<div className={cx('col-sm-9')}>Làm việc tại công ty</div>
 								)}
 							</div>
 

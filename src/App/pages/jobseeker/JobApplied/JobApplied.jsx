@@ -17,6 +17,7 @@ const JobApplied = () => {
 			user_account_id: user?.id
 		}
 	});
+	console.log(allJobPostActivity?.data);
 	return (
 		<div className={cx('page-content', 'd-flex', 'align-items-stretch')}>
 			<SideBar className={cx} />

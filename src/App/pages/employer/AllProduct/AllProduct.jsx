@@ -32,9 +32,7 @@ const AllProduct = ({ cx }) => {
 											<div className={sx('item')}>
 												<div className={sx('caption')}>
 													<h3 className={sx('title')}>
-														<a href='https://careerbuilder.vn/vi/employers/products-and-services/dang-tuyen-dung/3'>
-															{value.name}
-														</a>
+														<Link to={`/employers/products-and-services/${value.id}`}>{value.name}</Link>
 													</h3>
 													<Link
 														className={sx('view-more')}

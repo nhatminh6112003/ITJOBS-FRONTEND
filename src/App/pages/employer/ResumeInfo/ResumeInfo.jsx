@@ -18,6 +18,12 @@ import { LevelArray } from '~/App/constants/levelEnum';
 import { useCreateEmployerResumeApiMutation } from '~/App/providers/apis/employerResumeApi';
 const sx = classNames.bind(styles);
 import { toast } from 'react-toastify';
+import useModal from '~/App/hooks/useModal';
+import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import ReactModal from 'react-modal';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { sendEmailSchema } from '~/App/schemas/sendEmailSchema';
 
 const ResumeInfo = ({ cx }) => {
 	const [sendMail] = useSendMailJobSeekerMutation();
@@ -27,8 +33,9 @@ const ResumeInfo = ({ cx }) => {
 		control,
 		formState: { errors },
 		reset
-	} = useForm({});
-
+	} = useForm({
+		resolver: yupResolver(sendEmailSchema)
+	});
 	const { id } = useParams();
 	const { data } = useGetOneResumeQuery(id);
 	const employer = useSelector((state) => state.auth?.employer);
@@ -46,6 +53,9 @@ const ResumeInfo = ({ cx }) => {
 			skip: !data?.user_account?.resume_profile?.provinces
 		}
 	);
+	const { isShowing, toggle } = useModal({
+		mailModal: false
+	});
 	const handleSaveToFolder = (resumeId) => {
 		const data = {
 			user_account_id: employer.id,
@@ -57,12 +67,22 @@ const ResumeInfo = ({ cx }) => {
 				toast.success('Đã lưu thành công!');
 			})
 			.catch((err) => {
-				toast.error(err);
+				toast.error(err.data.message);
 			});
 	};
-	useEffect(() => {
-		console.log(data);
-	}, [data]);
+	const onSendMail = async (db) => {
+		sendMail({
+			user_account_id: data?.user_account_id,
+			...db
+		}).then((r) => {
+			if (r?.data?.status == 200) {
+				toast.success('Gửi mail thông báo thành công');
+			}
+		});
+		toggle('mailModal');
+		reset();
+	};
+
 	return (
 		<section
 			className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}
@@ -83,6 +103,15 @@ const ResumeInfo = ({ cx }) => {
 														title='Lưu thư mục'
 														style={{ cursor: 'pointer' }}>
 														Lưu thư mục
+													</a>
+												</li>
+												<li>
+													<em className={cx('material-icons')}>email </em>
+													<a
+														href='javascript:void(0);'
+														onClick={() => toggle('mailModal')}
+														title='Gửi thông báo'>
+														Gửi thông báo
 													</a>
 												</li>
 											</ul>
@@ -167,20 +196,6 @@ const ResumeInfo = ({ cx }) => {
 																	</ul>
 																</div>
 																<div className={sx('tag-list')}> </div>
-															</div>
-															<div className={cx('col-lg-6', 'colRight')}>
-																<div className={cx('buyService')}>
-																	<div className={sx('top')}>
-																		<p>
-																			Để xem hồ sơ hoàn chỉnh của ứng viên, quý khách vui lòng sử
-																			dụng dịch vụ
-																		</p>{' '}
-																		<strong>&quot; Tìm hồ sơ &ldquo;</strong>
-																	</div>
-																	<div className={sx('btn_submit')}>
-																		<button type='button'>Mua dịch vụ</button>
-																	</div>
-																</div>
 															</div>
 														</div>
 														<p className={sx('title-flip')}>Thông tin nghề nghiệp</p>
@@ -358,6 +373,151 @@ const ResumeInfo = ({ cx }) => {
 					</div>
 				</div>
 			</div>
+			<ReactModal
+				isOpen={isShowing.mailModal}
+				onRequestClose={() => toggle('mailModal')}
+				style={{
+					overlay: {
+						zIndex: '9999',
+						backgroundColor: '#343434'
+					},
+					content: {
+						padding: 0,
+						margin: 30,
+						height: 450,
+						backgroundColor: '#ffff',
+						position: 'absolute',
+						left: '50%',
+						top: '50%',
+						transform: 'translate(-50%,-50%)'
+					}
+				}}>
+				<div
+					style={{ border: 'transparent', display: 'flex', justifyContent: 'center', width: '100%' }}
+					className={cx('jobs-posting-modal', 'jobs-posting-10-modal', 'fancybox-content')}
+					id='jobs-posting-10-modal'>
+					<div className={cx('modal-body')}>
+						<form id='frmResumeForNotify' name='frmResumeForNotify' onSubmit={handleSubmit(onSendMail)}>
+							<div className={cx('form-wrap')}>
+								<div className={cx('row')}>
+									<div className={cx('col-12')}>
+										<div className={cx('form-group', 'form-text')}>
+											<label>
+												Tiêu đề <font style={{ color: 'red' }}>*</font>
+											</label>
+
+											<InputFieldControl
+												type='text'
+												placeholder='Nhập nội dung'
+												name='title'
+												id='title'
+												control={control}
+											/>
+											{/* <span className={cx('noted')}>Tối đa 150 ký tự</span> */}
+										</div>
+									</div>
+									<div className={cx('col-12')}>
+										<div className={cx('form-group', 'form-textarea')}>
+											<label>
+												Nội dung <font style={{ color: 'red' }}>*</font>
+											</label>
+
+											<TextAreaFieldControl
+												control={control}
+												placeholder='Nhập nội dung'
+												name='content'
+												id='content'
+												maxRows={5}
+											/>
+
+											{/* <span className={cx('noted')}>Lớn hơn 10 và nhỏ hơn 3.000 kí tự</span> */}
+										</div>
+									</div>
+									{/* <div className={cx('col-12')}>
+										<div className={cx('form-group', 'form-checkbox')}>
+											<div className={cx('group')}>
+												<input
+													type='checkbox'
+													defaultChecked='checked'
+													defaultValue={1}
+													id='update2mail'
+													name='update2mail'
+												/>
+												<label htmlFor='sendmail'>Gửi một bản sao đến email của tôi</label>
+											</div>
+											<div className={cx('group')}>
+												<input type='checkbox' id='update2my' name='update2my' defaultValue={1} />
+												<label htmlFor='updateText'>Cập nhật lại nội dung thư thông báo này</label>
+											</div>
+										</div>
+									</div> */}
+								</div>
+								<div className={cx('form-group', 'form-submit')}>
+									{/* <a className={cx('btn-cancel')} href='javascript:;' onclick='resetNotifyMail();'>
+										Bỏ qua
+									</a> */}
+									<button
+										className={cx('btn-gradient', 'btn-submit')}
+										id='resume_notify_mail_send'
+										type='sunmit'
+										onclick='sendNotifyMail();'>
+										Gửi
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div
+						className={cx('jobs-posting-modal', 'jobs-posting-17-modal')}
+						id='NotifyAbout'
+						style={{ display: 'none' }}>
+						<div className={cx('modal-head')}>
+							<p className={cx('title')}>Thư thông báo mẫu</p>
+						</div>
+						<div className={cx('modal-body')}>
+							<div className={cx('preview-reply-letter')}>
+								<div className={cx('title')}>
+									<p>Tiêu đề: Thanks you for applying</p>
+								</div>
+								<div className={cx('full-content')}>
+									<p>
+										Dear <strong>[firstname] [lastname]</strong>,<br />
+										We have received your resume submission for this position. We appreciate your interest and
+										look forward to reviewing your resume.
+										<br />
+										We will contact you within seven days if your qualifications meet the requirements of the
+										position.
+										<br />
+										Thanks you again for applying!
+										<br />
+										<br />
+										Best regards,
+										<br />
+										<strong>[contact-name]</strong>
+									</p>
+								</div>
+							</div>
+							<div className={cx('form-group', 'form-submit')}>
+								<a
+									className={cx('btn-cancel')}
+									href='javascript:void(0);'
+									onclick="showNotifyMail('35BFE874', '35C9210A')">
+									Trở lại
+								</a>
+							</div>
+						</div>
+					</div>
+					<button
+						type='button'
+						data-fancybox-close=''
+						className={cx('fancybox-button', 'fancybox-close-small')}
+						title='Close'>
+						<svg xmlns='http://www.w3.org/2000/svg' version={1} viewBox='0 0 24 24'>
+							<path d='M13 12l5-5-1-1-5 5-5-5-1 1 5 5-5 5 1 1 5-5 5 5 1-1z' />
+						</svg>
+					</button>
+				</div>
+			</ReactModal>
 		</section>
 	);
 };

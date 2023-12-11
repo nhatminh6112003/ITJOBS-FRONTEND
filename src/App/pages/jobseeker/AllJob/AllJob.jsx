@@ -413,7 +413,12 @@ const AllJob = () => {
 									<a href='' className={cx('btn-apply')}>
 										Tìm Ngay
 									</a>
-									<a className={cx('btn-clear')} onClick={() => handleReset()}>
+									<a
+										className={cx('btn-clear')}
+										onClick={() => handleReset()}
+										style={{
+											cursor: 'pointer'
+										}}>
 										Xóa bộ lọc
 									</a>
 								</div>

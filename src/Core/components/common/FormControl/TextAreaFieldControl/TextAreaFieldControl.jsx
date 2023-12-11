@@ -4,7 +4,7 @@ import { useController } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { useRef } from 'react';
 
-const TextAreaFieldControl = ({ label, name, control, rules, disabled, ...props }) => {
+const TextAreaFieldControl = ({ label, name, control, rules, disabled, placeholder, ...props }) => {
 	const grey = {
 		50: '#f6f8fa',
 		100: '#eaeef2',
@@ -56,8 +56,15 @@ const TextAreaFieldControl = ({ label, name, control, rules, disabled, ...props 
 					field.ref(e);
 					inputRef.current = e;
 				}}
+				placeholder={placeholder}
 			/>
-			{errors ? <span style={{ color: 'red' }}>{errors[name]?.message}</span> : ''}
+			{errors ? (
+				<span style={{ paddingTop: 7, color: 'red', fontSize: 12, fontStyle: 'italic', fontWeight: 500 }}>
+					{errors[name]?.message}
+				</span>
+			) : (
+				''
+			)}
 		</div>
 	);
 };

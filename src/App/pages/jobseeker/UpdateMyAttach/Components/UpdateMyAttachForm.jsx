@@ -163,7 +163,7 @@ const UpdateMyAttachForm = ({
 								<li>
 									<a title=' ' className={sx('action-1', '')}>
 										<em className={sx('fa', 'fa-sync', '')} />
-										Đồng bộ thông tin với Hồ Sơ CareerBuilder
+										Đồng bộ thông tin với Hồ Sơ JobHunters
 									</a>
 								</li>
 							</ul>
@@ -207,7 +207,7 @@ const UpdateMyAttachForm = ({
 										label: value.name
 									}))}
 									placeholder='Chọn'
-									maxItems={3}
+									maxItems={2}
 									control={control}
 									name='profession_id'
 									selectedValues={my_attach?.profession_desired_job?.map((item) => item.profession_id)}
