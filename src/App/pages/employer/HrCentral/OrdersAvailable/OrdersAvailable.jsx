@@ -12,22 +12,39 @@ const sx = classNames.bind(styles);
 import moment from 'moment';
 import formatDate from '~/Core/utils/formatDate';
 import TabMenu from '../components/TabMenu';
-import Button from '~/Core/components/common/Button';
 import ConfirmDialog from '~/Core/components/common/Modal/ConfirmDialog';
 import { toast } from 'react-toastify';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import { useForm } from 'react-hook-form';
+import useSearchOrder from '../components/useSearchOrder';
+import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 const OrdersAvailable = ({ cx }) => {
-	const [dataUpdate, setDataUpdate] = useState(null);
 	const [modalConfirmState, setModalConfirmState] = useState({ open: false, payload: null });
 
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const employer = useSelector((state) => state.auth?.employer);
+	const { pushQuery, query } = useSearchOrder();
+	const { control, handleSubmit } = useForm({
+		values: {
+			fromDate: query.fromDate || '',
+			toDate: query.toDate || '',
+		}
+	});
 	const { data: allOrder } = useGetAllCompany_serviceQuery({
 		params: {
 			company_id: employer?.company?.id,
-			isExpiry: 0
-		}
+			isExpiry: 0,
+			fromDate: query.fromDate || '',
+			toDate: query.toDate || '',
+		},
+		refetchOnMountOrArgChange: true
 	});
+	const { data: allServiceType } = useGetAllServiceTypeQuery();
+	useEffect(() => {
+		console.log(allOrder?.data);
+	}, [allOrder]);
 	const activedOrder = allOrder?.data?.filter((item) => {
 		return item?.isActive === true;
 	});
@@ -59,7 +76,9 @@ const OrdersAvailable = ({ cx }) => {
 		}
 		return '0 ngày';
 	};
-
+	const onSubmit = (data) => {
+		pushQuery({ ...data });
+	};
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -82,76 +101,33 @@ const OrdersAvailable = ({ cx }) => {
 						<div className={sx('tabslet-content', 'active')} id='tab-1'>
 							<div id='frm-filter-reports'>
 								<div className={sx('main-form-posting')}>
-									<div className={sx('form-wrap')}>
-										<div className={sx('form-group', 'form-text')}>
-											<label>Từ khóa</label>
-											<input type='text' name='keywords' defaultValue='' placeholder='Số đơn hàng' />
-										</div>
+									<form className={sx('form-wrap')} onSubmit={handleSubmit(onSubmit)}>
 										<div className={sx('form-group', 'form-date', 'start-date')}>
-											<label> Từ ngày</label>
-											<input
-												type='text'
-												className={sx('dates_cus_select')}
-												name='fromdate'
-												id='fromdate'
-												defaultValue=''
-												placeholder='Chọn'
-												readOnly=''
-											/>
-											<div className={sx('icon')}>
-												<em className={cx('material-icons')}>event</em>
-											</div>
-											<div id='start-date' className={sx('dtpicker-overlay', 'dtpicker-mobile')}>
-												<div className={sx('dtpicker-bg')}>
-													<div className={sx('dtpicker-cont')}>
-														<div className={sx('dtpicker-content')}>
-															<div className={sx('dtpicker-subcontent')} />
-														</div>
-													</div>
-												</div>
-											</div>
+											<InputFieldControl label='Từ ngày' type='date' name='fromDate' control={control} />
 										</div>
 										<div className={sx('form-group', 'form-date', 'end-date')}>
-											<label> Tới ngày</label>
-											<input
-												type='text'
-												className={sx('dates_cus_select')}
-												name='todate'
-												id='todate'
-												defaultValue=''
-												readOnly=''
-												placeholder='Chọn'
+											<InputFieldControl label='Tới ngày' type='date' name='toDate' control={control} />
+										</div>
+										{/* <div className={sx('form-group', 'form-select')}>
+											<SelectFieldControl
+												label='Loại dịch vụ'
+												name='service_type_id'
+												control={control}
+												className={sx('select_long')}
+												options={allServiceType?.data.map((value) => {
+													return {
+														value: value.id,
+														label: value.name
+													};
+												})}
 											/>
-											<div className={sx('icon')}>
-												<em className={cx('material-icons')}>event</em>
-											</div>
-											<div id='end-date' className={sx('dtpicker-overlay', 'dtpicker-mobile')}>
-												<div className={sx('dtpicker-bg')}>
-													<div className={sx('dtpicker-cont')}>
-														<div className={sx('dtpicker-content')}>
-															<div className={sx('dtpicker-subcontent')} />
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div className={sx('form-group', 'form-select')}>
-											<label>Loại dịch vụ</label>
-											<select name='servicetype' className={sx('select_long')}>
-												<option selected='' value={-1}>
-													Tất cả
-												</option>
-												<option value={0}>Đăng tuyển dụng</option>
-												<option value={1}>Tìm hồ sơ</option>
-												<option value={2}>Dịch vụ khác</option>
-											</select>
-										</div>
+										</div> */}
 										<div className={sx('form-group', 'form-submit', 'form-submit-less')}>
 											<button className={sx('btn-submit', 'btn-gradient')} type='submit'>
 												<em className={cx('material-icons')}>find_in_page</em> Tìm
 											</button>
 										</div>
-									</div>
+									</form>
 								</div>
 								<div className={sx('main-resume-applied')}>
 									<div className={sx('boding-resume-applied')}>

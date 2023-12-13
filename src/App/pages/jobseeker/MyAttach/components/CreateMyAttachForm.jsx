@@ -15,14 +15,29 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
 import { LockIcon } from '~/Core/resources';
-import { Link } from 'react-router-dom';
-import routesPath from '~/App/config/routesPath';
 import { DegreeArray } from '~/App/constants/degreeArray';
+import useModal from '~/App/hooks/useModal';
+import Information, { Form } from './Information';
+import { useGetOneResumeProfileQuery, useUpdateResumeProfileMutation } from '~/App/providers/apis/resumeProfileApi';
+import { useSelector } from 'react-redux';
+import ModalMyAttach from './ModalMyAttach';
+import styles from '~/App/pages/jobseeker/MyProfile/MyProfile.module.css';
+import classNames from 'classnames/bind';
+import { resumeProfileSchema } from '~/App/schemas/resumeProfileSchema';
+import { toast } from 'react-toastify';
+
+export const sw = classNames.bind(styles);
 const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue }) => {
 	const { control, handleSubmit, watch, setValue } = useForm({
 		resolver: yupResolver(myAttachSchema)
 	});
-
+	const {
+		control: updateControl,
+		handleSubmit: handleUpdateSubmit,
+		reset
+	} = useForm({
+		resolver: yupResolver(resumeProfileSchema)
+	});
 	const selectFile = watch('file');
 
 	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
@@ -30,6 +45,11 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const selectedProvince = watch('provinces', null);
+	const [updateProfileMutation] = useUpdateResumeProfileMutation();
+	const user = useSelector((state) => state.auth?.user);
+	const id = useSelector((state) => state.auth?.user?.id);
+
+	const { data: resume_profile } = useGetOneResumeProfileQuery(id);
 	const { data: listDistricts } = useGetAllDistrictsQuery(
 		{
 			params: {
@@ -41,6 +61,26 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 			skip: !selectedProvince
 		}
 	);
+	const { isShowing, toggle } = useModal({
+		update_resume_profile: false
+	});
+	const onUpdateSubmit = async (data) => {
+		console.log(data);
+		updateProfileMutation({
+			id: user?.id,
+			payload: {
+				...data
+			}
+		})
+			.unwrap()
+			.then((r) => {
+				console.log('111');
+				if (r.status == 200) {
+					toast.success(r?.message);
+					toggle('update_resume_profile');
+				}
+			});
+	};
 	return (
 		<>
 			<form onSubmit={handleSubmit(onCreateAttach)}>
@@ -123,10 +163,14 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 					<div className={sx('cb-title-h3', 'd-flex', 'justify-content-sb', 'align-center', '')}>
 						<h3>Thông tin cá nhân</h3>
 						<div className={sx('link-edit', '')}>
-							<Link to={routesPath.JobseekerPaths.myProfile + '#personalinfo-section'}>
-								<em className={cx('material-icons', '')}>create</em>
-								<span> Chỉnh sửa </span>
-							</Link>
+							<Information
+								className={cx}
+								isShowing={isShowing}
+								toggle={toggle}
+								onUpdateSubmit={onUpdateSubmit}
+								resume_profile={resume_profile}
+								reset={reset}
+							/>
 						</div>
 					</div>
 					<p className={sx('noted', '')}> Xin vui lòng cập nhật thông tin cá nhân để hoàn tất hồ sơ</p>
@@ -449,6 +493,23 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 					</div>
 				</div>
 			</form>
+			<ModalMyAttach
+				isOpen={isShowing.update_resume_profile}
+				hide={() => toggle('update_resume_profile')}
+				className={sw}
+				title='Thông tin cá nhân'>
+				<Form
+					control={updateControl}
+					onSubmit={onUpdateSubmit}
+					handleSubmit={handleUpdateSubmit}
+					cx={sw}
+					resume_profile={resume_profile}
+					listProvinces={listProvinces}
+					listDistricts={listDistricts?.districts}
+					setValue={setValue}
+					user={user}
+				/>
+			</ModalMyAttach>
 		</>
 	);
 };

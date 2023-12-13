@@ -68,7 +68,7 @@ const ManageResume = ({ cx }) => {
 				<div className={sx('box-candidates-resume-applied')}>
 					<div className={sx('heading-manage')}>
 						<div className={sx('left-heading')}>
-							<h1 className={sx('title-manage')}>Quản lý hồ sơ</h1>
+							<h1 className={sx('title-manage')}>Quản Lý Hồ Sơ</h1>
 						</div>
 					</div>
 					<div className={sx('main-form-posting')}>
