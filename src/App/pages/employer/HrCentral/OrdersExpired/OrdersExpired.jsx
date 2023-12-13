@@ -9,17 +9,29 @@ const sx = classNames.bind(styles);
 import moment from 'moment';
 import formatDate from '~/Core/utils/formatDate';
 import TabMenu from '../components/TabMenu';
+import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
+import useSearchOrder from '../components/useSearchOrder';
+import { useForm } from 'react-hook-form';
 const OrdersExpired = ({ cx }) => {
 	const location = useLocation();
 	const currentPath = location.pathname;
 	const employer = useSelector((state) => state.auth?.employer);
+	const { pushQuery, query } = useSearchOrder();
+	const { control, handleSubmit } = useForm({
+		values: {
+			fromDate: query.fromDate || '',
+			toDate: query.toDate || ''
+		}
+	});
 	const { data: allOrder } = useGetAllCompany_serviceQuery({
 		params: {
 			company_id: employer?.company?.id,
-			isExpiry: 1
-		}
+			isExpiry: 1,
+			fromDate: query.fromDate || '',
+			toDate: query.toDate || ''
+		},
+		refetchOnMountOrArgChange: true
 	});
-	console.log(allOrder);
 	const calculateRemainingDays = (order) => {
 		if (order?.expiration_date) {
 			const expirationDate = moment(order.expiration_date);
@@ -29,7 +41,9 @@ const OrdersExpired = ({ cx }) => {
 		}
 		return '0 ngày';
 	};
-
+	const onSubmit = (data) => {
+		pushQuery({ ...data });
+	};
 	return (
 		<section className={sx('manage-candidates-resume-applied', 'cb-section', 'bg-manage')}>
 			<div className={cx('container')}>
@@ -52,60 +66,14 @@ const OrdersExpired = ({ cx }) => {
 						<div className={sx('tabslet-content', 'active')} id='tab-1'>
 							<form method='post' id='frm-filter-reports'>
 								<div className={sx('main-form-posting')}>
-									<div className={sx('form-wrap')}>
-										<div className={sx('form-group', 'form-text')}>
-											<label>Từ khóa</label>
-											<input type='text' name='keywords' defaultValue='' placeholder='Số đơn hàng' />
-										</div>
+									<form className={sx('form-wrap')} onSubmit={handleSubmit(onSubmit)}>
 										<div className={sx('form-group', 'form-date', 'start-date')}>
-											<label> Từ ngày</label>
-											<input
-												type='text'
-												className={sx('dates_cus_select')}
-												name='fromdate'
-												id='fromdate'
-												defaultValue=''
-												placeholder='Chọn'
-												readOnly=''
-											/>
-											<div className={sx('icon')}>
-												<em className={cx('material-icons')}>event</em>
-											</div>
-											<div id='start-date' className={sx('dtpicker-overlay', 'dtpicker-mobile')}>
-												<div className={sx('dtpicker-bg')}>
-													<div className={sx('dtpicker-cont')}>
-														<div className={sx('dtpicker-content')}>
-															<div className={sx('dtpicker-subcontent')} />
-														</div>
-													</div>
-												</div>
-											</div>
+											<InputFieldControl label='Từ ngày' type='date' name='fromDate' control={control} />
 										</div>
 										<div className={sx('form-group', 'form-date', 'end-date')}>
-											<label> Tới ngày</label>
-											<input
-												type='text'
-												className={sx('dates_cus_select')}
-												name='todate'
-												id='todate'
-												defaultValue=''
-												readOnly=''
-												placeholder='Chọn'
-											/>
-											<div className={sx('icon')}>
-												<em className={cx('material-icons')}>event</em>
-											</div>
-											<div id='end-date' className={sx('dtpicker-overlay', 'dtpicker-mobile')}>
-												<div className={sx('dtpicker-bg')}>
-													<div className={sx('dtpicker-cont')}>
-														<div className={sx('dtpicker-content')}>
-															<div className={sx('dtpicker-subcontent')} />
-														</div>
-													</div>
-												</div>
-											</div>
+											<InputFieldControl label='Tới ngày' type='date' name='toDate' control={control} />
 										</div>
-										<div className={sx('form-group', 'form-select')}>
+										{/* <div className={sx('form-group', 'form-select')}>
 											<label>Loại dịch vụ</label>
 											<select name='servicetype' className={sx('select_long')}>
 												<option selected='' value={-1}>
@@ -115,13 +83,13 @@ const OrdersExpired = ({ cx }) => {
 												<option value={1}>Tìm hồ sơ</option>
 												<option value={2}>Dịch vụ khác</option>
 											</select>
-										</div>
+										</div> */}
 										<div className={sx('form-group', 'form-submit', 'form-submit-less')}>
 											<button className={sx('btn-submit', 'btn-gradient')} type='submit'>
 												<em className={cx('material-icons')}>find_in_page</em> Tìm
 											</button>
 										</div>
-									</div>
+									</form>
 								</div>
 								<div className={sx('main-resume-applied')}>
 									<div className={sx('boding-resume-applied')}>

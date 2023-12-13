@@ -4,19 +4,25 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
 import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUploadFieldControl/FileUploadFieldControl';
-import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import { useGetAllWorkTypeQuery } from '~/App/providers/apis/workTypeApi';
 import { useGetAllJobWelfareQuery } from '~/App/providers/apis/jobWelfareApi';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
-import { LockIcon } from '~/Core/resources';
-import LanguageIcon from '@mui/icons-material/Language';
-import BoltIcon from '@mui/icons-material/Bolt';
-import { useNavigate } from 'react-router-dom';
-import routesPath from '~/App/config/routesPath';
-import { Link } from 'react-router-dom';
 import { DegreeArray } from '~/App/constants/degreeArray';
+import Information, { Form } from '~/App/pages/jobseeker/MyAttach/components/Information.jsx';
+import useModal from '~/App/hooks/useModal';
+import { useGetOneResumeProfileQuery, useUpdateResumeProfileMutation } from '~/App/providers/apis/resumeProfileApi';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import ModalMyAttach from '../../MyAttach/components/ModalMyAttach';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { resumeProfileSchema } from '~/App/schemas/resumeProfileSchema';
+import styles from '~/App/pages/jobseeker/MyProfile/MyProfile.module.css';
+import classNames from 'classnames/bind';
+
+export const sw = classNames.bind(styles);
 const UpdateMyAttachForm = ({
 	sx,
 	cx,
@@ -39,6 +45,17 @@ const UpdateMyAttachForm = ({
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProvinces } = useGetAllProvincesQuery();
 	const [work_type_id, setWorkTypeId] = useState([]);
+	const [updateProfileMutation] = useUpdateResumeProfileMutation();
+	const user = useSelector((state) => state.auth?.user);
+	const id = useSelector((state) => state.auth?.user?.id);
+	const { data: resume_profile } = useGetOneResumeProfileQuery(id);
+	const {
+		control: updateControl,
+		handleSubmit: handleUpdateSubmit,
+		reset: updateReset
+	} = useForm({
+		resolver: yupResolver(resumeProfileSchema)
+	});
 	const selectedProvince = watch('provinces', null);
 	const { data: listDistricts } = useGetAllDistrictsQuery(
 		{
@@ -76,6 +93,24 @@ const UpdateMyAttachForm = ({
 	}, [reset, my_attach, setValue, setWorkTypeId]);
 	const handleClick = (value) => {
 		setSelectedValue(value);
+	};
+	const { isShowing, toggle } = useModal({
+		update_resume_profile: false
+	});
+	const onUpdateSubmit = async (data) => {
+		updateProfileMutation({
+			id: user?.id,
+			payload: {
+				...data
+			}
+		})
+			.unwrap()
+			.then((r) => {
+				if (r.status == 200) {
+					toast.success(r?.message);
+					toggle('update_resume_profile');
+				}
+			});
 	};
 	return (
 		<>
@@ -147,10 +182,14 @@ const UpdateMyAttachForm = ({
 					<div className={sx('cb-title-h3', 'd-flex', 'justify-content-sb', 'align-center', '')}>
 						<h3>Thông tin cá nhân</h3>
 						<div className={sx('link-edit', '')}>
-							<Link to={routesPath.JobseekerPaths.myProfile + '#personalinfo-section'}>
-								<em className={cx('material-icons', '')}>create</em>
-								<span> Chỉnh sửa </span>
-							</Link>
+							<Information
+								className={cx}
+								isShowing={isShowing}
+								toggle={toggle}
+								onUpdateSubmit={onUpdateSubmit}
+								resume_profile={resume_profile}
+								reset={updateReset}
+							/>
 						</div>
 					</div>
 					<p className={sx('noted', '')}> Xin vui lòng cập nhật thông tin cá nhân để hoàn tất hồ sơ</p>
@@ -430,6 +469,23 @@ const UpdateMyAttachForm = ({
 					</div>
 				</div>
 			</form>
+			<ModalMyAttach
+				isOpen={isShowing.update_resume_profile}
+				hide={() => toggle('update_resume_profile')}
+				className={sw}
+				title='Thông tin cá nhân'>
+				<Form
+					control={updateControl}
+					onSubmit={onUpdateSubmit}
+					handleSubmit={handleUpdateSubmit}
+					cx={sw}
+					resume_profile={resume_profile}
+					listProvinces={listProvinces}
+					listDistricts={listDistricts?.districts}
+					setValue={setValue}
+					user={user}
+				/>
+			</ModalMyAttach>
 		</>
 	);
 };

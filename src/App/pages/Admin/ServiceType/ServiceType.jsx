@@ -29,9 +29,18 @@ const ServiceType = () => {
 	const pageSize = searchParams.get('pageSize') || paginationState.queryPageSize;
 	const page = searchParams.get('page') || paginationState.queryPageIndex;
 
-	const { data, isFetching } = useGetAllServiceTypeQuery({
-		refetchOnMountOrArgChange: true
-	});
+	const { data, isFetching } = useGetAllServiceTypeQuery(
+		{
+			params: {
+				keyword,
+				limit: pageSize,
+				page
+			}
+		},
+		{
+			refetchOnMountOrArgChange: true
+		}
+	);
 
 	const [deleteMutation] = useDeleteServiceTypeMutation();
 	const tableData = useMemo(() => data?.data ?? [], [data]);

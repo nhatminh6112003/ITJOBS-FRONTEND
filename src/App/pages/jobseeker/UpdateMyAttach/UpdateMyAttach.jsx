@@ -50,9 +50,9 @@ const UpdateMyAttach = ({ cx }) => {
 			payload: formData
 		})
 			.unwrap()
-			.then((r) => {
-				if (r.status == 200) {
-					toast.success(r?.message);
+			.then((response) => {
+				if (response.status == 200) {
+					toast.success(response?.message);
 					navigate('/jobseekers/dashboard');
 					return;
 				}
