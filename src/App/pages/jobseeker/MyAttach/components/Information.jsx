@@ -15,7 +15,7 @@ import Utilities from './Utilities';
 
 export const sw = classNames.bind(styles);
 
-const Information = ({ className: cx, isShowing, toggle, onUpdateSubmit, resume_profile, reset }) => {
+const Information = ({ className: cx, isShowing, toggle, onUpdateSubmit, resume_profile, reset, watch }) => {
 	const location = useLocation();
 
 	useEffect(() => {

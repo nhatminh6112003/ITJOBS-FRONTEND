@@ -592,20 +592,6 @@ const AllJob = () => {
 					</div>
 				</div>
 			</section>
-			<div className={cx('sticker-jobs')}>
-				<div className={cx('icons')}>
-					<em className={cx('material-icons')}>access_alarms</em>
-				</div>
-				<div className={cx('content')}>
-					<p>Gửi tôi việc làm tương tự</p>
-				</div>
-				<div className={cx('button')}>
-					{' '}
-					<a href='' onClick='return adVanceJobalert();'>
-						Đăng ký ngay
-					</a>
-				</div>
-			</div>
 		</>
 	);
 };

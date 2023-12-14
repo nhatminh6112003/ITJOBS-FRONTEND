@@ -140,24 +140,6 @@ const ResumeDetail = ({ cx }) => {
 										</div>
 										<div className={sx('action')}>
 											<ul className={sx('list-manipulation')}>
-												{/* <li>
-													<em className={cx('material-icons')}>folder_shared </em>
-													<a
-														href='javascript:void(0);'
-														onclick="showFoldersSelected('35C9210A', 'listresumes[]');"
-														title='Lưu thư mục'>
-														Lưu thư mục
-													</a>
-												</li> */}
-												<li>
-													<i className={sx('fa', 'fa-star')} aria-hidden='true' />
-													<a
-														href='javascript:void(0);'
-														onclick="showClassifiedResume('35C9210A', '35BFE874', '','','');return false;"
-														title='Cập nhật trạng thái'>
-														Cập nhật trạng thái
-													</a>
-												</li>
 												<li>
 													<em className={cx('material-icons')}>email </em>
 													<a

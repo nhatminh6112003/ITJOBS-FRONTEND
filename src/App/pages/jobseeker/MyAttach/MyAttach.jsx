@@ -16,7 +16,7 @@ const MyAttach = ({ cx }) => {
 		setSelectedValue(value);
 	};
 	const navigate = useNavigate();
-	const onCreateAttach = ({ profession_id, welfare_id, ...data }) => {
+	const onCreateAttach = ({ provincesMyAttach, districtsMyAttach, profession_id, welfare_id, ...data }) => {
 		if (!data.file) {
 			toast.error('Vui lòng chọn CV của bạn');
 			return;
@@ -41,7 +41,8 @@ const MyAttach = ({ cx }) => {
 		formData.append('resume_active', Number(selectedValue));
 		formData.append('user_account_id', user_account_id);
 		formData.append('resume_type_id', 2);
-
+		formData.append('provinces', provincesMyAttach);
+		formData.append('districts', districtsMyAttach);
 		createMyAttach(formData)
 			.unwrap()
 			.then((r) => {

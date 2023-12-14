@@ -25,6 +25,7 @@ import styles from '~/App/pages/jobseeker/MyProfile/MyProfile.module.css';
 import classNames from 'classnames/bind';
 import { resumeProfileSchema } from '~/App/schemas/resumeProfileSchema';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 export const sw = classNames.bind(styles);
 const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue }) => {
@@ -34,17 +35,31 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 	const {
 		control: updateControl,
 		handleSubmit: handleUpdateSubmit,
-		reset
+		reset,
+		watch: watchUpdateProfile
 	} = useForm({
 		resolver: yupResolver(resumeProfileSchema)
 	});
 	const selectFile = watch('file');
 
+	const selectedProvince2 = watchUpdateProfile('provinces', null);
+	const { data: listDistricts2 } = useGetAllDistrictsQuery(
+		{
+			params: {
+				depth: 2
+			},
+			code: selectedProvince2
+		},
+		{
+			skip: !selectedProvince2
+		}
+	);
+
 	const { data: listJobWelfare } = useGetAllJobWelfareQuery({});
 	const { data: listProfession } = useGetAllProfessionQuery({});
 	const { data: listWorkType } = useGetAllWorkTypeQuery();
 	const { data: listProvinces } = useGetAllProvincesQuery();
-	const selectedProvince = watch('provinces', null);
+	const selectedProvince = watch('provincesMyAttach', null);
 	const [updateProfileMutation] = useUpdateResumeProfileMutation();
 	const user = useSelector((state) => state.auth?.user);
 	const id = useSelector((state) => state.auth?.user?.id);
@@ -170,6 +185,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 								onUpdateSubmit={onUpdateSubmit}
 								resume_profile={resume_profile}
 								reset={reset}
+								watch={watchUpdateProfile}
 							/>
 						</div>
 					</div>
@@ -301,8 +317,8 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 														label: value.name
 													};
 												})}
-												name='provinces'
-												id='provinces'
+												name='provincesMyAttach'
+												id='provincesMyAttach'
 												label='Nơi làm việc mong muốn'
 											/>
 										</div>
@@ -319,8 +335,8 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 													};
 												})}
 												placeholder='Chọn'
-												name='districts'
-												id='districts'
+												name='districtsMyAttach'
+												id='districtsMyAttach'
 												label='Quận'
 											/>
 										</div>
@@ -505,7 +521,7 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 					cx={sw}
 					resume_profile={resume_profile}
 					listProvinces={listProvinces}
-					listDistricts={listDistricts?.districts}
+					listDistricts={listDistricts2?.districts}
 					setValue={setValue}
 					user={user}
 				/>

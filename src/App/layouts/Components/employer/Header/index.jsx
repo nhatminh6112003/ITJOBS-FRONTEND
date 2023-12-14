@@ -70,7 +70,7 @@ const Header = () => {
 									</div>
 								</li>
 								<li className=''>
-									<Link to={routesPath.EmployerPaths.serviceAndContact}>Liên hệ</Link>
+									<Link to={routesPath.EmployerPaths.serviceAndContact}>Mua Dịch Vụ</Link>
 								</li>
 							</ul>
 						</div>

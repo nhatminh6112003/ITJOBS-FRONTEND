@@ -33,7 +33,6 @@ const UpdateMyAttachForm = ({
 	handleSubmit,
 	control,
 	setSelectedValue,
-	selectedValue,
 	resume_desired_job,
 	resume_title,
 	my_attach,
@@ -52,11 +51,12 @@ const UpdateMyAttachForm = ({
 	const {
 		control: updateControl,
 		handleSubmit: handleUpdateSubmit,
-		reset: updateReset
+		reset: updateReset,
+		watch: watchUpdateProfile
 	} = useForm({
 		resolver: yupResolver(resumeProfileSchema)
 	});
-	const selectedProvince = watch('provinces', null);
+	const selectedProvince = watch('provincesMyAttach', null);
 	const { data: listDistricts } = useGetAllDistrictsQuery(
 		{
 			params: {
@@ -69,13 +69,27 @@ const UpdateMyAttachForm = ({
 		}
 	);
 
+	const selectedProvince2 = watchUpdateProfile('provinces', null);
+	const { data: listDistricts2 } = useGetAllDistrictsQuery(
+		{
+			params: {
+				depth: 2
+			},
+			code: selectedProvince2
+		},
+		{
+			skip: !selectedProvince2
+		}
+	);
+
 	useEffect(() => {
+		console.log(resume_desired_job);
 		reset({
 			salary_from: resume_desired_job?.salary_from,
 			salary_to: resume_desired_job?.salary_to,
 			position_id: resume_desired_job?.position_id,
-			provinces: resume_desired_job?.provinces,
-			districts: resume_desired_job?.districts,
+			provincesMyAttach: resume_desired_job?.provinces,
+			districtsMyAttach: resume_desired_job?.districts,
 			work_home: resume_desired_job?.work_home,
 			job_degree_value: my_attach?.attachments?.job_degree_value,
 			yearOfExperience: my_attach?.attachments?.yearOfExperience,
@@ -90,7 +104,7 @@ const UpdateMyAttachForm = ({
 			setValue(`work_type_id_${item.work_type_id}`, item.work_type_id);
 		});
 		setValue('file', selectFile | my_attach?.attachments?.file);
-	}, [reset, my_attach, setValue, setWorkTypeId]);
+	}, [reset, my_attach, setValue, setWorkTypeId, resume_desired_job, resume_title?.title, selectFile]);
 	const handleClick = (value) => {
 		setSelectedValue(value);
 	};
@@ -278,8 +292,8 @@ const UpdateMyAttachForm = ({
 														label: value.name
 													};
 												})}
-												name='provinces'
-												id='provinces'
+												name='provincesMyAttach'
+												id='provincesMyAttach'
 												label='Nơi làm việc mong muốn'
 											/>
 										</div>
@@ -296,8 +310,8 @@ const UpdateMyAttachForm = ({
 													};
 												})}
 												placeholder='Chọn'
-												name='districts'
-												id='districts'
+												name='districtsMyAttach'
+												id='districtsMyAttach'
 												label='Quận'
 											/>
 										</div>
@@ -375,89 +389,6 @@ const UpdateMyAttachForm = ({
 					</div>
 				</div>
 				<div className={sx('quick-upload', 'quick-upload-2', '')}>
-					{/* <div className={sx('cb-title-h3', '')}>
-						<h3>Quyền riêng tư của hồ sơ</h3>
-					</div>
-					<div className={sx('status-area', '')}>
-						<div className={sx('switch-status', 'switch-status-element', '')}>
-							<a
-								data-type={1}
-								className={sx(
-									selectedValue === 1
-										? sx('lock', 'switch-status-element-1', 'active')
-										: sx('lock', 'switch-status-element-1')
-								)}
-								style={{
-									cursor: 'pointer',
-									display: 'flex',
-									alignItems: 'center',
-									gap: 3,
-									justifyContent: 'center'
-								}}
-								onClick={() => handleClick(1)}>
-								<LockIcon fontSize='20' />
-								Khóa
-							</a>
-							<a
-								data-type={2}
-								className={
-									selectedValue === 2
-										? sx('public', 'switch-status-element-2', 'active')
-										: sx('public', 'switch-status-element-2')
-								}
-								style={{
-									cursor: 'pointer',
-									display: 'flex',
-									alignItems: 'center',
-									gap: 3,
-									justifyContent: 'center'
-								}}
-								onClick={() => handleClick(2)}>
-								<LanguageIcon fontSize='20' />
-								Công khai
-							</a>
-							<a
-								data-type={3}
-								className={cx(
-									'flash',
-									'switch-status-element-3',
-									selectedValue === 3
-										? sx('flash', 'switch-status-element-3', 'active')
-										: sx('flash', 'switch-status-element-3')
-								)}
-								style={{
-									cursor: 'pointer',
-									display: 'flex',
-									alignItems: 'center',
-									gap: 3,
-									justifyContent: 'center'
-								}}
-								onClick={() => handleClick(3)}>
-								<BoltIcon fontSize='20' />
-								Khẩn cấp
-							</a>
-						</div>
-						<div className={sx('swap-content-1', '')}>
-							<p className={sx('content-1', 'active', '')}>
-								Bạn đang <span>vô hiệu hóa</span> hồ sơ. Nhà tuyển dụng sẽ không thấy được hồ sơ này của bạn.
-							</p>
-							<p className={sx('content-2', '')}>
-								Hồ sơ của bạn đang ở trạng thái <span>Công Khai</span>. Nhà tuyển dụng có thể tìm thấy Hồ sơ này
-								của bạn.
-							</p>
-							<p className={sx('content-3', '')}>
-								Hồ sơ của bạn đang ở trạng thái <span>Khẩn cấp</span>. Hồ sơ của bạn sẽ được ưu tiên tìm thấy
-								bởi các nhà tuyển dụng.
-							</p>
-						</div>
-					</div> */}
-					{/* <div className={cx('row', 'search-resume', '')}>
-						<div className={cx('col-md-6', '')}>
-							<div className={sx('form-group', '')}>
-								<span className={sx('hide-infor', '')}>Ẩn một số thông tin</span>
-							</div>
-						</div>
-					</div> */}
 					<div className={cx('row', '')}>
 						<div className={cx('col-md-12')}>
 							<div className={sx('form-group', 'form-submit', 'form-back', '')}>
@@ -481,7 +412,7 @@ const UpdateMyAttachForm = ({
 					cx={sw}
 					resume_profile={resume_profile}
 					listProvinces={listProvinces}
-					listDistricts={listDistricts?.districts}
+					listDistricts={listDistricts2?.districts}
 					setValue={setValue}
 					user={user}
 				/>
