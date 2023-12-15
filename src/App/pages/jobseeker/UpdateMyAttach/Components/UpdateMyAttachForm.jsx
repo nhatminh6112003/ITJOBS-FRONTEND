@@ -21,6 +21,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { resumeProfileSchema } from '~/App/schemas/resumeProfileSchema';
 import styles from '~/App/pages/jobseeker/MyProfile/MyProfile.module.css';
 import classNames from 'classnames/bind';
+import { useGetOneMyAttachQuery } from '~/App/providers/apis/myAttachApi';
+import GenderEnum from '~/App/constants/genderEnum';
+import formatDate from '~/Core/utils/formatDate';
+import { marialStatusEnum } from '~/App/constants/marialStatusEnum';
 
 export const sw = classNames.bind(styles);
 const UpdateMyAttachForm = ({
@@ -47,6 +51,8 @@ const UpdateMyAttachForm = ({
 	const [updateProfileMutation] = useUpdateResumeProfileMutation();
 	const user = useSelector((state) => state.auth?.user);
 	const id = useSelector((state) => state.auth?.user?.id);
+	const { data, isLoading } = useGetOneMyAttachQuery(user?.resume?.id);
+
 	const { data: resume_profile } = useGetOneResumeProfileQuery(id);
 	const {
 		control: updateControl,
@@ -83,7 +89,6 @@ const UpdateMyAttachForm = ({
 	);
 
 	useEffect(() => {
-		console.log(resume_desired_job);
 		reset({
 			salary_from: resume_desired_job?.salary_from,
 			salary_to: resume_desired_job?.salary_to,
@@ -93,9 +98,6 @@ const UpdateMyAttachForm = ({
 			work_home: resume_desired_job?.work_home,
 			job_degree_value: my_attach?.attachments?.job_degree_value,
 			yearOfExperience: my_attach?.attachments?.yearOfExperience,
-			// profession_id: resume_desired_job?.profession_id,
-			// welfare_id: resume_desired_job?.welfare_id,
-			// work_type_id: resume_desired_job?.work_type_id,
 			title: resume_title?.title
 		});
 		const work_type_id = my_attach?.resume_work_type.map((item) => item.work_type_id);
@@ -105,9 +107,7 @@ const UpdateMyAttachForm = ({
 		});
 		setValue('file', selectFile | my_attach?.attachments?.file);
 	}, [reset, my_attach, setValue, setWorkTypeId, resume_desired_job, resume_title?.title, selectFile]);
-	const handleClick = (value) => {
-		setSelectedValue(value);
-	};
+
 	const { isShowing, toggle } = useModal({
 		update_resume_profile: false
 	});
@@ -206,21 +206,64 @@ const UpdateMyAttachForm = ({
 							/>
 						</div>
 					</div>
+					<div className={cx('data-field')}>
+						<div className={cx('img-info')}>
+							<div className={cx('figure')}>
+								<div className={cx('image', 'img-result', 'hide')}></div>
+							</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Họ &amp; tên</label>
+							<div className={cx('col-sm-9')}>{resume_profile?.firstname + ' ' + resume_profile?.lastname}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Giới tính</label>
+							<div className={cx('col-sm-9')}> {GenderEnum[resume_profile?.gender]} </div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Ngày sinh</label>
+							<div className={cx('col-sm-9')}>{formatDate(resume_profile?.birthday)}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Điện thoại</label>
+							<div className={cx('col-sm-9')}>{resume_profile?.phone_number}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Email</label>
+							<div className={cx('col-sm-9')}>{user?.email}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Tình trạng hôn nhân</label>
+							<div className={cx('col-sm-9')}>{marialStatusEnum[resume_profile?.marial_status]}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Tỉnh/ Thành phố</label>
+							{listProvinces?.map((item) =>
+								item.code === resume_profile?.provinces ? (
+									<div className={cx('col-sm-9')} key={item.code}>
+										{item.name}
+									</div>
+								) : null
+							)}
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Quận/ Huyện</label>
+							<div className={cx('col-sm-9')}>
+								{listDistricts2?.districts?.map((item) =>
+									item.code === resume_profile?.districts ? item.name : null
+								)}
+							</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Địa chỉ</label>
+							<div className={cx('col-sm-9')}>{resume_profile?.address}</div>
+						</div>
+					</div>
 					<p className={sx('noted', '')}> Xin vui lòng cập nhật thông tin cá nhân để hoàn tất hồ sơ</p>
 				</div>
 				<div className={sx('quick-upload', 'quick-upload-2', '')}>
 					<div className={sx('cb-title-h3', '')}>
 						<h3>Thông tin nghề nghiệp</h3>
-						<div className={sx('user-action', '')}>
-							<ul>
-								<li>
-									<a title=' ' className={sx('action-1', '')}>
-										<em className={sx('fa', 'fa-sync', '')} />
-										Đồng bộ thông tin với Hồ Sơ JobHunters
-									</a>
-								</li>
-							</ul>
-						</div>
 					</div>
 					<div className={cx('row')}>
 						<div className={cx('col-md-6')}>
