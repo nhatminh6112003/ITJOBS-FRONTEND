@@ -29,7 +29,7 @@ const OrdersAvailable = ({ cx }) => {
 	const { control, handleSubmit } = useForm({
 		values: {
 			fromDate: query.fromDate || '',
-			toDate: query.toDate || '',
+			toDate: query.toDate || ''
 		}
 	});
 	const { data: allOrder } = useGetAllCompany_serviceQuery({
@@ -37,7 +37,7 @@ const OrdersAvailable = ({ cx }) => {
 			company_id: employer?.company?.id,
 			isExpiry: 0,
 			fromDate: query.fromDate || '',
-			toDate: query.toDate || '',
+			toDate: query.toDate || ''
 		},
 		refetchOnMountOrArgChange: true
 	});
@@ -50,11 +50,20 @@ const OrdersAvailable = ({ cx }) => {
 	});
 	const [update] = useUpdateCompany_serviceMutation();
 
-	const updateCompany_service = (id) => {
+	const updateCompany_service = ({ id, service_id }) => {
 		const now = moment();
 		const register_date = now.format('YYYY-MM-DD');
 		const expiration_date = now.add(30, 'days').format('YYYY-MM-DD');
-		update({ id, payload: { isActive: true, register_date: register_date, expiration_date: expiration_date } })
+		update({
+			id,
+			payload: {
+				isActive: true,
+				register_date: register_date,
+				expiration_date: expiration_date,
+				service_id: service_id,
+				posted_by_id: employer?.id
+			}
+		})
 			.unwrap()
 			.then((r) => {
 				if (r.status == 200) {
@@ -199,7 +208,7 @@ const OrdersAvailable = ({ cx }) => {
 																					}
 																					return setModalConfirmState({
 																						open: true,
-																						payload: order?.id
+																						payload: {id: order?.id, service_id: order?.service_id}
 																					});
 																				}}>
 																				Kích hoạt
