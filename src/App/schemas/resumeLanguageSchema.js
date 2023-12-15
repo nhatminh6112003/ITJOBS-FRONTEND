@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 export const resumeLanguageSchema = yup.object({
-	resume_id: yup.string().required(),
+	resume_id: yup.string(),
 	rs_language: yup.string().required('Vui lòng chọn ngôn ngữ'),
 	rs_language_level: yup.string().required('Vui lòng chọn trình độ ngoại ngữ'),
 	rs_language_certify: yup
