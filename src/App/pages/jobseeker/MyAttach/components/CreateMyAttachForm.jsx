@@ -25,7 +25,9 @@ import styles from '~/App/pages/jobseeker/MyProfile/MyProfile.module.css';
 import classNames from 'classnames/bind';
 import { resumeProfileSchema } from '~/App/schemas/resumeProfileSchema';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
+import GenderEnum from '~/App/constants/genderEnum';
+import formatDate from '~/Core/utils/formatDate';
+import { marialStatusEnum } from '~/App/constants/marialStatusEnum';
 
 export const sw = classNames.bind(styles);
 const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue }) => {
@@ -41,7 +43,6 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 		resolver: yupResolver(resumeProfileSchema)
 	});
 	const selectFile = watch('file');
-
 	const selectedProvince2 = watchUpdateProfile('provinces', null);
 	const { data: listDistricts2 } = useGetAllDistrictsQuery(
 		{
@@ -63,8 +64,8 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 	const [updateProfileMutation] = useUpdateResumeProfileMutation();
 	const user = useSelector((state) => state.auth?.user);
 	const id = useSelector((state) => state.auth?.user?.id);
-
 	const { data: resume_profile } = useGetOneResumeProfileQuery(id);
+
 	const { data: listDistricts } = useGetAllDistrictsQuery(
 		{
 			params: {
@@ -80,7 +81,6 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 		update_resume_profile: false
 	});
 	const onUpdateSubmit = async (data) => {
-		console.log(data);
 		updateProfileMutation({
 			id: user?.id,
 			payload: {
@@ -89,7 +89,6 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 		})
 			.unwrap()
 			.then((r) => {
-				console.log('111');
 				if (r.status == 200) {
 					toast.success(r?.message);
 					toggle('update_resume_profile');
@@ -118,23 +117,12 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 						<div className={sx('form-group')}>
 							<div className={sx('list-choose')}>
 								<div className={sx('choose-mycomputer')}>
-									{/* <label htmlFor='file'>
-										<FolderOutlinedIcon style={{ padding: 3 }} />
-										Tải hồ sơ từ máy tínhf
-									</label> */}
 									<FileUploadFieldControl
 										htmlFor='file'
 										control={control}
 										name='file'
 										label='Tải hồ sơ từ máy tính'
 									/>
-									{/* <InputFieldControl
-										control={control}
-										name='file'
-										id='file'
-										type='file'
-										style={{display:'none'}}
-									/> */}
 								</div>
 							</div>
 							<span className={sx('error_attach_file')} />
@@ -149,7 +137,6 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 					</div>
 					<div className={sx('form-group', 'form-note')}>
 						<div className={sx('box-noti')} style={{ color: 'red' }}>
-							<p></p>
 							<div>
 								<b>Lưu ý:</b> Theo thống kê của JobHunters.vn hồ sơ Tiếng Anh được nhà tuyển dụng xem nhiều hơn
 								150% so với hồ sơ Tiếng Việt
@@ -189,21 +176,64 @@ const CreateMyAttachForm = ({ sx, cx, onCreateAttach, handleClick, selectedValue
 							/>
 						</div>
 					</div>
+					<div className={cx('data-field')}>
+						<div className={cx('img-info')}>
+							<div className={cx('figure')}>
+								<div className={cx('image', 'img-result', 'hide')}></div>
+							</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Họ &amp; tên</label>
+							<div className={cx('col-sm-9')}>{resume_profile?.firstname + ' ' + resume_profile?.lastname}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Giới tính</label>
+							<div className={cx('col-sm-9')}> {GenderEnum[resume_profile?.gender]} </div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Ngày sinh</label>
+							<div className={cx('col-sm-9')}>{formatDate(resume_profile?.birthday)}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Điện thoại</label>
+							<div className={cx('col-sm-9')}>{resume_profile?.phone_number}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Email</label>
+							<div className={cx('col-sm-9')}>{user?.email}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Tình trạng hôn nhân</label>
+							<div className={cx('col-sm-9')}>{marialStatusEnum[resume_profile?.marial_status]}</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Tỉnh/ Thành phố</label>
+							{listProvinces?.map((item) =>
+								item.code === resume_profile?.provinces ? (
+									<div className={cx('col-sm-9')} key={item.code}>
+										{item.name}
+									</div>
+								) : null
+							)}
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Quận/ Huyện</label>
+							<div className={cx('col-sm-9')}>
+								{listDistricts2?.districts?.map((item) =>
+									item.code === resume_profile?.districts ? item.name : null
+								)}
+							</div>
+						</div>
+						<div className={cx('form-group', 'row')}>
+							<label className={cx('col-sm-3', 'col-form-label')}>Địa chỉ</label>
+							<div className={cx('col-sm-9')}>{resume_profile?.address}</div>
+						</div>
+					</div>
 					<p className={sx('noted', '')}> Xin vui lòng cập nhật thông tin cá nhân để hoàn tất hồ sơ</p>
 				</div>
 				<div className={sx('quick-upload', 'quick-upload-2', '')}>
 					<div className={sx('cb-title-h3', '')}>
 						<h3>Thông tin nghề nghiệp</h3>
-						<div className={sx('user-action', '')}>
-							<ul>
-								<li>
-									<a title=' ' className={sx('action-1', '')}>
-										<em className={sx('fa', 'fa-sync', '')} />
-										Đồng bộ thông tin với Hồ Sơ JobHunters
-									</a>
-								</li>
-							</ul>
-						</div>
 					</div>
 					<div className={cx('row')}>
 						<div className={cx('col-md-6')}>

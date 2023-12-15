@@ -22,6 +22,6 @@ const resumeProfileApi = createApi({
 	})
 });
 
-export const { useUpdateResumeProfileMutation, useGetOneResumeProfileQuery } = resumeProfileApi;
+export const { useUpdateResumeProfileMutation, 	useGetOneResumeProfileQuery } = resumeProfileApi;
 
 export default resumeProfileApi;
