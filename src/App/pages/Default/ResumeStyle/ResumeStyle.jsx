@@ -64,10 +64,16 @@ const ResumeStyle = () => {
 					}).join('')}
 											<li class="dbl-line">
 											<label>Mức lương</label>:&nbsp;</>
-											<span class="txt">					  					  ${formatVND(resumeData?.resume_desired_job?.salary_from)} - ${formatVND(
-					resumeData?.resume_desired_job?.salary_to
-				)} 
-					   VND
+											<span class="txt">				
+				${
+					resumeData?.resume_desired_job?.salary_from && resumeData?.resume_desired_job?.salary_to
+						? formatVND(resumeData?.resume_desired_job?.salary_from) +
+						  '-' +
+						  formatVND(resumeData?.resume_desired_job?.salary_to) +
+						  'VND'
+						: ''
+				}
+					   
 					  </span>
 					  </li>
 																										                    <li class="dbl-line"><label>Hình thức công việc</label><span>:&nbsp;</span><span class="txt">
@@ -86,6 +92,17 @@ const ResumeStyle = () => {
 					
 				</ul>
 			</div>
+				</div>
+			`
+			);
+			resumeDesiredBlock.insertAdjacentHTML(
+				'afterend',
+				`
+				<div class='_col-xs-12_1hw82_2635'>
+				<h3><span>THÀNH TÍCH NỔI BẬT</span></h3>
+				<div class="_text-edt_1hw82_3533">
+								<div class="_text-edt_1hw82_3533">
+								<div class="_title_1hw82_1464">${resumeData?.resume_addioninfo?.addioninfo}  </div>
 				</div>
 			`
 			);
@@ -159,9 +176,9 @@ ${item?.rexp_title} - ${item?.rexp_company}
 				if (labelBlock) {
 					ulBlock.innerHTML = `
 					<ul class="_contact_1hw82_2730">
-					<li><label>Birthday</label> : ${profileUser?.birthday ? formatDate(profileUser?.birthday) : 'MM/DD/YYYY'}</li>
-					<li><label>Marital status</label> : ${
-						profileUser?.marial_status ? marialStatusEnum[profileUser?.marial_status] : 'Độc thân'
+					<li><label>Ngày sinh</label> : ${profileUser?.birthday ? formatDate(profileUser?.birthday) : 'MM/DD/YYYY'}</li>
+					<li><label>Tình trạng hôn nhân</label> : ${
+						profileUser?.marial_status ? marialStatusEnum[profileUser?.marial_status] : ''
 					}</li>
 					`;
 				} else {
