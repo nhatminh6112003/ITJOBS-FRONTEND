@@ -11,6 +11,13 @@ const jobPostApi = createApi({
 			providesTags: ['job_post'],
 			transformResponse: (response) => response
 		}),
+		getAllJobPostByPriority: build.query({
+			query: (arg) => {
+				return { url: `/job_post/sort`, method: 'GET', params: arg.params };
+			},
+			providesTags: ['job_post'],
+			transformResponse: (response) => response
+		}),
 		analytics: build.query({
 			query: (arg) => {
 				return { url: `/job_post/analytics`, method: 'GET', params: arg.params };
@@ -84,6 +91,7 @@ const jobPostApi = createApi({
 export const {
 	useCreateJobPostMutation,
 	useGetAllJobPostQuery,
+	useGetAllJobPostByPriorityQuery,
 	useGetOneJobPostQuery,
 	useDeleteJobPostMutation,
 	useUpdateJobPostMutation,
