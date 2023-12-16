@@ -87,11 +87,8 @@ const ResumeProfile = ({ className: cx, isShowing, toggle }) => {
 	}, [location]);
 
 	const scrollToElement = (elementId) => {
-		console.log('TCL: scrollToElement -> elementId', elementId);
-		const container = document.getElementById(elementId); // Thay 'container' bằng ID của phần tử chứa
-		console.log('TCL: scrollToElement -> container', container);
-		const element = document.getElementById(elementId); // Thay 'elementId' bằng ID của phần tử con
-
+		const container = document.getElementById(elementId);
+		const element = document.getElementById(elementId);
 		if (container && element) {
 			const containerRect = container.getBoundingClientRect();
 			const elementRect = element.getBoundingClientRect();

@@ -1,17 +1,16 @@
-import React, { Suspense, lazy, useEffect } from 'react';
-import SideBar from '~/App/layouts/Components/jobseeker/SideBar';
-import styles from './changetemplate.module.css';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import Tips from '~/Core/components/common/Modal/Tips';
-import useModal from '~/App/hooks/useModal';
-import { useGetOneQuery, useUpdateUiMutation } from '~/App/providers/apis/resumeTemplateApi';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { fontsEnum, colorsEnum, fontSize } from '~/App/constants/resumeTemplateEnum';
-import ChooseTemplate from './components/ChooseTemplate';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import routesPath from '~/App/config/routesPath';
+import { colorsEnum, fontSize, fontsEnum } from '~/App/constants/resumeTemplateEnum';
+import useModal from '~/App/hooks/useModal';
+import SideBar from '~/App/layouts/Components/jobseeker/SideBar';
+import { useGetOneQuery, useUpdateUiMutation } from '~/App/providers/apis/resumeTemplateApi';
+import Tips from '~/Core/components/common/Modal/Tips';
+import styles from './changetemplate.module.css';
+import ChooseTemplate from './components/ChooseTemplate';
 const cx = classNames.bind(styles);
 const ChangeTemplate = () => {
 	let [currentFont, changeFont] = useState('');
@@ -131,11 +130,11 @@ const ChangeTemplate = () => {
 																	<p id='cv_template_name'>{myResume?.default_template_name}</p>
 																</div>
 																<div className={cx('change')}>
-																	<Link
+																	{/* <Link
 																		onClick={() => toggle('chooseTemplate')}
 																		className={cx('btn-change-template')}>
 																		Đổi Mẫu
-																	</Link>
+																	</Link> */}
 																</div>
 															</div>
 														</li>
