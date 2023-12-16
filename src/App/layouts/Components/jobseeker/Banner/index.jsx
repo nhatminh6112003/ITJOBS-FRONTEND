@@ -18,7 +18,7 @@ const Banner = () => {
 					<div className={cx('swiper-container')}>
 						<div className={cx('swiper-wrapper', 'pc-swiper-wrapper')}>
 							<div className={cx('swiper-slide')}>
-								<a href='/' target='_blank'>
+								<a href='/'>
 									<div className={cx('image')}>
 										<img
 											src='https://images.careerbuilder.vn/background/mbbank_1900x570_2022_12_12_1670843523.jpg'
@@ -37,7 +37,7 @@ const Banner = () => {
 					<div className={cx('swiper-container')}>
 						<div className={cx('swiper-wrapper', 'mobile-swiper-wrapper')}>
 							<div className={cx('swiper-slide')}>
-								<a href='/' target='_blank'>
+								<a href='/'>
 									<div className={cx('image')}>
 										<img alt='Banner' />
 									</div>

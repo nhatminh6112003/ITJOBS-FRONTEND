@@ -433,7 +433,7 @@ const AllJob = () => {
 						<div className={cx('col-lg-8', 'col-custom-xxl-9')}>
 							<div className={cx('job-found')}>
 								<div className={cx('job-found-amout')}>
-									<h1>{allJobPost?.data?.length} việc làm</h1>
+									<h1>{allJobPost?.data?.length ? allJobPost?.data?.length : 0} việc làm</h1>
 								</div>
 							</div>
 							<div className={cx('main-slide')}>
@@ -446,7 +446,6 @@ const AllJob = () => {
 														<div className={cx('image')}>
 															<Link
 																to={`/nha-tuyen-dung/${job_post?.company_id}`}
-																target='_blank'
 																title={job_post?.company?.company_name}
 																rel='noreferrer'>
 																<img
@@ -459,31 +458,28 @@ const AllJob = () => {
 														<div className={cx('figcaption')}>
 															<div className={cx('title')}>
 																<h2>
-																	<a
+																	<Link
 																		className={cx('job_link')}
 																		data-id='35BB3D60'
-																		href={`/tim-viec-lam/${job_post?.id}`}
-																		target='_blank'
+																		to={`/tim-viec-lam/${job_post?.id}`}
 																		title={job_post?.job_title}
 																		rel='noreferrer'>
 																		{job_post?.job_title}
-																	</a>
+																	</Link>
 																</h2>
 															</div>
 															<div className={cx('caption')}>
-																<a
+																<Link
 																	className={cx('company-name')}
-																	target='_blank'
-																	href={`/nha-tuyen-dung/${job_post?.company_id}`}
+																	to={`/nha-tuyen-dung/${job_post?.company_id}`}
 																	title={job_post?.company?.company_name}
 																	rel='noreferrer'>
 																	{job_post?.company?.company_name}
-																</a>
-																<a
+																</Link>
+																<Link
 																	className={cx('job_link')}
 																	data-id='35BB3D60'
-																	href={`/tim-viec-lam/${job_post?.id}`}
-																	target='_blank'
+																	to={`/tim-viec-lam/${job_post?.id}`}
 																	title={job_post?.job_title}
 																	rel='noreferrer'>
 																	<div style={{ color: '#008563', fontSize: '14px' }}>
@@ -509,7 +505,7 @@ const AllJob = () => {
 																		<em className='fa fa-clock-o' />
 																		<p>Hạn nộp: {formatDate(job_post?.expiry_date)}</p>
 																	</div>
-																</a>
+																</Link>
 															</div>
 															<div className={cx('bottom-right-icon')}>
 																<ul>

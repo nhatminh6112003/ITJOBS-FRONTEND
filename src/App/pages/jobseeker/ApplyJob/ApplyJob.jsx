@@ -35,7 +35,7 @@ const ApplyJob = ({ cx }) => {
 	console.log('TCL: ApplyJob -> resume', resume);
 
 	const { data: myAttach } = useGetAllMyAttachQuery(user?.id);
-	const [createMutation] = useCreateJobPostActivityApiMutation();
+	const [createMutation, { isLoading }] = useCreateJobPostActivityApiMutation();
 	const [provinces, setProvinces] = useState('');
 	const { data: listProvinces } = useGetAllProvincesQuery();
 
@@ -135,7 +135,7 @@ const ApplyJob = ({ cx }) => {
 																/>
 																<label htmlFor={`resume_${item.id}`}>
 																	{item?.resume_title?.title}
-																	<Link to={routesPath.JobseekerPaths.dashboard}>[Xem]</Link>
+																	<Link to={`/resume-style/${item.id}`}>[Xem]</Link>
 																</label>
 															</div>
 														)
@@ -630,7 +630,15 @@ const ApplyJob = ({ cx }) => {
 										</ul>
 									</div>
 									<div className={sx('form-group', 'form-submit')}>
-										<button className={sx('btn-gradient')} name='btnsubmit' id='btnsubmit' type='submit'>
+										<button
+											className={sx('btn-gradient')}
+											name='btnsubmit'
+											id='btnsubmit'
+											type='submit'
+											disabled={isLoading}
+											style={{
+												backgroundImage: isLoading ? 'linear-gradient(270deg, #bdc3c7, #bdc2c4)' : ''
+											}}>
 											Nộp Ứng Tuyển
 										</button>
 									</div>
