@@ -13,6 +13,7 @@ import { DegreeArray } from '~/App/constants/degreeArray';
 import formatVND from '~/Core/utils/formatVND';
 import { LevelArray } from '~/App/constants/levelEnum';
 import { listProvinces } from '~/App/constants/provincesData';
+import GenderEnum from '~/App/constants/genderEnum';
 const sx = classNames.bind(styles);
 
 const ResumeStyle = () => {
@@ -102,7 +103,62 @@ const ResumeStyle = () => {
 				<h3><span>THÀNH TÍCH NỔI BẬT</span></h3>
 				<div class="_text-edt_1hw82_3533">
 								<div class="_text-edt_1hw82_3533">
-								<div class="_title_1hw82_1464">${resumeData?.resume_addioninfo?.addioninfo}  </div>
+								<div class="_title_1hw82_1464">${
+									resumeData?.resume_addioninfo?.addioninfo ? resumeData?.resume_addioninfo?.addioninfo : ''
+								}  </div>
+				</div>
+			`
+			);
+			resumeDesiredBlock.insertAdjacentHTML(
+				'afterend',
+				`
+				<div class='_col-xs-12_1hw82_2635'>
+				<h3><span>CHỨNG CHỈ</span></h3>
+				<div class="_text-edt_1hw82_3533" style="margin-bottom:0px">
+								<div class="_text-edt_1hw82_3533">
+								<div class="_title_1hw82_1464">${resumeData?.resume_certificate
+									?.map(
+										(item, index, array) => `
+								<div class="_text-edt_1hw82_3533">
+								  <div class="_title_1hw82_1464">
+									 ${item.cer_title}
+									 </br>
+									 ${item.cer_by}
+									 </br>
+								  </div>
+								  <div class="_content_fck_1hw82_1507" style="margin-bottom:${index === array.length - 1 ? '0' : '10px'}">
+									 <p>${formatDate(item.cer_form)}-${item.cer_limit ? 'Không giới hạn' : formatDate(item.cer_to)}</p>
+								  </div>
+								</div>`
+									)
+									.join('')}  </div>
+				</div>
+			`
+			);
+			resumeDesiredBlock.insertAdjacentHTML(
+				'afterend',
+				`
+				<div class='_col-xs-12_1hw82_2635'>
+				<h3><span>HOẠT ĐỘNG KHÁC</span></h3>
+				<div class="_text-edt_1hw82_3533" style="margin-bottom:0px">
+								<div class="_text-edt_1hw82_3533">
+								<div class="_title_1hw82_1464">${resumeData?.resume_activities
+									?.map(
+										(item, index, array) => `
+								<div class="_text-edt_1hw82_3533">
+								  <div class="_title_1hw82_1464">
+								  ${item?.role}
+									 </br>
+									 ${item?.activity_des ? item?.activity_des : ''}
+									 </br>
+								  </div>
+								  <div class="_content_fck_1hw82_1507" style="margin-bottom:${index === array.length - 1 ? '0' : '10px'}">
+									 <p>${formatDate(item.start_date)} - 
+									 ${item.activity_current ? ' Hiện tại ' : formatDate(item.end_date)}</p>
+								  </div>
+								</div>`
+									)
+									.join('')}  </div>
 				</div>
 			`
 			);
@@ -118,49 +174,54 @@ const ResumeStyle = () => {
 			if (lowerCaseText.includes('work experience') || lowerCaseText.includes('kinh nghiệm làm việc')) {
 				nextElementSibling.innerHTML =
 					resumeData?.resume_experiences && resumeData?.resume_experiences?.length > 0
-						? resumeData?.resume_experiences?.map(
-								(item) => `
-				<div class="_text-edt_1hw82_3533">
-				<div class="_title_1hw82_1464">${formatDate(item?.rexp_form)} -${formatDate(item?.rexp_to)}
-				:
-${item?.rexp_title} - ${item?.rexp_company}
-	 
-</div>
-				<div class="_content_fck_1hw82_1507">${item?.rexp_workdesc}</div>`
-						  )
+						? resumeData?.resume_experiences
+								?.map(
+									(item) => `
+									<div class="_title_1hw82_1464">		${formatDate(item.rexp_form)}-
+									${item.experCurrent ? 'Hiện tại' : formatDate(item.rexp_to)}
+									:
+					${item?.rexp_title} - ${item?.rexp_company}
+						 
+					</div>
+									<div class="_content_fck_1hw82_1507" style="margin-bottom:25px">${item?.rexp_workdesc}</div>
+				`
+								)
+								.join('')
 						: [];
 				nextElementSibling.nextElementSibling.style = 'display:none';
 			}
 			if (lowerCaseText.includes('educations') || lowerCaseText.includes('học vấn')) {
 				nextElementSibling.innerHTML =
 					resumeData?.resume_education && resumeData?.resume_education?.length > 0
-						? resumeData?.resume_education?.map(
-								(item) => `
-								<div class="_text-edt_1hw82_3533">
+						? resumeData?.resume_education
+								?.map(
+									(item) => `
+								<div class="_text-edt_1hw82_3533" style="margin-bottom:0px">
 								<div class="_title_1hw82_1464">Tốt nghiệp ${formatDate(item?.redu_date)}</br>${DegreeArray?.map((degree) => {
-									if (degree.value == item?.redu_degree) {
-										return degree.label;
-									}
-								}).join('')} - ${item?.redu_name} </div>
-								<div class="_content_fck_1hw82_1507">${item?.redu_desc}</div>`
-						  )
+										if (degree.value == item?.redu_degree) {
+											return degree.label;
+										}
+									}).join('')} - ${item?.redu_name} </div>
+								<div class="_content_fck_1hw82_1507" style="margin-bottom:25px">${item?.redu_desc}</div>`
+								)
+								.join('')
 						: [];
 			}
 			if (lowerCaseText.includes('references') || lowerCaseText.includes('người tham khảo')) {
 				nextElementSibling.innerHTML =
-					resumeData?.resume_certificate && resumeData?.resume_certificate?.length > 0
-						? resumeData?.resume_certificate?.map(
-								(item) => `
-								<div class="_text-edt_1hw82_3533">
-								<div class="_title_1hw82_1464">
-								${item.cer_title}
-								</br>
-								${item.cer_by}
-								</br>
-								${formatDate(item?.cer_form)} - ${formatDate(item?.cer_to)}
-								</div>
-								<div class="_content_fck_1hw82_1507"></div>`
-						  )
+					resumeData?.resume_refer && resumeData?.resume_refer?.length > 0
+						? resumeData?.resume_refer
+								?.map(
+									(item) => `
+								<div class="text-edt" style="margin-bottom:25px">
+				<div class="title">${item?.ref_name}</div>
+				<div class="content_fck">
+					<p>${item?.ref_title}, ${item?.ref_company}</p>
+					<p>Phone: ${item?.ref_phone}</p>
+					<p>Email: ${item?.ref_email}</p>				</div>
+			</div>`
+								)
+								.join('')
 						: [];
 				nextElementSibling.nextElementSibling.style = 'display:none';
 			}
@@ -170,25 +231,35 @@ ${item?.rexp_title} - ${item?.rexp_company}
 			const lowerCaseText = itemBlock.innerText.toLowerCase();
 			if (lowerCaseText.includes('contact') || lowerCaseText.includes('liên hệ')) {
 				const ulBlock = itemBlock.parentElement.querySelector('._contact_1hw82_2730');
+
+				const editTitle = ulBlock.parentElement.querySelector('h3 span');
+
 				const liBlock = ulBlock.querySelector('li');
 				const labelBlock = liBlock.querySelector('li label');
-
+				if (editTitle.innerText === 'CONTACT') {
+					editTitle.innerHTML = 'Thông tin liên lạc';
+				}
+				if (editTitle.innerText.toLowerCase() === 'liên hệ') {
+					editTitle.innerText = 'Thông tin cá nhân';
+				}
 				if (labelBlock) {
 					ulBlock.innerHTML = `
 					<ul class="_contact_1hw82_2730">
 					<li><label>Ngày sinh</label> : ${profileUser?.birthday ? formatDate(profileUser?.birthday) : 'MM/DD/YYYY'}</li>
+					<li><label>Giới Tính</label> : ${profileUser?.gender ? GenderEnum[profileUser?.gender] : ''}</li>
 					<li><label>Tình trạng hôn nhân</label> : ${
-						profileUser?.marial_status ? marialStatusEnum[profileUser?.marial_status] : ''
+						profileUser?.marial_status != null && profileUser?.marial_status != undefined
+							? 'Đã kết hôn'
+							: 'Độc thân'
 					}</li>
 					`;
 				} else {
 					ulBlock.innerHTML = `
 					<ul class="_contact_1hw82_2730"><li>
-					<i class="_fa_1hw82_1464 fa-phone"></i>${profileUser?.phone_number ? profileUser?.phone_number : 'Số điện thoại'}</li>
+					${profileUser?.phone_number ? profileUser?.phone_number : 'Số điện thoại'}</li>
 					<li class="_dbl-line_1hw82_4872">
-					<i class="_fa_1hw82_1464 _fa-envelope_1hw82_5989"></i> <span>${resumeData?.user_account?.email}</span></li>
+					 <span>${resumeData?.user_account?.email}</span></li>
 					<li class="_dbl-line_1hw82_4872">
-					<i class="_fa_1hw82_1464 fa-home"></i> 
 					<span class="_txt_1hw82_2113">${profileUser?.address ? profileUser?.address : 'Địa chỉ'}</span></li>
 					</ul>`;
 				}
@@ -196,6 +267,7 @@ ${item?.rexp_title} - ${item?.rexp_company}
 		}
 
 		for (const itemSkill of allSkill) {
+			itemSkill.parentElement.className = '_col-xs-12_1hw82_2635';
 			if (itemSkill.className == '_skill_1hw82_1616') {
 				const resume_skill =
 					resumeData?.resume_skills && resumeData?.resume_skills?.length > 0
