@@ -213,41 +213,6 @@ const DetailJobPost = ({ cx }) => {
 												</a>
 											</li>
 											<li>
-												<div className={sx('dropdown')}>
-													{' '}
-													<i className={sx('mdi', 'mdi-share-variant')} />
-													<div className={sx('dropdown-menu')}>
-														<div className={sx('social-list')}>
-															<a
-																rel='nofollow noreferrer'
-																target='_blank'
-																href='https://www.facebook.com/sharer/sharer.php?u=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&t=Kế Toán Nội Bộ'>
-																<i className={sx('fa', 'fa-facebook')} />
-															</a>
-															<a
-																rel='nofollow noreferrer'
-																target='_blank'
-																href='https://api.addthis.com/oexchange/0.8/forward/linkedin/offer?url=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&pubid=ra-559220ee7f9c15d6&title=Kế Toán Nội Bộ&ct=1&pco=tbxnj-1.0'>
-																<i className={sx('fa', 'fa-linkedin')} />
-															</a>
-															<a
-																rel='nofollow noreferrer'
-																target='_blank'
-																href='https://api.addthis.com/oexchange/0.8/forward/gmail/offer?url=https://careerbuilder.vn/vi/tim-viec-lam/ke-toan-noi-bo.35BE1408.html&pubid=ra-559220ee7f9c15d6&title=Kế Toán Nội Bộ&ct=1&pco=tbxnj-1.0'>
-																<i className={sx('fa', 'fa-google')} />
-															</a>
-															<div
-																className={sx('zalo-share-button')}
-																data-href=''
-																data-layout={2}
-																data-color='white'
-																data-customize='false'
-															/>
-														</div>
-													</div>
-												</div>
-											</li>
-											<li>
 												<a tabIndex={0} role='button' className={sx('report-job', 'toollips')}>
 													<i className={sx('fa', 'fa-flag-o')} />
 													<div className={sx('toolip')}>
@@ -547,7 +512,6 @@ const DetailJobPost = ({ cx }) => {
 																	{' '}
 																	<Link
 																		to={`/nha-tuyen-dung/${item.company_id}`}
-																		target='_blank'
 																		title={item.company.company_name}
 																		rel='noreferrer'>
 																		{' '}
@@ -565,7 +529,6 @@ const DetailJobPost = ({ cx }) => {
 																		<Link
 																			className={sx('job_link')}
 																			to={`/tim-viec-lam/${item.id}`}
-																			target='_blank'
 																			title={item.job_title}
 																			rel='noreferrer'>
 																			{' '}
@@ -576,7 +539,6 @@ const DetailJobPost = ({ cx }) => {
 																		<Link
 																			className={sx('company-name')}
 																			to={`/nha-tuyen-dung/${item.company_id}`}
-																			target='_blank'
 																			title={item.company.company_name}
 																			rel='noreferrer'>
 																			{item.company.company_name}

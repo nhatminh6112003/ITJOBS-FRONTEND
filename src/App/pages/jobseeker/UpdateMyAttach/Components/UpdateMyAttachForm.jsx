@@ -259,7 +259,6 @@ const UpdateMyAttachForm = ({
 							<div className={cx('col-sm-9')}>{resume_profile?.address}</div>
 						</div>
 					</div>
-					<p className={sx('noted', '')}> Xin vui lòng cập nhật thông tin cá nhân để hoàn tất hồ sơ</p>
 				</div>
 				<div className={sx('quick-upload', 'quick-upload-2', '')}>
 					<div className={sx('cb-title-h3', '')}>

@@ -33,9 +33,8 @@ const JobItem = ({ job_post }) => {
 		<div className={cx('job-item')}>
 			<div className={cx('figure')}>
 				<div className={cx('image')}>
-					<a
-						target='_blank'
-						href={`/nha-tuyen-dung/${job_post?.company_id}`}
+					<Link
+						to={`/nha-tuyen-dung/${job_post?.company_id}`}
 						title={job_post?.company?.company_name}
 						rel='noreferrer'>
 						<LazyLoadImage
@@ -43,7 +42,7 @@ const JobItem = ({ job_post }) => {
 							effect='black-and-white'
 							alt={job_post?.company?.company_name}
 						/>
-					</a>
+					</Link>
 				</div>
 				<div className={cx('figcaption')}>
 					<div className={cx('title')}>
@@ -56,7 +55,6 @@ const JobItem = ({ job_post }) => {
 							className={cx('company-name')}
 							to={`/nha-tuyen-dung/${job_post?.company_id}`}
 							title={job_post?.company?.company_name}
-							target='_blank'
 							rel='noreferrer'>
 							{job_post?.company?.company_name}
 						</Link>

@@ -17,6 +17,7 @@ import {
 } from '~/App/providers/apis/jobSavedApi';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useGetAllJobPostActivityApiQuery } from '~/App/providers/apis/jobPostActivityApi';
 
 const sx = classNames.bind(styles);
 
@@ -32,7 +33,7 @@ const DetailCompany = ({ cx }) => {
 	const {
 		query: { page }
 	} = useCustomRouter();
-	const { data: allJobPost, isLoading } = useGetAllJobPostQuery({
+	const { data: allJobPost } = useGetAllJobPostQuery({
 		params: {
 			status: jobPostStatusEnum.Publish,
 			isDeleted: false,
@@ -40,6 +41,15 @@ const DetailCompany = ({ cx }) => {
 			company_id: id || ''
 		}
 	});
+	const { data: allJobPostActivity } = useGetAllJobPostActivityApiQuery(
+		{
+			params: {
+				user_account_id: user?.id
+			}
+		},
+		{ skip: !user?.id }
+	);
+
 	const handleCreateJobSaved = (id) => {
 		if (!user.id) {
 			navigate('/account/login');
@@ -196,11 +206,30 @@ const DetailCompany = ({ cx }) => {
 															</div>
 														</div>
 													</div>
-													<Link
-														to={`/jobseekers/jobs/apply/${job_post?.id}`}
-														className={sx('btn-apply', 'btnApplyClick')}>
-														Ứng tuyển
-													</Link>
+													{allJobPostActivity?.data.some((item) => item.job_id === job_post?.id) ? (
+														<Link
+															style={{
+																borderRadius: '3px',
+																color: '#cfd9df',
+																height: '32px',
+																display: 'flex',
+																alignItems: 'center',
+																padding: '0 16px',
+																position: 'absolute',
+																top: 0,
+																right: 0,
+																backgroundColor: '#f0f0f0'
+															}}>
+															Đã ứng tuyển
+														</Link>
+													) : (
+														<Link
+															to={`/jobseekers/jobs/apply/${job_post?.id}`}
+															className={sx('btn-apply', 'btnApplyClick')}>
+															Ứng tuyển
+														</Link>
+													)}
+
 													<div className={sx('right-action')}>
 														<a
 															className={cx('save-job chk_save_35BDECD0')}
