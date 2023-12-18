@@ -32,7 +32,7 @@ const SideBar = (props) => {
 		},
 
 		{
-			title: 'Phúc lợi công việc',
+			title: 'Quản lý phúc lợi công việc',
 			route: routesPath.AdminPaths.jobWelfare,
 			icon: <Diversity1Icon />
 		},
@@ -59,7 +59,7 @@ const SideBar = (props) => {
 			icon: <ApartmentIcon />
 		},
 		{
-			title: 'Quản lý lợi ích',
+			title: 'Quản lý lợi ích dịch vụ',
 			route: routesPath.AdminPaths.benefits,
 			icon: <AnalyticsIcon />
 		},
@@ -69,7 +69,7 @@ const SideBar = (props) => {
 			icon: <HomeRepairServiceIcon />
 		},
 		{
-			title: 'Quản lý loại hình dịch vụ',
+			title: 'Quản lý loại dịch vụ',
 			route: routesPath.AdminPaths.serviceType,
 			icon: <LayersIcon />
 		},

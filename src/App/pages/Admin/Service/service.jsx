@@ -116,7 +116,7 @@ const Service = () => {
 	return (
 		<Fragment>
 			<Card
-				header={'Danh sách dịch vụ'}
+				header={'Quản lý dịch vụ'}
 				toolbar={
 					<Button onClick={() => toggle('create')} color='info' variant='contained' startIcon={<AddIcon />}>
 						Thêm mới

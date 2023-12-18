@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { useCreateBenefitsMutation } from '~/App/providers/apis/benefits';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { jobPositionCategorySchema } from '~/App/schemas/jobPositionCategorySchema';
+import { benefitSchema } from '~/App/schemas/benefitSchema';
 const CreateModal = ({ isOpen, onRequestClose }) => {
 	const [createBenefits] = useCreateBenefitsMutation();
 	const {
@@ -15,7 +15,7 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 		reset,
 		formState: { errors }
 	} = useForm({
-		resolver: yupResolver(jobPositionCategorySchema)
+		resolver: yupResolver(benefitSchema)
 	});
 
 	const onSubmit = (data) => {
@@ -28,7 +28,7 @@ const CreateModal = ({ isOpen, onRequestClose }) => {
 				}
 			});
 		onRequestClose();
-		reset()
+		reset();
 	};
 
 	return (

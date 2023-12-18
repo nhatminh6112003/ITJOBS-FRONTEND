@@ -54,7 +54,7 @@ const ServiceType = () => {
 				sortable: true,
 				canSort: true
 			},
-			{ Header: 'Tên loại hình dịch vụ', accessor: 'name' },
+			{ Header: 'Tên loại dịch vụ', accessor: 'name' },
 			{
 				Header: 'Thao tác',
 				accessor: 'id',
@@ -102,7 +102,7 @@ const ServiceType = () => {
 	return (
 		<Fragment>
 			<Card
-				header={'Danh mục dịch vụ'}
+				header={'Quản lý loại dịch vụ'}
 				toolbar={
 					<Button onClick={() => toggle('create')} color='info' variant='contained' startIcon={<AddIcon />}>
 						Thêm mới

@@ -10,6 +10,7 @@ import SelectVariantsFieldControl from '~/Core/components/common/FormControl/Sel
 import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
+import { serviceSchema } from '~/App/schemas/serviceSchema';
 const CreateModal = ({ isOpen, onRequestClose, listBenefits }) => {
 	const [createService] = useCreateServiceMutation();
 	const { data: listServiceType } = useGetAllServiceTypeQuery();
@@ -20,7 +21,9 @@ const CreateModal = ({ isOpen, onRequestClose, listBenefits }) => {
 		control,
 		reset,
 		formState: { errors }
-	} = useForm({});
+	} = useForm({
+		resolver: yupResolver(serviceSchema)
+	});
 
 	const onSubmit = (data) => {
 		console.log(data);

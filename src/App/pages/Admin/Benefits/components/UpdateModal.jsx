@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import { useUpdateBenefitsMutation } from '~/App/providers/apis/benefits';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { jobPositionCategorySchema } from '~/App/schemas/jobPositionCategorySchema';
+import { benefitSchema } from '~/App/schemas/benefitSchema';
 
 const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 	const [updateBenefits] = useUpdateBenefitsMutation();
@@ -20,7 +20,7 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate }) => {
 			name: dataUpdate.name,
 			description: dataUpdate.description
 		},
-		resolver: yupResolver(jobPositionCategorySchema)
+		resolver: yupResolver(benefitSchema)
 	});
 
 	const onSubmit = (data) => {

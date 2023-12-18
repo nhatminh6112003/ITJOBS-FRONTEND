@@ -12,6 +12,7 @@ import { useGetAllServiceTypeQuery } from '~/App/providers/apis/serviceTypeApi';
 import SelectVariantsFieldControl from '~/Core/components/common/FormControl/SelectVariantsFieldControl';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import SelectMultipleFieldControl from '~/Core/components/common/FormControl/SelectMultipleFieldControl';
+import { serviceSchema } from '~/App/schemas/serviceSchema';
 const UpdateModal = ({ isOpen, onRequestClose, dataUpdate, listBenefits }) => {
 	const { data: listServiceType } = useGetAllServiceTypeQuery();
 	const { data: serviceDetail } = useGetOneServiceQuery(dataUpdate?.id || '');
@@ -27,11 +28,9 @@ const UpdateModal = ({ isOpen, onRequestClose, dataUpdate, listBenefits }) => {
 			service_type_id: dataUpdate.service_type_id,
 			price: dataUpdate.price,
 			description: dataUpdate.description
-		}
+		},
+		resolver: yupResolver(serviceSchema)
 	});
-	useEffect(() => {
-		console.log(serviceDetail?.serviceBenefits?.map((item) => item.id));
-	}, [serviceDetail]);
 	const onSubmit = (data) => {
 		updateService({
 			id: dataUpdate.id,
