@@ -11,7 +11,7 @@ const useSearchJobPost = () => {
 	let profession_id = searchParams.get('profession_id');
 	let salary = searchParams.get('salary');
 	let days = searchParams.get('days');
-
+	let job_position_value = searchParams.get('job_position_value');
 	if (keyword) query.keyword = keyword;
 	if (dateType) query.dateType = dateType;
 	if (fromDate) query.fromDate = fromDate;
@@ -20,8 +20,18 @@ const useSearchJobPost = () => {
 	if (profession_id) query.profession_id = profession_id;
 	if (salary) query.salary = salary;
 	if (days) query.days = days;
-
-	const pushQuery = ({ keyword, dateType, fromDate, toDate, provinces, profession_id, days, salary }) => {
+	if (job_position_value) query.job_position_value = job_position_value;
+	const pushQuery = ({
+		keyword,
+		dateType,
+		fromDate,
+		toDate,
+		provinces,
+		profession_id,
+		days,
+		salary,
+		job_position_value
+	}) => {
 		if (keyword !== undefined) {
 			keyword === '' ? delete query.keyword : (query.keyword = keyword);
 		}
@@ -45,6 +55,9 @@ const useSearchJobPost = () => {
 		}
 		if (days !== undefined) {
 			days === '' ? delete query.days : (query.days = days);
+		}
+		if (job_position_value !== undefined) {
+			job_position_value === '' ? delete query.job_position_value : (query.job_position_value = job_position_value);
 		}
 		const newQuery = new URLSearchParams(query).toString();
 		setSearchParams(newQuery);
