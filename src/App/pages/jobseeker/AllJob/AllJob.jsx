@@ -7,7 +7,7 @@ import { dateFilterEnum } from '~/App/constants/dateFilterEnum';
 import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import { LevelArray } from '~/App/constants/levelEnum';
 import { priceFilterEnum } from '~/App/constants/priceFilterEnum';
-import { useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
+import { useGetAllJobPostByPriorityQuery, useGetAllJobPostQuery } from '~/App/providers/apis/jobPostApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllProfessionQuery } from '~/App/providers/apis/professionApi';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
@@ -35,7 +35,7 @@ const AllJob = () => {
 		query: { page }
 	} = useCustomRouter();
 	const dispatch = useDispatch();
-	const { data: allJobPost, isLoading } = useGetAllJobPostQuery({
+	const { data: allJobPost, isLoading } = useGetAllJobPostByPriorityQuery({
 		params: {
 			keyword: query.keyword || '',
 			provinces: query.provinces || '',
