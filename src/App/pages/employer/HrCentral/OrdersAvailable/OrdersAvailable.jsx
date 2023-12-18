@@ -45,9 +45,9 @@ const OrdersAvailable = ({ cx }) => {
 	useEffect(() => {
 		console.log(allOrder?.data);
 	}, [allOrder]);
-	const activedOrder = allOrder?.data?.filter((item) => {
-		return item?.isActive === true;
-	});
+	// const activedOrder = allOrder?.data?.filter((item) => {
+	// 	return item?.isActive === true;
+	// });
 	const [update] = useUpdateCompany_serviceMutation();
 
 	const updateCompany_service = ({ id, service_id }) => {
@@ -197,15 +197,15 @@ const OrdersAvailable = ({ cx }) => {
 																			<button
 																				className={sx('btn-submit', 'btn-gradient')}
 																				onClick={() => {
-																					const checkActive = activedOrder.some((item) => {
-																						return (
-																							item?.service?.service_type_id ===
-																							order?.service?.service_type_id
-																						);
-																					});
-																					if (checkActive) {
-																						return toast.error('Bạn không thể thực hiện!');
-																					}
+																					// const checkActive = activedOrder.some((item) => {
+																					// 	return (
+																					// 		item?.service?.service_type_id ===
+																					// 		order?.service?.service_type_id
+																					// 	);
+																					// });
+																					// if (checkActive) {
+																					// 	return toast.error('Bạn không thể thực hiện!');
+																					// }
 																					return setModalConfirmState({
 																						open: true,
 																						payload: {id: order?.id, service_id: order?.service_id}
@@ -244,7 +244,7 @@ const OrdersAvailable = ({ cx }) => {
 					</div>
 				</div>
 				<ConfirmDialog
-					contentText='Bạn sẽ không thể thay đổi cùng 1 loại dịch vụ trong 30 ngày!'
+					contentText='Bạn có muốn thay đổi gói dịch vụ này không ?'
 					open={modalConfirmState.open}
 					onConfirm={() => updateCompany_service(modalConfirmState.payload)}
 					onCancel={() => setModalConfirmState({ open: false, payload: null })}
