@@ -48,7 +48,7 @@ const JobSeeker = () => {
 	return (
 		<Fragment>
 			<Card
-				header={'Danh sách ứng viên'}
+				header={'Quản lý ứng viên'}
 				body={
 					<Table
 						pageCount={data?.pagination?.totalPages}

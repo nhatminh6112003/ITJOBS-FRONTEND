@@ -114,7 +114,7 @@ const FeedBack = () => {
 	return (
 		<Fragment>
 			<Card
-				header={'Báo cáo bài đăng tuyển dụng xấu'}
+				header={'Quản lý báo cáo'}
 				body={
 					<Table
 						pageCount={data?.pagination?.totalPages}

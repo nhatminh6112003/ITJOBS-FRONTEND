@@ -100,7 +100,7 @@ const JobWelfare = () => {
 	return (
 		<Fragment>
 			<Card
-				header={'Phúc lợi công ty'}
+				header={'Quản lý phúc lợi công việc'}
 				toolbar={
 					<Button onClick={() => toggle('create')} color='info' variant='contained' startIcon={<AddIcon />}>
 						Thêm mới

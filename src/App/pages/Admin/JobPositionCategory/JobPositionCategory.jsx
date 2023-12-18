@@ -106,7 +106,7 @@ const JobPositionCategory = () => {
 	return (
 		<Fragment>
 			<Card
-				header={'Danh mục vị trí công việc'}
+				header={'Quản lý danh mục vị trí công việc'}
 				toolbar={
 					<Button onClick={() => toggle('create')} color='info' variant='contained' startIcon={<AddIcon />}>
 						Thêm mới

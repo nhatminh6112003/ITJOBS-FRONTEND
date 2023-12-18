@@ -110,7 +110,7 @@ const ResumeCertificate = ({ className: cx, isShowing, toggle }) => {
 			cer_by: result?.data?.cer_by,
 			redu_desc: result?.data?.redu_desc,
 			cer_form: moment(result?.data?.cer_form).format('YYYY-MM-DD'),
-			cer_to: moment(result?.data?.cer_form).format('YYYY-MM-DD'),
+			cer_to: moment(result?.data?.cer_to).format('YYYY-MM-DD'),
 			cer_limit: result?.data?.cer_limit,
 			resume_id: result?.data?.resume_id
 		});

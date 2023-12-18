@@ -79,7 +79,7 @@ const Order = () => {
 	return (
 		<Fragment>
 			<Card
-				header={'Danh sách đơn hàng'}
+				header={'Quản lý đơn hàng'}
 				body={
 					<Table
 						pageCount={data?.pagination?.totalPages}
