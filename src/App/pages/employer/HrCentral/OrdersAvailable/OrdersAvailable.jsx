@@ -185,7 +185,7 @@ const OrdersAvailable = ({ cx }) => {
 																		</td>
 																		<td>
 																			<p>
-																				{order?.isActive === true
+																				{order?.isActive === true || order?.expiration_date
 																					? 'Đang kích hoạt'
 																					: 'Chưa kích hoạt'}
 																			</p>
