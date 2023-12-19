@@ -105,8 +105,8 @@ const UpdateMyAttachForm = ({
 		my_attach?.resume_work_type?.forEach((item) => {
 			setValue(`work_type_id_${item.work_type_id}`, item.work_type_id);
 		});
-		setValue('file', selectFile | my_attach?.attachments?.file);
-	}, [reset, my_attach, setValue, setWorkTypeId, resume_desired_job, resume_title?.title, selectFile]);
+		setValue('file', selectFile || my_attach?.attachments?.file);
+	}, [reset, my_attach, setWorkTypeId, resume_desired_job, resume_title?.title]);
 
 	const { isShowing, toggle } = useModal({
 		update_resume_profile: false
