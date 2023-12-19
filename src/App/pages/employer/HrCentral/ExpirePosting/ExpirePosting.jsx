@@ -75,7 +75,10 @@ const ExpirePosting = ({ cx }) => {
 			toast.error('Bạn chưa kích hoạt sử dụng dịch vụ đăng tuyển');
 			return;
 		}
-		const company_service_isActive = companyService.find((item) => item.isActive === true);
+		const company_service_isActive = companyService.find(
+			(item) => item.isActive === true && item?.service?.service_type?.slug === ServiceTypeSlugEnum.PostJob
+		);
+
 		updateJobPost({
 			id,
 			payload: {
