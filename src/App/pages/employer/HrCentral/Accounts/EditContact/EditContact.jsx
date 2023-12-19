@@ -6,15 +6,13 @@ import { useGetOneCompanyQuery, useUpdateCompanyMutation } from '~/App/providers
 
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 
-import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
-import styles from '../EditEmployer/editEmployer.module.css';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useLocation } from 'react-router-dom';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
-import TabMenu from '../components/TabMenu';
-import { useEffect } from 'react';
-import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import { CompanySchema } from '~/App/schemas/companySchema';
-import { yupResolver } from '@hookform/resolvers/yup';
+import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
+import styles from '../EditEmployer/editEmployer.module.css';
+import TabMenu from '../components/TabMenu';
 const sx = classNames.bind(styles);
 const EditContact = ({ cx }) => {
 	const location = useLocation();
@@ -53,7 +51,6 @@ const EditContact = ({ cx }) => {
 		Object.entries(data).forEach(([key, value]) => {
 			formData.append(key, value);
 		});
-
 		updateCompany({
 			id: companyId,
 			payload: formData
