@@ -80,10 +80,11 @@ const OrdersAvailable = ({ cx }) => {
 		if (order?.expiration_date) {
 			const expirationDate = moment(order.expiration_date);
 			const currentDate = moment();
-			const remainingDays = expirationDate.diff(currentDate, 'days');
+			const remainingDays = expirationDate.diff(currentDate, 'days') + 1;
 			return Math.max(0, remainingDays) + ' ngày';
+		} else {
+			return ' ';
 		}
-		return '0 ngày';
 	};
 	const onSubmit = (data) => {
 		pushQuery({ ...data });
@@ -173,11 +174,7 @@ const OrdersAvailable = ({ cx }) => {
 																		</td>
 																		<td>
 																			<div className={sx('title')}>
-																				<p>
-																					{order?.isActive === true
-																						? calculateRemainingDays(order)
-																						: '30 ngày'}
-																				</p>
+																				<p>{calculateRemainingDays(order)}</p>
 																			</div>
 																		</td>
 																		<td>
@@ -196,6 +193,12 @@ const OrdersAvailable = ({ cx }) => {
 																		<td>
 																			<button
 																				className={sx('btn-submit', 'btn-gradient')}
+																				style={{
+																					backgroundImage: order?.isActive
+																						? 'linear-gradient(270deg, #bdc3c7, #bdc2c4)'
+																						: ''
+																				}}
+																				disabled={order?.isActive ? true : false}
 																				onClick={() => {
 																					// const checkActive = activedOrder.some((item) => {
 																					// 	return (
@@ -208,7 +211,10 @@ const OrdersAvailable = ({ cx }) => {
 																					// }
 																					return setModalConfirmState({
 																						open: true,
-																						payload: {id: order?.id, service_id: order?.service_id}
+																						payload: {
+																							id: order?.id,
+																							service_id: order?.service_id
+																						}
 																					});
 																				}}>
 																				Kích hoạt

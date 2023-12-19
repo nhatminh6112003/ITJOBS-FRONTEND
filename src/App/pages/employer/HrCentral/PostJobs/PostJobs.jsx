@@ -156,7 +156,14 @@ const PostJobs = ({ cx }) => {
 																	gợi ý hồ sơ phù hợp.
 																</div>
 															}>
-															<em className={cx('material-icons')}>info</em>
+															<em
+																style={{
+																	position: 'relative',
+																	bottom: 10
+																}}
+																className={cx('material-icons')}>
+																info
+															</em>
 														</Tooltip>
 													</div>
 												</div>
@@ -179,7 +186,7 @@ const PostJobs = ({ cx }) => {
 													</div>
 												</div>
 											</div>
-											<div id='post_job_location'>
+											<div id='post_job_location' style={{ marginTop: 30 }}>
 												<div className={sx('item_post_job_location')}>
 													<div className={cx('row')}>
 														<div className={cx('col-lg-6')}>

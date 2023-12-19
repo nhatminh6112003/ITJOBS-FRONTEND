@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { CompanySize, CompanyTypeArray } from '~/App/constants/companyEnum';
 import { useGetOneCompanyQuery, useUpdateCompanyMutation } from '~/App/providers/apis/companyApi';
@@ -8,11 +9,8 @@ import FileUploadFieldControl from '~/Core/components/common/FormControl/FileUpl
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
-import styles from './editEmployer.module.css';
-import { Link, useLocation } from 'react-router-dom';
 import TabMenu from '../components/TabMenu';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { CompanySchema } from '~/App/schemas/companySchema';
+import styles from './editEmployer.module.css';
 
 const sx = classNames.bind(styles);
 const EditEmployer = ({ cx }) => {
@@ -22,7 +20,7 @@ const EditEmployer = ({ cx }) => {
 	const companyId = employer?.company?.id;
 	const { data: company } = useGetOneCompanyQuery(companyId);
 	const [updateCompany] = useUpdateCompanyMutation();
-
+	console.log(company?.data?.company_website_url);
 	const {
 		handleSubmit,
 		control,
@@ -39,10 +37,9 @@ const EditEmployer = ({ cx }) => {
 			contact_name: company?.data?.contact_name,
 			contact_phone: company?.data?.contact_phone,
 			position: company?.data?.position,
-			company_website_url: company?.data?.company_website_url,
-			company_summary: company?.data?.company_summary
-		},
-		resolver: yupResolver(CompanySchema)
+			company_website_url: company?.data?.company_website_url ? company?.data?.company_website_url : '',
+			company_summary: company?.data?.company_summary ? company?.data?.company_summary : ''
+		}
 	});
 	const logo = watch('logo');
 	const banner = watch('banner');
@@ -90,20 +87,7 @@ const EditEmployer = ({ cx }) => {
 									</Link>
 								</li>
 							))}
-							{/* <li>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/worklocation'
-									alt='Quản Lý Địa Điểm Làm Việc'>
-									<span>Quản Lý Địa Điểm Làm Việc</span>
-								</a>
-							</li>
-							<li>
-								<a
-									href='https://careerbuilder.vn/vi/employers/hrcentral/accounts/report_task_log'
-									alt='Báo cáo tác vụ'>
-									<span>Báo cáo tác vụ</span>
-								</a>
-							</li> */}
+						
 						</ul>
 						<div className={sx('tabslet-content', 'active')} id='tab-2'>
 							<form
