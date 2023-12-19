@@ -48,7 +48,10 @@ const WaitPosting = ({ cx }) => {
 			isDeleted: false
 		}
 	});
-	const { isServiceExits, isServiceActive, companyService } = useRegisterService(employer?.company?.id, ServiceTypeSlugEnum.PostJob);
+	const { isServiceExits, isServiceActive, companyService } = useRegisterService(
+		employer?.company?.id,
+		ServiceTypeSlugEnum.PostJob
+	);
 
 	const [deleteJobPost] = useDeleteJobPostMutation();
 	const [updateJobPost] = useUpdateJobPostMutation();
@@ -81,8 +84,18 @@ const WaitPosting = ({ cx }) => {
 			toast.error('Bạn chưa kích hoạt sử dụng dịch vụ đăng tuyển');
 			return;
 		}
-		const company_service_isActive = companyService.find(item => item.isActive === true);
-		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date(), company_service_id: company_service_isActive.id} })
+		const company_service_isActive = companyService.find(
+			(item) => item.isActive === true && item?.service?.service_type?.slug === ServiceTypeSlugEnum.PostJob
+		);
+
+		updateJobPost({
+			id,
+			payload: {
+				status: jobPostStatusEnum.Publish,
+				posted_date: new Date(),
+				company_service_id: company_service_isActive.id
+			}
+		})
 			.unwrap()
 			.then((r) => {
 				if (r.status == 200) {

@@ -37,7 +37,7 @@ const EditContact = ({ cx }) => {
 			address: company?.data?.address,
 			contact_name: company?.data?.contact_name,
 			contact_phone: company?.data?.contact_phone,
-			position: company?.data?.position,
+			position: company?.data?.position ? company?.data?.position : '',
 			company_website_url: company?.data?.company_website_url,
 			company_summary: company?.data?.company_summary,
 			provinces: company?.data?.provinces,
