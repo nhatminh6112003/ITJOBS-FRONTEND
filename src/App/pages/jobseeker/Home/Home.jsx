@@ -18,7 +18,7 @@ const Home = ({ cx }) => {
 
 	const { data: allJobPost, isLoading } = useGetAllJobPostByPriorityQuery({
 		params: {
-			limit: 10,
+			limit: -1,
 			stringStatus: `${jobPostStatusEnum.Publish},${jobPostStatusEnum.Expired}`,
 			isDeleted: false,
 			page: page || 1
@@ -114,7 +114,7 @@ const Home = ({ cx }) => {
 											</div>
 										</div>
 										<div className={cx('swiper-bottom')}>
-											<Pagination
+											{/* <Pagination
 												style={{ display: 'flex', justifyContent: 'center' }}
 												total={allJobPost?.pagination?.totalPages}
 												pageSize={allJobPost?.pagination?.pageSize}
@@ -122,7 +122,7 @@ const Home = ({ cx }) => {
 												onChange={changePageIndex}
 												gotoNextPage={gotoNextPage}
 												gotoPreviousPage={gotoPreviousPage}
-											/>
+											/> */}
 											<div className={cx('view-more')}>
 												<Link to={routesPath.JobseekerPaths.allJob}>
 													Xem việc làm mới cập nhật

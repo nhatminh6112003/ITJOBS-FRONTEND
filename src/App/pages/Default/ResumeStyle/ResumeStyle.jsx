@@ -260,7 +260,7 @@ const ResumeStyle = () => {
 					<ul class="_contact_1hw82_2730"><li>
 					${profileUser?.phone_number ? profileUser?.phone_number : 'Số điện thoại'}</li>
 					<li class="_dbl-line_1hw82_4872">
-					 <span>${resumeData?.user_account?.email}</span></li>
+					 <span>${resumeData?.user_account?.email ? resumeData?.user_account?.email : ''}</span></li>
 					<li class="_dbl-line_1hw82_4872">
 					<span class="_txt_1hw82_2113">${profileUser?.address ? profileUser?.address : 'Địa chỉ'}</span></li>
 					</ul>`;
