@@ -58,7 +58,7 @@ const VnpayReturn = () => {
 				)}
 				<div>
 					<button className={sx('button-76')} role='button'>
-						<Link to='/employers/dashboard'>Quay lại trang chủ</Link>
+						<Link to='/employers/dashboard'>Quay lại trang chủ tuyển dụng</Link>
 					</button>
 				</div>
 			</div>

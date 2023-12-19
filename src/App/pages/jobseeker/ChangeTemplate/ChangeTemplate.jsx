@@ -69,9 +69,9 @@ const ChangeTemplate = () => {
 						<div className={cx('button')}>
 							<div className={cx('left')}>
 								<div className={cx('view-back')}>
-									<a href={routesPath.BasePaths.ResumeStyle.replace(/:id/g, user.resume.id)} id='btn_preview'>
-										Xem CV Template
-									</a>
+									<Link to={routesPath.BasePaths.ResumeStyle.replace(/:id/g, user.resume.id)} id='btn_preview'>
+										Xem Mẫu CV
+									</Link>
 								</div>
 							</div>
 							<div className={cx('right')}>
