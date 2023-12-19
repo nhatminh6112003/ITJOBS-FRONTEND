@@ -49,7 +49,7 @@ const VnpayReturn = () => {
 		}
 	}, [CreateCompanyService, createOrder, searchParams, setSearchParams, vnp_OrderInfo, vnp_TransactionStatus]);
 	return (
-		<div className={sx('container')} style={{backgroundColor:"white"}}>
+		<div className={sx('container')} style={{ backgroundColor: 'white' }}>
 			<div className={sx('center-div')}>
 				{vnp_TransactionStatus === '00' ? (
 					<h1 className={sx('success')}>Chúc mừng giao dịch thành công</h1>

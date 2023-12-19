@@ -145,7 +145,7 @@ const MyCvDetail = ({ cx }) => {
 						<div className={cx('data-field')}>
 							<div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Số năm kinh nghiệm</label>
-								<div className={cx('col-sm-9')}>{data?.attachments?.job_degree_value}</div>
+								<div className={cx('col-sm-9')}>{data?.attachments?.yearOfExperience}</div>
 							</div>
 							{/* <div className={cx('form-group', 'row')}>
 								<label className={cx('col-sm-3', 'col-form-label')}>Ngôn ngữ</label>
@@ -202,8 +202,8 @@ const MyCvDetail = ({ cx }) => {
 								<div className={cx('col-sm-9')}>
 									{listProvinces?.map((item) =>
 										item.code === data?.resume_desired_job?.provinces ? item.name : null
-									)}{' '}
-									-{' '}
+									)}
+									-
 									{listDistricts?.districts?.map((item) =>
 										item.code === data?.resume_desired_job?.districts ? item.name : null
 									)}
