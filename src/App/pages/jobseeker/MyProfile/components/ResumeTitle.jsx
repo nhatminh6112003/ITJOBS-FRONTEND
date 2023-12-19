@@ -26,7 +26,7 @@ const ResumeTitle = ({ className: cx, isShowing, toggle }) => {
 	const [updateResumeTitle, { isLoading }] = useUpdateResumeTitleMutation();
 
 	const onSubmit = async (data) => {
-		updateResumeTitle({ id: resume?.id, payload: data })
+		updateResumeTitle({ id: resume?.id, payload: data, status: 1 })
 			.unwrap()
 			.then((r) => {
 				if (r.status == 200) {
