@@ -3935,7 +3935,7 @@ input[type='search']::-webkit-search-results-decoration {
 	content: '|';
 }
 .job-item .figure .top-icon {
-	display: none;
+	/* display: none; */
 	z-index: 11;
 	position: absolute;
 	top: 0;

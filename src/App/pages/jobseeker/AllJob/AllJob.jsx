@@ -27,6 +27,7 @@ import {
 	useGetAllJobSavedQuery
 } from '~/App/providers/apis/jobSavedApi';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const cx = classNames.bind(styles);
 const AllJob = () => {
@@ -507,6 +508,16 @@ const AllJob = () => {
 																	</div>
 																</Link>
 															</div>
+															{job_post?.company_service?.priority &&
+															moment().isBefore(job_post?.company_service?.priority_expiry_date) ? (
+																<div className={cx('premium-icon')}>
+																	<img
+																		src='https://static.careerbuilder.vn/themes/careerbuilder/img/premium.png'
+																		alt='premium'
+																	/>
+																</div>
+															) : null}
+
 															<div className={cx('bottom-right-icon')}>
 																<ul>
 																	<li>

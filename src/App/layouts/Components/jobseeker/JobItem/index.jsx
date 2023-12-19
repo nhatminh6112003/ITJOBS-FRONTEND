@@ -7,11 +7,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { listProvinces } from '~/App/constants/provincesData';
 import formatDate from '~/Core/utils/formatDate';
+import moment from 'moment';
 const cx = classNames.bind(styles);
 
 const JobItem = ({ job_post }) => {
 	const [provinces, setProvinces] = useState('');
 	useEffect(() => {
+		console.log(job_post?.company_service);
 		listProvinces?.map((item) => {
 			if (item.code == job_post?.provinces) {
 				setProvinces(item.name);
@@ -80,9 +82,12 @@ const JobItem = ({ job_post }) => {
 						</div>
 					</div>
 				</div>
-				<div className={cx('top-icon')}>
-					<span className={cx('top')}>Top</span>
-				</div>
+				{job_post?.company_service?.priority &&
+				moment().isBefore(job_post?.company_service?.priority_expiry_date) ? (
+					<div className={cx('top-icon')}>
+						<span className={cx('top')}>Top</span>
+					</div>
+				) : null}
 			</div>
 		</div>
 	);
