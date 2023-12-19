@@ -24,6 +24,8 @@ import InputFieldControl from '~/Core/components/common/FormControl/InputFieldCo
 import SelectFieldControl from '~/Core/components/common/FormControl/SelectFieldControl';
 import { toast } from 'react-toastify';
 import CancelIcon from '@mui/icons-material/Cancel';
+import useRegisterService from '../components/useRegisterService';
+import { ServiceTypeSlugEnum } from '~/App/constants/serviceEnum';
 const sx = classNames.bind(styles);
 
 const ExpirePosting = ({ cx }) => {
@@ -33,6 +35,11 @@ const ExpirePosting = ({ cx }) => {
 	const { pushQuery, query } = useSearchJobPost();
 	const [updateJobPost] = useUpdateJobPostMutation();
 	const [deleteJobPost] = useDeleteJobPostMutation();
+
+	const { isServiceExits, isServiceActive, companyService } = useRegisterService(
+		employer?.company?.id,
+		ServiceTypeSlugEnum.PostJob
+	);
 
 	const { data: allJobPost } = useGetAllJobPostQuery({
 		params: {
@@ -60,7 +67,23 @@ const ExpirePosting = ({ cx }) => {
 	};
 
 	const updateStatusJobPost = async (id) => {
-		updateJobPost({ id, payload: { status: jobPostStatusEnum.Publish, posted_date: new Date() } })
+		if (!isServiceExits) {
+			toast.error('Bạn chưa đăng kí dịch vụ đăng tuyển');
+			return;
+		}
+		if (!isServiceActive) {
+			toast.error('Bạn chưa kích hoạt sử dụng dịch vụ đăng tuyển');
+			return;
+		}
+		const company_service_isActive = companyService.find((item) => item.isActive === true);
+		updateJobPost({
+			id,
+			payload: {
+				status: jobPostStatusEnum.Publish,
+				posted_date: new Date(),
+				company_service_id: company_service_isActive.id
+			}
+		})
 			.unwrap()
 			.then((r) => {
 				if (r.status == 200) {

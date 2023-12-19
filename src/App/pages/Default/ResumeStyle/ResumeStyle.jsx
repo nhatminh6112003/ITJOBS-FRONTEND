@@ -248,7 +248,9 @@ const ResumeStyle = () => {
 					<li><label>Ngày sinh</label> : ${profileUser?.birthday ? formatDate(profileUser?.birthday) : 'MM/DD/YYYY'}</li>
 					<li><label>Giới Tính</label> : ${profileUser?.gender ? GenderEnum[profileUser?.gender] : ''}</li>
 					<li><label>Tình trạng hôn nhân</label> : ${
-						profileUser?.marial_status != null && profileUser?.marial_status != undefined
+						profileUser?.marial_status != null &&
+						profileUser?.marial_status != undefined &&
+						profileUser?.marial_status
 							? 'Đã kết hôn'
 							: 'Độc thân'
 					}</li>

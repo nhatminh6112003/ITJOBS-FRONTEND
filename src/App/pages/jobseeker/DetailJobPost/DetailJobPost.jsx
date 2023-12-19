@@ -23,6 +23,8 @@ import useModal from '~/App/hooks/useModal';
 import FeedBackModal from './components/FeedBackModal';
 import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
 import routesPath from '~/App/config/routesPath';
+import moment from 'moment';
+import { useMemo } from 'react';
 
 const sx = classNames.bind(styles);
 
@@ -70,7 +72,13 @@ const DetailJobPost = ({ cx }) => {
 		}
 	});
 	const isIdInData = allJobPostActivity?.data.some((item) => item.job_id === id);
-	const isJobExpiry = formatDate(currentDate) > formatDate(detailJobPost?.expiry_date);
+	const isJobExpiry = useMemo(() => {
+		const currentDate = moment();
+		return currentDate.isAfter(detailJobPost?.expiry_date) ? true : false;
+	}, [detailJobPost?.expiry_date]);
+
+	// const isJobExpiry = formatDate(currentDate) > formatDate(detailJobPost?.expiry_date);
+
 	const { isShowing, toggle } = useModal({
 		feedback: false
 	});
