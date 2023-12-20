@@ -271,7 +271,7 @@ const UnPosting = ({ cx }) => {
 																			<em className={cx('material-icons')}>visibility </em>
 																		</Link>
 																	</li>
-
+																	{/* 
 																	<li
 																		style={{
 																			width: 48,
@@ -285,7 +285,7 @@ const UnPosting = ({ cx }) => {
 																			style={{ cursor: 'pointer' }}>
 																			<CancelIcon />
 																		</a>
-																	</li>
+																	</li> */}
 																</ul>
 															</td>
 														</tr>

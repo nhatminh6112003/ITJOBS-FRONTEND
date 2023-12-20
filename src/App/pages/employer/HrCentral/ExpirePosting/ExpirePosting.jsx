@@ -278,7 +278,7 @@ const ExpirePosting = ({ cx }) => {
 																		</Link>
 																	</li>
 
-																	<li
+																	{/* <li
 																		style={{
 																			width: 48,
 																			height: 24,
@@ -291,7 +291,7 @@ const ExpirePosting = ({ cx }) => {
 																			style={{ cursor: 'pointer' }}>
 																			<CancelIcon />
 																		</a>
-																	</li>
+																	</li> */}
 																</ul>
 															</td>
 														</tr>
