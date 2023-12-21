@@ -285,14 +285,14 @@ const WaitPosting = ({ cx }) => {
 																				<EditIcon />
 																			</Link>
 																		</li>
-																		<li className={sx('end')}>
+																		{/* <li className={sx('end')}>
 																			<a
 																				title='Xóa'
 																				onClick={() => handleDeleteJobPost(job_post.id)}
 																				style={{ cursor: 'pointer' }}>
 																				<CancelIcon />
 																			</a>
-																		</li>
+																		</li> */}
 																	</ul>
 																</td>
 															</tr>
