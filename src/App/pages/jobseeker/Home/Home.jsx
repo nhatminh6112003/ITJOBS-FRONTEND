@@ -51,7 +51,7 @@ const Home = ({ cx }) => {
 			/>
 			<section className={cx('cb-section', 'cb-section-border-bottom')}>
 				<div className={cx('container')}>
-				
+
 					<div className={cx('top-employers-list')}></div>
 					<div className={cx('top-employers-banner')}>
 						<div className={cx('row')}>
@@ -60,7 +60,7 @@ const Home = ({ cx }) => {
 									<div className={cx('image', 'adsTopBanner')} id={846}>
 										{/**/}
 										<img
-											src='https://ads.careerbuilder.vn/www/images/8038e22595ece70fbfe0a75e7020f355.jpg'
+											src='/banner1.png'
 											alt=''
 										/>
 									</div>
@@ -71,7 +71,7 @@ const Home = ({ cx }) => {
 									<div className={cx('image', 'adsTopBanner')} id={847}>
 										{/**/}
 										<img
-											src='https://ads.careerbuilder.vn/www/images/80aafecd7e8bc8eaa6ebccb05cb02177.jpg'
+											src='/banner2.png'
 											alt=''
 										/>
 									</div>

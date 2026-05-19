@@ -26,6 +26,7 @@ import formatVND from '~/Core/utils/formatVND';
 import styles from './resumeDetail.module.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { sendEmailSchema } from '~/App/schemas/sendEmailSchema';
+import EmailIcon from '@mui/icons-material/Email';
 
 const sx = classNames.bind(styles);
 
@@ -141,7 +142,7 @@ const ResumeDetail = ({ cx }) => {
 										<div className={sx('action')}>
 											<ul className={sx('list-manipulation')}>
 												<li>
-													<em className={cx('material-icons')}>email </em>
+													<EmailIcon />
 													<a
 														href='javascript:void(0);'
 														onClick={() => toggle('mailModal')}
@@ -157,13 +158,13 @@ const ResumeDetail = ({ cx }) => {
 													{data?.user_account?.firstname + ' ' + data?.user_account?.lastname}
 												</h3>
 												<div className={sx('button')}>
-													<img
+													{/* <img
 														src='https://static.careerbuilder.vn/images/icons/resume_type_0.gif'
 														title='Hồ sơ Theo mẫu'
 														alt='Hồ sơ Theo mẫu'
 														align='absmiddle'
 														className={sx('mar_left5')}
-													/>
+													/> */}
 												</div>
 											</div>
 										</div>
@@ -262,10 +263,7 @@ const ResumeDetail = ({ cx }) => {
 															<div className={cx('col-lg-6', 'colLeft')}>
 																<div className={sx('info-left')}>
 																	<div className={sx('image')}>
-																		<img
-																			id='img_mem_avatar'
-																			src='https://static.careerbuilder.vn/themes/kiemviecv32/jobseekers/images/icons/avatar_120x160.png'
-																		/>
+																		<img id='img_mem_avatar' src={'/avatar_cv.webp'} />
 																	</div>
 																	<ul className={sx('info-list')}>
 																		<li>
@@ -273,11 +271,7 @@ const ResumeDetail = ({ cx }) => {
 																				<strong>Ứng viên:</strong>
 																			</p>
 																			<p className={sx('name')}>
-																				<strong>
-																					{' '}
-																					{data?.user_account?.firstname +
-																						' ' +
-																						data?.user_account?.lastname}
+																				<strong>{`${data?.user_account?.firstname ?? ''} ${data?.user_account?.lastname ?? ''}`}
 																				</strong>
 																			</p>
 																		</li>
@@ -297,7 +291,7 @@ const ResumeDetail = ({ cx }) => {
 																				{GenderEnum[data?.user_account?.resume_profile?.gender]} -{' '}
 																				{
 																					marialStatusEnum[
-																						data?.user_account?.resume_profile?.marial_status
+																					data?.user_account?.resume_profile?.marial_status
 																					]
 																				}
 																			</p>
@@ -309,7 +303,7 @@ const ResumeDetail = ({ cx }) => {
 																			</p>
 																			{listProvinces?.map((item) =>
 																				item.code ===
-																				data?.user_account?.resume_profile?.provinces ? (
+																					data?.user_account?.resume_profile?.provinces ? (
 																					<p>{item.name}</p>
 																				) : null
 																			)}
@@ -320,7 +314,7 @@ const ResumeDetail = ({ cx }) => {
 																			</p>
 																			{listDistricts?.districts?.map((item) =>
 																				item.code ===
-																				data?.user_account?.resume_profile?.districts ? (
+																					data?.user_account?.resume_profile?.districts ? (
 																					<p>{item.name}</p>
 																				) : null
 																			)}
@@ -455,9 +449,8 @@ const ResumeDetail = ({ cx }) => {
 																	id='frm_view_pdf'
 																	frameBorder={0}
 																	scrolling='no'
-																	src={`${import.meta.env.VITE_FRONT_END_URL}/resume-style/${
-																		data?.id
-																	}`}
+																	src={`${import.meta.env.VITE_FRONT_END_URL}/resume-style/${data?.id
+																		}`}
 																	height={934}
 																	width='100%'
 																/>

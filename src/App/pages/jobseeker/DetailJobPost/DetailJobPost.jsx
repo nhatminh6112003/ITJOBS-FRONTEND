@@ -7,6 +7,7 @@ import formatDate from '~/Core/utils/formatDate';
 import { experienceEnum } from '~/App/constants/experienceEnum';
 import { LevelArray } from '~/App/constants/levelEnum';
 import { DegreeArray } from '~/App/constants/degreeArray';
+import { GenderArray } from '~/App/constants/genderEnum';
 import GenderEnum from '~/App/constants/genderEnum';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
@@ -153,7 +154,7 @@ const DetailJobPost = ({ cx }) => {
 										src={
 											detailJobPost?.company?.banner
 												? `${import.meta.env.VITE_IMAGE_URL}/${detailJobPost.company.banner}`
-												: 'https://images.careerbuilder.vn/employer_folders/lot6/181286/131718banner-doitac.jpg'
+												: '/banner_company_default.webp'
 										}
 										alt={detailJobPost?.company?.company_name}
 									/>
@@ -373,7 +374,11 @@ const DetailJobPost = ({ cx }) => {
 											<div className={sx('content_fck', '')}>
 												<ul>
 													<li> Bằng cấp: {DegreeArray[detailJobPost?.job_degree_value]?.label}</li>
-													<li> Giới tính: {GenderEnum[detailJobPost?.gender]} </li>
+													{GenderArray.map((item) => {
+														if (item.value === detailJobPost?.gender) {
+															return <li> Giới tính: {item.label}</li>;
+														}
+													})	}
 													<li>
 														{' '}
 														Độ tuổi: {detailJobPost?.form_age} - {detailJobPost?.to_age}
@@ -418,20 +423,20 @@ const DetailJobPost = ({ cx }) => {
 															className={sx('toollips', 'save-job', 'chk_save_35BE1408', '')}
 															onClick={
 																allJobSaved?.length > 0 &&
-																allJobSaved.some((item) => item.job_post_saved.id === detailJobPost?.id)
+																	allJobSaved.some((item) => item.job_post_saved.id === detailJobPost?.id)
 																	? () =>
-																			handleDeleteJobSaved(
-																				allJobSaved.find(
-																					(item) => item.job_post_saved.id === detailJobPost?.id
-																				).id
-																			)
+																		handleDeleteJobSaved(
+																			allJobSaved.find(
+																				(item) => item.job_post_saved.id === detailJobPost?.id
+																			).id
+																		)
 																	: () => handleCreateJobSaved(detailJobPost?.id)
 															}
 															style={{ cursor: 'pointer' }}>
 															{allJobSaved?.length > 0 &&
-															allJobSaved.some(
-																(item) => item.job_post_saved.id === detailJobPost?.id
-															) ? (
+																allJobSaved.some(
+																	(item) => item.job_post_saved.id === detailJobPost?.id
+																) ? (
 																<>
 																	<FavoriteBorderIcon
 																		fontSize='small'

@@ -125,7 +125,7 @@ const ResumeLanguage = ({ className: cx, isShowing, toggle }) => {
 				onOpenTipSlide={() => toggleTips('t_resume_language')}
 				icon={
 					<div className={cx('image', 'icon-translate')}>
-						<span className={cx('material-icons')}>translate</span>
+						{/* <span className={cx('material-icons')}>translate</span> */}
 					</div>
 				}>
 				<div className={cx('content')}>

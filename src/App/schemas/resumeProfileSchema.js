@@ -19,5 +19,5 @@ export const resumeProfileSchema = yup.object({
 	provinces: yup.string().default('').required('Vui lòng nhập nơi làm việc').nullable(),
 	districts: yup.string().default('').required('Vui lòng nhập quận').nullable(),
 	marial_status: yup.string().required('Vui lòng nhập tình trạng hôn nhân').nullable(),
-	gender: yup.string().default('').required('Vui lòng chọn giới tính').nullable()
+	gender: yup.string().default('').required('Vui lòng chọn Giới tính').nullable()
 });

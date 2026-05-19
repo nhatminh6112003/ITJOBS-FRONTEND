@@ -59,20 +59,19 @@ const ResumeStyle = () => {
 				<ul class="contact">
 					<li>
 					<label>Cấp bậc </label> : ${LevelArray.map((value) => {
-						if (value.value === resumeData?.resume_desired_job?.position_id) {
-							return value.label;
-						}
-					}).join('')}
+					if (value.value === resumeData?.resume_desired_job?.position_id) {
+						return value.label;
+					}
+				}).join('')}
 											<li class="dbl-line">
 											<label>Mức lương</label>:&nbsp;</>
 											<span class="txt">				
-				${
-					resumeData?.resume_desired_job?.salary_from && resumeData?.resume_desired_job?.salary_to
-						? formatVND(resumeData?.resume_desired_job?.salary_from) +
-						  '-' +
-						  formatVND(resumeData?.resume_desired_job?.salary_to) +
-						  'VND'
-						: ''
+				${resumeData?.resume_desired_job?.salary_from && resumeData?.resume_desired_job?.salary_to
+					? formatVND(resumeData?.resume_desired_job?.salary_from) +
+					'-' +
+					formatVND(resumeData?.resume_desired_job?.salary_to) +
+					'VND'
+					: ''
 				}
 					   
 					  </span>
@@ -80,15 +79,15 @@ const ResumeStyle = () => {
 																										                    <li class="dbl-line"><label>Hình thức công việc</label><span>:&nbsp;</span><span class="txt">
 												${resumeData?.work_type?.map((item) => item.name)}																				  </span></li>
                                         					<li class="dbl-line"><label>Ngành nghề</label><span>:&nbsp;</span><span class="txt">${resumeData?.professions?.map(
-																			(item) => item.name
-																		)}	</span></li>
+					(item) => item.name
+				)}	</span></li>
 					<li class="dbl-line"><label>Nơi làm việc</label><span>:&nbsp;</span><span class="txt"> ${listProvinces
-						?.map((province) => {
-							const desiredProvinceId = resumeData?.resume_desired_job?.provinces;
-							const positionLabel = province.code === desiredProvinceId ? province.name : null;
-							return positionLabel;
-						})
-						.join('')}
+					?.map((province) => {
+						const desiredProvinceId = resumeData?.resume_desired_job?.provinces;
+						const positionLabel = province.code === desiredProvinceId ? province.name : null;
+						return positionLabel;
+					})
+					.join('')}
 						  						  </span></li>
 					
 				</ul>
@@ -103,9 +102,8 @@ const ResumeStyle = () => {
 				<h3><span>THÀNH TÍCH NỔI BẬT</span></h3>
 				<div class="_text-edt_1hw82_3533">
 								<div class="_text-edt_1hw82_3533">
-								<div class="_title_1hw82_1464">${
-									resumeData?.resume_addioninfo?.addioninfo ? resumeData?.resume_addioninfo?.addioninfo : ''
-								}  </div>
+								<div class="_title_1hw82_1464">${resumeData?.resume_addioninfo?.addioninfo ? resumeData?.resume_addioninfo?.addioninfo : ''
+				}  </div>
 				</div>
 			`
 			);
@@ -117,8 +115,8 @@ const ResumeStyle = () => {
 				<div class="_text-edt_1hw82_3533" style="margin-bottom:0px">
 								<div class="_text-edt_1hw82_3533">
 								<div class="_title_1hw82_1464">${resumeData?.resume_certificate
-									?.map(
-										(item, index, array) => `
+					?.map(
+						(item, index, array) => `
 								<div class="_text-edt_1hw82_3533">
 								  <div class="_title_1hw82_1464">
 									 ${item.cer_title}
@@ -130,8 +128,8 @@ const ResumeStyle = () => {
 									 <p>${formatDate(item.cer_form)}-${item.cer_limit ? 'Không giới hạn' : formatDate(item.cer_to)}</p>
 								  </div>
 								</div>`
-									)
-									.join('')}  </div>
+					)
+					.join('')}  </div>
 				</div>
 			`
 			);
@@ -143,8 +141,8 @@ const ResumeStyle = () => {
 				<div class="_text-edt_1hw82_3533" style="margin-bottom:0px">
 								<div class="_text-edt_1hw82_3533">
 								<div class="_title_1hw82_1464">${resumeData?.resume_activities
-									?.map(
-										(item, index, array) => `
+					?.map(
+						(item, index, array) => `
 								<div class="_text-edt_1hw82_3533">
 								  <div class="_title_1hw82_1464">
 								  ${item?.role}
@@ -157,8 +155,8 @@ const ResumeStyle = () => {
 									 ${item.activity_current ? ' Hiện tại ' : formatDate(item.end_date)}</p>
 								  </div>
 								</div>`
-									)
-									.join('')}  </div>
+					)
+					.join('')}  </div>
 				</div>
 			`
 			);
@@ -167,16 +165,15 @@ const ResumeStyle = () => {
 			const lowerCaseText = itemContentResume.innerText.toLowerCase();
 			const nextElementSibling = itemContentResume.nextElementSibling;
 			if (lowerCaseText.includes('objectives') || lowerCaseText.includes('mục tiêu nghề nghiệp')) {
-				nextElementSibling.innerHTML = `<div class="_content_fck_1hw82_1507">${
-					resumeData?.resume_objective ? resumeData?.resume_objective?.objective_job : ''
-				}</div>`;
+				nextElementSibling.innerHTML = `<div class="_content_fck_1hw82_1507">${resumeData?.resume_objective ? resumeData?.resume_objective?.objective_job : ''
+					}</div>`;
 			}
 			if (lowerCaseText.includes('work experience') || lowerCaseText.includes('kinh nghiệm làm việc')) {
 				nextElementSibling.innerHTML =
 					resumeData?.resume_experiences && resumeData?.resume_experiences?.length > 0
 						? resumeData?.resume_experiences
-								?.map(
-									(item) => `
+							?.map(
+								(item) => `
 									<div class="_title_1hw82_1464">		${formatDate(item.rexp_form)}-
 									${item.experCurrent ? 'Hiện tại' : formatDate(item.rexp_to)}
 									:
@@ -185,8 +182,8 @@ const ResumeStyle = () => {
 					</div>
 									<div class="_content_fck_1hw82_1507" style="margin-bottom:25px">${item?.rexp_workdesc}</div>
 				`
-								)
-								.join('')
+							)
+							.join('')
 						: [];
 				nextElementSibling.nextElementSibling.style = 'display:none';
 			}
@@ -194,25 +191,25 @@ const ResumeStyle = () => {
 				nextElementSibling.innerHTML =
 					resumeData?.resume_education && resumeData?.resume_education?.length > 0
 						? resumeData?.resume_education
-								?.map(
-									(item) => `
+							?.map(
+								(item) => `
 								<div class="_text-edt_1hw82_3533" style="margin-bottom:0px">
 								<div class="_title_1hw82_1464">Tốt nghiệp ${formatDate(item?.redu_date)}</br>${DegreeArray?.map((degree) => {
-										if (degree.value == item?.redu_degree) {
-											return degree.label;
-										}
-									}).join('')} - ${item?.redu_name} </div>
+									if (degree.value == item?.redu_degree) {
+										return degree.label;
+									}
+								}).join('')} - ${item?.redu_name} </div>
 								<div class="_content_fck_1hw82_1507" style="margin-bottom:25px">${item?.redu_desc}</div>`
-								)
-								.join('')
+							)
+							.join('')
 						: [];
 			}
 			if (lowerCaseText.includes('references') || lowerCaseText.includes('người tham khảo')) {
 				nextElementSibling.innerHTML =
 					resumeData?.resume_refer && resumeData?.resume_refer?.length > 0
 						? resumeData?.resume_refer
-								?.map(
-									(item) => `
+							?.map(
+								(item) => `
 								<div class="text-edt" style="margin-bottom:25px">
 				<div class="title">${item?.ref_name}</div>
 				<div class="content_fck">
@@ -220,8 +217,8 @@ const ResumeStyle = () => {
 					<p>Phone: ${item?.ref_phone}</p>
 					<p>Email: ${item?.ref_email}</p>				</div>
 			</div>`
-								)
-								.join('')
+							)
+							.join('')
 						: [];
 				nextElementSibling.nextElementSibling.style = 'display:none';
 			}
@@ -246,14 +243,13 @@ const ResumeStyle = () => {
 					ulBlock.innerHTML = `
 					<ul class="_contact_1hw82_2730">
 					<li><label>Ngày sinh</label> : ${profileUser?.birthday ? formatDate(profileUser?.birthday) : 'MM/DD/YYYY'}</li>
-					<li><label>Giới Tính</label> : ${profileUser?.gender ? GenderEnum[profileUser?.gender] : ''}</li>
-					<li><label>Tình trạng hôn nhân</label> : ${
-						profileUser?.marial_status != null &&
-						profileUser?.marial_status != undefined &&
-						profileUser?.marial_status
+					<li><label>Giới tính</label> : ${profileUser?.gender ? GenderEnum[profileUser?.gender] : ''}</li>
+					<li><label>Tình trạng hôn nhân</label> : ${profileUser?.marial_status != null &&
+							profileUser?.marial_status != undefined &&
+							profileUser?.marial_status
 							? 'Đã kết hôn'
 							: 'Độc thân'
-					}</li>
+						}</li>
 					`;
 				} else {
 					ulBlock.innerHTML = `
@@ -274,9 +270,9 @@ const ResumeStyle = () => {
 				const resume_skill =
 					resumeData?.resume_skills && resumeData?.resume_skills?.length > 0
 						? resumeData?.resume_skills?.map(
-								(item) =>
-									`<li><label>${item.skill_content}</label><div class="_point_1hw82_3766"><span></span><span></span><span></span><span></span><span></span></div></li>`
-						  )
+							(item) =>
+								`<li><label>${item.skill_content}</label><div class="_point_1hw82_3766"><span></span><span></span><span></span><span></span><span></span></div></li>`
+						)
 						: null;
 
 				if (resume_skill) {
@@ -288,11 +284,11 @@ const ResumeStyle = () => {
 				const resume_language =
 					resumeData?.resume_language && resumeData?.resume_language?.length > 0
 						? resumeData?.resume_language?.map(
-								(item) =>
-									`<li>
+							(item) =>
+								`<li>
 									<label>${item.rs_language_certify}</label>
 								 </li>`
-						  )
+						)
 						: null;
 
 				if (resume_language) {

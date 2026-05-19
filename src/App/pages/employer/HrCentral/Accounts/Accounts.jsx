@@ -3,6 +3,7 @@ import styles from './accounts.module.css';
 import classNames from 'classnames/bind';
 import routesPath from '~/App/config/routesPath';
 import { Link } from 'react-router-dom';
+import GavelIcon from '@mui/icons-material/Gavel';
 const sx = classNames.bind(styles);
 
 const Accounts = ({ cx }) => {
@@ -166,7 +167,7 @@ const Accounts = ({ cx }) => {
 																			href='javascript:void(0);'
 																			onclick="getPermissionuser('nhatminhnguyen6112003.1672041283','nguyễn minh');"
 																			title='Cấp quyền'>
-																			<em className={cx('material-icons')}>gavel</em>
+																			<GavelIcon />
 																		</a>
 																	</li>
 																</ul>

@@ -138,7 +138,8 @@ const ResumeSaved = ({ cx }) => {
 								</div>
 								<div className={sx('form-group', 'form-submit', 'form-submit-less')}>
 									<button className={sx('btn-submit', 'btn-gradient')} type='submit'>
-										<em className={cx('material-icons')}>find_in_page</em>Tìm
+										{/* <em className={cx('material-icons')}>find_in_page</em> */}
+										Tìm
 									</button>
 								</div>
 								<div className={sx('form-group', 'form-filter-advanced')}></div>
@@ -203,7 +204,7 @@ const ResumeSaved = ({ cx }) => {
 																		<p>
 																			{employer_resume?.resume?.attachments[0]?.yearOfExperience
 																				? employer_resume?.resume?.attachments[0]
-																						?.yearOfExperience + 'năm'
+																					?.yearOfExperience + 'năm'
 																				: 'Không có kinh nghiệm'}{' '}
 																		</p>
 																	</td>

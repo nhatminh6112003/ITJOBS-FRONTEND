@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const districtsApi = createApi({
 	reducerPath: 'Districts',
-	baseQuery: fetchBaseQuery({ baseUrl: 'https://provinces.open-api.vn/api' }),
+	baseQuery: fetchBaseQuery({ baseUrl: 'https://provinces.open-api.vn/api/v1' }),
 	endpoints: (build) => ({
 		getAllDistricts: build.query({
 			query: (arg) => {

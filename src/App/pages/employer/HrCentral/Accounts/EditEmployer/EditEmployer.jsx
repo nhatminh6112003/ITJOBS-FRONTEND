@@ -11,6 +11,8 @@ import SelectFieldControl from '~/Core/components/common/FormControl/SelectField
 import TextAreaFieldControl from '~/Core/components/common/FormControl/TextAreaFieldControl';
 import TabMenu from '../components/TabMenu';
 import styles from './editEmployer.module.css';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import InfoIcon from '@mui/icons-material/Info';
 
 const sx = classNames.bind(styles);
 const EditEmployer = ({ cx }) => {
@@ -87,7 +89,7 @@ const EditEmployer = ({ cx }) => {
 									</Link>
 								</li>
 							))}
-						
+
 						</ul>
 						<div className={sx('tabslet-content', 'active')} id='tab-2'>
 							<form
@@ -174,14 +176,14 @@ const EditEmployer = ({ cx }) => {
 													name='logo'
 													label={
 														<div style={{ display: 'flex', alignItems: 'center' }}>
-															<em className={cx('material-icons')}>folder_open</em> Tải ảnh từ máy tính
+															<FolderOpenIcon /> Tải ảnh từ máy tính
 														</div>
 													}
 												/>
 
 												<div className={sx('noti')}>
 													{' '}
-													<em className={cx('material-icons')}>info </em>
+													<InfoIcon />
 													<div className={cx('toolip')}>
 														<p>Định dạng: gif, jpg, png, kích thước đẹp nhất 240x160px</p>
 													</div>
@@ -228,14 +230,14 @@ const EditEmployer = ({ cx }) => {
 													name='banner'
 													label={
 														<div style={{ display: 'flex', alignItems: 'center' }}>
-															<em className={cx('material-icons')}>folder_open</em> Tải ảnh từ máy tính
+															<FolderOpenIcon /> Tải ảnh từ máy tính
 														</div>
 													}
 												/>
 
 												<div className={sx('noti')}>
 													{' '}
-													<em className={cx('material-icons')}>info </em>
+													<InfoIcon />
 													<div className={sx('toolip')}>
 														<p>Định dạng: *.gif, *.jpg, *.png. Kích thước đẹp nhất 1410x290px</p>
 													</div>

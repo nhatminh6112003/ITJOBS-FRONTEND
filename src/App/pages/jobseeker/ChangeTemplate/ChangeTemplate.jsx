@@ -99,7 +99,7 @@ const ChangeTemplate = () => {
 											<div className={cx('figure')}>
 												<div className={cx('image')}>
 													<img
-														src='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/i9.png'
+														src={'/i9.webp'}
 														alt='Công cụ'
 													/>
 												</div>
@@ -319,8 +319,8 @@ const ChangeTemplate = () => {
 																									colorIndex === 3
 																										? 2
 																										: colorIndex === 1
-																										? 2
-																										: ''
+																											? 2
+																											: ''
 																							}}
 																							className={cx('color-block')}
 																						/>

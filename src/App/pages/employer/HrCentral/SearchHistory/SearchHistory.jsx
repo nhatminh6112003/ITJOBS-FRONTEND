@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './searchHistory.module.css';
 import classNames from 'classnames/bind';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 const sx = classNames.bind(styles);
 const SearchHistory = ({ cx }) => {
 	return (
@@ -14,7 +15,7 @@ const SearchHistory = ({ cx }) => {
 								<a
 									className={sx('btn-gradient')}
 									href='https://careerbuilder.vn/vi/employers/saved_search/alert'>
-									<em className={cx('material-icons')}>notifications_none</em>Thông Báo Ứng Viên
+									<NotificationsNoneIcon />Thông Báo Ứng Viên
 								</a>
 							</div>
 						</div>

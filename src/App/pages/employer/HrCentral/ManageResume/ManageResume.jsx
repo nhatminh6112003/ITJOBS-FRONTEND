@@ -118,7 +118,8 @@ const ManageResume = ({ cx }) => {
 								</div>
 								<div className={sx('form-group', 'form-submit', 'form-submit-less')}>
 									<button className={sx('btn-submit', 'btn-gradient')} type='submit'>
-										<em className={cx('material-icons')}>find_in_page</em>Tìm
+										{/* <em className={cx('material-icons')}>find_in_page</em> */}
+										Tìm
 									</button>
 								</div>
 								<div className={sx('form-group', 'form-filter-advanced')}></div>
@@ -198,7 +199,7 @@ const ManageResume = ({ cx }) => {
 																		<p>
 																			{jobPostActivity?.resume?.my_attaches[0]?.yearOfExperience
 																				? jobPostActivity?.resume?.my_attaches[0]
-																						?.yearOfExperience + ' Năm'
+																					?.yearOfExperience + ' Năm'
 																				: 'Không có kinh nghiệm'}{' '}
 																		</p>
 																	</td>

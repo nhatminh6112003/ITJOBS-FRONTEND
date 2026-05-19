@@ -86,7 +86,8 @@ const OrdersExpired = ({ cx }) => {
 										</div> */}
 										<div className={sx('form-group', 'form-submit', 'form-submit-less')}>
 											<button className={sx('btn-submit', 'btn-gradient')} type='submit'>
-												<em className={cx('material-icons')}>find_in_page</em> Tìm
+												{/* <em className={cx('material-icons')}>find_in_page</em> */}
+												Tìm
 											</button>
 										</div>
 									</form>

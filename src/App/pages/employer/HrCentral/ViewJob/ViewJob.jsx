@@ -7,13 +7,16 @@ import formatDate from '~/Core/utils/formatDate';
 import { LevelArray } from '~/App/constants/levelEnum';
 import { experienceEnum } from '~/App/constants/experienceEnum';
 import { DegreeArray } from '~/App/constants/degreeArray';
-import { GenderArray } from '~/App/constants/genderEnum';
+import GenderEnum, { GenderArray } from '~/App/constants/genderEnum';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import TabMenu from '../Posting/components/TabMenu';
 import routesPath from '~/App/config/routesPath';
 import { useLocation } from 'react-router-dom';
 import formatVND from '~/Core/utils/formatVND';
+import CreateIcon from '@mui/icons-material/Create';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import CancelIcon from '@mui/icons-material/Cancel';
 const sx = classNames.bind(styles);
 
 const ViewJob = ({ cx }) => {
@@ -35,7 +38,7 @@ const ViewJob = ({ cx }) => {
 								<h1 className={sx('title-manage')}>Chi Tiết Bài Đăng </h1>
 								<div className={sx('button')}>
 									<Link className={sx('btn-gradient')} to={routesPath.EmployerPaths.postjobs}>
-										<em className={cx('material-icons')}>create</em>Tạo Mẫu Tuyển Dụng
+										<CreateIcon />Tạo Mẫu Tuyển Dụng
 									</Link>
 								</div>
 							</div>
@@ -152,7 +155,7 @@ const ViewJob = ({ cx }) => {
 																className={sx('edit')}
 																to={'/employers/postjobs/' + jobPost?.id}
 																title='Sửa'>
-																<em className={cx('material-icons')}>created </em> Sửa
+																<CreateIcon /> Sửa
 															</Link>
 														</div>
 														<div className={sx('body')}>
@@ -255,10 +258,7 @@ const ViewJob = ({ cx }) => {
 																		)}
 																		<li>
 																			<p className={sx('name')}>Giới tính</p>
-																			{GenderArray?.map(
-																				(item) =>
-																					item.value == jobPost?.gender && <p>{item.label}</p>
-																			)}
+																			<p>{GenderEnum[jobPost?.gender]}</p>
 																		</li>
 																		<li>
 																			<p className={sx('name')}>Hạn nhận hồ sơ</p>
@@ -428,7 +428,7 @@ const ViewJob = ({ cx }) => {
 																		<tr className={sx('', 'lop7cttnq1667207375')}>
 																			<td>
 																				<div className={sx('tag-icon')}>
-																					<em className={sx('material-icons')}>local_offer </em>
+																					<LocalOfferIcon />
 																				</div>
 																			</td>
 																			<td>
@@ -449,9 +449,9 @@ const ViewJob = ({ cx }) => {
 																			<td>
 																				<a
 																					href='javascript:void(0);'
-																					onclick="return deleteTag(this, 'Fresher Developer');"
+																					onclick="return deleteTag(this, '');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -481,7 +481,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, 'NET Android IOS Programmer');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -511,7 +511,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, 'Embedded Software Engineer');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -541,7 +541,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, 'Java Android Programmer');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -571,7 +571,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, '.NET Developer');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -601,7 +601,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, 'ASP NET Software Developer');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -631,7 +631,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, 'lập trình viên');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -661,7 +661,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, 'Frontend Developer');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -691,7 +691,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, 'Software Developer');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -721,7 +721,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, 'Game Developer');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>
@@ -751,7 +751,7 @@ const ViewJob = ({ cx }) => {
 																					href='javascript:void(0);'
 																					onclick="return deleteTag(this, 'Advert Developer');"
 																					title='Xóa'>
-																					<em className={sx('material-icons')}>cancel</em>
+																					<CancelIcon />
 																				</a>
 																			</td>
 																		</tr>

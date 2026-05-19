@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../postjobs.module.css';
 import classNames from 'classnames/bind';
 import Tooltip from '@mui/material/Tooltip';
+import InfoIcon from '@mui/icons-material/Info';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import { useForm } from 'react-hook-form';
 import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
@@ -60,37 +61,40 @@ const UpdatePostJobs = ({ cx }) => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const { data: jobPost } = useGetOneJobPostQuery(id);
-
 	const [displayExperience, setDisplayExperience] = useState(false);
 	const [isAgreementChecked, setIsAgreementChecked] = useState();
 	const [description, setDescription] = useState('');
 	const [requirements, setRequirements] = useState('');
 	useEffect(() => {
-		reset({
-			expiry_date: moment(jobPost?.expiry_date).format('YYYY-MM-DD'),
-			districts: jobPost?.districts,
-			address: jobPost?.address,
-			form_age: jobPost?.form_age,
-			to_age: jobPost?.to_age,
-			job_degree_value: jobPost?.job_degree_value,
-			job_experience_value: jobPost?.job_experience_value,
-			job_position_value: jobPost?.job_position_value,
-			job_title: jobPost?.job_title,
-			max_salary: jobPost?.max_salary,
-			min_salary: jobPost?.min_salary,
-			provinces: jobPost?.provinces,
-			work_home: jobPost?.work_home,
-			job_formExperience: jobPost?.job_formExperience,
-			job_ToExperience: jobPost?.job_ToExperience,
-			isAgreement: jobPost?.isAgreement
-		});
+		if (jobPost) {
+			reset({
+				expiry_date: moment(jobPost?.expiry_date).format('YYYY-MM-DD'),
+				districts: jobPost?.districts,
+				address: jobPost?.address,
+				form_age: jobPost?.form_age,
+				to_age: jobPost?.to_age,
+				job_degree_value: jobPost?.job_degree_value,
+				job_experience_value: jobPost?.job_experience_value,
+				job_position_value: jobPost?.job_position_value,
+				job_title: jobPost?.job_title,
+				max_salary: jobPost?.max_salary,
+				min_salary: jobPost?.min_salary,
+				provinces: jobPost?.provinces,
+				work_home: jobPost?.work_home,
+				job_formExperience: jobPost?.job_formExperience,
+				job_ToExperience: jobPost?.job_ToExperience,
+				isAgreement: jobPost?.isAgreement,
+				gender: jobPost?.gender
+			});
+			setIsAgreementChecked(jobPost?.isAgreement === 1 || jobPost?.isAgreement === true);
+		}
 		if (jobPost && jobPost?.job_request) {
 			setRequirements(jobPost?.job_request);
 		}
 		if (jobPost && jobPost?.job_desc) {
 			setDescription(jobPost?.job_desc);
 		}
-	}, [jobPost, reset, isAgreementChecked]);
+	}, [jobPost, reset]);
 	const handleDescription = (Description) => {
 		setDescription(Description);
 	};
@@ -191,7 +195,7 @@ const UpdatePostJobs = ({ cx }) => {
 																	gợi ý hồ sơ phù hợp.
 																</div>
 															}>
-															<em className={cx('material-icons')}>info</em>
+															<InfoIcon />
 														</Tooltip>
 													</div>
 												</div>
@@ -390,7 +394,7 @@ const UpdatePostJobs = ({ cx }) => {
 																	</p>
 																</div>
 															}>
-															<em className={cx('material-icons')}>info</em>
+															<InfoIcon />
 														</Tooltip>
 													</div>
 												</div>
@@ -498,14 +502,8 @@ const UpdatePostJobs = ({ cx }) => {
 																	control={control}
 																	label='Khác'
 																	value={0}
-																	checked={jobPost?.gender == 0 ? true : false}
 																	id='gender0'
 																	style={{ position: 'relative', top: 3 }}
-																	onChange={(e) => {
-																		if (e.target.checked) {
-																			setValue(`gender`, Number(e.target.value));
-																		}
-																	}}
 																/>
 															</div>
 															<div
@@ -517,14 +515,8 @@ const UpdatePostJobs = ({ cx }) => {
 																	control={control}
 																	label='Nam'
 																	value={1}
-																	checked={jobPost?.gender == 1 ? true : false}
 																	id='gender1'
 																	style={{ position: 'relative', top: 3 }}
-																	onChange={(e) => {
-																		if (e.target.checked) {
-																			setValue(`gender`, Number(e.target.value));
-																		}
-																	}}
 																/>
 															</div>
 															<div
@@ -535,14 +527,9 @@ const UpdatePostJobs = ({ cx }) => {
 																	name='gender'
 																	control={control}
 																	label='Nữ'
-																	checked={jobPost?.gender == 2 ? true : false}
+																	value={2}
 																	id='gender2'
 																	style={{ position: 'relative', top: 3 }}
-																	onChange={(e) => {
-																		if (e.target.checked) {
-																			setValue(`gender`, Number(e.target.value));
-																		}
-																	}}
 																/>
 															</div>
 														</div>
@@ -805,7 +792,7 @@ const UpdatePostJobs = ({ cx }) => {
 													</div>
 													<div className={cx('col-lg-5', 'd-flex', 'align-center')}>
 														<div className={sx('noti')}>
-															<em className={cx('material-icons')}>info</em>
+															<InfoIcon />
 															<div className={sx('toolip')}>
 																<p>(Email sẽ được bảo mật)</p>
 															</div>
@@ -827,7 +814,7 @@ const UpdatePostJobs = ({ cx }) => {
 													</div>
 													<div className={cx('col-lg-5', 'd-flex', 'align-center')}>
 														<div className={sx('noti')}>
-															<em className={cx('material-icons')}>info</em>
+															<InfoIcon />
 															<div className={sx('toolip')}>
 																<p>(Email sẽ được bảo mật)</p>
 															</div>
@@ -846,7 +833,7 @@ const UpdatePostJobs = ({ cx }) => {
 													</div>
 													<div className={cx('col-lg-5', 'd-flex', 'align-center')}>
 														<div className={sx('noti')}>
-															<em className={cx('material-icons')}>info</em>
+															<InfoIcon />
 															<div className={sx('toolip')}>
 																<p>Nhận email thông báo khi có ứng viên nộp đơn trực tuyến.</p>
 																<p>
@@ -884,7 +871,7 @@ const UpdatePostJobs = ({ cx }) => {
 																Thiết lập thư trả lời tự động khi có ứng viên nộp đơn ứng tuyển
 															</label>
 															<div className={sx('noti')}>
-																<em className={cx('material-icons')}>info</em>
+																<InfoIcon />
 																<div className={sx('toolip')}>
 																	<p>
 																		Hệ thống sẽ tự động gửi Thư tự động trả lời cho các ứng viên nộp
@@ -999,16 +986,7 @@ const UpdatePostJobs = ({ cx }) => {
 						</form>
 					</div>
 				</div>
-				{Object.keys(errors).length > 0 && (
-					<div>
-						<p>Có lỗi xảy ra:</p>
-						<ul>
-							{Object.keys(errors).map((errorKey) => (
-								<li key={errorKey}>{errors[errorKey].message}</li>
-							))}
-						</ul>
-					</div>
-				)}
+
 			</section>
 		</>
 	);

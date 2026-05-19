@@ -85,12 +85,14 @@ const NavBar = ({ className: cx }) => {
 									onClick={() => {
 										handleFindJobSeeker();
 									}}>
-									<em className={cx('material-icons')}>find_in_page</em> Tìm Hồ Sơ
+									{/* <em className={cx('material-icons')}>find_in_page</em>  */}
+									Tìm Hồ Sơ
 								</Link>
 							</li>
 							<li>
 								<Link className={cx('but-createjob')} to={routesPath.EmployerPaths.postjobs}>
-									<em className={cx('material-icons')}>assignment_ind</em> Đăng Tuyển Dụng
+									{/* <em className={cx('material-icons')}>assignment_ind</em>  */}
+									Đăng Tuyển Dụng
 								</Link>
 							</li>
 						</ul>

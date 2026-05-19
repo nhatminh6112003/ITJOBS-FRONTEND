@@ -20,10 +20,7 @@ const Banner = () => {
 							<div className={cx('swiper-slide')}>
 								<a href='/'>
 									<div className={cx('image')}>
-										<img
-											src='https://images.careerbuilder.vn/background/mbbank_1900x570_2022_12_12_1670843523.jpg'
-											alt='Banner'
-										/>
+										<img src='/Ocean_Edu.webp' alt='Banner' />
 									</div>
 								</a>
 							</div>

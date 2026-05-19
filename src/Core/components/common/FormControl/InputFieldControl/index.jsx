@@ -2,7 +2,6 @@ import { useController } from 'react-hook-form';
 import styles from './InputFieldControl.module.css';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
-import { v4 as uuidv4 } from 'uuid';
 
 import { useRef, forwardRef, Fragment } from 'react';
 const InputFieldControl = (
@@ -12,28 +11,41 @@ const InputFieldControl = (
 	const {
 		field,
 		fieldState: { error },
-		formState: { errors, touchedFields }
+		formState: { errors }
 	} = useController({
 		name,
 		control,
 		rules,
-		defaultValue: props.value,
-		...props
+		defaultValue: type === 'radio' ? undefined : (defaultValue || props.value)
 	});
 
 	const localRef = useRef(null);
 	const inputRef = ref || localRef;
+
+	const isRadio = type === 'radio';
+	const inputId = id || (isRadio ? `${name}_${props.value}` : name);
+
 	return (
 		<Fragment>
-			{label && <label htmlFor={field.name}>{label}</label>}
+			{label && (
+				<label htmlFor={inputId} style={isRadio ? { cursor: 'pointer' } : {}}>
+					{label}
+				</label>
+			)}
 			<input
 				type={type}
 				name={field.name}
-				id={uuidv4()}
-				onChange={field.onChange}
+				id={inputId}
+				onChange={(e) => {
+					field.onChange(e);
+					if (props.onChange) {
+						props.onChange(e);
+					}
+				}}
 				onBlur={field.onBlur}
-				defaultValue={defaultValue}
-				value={field.value || ''}
+				defaultValue={isRadio ? undefined : defaultValue}
+				value={isRadio ? props.value : (field.value ?? '')}
+				checked={isRadio ? field.value == props.value : undefined}
 				disabled={disabled}
 				ref={(e) => {
 					field.ref(e);
@@ -41,7 +53,7 @@ const InputFieldControl = (
 				}}
 				{...props}
 			/>
-			{errors ? (
+			{error ? (
 				<span
 					className={`error_${name}`}
 					style={{
@@ -49,9 +61,10 @@ const InputFieldControl = (
 						color: 'red',
 						fontSize: 12,
 						fontStyle: 'italic',
-						fontWeight: 500
+						fontWeight: 500,
+						display: 'block'
 					}}>
-					{errors[name]?.message}
+					{error.message}
 				</span>
 			) : (
 				''
@@ -60,3 +73,4 @@ const InputFieldControl = (
 	);
 };
 export default forwardRef(InputFieldControl);
+

@@ -9,6 +9,7 @@ import TabMenu from './components/TabMenu';
 import { useLocation } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import {
 	useDeleteJobPostMutation,
 	useGetAllJobPostQuery,
@@ -221,17 +222,17 @@ const Posting = ({ cx }) => {
 																<ul
 																	className={cx('list-manipulation', 'd-flex')}
 																	style={{ alignItems: 'center', justifyContent: 'center' }}>
-																	<li>
+																	<li style={{ width: 48, height: 30 }}>
 																		<Link to={`/employers/postjobs/${item.id}`} title='Sửa'>
-																			<em className={cx('material-icons')}>created</em>
+																			<CreateIcon />
 																		</Link>
 																	</li>
 
-																	<li>
+																	<li style={{ width: 48, height: 30 }}>
 																		<Link
 																			to={`/employers/hrcentral/viewjob/${item.id}`}
 																			title='Chi tiết'>
-																			<em className={cx('material-icons')}>visibility </em>
+																			<VisibilityIcon />
 																		</Link>
 																	</li>
 

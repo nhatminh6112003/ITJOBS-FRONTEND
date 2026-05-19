@@ -90,7 +90,7 @@ const Dashboard = () => {
 															/>
 															<img
 																id='img_mem_avatar'
-																src='https://static.careerbuilder.vn/themes/careerbuilder/img/dash-board/1.png'
+																src='/avatar.webp'
 																alt='Lop Minh'
 															/>
 														</div>
@@ -320,7 +320,9 @@ const Dashboard = () => {
 																<div className={cx('figure')}>
 																	<div className={cx('image')}>
 																		<img
-																			src='https://static.careerbuilder.vn/themes/kiemviecv32/images/icons/ic-resume.png'
+																			src={
+																				'/ic-resume.webp'
+																			}
 																			alt={123}
 																		/>
 																	</div>

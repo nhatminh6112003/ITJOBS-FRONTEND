@@ -9,6 +9,7 @@ import TabMenu from '../Posting/components/TabMenu';
 import { useLocation } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import GetAppIcon from '@mui/icons-material/GetApp';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import DateTypeEnum from '~/App/constants/dataTypeEnum';
 import useSearchJobPost from '../../components/useSearchJobPost';
 import jobPostStatusEnum from '~/App/constants/jobPostStatusEnum';
@@ -266,7 +267,7 @@ const ExpirePosting = ({ cx }) => {
 																	style={{ alignItems: 'center', justifyContent: 'center' }}>
 																	<li>
 																		<Link to={`/employers/postjobs/${item.id}`} title='Sửa'>
-																			<em className={cx('material-icons')}>created</em>
+																			<CreateIcon />
 																		</Link>
 																	</li>
 
@@ -274,7 +275,7 @@ const ExpirePosting = ({ cx }) => {
 																		<Link
 																			to={`/employers/hrcentral/viewjob/${item.id}`}
 																			title='Chi tiết'>
-																			<em className={cx('material-icons')}>visibility </em>
+																			<VisibilityIcon />
 																		</Link>
 																	</li>
 

@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Fragment, useEffect, useRef } from 'react';
-import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useGetAllDistrictsQuery } from '~/App/providers/apis/districtsApi';
 import { useGetAllProvincesQuery } from '~/App/providers/apis/listProvincesApi';

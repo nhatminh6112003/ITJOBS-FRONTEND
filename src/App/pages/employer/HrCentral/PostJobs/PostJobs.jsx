@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './postjobs.module.css';
 import classNames from 'classnames/bind';
 import Tooltip from '@mui/material/Tooltip';
+import InfoIcon from '@mui/icons-material/Info';
 import InputFieldControl from '~/Core/components/common/FormControl/InputFieldControl';
 import { useForm } from 'react-hook-form';
 import CheckBoxFieldControl from '~/Core/components/common/FormControl/CheckBoxFieldControl';
@@ -156,14 +157,12 @@ const PostJobs = ({ cx }) => {
 																	gợi ý hồ sơ phù hợp.
 																</div>
 															}>
-															<em
+															<InfoIcon
 																style={{
 																	position: 'relative',
 																	bottom: 10
 																}}
-																className={cx('material-icons')}>
-																info
-															</em>
+															/>
 														</Tooltip>
 													</div>
 												</div>
@@ -354,7 +353,7 @@ const PostJobs = ({ cx }) => {
 																</p>
 															</div>
 														}>
-														<em className={cx('material-icons')}>info</em>
+														<InfoIcon />
 													</Tooltip>
 												</div>
 											</div>
@@ -767,7 +766,7 @@ const PostJobs = ({ cx }) => {
 												</div>
 												<div className={cx('col-lg-5', 'd-flex', 'align-center')}>
 													<div className={sx('noti')}>
-														<em className={cx('material-icons')}>info</em>
+														<InfoIcon />
 														<div className={sx('toolip')}>
 															<p>(Email sẽ được bảo mật)</p>
 														</div>
@@ -789,7 +788,7 @@ const PostJobs = ({ cx }) => {
 												</div>
 												<div className={cx('col-lg-5', 'd-flex', 'align-center')}>
 													<div className={sx('noti')}>
-														<em className={cx('material-icons')}>info</em>
+														<InfoIcon />
 														<div className={sx('toolip')}>
 															<p>(Email sẽ được bảo mật)</p>
 														</div>
@@ -808,7 +807,7 @@ const PostJobs = ({ cx }) => {
 												</div>
 												<div className={cx('col-lg-5', 'd-flex', 'align-center')}>
 													<div className={sx('noti')}>
-														<em className={cx('material-icons')}>info</em>
+														<InfoIcon />
 														<div className={sx('toolip')}>
 															<p>Nhận email thông báo khi có ứng viên nộp đơn trực tuyến.</p>
 															<p>
@@ -846,7 +845,7 @@ const PostJobs = ({ cx }) => {
 															Thiết lập thư trả lời tự động khi có ứng viên nộp đơn ứng tuyển
 														</label>
 														<div className={sx('noti')}>
-															<em className={cx('material-icons')}>info</em>
+															<InfoIcon />
 															<div className={sx('toolip')}>
 																<p>
 																	Hệ thống sẽ tự động gửi Thư tự động trả lời cho các ứng viên nộp hồ

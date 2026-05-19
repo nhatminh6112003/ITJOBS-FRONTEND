@@ -165,7 +165,7 @@ const ResumeInfo = ({ cx }) => {
 																				{GenderEnum[data?.user_account?.resume_profile?.gender]} -{' '}
 																				{
 																					marialStatusEnum[
-																						data?.user_account?.resume_profile?.marial_status
+																					data?.user_account?.resume_profile?.marial_status
 																					]
 																				}
 																			</p>
@@ -177,7 +177,7 @@ const ResumeInfo = ({ cx }) => {
 																			</p>
 																			{listProvinces?.map((item) =>
 																				item.code ===
-																				data?.user_account?.resume_profile?.provinces ? (
+																					data?.user_account?.resume_profile?.provinces ? (
 																					<p>{item.name}</p>
 																				) : null
 																			)}
@@ -188,7 +188,7 @@ const ResumeInfo = ({ cx }) => {
 																			</p>
 																			{listDistricts?.districts?.map((item) =>
 																				item.code ===
-																				data?.user_account?.resume_profile?.districts ? (
+																					data?.user_account?.resume_profile?.districts ? (
 																					<p>{item.name}</p>
 																				) : null
 																			)}
